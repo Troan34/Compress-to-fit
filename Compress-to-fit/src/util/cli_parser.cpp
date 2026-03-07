@@ -2,6 +2,8 @@
 #include <charconv>
 #include <fstream>
 #include <cassert>
+#include <iostream>
+#include <exception>
 
 namespace parser
 {
@@ -23,9 +25,10 @@ Token::Token(const std::string& option)
 
 std::expected<Token, ErrorType> lex(const std::string& option)
 {
-	auto token_string = option.substr(0, option.find(' ') + 1);
+	auto token_string = option.substr(0, option.find(' '));
 	auto token_value = option.substr(option.find(' ') + 1, std::string::npos);
 
+	//TODO: This doesn't work if option is just a flag
 	if (token_string.size() == option.size())//we have not found a ' ' character <-> find() returned npos
 		return std::unexpected(ErrorType::SYNTAX_ERROR);
 
@@ -62,36 +65,46 @@ std::expected<Token, ErrorType> lex(const std::string& option)
 	case TokenType::FILENAME_IN:
 	{
 		//Test if we can find and access the input file
-		auto& value_ref = std::get<fs::path>(value);
-
 		if (!fs::exists(token_value))
 			return std::unexpected(ErrorType::PATH_NOT_FOUND);
 
 		if (std::ifstream file(token_value); !file.is_open())
 			return std::unexpected(ErrorType::PATH_NOT_ACCESSIBLE);
 
-		value_ref = token_value;
+		value.emplace<fs::path>(token_value);
 	}
 	break;
 	case TokenType::FILENAME_OUT:
 	{
+		fs::path path{ token_value };
+		
 		//Test if we can write a file to the given dir
-		auto value_ref = std::get<fs::path>(value);
-
-		auto test_path = value_ref.parent_path() / ".test_writability";
+		auto test_path = path.parent_path() / "test_writability";
 		std::ofstream test_file{test_path};
 		if (!test_file.is_open())
+		{
+			fs::remove(test_path);
 			return std::unexpected(ErrorType::PATH_NOT_ACCESSIBLE);
+		}
+		test_file.close();
+		fs::remove(test_path);
+		
+		path = path.stem();
+		path += FILE_EXTENSION;
+
+		value.emplace<fs::path>(path);
 	}
 	break;
 	case TokenType::COMPRESSION_PRESET:
 	{
 		//Convert and check the compression preset
-		auto& value_ref = std::get<size_t>(value);
-		auto res = std::from_chars(token_value.data(), token_value.data() + token_value.size(), value_ref);
+		size_t value_cmpr;
+		auto res = std::from_chars(token_value.data(), token_value.data() + token_value.size(), value_cmpr);
 
-		if (res.ec != std::errc() or (value_ref > CompPreset::COMP_MAX or value_ref < CompPreset::NO_COMP))//if not a number or outside of our range
+		if (res.ec != std::errc() or (value_cmpr > CompPreset::COMP_MAX or value_cmpr < CompPreset::NO_COMP))//if not a number or outside of our range
 			return std::unexpected(ErrorType::VALUE_ERROR);
+
+		value.emplace<size_t>(value_cmpr);
 	}
 	break;
 	case TokenType::N_FILES:
@@ -102,7 +115,7 @@ std::expected<Token, ErrorType> lex(const std::string& option)
 		if (res.ec != std::errc() or (value_temp > N_FILES_LIMIT or value_temp < 0))//if negative or over N_FILES_LIMIT
 			return std::unexpected(ErrorType::VALUE_ERROR);
 		
-		std::get<size_t>(value) = value_temp;
+		value.emplace<size_t>(value_temp);
 	}
 	break;
 	case TokenType::SIZE_FILES:
@@ -113,33 +126,42 @@ std::expected<Token, ErrorType> lex(const std::string& option)
 		if (res.ec != std::errc() or (value_temp < SIZE_FILES_MIN))//if negative or under SIZE_FILES_MIN
 			return std::unexpected(ErrorType::VALUE_ERROR);
 
-		std::get<size_t>(value) = value_temp;
+		value.emplace<size_t>(value_temp);
 	}
 	}
 
-	return Token{ token_type, token_value };
+	return Token{ token_type, value };
 }
 
 void throw_error(ErrorType error, const std::string& error_option)
 {
 	switch (error)
 	{
-	case parser::ErrorType::NO_ERROR:
+	case ErrorType::NO_ERROR:
 		break;
-	case parser::ErrorType::VALUE_ERROR:
-		throw std::runtime_error(error_option + "< " + ERR_STRING::VALUE);
+	case ErrorType::VALUE_ERROR:
+		std::cerr << error_option + " <- " + ERR_STRING::VALUE;
+		throw std::runtime_error(error_option + " <- " + ERR_STRING::VALUE);
 		break;
-	case parser::ErrorType::SYNTAX_ERROR:
-		throw std::runtime_error(error_option + "< " + ERR_STRING::SYNTAX);
+	case ErrorType::SYNTAX_ERROR:
+		std::cerr << error_option + " <- " + ERR_STRING::SYNTAX;
+		throw std::runtime_error(error_option + " <- " + ERR_STRING::SYNTAX);
 		break;
-	case parser::ErrorType::OPTION_UNAVAILABLE:
-		throw std::runtime_error(error_option + "< " + ERR_STRING::OPTION_UNAVAILABLE);
+	case ErrorType::OPTION_UNAVAILABLE:
+		std::cerr << error_option + " <- " + ERR_STRING::OPTION_UNAVAILABLE;
+		throw std::runtime_error(error_option + " <- " + ERR_STRING::OPTION_UNAVAILABLE);
 		break;
-	case parser::ErrorType::PATH_NOT_FOUND:
-		throw std::runtime_error(error_option + "< " + ERR_STRING::PATH_NOT_FOUND);
+	case ErrorType::PATH_NOT_FOUND:
+		std::cerr << error_option + " <- " + ERR_STRING::PATH_NOT_FOUND;
+		throw std::runtime_error(error_option + " <- " + ERR_STRING::PATH_NOT_FOUND);
 		break;
-	case parser::ErrorType::PATH_NOT_ACCESSIBLE:
-		throw std::runtime_error(error_option + "< " + ERR_STRING::PATH_NOT_ACCESSIBLE);
+	case ErrorType::PATH_NOT_ACCESSIBLE:
+		std::cerr << error_option + " <- " + ERR_STRING::PATH_NOT_ACCESSIBLE;
+		throw std::runtime_error(error_option + " <- " + ERR_STRING::PATH_NOT_ACCESSIBLE);
+		break;
+	case ErrorType::PATH_INVALID:
+		std::cerr << error_option + " <- " + ERR_STRING::PATH_INVALID;
+		throw std::runtime_error(error_option + " <- " + ERR_STRING::PATH_INVALID);
 		break;
 	default:
 		break;
@@ -150,11 +172,33 @@ Options parse(int argc, char* argv[])
 {
 	Options options;
 	//starting at 1 means we ignore the first (name of program)
-	for (int index = 1; index < argc; index += 2)
+	for (int index = 1; index < argc; index++)
 	{
 		std::string option{ argv[index] };
-		option += argv[index + 1];
+		option += ' ';
+		option += argv[++index];
 		
+		//If the path has spaces, this makes sure that we take the whole path (we check for ")
+		//else we throw
+		if (std::count(option.begin(), option.end(), '\"') == 1)
+		{
+			bool valid = false;
+
+			for(;index < argc - 1; index++)
+			{
+				std::string option_temp{ argv[index + 1] };
+				option += option_temp;
+				if (std::count(option_temp.begin(), option_temp.end(), '\"') == 1)
+				{
+					valid = true;
+					break;
+				}
+			}
+
+			if (!valid)
+				throw_error(ErrorType::PATH_INVALID, option);
+		}
+
 		auto token = lex(option);
 
 		if (token)
@@ -177,11 +221,17 @@ Options parse(int argc, char* argv[])
 				options.size_files = std::get<size_t>(token.value().get_value());
 				break;
 			default:
-				assert(false == true);
+				assert(false);
 				break;
 			}
 		}
+		else
+		{
+			throw_error(token.error(), option);
+		}
 	}
+
+	return options;
 }
 
 }//namespace parser

@@ -4,5 +4,6 @@
 #pragma once
 
 #include <iostream>
+#include "src/util/cli_parser.hpp"
 
 // TODO: Reference additional headers your program requires here.

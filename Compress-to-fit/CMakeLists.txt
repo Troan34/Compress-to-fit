@@ -16,3 +16,4 @@ if (MSVC_VERSION GREATER_EQUAL "1900")
         add_compile_options("/std:c++latest")
     endif()
 endif()
+
