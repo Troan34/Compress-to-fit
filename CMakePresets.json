@@ -11,11 +11,17 @@
                 "CMAKE_C_COMPILER": "cl.exe",
                 "CMAKE_CXX_COMPILER": "cl.exe"
             },
-            "condition": {
+          "condition": {
+            "type": "allOf",
+            "conditions": [
+              {
                 "type": "equals",
                 "lhs": "${hostSystemName}",
                 "rhs": "Windows"
-            }
+              }
+            ]
+          }
+          
         },
         {
             "name": "x64-debug",

@@ -3,7 +3,7 @@
 #
 
 # Add source to this project's executable.
-add_executable (Compress-to-fit "Compress-to-fit.cpp" "Compress-to-fit.h" "src/util/cli_parser.cpp")
+add_executable (Compress-to-fit "Compress-to-fit.cpp" "Compress-to-fit.h" "src/util/cli_parser.cpp" "src/util/file_management.cpp" "src/util/utils.cpp")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET Compress-to-fit PROPERTY CXX_STANDARD 23)
