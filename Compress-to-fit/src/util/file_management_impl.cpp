@@ -1,8 +1,14 @@
-#include "file_management.hpp"
+module file_util;
+
+import util;
+import std;
+
+namespace fs = std::filesystem;
 
 namespace file
 {
-	template <typename fun>
+
+	template <ptr_size_fun fun>
 	void process_file(const fs::path& in_path, const fs::path& out_path, fun op)
 	{
 		
@@ -27,9 +33,18 @@ namespace file
 		}
 	}
 
-
-	void split_file(const fs::path& path_, size_t portions)
+	template<typename T>
+	void write_file(std::span<T> data, const fs::path& out_path)
 	{
+		std::ofstream file(out_path, std::ios::app);
+
+
+	}
+
+
+	void split_file(const fs::path& path_, size_t portions = 1)
+	{
+		
 	}
 
 }//namespace file

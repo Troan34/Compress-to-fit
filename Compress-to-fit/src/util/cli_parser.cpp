@@ -1,13 +1,12 @@
-#include "cli_parser.hpp"
-#include <charconv>
-#include <fstream>
-#include <cassert>
-#include <iostream>
+module parser;
 
+import util;
+import std;
+
+namespace fs = std::filesystem;
 
 namespace parser
 {
-
 Token::Token(TokenType type_, ValueType value_)
 	:type(type_), value(value_)
 {
@@ -187,7 +186,7 @@ Options parse(int argc, char* argv[])
 				options.size_files = std::get<size_t>(token.value().get_value());
 				break;
 			default:
-				assert(false);
+				std::terminate();
 				break;
 			}
 		}

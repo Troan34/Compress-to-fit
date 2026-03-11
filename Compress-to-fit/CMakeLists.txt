@@ -2,18 +2,26 @@
 # project specific logic here.
 #
 
-# Add source to this project's executable.
-add_executable (Compress-to-fit "Compress-to-fit.cpp" "Compress-to-fit.h" "src/util/cli_parser.cpp" "src/util/file_management.cpp" "src/util/utils.cpp")
 
-if (CMAKE_VERSION VERSION_GREATER 3.12)
-  set_property(TARGET Compress-to-fit PROPERTY CXX_STANDARD 23)
-endif()
+add_executable(Compress-to-fit)
 
-if (MSVC_VERSION GREATER_EQUAL "1900")
-    include(CheckCXXCompilerFlag)
-    CHECK_CXX_COMPILER_FLAG("/std:c++latest" _cpp_latest_flag_supported)
-    if (_cpp_latest_flag_supported)
-        add_compile_options("/std:c++latest")
-    endif()
-endif()
+target_sources(
+    Compress-to-fit
+    PRIVATE
+    "Compress-to-fit.cpp"
+    "src/util/cli_parser.cpp"
+    "src/util/file_management_impl.cpp"  
+)
+
+target_sources(
+    Compress-to-fit
+    PRIVATE
+    FILE_SET CXX_MODULES FILES
+    src/util/utils.cppm
+    src/util/file_management.cppm
+    src/util/cli_parser.cppm
+)
+target_compile_features(Compress-to-fit PRIVATE cxx_std_23)
+target_link_libraries(Compress-to-fit PRIVATE __CMAKE::CXX23)
+
 

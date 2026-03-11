@@ -1,7 +1,6 @@
 ﻿// Compress-to-fit.cpp : Defines the entry point for the application.
 //
-
-#include "Compress-to-fit.h"
+import parser;
 
 using namespace std;
 
