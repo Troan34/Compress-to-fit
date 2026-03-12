@@ -56,7 +56,7 @@ namespace parser
 	/// <summary>
 	/// Represents a cli option
 	/// </summary>
-	export class Token
+	class Token
 	{
 	public:
 	

@@ -38,19 +38,21 @@ export enum class ErrorType
 	PATH_NOT_FOUND,
 	PATH_NOT_ACCESSIBLE,
 	PATH_INVALID,
+	FILE_INVALID,
 };
 
 namespace ERR_STRING
 {
-	constexpr std::string_view VALUE = "\033[31merr\033[0m: this is an incorrect value for this option.";
-	constexpr std::string_view SYNTAX = "\033[31merr\033[0m: the syntax for this option is incorrect.";
-	constexpr std::string_view OPTION_UNAVAILABLE = "\033[31merr\033[0m: this option is unavailable in this context.";
-	constexpr std::string_view PATH_NOT_FOUND = "\033[31merr\033[0m: this path could not be found, make sure to double quote (\") around your path if there are spaces in it";
-	constexpr std::string_view PATH_NOT_ACCESSIBLE = "\033[31merr\033[0m: this path could not be accessed, the program may not have some required privileges";
-	constexpr std::string_view PATH_INVALID = "\033[31merr\033[0m: this path is invalid, make sure to double quote (\") around your path if there are spaces in it";
+	inline constexpr std::string_view VALUE = "\033[31merr\033[0m: this is an incorrect value for this option.";
+	inline constexpr std::string_view SYNTAX = "\033[31merr\033[0m: the syntax for this option is incorrect.";
+	inline constexpr std::string_view OPTION_UNAVAILABLE = "\033[31merr\033[0m: this option is unavailable in this context.";
+	inline constexpr std::string_view PATH_NOT_FOUND = "\033[31merr\033[0m: this path could not be found, make sure to double quote (\") around your path if there are spaces in it";
+	inline constexpr std::string_view PATH_NOT_ACCESSIBLE = "\033[31merr\033[0m: this path could not be accessed, the program may not have some required privileges";
+	inline constexpr std::string_view PATH_INVALID = "\033[31merr\033[0m: this path is invalid, make sure to double quote (\") around your path if there are spaces in it";
+	inline constexpr std::string_view FILE_INVALID = "\033[31merr\033[0m: this file is invalid. i.e. it is the wrong type or it is unrecognizable.";
 }
 
-export void throw_error(ErrorType error, const std::string& error_option)
+export void throw_error(ErrorType error, const std::string& error_option = "")
 {
 	switch (error)
 	{
@@ -79,6 +81,10 @@ export void throw_error(ErrorType error, const std::string& error_option)
 	case ErrorType::PATH_INVALID:
 		std::cerr << error_option + " <- " + ERR_STRING::PATH_INVALID.data();
 		throw std::runtime_error(error_option + " <- " + ERR_STRING::PATH_INVALID.data());
+		break;
+	case ErrorType::FILE_INVALID:
+		std::cerr << error_option + " <- " + ERR_STRING::FILE_INVALID.data();
+		throw std::runtime_error(error_option + " <- " + ERR_STRING::FILE_INVALID.data());
 		break;
 	default:
 		break;

@@ -28,4 +28,7 @@ namespace file
 	*/
 	export void split_file(const fs::path& path_, size_t portions = 1);
 
+	//Check the signature of the file at 'path', throws if check fails (and if it doesn't exist)
+	void check_signature(const fs::path& path);
+
 }//namespace file
