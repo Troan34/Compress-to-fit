@@ -36,18 +36,50 @@ namespace file
 	}
 
 	template<typename T>
-	void write_file(std::span<T> data, const fs::path& out_path)
+	void write_file(std::span<T> buffer, const fs::path& out_path)
 	{
-		std::ofstream file(out_path, std::ios::app);
+		std::ofstream file(out_path, std::ios::app | std::ios::binary);
+		
+		if (file.tellp() > 0)//not empty
+			check_signature(out_path);
+		else
+			file.write(SIGNATURE, SIGNATURE.size());
 
-
+		
+		file.write(buffer.data(), buffer.size());
 	}
-
-
 
 	void split_file(const fs::path& path_, size_t portions = 1)
 	{
+		check_signature(path_);
 		
+		if ((portions < 1 or portions > N_FILES_LIMIT) or (fs::file_size(path_) / portions) < SIZE_FILES_MIN)
+			throw_error(ErrorType::PORTIONS_OUT_OF_RANGE);
+		
+		std::ifstream source_file{ path_, std::ios::binary};
+		source_file.seekg(FILE_HEADER_SIZE);
+		auto portions_size = fs::file_size(path_) / portions;
+		std::vector<char> buffer(portions_size);
+
+		//Set up a random number such that num + N_FILES_LIMIT < size_t::max
+		std::random_device seed;
+		std::default_random_engine rng(seed());
+		std::uniform_int_distribution<size_t> dist(1, std::numeric_limits<size_t>::max() - N_FILES_LIMIT);
+		auto starting_id = dist(rng);
+
+		for (auto file_n = 1u; file_n < portions; file_n++, starting_id++)
+		{
+			std::ofstream file(path_.string() + '_' + std::to_string(file_n), std::ios::binary | std::ios::trunc);
+			file.write(SIGNATURE.data(), SIGNATURE.size());
+			file.write(reinterpret_cast<const char*>(&starting_id), sizeof(starting_id));//add the identifying id
+
+			//We are at the last file, may be smaller than portions_size and/or SIZE_FILES_MIN
+			if (portions_size > (fs::file_size(path_) - source_file.tellg()))
+				buffer.resize(fs::file_size(path_) - source_file.tellg());
+			
+			source_file.read(buffer.data(), buffer.size());
+			file.write(buffer.data(), buffer.size());
+		}
 	}
 
 	void check_signature(const fs::path& path)

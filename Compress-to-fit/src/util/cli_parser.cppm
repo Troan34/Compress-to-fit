@@ -7,10 +7,6 @@ import util;
 import std;
 
 
-export inline constexpr size_t N_FILES_LIMIT = 1'000;
-export inline constexpr size_t SIZE_FILES_MIN = 512;
-inline constexpr const char* FILE_EXTENSION = ".tzf";
-
 namespace parser
 {
 	namespace fs = std::filesystem;
@@ -36,7 +32,6 @@ namespace parser
 		"-size_files",
 	};
 
-	
 
 	//unscoped because having to add static_cast becomes annoying
 	export enum CompPreset
@@ -81,7 +76,6 @@ namespace parser
 	//Constructs a Token given a string that looks like this "-<option> <value>"
 	std::expected<Token, ErrorType> lex(const std::string& option);
 
-	
 
 	/// <summary>
 	/// All the options available

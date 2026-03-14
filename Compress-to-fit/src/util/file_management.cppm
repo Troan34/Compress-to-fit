@@ -21,12 +21,12 @@ namespace file
 	If the file already exists and the file signature is correct (if not: throw), append new data to the end of the file.
 	*/
 	export template <typename T>
-	void write_file(std::span<T> data, const fs::path& out_path);
+	void write_file(std::span<T> buffer, const fs::path& out_path);
 
 	/*
 	Given a file, split it into multiple files according to documentation.
 	*/
-	export void split_file(const fs::path& path_, size_t portions = 1);
+	export void split_file(const fs::path& path_, size_t portions);
 
 	//Check the signature of the file at 'path', throws if check fails (and if it doesn't exist)
 	void check_signature(const fs::path& path);
