@@ -33,20 +33,7 @@ namespace parser
 	};
 
 
-	//unscoped because having to add static_cast becomes annoying
-	export enum CompPreset
-	{
-		NO_COMP,
-		COMP_1,
-		COMP_2,
-		COMP_3,
-		COMP_4,
-		COMP_5,
-		COMP_6,
-		COMP_7,
-		COMP_8,
-		COMP_MAX,
-	};
+	
 	
 	/// <summary>
 	/// Represents a cli option
