@@ -10,8 +10,8 @@ namespace file
 	inline constexpr std::string_view SIGNATURE = "C-T-F";
 	inline constexpr size_t FILE_HEADER_SIZE = SIGNATURE.size() + sizeof(size_t);//maybe i'll change this, maybe not
 
-	template <ptr_size_fun fun>
-	void process_file(const fs::path& in_path, const fs::path& out_path, fun op)
+	template <ptr_size_pred pred>
+	void process_file(const fs::path& in_path, const fs::path& out_path, pred op)
 	{
 		
 		std::ifstream in(in_path, std::ios::binary);

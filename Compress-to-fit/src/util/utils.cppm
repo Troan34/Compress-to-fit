@@ -22,7 +22,7 @@ struct function_traits<fun(*)(args...)>
 };
 
 export template <typename fun>
-concept ptr_size_fun = requires
+concept ptr_size_pred = requires
 {
 	requires (function_traits<fun>::num_args == 2);
 	requires std::is_pointer_v<typename function_traits<fun>::template arg<0>>;
@@ -115,7 +115,13 @@ export enum CompPreset
 	COMP_MAX,
 };
 
+//definition of the symbol type for compression
 export struct Sym
 {
 	unsigned char value;
+
+	operator int() const
+	{
+		return value;
+	}
 };
