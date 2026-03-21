@@ -13,7 +13,7 @@ namespace file
 	The type 'fun' shall take a pointer to the data and an integer for the size of the data, the return of 'fun' is discarded.
 	This will not check if a path is accessible or existant, or any other form of checking.
 	*/
-	export template <ptr_size_fun fun>
+	export template <ptr_size_pred fun>
 	void process_file(const fs::path& in_path, const fs::path& out_path, fun op);
 
 	/*

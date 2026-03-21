@@ -122,6 +122,18 @@ export struct Sym
 
 	operator int() const
 	{
-		return value;
+		return static_cast<int>(value);
 	}
+
+	auto operator<=>(const Sym&) const = default;
 };
+
+export constexpr size_t KB_to_B(size_t value)
+{
+	return value * 1024;
+}
+
+export constexpr size_t MB_to_B(size_t value)
+{
+	return value * 1024 * 1024;
+}
