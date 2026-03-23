@@ -126,6 +126,11 @@ export struct Sym
 	}
 
 	auto operator<=>(const Sym&) const = default;
+
+	static constexpr auto max() noexcept
+	{
+		return std::numeric_limits<decltype(value)>::max();
+	}
 };
 
 export constexpr size_t KB_to_B(size_t value)

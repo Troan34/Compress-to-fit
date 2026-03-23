@@ -5,156 +5,96 @@ import std.compat;
 
 namespace alg
 {
-	inline constexpr unsigned int MOD = 1e9 + 7;
-	inline constexpr unsigned int BASE = 31;
+	inline constexpr unsigned int MOD = (1u << 31) - 1;
+	inline constexpr unsigned int BASE = Sym::max();
+	inline constexpr unsigned int MIN_MATCH = 3;
 
-	struct Hash
+	class Rabin
 	{
-		int hash_val;
-
-		Hash(int num) : hash_val(num)
-		{
-		}
-
-		Hash() = default;
-
-
-		void operator+=(int operand) noexcept
-		{
-			hash_val += operand;
-			if (hash_val >= MOD) hash_val -= MOD;
-		}
-
-		void operator-=(int operand) noexcept
-		{
-			hash_val -= operand;
-			if (hash_val < 0) hash_val += MOD;
-		}
-
-		void operator*=(int operand) noexcept
-		{
-			hash_val *= operand;
-			hash_val %= MOD;
-		}
-
-		auto operator+(int operand) noexcept
-		{
-			auto num = hash_val + operand;
-			if (num >= MOD) num -= MOD;
-			return num;
-		}
-
-		auto operator-(int operand) noexcept
-		{
-			auto num = hash_val - operand;
-			if (num < 0) num += MOD;
-			return num;
-		}
-
-		auto operator*(int operand) noexcept
-		{
-			auto num = hash_val * operand;
-			num %= MOD;
-			return num;
-		}
-
-		auto operator*(const Hash& operand) noexcept
-		{
-			return hash_val * operand.hash_val % MOD;
-		}
-
-
-		auto operator<=>(const Hash&) const = default;
-	};
-
-	class Karp
-	{
-	private:
-
-		std::vector<Hash> hashes;
-		std::vector<Hash> powers;
-
 	public:
 
-		Karp(const std::span<Sym>& data)
+		Rabin(std::span<Sym> data, size_t pos)
 		{
-			hashes.resize(data.size());
-			powers.resize(data.size());
-
-			hashes[0] = data[0].value;
-			powers[0] = 1;
-
-			for (int i = 1; i < data.size(); i++)
+			for (int i = 0; i < MIN_MATCH; i++)//initialize the hash
 			{
-				hashes[i] = hashes[i - 1] * BASE + data[i].value;
-				powers[i] = powers[i - 1] * BASE;
+				hash = (hash * BASE * data[pos + i]) % MOD;
 			}
 		}
 
-		auto get_hash(int start, int end)
-		{
-			auto hash = hashes[end];
-			if (start > 0)
-			{
-				hash = hash - (hashes[start - 1] * powers[end - start + 1]);
-			}
-			return hash;
-		}
-
-
+	private:
+		uint32_t hash = 0;
+		std::unordered_map<uint32_t, std::vector<uint32_t>> symbol_positions;
 	};
 
 
 }//namespace algs
 
+inline constexpr int SEARCH_RATIO = 100;
+
+/**
+ * @brief [lz77.Window]
+ * @brief This class gives a window to data given to the ctor
+ * 
+ * 
+ * @file src/models/LZ77/lz7.cppm
+ */
 class Window
 {
 public:
 
 	Window(const std::span<Sym>& data_, size_t window_size) noexcept
-		:data(data_), size(window_size), size_search(0), size_look_ahead(std::ceil(window_size / 2))
+		:data(data_), max_size(window_size), size_search(0)
 	{
+		if (max_size > data.size()) max_size = data.size();
+		size_look_ahead = std::ceil(max_size / (SEARCH_RATIO + 1));
+		max_size_look_ahead = size_look_ahead;
+		max_size_search = SEARCH_RATIO * max_size_look_ahead;
 	}
 
-	Window(const std::span<Sym>& data_, CompPreset preset) noexcept
+	Window(const std::span<Sym>& data_, CompPreset preset)
 		:data(data_)
 	{
+		size_search = 0;
 		switch (preset)
 		{
 		case COMP_MAX:
-			size = KB_to_B(256);
+			max_size = KB_to_B(256);
 			break;
 		case COMP_8:
-			size = KB_to_B(224);
+			max_size = KB_to_B(224);
 			break;
 		case COMP_7:
-			size = KB_to_B(192);
+			max_size = KB_to_B(192);
 			break;
 		case COMP_6:
-			size = KB_to_B(160);
+			max_size = KB_to_B(160);
 			break;
 		case COMP_5:
-			size = KB_to_B(128);
+			max_size = KB_to_B(128);
 			break;
 		case COMP_4:
-			size = KB_to_B(96);
+			max_size = KB_to_B(96);
 			break;
 		case COMP_3:
-			size = KB_to_B(64);
+			max_size = KB_to_B(64);
 			break;
 		case COMP_2:
-			size = KB_to_B(32);
+			max_size = KB_to_B(32);
 			break;
 		case COMP_1:
-			size = KB_to_B(16);
+			max_size = KB_to_B(16);
 			break;
 		case NO_COMP:
-			throw std::runtime_error("There has been an exception the file " + std::string{__FILE__} + " at the line " + std::to_string(__LINE__));
+			throw std::runtime_error("There has been an exception the file " + std::string{ __FILE__ } + " at the line " + std::to_string(__LINE__));
 			break;
 		default:
 			throw std::runtime_error("There has been an exception the file " + std::string{ __FILE__ } + " at the line " + std::to_string(__LINE__));
 			break;
 		}
+		if (max_size > data.size()) max_size = data.size();
+		size_look_ahead = std::ceil(max_size / SEARCH_RATIO);
+		max_size_look_ahead = size_look_ahead;
+		max_size_search = SEARCH_RATIO * max_size_look_ahead;
 	}
 
 	auto begin() const noexcept
@@ -164,27 +104,43 @@ public:
 
 	auto end() const noexcept
 	{
-		return data.begin() + offset + size + 1;
+		return data.begin() + offset + size_search + size_look_ahead + 1;
 	}
 
-	//TODO: remake these three next functions, they should follow the size_search == 0 condition when constructed, and behave accordingly
-
+	/**
+	 * @brief Slide the window
+	 * @param displacement The offset(or sizes) will moved by this amount
+	 */
 	void slide(size_t displacement)
 	{
-		offset += displacement;
-		if ((offset + size) > data.size())
+		if (size_search < max_size_search)//size_search should grow
 		{
-			size -= std::clamp(offset + size - data.size(), 0ull, size);
+			size_search += displacement;
+			if (size_search > max_size_search)//size_search has grown past maximum
+			{
+				offset += size_search - max_size_search;
+				size_search = max_size_search;
+			}
 		}
-		offset = std::clamp(offset, 0ull, data.size() + 1);
+		else
+		{
+			offset += displacement;
+		}
+
+		if (offset + max_size > data.size())//we have to cut off size_look_ahead
+		{
+			size_look_ahead = std::clamp(size_look_ahead - (offset + max_size - data.size()), 0ull, max_size_look_ahead);
+		}
+
+		offset = std::clamp(offset, 0ull, data.size() - max_size_search);
 	}
 
-	auto look_ahead_buffer()
+	auto look_ahead_buffer() -> std::span<Sym>
 	{
-		return data.subspan(offset + std::ceil(size / 2), std::ceil(size / 2));
+		return data.subspan(offset + size_search, size_look_ahead);
 	}
 
-	auto search_buffer()
+	auto search_buffer() -> std::span<Sym>
 	{
 		return data.subspan(offset, size_search);
 	}
@@ -192,28 +148,33 @@ public:
 private:
 	const std::span<Sym> data;
 	size_t size_look_ahead;
+	size_t max_size_look_ahead;
 	size_t size_search;
-	size_t size;
+	size_t max_size_search;
+	size_t max_size;
 	size_t offset = 0;
 };
 
-export class Lz77
+export class LZ77
 {
 public:
-	//to be fine tuned
-	struct Entry
+	
+	/**
+	 * @brief This is the type LZ77 will use for compressed symbols
+	 */
+	struct Triplet
 	{
 		uint16_t offset;
 		uint8_t length;
 		Sym symbol;
 	};
 	    
-	Lz77(std::span<Sym> data_, CompPreset preset_)
+	LZ77(std::span<Sym> data_, CompPreset preset_)
 		:data(data_), preset(preset_), window(data_, preset_)
 	{
 	}
 
-	void compress();
+	std::vector<Triplet> compress();
 	void decompress();
 
 private:

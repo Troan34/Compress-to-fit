@@ -1,11 +1,18 @@
 module lz77;
 
 
-void Lz77::compress()
+std::vector<LZ77::Triplet> LZ77::compress()
 {
-
+	auto ahead_span = window.look_ahead_buffer();
+	auto search_span = window.search_buffer();
+	
+	//loop until the ahead buffer has symbols
+	while (ahead_span.size())
+	{
+		for ()
+	}
 }
 
-void Lz77::decompress()
+void LZ77::decompress()
 {
 }
