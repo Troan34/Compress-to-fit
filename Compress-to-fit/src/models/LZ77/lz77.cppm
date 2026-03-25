@@ -3,26 +3,64 @@ export module lz77;
 export import util;
 import std.compat;
 
+/**
+* @brief This is the type LZ77 will use for compressed symbols
+*/
+struct Token
+{
+	uint16_t offset;
+	uint8_t length;
+	Sym symbol;
+};
+
 namespace alg
 {
-	inline constexpr unsigned int MOD = (1u << 31) - 1;
-	inline constexpr unsigned int BASE = Sym::max();
-	inline constexpr unsigned int MIN_MATCH = 3;
+	inline constexpr uint32_t MOD = (1u << 31) - 1;
+	inline constexpr uint32_t BASE = Sym::alphabet_size();
+	inline constexpr uint32_t MIN_MATCH = 3;
+	inline constexpr uint32_t MAX_MATCH = 250;
+	inline constexpr uint32_t PRIME = 31;
+	inline consteval uint32_t ROLL_FACTOR = const_pow(BASE, MIN_MATCH - 1);
 
 	class Rabin
 	{
 	public:
 
-		Rabin(std::span<Sym> data, size_t pos)
+		Rabin(std::span<Sym> data, uint32_t pos)
+			:data(data), position(pos)
 		{
 			for (int i = 0; i < MIN_MATCH; i++)//initialize the hash
 			{
 				hash = (hash * BASE * data[pos + i]) % MOD;
 			}
+			symbol_positions[hash].emplace_back(pos);
+		}
+
+		/**
+		 * @brief This rolls the hash.
+		 * @brief The position will NOT be advanced. That is up to the user.
+		 */
+		void roll_hash()
+		{
+			if (position < (data.size() - MIN_MATCH))//stop if we reached the end
+			{
+				//roll hash
+				hash = (hash + MOD - static_cast<uint64_t>(data[position]) * ROLL_FACTOR % MOD) % MOD;
+				hash = (hash * BASE + data[position + MIN_MATCH]) % MOD;
+
+				symbol_positions[hash].emplace_back(position);
+			}
+		}
+
+		const auto& get_table()
+		{
+			return symbol_positions;
 		}
 
 	private:
+		const std::span<Sym> data;
 		uint32_t hash = 0;
+		uint32_t position;
 		std::unordered_map<uint32_t, std::vector<uint32_t>> symbol_positions;
 	};
 
@@ -159,22 +197,14 @@ export class LZ77
 {
 public:
 	
-	/**
-	 * @brief This is the type LZ77 will use for compressed symbols
-	 */
-	struct Triplet
-	{
-		uint16_t offset;
-		uint8_t length;
-		Sym symbol;
-	};
+	
 	    
 	LZ77(std::span<Sym> data_, CompPreset preset_)
 		:data(data_), preset(preset_), window(data_, preset_)
 	{
 	}
 
-	std::vector<Triplet> compress();
+	std::vector<Token> compress();
 	void decompress();
 
 private:
@@ -183,7 +213,7 @@ private:
 	CompPreset preset;
 
 	/**
-	* @brief Find a match for a patter in a buffer.
+	* @brief Find a match for a pattern in a buffer.
 	* @param buffer The searched buffer.
 	* @param pattern The pattern.
 	* @return An optional index to the start of the match.

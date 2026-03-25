@@ -127,9 +127,13 @@ export struct Sym
 
 	auto operator<=>(const Sym&) const = default;
 
-	static constexpr auto max() noexcept
+	[[nodiscard]] static constexpr auto max() noexcept
 	{
 		return std::numeric_limits<decltype(value)>::max();
+	}
+	[[nodiscard]] static constexpr auto alphabet_size() noexcept
+	{
+		return max() + 1;
 	}
 };
 
@@ -141,4 +145,17 @@ export constexpr size_t KB_to_B(size_t value)
 export constexpr size_t MB_to_B(size_t value)
 {
 	return value * 1024 * 1024;
+}
+
+/**
+* @brief Calculate the power at compile time, to make sure of its correct usage it will be consteval
+*/
+export consteval size_t const_pow(size_t base, size_t exponent)
+{
+	size_t result = 1;
+	for (int i = 0; i < exponent; i++)
+	{
+		result *= base;
+	}
+	return result;
 }
