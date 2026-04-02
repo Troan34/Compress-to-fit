@@ -13,61 +13,9 @@ struct Token
 	Sym symbol;
 };
 
-namespace alg
-{
-	inline constexpr uint32_t MOD = (1u << 31) - 1;
-	inline constexpr uint32_t BASE = Sym::alphabet_size();
-	inline constexpr uint32_t MIN_MATCH = 3;
-	inline constexpr uint32_t MAX_MATCH = 250;
-	inline constexpr uint32_t PRIME = 31;
-	inline consteval uint32_t ROLL_FACTOR = const_pow(BASE, MIN_MATCH - 1);
 
-	class Rabin
-	{
-	public:
-
-		Rabin(std::span<Sym> data, uint32_t pos)
-			:data(data), position(pos)
-		{
-			for (int i = 0; i < MIN_MATCH; i++)//initialize the hash
-			{
-				hash = (hash * BASE * data[pos + i]) % MOD;
-			}
-			symbol_positions[hash].emplace_back(pos);
-		}
-
-		/**
-		 * @brief This rolls the hash.
-		 * @brief The position will NOT be advanced. That is up to the user.
-		 */
-		void roll_hash()
-		{
-			if (position < (data.size() - MIN_MATCH))//stop if we reached the end
-			{
-				//roll hash
-				hash = (hash + MOD - static_cast<uint64_t>(data[position]) * ROLL_FACTOR % MOD) % MOD;
-				hash = (hash * BASE + data[position + MIN_MATCH]) % MOD;
-
-				symbol_positions[hash].emplace_back(position);
-			}
-		}
-
-		const auto& get_table()
-		{
-			return symbol_positions;
-		}
-
-	private:
-		const std::span<Sym> data;
-		uint32_t hash = 0;
-		uint32_t position;
-		std::unordered_map<uint32_t, std::vector<uint32_t>> symbol_positions;
-	};
-
-
-}//namespace algs
-
-inline constexpr int SEARCH_RATIO = 100;
+inline constexpr int SEARCH_RATIO = 100;//Ratio of the search buf size and la buf
+inline constexpr auto MAX_WINDOW_SIZE = KB_to_B(256);
 
 /**
  * @brief [lz77.Window]
@@ -81,7 +29,7 @@ class Window
 public:
 
 	Window(const std::span<Sym>& data_, size_t window_size) noexcept
-		:data(data_), max_size(window_size), size_search(0)
+		:data(data_), max_size(std::clamp(window_size, window_size, MAX_WINDOW_SIZE)), size_search(0)
 	{
 		if (max_size > data.size()) max_size = data.size();
 		size_look_ahead = std::ceil(max_size / (SEARCH_RATIO + 1));
@@ -96,37 +44,37 @@ public:
 		switch (preset)
 		{
 		case COMP_MAX:
-			max_size = KB_to_B(256);
+			max_size = MAX_WINDOW_SIZE;
 			break;
 		case COMP_8:
-			max_size = KB_to_B(224);
+			max_size = MAX_WINDOW_SIZE >> 1;
 			break;
 		case COMP_7:
-			max_size = KB_to_B(192);
+			max_size = MAX_WINDOW_SIZE >> 2;
 			break;
 		case COMP_6:
-			max_size = KB_to_B(160);
+			max_size = MAX_WINDOW_SIZE >> 3;
 			break;
 		case COMP_5:
-			max_size = KB_to_B(128);
+			max_size = MAX_WINDOW_SIZE >> 4;
 			break;
 		case COMP_4:
-			max_size = KB_to_B(96);
+			max_size = MAX_WINDOW_SIZE >> 5;
 			break;
 		case COMP_3:
-			max_size = KB_to_B(64);
+			max_size = MAX_WINDOW_SIZE >> 6;
 			break;
 		case COMP_2:
-			max_size = KB_to_B(32);
+			max_size = MAX_WINDOW_SIZE >> 7;
 			break;
 		case COMP_1:
-			max_size = KB_to_B(16);
+			max_size = MAX_WINDOW_SIZE >> 8;
 			break;
 		case NO_COMP:
-			throw std::runtime_error("There has been an exception the file " + std::string{ __FILE__ } + " at the line " + std::to_string(__LINE__));
+			throw std::runtime_error("There has been an exception in the file " + std::string{ __FILE__ } + " at the line " + std::to_string(__LINE__));
 			break;
 		default:
-			throw std::runtime_error("There has been an exception the file " + std::string{ __FILE__ } + " at the line " + std::to_string(__LINE__));
+			throw std::runtime_error("There has been an exception in the file " + std::string{ __FILE__ } + " at the line " + std::to_string(__LINE__));
 			break;
 		}
 		if (max_size > data.size()) max_size = data.size();
@@ -183,6 +131,26 @@ public:
 		return data.subspan(offset, size_search);
 	}
 
+	auto get_size_search() const
+	{
+		return size_search;
+	}
+
+	auto get_size_la_buf() const
+	{
+		return size_look_ahead;
+	}
+
+	auto get_relative_pos() const
+	{
+		return size_search;
+	}
+
+	auto& operator[](size_t index)
+	{
+		return data[offset + index];
+	}
+
 private:
 	const std::span<Sym> data;
 	size_t size_look_ahead;
@@ -193,15 +161,77 @@ private:
 	size_t offset = 0;
 };
 
+namespace alg
+{
+	inline constexpr uint32_t MOD = (1u << 31) - 1;
+	inline constexpr uint32_t BASE = Sym::alphabet_size();
+	inline constexpr uint32_t MIN_MATCH = 3;
+	inline constexpr uint32_t MAX_MATCH = 250;
+	inline constexpr uint32_t PRIME = 31;
+	inline consteval uint32_t ROLL_FACTOR = const_pow(BASE, MIN_MATCH - 1);
+
+
+	/**
+	 * @brief [lz77.Karp-Rabin]
+	 * @brief This class gives fast string matching.
+	 * @brief Makes use of two chained arrays.
+	 *
+	 * @file src/models/LZ77/lz7.cppm
+	 */
+	class Rabin
+	{
+	public:
+
+		Rabin(const Window& data, uint32_t pos)
+			:data(data), position(pos)
+		{
+			for (int i = 0; i < MIN_MATCH and i < position; i++)//initialize the hash
+			{
+				hash = (hash * BASE * data[pos + i]) % MOD;
+			}
+			symbol_positions[hash].emplace_back(pos);
+		}
+
+		/**
+		 * @brief Roll and add the hash to the symbol_positions
+		 * @brief This function will check if position has reached the end
+		 * @brief The position will be advanced
+		 */
+		void roll_hash()
+		{
+			if (position < (data.search_buffer().size() - MIN_MATCH))//stop if we reached the end
+			{
+				//roll hash
+				hash = (hash + MOD - static_cast<uint64_t>(data[position]) * ROLL_FACTOR % MOD) % MOD;
+				hash = (hash * BASE + data[position + MIN_MATCH]) % MOD;
+
+				symbol_positions[hash].emplace_back(position);
+			}
+
+			position++;
+		}
+
+	private:
+		const Window& data;
+		uint32_t hash = 0;
+		uint16_t position;
+		uint16_t poss_table[MAX_WINDOW_SIZE];
+		uint16_t prev_poss_table[MAX_WINDOW_SIZE];
+
+	};
+
+
+}//namespace algs
+
 export class LZ77
 {
 public:
-	
 	
 	    
 	LZ77(std::span<Sym> data_, CompPreset preset_)
 		:data(data_), preset(preset_), window(data_, preset_)
 	{
+		
 	}
 
 	std::vector<Token> compress();
@@ -211,6 +241,7 @@ private:
 	std::span<Sym> data;
 	Window window;
 	CompPreset preset;
+	alg::Rabin search_table;
 
 	/**
 	* @brief Find a match for a pattern in a buffer.
@@ -220,23 +251,7 @@ private:
 	*/
 	std::optional<int> search_pattern(const std::span<Sym> buffer, const std::span<Sym> pattern)
 	{
-		auto buf_size = buffer.size(), patt_size = pattern.size();
 
-		alg::Karp stream_hash{ buffer };
-		auto pattern_hash = alg::Karp{ pattern }.get_hash(0, patt_size - 1);
-
-		for (int i = 0; i <= buf_size - patt_size; i++)
-		{
-			auto sub_hash = stream_hash.get_hash(i, i + patt_size - 1);
-			if (sub_hash == pattern_hash)
-			{
-				if (std::equal(buffer.subspan(i, patt_size).begin(), buffer.subspan(i, patt_size).end(), pattern.begin()))
-				{
-					return i;
-				}
-			}
-		}
-		return std::nullopt;
 	}
 
 };
