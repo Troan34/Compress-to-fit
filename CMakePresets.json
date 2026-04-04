@@ -8,6 +8,12 @@
         "generator": "Ninja",
         "binaryDir": "${sourceDir}/out/build/${presetName}",
         "installDir": "${sourceDir}/out/install/${presetName}",
+        "vendor": {
+          "microsoft.com/VisualStudioSettings/CMake/1.0": {
+            "enableClangTidyCodeAnalysis": true,
+            "clangTidyChecks": "bugprone-use-after-move"
+          }
+        },
         "cacheVariables": {
           "CMAKE_C_COMPILER": "cl.exe",
           "CMAKE_CXX_COMPILER": "cl.exe",

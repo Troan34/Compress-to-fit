@@ -150,7 +150,7 @@ export constexpr size_t MB_to_B(size_t value)
 /**
 * @brief Calculate the power at compile time, to make sure of its correct usage it will be consteval
 */
-export consteval size_t const_pow(size_t base, size_t exponent)
+export constexpr size_t const_pow(size_t base, size_t exponent)
 {
 	size_t result = 1;
 	for (int i = 0; i < exponent; i++)

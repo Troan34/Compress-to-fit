@@ -11,7 +11,7 @@ target_sources(
     "Compress-to-fit.cpp"
     "src/util/cli_parser.cpp"
     "src/util/file_management_impl.cpp"  
-  "src/models/LZ77/lz77_impl.cpp")
+    "src/models/LZ77/lz77_impl.cpp")
 
 target_sources(
     Compress-to-fit

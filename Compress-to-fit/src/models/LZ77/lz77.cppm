@@ -15,7 +15,8 @@ struct Token
 
 
 inline constexpr int SEARCH_RATIO = 100;//Ratio of the search buf size and la buf
-inline constexpr auto MAX_WINDOW_SIZE = KB_to_B(256);
+inline constexpr auto MAX_WINDOW_SIZE = KB_to_B(128);
+inline constexpr auto MAX_HASH_SIZE = MAX_WINDOW_SIZE << 1;
 
 /**
  * @brief [lz77.Window]
@@ -82,6 +83,7 @@ public:
 		max_size_look_ahead = size_look_ahead;
 		max_size_search = SEARCH_RATIO * max_size_look_ahead;
 	}
+
 
 	auto begin() const noexcept
 	{
@@ -151,6 +153,11 @@ public:
 		return data[offset + index];
 	}
 
+	auto operator[](size_t index) const
+	{
+		return data[offset + index];
+	}
+
 private:
 	const std::span<Sym> data;
 	size_t size_look_ahead;
@@ -168,7 +175,7 @@ namespace alg
 	inline constexpr uint32_t MIN_MATCH = 3;
 	inline constexpr uint32_t MAX_MATCH = 250;
 	inline constexpr uint32_t PRIME = 31;
-	inline consteval uint32_t ROLL_FACTOR = const_pow(BASE, MIN_MATCH - 1);
+	inline constexpr uint32_t ROLL_FACTOR = const_pow(BASE, MIN_MATCH - 1);
 
 
 	/**
@@ -185,12 +192,21 @@ namespace alg
 		Rabin(const Window& data, uint32_t pos)
 			:data(data), position(pos)
 		{
+			//will probably use memset
+			for (int i = 0; i < MAX_HASH_SIZE; i++)
+				poss_table[i] = -1;
+
+			for (int i = 0; i < MAX_WINDOW_SIZE; i++)
+				prev_poss_table[i] = -1;
+
 			for (int i = 0; i < MIN_MATCH and i < position; i++)//initialize the hash
 			{
 				hash = (hash * BASE * data[pos + i]) % MOD;
 			}
-			symbol_positions[hash].emplace_back(pos);
+			poss_table[bucket_index(hash)] = pos;
 		}
+
+		Rabin& operator=(const Rabin&) = default;
 
 		/**
 		 * @brief Roll and add the hash to the symbol_positions
@@ -199,13 +215,13 @@ namespace alg
 		 */
 		void roll_hash()
 		{
-			if (position < (data.search_buffer().size() - MIN_MATCH))//stop if we reached the end
+			if (position < (data.get_size_search() - MIN_MATCH))//stop if we reached the end
 			{
 				//roll hash
 				hash = (hash + MOD - static_cast<uint64_t>(data[position]) * ROLL_FACTOR % MOD) % MOD;
 				hash = (hash * BASE + data[position + MIN_MATCH]) % MOD;
 
-				symbol_positions[hash].emplace_back(position);
+				poss_table[bucket_index(hash)] = position;
 			}
 
 			position++;
@@ -215,8 +231,20 @@ namespace alg
 		const Window& data;
 		uint32_t hash = 0;
 		uint16_t position;
-		uint16_t poss_table[MAX_WINDOW_SIZE];
-		uint16_t prev_poss_table[MAX_WINDOW_SIZE];
+		int16_t poss_table[MAX_HASH_SIZE];
+		int16_t prev_poss_table[MAX_WINDOW_SIZE];
+
+		auto bucket_index(uint32_t hash_) const noexcept -> uint32_t
+		{
+			if constexpr (std::popcount(MAX_HASH_SIZE) == 1)
+			{
+				return hash_ & (MAX_HASH_SIZE - 1);
+			}
+			else
+			{
+				return hash % MAX_HASH_SIZE;
+			}
+		}
 
 	};
 
@@ -229,9 +257,9 @@ public:
 	
 	    
 	LZ77(std::span<Sym> data_, CompPreset preset_)
-		:data(data_), preset(preset_), window(data_, preset_)
+		:data(data_), preset(preset_), window(data_, preset_), pattern_matcher(window, 0)
 	{
-		
+
 	}
 
 	std::vector<Token> compress();
@@ -241,7 +269,7 @@ private:
 	std::span<Sym> data;
 	Window window;
 	CompPreset preset;
-	alg::Rabin search_table;
+	alg::Rabin pattern_matcher;
 
 	/**
 	* @brief Find a match for a pattern in a buffer.
