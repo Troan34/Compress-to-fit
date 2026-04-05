@@ -123,32 +123,37 @@ public:
 		offset = std::clamp(offset, 0ull, data.size() - max_size_search);
 	}
 
-	auto look_ahead_buffer() -> std::span<Sym>
+	[[nodiscard]] auto look_ahead_buffer() noexcept -> std::span<Sym>
 	{
 		return data.subspan(offset + size_search, size_look_ahead);
 	}
 
-	auto search_buffer() -> std::span<Sym>
+	[[nodiscard]] auto search_buffer() noexcept -> std::span<Sym>
 	{
 		return data.subspan(offset, size_search);
 	}
 
-	auto get_size_search() const
+	[[nodiscard]] auto get_size_search() const noexcept
 	{
 		return size_search;
 	}
 
-	auto get_size_la_buf() const
+	[[nodiscard]] auto get_size_la_buf() const noexcept
 	{
 		return size_look_ahead;
 	}
 
-	auto get_relative_pos() const
+	[[nodiscard]] auto get_max_size() const noexcept
+	{
+		return max_size;
+	}
+
+	[[nodiscard]] auto get_relative_pos() const noexcept
 	{
 		return size_search;
 	}
 
-	auto& operator[](size_t index)
+	auto& operator[](size_t index) noexcept
 	{
 		return data[offset + index];
 	}
@@ -158,6 +163,10 @@ public:
 		return data[offset + index];
 	}
 
+	[[nodiscard]] const auto get_data() const noexcept //peak function signature
+	{
+		return data;
+	}
 private:
 	const std::span<Sym> data;
 	size_t size_look_ahead;
@@ -176,7 +185,7 @@ namespace alg
 	inline constexpr uint32_t MAX_MATCH = 250;
 	inline constexpr uint32_t PRIME = 31;
 	inline constexpr uint32_t ROLL_FACTOR = const_pow(BASE, MIN_MATCH - 1);
-
+	inline constexpr uint32_t MAX_CHAIN_CHECKS = 3;
 
 	/**
 	 * @brief [lz77.Karp-Rabin]
@@ -211,7 +220,7 @@ namespace alg
 		/**
 		 * @brief Roll and add the hash to the symbol_positions
 		 * @brief This function will check if position has reached the end
-		 * @brief The position will be advanced
+		 * @brief The position will be increased
 		 */
 		void roll_hash()
 		{
@@ -221,20 +230,41 @@ namespace alg
 				hash = (hash + MOD - static_cast<uint64_t>(data[position]) * ROLL_FACTOR % MOD) % MOD;
 				hash = (hash * BASE + data[position + MIN_MATCH]) % MOD;
 
+				prev_poss_table[prev_bucket_index(hash)] = poss_table[bucket_index(hash)];
 				poss_table[bucket_index(hash)] = position;
 			}
 
 			position++;
 		}
 
+		Token find_pattern()
+		{
+			auto best_length = 0ull;
+			auto best_offset = 0ull;
+			auto candidate = poss_table[bucket_index(hash)];
+			int num_of_iter = 0;
+
+			//check the number of times we go down the chain --- check if candidate is not too far from pos --- and that candidate exist (we initialized -1)
+			while (num_of_iter <= MAX_CHAIN_CHECKS and position - candidate <= data.get_max_size() and candidate >= 0)
+			{
+				auto temp = count_equal(data.get_data().subspan(position), data.get_data().subspan(candidate));
+				if (temp > best_length)
+				{
+					best_length = temp;
+					best_offset = candidate;
+				}
+
+			}
+		}
+
 	private:
 		const Window& data;
 		uint32_t hash = 0;
-		uint16_t position;
-		int16_t poss_table[MAX_HASH_SIZE];
-		int16_t prev_poss_table[MAX_WINDOW_SIZE];
+		uint32_t position;
+		int32_t poss_table[MAX_HASH_SIZE];
+		int32_t prev_poss_table[MAX_WINDOW_SIZE];
 
-		auto bucket_index(uint32_t hash_) const noexcept -> uint32_t
+		[[nodiscard]] auto bucket_index(uint32_t hash_) const noexcept -> uint32_t
 		{
 			if constexpr (std::popcount(MAX_HASH_SIZE) == 1)
 			{
@@ -242,9 +272,22 @@ namespace alg
 			}
 			else
 			{
-				return hash % MAX_HASH_SIZE;
+				return hash_ % MAX_HASH_SIZE;
 			}
 		}
+
+		[[nodiscard]] auto prev_bucket_index(uint32_t hash_) const noexcept -> uint32_t
+		{
+			if constexpr (std::popcount(MAX_WINDOW_SIZE) == 1)
+			{
+				return hash_ & (MAX_WINDOW_SIZE - 1);
+			}
+			else
+			{
+				return hash_ % MAX_WINDOW_SIZE;
+			}
+		}
+
 
 	};
 
@@ -270,17 +313,6 @@ private:
 	Window window;
 	CompPreset preset;
 	alg::Rabin pattern_matcher;
-
-	/**
-	* @brief Find a match for a pattern in a buffer.
-	* @param buffer The searched buffer.
-	* @param pattern The pattern.
-	* @return An optional index to the start of the match.
-	*/
-	std::optional<int> search_pattern(const std::span<Sym> buffer, const std::span<Sym> pattern)
-	{
-
-	}
 
 };
 

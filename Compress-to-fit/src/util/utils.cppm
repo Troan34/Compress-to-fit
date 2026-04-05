@@ -137,12 +137,12 @@ export struct Sym
 	}
 };
 
-export constexpr size_t KB_to_B(size_t value)
+export [[nodiscard]] constexpr size_t KB_to_B(size_t value)
 {
 	return value * 1024;
 }
 
-export constexpr size_t MB_to_B(size_t value)
+export [[nodiscard]] constexpr size_t MB_to_B(size_t value)
 {
 	return value * 1024 * 1024;
 }
@@ -150,7 +150,7 @@ export constexpr size_t MB_to_B(size_t value)
 /**
 * @brief Calculate the power at compile time, to make sure of its correct usage it will be consteval
 */
-export constexpr size_t const_pow(size_t base, size_t exponent)
+export [[nodiscard]] constexpr size_t const_pow(size_t base, size_t exponent) noexcept
 {
 	size_t result = 1;
 	for (int i = 0; i < exponent; i++)
@@ -158,4 +158,17 @@ export constexpr size_t const_pow(size_t base, size_t exponent)
 		result *= base;
 	}
 	return result;
+}
+
+export template <typename Type>
+[[nodiscard]] constexpr auto count_equal(const std::span<Type> str1, const std::span<Type> str2)
+{
+	auto cond = std::max(str1.size(), str2.size());
+	size_t i = 0;
+	for (; i < cond; i++)
+	{
+		if (str1[i] != str2[i])
+			break;
+	}
+	return i;
 }

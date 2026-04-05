@@ -23,3 +23,13 @@ set(CMAKE_CXX_MODULE_STD ON)
 
 # Include sub-projects.
 add_subdirectory ("Compress-to-fit")
+
+if(MSVC)
+    target_link_options(Compress-to-fit PRIVATE "/STACK:10485760")
+elseif(APPLE)
+    target_link_options(Compress-to-fit PRIVATE "LINKER:-stack_size,0x1000000")
+elseif(WIN32 AND NOT MSVC) #MinGW
+    target_link_options(Compress-to-fit PRIVATE "-Wl,--stack,10485760")
+else() #Linux
+    target_link_options(Compress-to-fit PRIVATE "LINKER:-z,stack-size=10485760")
+endif()
