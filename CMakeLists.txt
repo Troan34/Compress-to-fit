@@ -15,7 +15,6 @@ project ("Compress-to-fit" LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set(CMAKE_CXX_SCAN_FOR_MODULES ON)
@@ -33,3 +32,5 @@ elseif(WIN32 AND NOT MSVC) #MinGW
 else() #Linux
     target_link_options(Compress-to-fit PRIVATE "LINKER:-z,stack-size=10485760")
 endif()
+
+

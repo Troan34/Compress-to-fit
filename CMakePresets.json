@@ -8,6 +8,7 @@
         "generator": "Ninja",
         "binaryDir": "${sourceDir}/out/build/${presetName}",
         "installDir": "${sourceDir}/out/install/${presetName}",
+        "configureOnEdit": true,
         "vendor": {
           "microsoft.com/VisualStudioSettings/CMake/1.0": {
             "enableClangTidyCodeAnalysis": true,
@@ -29,7 +30,6 @@
             }
           ]
         }
-
       },
         {
             "name": "x64-debug",

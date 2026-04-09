@@ -125,6 +125,12 @@ export struct Sym
 		return static_cast<int>(value);
 	}
 
+	friend std::istream& operator>>(std::istream& is, Sym& sym)
+	{
+		is >> sym.value;
+		return is;
+	}
+
 	auto operator<=>(const Sym&) const = default;
 
 	[[nodiscard]] static constexpr auto max() noexcept
@@ -135,6 +141,7 @@ export struct Sym
 	{
 		return max() + 1;
 	}
+
 };
 
 export [[nodiscard]] constexpr size_t KB_to_B(size_t value)

@@ -2,7 +2,6 @@ export module file_util;
 
 import util;
 import std;
-
 namespace fs = std::filesystem;
 
 namespace file

@@ -21,9 +21,7 @@ target_sources(
     src/util/file_management.cppm
     src/util/cli_parser.cppm
     src/models/LZ77/lz77.cppm)
+
 target_compile_features(Compress-to-fit PRIVATE cxx_std_23)
 target_link_libraries(Compress-to-fit PRIVATE __CMAKE::CXX23)
-
-
-
 
