@@ -1,5 +1,6 @@
 module;
 #include <source_location>
+#include <limits>
 
 export module lz77;
 
@@ -15,16 +16,13 @@ struct Token
 	uint8_t length;
 	Sym symbol;
 
-	friend std::ostream& operator<<(std::ostream& os, Token& token)
+	friend std::ostream& operator<<(std::ostream& os, const Token& token)
 	{
-		os << token.offset;
-		os << token.length;
-		os << token.symbol;
+		os.write(reinterpret_cast<const char*>(&token), sizeof(Token));
 
 		return os;
 	}
 };
-
 
 inline constexpr int SEARCH_RATIO = 100;//Ratio of the search buf size and la buf
 inline constexpr auto MAX_WINDOW_SIZE = KB_to_B(128);
@@ -176,7 +174,7 @@ public:
 
 	auto operator[](size_t index) const
 	{
-		return data[offset + index];
+		return data[index];
 	}
 
 	[[nodiscard]] const auto get_data() const noexcept //peak function signature
@@ -228,12 +226,13 @@ namespace alg
 
 			for (int i = 0; i < MAX_WINDOW_SIZE; i++)
 				prev_poss_table[i] = -1;
-
-			for (int i = 0; i < MIN_MATCH and i < position; i++)//initialize the hash
+			
+			for (int i = 0; i < MIN_MATCH and i < data.get_data().size(); i++)//initialize the hash
 			{
 				hash = (hash * BASE * data[position + i]) % MOD;
 			}
-			poss_table[bucket_index(hash)] = pos;
+			poss_table[bucket_index(hash)] = position;
+			
 		}
 
 		Rabin& operator=(const Rabin&) = default;
@@ -254,7 +253,7 @@ namespace alg
 					hash = (hash + MOD - static_cast<uint64_t>(data[position]) * ROLL_FACTOR % MOD) % MOD;
 					hash = (hash * BASE + data[position + MIN_MATCH]) % MOD;
 
-					prev_poss_table[bucket_index(hash)] = poss_table[bucket_index(hash)];
+					prev_poss_table[prev_bucket_index(hash)] = poss_table[bucket_index(hash)];
 					poss_table[bucket_index(hash)] = position;
 				}
 
@@ -275,20 +274,23 @@ namespace alg
 			int num_of_iter = 0;
 
 			//check the number of times we go down the chain --- check if candidate is not too far from pos --- and that candidate exist (we initialized -1)
-			while (num_of_iter <= MAX_CHAIN_CHECKS and position - candidate <= data.get_size_search() and candidate >= 0)
+			while (num_of_iter <= MAX_CHAIN_CHECKS and position - candidate < data.get_size_search() and candidate >= 0)
 			{
-				auto temp_len = count_equal(data.get_data().subspan(position), data.get_data().subspan(candidate));
+				auto temp_len = std::min(count_equal(data.get_data().subspan(position), data.get_data().subspan(candidate)),
+										 static_cast<size_t>(std::numeric_limits<uint8_t>::max()));
 				if (temp_len > best_length)
 				{
 					best_length = temp_len;
 					best_offset = candidate;
 				}
-				candidate = prev_poss_table[bucket_index(candidate)];
+				candidate = prev_poss_table[prev_bucket_index(candidate)];
 				num_of_iter++;
 			}
 
-
-			return Token{.offset = best_offset, .length = best_length, .symbol = data[position + best_length]};
+			if (position + best_length < data.get_data().size())
+				return Token{ .offset = best_offset, .length = best_length, .symbol = data[position + best_length] };
+			else
+				return Token{ .offset = best_offset, .length = --best_length, .symbol = data[position] };
 		}
 
 		[[nodiscard]] auto get_pos() const noexcept
@@ -315,6 +317,18 @@ namespace alg
 			}
 		}
 
+		[[nodiscard]] auto prev_bucket_index(uint32_t hash_) const noexcept -> uint32_t
+		{
+			if constexpr (std::popcount(MAX_WINDOW_SIZE) == 1)
+			{
+				return hash_ & (MAX_WINDOW_SIZE - 1);
+			}
+			else
+			{
+				return hash_ % MAX_WINDOW_SIZE;
+			}
+		}
+
 	};
 
 
@@ -323,7 +337,7 @@ namespace alg
 export class LZ77
 {
 public:
-	
+	using Token = Token;//share token type
 	    
 	LZ77(std::span<Sym> data_, CompPreset preset_)
 		:data(data_), preset(preset_), window(data_, preset_), pattern_matcher(window, 0)

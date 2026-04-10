@@ -170,7 +170,7 @@ export [[nodiscard]] constexpr size_t const_pow(size_t base, size_t exponent) no
 export template <typename Type>
 [[nodiscard]] constexpr auto count_equal(const std::span<Type> str1, const std::span<Type> str2)
 {
-	auto cond = std::max(str1.size(), str2.size());
+	auto cond = std::min(str1.size(), str2.size());
 	size_t i = 0;
 	for (; i < cond; i++)
 	{
@@ -179,3 +179,4 @@ export template <typename Type>
 	}
 	return i;
 }
+

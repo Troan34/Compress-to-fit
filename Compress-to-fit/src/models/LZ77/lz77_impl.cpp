@@ -2,10 +2,11 @@ module lz77;
 
 std::vector<Token> LZ77::compress()
 {
-	std::vector<Token> out_stream(data.size() / 3);//arbitrary pre-allocation
+	std::vector<Token> out_stream{};//arbitrary pre-allocation
+	out_stream.reserve(data.size() / 3);
 
 	//loop over the stream
-	while (pattern_matcher.get_pos() <= window.get_absolute_pos())
+	while (pattern_matcher.get_pos() < data.size())
 	{
 		auto token = pattern_matcher.find_pattern();
 		out_stream.push_back(token);
