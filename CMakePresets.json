@@ -1,36 +1,37 @@
 ﻿{
     "version": 3,
     "configurePresets": [
-      {
-        "name": "windows-base",
-        "cmakeExecutable": "C:/cmake/bin/cmake.exe",
-        "hidden": true,
-        "generator": "Ninja",
-        "binaryDir": "${sourceDir}/out/build/${presetName}",
-        "installDir": "${sourceDir}/out/install/${presetName}",
-        "configureOnEdit": true,
-        "vendor": {
-          "microsoft.com/VisualStudioSettings/CMake/1.0": {
-            "enableClangTidyCodeAnalysis": true,
-            "clangTidyChecks": "bugprone-use-after-move"
-          }
-        },
-        "cacheVariables": {
-          "CMAKE_C_COMPILER": "cl.exe",
-          "CMAKE_CXX_COMPILER": "cl.exe",
-          "CMAKE_CXX_FLAGS": "/permissive- "
-        },
-        "condition": {
-          "type": "allOf",
-          "conditions": [
-            {
-              "type": "equals",
-              "lhs": "${hostSystemName}",
-              "rhs": "Windows"
+        {
+            "name": "windows-base",
+            "cmakeExecutable": "C:/cmake/bin/cmake.exe",
+            "hidden": true,
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/out/build/${presetName}",
+            "installDir": "${sourceDir}/out/install/${presetName}",
+            "configureOnEdit": true,
+            "vendor": {
+                "microsoft.com/VisualStudioSettings/CMake/1.0": {
+                    "enableClangTidyCodeAnalysis": true,
+                    "clangTidyChecks": "bugprone-use-after-move"
+                }
+            },
+            "cacheVariables": {
+                "CMAKE_C_COMPILER": "cl.exe",
+                "CMAKE_CXX_COMPILER": "cl.exe",
+                "CMAKE_EXE_LINKER_FLAGS": "/DEBUG",
+                "CMAKE_CXX_FLAGS": "/permissive- "
+            },
+            "condition": {
+              "type": "allOf",
+                "conditions": [
+                    {
+                      "type": "equals",
+                      "lhs": "${hostSystemName}",
+                      "rhs": "Windows"
+                    }
+                ]
             }
-          ]
-        }
-      },
+        },
         {
             "name": "x64-debug",
             "displayName": "x64 Debug",
@@ -45,12 +46,26 @@
             }
         },
         {
-            "name": "x64-release",
-            "displayName": "x64 Release",
-            "inherits": "x64-debug",
+          "name": "x64-release",
+          "displayName": "x64 Release",
+          "inherits": "x64-debug",
           "cacheVariables": {
             "CMAKE_BUILD_TYPE": "Release",
             "CMAKE_CXX_FLAGS": "/W4 /O2"
+          }
+        },
+        {
+          "name": "x64-profiling",
+          "displayName": "x64 Profiling",
+          "inherits": "windows-base",
+          "architecture": {
+            "value": "x64",
+            "strategy": "external"
+          },
+          "cacheVariables": {
+            "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+            "CMAKE_CXX_FLAGS": "/W4 /O2 /Zi",
+            "CMAKE_EXE_LINKER_FLAGS": "/DEBUG /PROFILE /OPT:REF /OPT:ICF"
           }
         },
         {

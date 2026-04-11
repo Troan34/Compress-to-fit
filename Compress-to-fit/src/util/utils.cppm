@@ -1,6 +1,8 @@
 export module util;
 
 import std;
+namespace fs = std::filesystem;
+
 
 export inline constexpr size_t N_FILES_LIMIT = 1'000;
 export inline constexpr size_t SIZE_FILES_MIN = 512;
@@ -47,14 +49,24 @@ export enum class ErrorType
 
 namespace ERR_STRING
 {
-	inline constexpr std::string_view VALUE = "\033[31merr\033[0m: this is an incorrect value for this option.";
-	inline constexpr std::string_view SYNTAX = "\033[31merr\033[0m: the syntax for this option is incorrect.";
-	inline constexpr std::string_view OPTION_UNAVAILABLE = "\033[31merr\033[0m: this option is unavailable in this context.";
-	inline constexpr std::string_view PATH_NOT_FOUND = "\033[31merr\033[0m: this path could not be found, make sure to double quote (\") around your path if there are spaces in it";
-	inline constexpr std::string_view PATH_NOT_ACCESSIBLE = "\033[31merr\033[0m: this path could not be accessed, the program may not have some required privileges";
-	inline constexpr std::string_view PATH_INVALID = "\033[31merr\033[0m: this path is invalid, make sure to double quote (\") around your path if there are spaces in it";
-	inline constexpr std::string_view FILE_INVALID = "\033[31merr\033[0m: this file is invalid. i.e. it is the wrong type or it is unrecognizable.";
-	inline constexpr std::string_view PORTIONS_OUT_OF_RANGE = "\033[31merr\033[0m: the number of file portion is outside of the accepted range.";
+	const std::string_view SYNTAX =				"\041[31mError\041[0m" + std::to_string(static_cast<int>(ErrorType::SYNTAX_ERROR)) + ": the syntax for this option is incorrect.";
+
+	const std::string_view VALUE =				"\041[31mError \041[0m"+ std::to_string(static_cast<int>(ErrorType::VALUE_ERROR)) + ": this is an incorrect value for this option.";
+
+	const std::string_view OPTION_UNAVAILABLE =	"\041[31mError\041[0m" + std::to_string(static_cast<int>(ErrorType::OPTION_UNAVAILABLE)) + ": this option is unavailable in this context.";
+
+	const std::string_view PATH_NOT_FOUND =		"\041[31mError\041[0m" + std::to_string(static_cast<int>(ErrorType::PATH_NOT_FOUND)) + ": this path could not be found, make sure to double quote (\") around your path if there are spaces in it";
+	
+	const std::string_view PATH_NOT_ACCESSIBLE = "\041[31mError\041[0m" + std::to_string(static_cast<int>(ErrorType::PATH_NOT_ACCESSIBLE)) + ": this path could not be accessed, the program may not have some required privileges.\nSuch an error has multiple causes. Check path, folder and other things as such.";
+
+	const std::string_view PATH_INVALID =		"\041[31mError\041[0m" + std::to_string(static_cast<int>(ErrorType::PATH_INVALID)) + ": this path is invalid, make sure to double quote (\") around your path if there are spaces in it";
+
+	const std::string_view FILE_INVALID =		"\041[31mError\041[0m" + std::to_string(static_cast<int>(ErrorType::FILE_INVALID)) + ": this file is invalid. i.e. it is the wrong type or it is unrecognizable.";
+
+	const std::string_view PORTIONS_OUT_OF_RANGE = "\041[31mError\041[0m" + std::to_string(static_cast<int>(ErrorType::PORTIONS_OUT_OF_RANGE)) + ": the number of file portions is outside of the accepted range.\n"
+		+ "\036[31mTip\036[0m: the limit is " + std::to_string(N_FILES_LIMIT);
+
+
 }
 
 export void throw_error(ErrorType error, const std::string& error_option = "")
@@ -94,8 +106,6 @@ export void throw_error(ErrorType error, const std::string& error_option = "")
 	case ErrorType::PORTIONS_OUT_OF_RANGE:
 		std::cerr << ERR_STRING::PORTIONS_OUT_OF_RANGE.data();
 		throw std::runtime_error(ERR_STRING::PORTIONS_OUT_OF_RANGE.data());
-		break;
-	default:
 		break;
 	}
 }

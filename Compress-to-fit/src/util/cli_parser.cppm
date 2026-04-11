@@ -1,10 +1,10 @@
-/*
-cli_parser.cppm - parse and categorize the cli input
-*/
+module;
+#include <print>
 export module parser;
 
 import util;
 import std;
+namespace fs = std::filesystem;
 
 
 namespace parser
@@ -20,18 +20,19 @@ namespace parser
 		COMPRESSION_PRESET,
 		N_FILES,
 		SIZE_FILES,
+		EXTRACT,
 		NO_TYPE = 696969,//we don't want this to be an index
 	};
 	//HAS to follow the same order of the TokenType enums
-	inline constexpr std::array<std::string_view, 5> token_strings =
+	inline constexpr std::array<std::string_view, 6> token_strings =
 	{
 		"-i",
 		"-o",
 		"-preset",
 		"-n_files",
 		"-size_files",
+		"-e",
 	};
-
 	
 	
 	/// <summary>
@@ -73,6 +74,7 @@ namespace parser
 		size_t preset = COMP_5;
 		size_t n_files = 1;
 		size_t size_files;
+		bool extract = false;
 	};
 	
 	/// <summary>
@@ -82,3 +84,36 @@ namespace parser
 	export Options parse(int argc, char* argv[]);
 
 }//namespace parser
+
+/**
+ * @brief Show a progress bar in terminal
+ * @param file What file is being created/accessed...
+ * @param options Will check what kind of operation is being done
+ * @param progress From 0 to 1
+ */
+export void show_progress(const fs::path& file = "", const parser::Options& options = {}, float progress = 0.f)
+{
+	const int max_bar_width = 50;
+
+	std::print("\r\033[K");
+	std::print("\033[34mProgress on the ");
+	if (options.extract)
+		std::print("extraction:\033[0m");
+	else
+		std::print("compression:\033[0m");
+
+	std::print("[\033[32m");
+	int filled_width = static_cast<int>(max_bar_width * progress);
+	for (int i = 0; i <= filled_width; i++)
+	{
+		std::print("█");
+	}
+	for (int i = filled_width + 1; i < max_bar_width; i++)
+	{
+		std::print("-");
+	}
+
+
+	std::print("\033[0m] {:.1f}%", progress * 100.0f);
+	std::cout << std::flush;
+}

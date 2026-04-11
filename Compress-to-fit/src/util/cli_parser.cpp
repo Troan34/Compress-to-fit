@@ -27,9 +27,6 @@ std::expected<Token, ErrorType> lex(const std::string& option)
 	auto token_string = option.substr(0, option.find(' '));
 	auto token_value = option.substr(option.find(' ') + 1, std::string::npos);
 
-	//TODO: This doesn't work if option is just a flag
-	if (token_string.size() == option.size())//we have not found a ' ' character <-> find() returned npos
-		return std::unexpected(ErrorType::SYNTAX_ERROR);
 
 	TokenType token_type;
 
@@ -55,7 +52,13 @@ std::expected<Token, ErrorType> lex(const std::string& option)
 		token_type = TokenType::SIZE_FILES;
 	}
 	else
-		return std::unexpected(ErrorType::SYNTAX_ERROR);
+		throw_error(ErrorType::SYNTAX_ERROR, token_string);
+
+	if (token_string.size() == option.size() //we have not found a ' ' character because find() returned npos
+		and token_type != TokenType::EXTRACT)
+	{
+		throw_error(ErrorType::SYNTAX_ERROR, token_string);
+	}
 
 	ValueType value;
 	//Find token_value and do error checking
@@ -65,10 +68,10 @@ std::expected<Token, ErrorType> lex(const std::string& option)
 	{
 		//Test if we can find and access the input file
 		if (!fs::exists(token_value))
-			return std::unexpected(ErrorType::PATH_NOT_FOUND);
+			throw_error(ErrorType::PATH_NOT_FOUND, token_value);
 
 		if (std::ifstream file(token_value); !file.is_open())
-			return std::unexpected(ErrorType::PATH_NOT_ACCESSIBLE);
+			throw_error(ErrorType::PATH_NOT_ACCESSIBLE, token_value);
 
 		value.emplace<fs::path>(token_value);
 	}
@@ -83,7 +86,7 @@ std::expected<Token, ErrorType> lex(const std::string& option)
 		if (!test_file.is_open())
 		{
 			fs::remove(test_path);
-			return std::unexpected(ErrorType::PATH_NOT_ACCESSIBLE);
+			throw_error(ErrorType::PATH_NOT_ACCESSIBLE, path.string());
 		}
 		test_file.close();
 		fs::remove(test_path);
@@ -101,7 +104,7 @@ std::expected<Token, ErrorType> lex(const std::string& option)
 		auto res = std::from_chars(token_value.data(), token_value.data() + token_value.size(), value_cmpr);
 
 		if (res.ec != std::errc() or (value_cmpr > CompPreset::COMP_MAX or value_cmpr < CompPreset::NO_COMP))//if not a number or outside of our range
-			return std::unexpected(ErrorType::VALUE_ERROR);
+			throw_error(ErrorType::VALUE_ERROR, token_string + token_value);
 
 		value.emplace<size_t>(value_cmpr);
 	}
@@ -112,7 +115,7 @@ std::expected<Token, ErrorType> lex(const std::string& option)
 		auto res = std::from_chars(token_value.data(), token_value.data() + token_value.size(), value_temp);
 
 		if (res.ec != std::errc() or (value_temp > N_FILES_LIMIT or value_temp < 0))//if negative or over N_FILES_LIMIT
-			return std::unexpected(ErrorType::VALUE_ERROR);
+			throw_error(ErrorType::VALUE_ERROR, token_string + token_value);
 		
 		value.emplace<size_t>(value_temp);
 	}
@@ -123,7 +126,7 @@ std::expected<Token, ErrorType> lex(const std::string& option)
 		auto res = std::from_chars(token_value.data(), token_value.data() + token_value.size(), value_temp);
 
 		if (res.ec != std::errc() or (value_temp < SIZE_FILES_MIN))//if negative or under SIZE_FILES_MIN
-			return std::unexpected(ErrorType::VALUE_ERROR);
+			throw_error(ErrorType::VALUE_ERROR, token_string + token_value);
 
 		value.emplace<size_t>(value_temp);
 	}
@@ -185,6 +188,8 @@ Options parse(int argc, char* argv[])
 			case TokenType::SIZE_FILES:
 				options.size_files = std::get<size_t>(token.value().get_value());
 				break;
+			case TokenType::EXTRACT:
+				options.extract = std::get<bool>(token.value().get_value());
 			default:
 				std::terminate();
 				break;
@@ -196,6 +201,12 @@ Options parse(int argc, char* argv[])
 		}
 	}
 
+	//TODO: When adding decompression capabilities, fix this
+	//if filename out is empty, copy filename in
+	if (options.filename_out.empty())
+	{
+		options.filename_out = options.filename_in.stem() += FILE_EXTENSION;
+	}
 	return options;
 }
 

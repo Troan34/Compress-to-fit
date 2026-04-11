@@ -6,6 +6,10 @@ export module lz77;
 
 export import util;
 import std.compat;
+import parser;
+
+namespace fs = std::filesystem;
+
 
 /**
 * @brief This is the type LZ77 will use for compressed symbols
@@ -381,7 +385,12 @@ public:
 	{
 	}
 
-	std::vector<Token> compress();
+	/**
+	 * @brief Compress the data.
+	 * @param file Optional file to be used in the progress bar
+	 * @return The compressed data
+	 */
+	std::vector<Token> compress(const fs::path& file = "", const parser::Options& option = {});
 	void decompress();
 
 private:

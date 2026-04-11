@@ -27,10 +27,13 @@ namespace file
 		}
 	}
 
-	/*
-	Apply a certain function of type 'fun' to the bytes read in from file 'in_path' and written to 'out_path'.
-	The type 'fun' shall take a pointer to the data and an integer for the size of the data, the return of 'fun' is discarded.
-	This will not check if a path is accessible or existant, or any other form of checking.
+
+
+	/**
+	* @brief Apply a certain function to a file.
+	* @param in_path File being read.
+	* @param out_path Where the result of the function will be stored.
+	* @param op The function to be applied.
 	*/
 	export template <ptr_size_pred pred>
 	void process_file(const fs::path& in_path, const fs::path& out_path, pred op)
@@ -63,7 +66,7 @@ namespace file
 	export template<typename T>
 	void write_file(std::span<T> buffer, const fs::path& out_path)
 	{
-		std::ofstream file(out_path, std::ios::app | std::ios::binary);
+		std::ofstream file(out_path, std::ios::trunc | std::ios::binary);
 
 		if (file.tellp() > 0)//not empty
 			check_signature(out_path);
@@ -118,8 +121,31 @@ namespace file
 
 		fs::remove(path_);
 	}
+	
+	/**
+	 * @brief Read a file into a vector. Will call throw_error if file is not found or inaccessible.
+	 * @param in_path Location of file.
+	 * @param received_data The vector that will be filled.
+	 */
+	export void read_file(const fs::path& in_path, std::vector<Sym>& received_data)
+	{
+		if (!fs::exists(in_path))
+		{
+			throw_error(ErrorType::PATH_NOT_FOUND, in_path.string());
+		}
 
+		std::ifstream in_file{ in_path, std::ios::ate | std::ios::binary };
 
+		if (!in_file.is_open())
+			throw_error(ErrorType::PATH_NOT_ACCESSIBLE, in_path.string());
 
+		auto size_file = in_file.tellg() / sizeof(Sym);
+
+		received_data.resize(size_file);
+
+		in_file.seekg(0);
+
+		in_file.read(reinterpret_cast<char*>(received_data.data()), size_file * sizeof(Sym));
+	}
 
 }//namespace file
