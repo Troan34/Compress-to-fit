@@ -84,10 +84,15 @@ namespace file
 		if ((portions < 1 or portions > N_FILES_LIMIT) or (fs::file_size(path_) / portions) < SIZE_FILES_MIN)
 			throw_error(ErrorType::PORTIONS_OUT_OF_RANGE);
 
+		if (portions == 1) return;
+
 		std::ifstream source_file{ path_, std::ios::binary };
 		source_file.seekg(FILE_HEADER_SIZE);
 		auto portions_size = fs::file_size(path_) / portions;
 		std::vector<char> buffer(portions_size);
+		fs::create_directory(fs::current_path() / "output");
+
+		auto out_path = fs::current_path() / "output";
 
 		//Set up a random number such that num + N_FILES_LIMIT < size_t::max
 		std::random_device seed;
@@ -95,9 +100,9 @@ namespace file
 		std::uniform_int_distribution<size_t> dist(1, std::numeric_limits<size_t>::max() - N_FILES_LIMIT);
 		auto starting_id = dist(rng);
 
-		for (auto file_n = 1u; file_n < portions; file_n++, starting_id++)
+		for (auto file_n = 0u; file_n < portions; file_n++, starting_id++)
 		{
-			std::ofstream file(path_.string() + '_' + std::to_string(file_n), std::ios::binary | std::ios::trunc);
+			std::ofstream file(out_path / (path_.stem().string() + '_' + std::to_string(file_n) + FILE_EXTENSION), std::ios::binary | std::ios::trunc);
 			file.write(SIGNATURE.data(), SIGNATURE.size());
 			file.write(reinterpret_cast<const char*>(&starting_id), sizeof(starting_id));//add the identifying id
 
@@ -108,7 +113,12 @@ namespace file
 			source_file.read(buffer.data(), buffer.size());
 			file.write(buffer.data(), buffer.size());
 		}
+
+		source_file.close();
+
+		fs::remove(path_);
 	}
+
 
 
 

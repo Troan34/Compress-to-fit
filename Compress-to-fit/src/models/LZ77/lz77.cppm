@@ -24,7 +24,7 @@ struct Token
 	}
 };
 
-inline constexpr int SEARCH_RATIO = 100;//Ratio of the search buf size and la buf
+inline constexpr int SEARCH_RATIO = 500;//Ratio of the search buf size and la buf
 inline constexpr auto MAX_WINDOW_SIZE = KB_to_B(128);
 inline constexpr auto MAX_HASH_SIZE = MAX_WINDOW_SIZE << 1;
 
@@ -199,7 +199,6 @@ namespace alg
 	inline constexpr uint32_t MAX_MATCH = 250;
 	inline constexpr uint32_t PRIME = 31;
 	inline constexpr uint32_t ROLL_FACTOR = const_pow(BASE, MIN_MATCH - 1);
-	inline constexpr uint32_t MAX_CHAIN_CHECKS = 3;
 
 	/**
 	 * @brief [lz77.Karp-Rabin]
@@ -217,9 +216,10 @@ namespace alg
 		/**
 		 * @pre data.max_size() > MAX_HASH_SIZE
 		 */
-		Rabin(const Window& data, uint32_t pos)
-			:data(data), position(pos)
-		{
+		Rabin(const Window& data, uint32_t pos, CompPreset preset)
+			:data(data), position(pos), MAX_CHAIN(get_max_chain_from_preset(preset))
+		{ 
+
 			//compiler will probably use memset-like
 			for (int i = 0; i < MAX_HASH_SIZE; i++)
 				poss_table[i] = -1;
@@ -274,7 +274,7 @@ namespace alg
 			int num_of_iter = 0;
 
 			//check the number of times we go down the chain --- check if candidate is not too far from pos --- and that candidate exist (we initialized -1)
-			while (num_of_iter <= MAX_CHAIN_CHECKS and position - candidate < data.get_size_search() and candidate >= 0)
+			while (num_of_iter <= MAX_CHAIN and position - candidate < data.get_size_search() and candidate >= 0)
 			{
 				auto temp_len = std::min(count_equal(data.get_data().subspan(position), data.get_data().subspan(candidate)),
 										 static_cast<size_t>(std::numeric_limits<uint8_t>::max()));
@@ -304,6 +304,7 @@ namespace alg
 		uint32_t position;
 		int32_t poss_table[MAX_HASH_SIZE];
 		int32_t prev_poss_table[MAX_WINDOW_SIZE];
+		const size_t MAX_CHAIN;
 
 		[[nodiscard]] auto bucket_index(uint32_t hash_) const noexcept -> uint32_t
 		{
@@ -329,6 +330,42 @@ namespace alg
 			}
 		}
 
+		[[nodiscard]] auto get_max_chain_from_preset(CompPreset preset) const noexcept -> size_t
+		{
+			switch (preset)
+			{
+			case COMP_MAX:
+				return 5;
+				break;
+			case COMP_8:
+				return 5;
+				break;
+			case COMP_7:
+				return 4;
+				break;
+			case COMP_6:
+				return 4;
+				break;
+			case COMP_5:
+				return 4;
+				break;
+			case COMP_4:
+				return 3;
+				break;
+			case COMP_3:
+				return 3;
+				break;
+			case COMP_2:
+				return 3;
+				break;
+			case COMP_1:
+				return 2;
+				break;
+			case NO_COMP:
+				std::terminate();
+				break;
+			}
+		}
 	};
 
 
@@ -340,7 +377,7 @@ public:
 	using Token = Token;//share token type
 	    
 	LZ77(std::span<Sym> data_, CompPreset preset_)
-		:data(data_), preset(preset_), window(data_, preset_), pattern_matcher(window, 0)
+		:data(data_), preset(preset_), window(data_, preset_), pattern_matcher(window, 0, preset)
 	{
 	}
 
