@@ -25,7 +25,7 @@ add_subdirectory ("Compress-to-fit")
 
 if(MSVC)
     target_link_options(Compress-to-fit PRIVATE "/STACK:10485760")
-
+    target_compile_options(Compress-to-fit PRIVATE "/utf-8")
 elseif(APPLE)
     target_link_options(Compress-to-fit PRIVATE "LINKER:-stack_size,0x1000000")
 elseif(WIN32 AND NOT MSVC) #MinGW

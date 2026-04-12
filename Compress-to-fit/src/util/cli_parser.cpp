@@ -114,7 +114,7 @@ std::expected<Token, ErrorType> lex(const std::string& option)
 		int value_temp;
 		auto res = std::from_chars(token_value.data(), token_value.data() + token_value.size(), value_temp);
 
-		if (res.ec != std::errc() or (value_temp > N_FILES_LIMIT or value_temp < 0))//if negative or over N_FILES_LIMIT
+		if (res.ec != std::errc() or (value_temp > N_FILES_LIMIT or value_temp < 1))//if less than 1 or over N_FILES_LIMIT
 			throw_error(ErrorType::VALUE_ERROR, token_string + token_value);
 		
 		value.emplace<size_t>(value_temp);

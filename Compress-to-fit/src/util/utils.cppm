@@ -44,31 +44,35 @@ export enum class ErrorType
 	PATH_NOT_ACCESSIBLE,
 	PATH_INVALID,
 	FILE_INVALID,
-	PORTIONS_OUT_OF_RANGE,
+	PORTIONS_OUT_OF_RANGE, //non throwing
 };
 
 namespace ERR_STRING
 {
-	const std::string_view SYNTAX =				"\041[31mError\041[0m" + std::to_string(static_cast<int>(ErrorType::SYNTAX_ERROR)) + ": the syntax for this option is incorrect.";
+	const std::string SYNTAX =				"\033[41mError\033[0m [" + std::to_string(static_cast<int>(ErrorType::SYNTAX_ERROR)) + "]: the syntax for this option is incorrect.";
 
-	const std::string_view VALUE =				"\041[31mError \041[0m"+ std::to_string(static_cast<int>(ErrorType::VALUE_ERROR)) + ": this is an incorrect value for this option.";
+	const std::string VALUE =				"\033[41mError \033[0m ["+ std::to_string(static_cast<int>(ErrorType::VALUE_ERROR)) + "]: this is an incorrect value for this option.";
 
-	const std::string_view OPTION_UNAVAILABLE =	"\041[31mError\041[0m" + std::to_string(static_cast<int>(ErrorType::OPTION_UNAVAILABLE)) + ": this option is unavailable in this context.";
+	const std::string OPTION_UNAVAILABLE =	"\033[41mError\033[0m [" + std::to_string(static_cast<int>(ErrorType::OPTION_UNAVAILABLE)) + "]: this option is unavailable in this context.";
 
-	const std::string_view PATH_NOT_FOUND =		"\041[31mError\041[0m" + std::to_string(static_cast<int>(ErrorType::PATH_NOT_FOUND)) + ": this path could not be found, make sure to double quote (\") around your path if there are spaces in it";
-	
-	const std::string_view PATH_NOT_ACCESSIBLE = "\041[31mError\041[0m" + std::to_string(static_cast<int>(ErrorType::PATH_NOT_ACCESSIBLE)) + ": this path could not be accessed, the program may not have some required privileges.\nSuch an error has multiple causes. Check path, folder and other things as such.";
+	const std::string PATH_NOT_FOUND =		"\033[41mError\033[0m [" + std::to_string(static_cast<int>(ErrorType::PATH_NOT_FOUND)) + "]: this path could not be found, make sure to double quote (\") around your path if there are spaces in it";
 
-	const std::string_view PATH_INVALID =		"\041[31mError\041[0m" + std::to_string(static_cast<int>(ErrorType::PATH_INVALID)) + ": this path is invalid, make sure to double quote (\") around your path if there are spaces in it";
+	const std::string PATH_NOT_ACCESSIBLE = "\033[41mError\033[0m [" + std::to_string(static_cast<int>(ErrorType::PATH_NOT_ACCESSIBLE)) + "]: this path could not be accessed, the program may not have some required privileges.\nSuch an error has multiple causes. Check path, folder and other things as such.";
 
-	const std::string_view FILE_INVALID =		"\041[31mError\041[0m" + std::to_string(static_cast<int>(ErrorType::FILE_INVALID)) + ": this file is invalid. i.e. it is the wrong type or it is unrecognizable.";
+	const std::string PATH_INVALID =		"\033[41mError\033[0m [" + std::to_string(static_cast<int>(ErrorType::PATH_INVALID)) + "]: this path is invalid, make sure to double quote (\") around your path if there are spaces in it";
 
-	const std::string_view PORTIONS_OUT_OF_RANGE = "\041[31mError\041[0m" + std::to_string(static_cast<int>(ErrorType::PORTIONS_OUT_OF_RANGE)) + ": the number of file portions is outside of the accepted range.\n"
-		+ "\036[31mTip\036[0m: the limit is " + std::to_string(N_FILES_LIMIT);
+	const std::string FILE_INVALID =		"\033[41mError\033[0m [" + std::to_string(static_cast<int>(ErrorType::FILE_INVALID)) + "]: this file is invalid. i.e. it is the wrong type or it is unrecognizable.";
 
+	const std::string PORTIONS_OUT_OF_RANGE = "\033[43mWarn\033[0m [" + std::to_string(static_cast<int>(ErrorType::PORTIONS_OUT_OF_RANGE)) + "]: the number of file portions is outside of the accepted range.\n"
+		+ "\033[31mTip\033[0m: The output file (not split) may have been too small.\nThe number of files created may be different from what you asked.";
 
 }
 
+/**
+ * @brief throw_error is a custom error logger to the terminal. This will NOT ALWAYS throw.
+ * @param error Your type of error.
+ * @param error_option An optional string to be added at the start, could be a path, text...
+ */
 export void throw_error(ErrorType error, const std::string& error_option = "")
 {
 	switch (error)
@@ -76,36 +80,35 @@ export void throw_error(ErrorType error, const std::string& error_option = "")
 	case ErrorType::NO_ERROR:
 		break;
 	case ErrorType::VALUE_ERROR:
-		std::cerr << error_option + " <- " + ERR_STRING::VALUE.data();
-		throw std::runtime_error(error_option + " <- " + ERR_STRING::VALUE.data());
+		std::cerr << error_option + " <- " + ERR_STRING::VALUE;
+		throw std::runtime_error(error_option + " <- " + ERR_STRING::VALUE);
 		break;
 	case ErrorType::SYNTAX_ERROR:
-		std::cerr << error_option + " <- " + ERR_STRING::SYNTAX.data();
-		throw std::runtime_error(error_option + " <- " + ERR_STRING::SYNTAX.data());
+		std::cout << error_option + " <- " + ERR_STRING::SYNTAX;
+		throw std::runtime_error(error_option + " <- " + ERR_STRING::SYNTAX);
 		break;
 	case ErrorType::OPTION_UNAVAILABLE:
-		std::cerr << error_option + " <- " + ERR_STRING::OPTION_UNAVAILABLE.data();
-		throw std::runtime_error(error_option + " <- " + ERR_STRING::OPTION_UNAVAILABLE.data());
+		std::cerr << error_option + " <- " + ERR_STRING::OPTION_UNAVAILABLE;
+		throw std::runtime_error(error_option + " <- " + ERR_STRING::OPTION_UNAVAILABLE);
 		break;
 	case ErrorType::PATH_NOT_FOUND:
-		std::cerr << error_option + " <- " + ERR_STRING::PATH_NOT_FOUND.data();
-		throw std::runtime_error(error_option + " <- " + ERR_STRING::PATH_NOT_FOUND.data());
+		std::cout << error_option + " <- " + ERR_STRING::PATH_NOT_FOUND;
+		throw std::runtime_error(error_option + " <- " + ERR_STRING::PATH_NOT_FOUND);
 		break;
 	case ErrorType::PATH_NOT_ACCESSIBLE:
-		std::cerr << error_option + " <- " + ERR_STRING::PATH_NOT_ACCESSIBLE.data();
-		throw std::runtime_error(error_option + " <- " + ERR_STRING::PATH_NOT_ACCESSIBLE.data());
+		std::cerr << error_option + " <- " + ERR_STRING::PATH_NOT_ACCESSIBLE;
+		throw std::runtime_error(error_option + " <- " + ERR_STRING::PATH_NOT_ACCESSIBLE);
 		break;
 	case ErrorType::PATH_INVALID:
-		std::cerr << error_option + " <- " + ERR_STRING::PATH_INVALID.data();
-		throw std::runtime_error(error_option + " <- " + ERR_STRING::PATH_INVALID.data());
+		std::cerr << error_option + " <- " + ERR_STRING::PATH_INVALID;
+		throw std::runtime_error(error_option + " <- " + ERR_STRING::PATH_INVALID);
 		break;
 	case ErrorType::FILE_INVALID:
-		std::cerr << error_option + " <- " + ERR_STRING::FILE_INVALID.data();
-		throw std::runtime_error(error_option + " <- " + ERR_STRING::FILE_INVALID.data());
+		std::cerr << error_option + " <- " + ERR_STRING::FILE_INVALID;
+		throw std::runtime_error(error_option + " <- " + ERR_STRING::FILE_INVALID);
 		break;
-	case ErrorType::PORTIONS_OUT_OF_RANGE:
-		std::cerr << ERR_STRING::PORTIONS_OUT_OF_RANGE.data();
-		throw std::runtime_error(ERR_STRING::PORTIONS_OUT_OF_RANGE.data());
+	case ErrorType::PORTIONS_OUT_OF_RANGE://non throwing
+		std::cerr << ERR_STRING::PORTIONS_OUT_OF_RANGE;
 		break;
 	}
 }

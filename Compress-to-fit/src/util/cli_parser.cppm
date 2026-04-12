@@ -91,7 +91,7 @@ namespace parser
  * @param options Will check what kind of operation is being done
  * @param progress From 0 to 1
  */
-export void show_progress(const fs::path& file = "", const parser::Options& options = {}, float progress = 0.f)
+export void show_progress(const parser::Options& options = {}, float progress = 0.f)
 {
 	const int max_bar_width = 50;
 
@@ -103,12 +103,12 @@ export void show_progress(const fs::path& file = "", const parser::Options& opti
 		std::print("compression:\033[0m");
 
 	std::print("[\033[32m");
-	int filled_width = static_cast<int>(max_bar_width * progress);
-	for (int i = 0; i <= filled_width; i++)
+	int filled_width = std::ceil(max_bar_width * progress);
+	for (int i = 0; i < filled_width; i++)
 	{
 		std::print("█");
 	}
-	for (int i = filled_width + 1; i < max_bar_width; i++)
+	for (int i = filled_width; i < max_bar_width; i++)
 	{
 		std::print("-");
 	}

@@ -1,15 +1,11 @@
 ﻿import parser;
 import lz77;
 import file_util;
-#include <Windows.h>
 
 using namespace std;
 
 int main(int argc, char* argv[])
 {
-#ifdef _WIN32
-	SetConsoleOutputCP(CP_UTF8);
-#endif
 
 	auto options = parser::parse(argc, argv);
 	
@@ -20,7 +16,10 @@ int main(int argc, char* argv[])
 
 	LZ77 encoder{ data, static_cast<CompPreset>(options.preset)};
 
-	auto output_vec = encoder.compress();
+	std::vector<LZ77::Token> output_vec{};
+	encoder.compress(options, output_vec);
+
+	std::cout << output_vec.data();
 	std::span<const LZ77::Token> output{ output_vec };
 	
 	file::write_file(output, options.filename_out);

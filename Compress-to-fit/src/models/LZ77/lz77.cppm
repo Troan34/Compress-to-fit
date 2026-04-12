@@ -185,6 +185,7 @@ public:
 	{
 		return data;
 	}
+
 private:
 	const std::span<Sym> data;
 	size_t size_look_ahead;
@@ -251,7 +252,7 @@ namespace alg
 		{
 			while (num_of_rolls > 0)
 			{
-				if (position < (data.get_size_search() - MIN_MATCH))//stop if we reached the end
+				if (position < (data.get_data().size() - MIN_MATCH))//stop if we reached the end
 				{
 					//roll hash
 					hash = (hash + MOD - static_cast<uint64_t>(data[position]) * ROLL_FACTOR % MOD) % MOD;
@@ -387,10 +388,10 @@ public:
 
 	/**
 	 * @brief Compress the data.
-	 * @param file Optional file to be used in the progress bar
-	 * @return The compressed data
+	 * @param option This is used for misc things.
+	 * @param out_stream Where the resulting string of Token will be stored.
 	 */
-	std::vector<Token> compress(const fs::path& file = "", const parser::Options& option = {});
+	void compress(const parser::Options& option, std::vector<Token>& out_stream);
 	void decompress();
 
 private:

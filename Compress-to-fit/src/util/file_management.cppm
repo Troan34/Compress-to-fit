@@ -84,10 +84,11 @@ namespace file
 	{
 		check_signature(path_);
 
+		if (portions == 1) return;
+
 		if ((portions < 1 or portions > N_FILES_LIMIT) or (fs::file_size(path_) / portions) < SIZE_FILES_MIN)
 			throw_error(ErrorType::PORTIONS_OUT_OF_RANGE);
 
-		if (portions == 1) return;
 
 		std::ifstream source_file{ path_, std::ios::binary };
 		source_file.seekg(FILE_HEADER_SIZE);
