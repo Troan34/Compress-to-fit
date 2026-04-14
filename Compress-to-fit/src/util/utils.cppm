@@ -128,6 +128,15 @@ export enum CompPreset
 	COMP_MAX,
 };
 
+/**
+ * @brief Identify compressor used
+ */
+export enum class CompType
+{
+	LZ77,
+};
+
+
 //definition of the symbol type for compression
 export struct Sym
 {

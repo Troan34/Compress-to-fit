@@ -4,30 +4,40 @@ export import util;
 import std;
 namespace fs = std::filesystem;
 
-namespace file
+
+inline constexpr std::string_view SIGNATURE = "CTF-1";
+	                                        //SIGNATURE       +    IDENTIFIER  + LENGTH of file info header     	
+inline constexpr size_t FILE_HEADER_SIZE = SIGNATURE.size() + sizeof(size_t) + sizeof(size_t);
+
+
+export struct FileOptions
 {
-	inline constexpr std::string_view SIGNATURE = "CTF-1";
-	inline constexpr size_t FILE_HEADER_SIZE = SIGNATURE.size() + sizeof(size_t);//maybe i'll change this, maybe not
+	fs::path file_path;
+	std::optional<fs::path> original_path;
+	CompType comp_type;
+	CompPreset preset;
+};
 
-	//Check the signature of the file at 'path', throws if check fails (and if it doesn't exist)
-	void check_signature(const fs::path& path)
+/**
+ * @brief Interpret a file as to retrieve custom information
+ * @details An interpreted file is one where we have the knowledge about it to fill #FileOptions
+ */
+export class File
+{
+public:
+
+	/**
+	 * @brief Construct member types, such as #FileOptions
+	 * @param path path of file
+	 */
+	File(fs::path path)
+		:path_(path)
 	{
-		std::ifstream file(path, std::ios::binary);
-		if (!file.is_open())
+		if (!fs::exists(path_))
 		{
-			throw_error(ErrorType::PATH_NOT_ACCESSIBLE, path.string());
-		}
-
-		file.seekg(0);
-		std::string buffer(SIGNATURE.size(), ' ');
-		file.read(buffer.data(), buffer.size());
-		if (!(buffer == SIGNATURE))//not recognized
-		{
-			throw_error(ErrorType::FILE_INVALID, path.string());
+			throw_error(ErrorType::PATH_NOT_FOUND, path_.string());
 		}
 	}
-
-
 
 	/**
 	* @brief Apply a certain function to a file.
@@ -35,10 +45,9 @@ namespace file
 	* @param out_path Where the result of the function will be stored.
 	* @param op The function to be applied.
 	*/
-	export template <ptr_size_pred pred>
+	template <ptr_size_pred pred>
 	void process_file(const fs::path& in_path, const fs::path& out_path, pred op)
 	{
-
 		std::ifstream in(in_path, std::ios::binary);
 		std::ofstream out(out_path, std::ios::binary);
 
@@ -59,11 +68,12 @@ namespace file
 			out.write(buffer.data(), bytes_read);
 		}
 	}
+
 	/*
 	Given a path, the file will be created there.
 	If the file already exists and the file signature is correct (if not: throw), append new data to the end of the file.
 	*/
-	export template<typename T>
+	template<typename T>
 	void write_file(std::span<T> buffer, const fs::path& out_path)
 	{
 		std::ofstream file(out_path, std::ios::trunc | std::ios::binary);
@@ -80,7 +90,7 @@ namespace file
 	/*
 	Given a file, split it into multiple files according to documentation.
 	*/
-	export void split_file(const fs::path& path_, size_t portions)
+	void split_file(const fs::path& path_, size_t portions)
 	{
 		check_signature(path_);
 
@@ -122,13 +132,13 @@ namespace file
 
 		fs::remove(path_);
 	}
-	
+
 	/**
-	 * @brief Read a file into a vector. Will call throw_error if file is not found or inaccessible.
-	 * @param in_path Location of file.
-	 * @param received_data The vector that will be filled.
-	 */
-	export void read_file(const fs::path& in_path, std::vector<Sym>& received_data)
+	* @brief Read a file into a vector. Will call throw_error if file is not found or inaccessible.
+	* @param in_path Location of file.
+	* @param received_data The vector that will be filled.
+	*/
+	void read_file(const fs::path& in_path, std::vector<Sym>& received_data)
 	{
 		if (!fs::exists(in_path))
 		{
@@ -149,4 +159,38 @@ namespace file
 		in_file.read(reinterpret_cast<char*>(received_data.data()), size_file * sizeof(Sym));
 	}
 
-}//namespace file
+
+private:
+	FileOptions file_options;
+	fs::path path_;
+
+
+	//Check the signature of the file at 'path', throws if check fails (and if it doesn't exist)
+	void check_signature(const fs::path& path)
+	{
+		std::ifstream file(path, std::ios::binary);
+		if (!file.is_open())
+		{
+			throw_error(ErrorType::PATH_NOT_ACCESSIBLE, path.string());
+		}
+
+		file.seekg(0);
+		std::string buffer(SIGNATURE.size(), ' ');
+		file.read(buffer.data(), buffer.size());
+		if (!(buffer == SIGNATURE.data()))//not recognized
+		{
+			throw_error(ErrorType::FILE_INVALID, path.string());
+		}
+	}
+
+	/**
+	 * @brief Non-throwing version of #check_signature
+	 * @return True if #path_ has signature, false if not
+	 * 
+	 * @pre The file shall already exist and be accessible.
+	 */
+	bool has_signature()
+	{
+
+	}
+};

@@ -34,5 +34,24 @@ else() #Linux
     target_link_options(Compress-to-fit PRIVATE "LINKER:-z,stack-size=10485760")
 endif()
 
+find_package(Doxygen OPTIONAL_COMPONENTS dot)
 
+if(DOXYGEN_FOUND)
+    set(DOXYGEN_CALL_GRAPH YES)
+    set(DOXYGEN_CALLER_GRAPH YES)
+    set(DOXYGEN_HAVE_DOT YES)
+    set(DOXYGEN_EXTRACT_ALL YES)
+    set(DOXYGEN_EXTRACT_PRIVATE YES)
+    set(DOXYGEN_EXTRACT_STATIC YES)
+    set(DOXYGEN_DOT_GRAPH_MAX_NODES 100)
+    set(DOXYGEN_RECURSIVE YES)
+    set(DOXYGEN_FILE_PATTERNS "*.cpp;*.ixx;*.cppm;*.h;*.hpp")
+    set(DOXYGEN_EXTENSION_MAPPING "ixx=C++ cppm=C++")
+
+    doxygen_add_docs(
+        docs
+        ${PROJECT_SOURCE_DIR}/src
+        COMMENT "Generating documentation with Doxygen"
+    )
+endif()
 

@@ -10,7 +10,8 @@ int main(int argc, char* argv[])
 	auto options = parser::parse(argc, argv);
 	
 	std::vector<Sym> stream{};
-	file::read_file(options.filename_in, stream);
+	File file{};
+	file.read_file(options.filename_in, stream);
 
 	std::span<Sym> data{ stream };
 
@@ -22,8 +23,8 @@ int main(int argc, char* argv[])
 	std::cout << output_vec.data();
 	std::span<const LZ77::Token> output{ output_vec };
 	
-	file::write_file(output, options.filename_out);
-	file::split_file(options.filename_out, options.n_files);
+	file.write_file(output, options.filename_out);
+	file.split_file(options.filename_out, options.n_files);
 
 	return 0;
 }

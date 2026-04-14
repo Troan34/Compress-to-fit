@@ -12,7 +12,7 @@ namespace fs = std::filesystem;
 
 
 /**
-* @brief This is the type LZ77 will use for compressed symbols
+* @brief This is the type LZ77 will output
 */
 struct Token
 {
@@ -30,14 +30,14 @@ struct Token
 
 inline constexpr int SEARCH_RATIO = 500;//Ratio of the search buf size and la buf
 inline constexpr auto MAX_WINDOW_SIZE = KB_to_B(128);
+/**
+ * @brief The size of @ref LZ77::poss_table
+ */
 inline constexpr auto MAX_HASH_SIZE = MAX_WINDOW_SIZE << 1;
 
 /**
  * @brief [lz77.Window]
  * @brief This class gives a window to data given to the ctor
- * 
- * 
- * @file src/models/LZ77/lz7.cppm
  */
 class Window
 {
@@ -212,20 +212,20 @@ namespace alg
 	 * @brief This class is intertwined with LZ77 and should not be used as separate entity.
 	 * @brief This class shall not modify the Window given
 	 *
-	 * @file src/models/LZ77/lz7.cppm
+	 * @file src/models/LZ77/lz77.cppm
 	 */
 	class Rabin
 	{
 	public:
 
 		/**
-		 * @pre data.max_size() > MAX_HASH_SIZE
+		 * @pre @p data.max_size() > #MAX_HASH_SIZE
 		 */
 		Rabin(const Window& data, uint32_t pos, CompPreset preset)
 			:data(data), position(pos), MAX_CHAIN(get_max_chain_from_preset(preset))
 		{ 
 
-			//compiler will probably use memset-like
+			//compiler will probably use a memset-like optimization
 			for (int i = 0; i < MAX_HASH_SIZE; i++)
 				poss_table[i] = -1;
 
@@ -245,58 +245,20 @@ namespace alg
 		/**
 		 * @brief Roll and add the hash to the symbol_positions
 		 * @brief This function will check if position has reached the end
-		 * @brief The position will be increased. THE WINDOW WILL NOT SLIDE
+		 * @warning The position will be increased. THE WINDOW WILL NOT SLIDE
 		 * @param num_of_rolls How many times it should roll, defaults to 1
+		 * 
+		 * @details find_pattern checks #poss_table for a pattern match, once, and if, found it will keep searching
+		 * down the chain of previous poss_table entries, which have been saved in #prev_poss_table by #roll_hash, an #MAX_CHAIN amount of times.
 		 */
-		void roll_hash(uint32_t num_of_rolls = 1) noexcept
-		{
-			while (num_of_rolls > 0)
-			{
-				if (position < (data.get_data().size() - MIN_MATCH))//stop if we reached the end
-				{
-					//roll hash
-					hash = (hash + MOD - static_cast<uint64_t>(data[position]) * ROLL_FACTOR % MOD) % MOD;
-					hash = (hash * BASE + data[position + MIN_MATCH]) % MOD;
+		void roll_hash(uint32_t num_of_rolls = 1) noexcept;
 
-					prev_poss_table[prev_bucket_index(hash)] = poss_table[bucket_index(hash)];
-					poss_table[bucket_index(hash)] = position;
-				}
-
-				position++;
-				num_of_rolls--;
-			}
-		}
 
 		/**
-		 * @brief Find the (if found) biggest pattern between the look ahead buffer and search buffer
-		 * @return A lz77 token type
+		 * @brief Find the biggest pattern between the look ahead buffer and search buffer
 		 */
-		Token find_pattern()
-		{
-			uint8_t best_length = 0;
-			uint16_t best_offset = 0;
-			auto candidate = poss_table[bucket_index(hash)];
-			int num_of_iter = 0;
+		Token find_pattern();
 
-			//check the number of times we go down the chain --- check if candidate is not too far from pos --- and that candidate exist (we initialized -1)
-			while (num_of_iter <= MAX_CHAIN and position - candidate < data.get_size_search() and candidate >= 0)
-			{
-				auto temp_len = std::min(count_equal(data.get_data().subspan(position), data.get_data().subspan(candidate)),
-										 static_cast<size_t>(std::numeric_limits<uint8_t>::max()));
-				if (temp_len > best_length)
-				{
-					best_length = temp_len;
-					best_offset = candidate;
-				}
-				candidate = prev_poss_table[prev_bucket_index(candidate)];
-				num_of_iter++;
-			}
-
-			if (position + best_length < data.get_data().size())
-				return Token{ .offset = best_offset, .length = best_length, .symbol = data[position + best_length] };
-			else
-				return Token{ .offset = best_offset, .length = --best_length, .symbol = data[position] };
-		}
 
 		[[nodiscard]] auto get_pos() const noexcept
 		{
@@ -376,11 +338,16 @@ namespace alg
 
 }//namespace algs
 
+/**
+ * @brief Implement the LZ77 algorithm.
+ * @details An overview of the algorithm: 
+ */
 export class LZ77
 {
 public:
 	using Token = Token;//share token type
-	    
+	
+	
 	LZ77(std::span<Sym> data_, CompPreset preset_)
 		:data(data_), preset(preset_), window(data_, preset_), pattern_matcher(window, 0, preset)
 	{
@@ -399,7 +366,6 @@ private:
 	Window window;
 	CompPreset preset;
 	alg::Rabin pattern_matcher;
-
 };
 
 

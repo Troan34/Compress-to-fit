@@ -87,7 +87,6 @@ namespace parser
 
 /**
  * @brief Show a progress bar in terminal
- * @param file What file is being created/accessed...
  * @param options Will check what kind of operation is being done
  * @param progress From 0 to 1
  */
