@@ -1,6 +1,6 @@
 export module util;
 
-import std;
+import std.compat;
 namespace fs = std::filesystem;
 
 
@@ -31,9 +31,9 @@ concept ptr_size_pred = requires
 	requires std::is_integral_v<typename function_traits<fun>::template arg<1>>;
 };
 
-/// <summary>
-/// Parser error types
-/// </summary>
+/**
+ * @brief Parser error types.
+ */
 export enum class ErrorType
 {
 	NO_ERROR,
@@ -44,34 +44,33 @@ export enum class ErrorType
 	PATH_NOT_ACCESSIBLE,
 	PATH_INVALID,
 	FILE_INVALID,
-	PORTIONS_OUT_OF_RANGE, //non throwing
+	FILE_CORRUPTED,
 };
 
 namespace ERR_STRING
 {
-	const std::string SYNTAX =				"\033[41mError\033[0m [" + std::to_string(static_cast<int>(ErrorType::SYNTAX_ERROR)) + "]: the syntax for this option is incorrect.";
+	const std::string SYNTAX =				"\033[41mError [" + std::to_string(static_cast<int>(ErrorType::SYNTAX_ERROR)) + "]\033[31m: the syntax for this option is incorrect. \033[31mTip\033[0m: [-h] or [-help] ";
 
-	const std::string VALUE =				"\033[41mError \033[0m ["+ std::to_string(static_cast<int>(ErrorType::VALUE_ERROR)) + "]: this is an incorrect value for this option.";
+	const std::string VALUE =				"\033[41mError \033[0m ["+ std::to_string(static_cast<int>(ErrorType::VALUE_ERROR)) + "]\033[31m: this is an incorrect value for this option.\033[0m";
 
-	const std::string OPTION_UNAVAILABLE =	"\033[41mError\033[0m [" + std::to_string(static_cast<int>(ErrorType::OPTION_UNAVAILABLE)) + "]: this option is unavailable in this context.";
+	const std::string OPTION_UNAVAILABLE = "\033[41mError\033[0m [" + std::to_string(static_cast<int>(ErrorType::OPTION_UNAVAILABLE)) + "]\033[31m: this option is unavailable in this context.\033[0m";
 
-	const std::string PATH_NOT_FOUND =		"\033[41mError\033[0m [" + std::to_string(static_cast<int>(ErrorType::PATH_NOT_FOUND)) + "]: this path could not be found, make sure to double quote (\") around your path if there are spaces in it";
+	const std::string PATH_NOT_FOUND = "\033[41mError\033[0m [" + std::to_string(static_cast<int>(ErrorType::PATH_NOT_FOUND)) + "]\033[31m: this path could not be found, make sure to double quote (\") around your path if there are spaces in it\033[0m";
 
-	const std::string PATH_NOT_ACCESSIBLE = "\033[41mError\033[0m [" + std::to_string(static_cast<int>(ErrorType::PATH_NOT_ACCESSIBLE)) + "]: this path could not be accessed, the program may not have some required privileges.\nSuch an error has multiple causes. Check path, folder and other things as such.";
+	const std::string PATH_NOT_ACCESSIBLE = "\033[41mError\033[0m [" + std::to_string(static_cast<int>(ErrorType::PATH_NOT_ACCESSIBLE)) + "]\033[31m: this path could not be accessed, the program may not have some required privileges.\nSuch an error has multiple causes. Check path, folder and other things as such.\033[0m";
 
-	const std::string PATH_INVALID =		"\033[41mError\033[0m [" + std::to_string(static_cast<int>(ErrorType::PATH_INVALID)) + "]: this path is invalid, make sure to double quote (\") around your path if there are spaces in it";
+	const std::string PATH_INVALID = "\033[41mError\033[0m [" + std::to_string(static_cast<int>(ErrorType::PATH_INVALID)) + "]\033[31m: this path is invalid, make sure to double quote (\" \") around your path if there are spaces in it.\033[0m";
 
-	const std::string FILE_INVALID =		"\033[41mError\033[0m [" + std::to_string(static_cast<int>(ErrorType::FILE_INVALID)) + "]: this file is invalid. i.e. it is the wrong type or it is unrecognizable.";
+	const std::string FILE_INVALID = "\033[41mError\033[0m [" + std::to_string(static_cast<int>(ErrorType::FILE_INVALID)) + "]\033[31m: this file is invalid. i.e. it is the wrong type or it is unrecognizable.\033[0m";
 
-	const std::string PORTIONS_OUT_OF_RANGE = "\033[43mWarn\033[0m [" + std::to_string(static_cast<int>(ErrorType::PORTIONS_OUT_OF_RANGE)) + "]: the number of file portions is outside of the accepted range.\n"
-		+ "\033[31mTip\033[0m: The output file (not split) may have been too small.\nThe number of files created may be different from what you asked.";
-
+	const std::string FILE_CORRUPTED = "\033[41mError\033[0m [" + std::to_string(static_cast<int>(ErrorType::FILE_CORRUPTED)) + "]\033[31m: this file's header is corrupted. Unable to continue decompression properly.\033[0m";
 }
 
 /**
- * @brief throw_error is a custom error logger to the terminal. This will NOT ALWAYS throw.
+ * @brief throw_error is a custom error logger to the terminal. This will WILL throw.
  * @param error Your type of error.
  * @param error_option An optional string to be added at the start, could be a path, text...
+ * @throw runtime_exception
  */
 export void throw_error(ErrorType error, const std::string& error_option = "")
 {
@@ -107,8 +106,39 @@ export void throw_error(ErrorType error, const std::string& error_option = "")
 		std::cerr << error_option + " <- " + ERR_STRING::FILE_INVALID;
 		throw std::runtime_error(error_option + " <- " + ERR_STRING::FILE_INVALID);
 		break;
-	case ErrorType::PORTIONS_OUT_OF_RANGE://non throwing
-		std::cerr << ERR_STRING::PORTIONS_OUT_OF_RANGE;
+	case ErrorType::FILE_CORRUPTED:
+		std::cerr << error_option + " <- " + ERR_STRING::FILE_INVALID;
+		throw std::runtime_error(error_option + " <- " + ERR_STRING::FILE_INVALID);
+		break;
+	}
+}
+
+export enum class WarningType
+{
+	RECOMPRESSION,
+	PORTIONS_OUT_OF_RANGE,
+
+};
+
+namespace WARN_STRING
+{
+	const std::string RECOMPRESSION = "\033[43mWarn [" + std::to_string(static_cast<int>(WarningType::RECOMPRESSION)) + "]\033[0m: the file being compressed has already been compressed.\n"
+		+ "\033[31mTip\033[0m: A file recompression gives negligible, if not counter-productive, results.\n";
+
+	const std::string PORTIONS_OUT_OF_RANGE = "\033[43mWarn\033[0m [" + std::to_string(static_cast<int>(WarningType::PORTIONS_OUT_OF_RANGE)) + "]: the number of file portions is outside of the accepted range.\n"
+	+ "\033[31mTip\033[0m: The output file (not split) may have been too small.\nThe number of files created may be different from what you asked.\n";
+
+}
+
+export void print_warn(WarningType warn, const std::string& warn_option = "")
+{
+	switch (warn)
+	{
+	case WarningType::RECOMPRESSION:
+		std::cout << WARN_STRING::RECOMPRESSION;
+		break;
+	case WarningType::PORTIONS_OUT_OF_RANGE:
+		std::cout << warn_option << " <- " + WARN_STRING::PORTIONS_OUT_OF_RANGE;
 		break;
 	}
 }
@@ -130,10 +160,20 @@ export enum CompPreset
 
 /**
  * @brief Identify compressor used
+ * 
+ * @note You must not reorder the enums or (and especially) remove MAX.
+ *		 For every new enum, MAX shall always stay the max enum possible.
+ *		 DO NOT CUSTOMIZE THE VALUES.
  */
-export enum class CompType
+export enum class CompType : uint32_t
 {
 	LZ77,
+	MAX,
+};
+
+constexpr std::string_view comp_strings[] =
+{
+	"LZ77",
 };
 
 

@@ -7,12 +7,18 @@ import std;
 namespace fs = std::filesystem;
 
 
+
+
 namespace parser
 {
 	namespace fs = std::filesystem;
 	using ValueType = std::variant<std::size_t, fs::path, bool>;
 
-
+	/**
+	 * @brief Parser token types.
+	 * 
+	 * @note Keep the ordering as this, if you must modify it, modify #token_strings too.
+	 */
 	export enum class TokenType
 	{
 		FILENAME_IN,
@@ -20,20 +26,46 @@ namespace parser
 		COMPRESSION_PRESET,
 		N_FILES,
 		SIZE_FILES,
-		EXTRACT,
+		LONG_HELP,
+		HELP,
+		FORCE_COMPRESSION,
+		DELETE_INPUT,
 		NO_TYPE = 696969,//we don't want this to be an index
 	};
 	//HAS to follow the same order of the TokenType enums
-	inline constexpr std::array<std::string_view, 6> token_strings =
+	static constexpr std::string_view token_strings[] =
 	{
 		"-i",
 		"-o",
 		"-preset",
 		"-n_files",
 		"-size_files",
-		"-e",
+		"-help",
+		"-h",
+		"-fc",
+		"-di",
 	};
 	
+	static constexpr std::string_view help_str =
+		"\033[1m\033[36mWelcome to Compress To Fit!\033[0m\n"
+		"A cli compressor program.\n"
+		"Usage: ctf [options]\n"
+		"options:\n"
+		"\t-i <path>  Take <path> as input. If <path> contains spaces, make sure to double quote(\"\") around <path>.\n"
+		"\t-o <path>  Take <path> as output. If <path> contains spaces, make sure to double quote(\"\") around <path>.\n"
+		"\t-c <comp_options>  Use a specific compressor from a list of compressor options (look for [comp_options] in this page).\n"
+		"\t-fc  Force compression of compressed files.\n"
+		"\t-di  Delete input file on compression/extraction\n"
+		"\t-preset <n>  Compression preset n is from 0 to 9 (included).\n"
+		"\t-n_files <n>  In how many files should the output be split in (max 1000).\n"
+		"\t-size_files <bytes>  Split the output file in files of <bytes> size (min 512).\n"
+		"\n\n"
+		"[comp_options]:"
+		"\"LZ77\": A dictionary based algorithm, good for repetitive patterns of data, slow compression and fast decompression.";
+	
+
+
+
 	
 	/// <summary>
 	/// Represents a cli option
@@ -74,32 +106,36 @@ namespace parser
 		size_t preset = COMP_5;
 		size_t n_files = 1;
 		size_t size_files;
-		bool extract = false;
+		bool force_compression = false;
+		bool delete_input = false;
 	};
 	
-	/// <summary>
-	/// Parse the cli, fully manages error checking
-	/// </summary>
-	/// <returns>An Option type</returns>
+	/**
+	 * @brief Parse the cli, fully manages error checking.
+	 * @return The options received from the cli.
+	 * 
+	 * @post Paths will be validated ONLY FOR THEIR EXISTANCE AND ACCESSIBILITY.
+	 */
 	export Options parse(int argc, char* argv[]);
 
 }//namespace parser
 
 /**
- * @brief Show a progress bar in terminal
- * @param options Will check what kind of operation is being done
+ * @brief Show a progress bar in terminal.
+ * @param options Receive miscellaneus data.
  * @param progress From 0 to 1
  */
-export void show_progress(const parser::Options& options = {}, float progress = 0.f)
+export void show_progress(const parser::Options& options = {}, float progress = 0.f, bool compressing = false)
 {
 	const int max_bar_width = 50;
 
 	std::print("\r\033[K");
 	std::print("\033[34mProgress on the ");
-	if (options.extract)
-		std::print("extraction:\033[0m");
-	else
+	if (compressing)
 		std::print("compression:\033[0m");
+	else
+		std::print("extraction:\033[0m");
+
 
 	std::print("[\033[32m");
 	int filled_width = std::ceil(max_bar_width * progress);

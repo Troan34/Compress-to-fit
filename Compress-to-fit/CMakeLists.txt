@@ -4,6 +4,7 @@
 
 
 add_executable(Compress-to-fit)
+set_target_properties(Compress-to-fit PROPERTIES OUTPUT_NAME "ctf")
 
 target_sources(
     Compress-to-fit

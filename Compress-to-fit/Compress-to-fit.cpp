@@ -10,7 +10,7 @@ int main(int argc, char* argv[])
 	auto options = parser::parse(argc, argv);
 	
 	std::vector<Sym> stream{};
-	File file{};
+	File file{options.filename_in};
 	file.read_file(options.filename_in, stream);
 
 	std::span<Sym> data{ stream };

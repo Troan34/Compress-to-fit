@@ -25,40 +25,64 @@ Token::Token(const std::string& option)
 std::expected<Token, ErrorType> lex(const std::string& option)
 {
 	auto token_string = option.substr(0, option.find(' '));
-	auto token_value = option.substr(option.find(' ') + 1, std::string::npos);
+	auto token_value = option.substr(option.find_first_not_of(' ', option.find(' ')), std::string::npos);
 
 
 	TokenType token_type;
 
 	//Find TokenType
-	if (token_string == token_strings[static_cast<std::size_t>(TokenType::COMPRESSION_PRESET)])
+	if (token_string == token_strings[static_cast<size_t>(TokenType::COMPRESSION_PRESET)])
 	{
 		token_type = TokenType::COMPRESSION_PRESET;
 	}
-	else if (token_string == token_strings[static_cast<std::size_t>(TokenType::FILENAME_IN)])
+	else if (token_string == token_strings[static_cast<size_t>(TokenType::FILENAME_IN)])
 	{
 		token_type = TokenType::FILENAME_IN;
 	}
-	else if (token_string == token_strings[static_cast<std::size_t>(TokenType::FILENAME_OUT)])
+	else if (token_string == token_strings[static_cast<size_t>(TokenType::FILENAME_OUT)])
 	{
 		token_type = TokenType::FILENAME_OUT;
 	}
-	else if (token_string == token_strings[static_cast<std::size_t>(TokenType::N_FILES)])
+	else if (token_string == token_strings[static_cast<size_t>(TokenType::N_FILES)])
 	{
 		token_type = TokenType::N_FILES;
 	}
-	else if (token_string == token_strings[static_cast<std::size_t>(TokenType::SIZE_FILES)])
+	else if (token_string == token_strings[static_cast<size_t>(TokenType::SIZE_FILES)])
 	{
 		token_type = TokenType::SIZE_FILES;
+	}
+	else if (token_string == token_strings[static_cast<size_t>(TokenType::LONG_HELP)])
+	{
+		std::print(help_str.data());
+		std::terminate();
+	}
+	else if (token_string == token_strings[static_cast<size_t>(TokenType::HELP)])
+	{
+		std::print(help_str.data());
+		std::terminate();
+	}
+	else if (token_string == token_strings[static_cast<size_t>(TokenType::FORCE_COMPRESSION)])
+	{
+		token_type = TokenType::FORCE_COMPRESSION;
+	}
+	else if (token_string == token_strings[static_cast<size_t>(TokenType::DELETE_INPUT)])
+	{
+		token_type = TokenType::DELETE_INPUT;
 	}
 	else
 		throw_error(ErrorType::SYNTAX_ERROR, token_string);
 
-	if (token_string.size() == option.size() //we have not found a ' ' character because find() returned npos
-		and token_type != TokenType::EXTRACT)
+	//handle flags
+	switch (token_type)
 	{
-		throw_error(ErrorType::SYNTAX_ERROR, token_string);
+	case parser::TokenType::DELETE_INPUT:
+	case parser::TokenType::FORCE_COMPRESSION:
+		return Token{ token_type, true };
+		break;
+	default:
+		break;
 	}
+		
 
 	ValueType value;
 	//Find token_value and do error checking
@@ -135,7 +159,6 @@ std::expected<Token, ErrorType> lex(const std::string& option)
 	return Token{ token_type, value };
 }
 
-
 Options parse(int argc, char* argv[])
 {
 	Options options;
@@ -188,12 +211,17 @@ Options parse(int argc, char* argv[])
 			case TokenType::SIZE_FILES:
 				options.size_files = std::get<size_t>(token.value().get_value());
 				break;
-			case TokenType::EXTRACT:
-				options.extract = std::get<bool>(token.value().get_value());
+			case TokenType::FORCE_COMPRESSION:
+				options.force_compression = std::get<size_t>(token.value().get_value());
+				break;
+			case TokenType::DELETE_INPUT:
+				options.delete_input = std::get<size_t>(token.value().get_value());
+				break;
 			default:
 				std::terminate();
 				break;
 			}
+
 		}
 		else
 		{
@@ -203,7 +231,7 @@ Options parse(int argc, char* argv[])
 
 	//TODO: When adding decompression capabilities, fix this
 	//if filename out is empty, copy filename in
-	if (options.filename_out.empty())
+	if (options.filename_out.empty() or options.filename_out.string().find_first_not_of(' ') == std::string::npos)
 	{
 		options.filename_out = options.filename_in.stem() += FILE_EXTENSION;
 	}

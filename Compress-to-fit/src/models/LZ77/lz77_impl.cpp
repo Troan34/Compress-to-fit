@@ -67,7 +67,7 @@ void LZ77::compress(const parser::Options& option, std::vector<Token>& out_strea
 		//if we went past modulo, show progress
 		if (progress_counter >= modulo_for_progress_bar)
 		{
-			show_progress(option, static_cast<double>(pattern_matcher.get_pos()) / static_cast<double>(data_size));
+			show_progress(option, static_cast<double>(pattern_matcher.get_pos()) / static_cast<double>(data_size), true);
 			progress_counter = 0;
 		}
 
@@ -89,7 +89,7 @@ void LZ77::compress(const parser::Options& option, std::vector<Token>& out_strea
 
 		progress_counter++;
 	}
-	show_progress(option, 1.f);
+	show_progress(option, 1.f, true);
 	out_stream.insert(out_stream.end(), buffer.begin(), buffer.begin() + buffering_counter);
 	std::cout << '\n';
 
