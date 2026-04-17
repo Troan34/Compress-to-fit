@@ -1,111 +1,119 @@
 ﻿{
     "version": 3,
     "configurePresets": [
-        {
-            "name": "windows-base",
-            "cmakeExecutable": "C:/cmake/bin/cmake.exe",
-            "hidden": true,
-            "generator": "Ninja",
-            "binaryDir": "${sourceDir}/out/build/${presetName}",
-            "installDir": "${sourceDir}/out/install/${presetName}",
-            "vendor": {
-                "microsoft.com/VisualStudioSettings/CMake/1.0": {
-                    "enableClangTidyCodeAnalysis": true,
-                    "clangTidyChecks": "bugprone-use-after-move"
-                }
-            },
-            "cacheVariables": {
-                "CMAKE_C_COMPILER": "cl.exe",
-                "CMAKE_CXX_COMPILER": "cl.exe",
-                "CMAKE_EXE_LINKER_FLAGS": "/DEBUG",
-                "CMAKE_CXX_FLAGS": "/permissive- "
-            },
-            "condition": {
-              "type": "allOf",
-                "conditions": [
-                    {
-                      "type": "equals",
-                      "lhs": "${hostSystemName}",
-                      "rhs": "Windows"
-                    }
-                ]
-            }
-        },
-        {
-            "name": "x64-debug",
-            "displayName": "x64 Debug",
-            "inherits": "windows-base",
-            "architecture": {
-                "value": "x64",
-                "strategy": "external"
-            },
-            "cacheVariables": {
-              "CMAKE_BUILD_TYPE": "Debug",
-              "CMAKE_CXX_FLAGS": "/W4 /Od"
-            }
-        },
-        {
-          "name": "x64-release",
-          "displayName": "x64 Release",
-          "inherits": "x64-debug",
-          "cacheVariables": {
-            "CMAKE_BUILD_TYPE": "Release",
-            "CMAKE_CXX_FLAGS": "/W4 /O2"
-          }
-        },
-        {
-          "name": "x64-profiling",
-          "displayName": "x64 Profiling",
-          "inherits": "windows-base",
-          "architecture": {
-            "value": "x64",
-            "strategy": "external"
+      {
+          "name": "windows-base",
+          "cmakeExecutable": "C:/cmake/bin/cmake.exe",
+          "hidden": true,
+          "generator": "Ninja",
+          "binaryDir": "${sourceDir}/out/build/${presetName}",
+          "installDir": "${sourceDir}/out/install/${presetName}",
+          "vendor": {
+              "microsoft.com/VisualStudioSettings/CMake/1.0": {
+                  "enableClangTidyCodeAnalysis": true,
+                  "clangTidyChecks": "bugprone-use-after-move"
+              }
           },
           "cacheVariables": {
-            "CMAKE_BUILD_TYPE": "RelWithDebInfo",
-            "CMAKE_CXX_FLAGS": "/W4 /O2 /Zi",
-            "CMAKE_EXE_LINKER_FLAGS": "/DEBUG /PROFILE /OPT:REF /OPT:ICF"
+              "CMAKE_C_COMPILER": "cl.exe",
+              "CMAKE_CXX_COMPILER": "cl.exe",
+              "CMAKE_EXE_LINKER_FLAGS": "/DEBUG",
+              "CMAKE_CXX_FLAGS": "/permissive- "
+          },
+          "condition": {
+            "type": "allOf",
+              "conditions": [
+                  {
+                    "type": "equals",
+                    "lhs": "${hostSystemName}",
+                    "rhs": "Windows"
+                  }
+              ]
           }
+      },
+      {
+        "name": "x64-debug",
+        "displayName": "x64 Debug",
+        "inherits": "windows-base",
+        "architecture": {
+          "value": "x64",
+          "strategy": "external"
         },
-        {
-            "name": "linux-debug",
-            "displayName": "Linux Debug",
-            "generator": "Ninja",
-            "binaryDir": "${sourceDir}/out/build/${presetName}",
-            "installDir": "${sourceDir}/out/install/${presetName}",
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Debug"
-            },
-            "condition": {
-                "type": "equals",
-                "lhs": "${hostSystemName}",
-                "rhs": "Linux"
-            },
-            "vendor": {
-                "microsoft.com/VisualStudioRemoteSettings/CMake/1.0": {
-                    "sourceDir": "$env{HOME}/.vs/$ms{projectDirName}"
-                }
-            }
+        "cacheVariables": {
+          "CMAKE_BUILD_TYPE": "Debug",
+          "CMAKE_CXX_FLAGS": "/W4 /Od"
         },
-        {
-            "name": "macos-debug",
-            "displayName": "macOS Debug",
-            "generator": "Ninja",
-            "binaryDir": "${sourceDir}/out/build/${presetName}",
-            "installDir": "${sourceDir}/out/install/${presetName}",
-            "cacheVariables": {
-                "CMAKE_BUILD_TYPE": "Debug"
-            },
-            "condition": {
-                "type": "equals",
-                "lhs": "${hostSystemName}",
-                "rhs": "Darwin"
-            },
-            "vendor": {
-                "microsoft.com/VisualStudioRemoteSettings/CMake/1.0": {
-                    "sourceDir": "$env{HOME}/.vs/$ms{projectDirName}"
-                }
-            }
+        "environment": {
+          "CFLAGS": "/fsanitize=address",
+          "CXXFLAGS": "/fsanitize=address"
         }
+      },
+      {
+        "name": "x64-release",
+        "displayName": "x64 Release",
+        "inherits": "x64-debug",
+        "cacheVariables": {
+          "CMAKE_BUILD_TYPE": "Release",
+          "CMAKE_CXX_FLAGS": "/W4 /O2"
+        }
+      },
+      {
+        "name": "x64-profiling",
+        "displayName": "x64 Profiling",
+        "inherits": "windows-base",
+        "architecture": {
+          "value": "x64",
+          "strategy": "external"
+        },
+        "cacheVariables": {
+          "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+          "CMAKE_CXX_FLAGS": "/W4 /O2",
+          "CMAKE_EXE_LINKER_FLAGS": "/DEBUG /PROFILE /OPT:REF /OPT:ICF"
+        },
+        "environment": {
+          "CFLAGS": "/fsanitize=address",
+          "CXXFLAGS": "/fsanitize=address"
+        }
+      },
+      {
+          "name": "linux-debug",
+          "displayName": "Linux Debug",
+          "generator": "Ninja",
+          "binaryDir": "${sourceDir}/out/build/${presetName}",
+          "installDir": "${sourceDir}/out/install/${presetName}",
+          "cacheVariables": {
+              "CMAKE_BUILD_TYPE": "Debug"
+          },
+          "condition": {
+              "type": "equals",
+              "lhs": "${hostSystemName}",
+              "rhs": "Linux"
+          },
+          "vendor": {
+              "microsoft.com/VisualStudioRemoteSettings/CMake/1.0": {
+                  "sourceDir": "$env{HOME}/.vs/$ms{projectDirName}"
+              }
+          }
+      },
+      {
+          "name": "macos-debug",
+          "displayName": "macOS Debug",
+          "generator": "Ninja",
+          "binaryDir": "${sourceDir}/out/build/${presetName}",
+          "installDir": "${sourceDir}/out/install/${presetName}",
+          "cacheVariables": {
+              "CMAKE_BUILD_TYPE": "Debug"
+          },
+          "condition": {
+              "type": "equals",
+              "lhs": "${hostSystemName}",
+              "rhs": "Darwin"
+          },
+          "vendor": {
+              "microsoft.com/VisualStudioRemoteSettings/CMake/1.0": {
+                  "sourceDir": "$env{HOME}/.vs/$ms{projectDirName}"
+              }
+          }
+      }
     ]
 }

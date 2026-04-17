@@ -23,12 +23,22 @@ struct function_traits<fun(*)(args...)>
 	using arg = std::tuple_element_t<N, std::tuple<args...>>;//arg will be a "triple tuple", if you will
 };
 
+template<typename T>
+struct is_vector : std::false_type {};
+
+template<typename T, typename A>
+struct is_vector<std::vector<T, A>> : std::true_type {};
+
+template<typename T>
+concept is_std_vector = is_vector<T>::value;
+
 export template <typename fun>
 concept ptr_size_pred = requires
 {
 	requires (function_traits<fun>::num_args == 2);
 	requires std::is_pointer_v<typename function_traits<fun>::template arg<0>>;
 	requires std::is_integral_v<typename function_traits<fun>::template arg<1>>;
+	requires is_std_vector<typename function_traits<fun>::return_type>;
 };
 
 /**

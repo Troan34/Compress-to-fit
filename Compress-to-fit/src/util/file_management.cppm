@@ -1,3 +1,9 @@
+module;
+#ifdef _WIN32
+#define WIN_LEAN_AND_MEAN
+
+#endif
+
 export module file_util;
 
 export import util;
@@ -51,12 +57,9 @@ public:
 	 * 
 	 * @todo Add a parameter for #FileOptions::delete_on_dtor when the parser is updated to do that
 	 */
-	File(const fs::path& path, CompType comp_type, CompPreset preset)
+	File(const fs::path& path)
 	{
-
-
-
-
+		file_options = extract_info(path);
 	}
 
 	/**
@@ -73,20 +76,60 @@ public:
 
 		static constexpr size_t SIZE_CHUNK = 8 * 1024 * 1024; //8MB
 
-		std::vector<char> buffer(SIZE_CHUNK);
+		std::vector<Sym> buffer{};
+		std::vector<Sym> write_buffer{};
+		//get type of op
+		std::mutex mut;
+		std::condition_variable cv;
+		std::vector<typename function_traits<decltype(&op)>::return_type> shared_buffer;
+		bool data_ready = false;
+
+		std::jthread writer(
+			[&](std::stop_token stop)
+			{
+				while (true)
+				{
+					std::unique_lock lk(mut);
+					// Sleep until data is ready or stop is requested
+					cv.wait(lk, stop, [&] { return data_ready; });
+
+					if (data_ready)
+					{
+						out.write(shared_buffer.data(), shared_buffer.size());
+						data_ready = false;
+						lk.unlock();
+						cv.notify_one(); // Tell producer we're done writing
+					}
+					else if (stop.stop_requested())
+					{
+						break;
+					}
+				}
+			});
+
 
 		while (true)
 		{
 			in.read(buffer.data(), SIZE_CHUNK);
-			auto bytes_read = in.gcount();//bytes_read may be lower than SIZE_CHUNK
+			auto bytes_read = in.gcount();
 
-			if (bytes_read == 0)
+			if (bytes_read == 0 and in.eof())
+			{
 				break;
+			}
 
-			op(buffer.data(), bytes_read);
+			auto processed = op(buffer.data(), bytes_read);
 
-			out.write(buffer.data(), bytes_read);
+			std::unique_lock lk(mut);
+			// If writer is still busy, wait for it to finish the last chunk
+			cv.wait(lk, [&] { return !data_ready; });
+
+			shared_buffer = std::move(processed);
+			data_ready = true;
+			lk.unlock();
+			cv.notify_one(); // Wake up the writer
 		}
+
 	}
 
 	/*
@@ -99,7 +142,7 @@ public:
 		std::ofstream file(out_path, std::ios::trunc | std::ios::binary);
 
 		if (file.tellp() > 0)//not empty
-			check_signature(out_path);
+			check_signature();
 		else
 			file.write(SIGNATURE.data(), SIGNATURE.size());
 
@@ -252,7 +295,13 @@ private:
 	 */
 	FileOptions extract_info(const fs::path& path)
 	{
-		std::ifstream file{ path, std::ios::binary};
+		if (!fs::exists(path))
+		{
+			std::ofstream file{ path };
+			return FileOptions{ path };
+		}
+
+		std::ifstream file{ path, std::ios::binary };
 
 		//we are dealing with an already compressed file
 		if (has_signature(file))
@@ -268,10 +317,12 @@ private:
 
 			if (comp_type >= CompType::MAX)
 				throw_error(ErrorType::FILE_CORRUPTED, path.string());
+
+			return FileOptions{ path, header };
 			
 		}
 
-
-
+		return FileOptions{ path };
 	}
+
 };

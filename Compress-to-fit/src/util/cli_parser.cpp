@@ -53,12 +53,12 @@ std::expected<Token, ErrorType> lex(const std::string& option)
 	}
 	else if (token_string == token_strings[static_cast<size_t>(TokenType::LONG_HELP)])
 	{
-		std::print(help_str.data());
+		std::cout << help_str;
 		std::terminate();
 	}
 	else if (token_string == token_strings[static_cast<size_t>(TokenType::HELP)])
 	{
-		std::print(help_str.data());
+		std::cout << help_str;
 		std::terminate();
 	}
 	else if (token_string == token_strings[static_cast<size_t>(TokenType::FORCE_COMPRESSION)])

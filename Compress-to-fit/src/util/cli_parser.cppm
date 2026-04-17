@@ -33,7 +33,7 @@ namespace parser
 		NO_TYPE = 696969,//we don't want this to be an index
 	};
 	//HAS to follow the same order of the TokenType enums
-	static constexpr std::string_view token_strings[] =
+	constexpr std::string_view token_strings[] =
 	{
 		"-i",
 		"-o",
@@ -46,7 +46,7 @@ namespace parser
 		"-di",
 	};
 	
-	static constexpr std::string_view help_str =
+	constexpr std::string_view help_str =
 		"\033[1m\033[36mWelcome to Compress To Fit!\033[0m\n"
 		"A cli compressor program.\n"
 		"Usage: ctf [options]\n"
