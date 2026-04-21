@@ -48,13 +48,15 @@ Token alg::Rabin::find_pattern()
 		return Token{ .offset = best_offset, .length = --best_length, .symbol = data[position] };
 }
 
-void LZ77::compress(const parser::Options& option, std::vector<Token>& out_stream)
+std::vector<Token> LZ77::compress()
 {
 	constexpr int buffer_size = 50;
 
+	std::vector<Token> out_stream{};
+
 	auto data_size = data.size();
 	out_stream.reserve(data_size);
-	std::cout << out_stream.data() << std::endl;
+
 	std::array<Token, buffer_size> buffer{};
 
 	const auto modulo_for_progress_bar = (data_size / 50);
@@ -67,7 +69,7 @@ void LZ77::compress(const parser::Options& option, std::vector<Token>& out_strea
 		//if we went past modulo, show progress
 		if (progress_counter >= modulo_for_progress_bar)
 		{
-			show_progress(option, static_cast<double>(pattern_matcher.get_pos()) / static_cast<double>(data_size), true);
+			show_progress(cli_options, static_cast<double>(pattern_matcher.get_pos()) / static_cast<double>(data_size), true);
 			progress_counter = 0;
 		}
 
@@ -89,10 +91,52 @@ void LZ77::compress(const parser::Options& option, std::vector<Token>& out_strea
 
 		progress_counter++;
 	}
-	show_progress(option, 1.f, true);
+	show_progress(cli_options, 1.f, true);
 	out_stream.insert(out_stream.end(), buffer.begin(), buffer.begin() + buffering_counter);
 	std::cout << '\n';
 
+	return out_stream;
+
+}
+
+std::vector<Token> LZ77::compress(size_t max_index)
+{
+	constexpr int buffer_size = 50;
+
+	std::vector<Token> out_stream{};
+
+	auto data_size = max_index - pattern_matcher.get_pos();
+	out_stream.reserve(data_size);
+
+	std::array<Token, buffer_size> buffer{};
+
+	auto buffering_counter = 0;
+
+	//loop over the stream
+	while (pattern_matcher.get_pos() < max_index)
+	{
+
+		auto token = pattern_matcher.find_pattern();
+
+		auto num_of_rolls = std::max(static_cast<int>(token.length), 1);
+		pattern_matcher.roll_hash(num_of_rolls);
+		window.slide(num_of_rolls);
+
+		buffer[buffering_counter] = token;
+
+		if (buffering_counter >= buffer_size - 1)
+		{
+			out_stream.append_range(buffer);
+			buffering_counter = 0;
+		}
+		else
+			buffering_counter++;
+
+	}
+	out_stream.insert(out_stream.end(), buffer.begin(), buffer.begin() + buffering_counter);
+	std::cout << '\n';
+
+	return out_stream;
 }
 
 void LZ77::decompress()

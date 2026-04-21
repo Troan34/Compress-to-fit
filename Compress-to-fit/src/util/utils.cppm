@@ -38,7 +38,13 @@ concept ptr_size_pred = requires
 	requires (function_traits<fun>::num_args == 2);
 	requires std::is_pointer_v<typename function_traits<fun>::template arg<0>>;
 	requires std::is_integral_v<typename function_traits<fun>::template arg<1>>;
-	requires is_std_vector<typename function_traits<fun>::return_type>;
+};
+
+export template <typename fun>
+concept size_pred = requires
+{
+	requires (function_traits<fun>::num_args == 1);
+	requires std::is_integral_v<typename function_traits<fun>::template arg<0>>;
 };
 
 /**

@@ -20,6 +20,9 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_SCAN_FOR_MODULES ON)
 set(CMAKE_CXX_MODULE_STD ON)
 
+find_package(mio CONFIG REQUIRED)
+
+
 # Include sub-projects.
 add_subdirectory ("Compress-to-fit")
 

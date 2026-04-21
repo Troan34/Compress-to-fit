@@ -348,20 +348,31 @@ public:
 	using Token = Token;//share token type
 	
 	
-	LZ77(std::span<Sym> data_, CompPreset preset_)
-		:data(data_), preset(preset_), window(data_, preset_), pattern_matcher(window, 0, preset)
+	LZ77(std::span<Sym> data_, const parser::Options& options)
+		:data(data_), preset(static_cast<CompPreset>(options.preset)), window(data_, static_cast<CompPreset>(options.preset)), pattern_matcher(window, 0, preset), cli_options(options)
 	{
 	}
 
 	/**
 	 * @brief Compress the data.
-	 * @param option This is used for misc things.
-	 * @param out_stream Where the resulting string of Token will be stored.
+	 * @return The resulting data.
 	 */
-	void compress(const parser::Options& option, std::vector<Token>& out_stream);
+	std::vector<Token> compress();
+
+	/**
+	 * @brief Compress the data up to max_index
+	 * @param max_index The last index to get compressed (included)
+	 * @return The resulting data.
+	 * 
+	 * @details This function shall be used as a compression "in steps". Its use is to stop the return type from being too big.
+	 *			The function shall not strictly stop at #max_index, due to the nature of the LZ77 algorithm.
+	 */
+	std::vector<Token> compress(size_t max_index);
+
 	void decompress();
 
 private:
+	const parser::Options& cli_options;
 	std::span<Sym> data;
 	Window window;
 	CompPreset preset;

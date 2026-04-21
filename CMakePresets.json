@@ -15,10 +15,11 @@
               }
           },
           "cacheVariables": {
-              "CMAKE_C_COMPILER": "cl.exe",
-              "CMAKE_CXX_COMPILER": "cl.exe",
-              "CMAKE_EXE_LINKER_FLAGS": "/DEBUG",
-              "CMAKE_CXX_FLAGS": "/permissive- "
+            "CMAKE_C_COMPILER": "cl.exe",
+            "CMAKE_CXX_COMPILER": "cl.exe",
+            "CMAKE_EXE_LINKER_FLAGS": "/DEBUG",
+            "CMAKE_CXX_FLAGS": "/permissive- ",
+            "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
           },
           "condition": {
             "type": "allOf",
@@ -82,7 +83,8 @@
           "binaryDir": "${sourceDir}/out/build/${presetName}",
           "installDir": "${sourceDir}/out/install/${presetName}",
           "cacheVariables": {
-              "CMAKE_BUILD_TYPE": "Debug"
+            "CMAKE_BUILD_TYPE": "Debug",
+            "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
           },
           "condition": {
               "type": "equals",

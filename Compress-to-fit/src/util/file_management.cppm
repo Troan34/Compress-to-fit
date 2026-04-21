@@ -1,14 +1,10 @@
-module;
-#ifdef _WIN32
-#define WIN_LEAN_AND_MEAN
-
-#endif
-
 export module file_util;
 
 export import util;
+import parser;
 import std.compat;
 namespace fs = std::filesystem;
+
 
 
 constexpr std::string_view SIGNATURE = "CTF-1";
@@ -57,7 +53,8 @@ public:
 	 * 
 	 * @todo Add a parameter for #FileOptions::delete_on_dtor when the parser is updated to do that
 	 */
-	File(const fs::path& path)
+	File(const fs::path& path, const parser::Options& options)
+		:cli_options(options)
 	{
 		file_options = extract_info(path);
 	}
@@ -68,20 +65,20 @@ public:
 	* @param out_path Where the result of the function will be stored.
 	* @param op The function to be applied.
 	*/
-	template <ptr_size_pred pred>
-	void process_file(const fs::path& in_path, const fs::path& out_path, pred op)
+	template <size_pred pred>
+	void process_file(pred op)
 	{
-		std::ifstream in(in_path, std::ios::binary);
-		std::ofstream out(out_path, std::ios::binary);
+		std::ifstream in(cli_options.filename_in, std::ios::binary | std::ios::beg);
+		std::ofstream out(cli_options.filename_out, std::ios::binary | std::ios::trunc);
 
-		static constexpr size_t SIZE_CHUNK = 8 * 1024 * 1024; //8MB
+		constexpr size_t SIZE_CHUNK = 4 * 1024 * 1024; //4MB
 
-		std::vector<Sym> buffer{};
-		std::vector<Sym> write_buffer{};
-		//get type of op
+
 		std::mutex mut;
 		std::condition_variable cv;
+		//get type of op
 		std::vector<typename function_traits<decltype(&op)>::return_type> shared_buffer;
+		shared_buffer.reserve(SIZE_CHUNK);
 		bool data_ready = false;
 
 		std::jthread writer(
@@ -107,18 +104,18 @@ public:
 				}
 			});
 
+		in.seekg(0, std::ios::end);
+		auto file_size = in.tellg();
+		in.seekg(0, std::ios::beg);
 
-		while (true)
+		for (size_t index = 0; index <= file_size; index += SIZE_CHUNK)
 		{
-			in.read(buffer.data(), SIZE_CHUNK);
-			auto bytes_read = in.gcount();
-
-			if (bytes_read == 0 and in.eof())
+			if (static_cast<size_t>(file_size) - index < SIZE_CHUNK)//we are too close to the end
 			{
-				break;
+				index = file_size;//so just push it to the end, this will almost certainly cause the call to reserve on the shared_buffer
 			}
 
-			auto processed = op(buffer.data(), bytes_read);
+			auto processed = op(index);
 
 			std::unique_lock lk(mut);
 			// If writer is still busy, wait for it to finish the last chunk
@@ -226,6 +223,7 @@ public:
 
 private:
 	FileOptions file_options;
+	const parser::Options& cli_options;
 
 	/**
 	* @brief Check if #file_options.path has the #SIGNATURE in the header, throws if not.
