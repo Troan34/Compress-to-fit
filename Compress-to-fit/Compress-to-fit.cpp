@@ -9,15 +9,18 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-
+	
 	auto options = parser::parse(argc, argv);
 	
-	std::vector<Sym> stream{};
 	File file{options.filename_in, options};
-	//file.read_file(options.filename_in, stream);
-	mio::mmap_source IO_map{ options.filename_in };
 
-	std::span<Sym> data{ IO_map.begin(), IO_map.end() };
+	std::error_code error;
+	auto IO_map = mio::make_mmap_source(options.filename_in.string(), error);
+
+	std::span<Sym const> data{
+		reinterpret_cast<Sym const*>(IO_map.data()),
+		IO_map.size()
+	};
 
 	LZ77 encoder{data, options};
 
@@ -27,13 +30,6 @@ int main(int argc, char* argv[])
 			return encoder.compress(max_index);
 		}
 	);
-	//std::vector<LZ77::Token> output_vec{ encoder.compress() };
-	
-	
-	//std::span<const LZ77::Token> output{ output_vec };
-	
-	//file.write_file(output, options.filename_out);
-	//file.split_file(options.n_files);
 
 	return 0;
 }

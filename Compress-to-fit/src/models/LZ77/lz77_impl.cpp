@@ -9,8 +9,8 @@ void alg::Rabin::roll_hash(uint32_t num_of_rolls) noexcept
 		if (position < (data.get_data().size() - MIN_MATCH))//stop if we reached the end
 		{
 			//roll hash
-			hash = (hash + MOD - static_cast<uint64_t>(data[position]) * ROLL_FACTOR % MOD) % MOD;
-			hash = (hash * BASE + data[position + MIN_MATCH]) % MOD;
+			hash = (hash + MOD - static_cast<uint32_t>(data[position]) * ROLL_FACTOR % MOD) % MOD;
+			hash = (hash * BASE + static_cast<uint32_t>(data[position + MIN_MATCH])) % MOD;
 
 			prev_poss_table[prev_bucket_index(hash)] = poss_table[bucket_index(hash)];
 			poss_table[bucket_index(hash)] = position;
@@ -31,8 +31,7 @@ Token alg::Rabin::find_pattern()
 	//check the number of times we go down the chain --- check if candidate is not too far from pos --- and that candidate exist (we initialized -1)
 	while (num_of_iter <= MAX_CHAIN and position - candidate < data.get_size_search() and candidate >= 0)
 	{
-		auto temp_len = std::min(count_equal(data.get_data().subspan(position), data.get_data().subspan(candidate)),
-								 static_cast<size_t>(std::numeric_limits<uint8_t>::max()));
+		auto temp_len = count_equal(data.get_data().subspan(position), data.get_data().subspan(candidate), std::numeric_limits<uint8_t>::max());
 		if (temp_len > best_length)
 		{
 			best_length = temp_len;
@@ -113,7 +112,7 @@ std::vector<Token> LZ77::compress(size_t max_index)
 	auto buffering_counter = 0;
 
 	//loop over the stream
-	while (pattern_matcher.get_pos() < max_index)
+	while (pattern_matcher.get_pos() < max_index and pattern_matcher.get_pos() < data.size())
 	{
 
 		auto token = pattern_matcher.find_pattern();
@@ -134,7 +133,6 @@ std::vector<Token> LZ77::compress(size_t max_index)
 
 	}
 	out_stream.insert(out_stream.end(), buffer.begin(), buffer.begin() + buffering_counter);
-	std::cout << '\n';
 
 	return out_stream;
 }

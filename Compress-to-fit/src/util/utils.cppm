@@ -41,11 +41,8 @@ concept ptr_size_pred = requires
 };
 
 export template <typename fun>
-concept size_pred = requires
-{
-	requires (function_traits<fun>::num_args == 1);
-	requires std::is_integral_v<typename function_traits<fun>::template arg<0>>;
-};
+concept size_pred = std::invocable<fun, size_t>;
+
 
 /**
  * @brief Parser error types.
@@ -198,10 +195,12 @@ export struct Sym
 {
 	unsigned char value;
 
-	operator int() const
+
+	operator unsigned char() const
 	{
-		return static_cast<int>(value);
+		return value;
 	}
+
 
 	friend std::istream& operator>>(std::istream& is, Sym& sym)
 	{
@@ -209,7 +208,7 @@ export struct Sym
 		return is;
 	}
 
-	auto operator<=>(const Sym&) const = default;
+	auto operator<=>(Sym const&) const = default;
 
 	[[nodiscard]] static constexpr auto max() noexcept
 	{
@@ -246,11 +245,11 @@ export [[nodiscard]] constexpr size_t const_pow(size_t base, size_t exponent) no
 }
 
 export template <typename Type>
-[[nodiscard]] constexpr auto count_equal(const std::span<Type> str1, const std::span<Type> str2)
+[[nodiscard]] constexpr auto count_equal(std::span<Type> const str1, std::span<Type> const str2, size_t const max_match)
 {
 	auto cond = std::min(str1.size(), str2.size());
 	size_t i = 0;
-	for (; i < cond; i++)
+	for (; i < cond and i < max_match; i++)
 	{
 		if (str1[i] != str2[i])
 			break;

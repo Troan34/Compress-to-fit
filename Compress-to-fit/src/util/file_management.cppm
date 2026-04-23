@@ -54,9 +54,10 @@ public:
 	 * @todo Add a parameter for #FileOptions::delete_on_dtor when the parser is updated to do that
 	 */
 	File(const fs::path& path, const parser::Options& options)
-		:cli_options(options)
+		:cli_options(options) 
 	{
 		file_options = extract_info(path);
+		create_file();
 	}
 
 	/**
@@ -68,34 +69,38 @@ public:
 	template <size_pred pred>
 	void process_file(pred op)
 	{
+		//Holy modern c++ and unreadiblity. Rust and C++ are colliding... wait, is the logo of Rust a crab because of the crab theory?
+		static_assert(std::is_invocable_v<pred, size_t>, "You shall give a function that takes a size_t as parameter");
+		using ReturnType = std::invoke_result_t<pred, size_t>;
+		using ValueType = std::ranges::range_value_t<std::invoke_result_t<pred, size_t>>;
+
 		std::ifstream in(cli_options.filename_in, std::ios::binary | std::ios::beg);
-		std::ofstream out(cli_options.filename_out, std::ios::binary | std::ios::trunc);
+		std::ofstream out(cli_options.filename_out, std::ios::binary | std::ios::app);
 
 		constexpr size_t SIZE_CHUNK = 4 * 1024 * 1024; //4MB
 
 
 		std::mutex mut;
 		std::condition_variable cv;
-		//get type of op
-		std::vector<typename function_traits<decltype(&op)>::return_type> shared_buffer;
-		shared_buffer.reserve(SIZE_CHUNK);
+		ReturnType shared_buffer;
 		bool data_ready = false;
 
+		//write to file when data is ready
 		std::jthread writer(
 			[&](std::stop_token stop)
 			{
 				while (true)
 				{
-					std::unique_lock lk(mut);
-					// Sleep until data is ready or stop is requested
-					cv.wait(lk, stop, [&] { return data_ready; });
+					std::unique_lock lock(mut);
+					//sleep until data is ready or stop is requested
+					cv.wait(lock, [&] { return data_ready or stop.stop_requested(); });
 
 					if (data_ready)
 					{
-						out.write(shared_buffer.data(), shared_buffer.size());
+						out.write(reinterpret_cast<char const*>(shared_buffer.data()), shared_buffer.size() * sizeof(ValueType));
 						data_ready = false;
-						lk.unlock();
-						cv.notify_one(); // Tell producer we're done writing
+						lock.unlock();
+						cv.notify_one(); //tell producer we're done writing
 					}
 					else if (stop.stop_requested())
 					{
@@ -104,11 +109,13 @@ public:
 				}
 			});
 
+		//get file size
 		in.seekg(0, std::ios::end);
 		auto file_size = in.tellg();
 		in.seekg(0, std::ios::beg);
 
-		for (size_t index = 0; index <= file_size; index += SIZE_CHUNK)
+
+		for (size_t index = SIZE_CHUNK; index <= file_size; index += SIZE_CHUNK)
 		{
 			if (static_cast<size_t>(file_size) - index < SIZE_CHUNK)//we are too close to the end
 			{
@@ -117,16 +124,19 @@ public:
 
 			auto processed = op(index);
 
-			std::unique_lock lk(mut);
+			std::unique_lock lock(mut);
 			// If writer is still busy, wait for it to finish the last chunk
-			cv.wait(lk, [&] { return !data_ready; });
+			cv.wait(lock, [&] { return !data_ready; });
 
 			shared_buffer = std::move(processed);
 			data_ready = true;
-			lk.unlock();
+			lock.unlock();
 			cv.notify_one(); // Wake up the writer
-		}
 
+			show_progress(cli_options, static_cast<float>(index) / file_size);
+		}
+		writer.request_stop();
+		cv.notify_one();
 	}
 
 	/*
@@ -323,4 +333,14 @@ private:
 		return FileOptions{ path };
 	}
 
+
+	void create_file()
+	{
+		std::ofstream file(cli_options.filename_out, std::ios::trunc | std::ios::binary);
+
+		if (file.tellp() > 0)//not empty
+			check_signature();
+		else
+			file.write(SIGNATURE.data(), SIGNATURE.size());
+	}
 };

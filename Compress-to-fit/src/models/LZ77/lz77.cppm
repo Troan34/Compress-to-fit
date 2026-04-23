@@ -42,7 +42,7 @@ inline constexpr auto MAX_HASH_SIZE = MAX_WINDOW_SIZE << 1;
 class Window
 {
 public:
-	Window(const std::span<Sym>& data_, size_t window_size) noexcept
+	Window(const std::span<Sym const>& data_, size_t window_size) noexcept
 		:data(data_), max_size(std::clamp(window_size, window_size, MAX_WINDOW_SIZE)), size_search(0)
 	{
 		if (max_size > data.size()) max_size = data.size();
@@ -51,7 +51,7 @@ public:
 		max_size_search = SEARCH_RATIO * max_size_look_ahead;
 	}
 
-	Window(const std::span<Sym>& data_, CompPreset preset)
+	Window(const std::span<Sym const>& data_, CompPreset preset)
 		:data(data_)
 	{
 		size_search = 0;
@@ -85,7 +85,7 @@ public:
 			max_size = MAX_WINDOW_SIZE >> 8;
 			break;
 		case NO_COMP:
-			throw std::runtime_error("There has been an exception in the file " + std::string{ std::source_location::current().file_name() } + " at the line " + std::string{ std::source_location::current().line()});
+			throw std::runtime_error("There has been an exception in the file " + std::string{ std::source_location::current().file_name() } + " at the line " + std::string{ std::source_location::current().line() });
 			break;
 		default:
 			throw std::runtime_error("There has been an exception in the file " + std::string{ std::source_location::current().file_name() } + " at the line " + std::string{ std::source_location::current().line() });
@@ -136,12 +136,12 @@ public:
 		offset = std::clamp(offset, 0ull, data.size() - max_size_search);
 	}
 
-	[[nodiscard]] auto look_ahead_buffer() noexcept -> std::span<Sym>
+	[[nodiscard]] auto look_ahead_buffer() noexcept -> std::span<Sym const>
 	{
 		return data.subspan(offset + size_search, size_look_ahead);
 	}
 
-	[[nodiscard]] auto search_buffer() noexcept -> std::span<Sym>
+	[[nodiscard]] auto search_buffer() noexcept -> std::span<Sym const>
 	{
 		return data.subspan(offset, size_search);
 	}
@@ -171,12 +171,8 @@ public:
 		return size_search + offset;
 	}
 
-	auto& operator[](size_t index) noexcept
-	{
-		return data[offset + index];
-	}
 
-	auto operator[](size_t index) const
+	auto operator[](size_t index) const noexcept
 	{
 		return data[index];
 	}
@@ -187,7 +183,7 @@ public:
 	}
 
 private:
-	const std::span<Sym> data;
+	const std::span<const Sym> data;
 	size_t size_look_ahead;
 	size_t max_size_look_ahead;
 	size_t size_search;
@@ -234,7 +230,7 @@ namespace alg
 			
 			for (int i = 0; i < MIN_MATCH and i < data.get_data().size(); i++)//initialize the hash
 			{
-				hash = (hash * BASE * data[position + i]) % MOD;
+				hash = (hash * BASE * static_cast<uint32_t>(data[position + i])) % MOD;
 			}
 			poss_table[bucket_index(hash)] = position;
 			
@@ -348,7 +344,7 @@ public:
 	using Token = Token;//share token type
 	
 	
-	LZ77(std::span<Sym> data_, const parser::Options& options)
+	LZ77(std::span<Sym const> data_, const parser::Options& options)
 		:data(data_), preset(static_cast<CompPreset>(options.preset)), window(data_, static_cast<CompPreset>(options.preset)), pattern_matcher(window, 0, preset), cli_options(options)
 	{
 	}
@@ -373,7 +369,7 @@ public:
 
 private:
 	const parser::Options& cli_options;
-	std::span<Sym> data;
+	std::span<Sym const> data;
 	Window window;
 	CompPreset preset;
 	alg::Rabin pattern_matcher;

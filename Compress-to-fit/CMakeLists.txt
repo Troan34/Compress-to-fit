@@ -6,6 +6,8 @@
 add_executable(Compress-to-fit)
 set_target_properties(Compress-to-fit PROPERTIES OUTPUT_NAME "ctf")
 
+target_link_libraries(Compress-to-fit PRIVATE mio::mio)
+
 target_sources(
     Compress-to-fit
     PRIVATE
@@ -29,4 +31,3 @@ target_sources(
 
 target_compile_features(Compress-to-fit PRIVATE cxx_std_23)
 target_link_libraries(Compress-to-fit PRIVATE __CMAKE::CXX23)
-target_link_libraries(Compress-to-fit PRIVATE mio::mio)
