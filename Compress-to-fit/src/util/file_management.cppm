@@ -9,7 +9,7 @@ namespace fs = std::filesystem;
 
 constexpr std::string_view SIGNATURE = "CTF-1";
 	                                //SIGNATURE     +   IDENTIFIER    	
-constexpr size_t FILE_HEADER_SIZE = SIGNATURE.size() + sizeof(size_t) + sizeof(uint8_t) + sizeof(uint8_t);
+export constexpr size_t FILE_HEADER_SIZE = SIGNATURE.size() + sizeof(size_t) + sizeof(uint8_t) + sizeof(uint8_t);
 
 ///									TZF		FILE	HEADER
 ///	 ___________________________________________________________________________
@@ -66,13 +66,9 @@ public:
 	* @param out_path Where the result of the function will be stored.
 	* @param op The function to be applied.
 	*/
-	template <size_pred pred>
-	void process_file(pred op)
+	template <typename T, arr_size_pred<T> pred>
+	void process_file(pred fun)
 	{
-		//Holy modern c++ and unreadiblity. Rust and C++ are colliding... wait, is the logo of Rust a crab because of the crab theory?
-		static_assert(std::is_invocable_v<pred, size_t>, "You shall give a function that takes a size_t as parameter");
-		using ReturnType = std::invoke_result_t<pred, size_t>;
-		using ValueType = std::ranges::range_value_t<std::invoke_result_t<pred, size_t>>;
 
 		std::ifstream in(cli_options.filename_in, std::ios::binary | std::ios::beg);
 		std::ofstream out(cli_options.filename_out, std::ios::binary | std::ios::app);
@@ -82,7 +78,8 @@ public:
 
 		std::mutex mut;
 		std::condition_variable cv;
-		ReturnType shared_buffer;
+		std::vector<T> shared_buffer;
+		std::vector<T> output_buffer;
 		bool data_ready = false;
 
 		//write to file when data is ready
@@ -97,7 +94,7 @@ public:
 
 					if (data_ready)
 					{
-						out.write(reinterpret_cast<char const*>(shared_buffer.data()), shared_buffer.size() * sizeof(ValueType));
+						out.write(reinterpret_cast<char const*>(shared_buffer.data()), shared_buffer.size() * sizeof(T));
 						data_ready = false;
 						lock.unlock();
 						cv.notify_one(); //tell producer we're done writing
@@ -111,29 +108,31 @@ public:
 
 		//get file size
 		in.seekg(0, std::ios::end);
-		auto file_size = in.tellg();
+		auto file_size = in.tellg() / 4;
 		in.seekg(0, std::ios::beg);
 
+		bool compressing = !has_signature();
+		size_t index = std::min(static_cast<size_t>(file_size), SIZE_CHUNK);
 
-		for (size_t index = SIZE_CHUNK; index <= file_size; index += SIZE_CHUNK)
+		for (; index <= file_size; index += SIZE_CHUNK)
 		{
 			if (static_cast<size_t>(file_size) - index < SIZE_CHUNK)//we are too close to the end
 			{
 				index = file_size;//so just push it to the end, this will almost certainly cause the call to reserve on the shared_buffer
 			}
 
-			auto processed = op(index);
+			fun(output_buffer, index);
 
 			std::unique_lock lock(mut);
 			// If writer is still busy, wait for it to finish the last chunk
 			cv.wait(lock, [&] { return !data_ready; });
 
-			shared_buffer = std::move(processed);
+			std::swap(shared_buffer, output_buffer);//move output_buffer into shared_buffer
 			data_ready = true;
 			lock.unlock();
 			cv.notify_one(); // Wake up the writer
 
-			show_progress(cli_options, static_cast<float>(index) / file_size);
+			show_progress(cli_options, static_cast<float>(index) / file_size, compressing);
 		}
 		writer.request_stop();
 		cv.notify_one();
@@ -230,6 +229,28 @@ public:
 		in_file.read(reinterpret_cast<char*>(received_data.data()), size_file * sizeof(Sym));
 	}
 
+	/**
+	 * @brief Check if file has the #SIGNATURE in the header. Non-throwing version of #check_signature.
+	 * @return True if file has signature, false if not.
+	 *
+	 * @param file File to be checked.
+	 * @pre The file shall already exist and be accessible.
+	 * @post file will be unchanged.
+	 */
+	static bool has_signature(std::ifstream& file)
+	{
+		auto save_pos = file.tellg();
+		file.seekg(0);
+		std::string buffer(SIGNATURE.size(), ' ');
+		file.read(buffer.data(), buffer.size());
+		file.seekg(save_pos);
+
+		if (!(buffer == SIGNATURE.data()))//not recognized
+		{
+			return false;
+		}
+		return true;
+	}
 
 private:
 	FileOptions file_options;
@@ -271,28 +292,6 @@ private:
 		return true;
 	}
 
-	/**
-	 * @brief Check if file has the #SIGNATURE in the header. Non-throwing version of #check_signature.
-	 * @return True if file has signature, false if not.
-	 *
-	 * @param file File to be checked.
-	 * @pre The file shall already exist and be accessible.
-	 * @post file will be unchanged.
-	 */
-	bool has_signature(std::ifstream& file) const
-	{
-		auto save_pos = file.tellg();
-		file.seekg(0);
-		std::string buffer(SIGNATURE.size(), ' ');
-		file.read(buffer.data(), buffer.size());
-		file.seekg(save_pos);
-
-		if (!(buffer == SIGNATURE.data()))//not recognized
-		{
-			return false;
-		}
-		return true;
-	}
 
 	/**
 	 * @brief Extract information from the header of the tzf file.
@@ -324,7 +323,7 @@ private:
 			CompType comp_type = header.comp_type;
 
 			if (comp_type >= CompType::MAX)
-				throw_error(ErrorType::FILE_CORRUPTED, path.string());
+				//throw_error(ErrorType::FILE_CORRUPTED, path.string());
 
 			return FileOptions{ path, header };
 			

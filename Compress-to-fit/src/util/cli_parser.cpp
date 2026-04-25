@@ -115,8 +115,7 @@ std::expected<Token, ErrorType> lex(const std::string& option)
 		test_file.close();
 		fs::remove(test_path);
 		
-		path = path.stem();
-		path += FILE_EXTENSION;
+		path.replace_extension(FILE_EXTENSION);
 
 		value.emplace<fs::path>(path);
 	}

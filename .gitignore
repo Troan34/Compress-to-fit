@@ -4,3 +4,4 @@ out/
 *.pdb
 
 documentation/
+test_set/

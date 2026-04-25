@@ -28,10 +28,12 @@ struct Token
 	}
 };
 
+export using LZ77_Token = Token;
+
 inline constexpr int SEARCH_RATIO = 500;//Ratio of the search buf size and la buf
 inline constexpr auto MAX_WINDOW_SIZE = KB_to_B(128);
 /**
- * @brief The size of @ref LZ77::poss_table
+ * @brief The size of @ref alg::Rabin::poss_table
  */
 inline constexpr auto MAX_HASH_SIZE = MAX_WINDOW_SIZE << 1;
 
@@ -159,6 +161,11 @@ public:
 	[[nodiscard]] auto get_max_size() const noexcept
 	{
 		return max_size;
+	}
+
+	[[nodiscard]] auto get_max_size_search() const noexcept
+	{
+		return max_size_search;
 	}
 
 	[[nodiscard]] auto get_relative_pos() const noexcept
@@ -334,45 +341,137 @@ namespace alg
 
 }//namespace algs
 
+template <typename T>
+struct CompressionData {};
+
+template <>
+struct CompressionData<Sym>
+{
+	Window window;
+	CompPreset preset;
+	alg::Rabin pattern_matcher;
+
+	CompressionData(std::span<Sym const> data_, CompPreset preset_)
+		: window(data_, preset_),
+		preset(preset_),
+		pattern_matcher(window, 0, preset)
+	{
+	}
+};
+
+template <typename T>
+concept IsSym = std::is_same_v<T, Sym>;
+
+template <typename T>
+concept IsToken = std::is_same_v<T, Token>;
+
 /**
  * @brief Implement the LZ77 algorithm.
  * @details An overview of the algorithm: 
  */
-export class LZ77
+export template <typename DataType>
+class LZ77 : protected CompressionData<DataType>
 {
 public:
-	using Token = Token;//share token type
-	
-	
-	LZ77(std::span<Sym const> data_, const parser::Options& options)
-		:data(data_), preset(static_cast<CompPreset>(options.preset)), window(data_, static_cast<CompPreset>(options.preset)), pattern_matcher(window, 0, preset), cli_options(options)
+	//extracting version
+	LZ77(std::span<DataType const> data_, const parser::Options& options) requires IsToken<DataType>
+		:data(data_), cli_options(options)
 	{
 	}
 
-	/**
-	 * @brief Compress the data.
-	 * @return The resulting data.
-	 */
-	std::vector<Token> compress();
+	LZ77(std::span<DataType const> data_, const parser::Options& options) requires IsSym<DataType>
+		: CompressionData<DataType>(data_, static_cast<CompPreset>(options.preset)),
+		cli_options(options),
+		data(data_)
+	{
+	}
+
 
 	/**
 	 * @brief Compress the data up to max_index
+	 * @param out_stream Where the output will go
 	 * @param max_index The last index to get compressed (included)
-	 * @return The resulting data.
 	 * 
-	 * @details This function shall be used as a compression "in steps". Its use is to stop the return type from being too big.
+	 * @warning #out_stream will be cleared and overwritten
+	 * 
+	 * @details This function shall be used as a compression "in steps". Its use is to stop the #out_stream from being too big.
 	 *			The function shall not strictly stop at #max_index, due to the nature of the LZ77 algorithm.
 	 */
-	std::vector<Token> compress(size_t max_index);
+	void compress(std::vector<Token>& out_stream, size_t max_index) requires IsSym<DataType>;
 
-	void decompress();
+	/**
+	 * @brief Decompress #data.
+	 * @param out_stream Where the output will go
+	 * @param max_index The last index to get decompressed (included)
+	 * 
+	 * @warning #out_stream will be cleared and overwritten
+	 * 
+	 * @details This function shall be used as a compression "in steps". Its use is to stop the #out_stream from being too big.
+	 */
+	void decompress(std::vector<Sym>& out_stream, size_t max_index) requires IsToken<DataType>;
 
 private:
 	const parser::Options& cli_options;
-	std::span<Sym const> data;
-	Window window;
-	CompPreset preset;
-	alg::Rabin pattern_matcher;
+	std::span<DataType const> data;
+
+	size_t decompression_index = 0;
 };
 
+template <typename DataType>
+void LZ77<DataType>::compress(std::vector<Token>& out_stream, size_t max_index) requires IsSym<DataType>
+{
+	constexpr int buffer_size = 50;
 
+	auto data_size = max_index - this->pattern_matcher.get_pos();
+	out_stream.clear();
+	out_stream.reserve(data_size);
+
+	//loop over the stream
+	while (this->pattern_matcher.get_pos() < max_index and this->pattern_matcher.get_pos() < data.size())
+	{
+		auto token = this->pattern_matcher.find_pattern();
+
+		auto num_of_rolls = std::max(static_cast<int>(token.length), 1);
+		this->pattern_matcher.roll_hash(num_of_rolls);//roll, updates the hash and position
+		this->window.slide(num_of_rolls);
+
+		out_stream.push_back(token);
+	}
+}
+
+template<typename DataType>
+void LZ77<DataType>::decompress(std::vector<Sym>& out_stream, size_t max_index) requires IsToken<DataType>
+{
+	auto size = std::min(this->data.size(), max_index);
+	out_stream.clear();
+	out_stream.reserve(size - decompression_index);
+	for (; decompression_index < size; decompression_index++)
+	{
+		auto token_index = decompression_index - this->data[decompression_index].offset;//where to grab the decoded symbols to repeat
+		auto token_length = this->data[decompression_index].length;
+		auto next_char = this->data[decompression_index].symbol;
+
+		if (token_index != decompression_index)//i.e. offset != 0
+		{
+			//if the iterator won't get past our position. i.e. length < offset. This is an optimization.
+			if (auto end_iter = token_index + token_length; end_iter < out_stream.size() and false)
+			{
+				std::copy(
+					out_stream.begin() + token_index,
+					out_stream.begin() + end_iter,
+					std::back_inserter(out_stream)
+				);
+			}
+			else//It will get past. We could append the range up until the end and then keep going in the conventional way, but that is premature (and probably bad) optimization
+			{
+				while (token_length > 0)
+				{
+					out_stream.push_back(out_stream[token_index]);
+					token_index++;
+					token_length--;
+				}
+			}
+		}
+		out_stream.emplace_back(next_char);
+	}
+}

@@ -2,21 +2,25 @@
 # project specific logic here.
 #
 
+add_subdirectory(modules/std)
 
 add_executable(Compress-to-fit)
 set_target_properties(Compress-to-fit PROPERTIES OUTPUT_NAME "ctf")
 
 target_link_libraries(Compress-to-fit PRIVATE mio::mio)
+target_link_libraries(Compress-to-fit PRIVATE std_module)
+
 
 target_sources(
     Compress-to-fit
     PRIVATE
     FILE_SET CXX_MODULES FILES
-    src/util/utils.cppm
-    src/util/cli_parser.cppm
-    src/util/file_management.cppm
-    src/models/LZ77/lz77.cppm
-     
+    "src/util/utils.cppm"
+    "src/util/cli_parser.cppm"
+    "src/util/file_management.cppm"
+    "src/models/LZ77/lz77.cppm"
+    "src/models/LZ77/lz77_impl.cppm"
+    
 )
 
 target_sources(
@@ -24,10 +28,6 @@ target_sources(
     PRIVATE
     "Compress-to-fit.cpp"
     "src/util/cli_parser.cpp"
-    "src/models/LZ77/lz77_impl.cpp"
 )
 
-
-
 target_compile_features(Compress-to-fit PRIVATE cxx_std_23)
-target_link_libraries(Compress-to-fit PRIVATE __CMAKE::CXX23)

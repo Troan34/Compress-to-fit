@@ -43,6 +43,9 @@ concept ptr_size_pred = requires
 export template <typename fun>
 concept size_pred = std::invocable<fun, size_t>;
 
+export template <typename fun, typename type>
+concept arr_size_pred = std::invocable<fun, std::vector<type>&, std::size_t>;
+
 
 /**
  * @brief Parser error types.
