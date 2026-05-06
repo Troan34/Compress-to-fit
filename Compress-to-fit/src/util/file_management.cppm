@@ -21,9 +21,9 @@ export constexpr size_t FILE_HEADER_SIZE = SIGNATURE.size() + sizeof(size_t) + s
 
 struct Header
 {
+	size_t identifier;
 	CompType comp_type;
 	CompPreset preset;
-	size_t identifier;
 };
 
 export struct FileOptions
@@ -62,14 +62,11 @@ public:
 
 	/**
 	* @brief Apply a certain function to a file.
-	* @param in_path File being read.
-	* @param out_path Where the result of the function will be stored.
-	* @param op The function to be applied.
 	*/
-	template <typename T, arr_size_pred<T> pred>
-	void process_file(pred fun)
+	template <typename In, typename Out, auto pred, typename Obj>
+		requires std::invocable<decltype(pred), Obj&, CodecInterface<In>&>
+	void process_file(Obj& obj, CodecInterface<In>& interface)
 	{
-
 		std::ifstream in(cli_options.filename_in, std::ios::binary | std::ios::beg);
 		std::ofstream out(cli_options.filename_out, std::ios::binary | std::ios::app);
 
@@ -78,8 +75,8 @@ public:
 
 		std::mutex mut;
 		std::condition_variable cv;
-		std::vector<T> shared_buffer;
-		std::vector<T> output_buffer;
+		std::vector<Out> shared_buffer;//Used to write to disk
+		std::vector<Out> output_buffer;//Used to receive data from fun()
 		bool data_ready = false;
 
 		//write to file when data is ready
@@ -94,7 +91,7 @@ public:
 
 					if (data_ready)
 					{
-						out.write(reinterpret_cast<char const*>(shared_buffer.data()), shared_buffer.size() * sizeof(T));
+						out.write(reinterpret_cast<char const*>(shared_buffer.data()), shared_buffer.size() * sizeof(Out));
 						data_ready = false;
 						lock.unlock();
 						cv.notify_one(); //tell producer we're done writing
@@ -114,6 +111,9 @@ public:
 		bool compressing = !has_signature();
 		size_t index = std::min(static_cast<size_t>(file_size), SIZE_CHUNK);
 
+		if (has_signature())
+			index += FILE_HEADER_SIZE;
+
 		for (; index <= file_size; index += SIZE_CHUNK)
 		{
 			if (static_cast<size_t>(file_size) - index < SIZE_CHUNK)//we are too close to the end
@@ -121,7 +121,7 @@ public:
 				index = file_size;//so just push it to the end, this will almost certainly cause the call to reserve on the shared_buffer
 			}
 
-			fun(output_buffer, index);
+			std::invoke(pred, obj, interface);
 
 			std::unique_lock lock(mut);
 			// If writer is still busy, wait for it to finish the last chunk

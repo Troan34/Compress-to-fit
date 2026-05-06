@@ -7,6 +7,8 @@ import file_util;
 
 using namespace std;
 
+//TODO: Get the design of process_file correct you tit.
+
 int main(int argc, char* argv[])
 {
 	auto options = parser::parse(argc, argv);
@@ -28,12 +30,13 @@ int main(int argc, char* argv[])
 		};
 
 		LZ77 encoder{ data, options };
-		file.process_file<LZ77_Token>(
-			[&encoder](std::vector<LZ77_Token>& output, size_t max_index) -> void
-			{
-				return encoder.compress(output, max_index);
-			}
-		);
+		CodecInterface<Sym> interface{
+			.comp_type = CompType::LZ77,
+			.comp_preset = static_cast<CompPreset>(options.preset),
+			.in_data = std::to_address(data.begin()),
+			.in_data_size = data.size(),
+		};
+		file.process_file<Sym, LZ77_Token, &decltype(encoder)::compress, decltype(encoder)>(encoder, interface);
 	}
 	else
 	{

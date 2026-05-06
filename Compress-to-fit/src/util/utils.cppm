@@ -23,6 +23,9 @@ struct function_traits<fun(*)(args...)>
 	using arg = std::tuple_element_t<N, std::tuple<args...>>;//arg will be a "triple tuple", if you will
 };
 
+
+
+
 template<typename T>
 struct is_vector : std::false_type {};
 
@@ -43,8 +46,6 @@ concept ptr_size_pred = requires
 export template <typename fun>
 concept size_pred = std::invocable<fun, size_t>;
 
-export template <typename fun, typename type>
-concept arr_size_pred = std::invocable<fun, std::vector<type>&, std::size_t>;
 
 
 /**
@@ -187,6 +188,40 @@ export enum class CompType : uint32_t
 	MAX,
 };
 
+template <typename Iter>
+struct ForwardIterator
+{
+	using iterator_concept = std::forward_iterator_tag;
+	using iterator_category = std::forward_iterator_tag;
+	using value_type = typename std::iterator_traits<Iter>::value_type;
+	using difference_type = typename std::iterator_traits<Iter>::difference_type;
+	using pointer = typename std::iterator_traits<Iter>::pointer;
+	using reference = typename std::iterator_traits<Iter>::reference;
+
+	Iter iterator;
+
+	ForwardIterator& operator++() { ++iterator; return *this; }
+	ForwardIterator operator++(int) { ForwardIterator temp = *this; ++iterator; return temp; }
+
+	reference operator*() { return *iterator; }
+
+	bool operator==(ForwardIterator const& other) const { return iterator == other.iterator; };
+	bool operator!=(ForwardIterator const& other) const { return iterator != other.iterator; };
+};
+
+export template <typename InType>
+struct CodecInterface
+{
+	CompType comp_type;
+	CompPreset comp_preset;
+	ForwardIterator<InType const*> in_data;
+	size_t in_data_size;
+};
+
+export template <typename fun, typename In>
+concept codec_pred = std::invocable<fun, CodecInterface<In>>;
+
+
 constexpr std::string_view comp_strings[] =
 {
 	"LZ77",
@@ -259,4 +294,5 @@ export template <typename Type>
 	}
 	return i;
 }
+
 
