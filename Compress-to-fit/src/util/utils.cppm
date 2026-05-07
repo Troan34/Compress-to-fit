@@ -6,7 +6,9 @@ namespace fs = std::filesystem;
 
 export inline constexpr size_t N_FILES_LIMIT = 1'000;
 export inline constexpr size_t SIZE_FILES_MIN = 512;
-export inline constexpr const char* FILE_EXTENSION = ".tzf";
+export inline constexpr char const* FILE_EXTENSION = ".tzf";
+export constexpr size_t SIZE_CHUNK = 4 * 1024 * 1024;//4MiB
+
 
 //All of this is COMPLETELY optional, but why not train our metaprogramming
 export template <typename not_a_fun>
@@ -198,28 +200,37 @@ struct ForwardIterator
 	using pointer = typename std::iterator_traits<Iter>::pointer;
 	using reference = typename std::iterator_traits<Iter>::reference;
 
+	ForwardIterator(Iter begin_, Iter const end_)
+		:iterator(begin_), end(end_)
+	{
+
+	}
 	Iter iterator;
+	Iter const end;
 
 	ForwardIterator& operator++() { ++iterator; return *this; }
 	ForwardIterator operator++(int) { ForwardIterator temp = *this; ++iterator; return temp; }
+	ForwardIterator& operator+=(size_t const size) { iterator += size; return *this; }
+
 
 	reference operator*() { return *iterator; }
 
-	bool operator==(ForwardIterator const& other) const { return iterator == other.iterator; };
-	bool operator!=(ForwardIterator const& other) const { return iterator != other.iterator; };
+	[[nodiscard]] bool operator==(ForwardIterator const& other) const { return iterator == other.iterator; };
+	[[nodiscard]] bool operator!=(ForwardIterator const& other) const { return iterator != other.iterator; };
+
+	[[nodiscard]] bool reached_end() const { return iterator == (end + 1); };
+	[[nodiscard]] size_t distance_to_end() const { return static_cast<size_t>(end - iterator); };
+
 };
 
-export template <typename InType>
+export template <typename InType, typename OutType>
 struct CodecInterface
 {
 	CompType comp_type;
 	CompPreset comp_preset;
 	ForwardIterator<InType const*> in_data;
-	size_t in_data_size;
+	std::vector<OutType>& out_data;
 };
-
-export template <typename fun, typename In>
-concept codec_pred = std::invocable<fun, CodecInterface<In>>;
 
 
 constexpr std::string_view comp_strings[] =

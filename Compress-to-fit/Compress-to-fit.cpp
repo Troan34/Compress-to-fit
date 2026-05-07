@@ -7,7 +7,8 @@ import file_util;
 
 using namespace std;
 
-//TODO: Get the design of process_file correct you tit.
+//TODO?: Get the design of process_file correct you tit.
+//TODO: Make use of the file_util facilities to create the files using the new FILE_HEADER_SIZE
 
 int main(int argc, char* argv[])
 {
@@ -30,27 +31,27 @@ int main(int argc, char* argv[])
 		};
 
 		LZ77 encoder{ data, options };
-		CodecInterface<Sym> interface{
-			.comp_type = CompType::LZ77,
-			.comp_preset = static_cast<CompPreset>(options.preset),
-			.in_data = std::to_address(data.begin()),
-			.in_data_size = data.size(),
-		};
-		file.process_file<Sym, LZ77_Token, &decltype(encoder)::compress, decltype(encoder)>(encoder, interface);
+
+		file.process_file<Sym, LZ77_Token>(
+			[&](CodecInterface<Sym, LZ77_Token>& interface)
+			{
+				encoder.compress(interface);
+			}
+		);
 	}
 	else
 	{
-		auto IO_map = mio::make_mmap_source(options.filename_in.string(), 5, 0, error);
+		auto IO_map = mio::make_mmap_source(options.filename_in.string(), FILE_HEADER_SIZE, mio::map_entire_file, error);
 
 		std::span<LZ77_Token const> data{
 			reinterpret_cast<LZ77_Token const*>(IO_map.data()),
 			IO_map.size()
 		};
 		LZ77 decoder{ data, options };
-		file.process_file<Sym>(
-			[&decoder](std::vector<Sym>& output, size_t max_index) -> void
+		file.process_file<LZ77_Token, Sym>(
+			[&](CodecInterface<LZ77_Token, Sym>& interface)
 			{
-				return decoder.decompress(output, max_index);
+				decoder.decompress(interface);
 			}
 		);
 	}

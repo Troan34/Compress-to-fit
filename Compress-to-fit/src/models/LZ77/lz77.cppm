@@ -397,7 +397,7 @@ public:
 	 * @details This function shall be used as a compression "in steps". Its use is to stop the #out_stream from being too big.
 	 *			The function shall not strictly stop at #max_index, due to the nature of the LZ77 algorithm.
 	 */
-	void compress(std::vector<Token>& out_stream, size_t max_index) requires IsSym<DataType>;
+	void compress(CodecInterface<Sym, LZ77_Token>& interface) requires IsSym<DataType>;
 
 	/**
 	 * @brief Decompress #data.
@@ -408,70 +408,48 @@ public:
 	 * 
 	 * @details This function shall be used as a compression "in steps". Its use is to stop the #out_stream from being too big.
 	 */
-	void decompress(std::vector<Sym>& out_stream, size_t max_index) requires IsToken<DataType>;
+	void decompress(CodecInterface<LZ77_Token, Sym>& interface) requires IsToken<DataType>;
 
 private:
 	const parser::Options& cli_options;
 	std::span<DataType const> data;
-
-	size_t decompression_index = 0;
 };
 
 template <typename DataType>
-void LZ77<DataType>::compress(std::vector<Token>& out_stream, size_t max_index) requires IsSym<DataType>
+void LZ77<DataType>::compress(CodecInterface<Sym, LZ77_Token>& interface) requires IsSym<DataType>
 {
-	constexpr int buffer_size = 50;
 
-	auto data_size = max_index - this->pattern_matcher.get_pos();
-	out_stream.clear();
-	out_stream.reserve(data_size);
+	interface.out_data.clear();
+	interface.out_data.reserve(SIZE_CHUNK);
 
+	size_t local_index = 0;
 	//loop over the stream
-	while (this->pattern_matcher.get_pos() < max_index and this->pattern_matcher.get_pos() < data.size())
+	while (!interface.in_data.reached_end() and local_index < SIZE_CHUNK)
 	{
 		auto token = this->pattern_matcher.find_pattern();
 
 		auto num_of_rolls = std::max(static_cast<int>(token.length), 1);
 		this->pattern_matcher.roll_hash(num_of_rolls);//roll, updates the hash and position
 		this->window.slide(num_of_rolls);
+		interface.in_data += num_of_rolls;
+		local_index += num_of_rolls;
 
-		out_stream.push_back(token);
+		interface.out_data.push_back(token);
 	}
 }
 
 template<typename DataType>
-void LZ77<DataType>::decompress(std::vector<Sym>& out_stream, size_t max_index) requires IsToken<DataType>
+void LZ77<DataType>::decompress(CodecInterface<LZ77_Token, Sym>& interface) requires IsToken<DataType>
 {
-	auto size = std::min(this->data.size(), max_index);
-	out_stream.clear();
-	out_stream.reserve(size - decompression_index);
-	for (; decompression_index < size; decompression_index++)
+	interface.out_data.reserve(interface.in_data.distance_to_end());
+	while (!interface.in_data.reached_end())
 	{
-		auto token_index = decompression_index - this->data[decompression_index].offset;//where to grab the decoded symbols to repeat
-		auto token_length = this->data[decompression_index].length;
-		auto next_char = this->data[decompression_index].symbol;
-
-		if (token_index != decompression_index)//i.e. offset != 0
+		if (interface.in_data.iterator->offset != 0)
 		{
-			//if the iterator won't get past our position. i.e. length < offset. This is an optimization.
-			if (auto end_iter = token_index + token_length; end_iter < out_stream.size() and false)
-			{
-				std::copy(
-					out_stream.begin() + token_index,
-					out_stream.begin() + end_iter,
-					std::back_inserter(out_stream)
-				);
-			}
-			else//It will get past. We could append the range up until the end and then keep going in the conventional way, but that is premature (and probably bad) optimization
-			{
-				while (token_length > 0)
-				{
-					out_stream.push_back(out_stream[token_index]);
-					token_index++;
-					token_length--;
-				}
-			}
+			for (size_t remaining_syms = interface.in_data.iterator->length; remaining_syms > 0; remaining_syms--)
+				interface.out_data.push_back(interface.out_data[interface.out_data.size() - interface.in_data.iterator->offset]);
 		}
-		out_stream.emplace_back(next_char);
+		interface.out_data.emplace_back(interface.in_data.iterator->symbol);
+		interface.in_data++;
 	}
 }

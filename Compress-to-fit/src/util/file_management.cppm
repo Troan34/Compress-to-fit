@@ -1,3 +1,6 @@
+module;
+#include <mio/mmap.hpp>
+
 export module file_util;
 
 export import util;
@@ -63,79 +66,50 @@ public:
 	/**
 	* @brief Apply a certain function to a file.
 	*/
-	template <typename In, typename Out, auto pred, typename Obj>
-		requires std::invocable<decltype(pred), Obj&, CodecInterface<In>&>
-	void process_file(Obj& obj, CodecInterface<In>& interface)
+	template <typename In, typename Out, typename Pred>
+	void process_file(Pred pred) requires std::invocable<Pred, CodecInterface<In, Out>&>
 	{
 		std::ifstream in(cli_options.filename_in, std::ios::binary | std::ios::beg);
 		std::ofstream out(cli_options.filename_out, std::ios::binary | std::ios::app);
 
-		constexpr size_t SIZE_CHUNK = 4 * 1024 * 1024; //4MB
-
-
-		std::mutex mut;
-		std::condition_variable cv;
-		std::vector<Out> shared_buffer;//Used to write to disk
-		std::vector<Out> output_buffer;//Used to receive data from fun()
-		bool data_ready = false;
-
-		//write to file when data is ready
-		std::jthread writer(
-			[&](std::stop_token stop)
-			{
-				while (true)
-				{
-					std::unique_lock lock(mut);
-					//sleep until data is ready or stop is requested
-					cv.wait(lock, [&] { return data_ready or stop.stop_requested(); });
-
-					if (data_ready)
-					{
-						out.write(reinterpret_cast<char const*>(shared_buffer.data()), shared_buffer.size() * sizeof(Out));
-						data_ready = false;
-						lock.unlock();
-						cv.notify_one(); //tell producer we're done writing
-					}
-					else if (stop.stop_requested())
-					{
-						break;
-					}
-				}
-			});
-
-		//get file size
-		in.seekg(0, std::ios::end);
-		auto file_size = in.tellg() / 4;
-		in.seekg(0, std::ios::beg);
-
-		bool compressing = !has_signature();
-		size_t index = std::min(static_cast<size_t>(file_size), SIZE_CHUNK);
-
-		if (has_signature())
-			index += FILE_HEADER_SIZE;
-
-		for (; index <= file_size; index += SIZE_CHUNK)
+		size_t offset = 0;
+		bool compressing = true;
+		if (has_signature(in))
 		{
-			if (static_cast<size_t>(file_size) - index < SIZE_CHUNK)//we are too close to the end
-			{
-				index = file_size;//so just push it to the end, this will almost certainly cause the call to reserve on the shared_buffer
-			}
-
-			std::invoke(pred, obj, interface);
-
-			std::unique_lock lock(mut);
-			// If writer is still busy, wait for it to finish the last chunk
-			cv.wait(lock, [&] { return !data_ready; });
-
-			std::swap(shared_buffer, output_buffer);//move output_buffer into shared_buffer
-			data_ready = true;
-			lock.unlock();
-			cv.notify_one(); // Wake up the writer
-
-			show_progress(cli_options, static_cast<float>(index) / file_size, compressing);
+			offset = 5;
+			compressing = false;
 		}
-		writer.request_stop();
-		cv.notify_one();
+
+
+		in.seekg(0, std::ios::end);
+		auto file_size = (in.tellg() / sizeof(In)) - offset;
+		in.seekg(0, std::ios::beg);
+		std::error_code error;
+		auto IO_map = mio::make_mmap_source(cli_options.filename_in.string(), offset, mio::map_entire_file, error);
+
+		if (!file_options.header.has_value())
+		{
+			fs::remove(cli_options.filename_out);
+			throw_error(ErrorType::FILE_CORRUPTED, file_options.path.string());
+		}
+
+		std::vector<Out> output_buffer;//Used to receive data from fun()
+
+		CodecInterface<In, Out> interface{
+			.comp_type = file_options.header.value().comp_type,
+			.comp_preset = file_options.header.value().preset,
+			.in_data{reinterpret_cast<In const*>(IO_map.data()), reinterpret_cast<In const*>(IO_map.end())},
+			.out_data = output_buffer
+		};
+
+
+		while (!interface.in_data.reached_end())
+		{
+			pred(interface);
+
+			show_progress(cli_options, interface.in_data.distance_to_end() / file_size, compressing);
+		}
+
 	}
 
 	/*
@@ -335,11 +309,14 @@ private:
 
 	void create_file()
 	{
-		std::ofstream file(cli_options.filename_out, std::ios::trunc | std::ios::binary);
+		std::ofstream file(cli_options.filename_out, std::ios::ate | std::ios::binary | std::ios::trunc);
 
 		if (file.tellp() > 0)//not empty
 			check_signature();
 		else
+		{
+			file.seekp(0);
 			file.write(SIGNATURE.data(), SIGNATURE.size());
+		}
 	}
 };
