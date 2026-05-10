@@ -69,14 +69,18 @@ std::expected<Token, ErrorType> lex(const std::string& option)
 	{
 		token_type = TokenType::DELETE_INPUT;
 	}
+	else if (token_string == token_strings[static_cast<size_t>(TokenType::COMPRESSOR_TYPE)])
+	{
+		token_type = TokenType::COMPRESSOR_TYPE;
+	}
 	else
 		throw_error(ErrorType::SYNTAX_ERROR, token_string);
 
 	//handle flags
 	switch (token_type)
 	{
-	case parser::TokenType::DELETE_INPUT:
-	case parser::TokenType::FORCE_COMPRESSION:
+	case TokenType::DELETE_INPUT:
+	case TokenType::FORCE_COMPRESSION:
 		return Token{ token_type, true };
 		break;
 	default:
@@ -119,7 +123,24 @@ std::expected<Token, ErrorType> lex(const std::string& option)
 
 		value.emplace<fs::path>(path);
 	}
-	break;
+	    break;
+	case TokenType::COMPRESSOR_TYPE:
+	{
+		std::transform(token_value.begin(), token_value.end(), token_value.begin(), [](char c) { return std::toupper(c); });
+
+		for (int i = 0; i < static_cast<int>(CompType::MAX); i++)
+		{
+			if (COMPRESSOR_STR_OPTIONS[i] == token_value)
+			{
+				value.emplace<size_t>(static_cast<size_t>(i));
+				break;
+			}
+		}
+
+		if (std::holds_alternative<std::monostate>(value))
+			throw_error(ErrorType::SYNTAX_ERROR, token_string + token_value);
+	}
+		break;
 	case TokenType::COMPRESSION_PRESET:
 	{
 		//Convert and check the compression preset
@@ -131,7 +152,7 @@ std::expected<Token, ErrorType> lex(const std::string& option)
 
 		value.emplace<size_t>(value_cmpr);
 	}
-	break;
+	    break;
 	case TokenType::N_FILES:
 	{
 		int value_temp;
@@ -201,6 +222,9 @@ Options parse(int argc, char* argv[])
 			case TokenType::FILENAME_OUT:
 				options.filename_out = std::get<fs::path>(token.value().get_value());
 				break;
+			case TokenType::COMPRESSOR_TYPE:
+				options.preset = std::get<size_t>(token.value().get_value());
+				break;
 			case TokenType::COMPRESSION_PRESET:
 				options.preset = std::get<size_t>(token.value().get_value());
 				break;
@@ -211,10 +235,10 @@ Options parse(int argc, char* argv[])
 				options.size_files = std::get<size_t>(token.value().get_value());
 				break;
 			case TokenType::FORCE_COMPRESSION:
-				options.force_compression = std::get<size_t>(token.value().get_value());
+				options.force_compression = std::get<bool>(token.value().get_value());
 				break;
 			case TokenType::DELETE_INPUT:
-				options.delete_input = std::get<size_t>(token.value().get_value());
+				options.delete_input = std::get<bool>(token.value().get_value());
 				break;
 			default:
 				std::terminate();
@@ -228,8 +252,6 @@ Options parse(int argc, char* argv[])
 		}
 	}
 
-	//TODO: When adding decompression capabilities, fix this
-	//if filename out is empty, copy filename in
 	if (options.filename_out.empty() or options.filename_out.string().find_first_not_of(' ') == std::string::npos)
 	{
 		options.filename_out = options.filename_in.stem() += FILE_EXTENSION;

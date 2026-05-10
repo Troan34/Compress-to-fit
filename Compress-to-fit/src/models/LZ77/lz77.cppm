@@ -94,7 +94,7 @@ public:
 			break;
 		}
 		if (max_size > data.size()) max_size = data.size();
-		size_look_ahead = std::ceil(max_size / SEARCH_RATIO);
+		size_look_ahead = std::ceil(max_size / static_cast<double>(SEARCH_RATIO));
 		max_size_look_ahead = size_look_ahead;
 		max_size_search = SEARCH_RATIO * max_size_look_ahead;
 	}
@@ -235,9 +235,10 @@ namespace alg
 			for (int i = 0; i < MAX_WINDOW_SIZE; i++)
 				prev_poss_table[i] = -1;
 			
-			for (int i = 0; i < MIN_MATCH and i < data.get_data().size(); i++)//initialize the hash
+			hash = data[0];
+			for (int i = 1; i < MIN_MATCH and i < data.get_data().size(); i++)//initialize the hash
 			{
-				hash = (hash * BASE * static_cast<uint32_t>(data[position + i])) % MOD;
+				hash = (static_cast<uint64_t>(hash) * BASE + data[position + i]) % MOD;
 			}
 			poss_table[bucket_index(hash)] = position;
 			
@@ -418,8 +419,6 @@ private:
 template <typename DataType>
 void LZ77<DataType>::compress(CodecInterface<Sym, LZ77_Token>& interface) requires IsSym<DataType>
 {
-
-	interface.out_data.clear();
 	interface.out_data.reserve(SIZE_CHUNK);
 
 	size_t local_index = 0;
@@ -428,7 +427,7 @@ void LZ77<DataType>::compress(CodecInterface<Sym, LZ77_Token>& interface) requir
 	{
 		auto token = this->pattern_matcher.find_pattern();
 
-		auto num_of_rolls = std::max(static_cast<int>(token.length), 1);
+		auto num_of_rolls = static_cast<int>(token.length + 1);
 		this->pattern_matcher.roll_hash(num_of_rolls);//roll, updates the hash and position
 		this->window.slide(num_of_rolls);
 		interface.in_data += num_of_rolls;

@@ -12,7 +12,7 @@ namespace fs = std::filesystem;
 namespace parser
 {
 	namespace fs = std::filesystem;
-	using ValueType = std::variant<std::size_t, fs::path, bool>;
+	using ValueType = std::variant<std::monostate, std::size_t, fs::path, bool>;
 
 	/**
 	 * @brief Parser token types.
@@ -23,6 +23,7 @@ namespace parser
 	{
 		FILENAME_IN,
 		FILENAME_OUT,
+		COMPRESSOR_TYPE,
 		COMPRESSION_PRESET,
 		N_FILES,
 		SIZE_FILES,
@@ -37,6 +38,7 @@ namespace parser
 	{
 		"-i",
 		"-o",
+		"-c",
 		"-preset",
 		"-n_files",
 		"-size_files",
@@ -103,6 +105,7 @@ namespace parser
 	{
 		fs::path filename_in;
 		fs::path filename_out;
+		size_t compressor = static_cast<size_t>(CompType::LZ77);
 		size_t preset = COMP_5;
 		size_t n_files = 1;
 		size_t size_files;
@@ -127,6 +130,7 @@ namespace parser
  */
 export void show_progress(const parser::Options& options = {}, float progress = 0.f, bool compressing = false)
 {
+	progress = std::min(1.f, progress);
 	const int max_bar_width = 50;
 
 	std::print("\r\033[K");

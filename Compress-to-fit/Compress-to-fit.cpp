@@ -7,8 +7,8 @@ import file_util;
 
 using namespace std;
 
-//TODO?: Get the design of process_file correct you tit.
-//TODO: Make use of the file_util facilities to create the files using the new FILE_HEADER_SIZE
+
+//TODO: Use a circular array-like to save the elaborated data to disk, MAKE IT ASYNC.
 
 int main(int argc, char* argv[])
 {
