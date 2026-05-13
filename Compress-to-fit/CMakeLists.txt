@@ -21,7 +21,7 @@ target_sources(
     "src/models/LZ77/lz77.cppm"
     "src/models/LZ77/lz77_impl.cppm"
     
-)
+ "src/util/concurrent_file_buffer.cppm")
 
 target_sources(
     Compress-to-fit
