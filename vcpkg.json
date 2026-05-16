@@ -1,7 +1,2 @@
 {
-  "name": "compress-to-fit",
-  "version-string": "0.1.0dev",
-  "dependencies": [
-    "mio"
-  ]
 }

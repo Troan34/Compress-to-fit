@@ -23,8 +23,23 @@ if(CMAKE_GENERATOR STREQUAL "Ninja")
 endif()
 
 
-find_package(mio CONFIG REQUIRED)
+include(CTest)
+include(FetchContent)
+enable_testing()
+FetchContent_Declare(
+    Catch2
+    GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+    GIT_TAG v3.15.0
+)
+FetchContent_MakeAvailable(Catch2)
+list(APPEND CMAKE_MODULE_PATH "${catch2_SOURCE_DIR}/extras") 
 
+FetchContent_Declare(
+    mio
+    GIT_REPOSITORY https://github.com/vimpunk/mio
+    GIT_TAG master
+)
+FetchContent_MakeAvailable(mio)
 
 # Include sub-projects.
 add_subdirectory ("Compress-to-fit")

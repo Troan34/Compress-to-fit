@@ -21,6 +21,22 @@ public:
 
 	constexpr void push_back(T const& value)
 	{
+		auto write_to_disk = []()
+		{
+			if (index_ < minimum_size_)//if buffer is not full
+				return;
+
+			auto elements_to_write_n = index_ - minimum_size_ - written_index_;
+
+			if constexpr (std::is_trivially_copyable_v<T>)
+			{
+				//TODO: this technically blocks a thread, but if there are 12 threads AND they aren't writing frequently, it shouldn't be THAT bad. Benchmark this.
+				out_stream_.write(reinterpret_cast<char const*>(&data_[written_index_]), elements_to_write_n * sizeof(T));
+			}
+
+			written_index_ = index_ - minimum_size_;
+		};
+		
 		lock.lock();
 
 		auto true_index = index_ % capacity_;
@@ -49,11 +65,12 @@ public:
 
 		//allocate size for new data
 		T* new_data_ = allocator.allocate(new_capacity);
+		auto size = index_ - written_index_;
 		std::unique_lock<std::mutex> lock(mut);
 		
 		if constexpr (std::is_trivially_copyable_v<T>)//if trivially copyable use std::memcpy
 		{
-			std::memcpy(new_data_, data_, size_ * sizeof(T));
+			std::memcpy(new_data_, data_, size * sizeof(T));
 		}
 
 		/* To be used if we ever want to use non trivial types
@@ -79,8 +96,9 @@ public:
 	{
 		//if in debug mode
 #ifndef NDEBUG
+		auto size = index_ - written_index_;
 		//holy yap
-		if ((index % capacity_) > (index_ % capacity_) or (index_ % capacity_) < ((index_ % capacity_) - size_))
+		if ((index % capacity_) > (index_ % capacity_) or (index_ % capacity_) < ((index_ % capacity_) - size))
 			throw std::out_of_range("Accessed an element outside of buffer, make sure to increase your index.");
 #endif
 		std::shared_lock<std::mutex> lock(mut);
@@ -103,31 +121,5 @@ private:
 	size_t capacity_ = 0;
 	size_t minimum_size_ = 0;
 
-
-	/**
-	 * @brief Write data outside of [start_unbuffered_, index_] to disk
-	 * 
-	 * @pre #mut must be locked through #lock
-	 */
-	constexpr void write_to_disk()
-	{
-#ifndef NDEBUG
-		if (!lock.owns_lock()) std::terminate();
-#endif
-
-		if (index_ < minimum_size_)//if buffer is not full
-			return;
-
-		auto elements_to_write_n = index - minimum_size_ - written_index_;
-
-		if constexpr (std::is_trivially_copyable_v<T>)
-		{
-			//TODO: this technically blocks a thread, but if there are 12 threads AND they aren't writing frequently, it shouldn't be THAT bad. Test this.
-			out_stream_.write(reinterpret_cast<char const*>(&data_[written_index_]), elements_to_write_n * sizeof(T));
-		}
-
-		written_index_ = index_ - minimum_size_;
-
-	}
 
 };

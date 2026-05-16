@@ -11,10 +11,10 @@ export constexpr size_t SIZE_CHUNK = 4 * 1024 * 1024;//4MiB
 
 
 //All of this is COMPLETELY optional, but why not train our metaprogramming
-export template <typename not_a_fun>
+template <typename not_a_fun>
 struct function_traits;//throws if not a fun
 
-export template <typename fun, typename... args>
+template <typename fun, typename... args>
 struct function_traits<fun(*)(args...)>
 {
 	using return_type = fun;
@@ -304,6 +304,15 @@ export [[nodiscard]] constexpr size_t const_pow(size_t base, size_t exponent) no
 	return result;
 }
 
+
+/**
+ * @brief Counts the number of consecutive equal elements from the start of two spans, up to a specified maximum.
+ * @tparam Type The element type in the spans, Type must support equality comparison.
+ * @param str1 The first sequence to compare.
+ * @param str2 The second sequence to compare.
+ * @param max_match Maximum number of elements to compare. Comparison stops when this limit is reached.
+ * @return The count of initial consecutive elements that are equal in both spans, constrained by the shorter span length and max_match.
+ */
 export template <typename Type>
 [[nodiscard]] constexpr auto count_equal(std::span<Type> const str1, std::span<Type> const str2, size_t const max_match)
 {

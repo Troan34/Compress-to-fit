@@ -110,17 +110,17 @@ public:
 
 		std::vector<Out> output_buffer;//Used to receive data from fun()
 
-		CodecInterface<In, Out> interface{
+		CodecInterface<In, Out> codec_interface{
 			.in_data{reinterpret_cast<In const*>(IO_map.data()), reinterpret_cast<In const*>(IO_map.end())},
 			.out_data = output_buffer
 		};
 
 
-		while (!interface.in_data.reached_end())
+		while (!codec_interface.in_data.reached_end())
 		{
-			pred(interface);
+			pred(codec_interface);
 
-			show_progress(cli_options, 1.f - (static_cast<float>(interface.in_data.distance_to_end()) / file_size), compressing);
+			show_progress(cli_options, 1.f - (static_cast<float>(codec_interface.in_data.distance_to_end()) / file_size), compressing);
 		}
 		out_file.write(reinterpret_cast<char const*>(output_buffer.data()), output_buffer.size() * sizeof(Out));
 	}
