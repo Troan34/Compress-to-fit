@@ -1,0 +1,171 @@
+\doxysection{LZ77\texorpdfstring{$<$}{<} Data\+Type \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{class_l_z77}{}\label{class_l_z77}\index{LZ77$<$ DataType $>$@{LZ77$<$ DataType $>$}}
+
+
+Implement the \doxylink{class_l_z77}{LZ77} algorithm.  
+
+
+
+
+Inheritance diagram for LZ77\texorpdfstring{$<$}{<} Data\+Type \texorpdfstring{$>$}{>}:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=227pt]{class_l_z77__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for LZ77\texorpdfstring{$<$}{<} Data\+Type \texorpdfstring{$>$}{>}:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_l_z77__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_l_z77_aca8a5f2d80bfbabcd6d2f8c962c6f09a}{LZ77}} (std::\+span$<$ Data\+Type const $>$ data\+\_\+, const \doxymbox{\hyperlink{structparser_1_1_options}{parser::\+\+Options}} \&options)
+\item 
+\doxymbox{\hyperlink{class_l_z77_ae500d99f7deb8ba81448e7852e0d4bda}{LZ77}} (std::\+span$<$ Data\+Type const $>$ data\+\_\+, const \doxymbox{\hyperlink{structparser_1_1_options}{parser::\+\+Options}} \&options)
+\item 
+void \doxymbox{\hyperlink{class_l_z77_aec26a02d93b29b8e173d82e158a3c2d3}{compress}} (\doxymbox{\hyperlink{struct_codec_interface}{Codec\+Interface}}$<$ \doxymbox{\hyperlink{struct_sym}{Sym}}, \doxymbox{\hyperlink{lz77_8cppm_a7184b481ee894966b0eb8845e4a7bcf2}{LZ77\+\_\+\+Token}} $>$ \&interface)
+\begin{DoxyCompactList}\small\item\em Compress the data up to max\+\_\+index. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{class_l_z77_a04ab1e960758a3bc472de1b58d128d75}{decompress}} (\doxymbox{\hyperlink{struct_codec_interface}{Codec\+Interface}}$<$ \doxymbox{\hyperlink{lz77_8cppm_a7184b481ee894966b0eb8845e4a7bcf2}{LZ77\+\_\+\+Token}}, \doxymbox{\hyperlink{struct_sym}{Sym}} $>$ \&interface)
+\begin{DoxyCompactList}\small\item\em Decompress \doxylink{class_l_z77_a7ab046e149092754e4ca5e8087cc8686}{data}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const \doxymbox{\hyperlink{structparser_1_1_options}{parser::\+\+Options}} \& \doxymbox{\hyperlink{class_l_z77_a96f8a600c7ebd24240e4f3a806b7b286}{cli\+\_\+options}}
+\item 
+std::\+span$<$ Data\+Type const  $>$ \doxymbox{\hyperlink{class_l_z77_a7ab046e149092754e4ca5e8087cc8686}{data}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Data\+Type$>$\newline
+class LZ77$<$ Data\+Type $>$}
+Implement the \doxylink{class_l_z77}{LZ77} algorithm. 
+
+An overview of the algorithm:\+ 
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00374}{374}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+
+
+\label{class_l_z77_doc-constructors}
+\Hypertarget{class_l_z77_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_l_z77_aca8a5f2d80bfbabcd6d2f8c962c6f09a}\index{LZ77$<$ DataType $>$@{LZ77$<$ DataType $>$}!LZ77@{LZ77}}
+\index{LZ77@{LZ77}!LZ77$<$ DataType $>$@{LZ77$<$ DataType $>$}}
+\doxysubsubsection{\texorpdfstring{LZ77()}{LZ77()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_l_z77_aca8a5f2d80bfbabcd6d2f8c962c6f09a} 
+template$<$typename Data\+Type$>$ \\
+\doxymbox{\hyperlink{class_l_z77}{LZ77}}$<$ Data\+Type $>$::\+\+LZ77 (\begin{DoxyParamCaption}\item[{std::\+span$<$ Data\+Type const $>$}]{data\+\_\+}{, }\item[{const \doxymbox{\hyperlink{structparser_1_1_options}{parser::\+\+Options}} \&}]{options}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00378}{378}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+\Hypertarget{class_l_z77_ae500d99f7deb8ba81448e7852e0d4bda}\index{LZ77$<$ DataType $>$@{LZ77$<$ DataType $>$}!LZ77@{LZ77}}
+\index{LZ77@{LZ77}!LZ77$<$ DataType $>$@{LZ77$<$ DataType $>$}}
+\doxysubsubsection{\texorpdfstring{LZ77()}{LZ77()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_l_z77_ae500d99f7deb8ba81448e7852e0d4bda} 
+template$<$typename Data\+Type$>$ \\
+\doxymbox{\hyperlink{class_l_z77}{LZ77}}$<$ Data\+Type $>$::\+\+LZ77 (\begin{DoxyParamCaption}\item[{std::\+span$<$ Data\+Type const $>$}]{data\+\_\+}{, }\item[{const \doxymbox{\hyperlink{structparser_1_1_options}{parser::\+\+Options}} \&}]{options}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00383}{383}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+
+
+\label{class_l_z77_doc-func-members}
+\Hypertarget{class_l_z77_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_l_z77_aec26a02d93b29b8e173d82e158a3c2d3}\index{LZ77$<$ DataType $>$@{LZ77$<$ DataType $>$}!compress@{compress}}
+\index{compress@{compress}!LZ77$<$ DataType $>$@{LZ77$<$ DataType $>$}}
+\doxysubsubsection{\texorpdfstring{compress()}{compress()}}
+{\footnotesize\ttfamily \label{class_l_z77_aec26a02d93b29b8e173d82e158a3c2d3} 
+template$<$typename Data\+Type$>$ \newline
+requires \doxymbox{\hyperlink{concept_is_sym}{Is\+Sym}}$<$Data\+Type$>$\\
+void \doxymbox{\hyperlink{class_l_z77}{LZ77}}$<$ Data\+Type $>$::\+compress (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_codec_interface}{Codec\+Interface}}$<$ \doxymbox{\hyperlink{struct_sym}{Sym}}, \doxymbox{\hyperlink{lz77_8cppm_a7184b481ee894966b0eb8845e4a7bcf2}{LZ77\+\_\+\+Token}} $>$ \&}]{interface}{}\end{DoxyParamCaption})}
+
+
+
+Compress the data up to max\+\_\+index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em out\+\_\+stream} & Where the output will go \\
+\hline
+{\em max\+\_\+index} & The last index to get compressed (included)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+\+\#out\+\_\+stream will be cleared and overwritten
+\end{DoxyWarning}
+This function shall be used as a compression "{}in steps"{}. Its use is to stop the \+\#out\+\_\+stream from being too big. The function shall not strictly stop at \+\#max\+\_\+index, due to the nature of the \doxylink{class_l_z77}{LZ77} algorithm. 
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00420}{420}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+\Hypertarget{class_l_z77_a04ab1e960758a3bc472de1b58d128d75}\index{LZ77$<$ DataType $>$@{LZ77$<$ DataType $>$}!decompress@{decompress}}
+\index{decompress@{decompress}!LZ77$<$ DataType $>$@{LZ77$<$ DataType $>$}}
+\doxysubsubsection{\texorpdfstring{decompress()}{decompress()}}
+{\footnotesize\ttfamily \label{class_l_z77_a04ab1e960758a3bc472de1b58d128d75} 
+template$<$typename Data\+Type$>$ \newline
+requires \doxymbox{\hyperlink{concept_is_token}{Is\+Token}}$<$Data\+Type$>$\\
+void \doxymbox{\hyperlink{class_l_z77}{LZ77}}$<$ Data\+Type $>$::\+decompress (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_codec_interface}{Codec\+Interface}}$<$ \doxymbox{\hyperlink{lz77_8cppm_a7184b481ee894966b0eb8845e4a7bcf2}{LZ77\+\_\+\+Token}}, \doxymbox{\hyperlink{struct_sym}{Sym}} $>$ \&}]{interface}{}\end{DoxyParamCaption})}
+
+
+
+Decompress \doxylink{class_l_z77_a7ab046e149092754e4ca5e8087cc8686}{data}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em out\+\_\+stream} & Where the output will go \\
+\hline
+{\em max\+\_\+index} & The last index to get decompressed (included)\\
+\hline
+\end{DoxyParams}
+\begin{DoxyWarning}{Warning}
+\+\#out\+\_\+stream will be cleared and overwritten
+\end{DoxyWarning}
+This function shall be used as a compression "{}in steps"{}. Its use is to stop the \+\#out\+\_\+stream from being too big. 
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00441}{441}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+
+
+\label{class_l_z77_doc-variable-members}
+\Hypertarget{class_l_z77_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_l_z77_a96f8a600c7ebd24240e4f3a806b7b286}\index{LZ77$<$ DataType $>$@{LZ77$<$ DataType $>$}!cli\_options@{cli\_options}}
+\index{cli\_options@{cli\_options}!LZ77$<$ DataType $>$@{LZ77$<$ DataType $>$}}
+\doxysubsubsection{\texorpdfstring{cli\_options}{cli\_options}}
+{\footnotesize\ttfamily \label{class_l_z77_a96f8a600c7ebd24240e4f3a806b7b286} 
+template$<$typename Data\+Type$>$ \\
+const \doxymbox{\hyperlink{structparser_1_1_options}{parser::\+\+Options}}\& \doxymbox{\hyperlink{class_l_z77}{LZ77}}$<$ Data\+Type $>$::\+cli\+\_\+options\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00415}{415}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+\Hypertarget{class_l_z77_a7ab046e149092754e4ca5e8087cc8686}\index{LZ77$<$ DataType $>$@{LZ77$<$ DataType $>$}!data@{data}}
+\index{data@{data}!LZ77$<$ DataType $>$@{LZ77$<$ DataType $>$}}
+\doxysubsubsection{\texorpdfstring{data}{data}}
+{\footnotesize\ttfamily \label{class_l_z77_a7ab046e149092754e4ca5e8087cc8686} 
+template$<$typename Data\+Type$>$ \\
+std::\+span$<$Data\+Type const$>$ \doxymbox{\hyperlink{class_l_z77}{LZ77}}$<$ Data\+Type $>$::\+data\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00416}{416}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Compress-\/to-\/fit/\+src/\+models/\+\+LZ77/\+\doxymbox{\hyperlink{lz77_8cppm}{lz77.\+cppm}}\end{DoxyCompactItemize}

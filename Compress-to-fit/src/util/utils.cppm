@@ -66,29 +66,33 @@ export enum class ErrorType
 	FILE_CORRUPTED,
 	DRIVE_ERROR,
 	INVALID_DECOMPRESSION,
+	DIR_COMPRESSION
 };
 
 namespace ERR_STRING
 {
-	const std::string SYNTAX =				"\033[41mError\033[0m [" + std::to_string(static_cast<int>(ErrorType::SYNTAX_ERROR)) + "]\033[31m: the syntax for this option is incorrect. \033[31mTip\033[0m: [-h] or [-help] ";
+	const std::string SYNTAX =				"\033[41mError\033[0m\033[31m[" + std::to_string(static_cast<int>(ErrorType::SYNTAX_ERROR)) + "]: the syntax for this option is incorrect. \033[34mTip\033[0m: '-h' or '-help' for help";
 
-	const std::string VALUE =				"\033[41mError\033[0m ["+ std::to_string(static_cast<int>(ErrorType::VALUE_ERROR)) + "]\033[31m: this is an incorrect value for this option.\033[0m";
+	const std::string VALUE =				"\033[41mError\033[0m\033[31m[" + std::to_string(static_cast<int>(ErrorType::VALUE_ERROR)) + "]: this is an incorrect value for this option.\033[0m";
 
-	const std::string OPTION_UNAVAILABLE = "\033[41mError\033[0m [" + std::to_string(static_cast<int>(ErrorType::OPTION_UNAVAILABLE)) + "]\033[31m: this option is unavailable in this context.\033[0m";
+	const std::string OPTION_UNAVAILABLE =	"\033[41mError\033[0m\033[31m[" + std::to_string(static_cast<int>(ErrorType::OPTION_UNAVAILABLE)) + "]: this option is unavailable in this context.\033[0m";
 
-	const std::string PATH_NOT_FOUND =		"\033[41mError\033[0m [" + std::to_string(static_cast<int>(ErrorType::PATH_NOT_FOUND)) + "]\033[31m: this path could not be found, make sure to double quote (\") around your path if there are spaces in it\033[0m";
+	const std::string PATH_NOT_FOUND =		"\033[41mError\033[0m\033[31m[" + std::to_string(static_cast<int>(ErrorType::PATH_NOT_FOUND)) + "]: this path could not be found, make sure to double quote (\") around your path if there are spaces in it\033[0m";
 
-	const std::string PATH_NOT_ACCESSIBLE = "\033[41mError\033[0m [" + std::to_string(static_cast<int>(ErrorType::PATH_NOT_ACCESSIBLE)) + "]\033[31m: this path could not be accessed, the program may not have some required privileges.\n\033[34mTip\033[0m:Such an error has multiple causes. Check path, folder and other things as such.\033[0m";
+	const std::string PATH_NOT_ACCESSIBLE = "\033[41mError\033[0m\033[31m[" + std::to_string(static_cast<int>(ErrorType::PATH_NOT_ACCESSIBLE)) + "]: this path could not be accessed, the program may not have some required privileges.\033[34mTip\033[0m:Such an error has multiple causes. Check path, folder and other things as such.\033[0m";
 
-	const std::string PATH_INVALID =		"\033[41mError\033[0m [" + std::to_string(static_cast<int>(ErrorType::PATH_INVALID)) + "]\033[31m: this path is invalid, make sure to double quote (\" \") around your path if there are spaces in it.\033[0m";
+	const std::string PATH_INVALID =		"\033[41mError\033[0m\033[31m[" + std::to_string(static_cast<int>(ErrorType::PATH_INVALID)) + "]: this path is invalid, it may be a path to a folder. Make sure to double quote (\" \") around your path if there are spaces in it.\033[0m";
 
-	const std::string FILE_INVALID =		"\033[41mError\033[0m [" + std::to_string(static_cast<int>(ErrorType::FILE_INVALID)) + "]\033[31m: this file is invalid. i.e. it is the wrong type or it is unrecognizable.\033[0m";
+	const std::string FILE_INVALID =		"\033[41mError\033[0m\033[31m[" + std::to_string(static_cast<int>(ErrorType::FILE_INVALID)) + "]: this file is invalid. i.e. it is the wrong type or it is unrecognizable.\033[0m";
 
-	const std::string FILE_CORRUPTED =		"\033[41mError\033[0m [" + std::to_string(static_cast<int>(ErrorType::FILE_CORRUPTED)) + "]\033[31m: this file's header is corrupted. Unable to continue decompression properly.\033[0m";
+	const std::string FILE_CORRUPTED =		"\033[41mError\033[0m\033[31m[" + std::to_string(static_cast<int>(ErrorType::FILE_CORRUPTED)) + "]: this file's header is corrupted. Unable to continue decompression properly.\033[0m";
 
-	const std::string DRIVE_ERROR =			"\033[41mError\033[0m [" + std::to_string(static_cast<int>(ErrorType::DRIVE_ERROR)) + "]\033[31m: there has been a critical error when accessing this file. Please check your drive.\033[0m";
+	const std::string DRIVE_ERROR =			"\033[41mError\033[0m\033[31m[" + std::to_string(static_cast<int>(ErrorType::DRIVE_ERROR)) + "]: there has been a critical error when accessing this file. Please check your drive.\033[0m";
 
-	const std::string INVALID_DECOMPRESSION="\033[41mError\033[0m [" + std::to_string(static_cast<int>(ErrorType::INVALID_DECOMPRESSION)) + "]\033[31m: decompression is invalid on this file, you may have tried to decompress a normal file.\033[0m";
+	const std::string INVALID_DECOMPRESSION="\033[41mError\033[0m\033[31m[" + std::to_string(static_cast<int>(ErrorType::INVALID_DECOMPRESSION)) + "]: decompression is invalid on this file, you may have tried to decompress a normal file.\033[0m";
+
+	const std::string DIR_COMPRESSION =		"\033[41mError\033[0m\033[31m[" + std::to_string(static_cast<int>(ErrorType::DIR_COMPRESSION)) + "]: folder compression is unvailable. \033[34mTip\033[0m: If you are trying to decompress a folder of files, check the related command in the help page with '-h' or '-help'";
+
 }
 
 /**
@@ -159,7 +163,7 @@ namespace WARN_STRING
 		+ "\033[34mTip\033[0m: A file recompression gives negligible, if not counter-productive, results.\n";
 
 	const std::string PORTIONS_OUT_OF_RANGE = "\033[43mWarn\033[0m [" + std::to_string(static_cast<int>(WarningType::PORTIONS_OUT_OF_RANGE)) + "]: the number of file portions is outside of the accepted range.\n"
-	+ "\033[34mTip\033[0m: The output file (not split) may have been too small.\nThe number of files created may be different from what you asked.\n";
+	+ "\033[34mTip\033[0m: The (not split) output file may have been too small.\nThe number of files created may be different from what you asked.\n";
 
 }
 
@@ -194,9 +198,9 @@ export enum CompPreset : uint8_t
 /**
  * @brief Identify compressor used
  * 
- * @note You must not reorder the enums or (and especially) remove MAX.
+ * @note You must not reorder the enums or (especially) remove MAX.
  *		 For every new enum, MAX shall always stay the max enum possible.
- *		 DO NOT CUSTOMIZE THE VALUES.
+ *		 DO NOT CUSTOMIZE THE VALUES. YOU WILL MAKE PREEXISTING .tzf FILES INVALID.
  */
 export enum class CompType : uint8_t
 {
@@ -294,7 +298,7 @@ export [[nodiscard]] constexpr size_t MB_to_B(size_t value)
 /**
 * @brief Calculate the power at compile time, to make sure of its correct usage it will be consteval
 */
-export [[nodiscard]] constexpr size_t const_pow(size_t base, size_t exponent) noexcept
+export [[nodiscard]] consteval size_t const_pow(size_t base, size_t exponent) noexcept
 {
 	size_t result = 1;
 	for (int i = 0; i < exponent; i++)

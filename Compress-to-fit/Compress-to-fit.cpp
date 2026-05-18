@@ -3,21 +3,21 @@
 import parser;
 import lz77;
 import file_util;
+import std.compat;
 
-
-using namespace std;
+namespace fs = std::filesystem;
 
 
 //TODO: Use a circular array-like to save the elaborated data to disk, MAKE IT ASYNC.
 
 int main(int argc, char* argv[])
 {
+
 	auto options = parser::parse(argc, argv);
 	
 	File file{options.filename_in, options};
 
 	std::error_code error;
-
 
 	std::ifstream in{ options.filename_in };
 
@@ -33,11 +33,18 @@ int main(int argc, char* argv[])
 		LZ77 encoder{ data, options };
 
 		file.process_file<Sym, LZ77_Token>(
-			[&](CodecInterface<Sym, LZ77_Token>& interface)
+			[&](CodecInterface<Sym, LZ77_Token>& codec_interface)
 			{
-				encoder.compress(interface);
+				encoder.compress(codec_interface);
 			}
 		);
+
+		//split file if required
+		if (options.n_files != 1)
+			File::split_file(options.filename_out, options.n_files);
+		else if (options.size_files != 0)
+			File::split_file(options.filename_out, fs::file_size(options.filename_out) / options.size_files);
+
 	}
 	else
 	{
@@ -49,9 +56,9 @@ int main(int argc, char* argv[])
 		};
 		LZ77 decoder{ data, options };
 		file.process_file<LZ77_Token, Sym>(
-			[&](CodecInterface<LZ77_Token, Sym>& interface)
+			[&](CodecInterface<LZ77_Token, Sym>& codec_interface)
 			{
-				decoder.decompress(interface);
+				decoder.decompress(codec_interface);
 			}
 		);
 	}

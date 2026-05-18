@@ -1,0 +1,18 @@
+<map id="ConcurrentFileBuffer&lt; T &gt;" name="ConcurrentFileBuffer&lt; T &gt;">
+<area shape="rect" id="Node000001" title="Circular array where if size &gt; capacity, size &#45; minimum_size is written to stream." alt="" coords="101,692,262,1017"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="33,543,121,612"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="74,609,77,639,81,667,97,712,91,712,76,669,71,640,74,615"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="14,377,140,463"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="77,475,80,543,75,543,77,480"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="16,243,138,328"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="77,340,80,378,75,378,77,345"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="5,124,149,193"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="77,206,80,243,75,243,77,211"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="33,5,122,75"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="77,87,80,124,75,124,77,92"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="197,385,270,455"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="219,452,206,493,195,535,185,605,180,676,175,675,180,604,190,534,201,492,217,457"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="239,535,374,620"/>
+<area shape="poly" id="edge8_Node000008_Node000007" title=" " alt="" coords="249,452,282,520,277,520,249,457"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="289,618,264,678,259,675,286,622"/>
+</map>

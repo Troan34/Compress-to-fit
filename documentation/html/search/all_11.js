@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['search_5fbuffer_0',['search_buffer',['../class_window.html#aa9822d4053645c6a08b1a9fff5d8889b',1,'Window']]],
+  ['search_5fratio_1',['SEARCH_RATIO',['../lz77_8cppm.html#a99dc63646f54b92729a552eed4b13e91',1,'lz77.cppm']]],
+  ['show_5fprogress_2',['show_progress',['../cli__parser_8cppm.html#ae97b52a0806996c1857b54bf4e06253e',1,'cli_parser.cppm']]],
+  ['signature_3',['SIGNATURE',['../file__management_8cppm.html#a5d9e3a0a38b084aa0d6d23da7a06be5e',1,'SIGNATURE:&#160;file_management.cppm'],['../file__management_8cppm.html#ac3f10b5949a91b9cafbbdcf140d0a527aef21bf22481e7930df1e2bda54025095',1,'SIGNATURE:&#160;file_management.cppm']]],
+  ['size_5fbytes_4',['size_bytes',['../struct_header.html#a71745d0fd3d493c06a4de669bbd45c24',1,'Header']]],
+  ['size_5fchunk_5',['SIZE_CHUNK',['../utils_8cppm.html#a558c3db94c9beb4d83912931cf4244e7',1,'utils.cppm']]],
+  ['size_5ffiles_6',['SIZE_FILES',['../namespaceparser.html#accd7eb1ffd4c925598ec25fab6905369a286f8ee59548f0a0839777ec3671b778',1,'parser']]],
+  ['size_5ffiles_7',['size_files',['../structparser_1_1_options.html#a31c850f2a96edb31857b56082fed7605',1,'parser::Options']]],
+  ['size_5ffiles_5fmin_8',['SIZE_FILES_MIN',['../utils_8cppm.html#aec7880c199d5393b78db8e52d180495b',1,'utils.cppm']]],
+  ['size_5flook_5fahead_9',['size_look_ahead',['../class_window.html#af4884d06fd6bee3d25f2738f82573ade',1,'Window']]],
+  ['size_5fpred_10',['size_pred',['../conceptsize__pred.html',1,'']]],
+  ['size_5fsearch_11',['size_search',['../class_window.html#a1021b4fccc4fbdf9e9d325bf805ef577',1,'Window']]],
+  ['slide_12',['slide',['../class_window.html#a9bbee4bdc07f8f3b9f581278ca677fab',1,'Window']]],
+  ['split_5ffile_13',['split_file',['../class_file.html#a30d421f12056fe097e75f2a98a0f480c',1,'File']]],
+  ['std_14',['std',['../module__std.html',1,'']]],
+  ['std_2ecompat_15',['std.compat',['../module__std_8compat.html',1,'']]],
+  ['std_2ecompat_2eixx_16',['std.compat.ixx',['../std_8compat_8ixx.html',1,'']]],
+  ['std_2eixx_17',['std.ixx',['../std_8ixx.html',1,'']]],
+  ['sym_18',['Sym',['../struct_sym.html',1,'']]],
+  ['symbol_19',['symbol',['../struct_token.html#a6f893dab099147a0de1fe04e3f428d0e',1,'Token']]],
+  ['syntax_20',['SYNTAX',['../namespace_e_r_r___s_t_r_i_n_g.html#a220301514d7ebf48975be72979b79ddf',1,'ERR_STRING']]],
+  ['syntax_5ferror_21',['SYNTAX_ERROR',['../utils_8cppm.html#ab0df38968e4f03a3f1f6d6df0f31f45aa756ec3dd26d1a73363eb3e68b6e820df',1,'utils.cppm']]]
+];

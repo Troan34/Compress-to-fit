@@ -1,0 +1,44 @@
+\doxysection{parser Module Reference}
+\hypertarget{module__parser}{}\label{module__parser}\index{parser Module Reference@{parser Module Reference}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{structparser_1_1_options}{parser::\+\+Options}}
+\begin{DoxyCompactList}\small\item\em All the options available. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum class \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369}{parser::\+\+Token\+Type}} \{ \newline
+\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369ad00542cdc8161faa7c73eecd3f4b1488}{parser::\+\+FILENAME\+\_\+\+IN}}
+, \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a51cbb3e0c50a665a956c0c05989805cc}{parser::\+\+FILENAME\+\_\+\+OUT}}
+, \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a6695eadf97d6ae0347fe82481a97b993}{parser::\+\+COMPRESSOR\+\_\+\+TYPE}}
+, \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a14f6404415ca014c5ce6296b2a77cdf3}{parser::\+\+COMPRESSION\+\_\+\+PRESET}}
+, \newline
+\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a991cf0c96f388f1b70f0966a0e45a485}{parser::\+\+N\+\_\+\+FILES}}
+, \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a286f8ee59548f0a0839777ec3671b778}{parser::\+\+SIZE\+\_\+\+FILES}}
+, \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369aa98228817cdbdd15909489b2743c1f17}{parser::\+\+LONG\+\_\+\+HELP}}
+, \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a4fc963e213bba362778f5c175eb4d5ff}{parser::\+\+HELP}}
+, \newline
+\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a07ce3fdb4d7777d766f62bcfcf57532e}{parser::\+\+FORCE\+\_\+\+COMPRESSION}}
+, \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a4eb6ee48803ccd6075e8d129e5167fb8}{parser::\+\+DELETE\+\_\+\+INPUT}}
+, \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a2dd08f693d26ad0ef819a6da487fe438}{parser::\+\+CONCATENATE}}
+, \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a297a6bb3ef5700bc84563dc87938c1b2}{parser::\+\+DO\+\_\+\+DECOMP\+\_\+\+AFTER\+\_\+\+CONCAT}}
+, \newline
+\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a8cb317a671dafb2df58c07a6fc9291ef}{parser::\+\+DO\+\_\+\+NOT\+\_\+\+DECOMP\+\_\+\+AFTER\+\_\+\+CONCAT}}
+, \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a245d11a3709454cc69b2de7911073d57}{parser::\+\+NO\+\_\+\+TYPE}} = 696969
+ \}
+\begin{DoxyCompactList}\small\item\em Parser token types. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{structparser_1_1_options}{Options}} \doxymbox{\hyperlink{namespaceparser_a7f5ecbf764fc175fc336fcea0dd07be8}{parser::\+parse}} (int argc, char \texorpdfstring{$\ast$}{*}argv\+[$\,$]\+)
+\begin{DoxyCompactList}\small\item\em Read the cli. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{cli__parser_8cppm_ae97b52a0806996c1857b54bf4e06253e}{show\+\_\+progress}} (const \doxymbox{\hyperlink{structparser_1_1_options}{parser::\+\+Options}} \&options=\{\}, float progress=0.f, bool compressing=false)
+\begin{DoxyCompactList}\small\item\em Show a progress bar in terminal. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Files}
+\begin{DoxyCompactItemize}
+\item 
+file Compress-\/to-\/fit/\+src/\+util/\+\doxymbox{\hyperlink{cli__parser_8cppm}{cli\+\_\+parser.\+cppm}}
+\item 
+file Compress-\/to-\/fit/\+src/\+util/\+\doxymbox{\hyperlink{cli__parser_8cpp}{cli\+\_\+parser.\+cpp}}
+\end{DoxyCompactItemize}

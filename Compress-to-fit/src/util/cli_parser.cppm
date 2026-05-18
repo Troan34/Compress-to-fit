@@ -7,8 +7,6 @@ import std;
 namespace fs = std::filesystem;
 
 
-
-
 namespace parser
 {
 	namespace fs = std::filesystem;
@@ -31,6 +29,9 @@ namespace parser
 		HELP,
 		FORCE_COMPRESSION,
 		DELETE_INPUT,
+		CONCATENATE,
+		DO_DECOMP_AFTER_CONCAT,
+		DO_NOT_DECOMP_AFTER_CONCAT,
 		NO_TYPE = 696969,//we don't want this to be an index
 	};
 	//HAS to follow the same order of the TokenType enums
@@ -46,6 +47,9 @@ namespace parser
 		"-h",
 		"-fc",
 		"-di",
+		"-concat",
+		"-concat:y",
+		"-concat:n",
 	};
 	
 	constexpr std::string_view help_str =
@@ -53,17 +57,20 @@ namespace parser
 		"A cli compressor program.\n"
 		"Usage: ctf [options]\n"
 		"options:\n"
-		"\t-i <path>  Take <path> as input. If <path> contains spaces, make sure to double quote(\"\") around <path>.\n"
-		"\t-o <path>  Take <path> as output. If <path> contains spaces, make sure to double quote(\"\") around <path>.\n"
+		"\t-i <path>  Take <path> as input path. If <path> contains spaces, make sure to double quote(\"\") around <path>.\n"
+		"\t-o <path>  Take <path> as output path. If <path> contains spaces, make sure to double quote(\"\") around <path>.\n"
 		"\t-c <comp_options>  Use a specific compressor from a list of compressor options (look for [comp_options] in this page).\n"
 		"\t-fc  Force compression of compressed files.\n"
 		"\t-di  Delete input file on compression/extraction\n"
 		"\t-preset <n>  Compression preset n is from 0 to 9 (included).\n"
 		"\t-n_files <n>  In how many files should the output be split in (max 1000).\n"
+		"\t-concat  Concatenate the compressed files in the folder specified by '-i'. Will prompt whether you want to decompress the concatenated file.\n"
+		"\t-concat:y  Concatenate the compressed files in the folder specified by '-i'. WILL decompress the concatenated file.\n"
+		"\t-concat:n  Concatenate the compressed files in the folder specified by '-i'. WILL NOT decompress the concatenated file.\n"
 		"\t-size_files <bytes>  Split the output file in files of <bytes> size (min 512).\n"
 		"\n\n"
 		"[comp_options]:"
-		"\"LZ77\": A dictionary based algorithm, good for repetitive patterns of data, slow compression and fast decompression.";
+		"\"LZ77\": A dictionary based algorithm, good for repetitive patterns of data. Slow compression and fast decompression.";
 	
 
 
@@ -103,14 +110,16 @@ namespace parser
 	/// </summary>
 	export struct Options
 	{
-		fs::path filename_in;
-		fs::path filename_out;
+		fs::path filename_in{};
+		fs::path filename_out{};
 		size_t compressor = static_cast<size_t>(CompType::LZ77);
 		size_t preset = COMP_5;
 		size_t n_files = 1;
-		size_t size_files;
+		size_t size_files = 0;
 		bool force_compression = false;
 		bool delete_input = false;
+		bool concatenate_files = false;
+		std::optional<bool> decomp_after_concat{};
 	};
 	
 	/**

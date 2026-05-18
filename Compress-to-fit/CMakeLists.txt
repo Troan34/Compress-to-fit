@@ -36,6 +36,18 @@ target_link_libraries(project_logic PRIVATE std_module)
 target_sources(Compress-to-fit PRIVATE "Compress-to-fit.cpp")
 target_compile_features(Compress-to-fit PRIVATE cxx_std_23)
 
+
+if(MSVC)
+    target_link_options(Compress-to-fit PRIVATE "/STACK:10485760")
+    target_compile_options(Compress-to-fit PRIVATE "/utf-8")
+elseif(APPLE)
+    target_link_options(Compress-to-fit PRIVATE "LINKER:-stack_size,0x1000000")
+elseif(WIN32 AND NOT MSVC) #MinGW
+    target_link_options(Compress-to-fit PRIVATE "-Wl,--stack,10485760")
+else() #Linux
+    target_link_options(Compress-to-fit PRIVATE "LINKER:-z,stack-size=10485760")
+endif()
+
 add_executable(tests)
 target_link_libraries(tests PRIVATE 
     project_logic
@@ -47,7 +59,7 @@ target_sources(
     tests
     PRIVATE
     "test/util/utils.cpp"
-)
+ "test/benchmarks/file_management.cpp")
 
 include(Catch)
 catch_discover_tests(tests)

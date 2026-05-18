@@ -1,0 +1,25 @@
+var class_window =
+[
+    [ "Window", "class_window.html#a90cb32428b92a9b87dbd0f6f0ee403ff", null ],
+    [ "Window", "class_window.html#a2775a79574306a6a71651d8d9b43bda9", null ],
+    [ "begin", "class_window.html#ab03fe4247b35a09d6f9d6b6f7d612c91", null ],
+    [ "end", "class_window.html#a9af0f12097f7bf387f7b33cabb4f6e44", null ],
+    [ "get_absolute_pos", "class_window.html#a545b4c991719d798b71a5caa33b6b332", null ],
+    [ "get_data", "class_window.html#a8f9a063bda4ec938ec51181f00c2afb3", null ],
+    [ "get_max_size", "class_window.html#a10c6b40b20cebc00c8061b59b914e5d2", null ],
+    [ "get_max_size_search", "class_window.html#abf906e8c855f1166e57d070cb613b8a3", null ],
+    [ "get_relative_pos", "class_window.html#ac2514e007aa303f6fb54b48fe0b35999", null ],
+    [ "get_size_la_buf", "class_window.html#a223036d292819493a4c96bc1c21ada81", null ],
+    [ "get_size_search", "class_window.html#a5be8f3f89ec60a2105c820bc9e9fdf1b", null ],
+    [ "look_ahead_buffer", "class_window.html#ac07b9fc0e03a50bf6d2f02e2ac30bb43", null ],
+    [ "operator[]", "class_window.html#a00a80fb449a7e2a81d7a5161ec652dc4", null ],
+    [ "search_buffer", "class_window.html#aa9822d4053645c6a08b1a9fff5d8889b", null ],
+    [ "slide", "class_window.html#a9bbee4bdc07f8f3b9f581278ca677fab", null ],
+    [ "data", "class_window.html#a2215049c98e68d2b886d551cd964ac37", null ],
+    [ "max_size", "class_window.html#ac17eb23134bc4acf3b6c0f3e52ec3f1e", null ],
+    [ "max_size_look_ahead", "class_window.html#a0d7ab6e968bbd1b1ccf38f7262b0355c", null ],
+    [ "max_size_search", "class_window.html#a26862559cda48d21cd2081510daa63ab", null ],
+    [ "offset", "class_window.html#ac8356c30e82c99c02e6e4b6f897c5086", null ],
+    [ "size_look_ahead", "class_window.html#af4884d06fd6bee3d25f2738f82573ade", null ],
+    [ "size_search", "class_window.html#a1021b4fccc4fbdf9e9d325bf805ef577", null ]
+];

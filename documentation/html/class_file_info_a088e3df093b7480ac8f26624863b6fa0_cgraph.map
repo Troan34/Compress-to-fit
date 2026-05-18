@@ -1,0 +1,5 @@
+<map id="FileInfo::read_file" name="FileInfo::read_file">
+<area shape="rect" id="Node000001" title="Read a file into a vector. Will call throw_error if file is not found or inaccessible." alt="" coords="5,5,127,32"/>
+<area shape="rect" id="Node000002" href="$utils_8cppm.html#a6c327b69ce479189b2946651f162daec" title="throw_error is a custom error logger to the terminal. This will NOT ALWAYS throw." alt="" coords="175,5,261,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="127,16,161,18,156,19,127,21"/>
+</map>

@@ -1,0 +1,419 @@
+\doxysection{File Class Reference}
+\hypertarget{class_file}{}\label{class_file}\index{File@{File}}
+
+
+Interpret a file as to retrieve custom information.  
+
+
+
+
+Collaboration diagram for File:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{class_file__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{class_file_af7104229a9098d85f8f631c1d5c2d9a2}{File}} (const fs::\+path \&path, \doxymbox{\hyperlink{structparser_1_1_options}{parser::\+\+Options}} const \&options)
+\begin{DoxyCompactList}\small\item\em Construct member types, such as \doxylink{struct_file_options}{File\+Options}. This ctor should be used when a file is to be compressed. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename In, typename Out, typename Pred$>$ \newline
+requires std::\+invocable$<$Pred, \doxymbox{\hyperlink{struct_codec_interface}{Codec\+Interface}}$<$In, Out$>$\&$>$}\\void \doxymbox{\hyperlink{class_file_ab58d4159da40e8eeeec3291a1283c051}{process\+\_\+file}} (Pred pred)
+\begin{DoxyCompactList}\small\item\em Sequentially apply a certain function to the \+\#cli\+\_\+options.\+filename\+\_\+in file and write the processed data to \doxylink{class_file_a733e671529f4aff0b4f43e9cfd223779}{out\+\_\+file}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\void \doxymbox{\hyperlink{class_file_a2505fac5cd02bc53f1c6f1f5143e9d73}{write\+\_\+file}} (std::\+span$<$ T $>$ buffer, const fs::\+path \&out\+\_\+path)
+\item 
+void \doxymbox{\hyperlink{class_file_aa9e64b96e1d0814319870297e97edb0e}{read\+\_\+file}} (const fs::\+path \&in\+\_\+path, std::\+vector$<$ \doxymbox{\hyperlink{struct_sym}{Sym}} $>$ \&received\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Read a file into a vector. Will call throw\+\_\+error if file is not found or inaccessible. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \doxymbox{\hyperlink{class_file_a30d421f12056fe097e75f2a98a0f480c}{split\+\_\+file}} (fs::\+path const \&path, size\+\_\+t portions)
+\begin{DoxyCompactList}\small\item\em Split an encoded file into a certain number of encoded (with header) files. \end{DoxyCompactList}\item 
+static bool \doxymbox{\hyperlink{class_file_a09024be52cad08277a0c2de7ddf22b8b}{has\+\_\+signature}} (std::\+ifstream \&file)
+\begin{DoxyCompactList}\small\item\em Check if file has the \doxylink{file__management_8cppm_a5d9e3a0a38b084aa0d6d23da7a06be5e}{SIGNATURE} in the header. Non-\/throwing version of \doxylink{class_file_a2eb241a6b3e045cb9665b0e3742ee424}{check\+\_\+signature}. \end{DoxyCompactList}\item 
+static std::\+optional$<$ \doxymbox{\hyperlink{struct_header}{Header}} $>$ \doxymbox{\hyperlink{class_file_aeb13eba5c36b3a47feeded0d234bb314}{extract\+\_\+info}} (const fs::\+path \&path)
+\begin{DoxyCompactList}\small\item\em Extract information from the header of the tzf file. \end{DoxyCompactList}\item 
+static std::\+optional$<$ \doxymbox{\hyperlink{struct_header}{Header}} $>$ \doxymbox{\hyperlink{class_file_ae6dfc687b619fc6f7080deafa67a6c1d}{extract\+\_\+info}} (std::\+ifstream \&file, fs::\+path const \&path)
+\begin{DoxyCompactList}\small\item\em Extract information from the header of the tzf file. \end{DoxyCompactList}\item 
+static std::\+ofstream \doxymbox{\hyperlink{class_file_aea022386c75771f8fdb7e8a76cf41aef}{create\+\_\+file}} (\doxymbox{\hyperlink{utils_8cppm_a77b7b3d2b23480b5378dbd65c7af9178}{Comp\+Type}} comp\+\_\+type, \doxymbox{\hyperlink{utils_8cppm_a59fc5d9b777790e56395e645e4205db0}{Comp\+Preset}} comp\+\_\+preset, fs::\+path path, size\+\_\+t id)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{class_file_a2eb241a6b3e045cb9665b0e3742ee424}{check\+\_\+signature}} ()
+\begin{DoxyCompactList}\small\item\em Check if \+\#file\+\_\+options.\+path has the \doxylink{file__management_8cppm_a5d9e3a0a38b084aa0d6d23da7a06be5e}{SIGNATURE} in the header, throws if not. \end{DoxyCompactList}\item 
+bool \doxymbox{\hyperlink{class_file_aa5c3142a4a5e9cba6bd7303c0373b8bb}{has\+\_\+signature}} () const
+\begin{DoxyCompactList}\small\item\em Check if \+\#file\+\_\+options.\+path has the \doxylink{file__management_8cppm_a5d9e3a0a38b084aa0d6d23da7a06be5e}{SIGNATURE} in the header. Non-\/throwing version of \doxylink{class_file_a2eb241a6b3e045cb9665b0e3742ee424}{check\+\_\+signature}. \end{DoxyCompactList}\item 
+std::\+ofstream \doxymbox{\hyperlink{class_file_a942986666cfee9c56f500f9f023e998d}{create\+\_\+file}} (fs::\+path path) const
+\begin{DoxyCompactList}\small\item\em Creates a compressed file(header) with the details of \doxylink{class_file_ab53a042dbb267af48b1a6e5523a2af1d}{cli\+\_\+options}. If file exists, it is cleared. \end{DoxyCompactList}\item 
+fs::\+path \doxymbox{\hyperlink{class_file_aaf7b0f743db8c7343de75d5c4d3f93fb}{concatenate\+\_\+files}} (fs::\+path const \&path)
+\begin{DoxyCompactList}\small\item\em Concatenate files found in \+\#path into a new file, if. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{struct_file_options}{File\+Options}} \doxymbox{\hyperlink{class_file_a29e9a211dc95cdfbfcf5c135bcb4fcf5}{file\+\_\+options}}
+\item 
+\doxymbox{\hyperlink{structparser_1_1_options}{parser::\+\+Options}} const  \& \doxymbox{\hyperlink{class_file_ab53a042dbb267af48b1a6e5523a2af1d}{cli\+\_\+options}}
+\item 
+std::\+ofstream \doxymbox{\hyperlink{class_file_a733e671529f4aff0b4f43e9cfd223779}{out\+\_\+file}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Interpret a file as to retrieve custom information. 
+
+An interpreted file is one where we have the knowledge about it to fill \doxylink{struct_file_options}{File\+Options} 
+
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00063}{63}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+
+
+
+\label{class_file_doc-constructors}
+\Hypertarget{class_file_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_file_af7104229a9098d85f8f631c1d5c2d9a2}\index{File@{File}!File@{File}}
+\index{File@{File}!File@{File}}
+\doxysubsubsection{\texorpdfstring{File()}{File()}}
+{\footnotesize\ttfamily \label{class_file_af7104229a9098d85f8f631c1d5c2d9a2} 
+File::\+\+File (\begin{DoxyParamCaption}\item[{const fs::\+path \&}]{path}{, }\item[{\doxymbox{\hyperlink{structparser_1_1_options}{parser::\+\+Options}} const \&}]{options}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct member types, such as \doxylink{struct_file_options}{File\+Options}. This ctor should be used when a file is to be compressed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Path of file \\
+\hline
+{\em comp\+\_\+type} & Type of compressor\\
+\hline
+\end{DoxyParams}
+\begin{DoxyRefDesc}{Todo}
+\item[\doxymbox{\hyperlink{todo__todo000001}{Todo}}]Add a parameter for \doxylink{struct_file_options_a7cb51e65263f944a8a56b79346dedb71}{File\+Options::\+delete\+\_\+on\+\_\+dtor} when the parser is updated to do that \end{DoxyRefDesc}
+
+
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00074}{74}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+
+
+
+References \doxymbox{\hyperlink{file__management_8cppm_source_l00074}{File()}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{file__management_8cppm_source_l00074}{File()}}.
+
+Here is the call graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=134pt]{class_file_af7104229a9098d85f8f631c1d5c2d9a2_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=134pt]{class_file_af7104229a9098d85f8f631c1d5c2d9a2_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{class_file_doc-func-members}
+\Hypertarget{class_file_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_file_a2eb241a6b3e045cb9665b0e3742ee424}\index{File@{File}!check\_signature@{check\_signature}}
+\index{check\_signature@{check\_signature}!File@{File}}
+\doxysubsubsection{\texorpdfstring{check\_signature()}{check\_signature()}}
+{\footnotesize\ttfamily \label{class_file_a2eb241a6b3e045cb9665b0e3742ee424} 
+void File::\+check\+\_\+signature (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Check if \+\#file\+\_\+options.\+path has the \doxylink{file__management_8cppm_a5d9e3a0a38b084aa0d6d23da7a06be5e}{SIGNATURE} in the header, throws if not. 
+
+
+
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00356}{356}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+
+\Hypertarget{class_file_aaf7b0f743db8c7343de75d5c4d3f93fb}\index{File@{File}!concatenate\_files@{concatenate\_files}}
+\index{concatenate\_files@{concatenate\_files}!File@{File}}
+\doxysubsubsection{\texorpdfstring{concatenate\_files()}{concatenate\_files()}}
+{\footnotesize\ttfamily \label{class_file_aaf7b0f743db8c7343de75d5c4d3f93fb} 
+fs::\+path File::\+concatenate\+\_\+files (\begin{DoxyParamCaption}\item[{fs::\+path const \&}]{path}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Concatenate files found in \+\#path into a new file, if. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+path to the new concatenated file 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00423}{423}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+
+\Hypertarget{class_file_aea022386c75771f8fdb7e8a76cf41aef}\index{File@{File}!create\_file@{create\_file}}
+\index{create\_file@{create\_file}!File@{File}}
+\doxysubsubsection{\texorpdfstring{create\_file()}{create\_file()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_file_aea022386c75771f8fdb7e8a76cf41aef} 
+std::\+ofstream File::\+create\+\_\+file (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{utils_8cppm_a77b7b3d2b23480b5378dbd65c7af9178}{Comp\+Type}}}]{comp\+\_\+type}{, }\item[{\doxymbox{\hyperlink{utils_8cppm_a59fc5d9b777790e56395e645e4205db0}{Comp\+Preset}}}]{comp\+\_\+preset}{, }\item[{fs::\+path}]{path}{, }\item[{size\+\_\+t}]{id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00331}{331}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+
+\Hypertarget{class_file_a942986666cfee9c56f500f9f023e998d}\index{File@{File}!create\_file@{create\_file}}
+\index{create\_file@{create\_file}!File@{File}}
+\doxysubsubsection{\texorpdfstring{create\_file()}{create\_file()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_file_a942986666cfee9c56f500f9f023e998d} 
+std::\+ofstream File::\+create\+\_\+file (\begin{DoxyParamCaption}\item[{fs::\+path}]{path}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Creates a compressed file(header) with the details of \doxylink{class_file_ab53a042dbb267af48b1a6e5523a2af1d}{cli\+\_\+options}. If file exists, it is cleared. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Where the file is created \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A stream to the file. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00395}{395}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+
+\Hypertarget{class_file_aeb13eba5c36b3a47feeded0d234bb314}\index{File@{File}!extract\_info@{extract\_info}}
+\index{extract\_info@{extract\_info}!File@{File}}
+\doxysubsubsection{\texorpdfstring{extract\_info()}{extract\_info()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_file_aeb13eba5c36b3a47feeded0d234bb314} 
+std::\+optional$<$ \doxymbox{\hyperlink{struct_header}{Header}} $>$ File::\+extract\+\_\+info (\begin{DoxyParamCaption}\item[{const fs::\+path \&}]{path}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Extract information from the header of the tzf file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A \doxylink{struct_file_options}{File\+Options} type constructed with the obtained information
+\end{DoxyReturn}
+\begin{DoxyPrecond}{Precondition}
+path shall exist and be accessible. 
+\end{DoxyPrecond}
+
+
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00290}{290}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+
+\Hypertarget{class_file_ae6dfc687b619fc6f7080deafa67a6c1d}\index{File@{File}!extract\_info@{extract\_info}}
+\index{extract\_info@{extract\_info}!File@{File}}
+\doxysubsubsection{\texorpdfstring{extract\_info()}{extract\_info()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_file_ae6dfc687b619fc6f7080deafa67a6c1d} 
+std::\+optional$<$ \doxymbox{\hyperlink{struct_header}{Header}} $>$ File::\+extract\+\_\+info (\begin{DoxyParamCaption}\item[{std::\+ifstream \&}]{file}{, }\item[{fs::\+path const \&}]{path}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Extract information from the header of the tzf file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Will not be used to construct a stream \\
+\hline
+{\em file} & The file the information will be extracted from \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A \doxylink{struct_file_options}{File\+Options} type constructed with the obtained information
+\end{DoxyReturn}
+\begin{DoxyPrecond}{Precondition}
+path shall exist and be accessible. 
+\end{DoxyPrecond}
+
+
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00305}{305}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+
+\Hypertarget{class_file_aa5c3142a4a5e9cba6bd7303c0373b8bb}\index{File@{File}!has\_signature@{has\_signature}}
+\index{has\_signature@{has\_signature}!File@{File}}
+\doxysubsubsection{\texorpdfstring{has\_signature()}{has\_signature()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_file_aa5c3142a4a5e9cba6bd7303c0373b8bb} 
+bool File::\+has\+\_\+signature (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Check if \+\#file\+\_\+options.\+path has the \doxylink{file__management_8cppm_a5d9e3a0a38b084aa0d6d23da7a06be5e}{SIGNATURE} in the header. Non-\/throwing version of \doxylink{class_file_a2eb241a6b3e045cb9665b0e3742ee424}{check\+\_\+signature}. 
+
+\begin{DoxyReturn}{Returns}
+True if \+\#file\+\_\+options.\+path has signature, false if not.
+\end{DoxyReturn}
+\begin{DoxyPrecond}{Precondition}
+The file shall already exist and be accessible. 
+\end{DoxyPrecond}
+
+
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00375}{375}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+
+\Hypertarget{class_file_a09024be52cad08277a0c2de7ddf22b8b}\index{File@{File}!has\_signature@{has\_signature}}
+\index{has\_signature@{has\_signature}!File@{File}}
+\doxysubsubsection{\texorpdfstring{has\_signature()}{has\_signature()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_file_a09024be52cad08277a0c2de7ddf22b8b} 
+bool File::\+has\+\_\+signature (\begin{DoxyParamCaption}\item[{std::\+ifstream \&}]{file}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Check if file has the \doxylink{file__management_8cppm_a5d9e3a0a38b084aa0d6d23da7a06be5e}{SIGNATURE} in the header. Non-\/throwing version of \doxylink{class_file_a2eb241a6b3e045cb9665b0e3742ee424}{check\+\_\+signature}. 
+
+\begin{DoxyReturn}{Returns}
+True if file has signature, false if not.
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em file} & \doxylink{class_file}{File} to be checked. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+The file shall already exist and be accessible. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+file will be unchanged. 
+\end{DoxyPostcond}
+
+
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00268}{268}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+
+\Hypertarget{class_file_ab58d4159da40e8eeeec3291a1283c051}\index{File@{File}!process\_file@{process\_file}}
+\index{process\_file@{process\_file}!File@{File}}
+\doxysubsubsection{\texorpdfstring{process\_file()}{process\_file()}}
+{\footnotesize\ttfamily \label{class_file_ab58d4159da40e8eeeec3291a1283c051} 
+template$<$typename In, typename Out, typename Pred$>$ \newline
+requires std::\+invocable$<$Pred, \doxymbox{\hyperlink{struct_codec_interface}{Codec\+Interface}}$<$In, Out$>$\&$>$\\
+void File::\+process\+\_\+file (\begin{DoxyParamCaption}\item[{Pred}]{pred}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sequentially apply a certain function to the \+\#cli\+\_\+options.\+filename\+\_\+in file and write the processed data to \doxylink{class_file_a733e671529f4aff0b4f43e9cfd223779}{out\+\_\+file}. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em In} & Type of the data found in \+\#cli\+\_\+options.\+filename\+\_\+in \\
+\hline
+{\em Out} & Type of the data written to \doxylink{class_file_a733e671529f4aff0b4f43e9cfd223779}{out\+\_\+file} \\
+\hline
+{\em Pred} & Function type to be applied, must satisfy {\ttfamily std::\+invocable\texorpdfstring{$<$}{<}Pred, \doxylink{struct_codec_interface}{Codec\+Interface}\texorpdfstring{$<$}{<}In, Out\texorpdfstring{$>$}{>}\&\texorpdfstring{$>$}{>}} \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em pred} & Function to be applied\\
+\hline
+\end{DoxyParams}
+This function will ignore the file header 
+
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00097}{97}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+
+\Hypertarget{class_file_aa9e64b96e1d0814319870297e97edb0e}\index{File@{File}!read\_file@{read\_file}}
+\index{read\_file@{read\_file}!File@{File}}
+\doxysubsubsection{\texorpdfstring{read\_file()}{read\_file()}}
+{\footnotesize\ttfamily \label{class_file_aa9e64b96e1d0814319870297e97edb0e} 
+void File::\+read\+\_\+file (\begin{DoxyParamCaption}\item[{const fs::\+path \&}]{in\+\_\+path}{, }\item[{std::\+vector$<$ \doxymbox{\hyperlink{struct_sym}{Sym}} $>$ \&}]{received\+\_\+data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Read a file into a vector. Will call throw\+\_\+error if file is not found or inaccessible. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em in\+\_\+path} & Location of file. \\
+\hline
+{\em received\+\_\+data} & The vector that will be filled. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00237}{237}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+
+\Hypertarget{class_file_a30d421f12056fe097e75f2a98a0f480c}\index{File@{File}!split\_file@{split\_file}}
+\index{split\_file@{split\_file}!File@{File}}
+\doxysubsubsection{\texorpdfstring{split\_file()}{split\_file()}}
+{\footnotesize\ttfamily \label{class_file_a30d421f12056fe097e75f2a98a0f480c} 
+void File::\+split\+\_\+file (\begin{DoxyParamCaption}\item[{fs::\+path const \&}]{path}{, }\item[{size\+\_\+t}]{portions}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Split an encoded file into a certain number of encoded (with header) files. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & \\
+\hline
+{\em portions} & \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00165}{165}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+
+\Hypertarget{class_file_a2505fac5cd02bc53f1c6f1f5143e9d73}\index{File@{File}!write\_file@{write\_file}}
+\index{write\_file@{write\_file}!File@{File}}
+\doxysubsubsection{\texorpdfstring{write\_file()}{write\_file()}}
+{\footnotesize\ttfamily \label{class_file_a2505fac5cd02bc53f1c6f1f5143e9d73} 
+template$<$typename T$>$ \\
+void File::\+write\+\_\+file (\begin{DoxyParamCaption}\item[{std::\+span$<$ T $>$}]{buffer}{, }\item[{const fs::\+path \&}]{out\+\_\+path}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00145}{145}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+
+
+
+\label{class_file_doc-variable-members}
+\Hypertarget{class_file_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_file_ab53a042dbb267af48b1a6e5523a2af1d}\index{File@{File}!cli\_options@{cli\_options}}
+\index{cli\_options@{cli\_options}!File@{File}}
+\doxysubsubsection{\texorpdfstring{cli\_options}{cli\_options}}
+{\footnotesize\ttfamily \label{class_file_ab53a042dbb267af48b1a6e5523a2af1d} 
+\doxymbox{\hyperlink{structparser_1_1_options}{parser::\+\+Options}} const\& File::\+cli\+\_\+options\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00350}{350}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+
+\Hypertarget{class_file_a29e9a211dc95cdfbfcf5c135bcb4fcf5}\index{File@{File}!file\_options@{file\_options}}
+\index{file\_options@{file\_options}!File@{File}}
+\doxysubsubsection{\texorpdfstring{file\_options}{file\_options}}
+{\footnotesize\ttfamily \label{class_file_a29e9a211dc95cdfbfcf5c135bcb4fcf5} 
+\doxymbox{\hyperlink{struct_file_options}{File\+Options}} File::\+file\+\_\+options\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00349}{349}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+
+\Hypertarget{class_file_a733e671529f4aff0b4f43e9cfd223779}\index{File@{File}!out\_file@{out\_file}}
+\index{out\_file@{out\_file}!File@{File}}
+\doxysubsubsection{\texorpdfstring{out\_file}{out\_file}}
+{\footnotesize\ttfamily \label{class_file_a733e671529f4aff0b4f43e9cfd223779} 
+std::\+ofstream File::\+out\+\_\+file\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00351}{351}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Compress-\/to-\/fit/\+src/\+util/\+\doxymbox{\hyperlink{file__management_8cppm}{file\+\_\+management.\+cppm}}\end{DoxyCompactItemize}

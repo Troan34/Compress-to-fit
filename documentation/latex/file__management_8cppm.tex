@@ -1,0 +1,121 @@
+\doxysection{Compress-\/to-\/fit/\+src/\+util/\+file\+\_\+management.cppm File Reference}
+\hypertarget{file__management_8cppm}{}\label{file__management_8cppm}\index{Compress-\/to-\/fit/src/util/file\_management.cppm@{Compress-\/to-\/fit/src/util/file\_management.cppm}}
+{\ttfamily \+\#include $<$mio/\+mmap.\+hpp$>$}\newline
+{\ttfamily \+\#include $<$cassert$>$}\newline
+{\ttfamily import std.\+compat;}\newline
+{\ttfamily import parser;}\newline
+{\ttfamily import util;}\newline
+Include dependency graph for file\+\_\+management.\+cppm:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{file__management_8cppm__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=216pt]{file__management_8cppm__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{struct_header}{Header}}
+\item 
+struct \doxymbox{\hyperlink{struct_file_options}{File\+Options}}
+\item 
+class \doxymbox{\hyperlink{class_file}{File}}
+\begin{DoxyCompactList}\small\item\em Interpret a file as to retrieve custom information. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum class \doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527}{HEADER\+\_\+\+OFFSET}} \{ \newline
+\doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527aef21bf22481e7930df1e2bda54025095}{SIGNATURE}} = 0
+, \doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527ab718adec73e04ce3ec720dd11a06a308}{ID}} = ::\+SIGNATURE.\+size()
+, \doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527ad539c6567c1f2966df43ad3a2d82b626}{COMP\+\_\+\+TYPE}} = ID + sizeof(size\+\_\+t)
+, \doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527a8d1d3f777392a89d7531871f6c3f2208}{COMP\+\_\+\+PRESET}} = COMP\+\_\+\+TYPE + sizeof(uint8\+\_\+t)
+, \newline
+\doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527a26a4b44a837bf97b972628509912b4a5}{MAX}} = COMP\+\_\+\+PRESET + sizeof(uint8\+\_\+t)
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+constexpr std::\+string\+\_\+view \doxymbox{\hyperlink{file__management_8cppm_a5d9e3a0a38b084aa0d6d23da7a06be5e}{SIGNATURE}} = "{}CTF-\/1"{}
+\item 
+constexpr size\+\_\+t \doxymbox{\hyperlink{file__management_8cppm_ae86837d59db95e31826c13b25d7aa994}{FILE\+\_\+\+HEADER\+\_\+\+SIZE}} = SIGNATURE.\+size() + sizeof(uint8\+\_\+t) + sizeof(uint8\+\_\+t) + sizeof(size\+\_\+t)
+\end{DoxyCompactItemize}
+
+
+\label{file__management_8cppm_doc-enum-members}
+\Hypertarget{file__management_8cppm_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527}\index{file\_management.cppm@{file\_management.cppm}!HEADER\_OFFSET@{HEADER\_OFFSET}}
+\index{HEADER\_OFFSET@{HEADER\_OFFSET}!file\_management.cppm@{file\_management.cppm}}
+\doxysubsubsection{\texorpdfstring{HEADER\_OFFSET}{HEADER\_OFFSET}}
+{\footnotesize\ttfamily \label{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527} 
+enum class \doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527}{HEADER\+\_\+\+OFFSET}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SIGNATURE@{SIGNATURE}!file\_management.cppm@{file\_management.cppm}}
+\index{file\_management.cppm@{file\_management.cppm}!SIGNATURE@{SIGNATURE}}
+}\Hypertarget{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527aef21bf22481e7930df1e2bda54025095}\label{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527aef21bf22481e7930df1e2bda54025095} 
+SIGNATURE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ID@{ID}!file\_management.cppm@{file\_management.cppm}}
+\index{file\_management.cppm@{file\_management.cppm}!ID@{ID}}
+}\Hypertarget{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527ab718adec73e04ce3ec720dd11a06a308}\label{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527ab718adec73e04ce3ec720dd11a06a308} 
+ID&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{COMP\_TYPE@{COMP\_TYPE}!file\_management.cppm@{file\_management.cppm}}
+\index{file\_management.cppm@{file\_management.cppm}!COMP\_TYPE@{COMP\_TYPE}}
+}\Hypertarget{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527ad539c6567c1f2966df43ad3a2d82b626}\label{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527ad539c6567c1f2966df43ad3a2d82b626} 
+COMP\+\_\+\+TYPE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{COMP\_PRESET@{COMP\_PRESET}!file\_management.cppm@{file\_management.cppm}}
+\index{file\_management.cppm@{file\_management.cppm}!COMP\_PRESET@{COMP\_PRESET}}
+}\Hypertarget{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527a8d1d3f777392a89d7531871f6c3f2208}\label{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527a8d1d3f777392a89d7531871f6c3f2208} 
+COMP\+\_\+\+PRESET&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MAX@{MAX}!file\_management.cppm@{file\_management.cppm}}
+\index{file\_management.cppm@{file\_management.cppm}!MAX@{MAX}}
+}\Hypertarget{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527a26a4b44a837bf97b972628509912b4a5}\label{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527a26a4b44a837bf97b972628509912b4a5} 
+MAX&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00017}{17}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+
+
+
+\label{file__management_8cppm_doc-var-members}
+\Hypertarget{file__management_8cppm_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{file__management_8cppm_ae86837d59db95e31826c13b25d7aa994}\index{file\_management.cppm@{file\_management.cppm}!FILE\_HEADER\_SIZE@{FILE\_HEADER\_SIZE}}
+\index{FILE\_HEADER\_SIZE@{FILE\_HEADER\_SIZE}!file\_management.cppm@{file\_management.cppm}}
+\doxysubsubsection{\texorpdfstring{FILE\_HEADER\_SIZE}{FILE\_HEADER\_SIZE}}
+{\footnotesize\ttfamily \label{file__management_8cppm_ae86837d59db95e31826c13b25d7aa994} 
+size\+\_\+t FILE\+\_\+\+HEADER\+\_\+\+SIZE = SIGNATURE.\+size() + sizeof(uint8\+\_\+t) + sizeof(uint8\+\_\+t) + sizeof(size\+\_\+t)\hspace{0.3cm}{\ttfamily [constexpr]}, {\ttfamily [export]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00016}{16}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+
+\Hypertarget{file__management_8cppm_a5d9e3a0a38b084aa0d6d23da7a06be5e}\index{file\_management.cppm@{file\_management.cppm}!SIGNATURE@{SIGNATURE}}
+\index{SIGNATURE@{SIGNATURE}!file\_management.cppm@{file\_management.cppm}}
+\doxysubsubsection{\texorpdfstring{SIGNATURE}{SIGNATURE}}
+{\footnotesize\ttfamily \label{file__management_8cppm_a5d9e3a0a38b084aa0d6d23da7a06be5e} 
+std::\+string\+\_\+view SIGNATURE = "{}CTF-\/1"{}\hspace{0.3cm}{\ttfamily [constexpr]}, {\ttfamily [export]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00014}{14}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+

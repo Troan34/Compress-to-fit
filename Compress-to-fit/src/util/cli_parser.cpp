@@ -22,6 +22,13 @@ Token::Token(const std::string& option)
 	}
 }
 
+//Only now I realize I fucked up the names for lex and parse.
+
+/**
+ * @brief Semantically check an argument (e.g. -preset 8)
+ * @param option The argument
+ * @return The token
+ */
 std::expected<Token, ErrorType> lex(const std::string& option)
 {
 	auto token_string = option.substr(0, option.find(' '));
@@ -30,49 +37,28 @@ std::expected<Token, ErrorType> lex(const std::string& option)
 
 	TokenType token_type;
 
-	//Find TokenType
-	if (token_string == token_strings[static_cast<size_t>(TokenType::COMPRESSION_PRESET)])
-	{
-		token_type = TokenType::COMPRESSION_PRESET;
-	}
-	else if (token_string == token_strings[static_cast<size_t>(TokenType::FILENAME_IN)])
-	{
-		token_type = TokenType::FILENAME_IN;
-	}
-	else if (token_string == token_strings[static_cast<size_t>(TokenType::FILENAME_OUT)])
-	{
-		token_type = TokenType::FILENAME_OUT;
-	}
-	else if (token_string == token_strings[static_cast<size_t>(TokenType::N_FILES)])
-	{
-		token_type = TokenType::N_FILES;
-	}
-	else if (token_string == token_strings[static_cast<size_t>(TokenType::SIZE_FILES)])
-	{
-		token_type = TokenType::SIZE_FILES;
-	}
+	//Find TokenType by checking if token_string is equal to any command
+	if (token_string == token_strings[static_cast<size_t>(TokenType::COMPRESSION_PRESET)]) token_type = TokenType::COMPRESSION_PRESET;
+	else if (token_string == token_strings[static_cast<size_t>(TokenType::FILENAME_IN)]) token_type = TokenType::FILENAME_IN;
+	else if (token_string == token_strings[static_cast<size_t>(TokenType::FILENAME_OUT)]) token_type = TokenType::FILENAME_OUT;
+	else if (token_string == token_strings[static_cast<size_t>(TokenType::N_FILES)]) token_type = TokenType::N_FILES;
+	else if (token_string == token_strings[static_cast<size_t>(TokenType::SIZE_FILES)]) token_type = TokenType::SIZE_FILES;
 	else if (token_string == token_strings[static_cast<size_t>(TokenType::LONG_HELP)])
 	{
-		std::cout << help_str;
+		std::print(help_str);
 		std::terminate();
 	}
 	else if (token_string == token_strings[static_cast<size_t>(TokenType::HELP)])
 	{
-		std::cout << help_str;
+		std::print(help_str);
 		std::terminate();
 	}
-	else if (token_string == token_strings[static_cast<size_t>(TokenType::FORCE_COMPRESSION)])
-	{
-		token_type = TokenType::FORCE_COMPRESSION;
-	}
-	else if (token_string == token_strings[static_cast<size_t>(TokenType::DELETE_INPUT)])
-	{
-		token_type = TokenType::DELETE_INPUT;
-	}
-	else if (token_string == token_strings[static_cast<size_t>(TokenType::COMPRESSOR_TYPE)])
-	{
-		token_type = TokenType::COMPRESSOR_TYPE;
-	}
+	else if (token_string == token_strings[static_cast<size_t>(TokenType::FORCE_COMPRESSION)]) token_type = TokenType::FORCE_COMPRESSION;
+	else if (token_string == token_strings[static_cast<size_t>(TokenType::DELETE_INPUT)]) token_type = TokenType::DELETE_INPUT;
+	else if (token_string == token_strings[static_cast<size_t>(TokenType::COMPRESSOR_TYPE)]) token_type = TokenType::COMPRESSOR_TYPE;
+	else if (token_string == token_strings[static_cast<size_t>(TokenType::CONCATENATE)]) token_type = TokenType::CONCATENATE;
+	else if (token_string == token_strings[static_cast<size_t>(TokenType::DO_DECOMP_AFTER_CONCAT)]) token_type = TokenType::DO_DECOMP_AFTER_CONCAT;
+	else if (token_string == token_strings[static_cast<size_t>(TokenType::DO_NOT_DECOMP_AFTER_CONCAT)]) token_type = TokenType::DO_NOT_DECOMP_AFTER_CONCAT;
 	else
 		throw_error(ErrorType::SYNTAX_ERROR, token_string);
 
@@ -81,6 +67,7 @@ std::expected<Token, ErrorType> lex(const std::string& option)
 	{
 	case TokenType::DELETE_INPUT:
 	case TokenType::FORCE_COMPRESSION:
+	case TokenType::CONCATENATE:
 		return Token{ token_type, true };
 		break;
 	default:
@@ -179,15 +166,28 @@ std::expected<Token, ErrorType> lex(const std::string& option)
 	return Token{ token_type, value };
 }
 
+/**
+ * @brief Read the cli.
+ * @param argc Number of cli arguments, where an argument is a 'word' separated by spaces, e.g. -i or -preset
+ * @param argv Pointer to the arguments
+ * @return The options obtained from the cli
+ * 
+ * @throws std::runtime_error for any kind of syntactic or semantic error
+ */
 Options parse(int argc, char* argv[])
 {
+	if (argc == 1)
+		throw_error(ErrorType::SYNTAX_ERROR, "No arguments given.");
+
 	Options options;
+	//Parse the cli
 	//starting at 1 means we ignore the first (name of program)
 	for (int index = 1; index < argc; index++)
 	{
 		std::string option{ argv[index] };
 		option += ' ';
-		option += argv[++index];
+		if (index + 1 < argc)//stay in bounds
+			option += argv[++index];
 		
 		//If the path has spaces, this makes sure that we take the whole path (we check for ")
 		//else we throw
@@ -234,11 +234,25 @@ Options parse(int argc, char* argv[])
 			case TokenType::SIZE_FILES:
 				options.size_files = std::get<size_t>(token.value().get_value());
 				break;
+			//DO index-- FOR FLAGS, it stops us from skipping arguments
 			case TokenType::FORCE_COMPRESSION:
 				options.force_compression = std::get<bool>(token.value().get_value());
+				index--;
 				break;
 			case TokenType::DELETE_INPUT:
 				options.delete_input = std::get<bool>(token.value().get_value());
+				index--;
+				break;
+			case TokenType::CONCATENATE:
+				options.concatenate_files = std::get<bool>(token.value().get_value());
+				index--;
+				break;
+			case TokenType::DO_DECOMP_AFTER_CONCAT:
+				options.decomp_after_concat = std::get<bool>(token.value().get_value());
+				index--;
+				break;
+			case TokenType::DO_NOT_DECOMP_AFTER_CONCAT:
+				index--;
 				break;
 			default:
 				std::terminate();
@@ -251,6 +265,9 @@ Options parse(int argc, char* argv[])
 			throw_error(token.error(), option);
 		}
 	}
+
+	if (fs::is_directory(options.filename_in) and !options.concatenate_files)
+		throw_error(ErrorType::DIR_COMPRESSION, options.filename_in.string());
 
 	if (options.filename_out.empty() or options.filename_out.string().find_first_not_of(' ') == std::string::npos)
 	{

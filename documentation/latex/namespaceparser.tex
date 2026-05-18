@@ -1,0 +1,306 @@
+\doxysection{parser Namespace Reference}
+\hypertarget{namespaceparser}{}\label{namespaceparser}\index{parser@{parser}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \doxymbox{\hyperlink{classparser_1_1_token}{Token}}
+\begin{DoxyCompactList}\small\item\em Represents a cli option. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structparser_1_1_options}{Options}}
+\begin{DoxyCompactList}\small\item\em All the options available. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \doxymbox{\hyperlink{namespaceparser_a69ca3fb1da948707d293c02ddfbedfdf}{Value\+Type}} = std::\+variant$<$std::\+monostate, std::\+size\+\_\+t, fs::\+path, bool$>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum class \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369}{Token\+Type}} \{ \newline
+\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369ad00542cdc8161faa7c73eecd3f4b1488}{FILENAME\+\_\+\+IN}}
+, \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a51cbb3e0c50a665a956c0c05989805cc}{FILENAME\+\_\+\+OUT}}
+, \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a6695eadf97d6ae0347fe82481a97b993}{COMPRESSOR\+\_\+\+TYPE}}
+, \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a14f6404415ca014c5ce6296b2a77cdf3}{COMPRESSION\+\_\+\+PRESET}}
+, \newline
+\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a991cf0c96f388f1b70f0966a0e45a485}{N\+\_\+\+FILES}}
+, \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a286f8ee59548f0a0839777ec3671b778}{SIZE\+\_\+\+FILES}}
+, \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369aa98228817cdbdd15909489b2743c1f17}{LONG\+\_\+\+HELP}}
+, \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a4fc963e213bba362778f5c175eb4d5ff}{HELP}}
+, \newline
+\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a07ce3fdb4d7777d766f62bcfcf57532e}{FORCE\+\_\+\+COMPRESSION}}
+, \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a4eb6ee48803ccd6075e8d129e5167fb8}{DELETE\+\_\+\+INPUT}}
+, \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a2dd08f693d26ad0ef819a6da487fe438}{CONCATENATE}}
+, \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a297a6bb3ef5700bc84563dc87938c1b2}{DO\+\_\+\+DECOMP\+\_\+\+AFTER\+\_\+\+CONCAT}}
+, \newline
+\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a8cb317a671dafb2df58c07a6fc9291ef}{DO\+\_\+\+NOT\+\_\+\+DECOMP\+\_\+\+AFTER\+\_\+\+CONCAT}}
+, \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a245d11a3709454cc69b2de7911073d57}{NO\+\_\+\+TYPE}} = 696969
+ \}
+\begin{DoxyCompactList}\small\item\em Parser token types. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std::\+expected$<$ \doxymbox{\hyperlink{struct_token}{Token}}, \doxymbox{\hyperlink{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45a}{Error\+Type}} $>$ \doxymbox{\hyperlink{namespaceparser_a883c446b2f982a5d7b6989f2442e8186}{lex}} (const std::\+string \&option)
+\begin{DoxyCompactList}\small\item\em Semantically check an argument (e.\+g. -\/preset 8). \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{structparser_1_1_options}{Options}} \doxymbox{\hyperlink{namespaceparser_a7f5ecbf764fc175fc336fcea0dd07be8}{parse}} (int argc, char \texorpdfstring{$\ast$}{*}argv\+[$\,$]\+)
+\begin{DoxyCompactList}\small\item\em Read the cli. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+constexpr std::\+string\+\_\+view \doxymbox{\hyperlink{namespaceparser_a35056580671d6aa5abd316f21007bef6}{token\+\_\+strings}} \+[$\,$]\+
+\item 
+constexpr std::\+string\+\_\+view \doxymbox{\hyperlink{namespaceparser_a8fb0c61c07575a0d8f64cfc377b885ed}{help\+\_\+str}}
+\end{DoxyCompactItemize}
+
+
+\label{namespaceparser_doc-typedef-members}
+\Hypertarget{namespaceparser_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{namespaceparser_a69ca3fb1da948707d293c02ddfbedfdf}\index{parser@{parser}!ValueType@{ValueType}}
+\index{ValueType@{ValueType}!parser@{parser}}
+\doxysubsubsection{\texorpdfstring{ValueType}{ValueType}}
+{\footnotesize\ttfamily \label{namespaceparser_a69ca3fb1da948707d293c02ddfbedfdf} 
+using \doxymbox{\hyperlink{namespaceparser_a69ca3fb1da948707d293c02ddfbedfdf}{parser::\+\+Value\+Type}} = std::\+variant$<$std::\+monostate, std::\+size\+\_\+t, fs::\+path, bool$>$}
+
+
+
+Definition at line \doxymbox{\hyperlink{cli__parser_8cppm_source_l00013}{13}} of file \doxymbox{\hyperlink{cli__parser_8cppm_source}{cli\+\_\+parser.\+cppm}}.
+
+
+
+\label{namespaceparser_doc-enum-members}
+\Hypertarget{namespaceparser_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{namespaceparser_accd7eb1ffd4c925598ec25fab6905369}\index{parser@{parser}!TokenType@{TokenType}}
+\index{TokenType@{TokenType}!parser@{parser}}
+\doxysubsubsection{\texorpdfstring{TokenType}{TokenType}}
+{\footnotesize\ttfamily \label{namespaceparser_accd7eb1ffd4c925598ec25fab6905369} 
+enum class \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369}{parser::\+\+Token\+Type}}\hspace{0.3cm}{\ttfamily [export]}, {\ttfamily [strong]}}
+
+
+
+Parser token types. 
+
+\begin{DoxyNote}{Note}
+Keep the ordering as this, if you must modify it, modify \+\#token\+\_\+strings too. 
+\end{DoxyNote}
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FILENAME\_IN@{FILENAME\_IN}!parser@{parser}}
+\index{parser@{parser}!FILENAME\_IN@{FILENAME\_IN}}
+}\Hypertarget{namespaceparser_accd7eb1ffd4c925598ec25fab6905369ad00542cdc8161faa7c73eecd3f4b1488}\label{namespaceparser_accd7eb1ffd4c925598ec25fab6905369ad00542cdc8161faa7c73eecd3f4b1488} 
+FILENAME\+\_\+\+IN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FILENAME\_OUT@{FILENAME\_OUT}!parser@{parser}}
+\index{parser@{parser}!FILENAME\_OUT@{FILENAME\_OUT}}
+}\Hypertarget{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a51cbb3e0c50a665a956c0c05989805cc}\label{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a51cbb3e0c50a665a956c0c05989805cc} 
+FILENAME\+\_\+\+OUT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{COMPRESSOR\_TYPE@{COMPRESSOR\_TYPE}!parser@{parser}}
+\index{parser@{parser}!COMPRESSOR\_TYPE@{COMPRESSOR\_TYPE}}
+}\Hypertarget{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a6695eadf97d6ae0347fe82481a97b993}\label{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a6695eadf97d6ae0347fe82481a97b993} 
+COMPRESSOR\+\_\+\+TYPE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{COMPRESSION\_PRESET@{COMPRESSION\_PRESET}!parser@{parser}}
+\index{parser@{parser}!COMPRESSION\_PRESET@{COMPRESSION\_PRESET}}
+}\Hypertarget{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a14f6404415ca014c5ce6296b2a77cdf3}\label{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a14f6404415ca014c5ce6296b2a77cdf3} 
+COMPRESSION\+\_\+\+PRESET&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{N\_FILES@{N\_FILES}!parser@{parser}}
+\index{parser@{parser}!N\_FILES@{N\_FILES}}
+}\Hypertarget{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a991cf0c96f388f1b70f0966a0e45a485}\label{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a991cf0c96f388f1b70f0966a0e45a485} 
+N\+\_\+\+FILES&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SIZE\_FILES@{SIZE\_FILES}!parser@{parser}}
+\index{parser@{parser}!SIZE\_FILES@{SIZE\_FILES}}
+}\Hypertarget{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a286f8ee59548f0a0839777ec3671b778}\label{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a286f8ee59548f0a0839777ec3671b778} 
+SIZE\+\_\+\+FILES&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LONG\_HELP@{LONG\_HELP}!parser@{parser}}
+\index{parser@{parser}!LONG\_HELP@{LONG\_HELP}}
+}\Hypertarget{namespaceparser_accd7eb1ffd4c925598ec25fab6905369aa98228817cdbdd15909489b2743c1f17}\label{namespaceparser_accd7eb1ffd4c925598ec25fab6905369aa98228817cdbdd15909489b2743c1f17} 
+LONG\+\_\+\+HELP&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{HELP@{HELP}!parser@{parser}}
+\index{parser@{parser}!HELP@{HELP}}
+}\Hypertarget{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a4fc963e213bba362778f5c175eb4d5ff}\label{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a4fc963e213bba362778f5c175eb4d5ff} 
+HELP&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FORCE\_COMPRESSION@{FORCE\_COMPRESSION}!parser@{parser}}
+\index{parser@{parser}!FORCE\_COMPRESSION@{FORCE\_COMPRESSION}}
+}\Hypertarget{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a07ce3fdb4d7777d766f62bcfcf57532e}\label{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a07ce3fdb4d7777d766f62bcfcf57532e} 
+FORCE\+\_\+\+COMPRESSION&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DELETE\_INPUT@{DELETE\_INPUT}!parser@{parser}}
+\index{parser@{parser}!DELETE\_INPUT@{DELETE\_INPUT}}
+}\Hypertarget{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a4eb6ee48803ccd6075e8d129e5167fb8}\label{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a4eb6ee48803ccd6075e8d129e5167fb8} 
+DELETE\+\_\+\+INPUT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CONCATENATE@{CONCATENATE}!parser@{parser}}
+\index{parser@{parser}!CONCATENATE@{CONCATENATE}}
+}\Hypertarget{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a2dd08f693d26ad0ef819a6da487fe438}\label{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a2dd08f693d26ad0ef819a6da487fe438} 
+CONCATENATE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DO\_DECOMP\_AFTER\_CONCAT@{DO\_DECOMP\_AFTER\_CONCAT}!parser@{parser}}
+\index{parser@{parser}!DO\_DECOMP\_AFTER\_CONCAT@{DO\_DECOMP\_AFTER\_CONCAT}}
+}\Hypertarget{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a297a6bb3ef5700bc84563dc87938c1b2}\label{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a297a6bb3ef5700bc84563dc87938c1b2} 
+DO\+\_\+\+DECOMP\+\_\+\+AFTER\+\_\+\+CONCAT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DO\_NOT\_DECOMP\_AFTER\_CONCAT@{DO\_NOT\_DECOMP\_AFTER\_CONCAT}!parser@{parser}}
+\index{parser@{parser}!DO\_NOT\_DECOMP\_AFTER\_CONCAT@{DO\_NOT\_DECOMP\_AFTER\_CONCAT}}
+}\Hypertarget{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a8cb317a671dafb2df58c07a6fc9291ef}\label{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a8cb317a671dafb2df58c07a6fc9291ef} 
+DO\+\_\+\+NOT\+\_\+\+DECOMP\+\_\+\+AFTER\+\_\+\+CONCAT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NO\_TYPE@{NO\_TYPE}!parser@{parser}}
+\index{parser@{parser}!NO\_TYPE@{NO\_TYPE}}
+}\Hypertarget{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a245d11a3709454cc69b2de7911073d57}\label{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a245d11a3709454cc69b2de7911073d57} 
+NO\+\_\+\+TYPE&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{cli__parser_8cppm_source_l00020}{20}} of file \doxymbox{\hyperlink{cli__parser_8cppm_source}{cli\+\_\+parser.\+cppm}}.
+
+
+
+\label{namespaceparser_doc-func-members}
+\Hypertarget{namespaceparser_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceparser_a883c446b2f982a5d7b6989f2442e8186}\index{parser@{parser}!lex@{lex}}
+\index{lex@{lex}!parser@{parser}}
+\doxysubsubsection{\texorpdfstring{lex()}{lex()}}
+{\footnotesize\ttfamily \label{namespaceparser_a883c446b2f982a5d7b6989f2442e8186} 
+std::\+expected$<$ \doxymbox{\hyperlink{struct_token}{Token}}, \doxymbox{\hyperlink{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45a}{Error\+Type}} $>$ parser::\+lex (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{option}{}\end{DoxyParamCaption})}
+
+
+
+Semantically check an argument (e.\+g. -\/preset 8). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em option} & The argument \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The token 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{cli__parser_8cpp_source_l00032}{32}} of file \doxymbox{\hyperlink{cli__parser_8cpp_source}{cli\+\_\+parser.\+cpp}}.
+
+\Hypertarget{namespaceparser_a7f5ecbf764fc175fc336fcea0dd07be8}\index{parser@{parser}!parse@{parse}}
+\index{parse@{parse}!parser@{parser}}
+\doxysubsubsection{\texorpdfstring{parse()}{parse()}}
+{\footnotesize\ttfamily \label{namespaceparser_a7f5ecbf764fc175fc336fcea0dd07be8} 
+\doxymbox{\hyperlink{structparser_1_1_options}{Options}} parser::\+parse (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{argv}{\+[$\,$]\+}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [export]}}
+
+
+
+Read the cli. 
+
+Parse the cli, fully manages error checking.
+
+
+\begin{DoxyParams}{Parameters}
+{\em argc} & Number of cli arguments, where an argument is a \textquotesingle{}word\textquotesingle{} separated by spaces, e.\+g. -\/i or -\/preset \\
+\hline
+{\em argv} & Pointer to the arguments \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The options obtained from the cli
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std::\+runtime\+\_\+error} & for any kind of syntactic or semantic error\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyReturn}{Returns}
+The options received from the cli.
+\end{DoxyReturn}
+\begin{DoxyPostcond}{Postcondition}
+Paths will be validated ONLY FOR THEIR EXISTANCE AND ACCESSIBILITY. 
+\end{DoxyPostcond}
+
+
+Definition at line \doxymbox{\hyperlink{cli__parser_8cpp_source_l00177}{177}} of file \doxymbox{\hyperlink{cli__parser_8cpp_source}{cli\+\_\+parser.\+cpp}}.
+
+
+
+\label{namespaceparser_doc-var-members}
+\Hypertarget{namespaceparser_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespaceparser_a8fb0c61c07575a0d8f64cfc377b885ed}\index{parser@{parser}!help\_str@{help\_str}}
+\index{help\_str@{help\_str}!parser@{parser}}
+\doxysubsubsection{\texorpdfstring{help\_str}{help\_str}}
+{\footnotesize\ttfamily \label{namespaceparser_a8fb0c61c07575a0d8f64cfc377b885ed} 
+std::\+string\+\_\+view parser::\+help\+\_\+str\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =}
+\DoxyCodeLine{\textcolor{stringliteral}{"{}\(\backslash\)033[1m\(\backslash\)033[36mWelcome\ to\ Compress\ To\ Fit!\(\backslash\)033[0m\(\backslash\)n"{}}}
+\DoxyCodeLine{\textcolor{stringliteral}{"{}A\ cli\ compressor\ program.\(\backslash\)n"{}}}
+\DoxyCodeLine{\textcolor{stringliteral}{"{}Usage:\ ctf\ [options]\(\backslash\)n"{}}}
+\DoxyCodeLine{\textcolor{stringliteral}{"{}options:\(\backslash\)n"{}}}
+\DoxyCodeLine{\textcolor{stringliteral}{"{}\(\backslash\)t-\/i\ <path>\ \ Take\ <path>\ as\ input\ path.\ If\ <path>\ contains\ spaces,\ make\ sure\ to\ double\ quote(\(\backslash\)"{}\(\backslash\)"{})\ around\ <path>.\(\backslash\)n"{}}}
+\DoxyCodeLine{\textcolor{stringliteral}{"{}\(\backslash\)t-\/o\ <path>\ \ Take\ <path>\ as\ output\ path.\ If\ <path>\ contains\ spaces,\ make\ sure\ to\ double\ quote(\(\backslash\)"{}\(\backslash\)"{})\ around\ <path>.\(\backslash\)n"{}}}
+\DoxyCodeLine{\textcolor{stringliteral}{"{}\(\backslash\)t-\/c\ <comp\_options>\ \ Use\ a\ specific\ compressor\ from\ a\ list\ of\ compressor\ options\ (look\ for\ [comp\_options]\ in\ this\ page).\(\backslash\)n"{}}}
+\DoxyCodeLine{\textcolor{stringliteral}{"{}\(\backslash\)t-\/fc\ \ Force\ compression\ of\ compressed\ files.\(\backslash\)n"{}}}
+\DoxyCodeLine{\textcolor{stringliteral}{"{}\(\backslash\)t-\/di\ \ Delete\ input\ file\ on\ compression/extraction\(\backslash\)n"{}}}
+\DoxyCodeLine{\textcolor{stringliteral}{"{}\(\backslash\)t-\/preset\ <n>\ \ Compression\ preset\ n\ is\ from\ 0\ to\ 9\ (included).\(\backslash\)n"{}}}
+\DoxyCodeLine{\textcolor{stringliteral}{"{}\(\backslash\)t-\/n\_files\ <n>\ \ In\ how\ many\ files\ should\ the\ output\ be\ split\ in\ (max\ 1000).\(\backslash\)n"{}}}
+\DoxyCodeLine{\textcolor{stringliteral}{"{}\(\backslash\)t-\/concat\ \ Concatenate\ the\ compressed\ files\ in\ the\ folder\ specified\ by\ '-\/i'.\ Will\ prompt\ whether\ you\ want\ to\ decompress\ the\ concatenated\ file.\(\backslash\)n"{}}}
+\DoxyCodeLine{\textcolor{stringliteral}{"{}\(\backslash\)t-\/concat:y\ \ Concatenate\ the\ compressed\ files\ in\ the\ folder\ specified\ by\ '-\/i'.\ WILL\ decompress\ the\ concatenated\ file.\(\backslash\)n"{}}}
+\DoxyCodeLine{\textcolor{stringliteral}{"{}\(\backslash\)t-\/concat:n\ \ Concatenate\ the\ compressed\ files\ in\ the\ folder\ specified\ by\ '-\/i'.\ WILL\ NOT\ decompress\ the\ concatenated\ file.\(\backslash\)n"{}}}
+\DoxyCodeLine{\textcolor{stringliteral}{"{}\(\backslash\)t-\/size\_files\ <bytes>\ \ Split\ the\ output\ file\ in\ files\ of\ <bytes>\ size\ (min\ 512).\(\backslash\)n"{}}}
+\DoxyCodeLine{\textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n"{}}}
+\DoxyCodeLine{\textcolor{stringliteral}{"{}[comp\_options]:"{}}}
+\DoxyCodeLine{\textcolor{stringliteral}{"{}\(\backslash\)"{}LZ77\(\backslash\)"{}:\ A\ dictionary\ based\ algorithm,\ good\ for\ repetitive\ patterns\ of\ data.\ Slow\ compression\ and\ fast\ decompression."{}}}
+
+\end{DoxyCode}
+
+
+Definition at line \doxymbox{\hyperlink{cli__parser_8cppm_source_l00055}{55}} of file \doxymbox{\hyperlink{cli__parser_8cppm_source}{cli\+\_\+parser.\+cppm}}.
+
+\Hypertarget{namespaceparser_a35056580671d6aa5abd316f21007bef6}\index{parser@{parser}!token\_strings@{token\_strings}}
+\index{token\_strings@{token\_strings}!parser@{parser}}
+\doxysubsubsection{\texorpdfstring{token\_strings}{token\_strings}}
+{\footnotesize\ttfamily \label{namespaceparser_a35056580671d6aa5abd316f21007bef6} 
+std::\+string\+\_\+view parser::\+token\+\_\+strings\+[$\,$]\+\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}-\/i"{}},}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}-\/o"{}},}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}-\/c"{}},}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}-\/preset"{}},}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}-\/n\_files"{}},}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}-\/size\_files"{}},}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}-\/help"{}},}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}-\/h"{}},}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}-\/fc"{}},}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}-\/di"{}},}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}-\/concat"{}},}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}-\/concat:y"{}},}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}-\/concat:n"{}},}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Definition at line \doxymbox{\hyperlink{cli__parser_8cppm_source_l00038}{38}} of file \doxymbox{\hyperlink{cli__parser_8cppm_source}{cli\+\_\+parser.\+cppm}}.
+

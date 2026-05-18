@@ -1,0 +1,26 @@
+<map id="throw_error" name="throw_error">
+<area shape="rect" id="Node000001" title="throw_error is a custom error logger to the terminal. This will NOT ALWAYS throw." alt="" coords="509,107,596,133"/>
+<area shape="rect" id="Node000002" href="$class_file_info.html#a9ec4f681948c70beda564ffd1d40bc10" title=" " alt="" coords="294,56,461,83"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="492,104,426,86,426,81,498,103"/>
+<area shape="rect" id="Node000003" href="$class_file_info.html#a69041c392ec2ad14c0f356efea36bb54" title=" " alt="" coords="114,5,234,32"/>
+<area shape="poly" id="edge15_Node000001_Node000003" title=" " alt="" coords="527,95,498,69,460,46,403,29,343,19,285,16,236,16,234,11,285,10,343,14,404,23,462,42,501,65,533,96"/>
+<area shape="rect" id="Node000006" href="$namespaceparser.html#a883c446b2f982a5d7b6989f2442e8186" title=" " alt="" coords="336,181,419,208"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="508,139,412,183,410,178,503,141"/>
+<area shape="rect" id="Node000007" href="$namespaceparser.html#a7f5ecbf764fc175fc336fcea0dd07be8" title="Parse the cli, fully manages error checking." alt="" coords="126,131,223,157"/>
+<area shape="poly" id="edge12_Node000001_Node000007" title=" " alt="" coords="493,126,224,144,223,138,495,121"/>
+<area shape="rect" id="Node000009" href="$class_file_info.html#a088e3df093b7480ac8f26624863b6fa0" title="Read a file into a vector. Will call throw_error if file is not found or inaccessible." alt="" coords="317,232,438,259"/>
+<area shape="poly" id="edge13_Node000001_Node000009" title=" " alt="" coords="536,145,505,186,463,222,439,234,438,229,460,218,501,182,532,147"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="304,53,231,35,231,30,309,51"/>
+<area shape="rect" id="Node000005" href="$class_file_info.html#a63ec6528df6855ce6ff971255f490fae" title=" " alt="" coords="112,56,236,83"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="276,70,238,72,236,67,281,68"/>
+<area shape="rect" id="Node000004" href="$_compress-to-fit_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="5,93,55,120"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="111,41,104,46,71,70,46,95,42,92,68,66,101,42,115,37"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="104,89,57,103,54,98,107,85"/>
+<area shape="poly" id="edge7_Node000006_Node000006" title=" " alt="" coords="406,166,397,162,378,160,360,162,350,167,348,172,352,182,347,180,342,173,346,163,358,157,378,155,399,157,411,166"/>
+<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="319,182,223,159,224,153,324,180"/>
+<area shape="rect" id="Node000008" href="$classparser_1_1_token.html#a03fc54839cfb01b88087c14db5b0fd63" title=" " alt="" coords="103,181,246,208"/>
+<area shape="poly" id="edge11_Node000006_Node000008" title=" " alt="" coords="318,195,247,197,246,192,324,194"/>
+<area shape="poly" id="edge9_Node000007_Node000004" title=" " alt="" coords="108,129,55,116,55,110,112,126"/>
+<area shape="poly" id="edge10_Node000007_Node000007" title=" " alt="" coords="197,116,190,112,174,109,160,111,152,116,150,122,154,131,149,130,145,122,148,112,158,106,174,104,192,107,203,115"/>
+<area shape="poly" id="edge14_Node000009_Node000004" title=" " alt="" coords="304,255,254,259,202,256,150,244,101,222,75,200,56,172,35,123,36,118,60,169,79,196,104,218,151,239,203,250,254,254,299,256"/>
+</map>

@@ -1,0 +1,120 @@
+\doxysection{File\+Info Class Reference}
+\hypertarget{class_file_info}{}\label{class_file_info}\index{FileInfo@{FileInfo}}
+
+
+Collaboration diagram for File\+Info:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=175pt]{class_file_info__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$\doxymbox{\hyperlink{conceptptr__size__pred}{ptr\+\_\+size\+\_\+pred}} pred$>$ }\\void \doxymbox{\hyperlink{class_file_info_a30245660c16bb2f23fa2b1db61423347}{process\+\_\+file}} (const fs::\+path \&in\+\_\+path, const fs::\+path \&out\+\_\+path, pred op)
+\begin{DoxyCompactList}\small\item\em Apply a certain function to a file. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\void \doxymbox{\hyperlink{class_file_info_a63ec6528df6855ce6ff971255f490fae}{write\+\_\+file}} (std::\+span$<$ T $>$ buffer, const fs::\+path \&out\+\_\+path)
+\item 
+void \doxymbox{\hyperlink{class_file_info_a69041c392ec2ad14c0f356efea36bb54}{split\+\_\+file}} (const fs::\+path \&path\+\_\+, size\+\_\+t portions)
+\item 
+void \doxymbox{\hyperlink{class_file_info_a088e3df093b7480ac8f26624863b6fa0}{read\+\_\+file}} (const fs::\+path \&in\+\_\+path, std::\+vector$<$ \doxymbox{\hyperlink{struct_sym}{Sym}} $>$ \&received\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Read a file into a vector. Will call throw\+\_\+error if file is not found or inaccessible. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{class_file_info_a9ec4f681948c70beda564ffd1d40bc10}{check\+\_\+signature}} (const fs::\+path \&path)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00012}{12}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+
+
+
+\label{class_file_info_doc-func-members}
+\Hypertarget{class_file_info_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_file_info_a9ec4f681948c70beda564ffd1d40bc10}\index{FileInfo@{FileInfo}!check\_signature@{check\_signature}}
+\index{check\_signature@{check\_signature}!FileInfo@{FileInfo}}
+\doxysubsubsection{\texorpdfstring{check\_signature()}{check\_signature()}}
+{\footnotesize\ttfamily \label{class_file_info_a9ec4f681948c70beda564ffd1d40bc10} 
+void File\+Info::\+check\+\_\+signature (\begin{DoxyParamCaption}\item[{const fs::\+path \&}]{path}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00139}{139}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+
+\Hypertarget{class_file_info_a30245660c16bb2f23fa2b1db61423347}\index{FileInfo@{FileInfo}!process\_file@{process\_file}}
+\index{process\_file@{process\_file}!FileInfo@{FileInfo}}
+\doxysubsubsection{\texorpdfstring{process\_file()}{process\_file()}}
+{\footnotesize\ttfamily \label{class_file_info_a30245660c16bb2f23fa2b1db61423347} 
+template$<$\doxymbox{\hyperlink{conceptptr__size__pred}{ptr\+\_\+size\+\_\+pred}} pred$>$ \\
+void File\+Info::\+process\+\_\+file (\begin{DoxyParamCaption}\item[{const fs::\+path \&}]{in\+\_\+path}{, }\item[{const fs::\+path \&}]{out\+\_\+path}{, }\item[{pred}]{op}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Apply a certain function to a file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em in\+\_\+path} & File being read. \\
+\hline
+{\em out\+\_\+path} & Where the result of the function will be stored. \\
+\hline
+{\em op} & The function to be applied. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00023}{23}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+
+\Hypertarget{class_file_info_a088e3df093b7480ac8f26624863b6fa0}\index{FileInfo@{FileInfo}!read\_file@{read\_file}}
+\index{read\_file@{read\_file}!FileInfo@{FileInfo}}
+\doxysubsubsection{\texorpdfstring{read\_file()}{read\_file()}}
+{\footnotesize\ttfamily \label{class_file_info_a088e3df093b7480ac8f26624863b6fa0} 
+void File\+Info::\+read\+\_\+file (\begin{DoxyParamCaption}\item[{const fs::\+path \&}]{in\+\_\+path}{, }\item[{std::\+vector$<$ \doxymbox{\hyperlink{struct_sym}{Sym}} $>$ \&}]{received\+\_\+data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Read a file into a vector. Will call throw\+\_\+error if file is not found or inaccessible. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em in\+\_\+path} & Location of file. \\
+\hline
+{\em received\+\_\+data} & The vector that will be filled. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00115}{115}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+
+\Hypertarget{class_file_info_a69041c392ec2ad14c0f356efea36bb54}\index{FileInfo@{FileInfo}!split\_file@{split\_file}}
+\index{split\_file@{split\_file}!FileInfo@{FileInfo}}
+\doxysubsubsection{\texorpdfstring{split\_file()}{split\_file()}}
+{\footnotesize\ttfamily \label{class_file_info_a69041c392ec2ad14c0f356efea36bb54} 
+void File\+Info::\+split\+\_\+file (\begin{DoxyParamCaption}\item[{const fs::\+path \&}]{path\+\_\+}{, }\item[{size\+\_\+t}]{portions}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00067}{67}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+
+\Hypertarget{class_file_info_a63ec6528df6855ce6ff971255f490fae}\index{FileInfo@{FileInfo}!write\_file@{write\_file}}
+\index{write\_file@{write\_file}!FileInfo@{FileInfo}}
+\doxysubsubsection{\texorpdfstring{write\_file()}{write\_file()}}
+{\footnotesize\ttfamily \label{class_file_info_a63ec6528df6855ce6ff971255f490fae} 
+template$<$typename T$>$ \\
+void File\+Info::\+write\+\_\+file (\begin{DoxyParamCaption}\item[{std::\+span$<$ T $>$}]{buffer}{, }\item[{const fs::\+path \&}]{out\+\_\+path}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00051}{51}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Compress-\/to-\/fit/\+src/\+util/\+\doxymbox{\hyperlink{file__management_8cppm}{file\+\_\+management.\+cppm}}\end{DoxyCompactItemize}

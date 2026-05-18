@@ -1,0 +1,8 @@
+<map id="FileInfo::split_file" name="FileInfo::split_file">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,31,126,57"/>
+<area shape="rect" id="Node000002" href="$class_file_info.html#a9ec4f681948c70beda564ffd1d40bc10" title=" " alt="" coords="174,5,341,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="126,33,161,31,156,32,127,39"/>
+<area shape="rect" id="Node000003" href="$utils_8cppm.html#a6c327b69ce479189b2946651f162daec" title="throw_error is a custom error logger to the terminal. This will NOT ALWAYS throw." alt="" coords="389,31,475,57"/>
+<area shape="poly" id="edge3_Node000001_Node000003" title=" " alt="" coords="126,41,373,41,373,47,126,47"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="341,28,376,36,371,35,341,33"/>
+</map>

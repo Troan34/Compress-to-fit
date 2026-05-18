@@ -71,16 +71,28 @@ public:
 	 * 
 	 * @todo Add a parameter for #FileOptions::delete_on_dtor when the parser is updated to do that
 	 */
-	File(const fs::path& path, const parser::Options& options)
+	File(const fs::path& path, parser::Options const& options)
 		:cli_options(options) 
 	{
+		if (options.concatenate_files)
+		{
+
+		}
+
+
 		file_options = FileOptions{ path, extract_info(path) };
 		out_file = create_file(cli_options.filename_out);
 	}
 
 	/**
-	* @brief Apply a certain function to a file.
-	*/
+	 * @brief Sequentially apply a certain function to the #cli_options.filename_in file and write the processed data to #out_file
+	 * @tparam In Type of the data found in #cli_options.filename_in
+	 * @tparam Out Type of the data written to #out_file
+	 * @tparam Pred Function type to be applied, must satisfy `std::invocable<Pred, CodecInterface<In, Out>&>`
+	 * @param pred Function to be applied
+	 * 
+	 * @details This function will ignore the file header
+	 */
 	template <typename In, typename Out, typename Pred>
 	void process_file(Pred pred) requires std::invocable<Pred, CodecInterface<In, Out>&>
 	{
@@ -145,16 +157,18 @@ public:
 
 	
 	
-	/*
-	Given a file, split it into multiple files according to documentation.
-	*/
+	/**
+	 * @brief Split an encoded file into a certain number of encoded (with header) files 
+	 * @param path 
+	 * @param portions 
+	 */
 	static void split_file(fs::path const& path, size_t portions)
 	{
 
 		if (portions == 1) return;
 
 		if ((portions < 1 or portions > N_FILES_LIMIT) or (fs::file_size(path) / portions) < SIZE_FILES_MIN)
-			print_warn(WarningType::PORTIONS_OUT_OF_RANGE);
+			print_warn(WarningType::PORTIONS_OUT_OF_RANGE, std::to_string(portions));
 
 
 		std::ifstream source_file{ path, std::ios::binary };
@@ -163,12 +177,15 @@ public:
 		if (!fs::exists(path)) throw_error(ErrorType::PATH_NOT_FOUND, path.string());
 		auto Header = extract_info(path);
 
+		//move to the ID section
 		source_file.seekg(static_cast<size_t>(HEADER_OFFSET::ID));
 		auto portions_size = fs::file_size(path) / portions;
-		std::vector<char> buffer(portions_size);
-		fs::create_directory(fs::current_path() / "output");
 
-		auto out_path = fs::current_path() / "output";
+		std::vector<char> buffer(portions_size);
+
+		auto out_path = path.parent_path() / "output";
+		fs::create_directory(out_path);
+
 
 		//Set up a random number such that num + N_FILES_LIMIT < size_t::max
 		std::random_device seed;
@@ -178,6 +195,7 @@ public:
 
 		for (auto file_n = 0u; file_n < portions; file_n++, id++)
 		{
+			//create a file with same comp_type and preset, but with id as ID. This file ends with _<file_n>
 			auto file = create_file(Header.value().comp_type, Header.value().preset, out_path / (path.stem().string() + '_' + std::to_string(file_n) + FILE_EXTENSION), id);
 
 			//We are at the last file, may be smaller than portions_size and/or SIZE_FILES_MIN
@@ -188,15 +206,23 @@ public:
 			file.write(buffer.data(), buffer.size());
 		}
 
-		switch (errno)
+		try
 		{
-		case ENOSPC:
-		case EIO:
-		case ENFILE:
-		case EMFILE:
-			throw_error(ErrorType::DRIVE_ERROR, path.string());
-		default:
-			break;
+			switch (errno)
+			{
+			case ENOSPC:
+			case EIO:
+			case ENFILE:
+			case EMFILE:
+				throw_error(ErrorType::DRIVE_ERROR, path.string());
+			default:
+				break;
+			}
+		}
+		catch (std::runtime_error const& err)
+		{
+			fs::remove_all(out_path);
+			std::terminate();//terminate as to not call fs::remove(path), also, if these errors do happen it is a good idea to drop everything
 		}
 		source_file.close();
 
@@ -263,8 +289,21 @@ public:
 	 */
 	static std::optional<Header> extract_info(const fs::path& path)
 	{
-
 		std::ifstream file{ path, std::ios::binary };
+
+		extract_info(file, path);
+	}
+
+	/**
+	 * @brief Extract information from the header of the tzf file.
+	 * @param path Will not be used to construct a stream
+	 * @param file The file the information will be extracted from
+	 * @return A FileOptions type constructed with the obtained information
+	 *
+	 * @pre path shall exist and be accessible.
+	 */
+	static std::optional<Header> extract_info(std::ifstream& file, fs::path const& path)
+	{
 
 		//we are dealing with an already compressed file
 		if (has_signature(file))
@@ -308,7 +347,7 @@ public:
 
 private:
 	FileOptions file_options;
-	const parser::Options& cli_options;
+	parser::Options const& cli_options;
 	std::ofstream out_file;
 
 	/**
@@ -376,4 +415,39 @@ private:
 		return file;
 	}
 
+	/**
+	 * @brief Concatenate files found in #path into a new file, if 
+	 * @param path 
+	 * @return path to the new concatenated file
+	 */
+	fs::path concatenate_files(fs::path const& path)
+	{
+		std::vector<fs::path> paths_found{};
+
+		std::pair<size_t, fs::path> minimum_entry{};
+
+		//find file with smallest id
+		for (auto const& dir_entry : fs::directory_iterator{ path })
+		{
+			if (dir_entry.is_regular_file())
+			{
+				std::ifstream file{ dir_entry.path() };
+
+				auto info = extract_info(dir_entry);
+
+				if (info.has_value())
+				{
+					if (minimum_entry.first > info.value().identifier)
+					{
+						minimum_entry.first = info.value().identifier;
+						minimum_entry.second = dir_entry.path();
+					}
+
+				}
+			}
+		}
+
+		//warn user if there are different ID series
+		
+	}
 };

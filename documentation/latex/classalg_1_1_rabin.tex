@@ -1,0 +1,265 @@
+\doxysection{alg::\+Rabin Class Reference}
+\hypertarget{classalg_1_1_rabin}{}\label{classalg_1_1_rabin}\index{alg::Rabin@{alg::Rabin}}
+
+
+Collaboration diagram for alg::\+Rabin:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classalg_1_1_rabin__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classalg_1_1_rabin_a3e845390e40970d04a161dc5797395ba}{Rabin}} (const \doxymbox{\hyperlink{class_window}{Window}} \&data, uint32\+\_\+t pos, \doxymbox{\hyperlink{utils_8cppm_a59fc5d9b777790e56395e645e4205db0}{Comp\+Preset}} preset)
+\item 
+\doxymbox{\hyperlink{classalg_1_1_rabin_a3e845390e40970d04a161dc5797395ba}{Rabin}} \& \doxymbox{\hyperlink{classalg_1_1_rabin_a1c223004b4686ec7bbf0dca95eee3672}{operator=}} (const \doxymbox{\hyperlink{classalg_1_1_rabin_a3e845390e40970d04a161dc5797395ba}{Rabin}} \&)=default
+\item 
+void \doxymbox{\hyperlink{classalg_1_1_rabin_a838bad9d27d6ae951862fc5e22ab1e1e}{roll\+\_\+hash}} (uint32\+\_\+t num\+\_\+of\+\_\+rolls=1) noexcept
+\begin{DoxyCompactList}\small\item\em Roll and add the hash to the symbol\+\_\+positions. \end{DoxyCompactList}\item 
+\doxymbox{\hyperlink{struct_token}{Token}} \doxymbox{\hyperlink{classalg_1_1_rabin_aac69972318494ea1b3b996e03d604d36}{find\+\_\+pattern}} ()
+\begin{DoxyCompactList}\small\item\em Find the biggest pattern between the look ahead buffer and search buffer. \end{DoxyCompactList}\item 
+auto \doxymbox{\hyperlink{classalg_1_1_rabin_a1cd8c6bc9482193fa87e859b511f6147}{get\+\_\+pos}} () const noexcept
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+auto \doxymbox{\hyperlink{classalg_1_1_rabin_a72778b4f5a658ef5f0f65b6bf2dac96f}{bucket\+\_\+index}} (uint32\+\_\+t hash\+\_\+) const noexcept -\/$>$ uint32\+\_\+t
+\item 
+auto \doxymbox{\hyperlink{classalg_1_1_rabin_a07a4f8f848f5fe3e55b406b486c3a0fd}{prev\+\_\+bucket\+\_\+index}} (uint32\+\_\+t hash\+\_\+) const noexcept -\/$>$ uint32\+\_\+t
+\item 
+auto \doxymbox{\hyperlink{classalg_1_1_rabin_adf7aeadedcc47129ec1f472e48b0fc9a}{get\+\_\+max\+\_\+chain\+\_\+from\+\_\+preset}} (\doxymbox{\hyperlink{utils_8cppm_a59fc5d9b777790e56395e645e4205db0}{Comp\+Preset}} preset) const noexcept -\/$>$ size\+\_\+t
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const \doxymbox{\hyperlink{class_window}{Window}} \& \doxymbox{\hyperlink{classalg_1_1_rabin_a52604c78d10ac675ca95f9fcbbb95e24}{data}}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{classalg_1_1_rabin_a94bd0dee44577823c0801f700a6a6328}{hash}} = 0
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{classalg_1_1_rabin_aaf17fcaa7e4f69ea0b43a96c392a852e}{position}}
+\item 
+int32\+\_\+t \doxymbox{\hyperlink{classalg_1_1_rabin_a044b5f0c49e0c52d1ae1a715d00ec0ac}{poss\+\_\+table}} \+[\doxymbox{\hyperlink{lz77_8cppm_ac4a340be8c3b526cce9e4074d9389497}{MAX\+\_\+\+HASH\+\_\+\+SIZE}}]\+
+\item 
+int32\+\_\+t \doxymbox{\hyperlink{classalg_1_1_rabin_a78250486a2341798edd6c7aef00fbf7f}{prev\+\_\+poss\+\_\+table}} \+[\doxymbox{\hyperlink{lz77_8cppm_a282c82f087f402efca939353e57fca44}{MAX\+\_\+\+WINDOW\+\_\+\+SIZE}}]\+
+\item 
+const size\+\_\+t \doxymbox{\hyperlink{classalg_1_1_rabin_aa15e426abcd632a784e8c129b586bce9}{MAX\+\_\+\+CHAIN}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00220}{220}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+
+
+\label{classalg_1_1_rabin_doc-constructors}
+\Hypertarget{classalg_1_1_rabin_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classalg_1_1_rabin_a3e845390e40970d04a161dc5797395ba}\index{alg::Rabin@{alg::Rabin}!Rabin@{Rabin}}
+\index{Rabin@{Rabin}!alg::Rabin@{alg::Rabin}}
+\doxysubsubsection{\texorpdfstring{Rabin()}{Rabin()}}
+{\footnotesize\ttfamily \label{classalg_1_1_rabin_a3e845390e40970d04a161dc5797395ba} 
+alg::\+\+Rabin::\+\+Rabin (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{class_window}{Window}} \&}]{data}{, }\item[{uint32\+\_\+t}]{pos}{, }\item[{\doxymbox{\hyperlink{utils_8cppm_a59fc5d9b777790e56395e645e4205db0}{Comp\+Preset}}}]{preset}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyPrecond}{Precondition}
+{\ttfamily data.\+max\+\_\+size()} \texorpdfstring{$>$}{>} \doxylink{lz77_8cppm_ac4a340be8c3b526cce9e4074d9389497}{MAX\+\_\+\+HASH\+\_\+\+SIZE} 
+\end{DoxyPrecond}
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00227}{227}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+
+
+References \doxymbox{\hyperlink{lz77_8cppm_source_l00273}{data}}, \doxymbox{\hyperlink{lz77_8cppm_source_l00187}{Window::\+get\+\_\+data()}}, \doxymbox{\hyperlink{lz77_8cppm_source_l00206}{alg::\+\+MIN\+\_\+\+MATCH}}, and \doxymbox{\hyperlink{lz77_8cppm_source_l00227}{Rabin()}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{lz77_8cppm_source_l00227}{Rabin()}}.
+
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=303pt]{classalg_1_1_rabin_a3e845390e40970d04a161dc5797395ba_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=172pt]{classalg_1_1_rabin_a3e845390e40970d04a161dc5797395ba_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{classalg_1_1_rabin_doc-func-members}
+\Hypertarget{classalg_1_1_rabin_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classalg_1_1_rabin_a72778b4f5a658ef5f0f65b6bf2dac96f}\index{alg::Rabin@{alg::Rabin}!bucket\_index@{bucket\_index}}
+\index{bucket\_index@{bucket\_index}!alg::Rabin@{alg::Rabin}}
+\doxysubsubsection{\texorpdfstring{bucket\_index()}{bucket\_index()}}
+{\footnotesize\ttfamily \label{classalg_1_1_rabin_a72778b4f5a658ef5f0f65b6bf2dac96f} 
+auto alg::\+\+Rabin::\+bucket\+\_\+index (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{hash\+\_\+}{}\end{DoxyParamCaption}) const -\/$>$ uint32\+\_\+t\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [private]}, {\ttfamily [noexcept]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00280}{280}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+
+
+References \doxymbox{\hyperlink{lz77_8cppm_source_l00038}{MAX\+\_\+\+HASH\+\_\+\+SIZE}}.
+
+\Hypertarget{classalg_1_1_rabin_aac69972318494ea1b3b996e03d604d36}\index{alg::Rabin@{alg::Rabin}!find\_pattern@{find\_pattern}}
+\index{find\_pattern@{find\_pattern}!alg::Rabin@{alg::Rabin}}
+\doxysubsubsection{\texorpdfstring{find\_pattern()}{find\_pattern()}}
+{\footnotesize\ttfamily \label{classalg_1_1_rabin_aac69972318494ea1b3b996e03d604d36} 
+\doxymbox{\hyperlink{struct_token}{Token}} alg::\+\+Rabin::\+find\+\_\+pattern (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Find the biggest pattern between the look ahead buffer and search buffer. 
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77__impl_8cppm_source_l00024}{24}} of file \doxymbox{\hyperlink{lz77__impl_8cppm_source}{lz77\+\_\+impl.\+cppm}}.
+
+\Hypertarget{classalg_1_1_rabin_adf7aeadedcc47129ec1f472e48b0fc9a}\index{alg::Rabin@{alg::Rabin}!get\_max\_chain\_from\_preset@{get\_max\_chain\_from\_preset}}
+\index{get\_max\_chain\_from\_preset@{get\_max\_chain\_from\_preset}!alg::Rabin@{alg::Rabin}}
+\doxysubsubsection{\texorpdfstring{get\_max\_chain\_from\_preset()}{get\_max\_chain\_from\_preset()}}
+{\footnotesize\ttfamily \label{classalg_1_1_rabin_adf7aeadedcc47129ec1f472e48b0fc9a} 
+auto alg::\+\+Rabin::\+get\+\_\+max\+\_\+chain\+\_\+from\+\_\+preset (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{utils_8cppm_a59fc5d9b777790e56395e645e4205db0}{Comp\+Preset}}}]{preset}{}\end{DoxyParamCaption}) const -\/$>$ size\+\_\+t\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [private]}, {\ttfamily [noexcept]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00304}{304}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+\Hypertarget{classalg_1_1_rabin_a1cd8c6bc9482193fa87e859b511f6147}\index{alg::Rabin@{alg::Rabin}!get\_pos@{get\_pos}}
+\index{get\_pos@{get\_pos}!alg::Rabin@{alg::Rabin}}
+\doxysubsubsection{\texorpdfstring{get\_pos()}{get\_pos()}}
+{\footnotesize\ttfamily \label{classalg_1_1_rabin_a1cd8c6bc9482193fa87e859b511f6147} 
+auto alg::\+\+Rabin::\+get\+\_\+pos (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00267}{267}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+\Hypertarget{classalg_1_1_rabin_a1c223004b4686ec7bbf0dca95eee3672}\index{alg::Rabin@{alg::Rabin}!operator=@{operator=}}
+\index{operator=@{operator=}!alg::Rabin@{alg::Rabin}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \label{classalg_1_1_rabin_a1c223004b4686ec7bbf0dca95eee3672} 
+\doxymbox{\hyperlink{classalg_1_1_rabin_a3e845390e40970d04a161dc5797395ba}{Rabin}} \& alg::\+\+Rabin::\+operator= (\begin{DoxyParamCaption}\item[{const \doxymbox{\hyperlink{classalg_1_1_rabin_a3e845390e40970d04a161dc5797395ba}{Rabin}} \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{classalg_1_1_rabin_a07a4f8f848f5fe3e55b406b486c3a0fd}\index{alg::Rabin@{alg::Rabin}!prev\_bucket\_index@{prev\_bucket\_index}}
+\index{prev\_bucket\_index@{prev\_bucket\_index}!alg::Rabin@{alg::Rabin}}
+\doxysubsubsection{\texorpdfstring{prev\_bucket\_index()}{prev\_bucket\_index()}}
+{\footnotesize\ttfamily \label{classalg_1_1_rabin_a07a4f8f848f5fe3e55b406b486c3a0fd} 
+auto alg::\+\+Rabin::\+prev\+\_\+bucket\+\_\+index (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{hash\+\_\+}{}\end{DoxyParamCaption}) const -\/$>$ uint32\+\_\+t\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [private]}, {\ttfamily [noexcept]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00292}{292}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+
+
+References \doxymbox{\hyperlink{lz77_8cppm_source_l00034}{MAX\+\_\+\+WINDOW\+\_\+\+SIZE}}.
+
+\Hypertarget{classalg_1_1_rabin_a838bad9d27d6ae951862fc5e22ab1e1e}\index{alg::Rabin@{alg::Rabin}!roll\_hash@{roll\_hash}}
+\index{roll\_hash@{roll\_hash}!alg::Rabin@{alg::Rabin}}
+\doxysubsubsection{\texorpdfstring{roll\_hash()}{roll\_hash()}}
+{\footnotesize\ttfamily \label{classalg_1_1_rabin_a838bad9d27d6ae951862fc5e22ab1e1e} 
+void alg::\+\+Rabin::\+roll\+\_\+hash (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{num\+\_\+of\+\_\+rolls}{ = {\ttfamily 1}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Roll and add the hash to the symbol\+\_\+positions. 
+
+This function will check if position has reached the end \begin{DoxyWarning}{Warning}
+The position will be increased. THE WINDOW WILL NOT SLIDE 
+\end{DoxyWarning}
+
+\begin{DoxyParams}{Parameters}
+{\em num\+\_\+of\+\_\+rolls} & How many times it should roll, defaults to 1\\
+\hline
+\end{DoxyParams}
+find\+\_\+pattern checks \doxylink{classalg_1_1_rabin_a044b5f0c49e0c52d1ae1a715d00ec0ac}{poss\+\_\+table} for a pattern match, once, and if, found it will keep searching down the chain of previous poss\+\_\+table entries, which have been saved in \doxylink{classalg_1_1_rabin_a78250486a2341798edd6c7aef00fbf7f}{prev\+\_\+poss\+\_\+table} by \doxylink{classalg_1_1_rabin_a838bad9d27d6ae951862fc5e22ab1e1e}{roll\+\_\+hash}, an \doxylink{classalg_1_1_rabin_aa15e426abcd632a784e8c129b586bce9}{MAX\+\_\+\+CHAIN} amount of times. 
+
+Definition at line \doxymbox{\hyperlink{lz77__impl_8cppm_source_l00005}{5}} of file \doxymbox{\hyperlink{lz77__impl_8cppm_source}{lz77\+\_\+impl.\+cppm}}.
+
+
+
+\label{classalg_1_1_rabin_doc-variable-members}
+\Hypertarget{classalg_1_1_rabin_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classalg_1_1_rabin_a52604c78d10ac675ca95f9fcbbb95e24}\index{alg::Rabin@{alg::Rabin}!data@{data}}
+\index{data@{data}!alg::Rabin@{alg::Rabin}}
+\doxysubsubsection{\texorpdfstring{data}{data}}
+{\footnotesize\ttfamily \label{classalg_1_1_rabin_a52604c78d10ac675ca95f9fcbbb95e24} 
+const \doxymbox{\hyperlink{class_window}{Window}}\& alg::\+\+Rabin::\+data\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00273}{273}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{lz77_8cppm_source_l00227}{Rabin()}}.
+
+\Hypertarget{classalg_1_1_rabin_a94bd0dee44577823c0801f700a6a6328}\index{alg::Rabin@{alg::Rabin}!hash@{hash}}
+\index{hash@{hash}!alg::Rabin@{alg::Rabin}}
+\doxysubsubsection{\texorpdfstring{hash}{hash}}
+{\footnotesize\ttfamily \label{classalg_1_1_rabin_a94bd0dee44577823c0801f700a6a6328} 
+uint32\+\_\+t alg::\+\+Rabin::\+hash = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00274}{274}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+\Hypertarget{classalg_1_1_rabin_aa15e426abcd632a784e8c129b586bce9}\index{alg::Rabin@{alg::Rabin}!MAX\_CHAIN@{MAX\_CHAIN}}
+\index{MAX\_CHAIN@{MAX\_CHAIN}!alg::Rabin@{alg::Rabin}}
+\doxysubsubsection{\texorpdfstring{MAX\_CHAIN}{MAX\_CHAIN}}
+{\footnotesize\ttfamily \label{classalg_1_1_rabin_aa15e426abcd632a784e8c129b586bce9} 
+const size\+\_\+t alg::\+\+Rabin::\+\+MAX\+\_\+\+CHAIN\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00278}{278}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+\Hypertarget{classalg_1_1_rabin_aaf17fcaa7e4f69ea0b43a96c392a852e}\index{alg::Rabin@{alg::Rabin}!position@{position}}
+\index{position@{position}!alg::Rabin@{alg::Rabin}}
+\doxysubsubsection{\texorpdfstring{position}{position}}
+{\footnotesize\ttfamily \label{classalg_1_1_rabin_aaf17fcaa7e4f69ea0b43a96c392a852e} 
+uint32\+\_\+t alg::\+\+Rabin::\+position\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00275}{275}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+\Hypertarget{classalg_1_1_rabin_a044b5f0c49e0c52d1ae1a715d00ec0ac}\index{alg::Rabin@{alg::Rabin}!poss\_table@{poss\_table}}
+\index{poss\_table@{poss\_table}!alg::Rabin@{alg::Rabin}}
+\doxysubsubsection{\texorpdfstring{poss\_table}{poss\_table}}
+{\footnotesize\ttfamily \label{classalg_1_1_rabin_a044b5f0c49e0c52d1ae1a715d00ec0ac} 
+int32\+\_\+t alg::\+\+Rabin::\+poss\+\_\+table\+[\doxymbox{\hyperlink{lz77_8cppm_ac4a340be8c3b526cce9e4074d9389497}{MAX\+\_\+\+HASH\+\_\+\+SIZE}}]\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00276}{276}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+\Hypertarget{classalg_1_1_rabin_a78250486a2341798edd6c7aef00fbf7f}\index{alg::Rabin@{alg::Rabin}!prev\_poss\_table@{prev\_poss\_table}}
+\index{prev\_poss\_table@{prev\_poss\_table}!alg::Rabin@{alg::Rabin}}
+\doxysubsubsection{\texorpdfstring{prev\_poss\_table}{prev\_poss\_table}}
+{\footnotesize\ttfamily \label{classalg_1_1_rabin_a78250486a2341798edd6c7aef00fbf7f} 
+int32\+\_\+t alg::\+\+Rabin::\+prev\+\_\+poss\+\_\+table\+[\doxymbox{\hyperlink{lz77_8cppm_a282c82f087f402efca939353e57fca44}{MAX\+\_\+\+WINDOW\+\_\+\+SIZE}}]\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00277}{277}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+Compress-\/to-\/fit/\+src/\+models/\+\+LZ77/\+\doxymbox{\hyperlink{lz77_8cppm}{lz77.\+cppm}}\item 
+Compress-\/to-\/fit/\+src/\+models/\+\+LZ77/\+\doxymbox{\hyperlink{lz77__impl_8cppm}{lz77\+\_\+impl.\+cppm}}\end{DoxyCompactItemize}

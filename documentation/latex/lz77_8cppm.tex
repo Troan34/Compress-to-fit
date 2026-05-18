@@ -1,0 +1,160 @@
+\doxysection{Compress-\/to-\/fit/\+src/\+models/\+\+LZ77/\+lz77.cppm File Reference}
+\hypertarget{lz77_8cppm}{}\label{lz77_8cppm}\index{Compress-\/to-\/fit/src/models/LZ77/lz77.cppm@{Compress-\/to-\/fit/src/models/LZ77/lz77.cppm}}
+
+
+\+[lz77.\+Karp-\/Rabin]\+  
+
+
+{\ttfamily \+\#include $<$source\+\_\+location$>$}\newline
+{\ttfamily \+\#include $<$limits$>$}\newline
+{\ttfamily import parser;}\newline
+{\ttfamily import std.\+compat;}\newline
+{\ttfamily import util;}\newline
+Include dependency graph for lz77.\+cppm:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{lz77_8cppm__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=212pt]{lz77_8cppm__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{struct_token}{Token}}
+\begin{DoxyCompactList}\small\item\em This is the type \doxylink{class_l_z77}{LZ77} will output. \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{class_window}{Window}}
+\begin{DoxyCompactList}\small\item\em \+[lz77.\+Window]\+ \end{DoxyCompactList}\item 
+class \doxymbox{\hyperlink{classalg_1_1_rabin}{alg::\+\+Rabin}}
+\item 
+struct \doxymbox{\hyperlink{struct_compression_data}{Compression\+Data$<$ T $>$}}
+\item 
+struct \doxymbox{\hyperlink{struct_compression_data_3_01_sym_01_4}{Compression\+Data$<$ Sym $>$}}
+\item 
+class \doxymbox{\hyperlink{class_l_z77}{LZ77$<$ Data\+Type $>$}}
+\begin{DoxyCompactList}\small\item\em Implement the \doxylink{class_l_z77}{LZ77} algorithm. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \doxymbox{\hyperlink{namespacealg}{alg}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Concepts}
+\begin{DoxyCompactItemize}
+\item 
+concept \doxymbox{\hyperlink{concept_is_sym}{Is\+Sym}}
+\item 
+concept \doxymbox{\hyperlink{concept_is_token}{Is\+Token}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \doxymbox{\hyperlink{lz77_8cppm_a7184b481ee894966b0eb8845e4a7bcf2}{LZ77\+\_\+\+Token}} = \doxymbox{\hyperlink{struct_token}{Token}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+constexpr int \doxymbox{\hyperlink{lz77_8cppm_a99dc63646f54b92729a552eed4b13e91}{SEARCH\+\_\+\+RATIO}} = 500
+\item 
+constexpr auto \doxymbox{\hyperlink{lz77_8cppm_a282c82f087f402efca939353e57fca44}{MAX\+\_\+\+WINDOW\+\_\+\+SIZE}} = \doxymbox{\hyperlink{utils_8cppm_add31fbd0032fa67fcfec5e586203f0f2}{KB\+\_\+to\+\_\+B}}(128)
+\item 
+constexpr auto \doxymbox{\hyperlink{lz77_8cppm_ac4a340be8c3b526cce9e4074d9389497}{MAX\+\_\+\+HASH\+\_\+\+SIZE}} = \doxymbox{\hyperlink{lz77_8cppm_a282c82f087f402efca939353e57fca44}{MAX\+\_\+\+WINDOW\+\_\+\+SIZE}} $<$$<$ 1
+\begin{DoxyCompactList}\small\item\em The size of \doxylink{classalg_1_1_rabin_a044b5f0c49e0c52d1ae1a715d00ec0ac}{alg::\+\+Rabin::\+poss\+\_\+table}. \end{DoxyCompactList}\item 
+constexpr uint32\+\_\+t \doxymbox{\hyperlink{namespacealg_a38d521bade379a8121e61b016ad5397f}{alg::\+\+MOD}} = (1u $<$$<$ 31) -\/ 1
+\item 
+constexpr uint32\+\_\+t \doxymbox{\hyperlink{namespacealg_a783a2c45f8f4efe9e425d4e7f1030864}{alg::\+\+BASE}} = \doxymbox{\hyperlink{struct_sym_aece773d665ceafaf42273722fa02cf5f}{Sym::\+alphabet\+\_\+size}}()
+\item 
+constexpr uint32\+\_\+t \doxymbox{\hyperlink{namespacealg_aeca501bd83e1fd3e65ea2fce9f4e1190}{alg::\+\+MIN\+\_\+\+MATCH}} = 3
+\item 
+constexpr uint32\+\_\+t \doxymbox{\hyperlink{namespacealg_ad3d2660056a755adc8334b83459060a6}{alg::\+\+MAX\+\_\+\+MATCH}} = 250
+\item 
+constexpr uint32\+\_\+t \doxymbox{\hyperlink{namespacealg_a38877028f73fde25cba851a5ff43a9a0}{alg::\+\+PRIME}} = 31
+\item 
+constexpr uint32\+\_\+t \doxymbox{\hyperlink{namespacealg_a094c81562033f2bf0caafaaa5ea260b0}{alg::\+\+ROLL\+\_\+\+FACTOR}} = \doxymbox{\hyperlink{utils_8cppm_a78c404083e319e5d50a4293e918cb8ab}{const\+\_\+pow}}(\doxymbox{\hyperlink{namespacealg_a783a2c45f8f4efe9e425d4e7f1030864}{BASE}}, \doxymbox{\hyperlink{namespacealg_aeca501bd83e1fd3e65ea2fce9f4e1190}{MIN\+\_\+\+MATCH}} -\/ 1)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\+[lz77.\+Karp-\/Rabin]\+ 
+
+This class enables fast string matching.
+
+Makes use of two chained arrays.
+
+This class is intertwined with \doxylink{class_l_z77}{LZ77} and should not be used as separate entity.
+
+This class shall not modify the \doxylink{class_window}{Window} given 
+
+Definition in file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+
+
+\label{lz77_8cppm_doc-typedef-members}
+\Hypertarget{lz77_8cppm_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{lz77_8cppm_a7184b481ee894966b0eb8845e4a7bcf2}\index{lz77.cppm@{lz77.cppm}!LZ77\_Token@{LZ77\_Token}}
+\index{LZ77\_Token@{LZ77\_Token}!lz77.cppm@{lz77.cppm}}
+\doxysubsubsection{\texorpdfstring{LZ77\_Token}{LZ77\_Token}}
+{\footnotesize\ttfamily \label{lz77_8cppm_a7184b481ee894966b0eb8845e4a7bcf2} 
+using \doxymbox{\hyperlink{lz77_8cppm_a7184b481ee894966b0eb8845e4a7bcf2}{LZ77\+\_\+\+Token}} = \doxymbox{\hyperlink{struct_token}{Token}}\hspace{0.3cm}{\ttfamily [export]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00031}{31}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+
+
+\label{lz77_8cppm_doc-var-members}
+\Hypertarget{lz77_8cppm_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{lz77_8cppm_ac4a340be8c3b526cce9e4074d9389497}\index{lz77.cppm@{lz77.cppm}!MAX\_HASH\_SIZE@{MAX\_HASH\_SIZE}}
+\index{MAX\_HASH\_SIZE@{MAX\_HASH\_SIZE}!lz77.cppm@{lz77.cppm}}
+\doxysubsubsection{\texorpdfstring{MAX\_HASH\_SIZE}{MAX\_HASH\_SIZE}}
+{\footnotesize\ttfamily \label{lz77_8cppm_ac4a340be8c3b526cce9e4074d9389497} 
+auto MAX\+\_\+\+HASH\+\_\+\+SIZE = \doxymbox{\hyperlink{lz77_8cppm_a282c82f087f402efca939353e57fca44}{MAX\+\_\+\+WINDOW\+\_\+\+SIZE}} $<$$<$ 1\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+The size of \doxylink{classalg_1_1_rabin_a044b5f0c49e0c52d1ae1a715d00ec0ac}{alg::\+\+Rabin::\+poss\+\_\+table}. 
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00038}{38}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{lz77_8cppm_source_l00280}{alg::\+\+Rabin::\+bucket\+\_\+index()}}.
+
+\Hypertarget{lz77_8cppm_a282c82f087f402efca939353e57fca44}\index{lz77.cppm@{lz77.cppm}!MAX\_WINDOW\_SIZE@{MAX\_WINDOW\_SIZE}}
+\index{MAX\_WINDOW\_SIZE@{MAX\_WINDOW\_SIZE}!lz77.cppm@{lz77.cppm}}
+\doxysubsubsection{\texorpdfstring{MAX\_WINDOW\_SIZE}{MAX\_WINDOW\_SIZE}}
+{\footnotesize\ttfamily \label{lz77_8cppm_a282c82f087f402efca939353e57fca44} 
+auto MAX\+\_\+\+WINDOW\+\_\+\+SIZE = \doxymbox{\hyperlink{utils_8cppm_add31fbd0032fa67fcfec5e586203f0f2}{KB\+\_\+to\+\_\+B}}(128)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00034}{34}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{lz77_8cppm_source_l00292}{alg::\+\+Rabin::\+prev\+\_\+bucket\+\_\+index()}}.
+
+\Hypertarget{lz77_8cppm_a99dc63646f54b92729a552eed4b13e91}\index{lz77.cppm@{lz77.cppm}!SEARCH\_RATIO@{SEARCH\_RATIO}}
+\index{SEARCH\_RATIO@{SEARCH\_RATIO}!lz77.cppm@{lz77.cppm}}
+\doxysubsubsection{\texorpdfstring{SEARCH\_RATIO}{SEARCH\_RATIO}}
+{\footnotesize\ttfamily \label{lz77_8cppm_a99dc63646f54b92729a552eed4b13e91} 
+int SEARCH\+\_\+\+RATIO = 500\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00033}{33}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{lz77_8cppm_source_l00056}{Window::\+\+Window()}}, and \doxymbox{\hyperlink{lz77_8cppm_source_l00047}{Window::\+\+Window()}}.
+

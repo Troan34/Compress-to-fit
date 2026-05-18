@@ -1,0 +1,285 @@
+\doxysection{cli\+\_\+parser.\+cpp}
+\hypertarget{cli__parser_8cpp_source}{}\label{cli__parser_8cpp_source}\index{Compress-\/to-\/fit/src/util/cli\_parser.cpp@{Compress-\/to-\/fit/src/util/cli\_parser.cpp}}
+\doxymbox{\hyperlink{cli__parser_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00001}00001\ module\ parser;}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00003}00003\ import\ util;}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00004}00004\ import\ std;}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00006}00006\ \textcolor{keyword}{namespace}\ fs\ =\ std::filesystem;}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00008}\doxymbox{\hyperlink{namespaceparser}{00008}}\ \textcolor{keyword}{namespace}\ \doxymbox{\hyperlink{namespaceparser}{parser}}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00009}00009\ \{}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00010}\doxymbox{\hyperlink{classparser_1_1_token_a1a02f18007b4724b39adab951f180e9f}{00010}}\ \doxymbox{\hyperlink{namespaceparser}{Token}}::\doxymbox{\hyperlink{namespaceparser}{Token}}(\doxymbox{\hyperlink{namespaceparser}{TokenType}}\ \doxymbox{\hyperlink{namespaceparser}{type\_}},\ \doxymbox{\hyperlink{namespaceparser}{ValueType}}\ \doxymbox{\hyperlink{namespaceparser}{value\_}})}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00011}00011\ \ \ \ \ :\doxymbox{\hyperlink{namespaceparser}{type}}(\doxymbox{\hyperlink{namespaceparser}{type\_}}),\ \doxymbox{\hyperlink{namespaceparser}{value}}(\doxymbox{\hyperlink{namespaceparser}{value\_}})}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00012}00012\ \{}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00013}00013\ \}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00015}\doxymbox{\hyperlink{classparser_1_1_token_a03fc54839cfb01b88087c14db5b0fd63}{00015}}\ \doxymbox{\hyperlink{namespaceparser}{Token}}::\doxymbox{\hyperlink{namespaceparser}{Token}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{namespaceparser}{std}}::\doxymbox{\hyperlink{namespaceparser}{string}}\&\ \doxymbox{\hyperlink{namespaceparser}{option}})}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00016}00016\ \{}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00017}00017\ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{namespaceparser}{res}}\ =\ \doxymbox{\hyperlink{namespaceparser}{lex}}(\doxymbox{\hyperlink{namespaceparser}{option}});}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00018}00018\ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{namespaceparser}{res}})}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00019}00019\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00020}00020\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespaceparser}{type}}\ =\ \doxymbox{\hyperlink{namespaceparser}{res}}.\doxymbox{\hyperlink{namespaceparser}{value}}().\doxymbox{\hyperlink{namespaceparser}{type}};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00021}00021\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespaceparser}{value}}\ =\ \doxymbox{\hyperlink{namespaceparser}{res}}.\doxymbox{\hyperlink{namespaceparser}{value}}().\doxymbox{\hyperlink{namespaceparser}{value}};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00022}00022\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00023}00023\ \}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00025}00025\ \textcolor{comment}{//Only\ now\ I\ realize\ I\ fucked\ up\ the\ names\ for\ lex\ and\ parse.}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00027}00027\ \textcolor{comment}{/**}}
+\DoxyCodeLine{00028\ \textcolor{comment}{\ *\ @brief\ Semantically\ check\ an\ argument\ (e.g.\ -\/preset\ 8)}}
+\DoxyCodeLine{00029\ \textcolor{comment}{\ *\ @param\ option\ The\ argument}}
+\DoxyCodeLine{00030\ \textcolor{comment}{\ *\ @return\ The\ token}}
+\DoxyCodeLine{00031\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00032}\doxymbox{\hyperlink{namespaceparser_a883c446b2f982a5d7b6989f2442e8186}{00032}}\ \doxymbox{\hyperlink{namespaceparser_a883c446b2f982a5d7b6989f2442e8186}{std}}::\doxymbox{\hyperlink{namespaceparser_a883c446b2f982a5d7b6989f2442e8186}{expected}}<\doxymbox{\hyperlink{namespaceparser_a883c446b2f982a5d7b6989f2442e8186}{Token}},\ \doxymbox{\hyperlink{namespaceparser_a883c446b2f982a5d7b6989f2442e8186}{ErrorType}}>\ \doxymbox{\hyperlink{namespaceparser_a883c446b2f982a5d7b6989f2442e8186}{lex}}(\textcolor{keyword}{const}\ std::string\&\ option)}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00033}00033\ \{}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00034}00034\ \ \ \ \ \textcolor{keyword}{auto}\ token\_string\ =\ option.substr(0,\ option.find(\textcolor{stringliteral}{'\ '}));}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00035}00035\ \ \ \ \ \textcolor{keyword}{auto}\ token\_value\ =\ option.substr(option.find\_first\_not\_of(\textcolor{stringliteral}{'\ '},\ option.find(\textcolor{stringliteral}{'\ '})),\ std::string::npos);}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00038}00038\ \ \ \ \ TokenType\ token\_type;}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00040}00040\ \ \ \ \ \textcolor{comment}{//Find\ TokenType\ by\ checking\ if\ token\_string\ is\ equal\ to\ any\ command}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00041}00041\ \ \ \ \ \textcolor{keywordflow}{if}\ (token\_string\ ==\ token\_strings[\textcolor{keyword}{static\_cast}<size\_t>(TokenType::COMPRESSION\_PRESET)])\ token\_type\ =\ TokenType::COMPRESSION\_PRESET;}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00042}00042\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (token\_string\ ==\ token\_strings[\textcolor{keyword}{static\_cast}<size\_t>(TokenType::FILENAME\_IN)])\ token\_type\ =\ TokenType::FILENAME\_IN;}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00043}00043\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (token\_string\ ==\ token\_strings[\textcolor{keyword}{static\_cast}<size\_t>(TokenType::FILENAME\_OUT)])\ token\_type\ =\ TokenType::FILENAME\_OUT;}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00044}00044\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (token\_string\ ==\ token\_strings[\textcolor{keyword}{static\_cast}<size\_t>(TokenType::N\_FILES)])\ token\_type\ =\ TokenType::N\_FILES;}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00045}00045\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (token\_string\ ==\ token\_strings[\textcolor{keyword}{static\_cast}<size\_t>(TokenType::SIZE\_FILES)])\ token\_type\ =\ TokenType::SIZE\_FILES;}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00046}00046\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (token\_string\ ==\ token\_strings[\textcolor{keyword}{static\_cast}<size\_t>(TokenType::LONG\_HELP)])}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00047}00047\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00048}00048\ \ \ \ \ \ \ \ \ std::print(help\_str);}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00049}00049\ \ \ \ \ \ \ \ \ std::terminate();}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00050}00050\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00051}00051\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (token\_string\ ==\ token\_strings[\textcolor{keyword}{static\_cast}<size\_t>(TokenType::HELP)])}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00052}00052\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00053}00053\ \ \ \ \ \ \ \ \ std::print(help\_str);}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00054}00054\ \ \ \ \ \ \ \ \ std::terminate();}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00055}00055\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00056}00056\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (token\_string\ ==\ token\_strings[\textcolor{keyword}{static\_cast}<size\_t>(TokenType::FORCE\_COMPRESSION)])\ token\_type\ =\ TokenType::FORCE\_COMPRESSION;}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00057}00057\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (token\_string\ ==\ token\_strings[\textcolor{keyword}{static\_cast}<size\_t>(TokenType::DELETE\_INPUT)])\ token\_type\ =\ TokenType::DELETE\_INPUT;}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00058}00058\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (token\_string\ ==\ token\_strings[\textcolor{keyword}{static\_cast}<size\_t>(TokenType::COMPRESSOR\_TYPE)])\ token\_type\ =\ TokenType::COMPRESSOR\_TYPE;}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00059}00059\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (token\_string\ ==\ token\_strings[\textcolor{keyword}{static\_cast}<size\_t>(TokenType::CONCATENATE)])\ token\_type\ =\ TokenType::CONCATENATE;}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00060}00060\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (token\_string\ ==\ token\_strings[\textcolor{keyword}{static\_cast}<size\_t>(TokenType::DO\_DECOMP\_AFTER\_CONCAT)])\ token\_type\ =\ TokenType::DO\_DECOMP\_AFTER\_CONCAT;}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00061}00061\ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (token\_string\ ==\ token\_strings[\textcolor{keyword}{static\_cast}<size\_t>(TokenType::DO\_NOT\_DECOMP\_AFTER\_CONCAT)])\ token\_type\ =\ TokenType::DO\_NOT\_DECOMP\_AFTER\_CONCAT;}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00062}00062\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00063}00063\ \ \ \ \ \ \ \ \ throw\_error(ErrorType::SYNTAX\_ERROR,\ token\_string);}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00065}00065\ \ \ \ \ \textcolor{comment}{//handle\ flags}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00066}00066\ \ \ \ \ \textcolor{keywordflow}{switch}\ (token\_type)}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00067}00067\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00068}00068\ \ \ \ \ \textcolor{keywordflow}{case}\ TokenType::DELETE\_INPUT:}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00069}00069\ \ \ \ \ \textcolor{keywordflow}{case}\ TokenType::FORCE\_COMPRESSION:}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00070}00070\ \ \ \ \ \textcolor{keywordflow}{case}\ TokenType::CONCATENATE:}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00071}00071\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Token\{\ token\_type,\ \textcolor{keyword}{true}\ \};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00072}00072\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00073}00073\ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00074}00074\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00075}00075\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00078}00078\ \ \ \ \ ValueType\ value;}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00079}00079\ \ \ \ \ \textcolor{comment}{//Find\ token\_value\ and\ do\ error\ checking}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00080}00080\ \ \ \ \ \textcolor{keywordflow}{switch}\ (token\_type)}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00081}00081\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00082}00082\ \ \ \ \ \textcolor{keywordflow}{case}\ TokenType::FILENAME\_IN:}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00083}00083\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00084}00084\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Test\ if\ we\ can\ find\ and\ access\ the\ input\ file}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00085}00085\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!fs::exists(token\_value))}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00086}00086\ \ \ \ \ \ \ \ \ \ \ \ \ throw\_error(ErrorType::PATH\_NOT\_FOUND,\ token\_value);}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00087}00087\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00088}00088\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (std::ifstream\ file(token\_value);\ !file.is\_open())}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ throw\_error(ErrorType::PATH\_NOT\_ACCESSIBLE,\ token\_value);}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00091}00091\ \ \ \ \ \ \ \ \ value.emplace<fs::path>(token\_value);}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00092}00092\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00093}00093\ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00094}00094\ \ \ \ \ \textcolor{keywordflow}{case}\ TokenType::FILENAME\_OUT:}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00095}00095\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00096}00096\ \ \ \ \ \ \ \ \ fs::path\ path\{\ token\_value\ \};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00097}00097\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00098}00098\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Test\ if\ we\ can\ write\ a\ file\ to\ the\ given\ dir}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00099}00099\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ test\_path\ =\ path.parent\_path()\ /\ \textcolor{stringliteral}{"{}test\_writability"{}};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00100}00100\ \ \ \ \ \ \ \ \ std::ofstream\ test\_file\{test\_path\};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00101}00101\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!test\_file.is\_open())}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00102}00102\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ fs::remove(test\_path);}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ throw\_error(ErrorType::PATH\_NOT\_ACCESSIBLE,\ path.string());}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00105}00105\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00106}00106\ \ \ \ \ \ \ \ \ test\_file.close();}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00107}00107\ \ \ \ \ \ \ \ \ fs::remove(test\_path);}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00109}00109\ \ \ \ \ \ \ \ \ path.replace\_extension(FILE\_EXTENSION);}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00110}00110\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00111}00111\ \ \ \ \ \ \ \ \ value.emplace<fs::path>(path);}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00112}00112\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00113}00113\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00114}00114\ \ \ \ \ \textcolor{keywordflow}{case}\ TokenType::COMPRESSOR\_TYPE:}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00115}00115\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00116}00116\ \ \ \ \ \ \ \ \ std::transform(token\_value.begin(),\ token\_value.end(),\ token\_value.begin(),\ [](\textcolor{keywordtype}{char}\ c)\ \{\ \textcolor{keywordflow}{return}\ std::toupper(c);\ \});}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00117}00117\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00118}00118\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ \textcolor{keyword}{static\_cast}<\textcolor{keywordtype}{int}>(CompType::MAX);\ i++)}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00119}00119\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00120}00120\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (COMPRESSOR\_STR\_OPTIONS[i]\ ==\ token\_value)}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ value.emplace<size\_t>(\textcolor{keyword}{static\_cast}<size\_t>(i));}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00125}00125\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00126}00126\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00127}00127\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (std::holds\_alternative<std::monostate>(value))}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00128}00128\ \ \ \ \ \ \ \ \ \ \ \ \ throw\_error(ErrorType::SYNTAX\_ERROR,\ token\_string\ +\ token\_value);}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00129}00129\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00130}00130\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00131}00131\ \ \ \ \ \textcolor{keywordflow}{case}\ TokenType::COMPRESSION\_PRESET:}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00132}00132\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00133}00133\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Convert\ and\ check\ the\ compression\ preset}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00134}00134\ \ \ \ \ \ \ \ \ size\_t\ value\_cmpr;}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00135}00135\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ res\ =\ std::from\_chars(token\_value.data(),\ token\_value.data()\ +\ token\_value.size(),\ value\_cmpr);}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00136}00136\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00137}00137\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (res.ec\ !=\ std::errc()\ \textcolor{keyword}{or}\ (value\_cmpr\ >\ CompPreset::COMP\_MAX\ \textcolor{keyword}{or}\ value\_cmpr\ <\ CompPreset::NO\_COMP))\textcolor{comment}{//if\ not\ a\ number\ or\ outside\ of\ our\ range}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00138}00138\ \ \ \ \ \ \ \ \ \ \ \ \ throw\_error(ErrorType::VALUE\_ERROR,\ token\_string\ +\ token\_value);}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00139}00139\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00140}00140\ \ \ \ \ \ \ \ \ value.emplace<size\_t>(value\_cmpr);}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00141}00141\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00142}00142\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00143}00143\ \ \ \ \ \textcolor{keywordflow}{case}\ TokenType::N\_FILES:}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00144}00144\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00145}00145\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ value\_temp;}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00146}00146\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ res\ =\ std::from\_chars(token\_value.data(),\ token\_value.data()\ +\ token\_value.size(),\ value\_temp);}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00147}00147\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00148}00148\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (res.ec\ !=\ std::errc()\ \textcolor{keyword}{or}\ (value\_temp\ >\ N\_FILES\_LIMIT\ \textcolor{keyword}{or}\ value\_temp\ <\ 1))\textcolor{comment}{//if\ less\ than\ 1\ or\ over\ N\_FILES\_LIMIT}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00149}00149\ \ \ \ \ \ \ \ \ \ \ \ \ throw\_error(ErrorType::VALUE\_ERROR,\ token\_string\ +\ token\_value);}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00150}00150\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00151}00151\ \ \ \ \ \ \ \ \ value.emplace<size\_t>(value\_temp);}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00152}00152\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00153}00153\ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00154}00154\ \ \ \ \ \textcolor{keywordflow}{case}\ TokenType::SIZE\_FILES:}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00155}00155\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00156}00156\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ value\_temp;}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00157}00157\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ res\ =\ std::from\_chars(token\_value.data(),\ token\_value.data()\ +\ token\_value.size(),\ value\_temp);}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00158}00158\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00159}00159\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (res.ec\ !=\ std::errc()\ \textcolor{keyword}{or}\ (value\_temp\ <\ SIZE\_FILES\_MIN))\textcolor{comment}{//if\ negative\ or\ under\ SIZE\_FILES\_MIN}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00160}00160\ \ \ \ \ \ \ \ \ \ \ \ \ throw\_error(ErrorType::VALUE\_ERROR,\ token\_string\ +\ token\_value);}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00161}00161\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00162}00162\ \ \ \ \ \ \ \ \ value.emplace<size\_t>(value\_temp);}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00163}00163\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00164}00164\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00165}00165\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00166}00166\ \ \ \ \ \textcolor{keywordflow}{return}\ Token\{\ token\_type,\ value\ \};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00167}00167\ \}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00168}00168\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00169}00169\ \textcolor{comment}{/**}}
+\DoxyCodeLine{00170\ \textcolor{comment}{\ *\ @brief\ Read\ the\ cli.}}
+\DoxyCodeLine{00171\ \textcolor{comment}{\ *\ @param\ argc\ Number\ of\ cli\ arguments,\ where\ an\ argument\ is\ a\ 'word'\ separated\ by\ spaces,\ e.g.\ -\/i\ or\ -\/preset}}
+\DoxyCodeLine{00172\ \textcolor{comment}{\ *\ @param\ argv\ Pointer\ to\ the\ arguments}}
+\DoxyCodeLine{00173\ \textcolor{comment}{\ *\ @return\ The\ options\ obtained\ from\ the\ cli}}
+\DoxyCodeLine{00174\ \textcolor{comment}{\ *\ }}
+\DoxyCodeLine{00175\ \textcolor{comment}{\ *\ @throws\ std::runtime\_error\ for\ any\ kind\ of\ syntactic\ or\ semantic\ error}}
+\DoxyCodeLine{00176\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00177}\doxymbox{\hyperlink{namespaceparser_a7f5ecbf764fc175fc336fcea0dd07be8}{00177}}\ \doxymbox{\hyperlink{namespaceparser_a7f5ecbf764fc175fc336fcea0dd07be8}{Options}}\ \doxymbox{\hyperlink{namespaceparser_a7f5ecbf764fc175fc336fcea0dd07be8}{parse}}(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}*\ argv[])}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00178}00178\ \{}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00179}00179\ \ \ \ \ \textcolor{keywordflow}{if}\ (argc\ ==\ 1)}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00180}00180\ \ \ \ \ \ \ \ \ throw\_error(ErrorType::SYNTAX\_ERROR,\ \textcolor{stringliteral}{"{}No\ arguments\ given."{}});}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00181}00181\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00182}00182\ \ \ \ \ Options\ options;}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00183}00183\ \ \ \ \ \textcolor{comment}{//Parse\ the\ cli}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00184}00184\ \ \ \ \ \textcolor{comment}{//starting\ at\ 1\ means\ we\ ignore\ the\ first\ (name\ of\ program)}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00185}00185\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ index\ =\ 1;\ index\ <\ argc;\ index++)}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00186}00186\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00187}00187\ \ \ \ \ \ \ \ \ std::string\ option\{\ argv[index]\ \};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00188}00188\ \ \ \ \ \ \ \ \ option\ +=\ \textcolor{stringliteral}{'\ '};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00189}00189\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (index\ +\ 1\ <\ argc)\textcolor{comment}{//stay\ in\ bounds}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00190}00190\ \ \ \ \ \ \ \ \ \ \ \ \ option\ +=\ argv[++index];}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00191}00191\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00192}00192\ \ \ \ \ \ \ \ \ \textcolor{comment}{//If\ the\ path\ has\ spaces,\ this\ makes\ sure\ that\ we\ take\ the\ whole\ path\ (we\ check\ for\ "{})}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00193}00193\ \ \ \ \ \ \ \ \ \textcolor{comment}{//else\ we\ throw}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00194}00194\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (std::count(option.begin(),\ option.end(),\ \textcolor{stringliteral}{'\(\backslash\)"{}'})\ ==\ 1)}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00195}00195\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00196}00196\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ valid\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00197}00197\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00198}00198\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(;index\ <\ argc\ -\/\ 1;\ index++)}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00199}00199\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00200}00200\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ option\_temp\{\ argv[index\ +\ 1]\ \};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00201}00201\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ option\ +=\ option\_temp;}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00202}00202\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (std::count(option\_temp.begin(),\ option\_temp.end(),\ \textcolor{stringliteral}{'\(\backslash\)"{}'})\ ==\ 1)}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00203}00203\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00204}00204\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ valid\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00205}00205\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00206}00206\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00207}00207\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00208}00208\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00209}00209\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!valid)}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00210}00210\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ throw\_error(ErrorType::PATH\_INVALID,\ option);}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00211}00211\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00212}00212\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00213}00213\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ token\ =\ lex(option);}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00214}00214\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00215}00215\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (token)}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00216}00216\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00217}00217\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (token.value().get\_type())}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00218}00218\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00219}00219\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ TokenType::FILENAME\_IN:}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00220}00220\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ options.filename\_in\ =\ std::get<fs::path>(token.value().get\_value());}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00221}00221\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00222}00222\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ TokenType::FILENAME\_OUT:}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00223}00223\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ options.filename\_out\ =\ std::get<fs::path>(token.value().get\_value());}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00224}00224\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00225}00225\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ TokenType::COMPRESSOR\_TYPE:}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00226}00226\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ options.preset\ =\ std::get<size\_t>(token.value().get\_value());}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00227}00227\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00228}00228\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ TokenType::COMPRESSION\_PRESET:}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00229}00229\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ options.preset\ =\ std::get<size\_t>(token.value().get\_value());}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00230}00230\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00231}00231\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ TokenType::N\_FILES:}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00232}00232\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ options.n\_files\ =\ std::get<size\_t>(token.value().get\_value());}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00233}00233\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00234}00234\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ TokenType::SIZE\_FILES:}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00235}00235\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ options.size\_files\ =\ std::get<size\_t>(token.value().get\_value());}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00236}00236\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00237}00237\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//DO\ index-\/-\/\ FOR\ FLAGS,\ it\ stops\ us\ from\ skipping\ arguments}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00238}00238\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ TokenType::FORCE\_COMPRESSION:}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00239}00239\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ options.force\_compression\ =\ std::get<\textcolor{keywordtype}{bool}>(token.value().get\_value());}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00240}00240\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ index-\/-\/;}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00241}00241\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00242}00242\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ TokenType::DELETE\_INPUT:}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00243}00243\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ options.delete\_input\ =\ std::get<\textcolor{keywordtype}{bool}>(token.value().get\_value());}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00244}00244\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ index-\/-\/;}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00245}00245\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00246}00246\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ TokenType::CONCATENATE:}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00247}00247\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ options.concatenate\_files\ =\ std::get<\textcolor{keywordtype}{bool}>(token.value().get\_value());}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00248}00248\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ index-\/-\/;}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00249}00249\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00250}00250\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ TokenType::DO\_DECOMP\_AFTER\_CONCAT:}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00251}00251\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ options.decomp\_after\_concat\ =\ std::get<\textcolor{keywordtype}{bool}>(token.value().get\_value());}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00252}00252\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ index-\/-\/;}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00253}00253\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00254}00254\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ TokenType::DO\_NOT\_DECOMP\_AFTER\_CONCAT:}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00255}00255\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ index-\/-\/;}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00256}00256\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00257}00257\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00258}00258\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::terminate();}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00259}00259\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00260}00260\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00261}00261\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00262}00262\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00263}00263\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00264}00264\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00265}00265\ \ \ \ \ \ \ \ \ \ \ \ \ throw\_error(token.error(),\ option);}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00266}00266\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00267}00267\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00268}00268\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00269}00269\ \ \ \ \ \textcolor{keywordflow}{if}\ (fs::is\_directory(options.filename\_in)\ \textcolor{keyword}{and}\ !options.concatenate\_files)}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00270}00270\ \ \ \ \ \ \ \ \ throw\_error(ErrorType::DIR\_COMPRESSION,\ options.filename\_in.string());}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00271}00271\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00272}00272\ \ \ \ \ \textcolor{keywordflow}{if}\ (options.filename\_out.empty()\ \textcolor{keyword}{or}\ options.filename\_out.string().find\_first\_not\_of(\textcolor{stringliteral}{'\ '})\ ==\ std::string::npos)}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00273}00273\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00274}00274\ \ \ \ \ \ \ \ \ options.filename\_out\ =\ options.filename\_in.stem()\ +=\ FILE\_EXTENSION;}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00275}00275\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00276}00276\ \ \ \ \ \textcolor{keywordflow}{return}\ options;}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00277}00277\ \}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00278}00278\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cpp_source_l00279}00279\ \}\textcolor{comment}{//namespace\ parser}}
+
+\end{DoxyCode}

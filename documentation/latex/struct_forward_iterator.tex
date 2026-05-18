@@ -1,0 +1,275 @@
+\doxysection{Forward\+Iterator\texorpdfstring{$<$}{<} Iter \texorpdfstring{$>$}{>} Struct Template Reference}
+\hypertarget{struct_forward_iterator}{}\label{struct_forward_iterator}\index{ForwardIterator$<$ Iter $>$@{ForwardIterator$<$ Iter $>$}}
+
+
+Collaboration diagram for Forward\+Iterator\texorpdfstring{$<$}{<} Iter \texorpdfstring{$>$}{>}:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=186pt]{struct_forward_iterator__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \doxymbox{\hyperlink{struct_forward_iterator_a475d091051d67a216ceffe667a0fbea4}{iterator\+\_\+concept}} = std::\+forward\+\_\+iterator\+\_\+tag
+\item 
+using \doxymbox{\hyperlink{struct_forward_iterator_ae32f9f8a175589cb0c9820711c485271}{iterator\+\_\+category}} = std::\+forward\+\_\+iterator\+\_\+tag
+\item 
+using \doxymbox{\hyperlink{struct_forward_iterator_ad00decbba72fa110b0c52a1654ae6436}{value\+\_\+type}} = typename std::\+iterator\+\_\+traits$<$Iter$>$::\+value\+\_\+type
+\item 
+using \doxymbox{\hyperlink{struct_forward_iterator_a0e9bacd46dc23d6647d5c7ccfb6e9270}{difference\+\_\+type}} = typename std::\+iterator\+\_\+traits$<$Iter$>$::\+difference\+\_\+type
+\item 
+using \doxymbox{\hyperlink{struct_forward_iterator_a6d702590809f9300419f87820ec077dd}{pointer}} = typename std::\+iterator\+\_\+traits$<$Iter$>$::\+pointer
+\item 
+using \doxymbox{\hyperlink{struct_forward_iterator_acbeb658714f135131729b875a45b8348}{reference}} = typename std::\+iterator\+\_\+traits$<$Iter$>$::\+reference
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{struct_forward_iterator_a09267b76a90c5288f27fb210ffa22365}{Forward\+Iterator}} (Iter begin\+\_\+, Iter const end\+\_\+)
+\item 
+\doxymbox{\hyperlink{struct_forward_iterator}{Forward\+Iterator}} \& \doxymbox{\hyperlink{struct_forward_iterator_a2bce5f8eb3cdeb4cb499164ef817db03}{operator++}} ()
+\item 
+\doxymbox{\hyperlink{struct_forward_iterator}{Forward\+Iterator}} \doxymbox{\hyperlink{struct_forward_iterator_a3336775442b4c084bae9583a49e3da5e}{operator++}} (int)
+\item 
+\doxymbox{\hyperlink{struct_forward_iterator}{Forward\+Iterator}} \& \doxymbox{\hyperlink{struct_forward_iterator_af4c11d6b1d8d895e1893584f63374e29}{operator+=}} (size\+\_\+t const size)
+\item 
+\doxymbox{\hyperlink{struct_forward_iterator_acbeb658714f135131729b875a45b8348}{reference}} \doxymbox{\hyperlink{struct_forward_iterator_a847bd43cee16c451c40f44e525ba1f16}{operator\texorpdfstring{$\ast$}{*}}} ()
+\item 
+bool \doxymbox{\hyperlink{struct_forward_iterator_a55dcfedc8110d7aafa80b33955fc792f}{operator==}} (\doxymbox{\hyperlink{struct_forward_iterator}{Forward\+Iterator}} const \&other) const
+\item 
+bool \doxymbox{\hyperlink{struct_forward_iterator_a2fe1fb4cb8e3ac42dd6cae010a29069a}{operator!=}} (\doxymbox{\hyperlink{struct_forward_iterator}{Forward\+Iterator}} const \&other) const
+\item 
+bool \doxymbox{\hyperlink{struct_forward_iterator_afe5df28a799dd1cba86e5ccc6f610088}{reached\+\_\+end}} () const
+\item 
+size\+\_\+t \doxymbox{\hyperlink{struct_forward_iterator_adbe1d464718886322bbf91c1d5596316}{distance\+\_\+to\+\_\+end}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Iter \doxymbox{\hyperlink{struct_forward_iterator_a2d1b8f67bb19dfe4f24d292581169a09}{iterator}}
+\item 
+Iter const \doxymbox{\hyperlink{struct_forward_iterator_a5aa22e4f8febf8fe6808d6f85d82dc9d}{end}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Iter$>$\newline
+struct Forward\+Iterator$<$ Iter $>$}
+
+
+Definition at line \doxymbox{\hyperlink{utils_8cppm_source_l00217}{217}} of file \doxymbox{\hyperlink{utils_8cppm_source}{utils.\+cppm}}.
+
+
+
+\label{struct_forward_iterator_doc-typedef-members}
+\Hypertarget{struct_forward_iterator_doc-typedef-members}
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{struct_forward_iterator_a0e9bacd46dc23d6647d5c7ccfb6e9270}\index{ForwardIterator$<$ Iter $>$@{ForwardIterator$<$ Iter $>$}!difference\_type@{difference\_type}}
+\index{difference\_type@{difference\_type}!ForwardIterator$<$ Iter $>$@{ForwardIterator$<$ Iter $>$}}
+\doxysubsubsection{\texorpdfstring{difference\_type}{difference\_type}}
+{\footnotesize\ttfamily \label{struct_forward_iterator_a0e9bacd46dc23d6647d5c7ccfb6e9270} 
+template$<$typename Iter$>$ \\
+using \doxymbox{\hyperlink{struct_forward_iterator}{Forward\+Iterator}}$<$ Iter $>$::\+difference\+\_\+type = typename std::\+iterator\+\_\+traits$<$Iter$>$::\+difference\+\_\+type}
+
+
+
+Definition at line \doxymbox{\hyperlink{utils_8cppm_source_l00222}{222}} of file \doxymbox{\hyperlink{utils_8cppm_source}{utils.\+cppm}}.
+
+\Hypertarget{struct_forward_iterator_ae32f9f8a175589cb0c9820711c485271}\index{ForwardIterator$<$ Iter $>$@{ForwardIterator$<$ Iter $>$}!iterator\_category@{iterator\_category}}
+\index{iterator\_category@{iterator\_category}!ForwardIterator$<$ Iter $>$@{ForwardIterator$<$ Iter $>$}}
+\doxysubsubsection{\texorpdfstring{iterator\_category}{iterator\_category}}
+{\footnotesize\ttfamily \label{struct_forward_iterator_ae32f9f8a175589cb0c9820711c485271} 
+template$<$typename Iter$>$ \\
+using \doxymbox{\hyperlink{struct_forward_iterator}{Forward\+Iterator}}$<$ Iter $>$::\+iterator\+\_\+category = std::\+forward\+\_\+iterator\+\_\+tag}
+
+
+
+Definition at line \doxymbox{\hyperlink{utils_8cppm_source_l00220}{220}} of file \doxymbox{\hyperlink{utils_8cppm_source}{utils.\+cppm}}.
+
+\Hypertarget{struct_forward_iterator_a475d091051d67a216ceffe667a0fbea4}\index{ForwardIterator$<$ Iter $>$@{ForwardIterator$<$ Iter $>$}!iterator\_concept@{iterator\_concept}}
+\index{iterator\_concept@{iterator\_concept}!ForwardIterator$<$ Iter $>$@{ForwardIterator$<$ Iter $>$}}
+\doxysubsubsection{\texorpdfstring{iterator\_concept}{iterator\_concept}}
+{\footnotesize\ttfamily \label{struct_forward_iterator_a475d091051d67a216ceffe667a0fbea4} 
+template$<$typename Iter$>$ \\
+using \doxymbox{\hyperlink{struct_forward_iterator}{Forward\+Iterator}}$<$ Iter $>$::\+iterator\+\_\+concept = std::\+forward\+\_\+iterator\+\_\+tag}
+
+
+
+Definition at line \doxymbox{\hyperlink{utils_8cppm_source_l00219}{219}} of file \doxymbox{\hyperlink{utils_8cppm_source}{utils.\+cppm}}.
+
+\Hypertarget{struct_forward_iterator_a6d702590809f9300419f87820ec077dd}\index{ForwardIterator$<$ Iter $>$@{ForwardIterator$<$ Iter $>$}!pointer@{pointer}}
+\index{pointer@{pointer}!ForwardIterator$<$ Iter $>$@{ForwardIterator$<$ Iter $>$}}
+\doxysubsubsection{\texorpdfstring{pointer}{pointer}}
+{\footnotesize\ttfamily \label{struct_forward_iterator_a6d702590809f9300419f87820ec077dd} 
+template$<$typename Iter$>$ \\
+using \doxymbox{\hyperlink{struct_forward_iterator}{Forward\+Iterator}}$<$ Iter $>$::\+pointer = typename std::\+iterator\+\_\+traits$<$Iter$>$::\+pointer}
+
+
+
+Definition at line \doxymbox{\hyperlink{utils_8cppm_source_l00223}{223}} of file \doxymbox{\hyperlink{utils_8cppm_source}{utils.\+cppm}}.
+
+\Hypertarget{struct_forward_iterator_acbeb658714f135131729b875a45b8348}\index{ForwardIterator$<$ Iter $>$@{ForwardIterator$<$ Iter $>$}!reference@{reference}}
+\index{reference@{reference}!ForwardIterator$<$ Iter $>$@{ForwardIterator$<$ Iter $>$}}
+\doxysubsubsection{\texorpdfstring{reference}{reference}}
+{\footnotesize\ttfamily \label{struct_forward_iterator_acbeb658714f135131729b875a45b8348} 
+template$<$typename Iter$>$ \\
+using \doxymbox{\hyperlink{struct_forward_iterator}{Forward\+Iterator}}$<$ Iter $>$::\+reference = typename std::\+iterator\+\_\+traits$<$Iter$>$::\+reference}
+
+
+
+Definition at line \doxymbox{\hyperlink{utils_8cppm_source_l00224}{224}} of file \doxymbox{\hyperlink{utils_8cppm_source}{utils.\+cppm}}.
+
+\Hypertarget{struct_forward_iterator_ad00decbba72fa110b0c52a1654ae6436}\index{ForwardIterator$<$ Iter $>$@{ForwardIterator$<$ Iter $>$}!value\_type@{value\_type}}
+\index{value\_type@{value\_type}!ForwardIterator$<$ Iter $>$@{ForwardIterator$<$ Iter $>$}}
+\doxysubsubsection{\texorpdfstring{value\_type}{value\_type}}
+{\footnotesize\ttfamily \label{struct_forward_iterator_ad00decbba72fa110b0c52a1654ae6436} 
+template$<$typename Iter$>$ \\
+using \doxymbox{\hyperlink{struct_forward_iterator}{Forward\+Iterator}}$<$ Iter $>$::\+value\+\_\+type = typename std::\+iterator\+\_\+traits$<$Iter$>$::\+value\+\_\+type}
+
+
+
+Definition at line \doxymbox{\hyperlink{utils_8cppm_source_l00221}{221}} of file \doxymbox{\hyperlink{utils_8cppm_source}{utils.\+cppm}}.
+
+
+
+\label{struct_forward_iterator_doc-constructors}
+\Hypertarget{struct_forward_iterator_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{struct_forward_iterator_a09267b76a90c5288f27fb210ffa22365}\index{ForwardIterator$<$ Iter $>$@{ForwardIterator$<$ Iter $>$}!ForwardIterator@{ForwardIterator}}
+\index{ForwardIterator@{ForwardIterator}!ForwardIterator$<$ Iter $>$@{ForwardIterator$<$ Iter $>$}}
+\doxysubsubsection{\texorpdfstring{ForwardIterator()}{ForwardIterator()}}
+{\footnotesize\ttfamily \label{struct_forward_iterator_a09267b76a90c5288f27fb210ffa22365} 
+template$<$typename Iter$>$ \\
+\doxymbox{\hyperlink{struct_forward_iterator}{Forward\+Iterator}}$<$ Iter $>$::\+\+Forward\+Iterator (\begin{DoxyParamCaption}\item[{Iter}]{begin\+\_\+}{, }\item[{Iter const}]{end\+\_\+}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{utils_8cppm_source_l00226}{226}} of file \doxymbox{\hyperlink{utils_8cppm_source}{utils.\+cppm}}.
+
+
+
+\label{struct_forward_iterator_doc-func-members}
+\Hypertarget{struct_forward_iterator_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{struct_forward_iterator_adbe1d464718886322bbf91c1d5596316}\index{ForwardIterator$<$ Iter $>$@{ForwardIterator$<$ Iter $>$}!distance\_to\_end@{distance\_to\_end}}
+\index{distance\_to\_end@{distance\_to\_end}!ForwardIterator$<$ Iter $>$@{ForwardIterator$<$ Iter $>$}}
+\doxysubsubsection{\texorpdfstring{distance\_to\_end()}{distance\_to\_end()}}
+{\footnotesize\ttfamily \label{struct_forward_iterator_adbe1d464718886322bbf91c1d5596316} 
+template$<$typename Iter$>$ \\
+size\+\_\+t \doxymbox{\hyperlink{struct_forward_iterator}{Forward\+Iterator}}$<$ Iter $>$::\+distance\+\_\+to\+\_\+end (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{utils_8cppm_source_l00245}{245}} of file \doxymbox{\hyperlink{utils_8cppm_source}{utils.\+cppm}}.
+
+\Hypertarget{struct_forward_iterator_a2fe1fb4cb8e3ac42dd6cae010a29069a}\index{ForwardIterator$<$ Iter $>$@{ForwardIterator$<$ Iter $>$}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!ForwardIterator$<$ Iter $>$@{ForwardIterator$<$ Iter $>$}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily \label{struct_forward_iterator_a2fe1fb4cb8e3ac42dd6cae010a29069a} 
+template$<$typename Iter$>$ \\
+bool \doxymbox{\hyperlink{struct_forward_iterator}{Forward\+Iterator}}$<$ Iter $>$::\+operator!= (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_forward_iterator}{Forward\+Iterator}}$<$ Iter $>$ const \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{utils_8cppm_source_l00242}{242}} of file \doxymbox{\hyperlink{utils_8cppm_source}{utils.\+cppm}}.
+
+\Hypertarget{struct_forward_iterator_a847bd43cee16c451c40f44e525ba1f16}\index{ForwardIterator$<$ Iter $>$@{ForwardIterator$<$ Iter $>$}!operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}}
+\index{operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}!ForwardIterator$<$ Iter $>$@{ForwardIterator$<$ Iter $>$}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}()}{operator*()}}
+{\footnotesize\ttfamily \label{struct_forward_iterator_a847bd43cee16c451c40f44e525ba1f16} 
+template$<$typename Iter$>$ \\
+\doxymbox{\hyperlink{struct_forward_iterator_acbeb658714f135131729b875a45b8348}{reference}} \doxymbox{\hyperlink{struct_forward_iterator}{Forward\+Iterator}}$<$ Iter $>$::\+operator\texorpdfstring{$\ast$}{*} (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{utils_8cppm_source_l00239}{239}} of file \doxymbox{\hyperlink{utils_8cppm_source}{utils.\+cppm}}.
+
+\Hypertarget{struct_forward_iterator_a2bce5f8eb3cdeb4cb499164ef817db03}\index{ForwardIterator$<$ Iter $>$@{ForwardIterator$<$ Iter $>$}!operator++@{operator++}}
+\index{operator++@{operator++}!ForwardIterator$<$ Iter $>$@{ForwardIterator$<$ Iter $>$}}
+\doxysubsubsection{\texorpdfstring{operator++()}{operator++()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{struct_forward_iterator_a2bce5f8eb3cdeb4cb499164ef817db03} 
+template$<$typename Iter$>$ \\
+\doxymbox{\hyperlink{struct_forward_iterator}{Forward\+Iterator}} \& \doxymbox{\hyperlink{struct_forward_iterator}{Forward\+Iterator}}$<$ Iter $>$::\+operator++ (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{utils_8cppm_source_l00234}{234}} of file \doxymbox{\hyperlink{utils_8cppm_source}{utils.\+cppm}}.
+
+\Hypertarget{struct_forward_iterator_a3336775442b4c084bae9583a49e3da5e}\index{ForwardIterator$<$ Iter $>$@{ForwardIterator$<$ Iter $>$}!operator++@{operator++}}
+\index{operator++@{operator++}!ForwardIterator$<$ Iter $>$@{ForwardIterator$<$ Iter $>$}}
+\doxysubsubsection{\texorpdfstring{operator++()}{operator++()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{struct_forward_iterator_a3336775442b4c084bae9583a49e3da5e} 
+template$<$typename Iter$>$ \\
+\doxymbox{\hyperlink{struct_forward_iterator}{Forward\+Iterator}} \doxymbox{\hyperlink{struct_forward_iterator}{Forward\+Iterator}}$<$ Iter $>$::\+operator++ (\begin{DoxyParamCaption}\item[{int}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{utils_8cppm_source_l00235}{235}} of file \doxymbox{\hyperlink{utils_8cppm_source}{utils.\+cppm}}.
+
+\Hypertarget{struct_forward_iterator_af4c11d6b1d8d895e1893584f63374e29}\index{ForwardIterator$<$ Iter $>$@{ForwardIterator$<$ Iter $>$}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!ForwardIterator$<$ Iter $>$@{ForwardIterator$<$ Iter $>$}}
+\doxysubsubsection{\texorpdfstring{operator+=()}{operator+=()}}
+{\footnotesize\ttfamily \label{struct_forward_iterator_af4c11d6b1d8d895e1893584f63374e29} 
+template$<$typename Iter$>$ \\
+\doxymbox{\hyperlink{struct_forward_iterator}{Forward\+Iterator}} \& \doxymbox{\hyperlink{struct_forward_iterator}{Forward\+Iterator}}$<$ Iter $>$::\+operator+= (\begin{DoxyParamCaption}\item[{size\+\_\+t const}]{size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{utils_8cppm_source_l00236}{236}} of file \doxymbox{\hyperlink{utils_8cppm_source}{utils.\+cppm}}.
+
+\Hypertarget{struct_forward_iterator_a55dcfedc8110d7aafa80b33955fc792f}\index{ForwardIterator$<$ Iter $>$@{ForwardIterator$<$ Iter $>$}!operator==@{operator==}}
+\index{operator==@{operator==}!ForwardIterator$<$ Iter $>$@{ForwardIterator$<$ Iter $>$}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{struct_forward_iterator_a55dcfedc8110d7aafa80b33955fc792f} 
+template$<$typename Iter$>$ \\
+bool \doxymbox{\hyperlink{struct_forward_iterator}{Forward\+Iterator}}$<$ Iter $>$::\+operator== (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{struct_forward_iterator}{Forward\+Iterator}}$<$ Iter $>$ const \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{utils_8cppm_source_l00241}{241}} of file \doxymbox{\hyperlink{utils_8cppm_source}{utils.\+cppm}}.
+
+\Hypertarget{struct_forward_iterator_afe5df28a799dd1cba86e5ccc6f610088}\index{ForwardIterator$<$ Iter $>$@{ForwardIterator$<$ Iter $>$}!reached\_end@{reached\_end}}
+\index{reached\_end@{reached\_end}!ForwardIterator$<$ Iter $>$@{ForwardIterator$<$ Iter $>$}}
+\doxysubsubsection{\texorpdfstring{reached\_end()}{reached\_end()}}
+{\footnotesize\ttfamily \label{struct_forward_iterator_afe5df28a799dd1cba86e5ccc6f610088} 
+template$<$typename Iter$>$ \\
+bool \doxymbox{\hyperlink{struct_forward_iterator}{Forward\+Iterator}}$<$ Iter $>$::\+reached\+\_\+end (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{utils_8cppm_source_l00244}{244}} of file \doxymbox{\hyperlink{utils_8cppm_source}{utils.\+cppm}}.
+
+
+
+\label{struct_forward_iterator_doc-variable-members}
+\Hypertarget{struct_forward_iterator_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{struct_forward_iterator_a5aa22e4f8febf8fe6808d6f85d82dc9d}\index{ForwardIterator$<$ Iter $>$@{ForwardIterator$<$ Iter $>$}!end@{end}}
+\index{end@{end}!ForwardIterator$<$ Iter $>$@{ForwardIterator$<$ Iter $>$}}
+\doxysubsubsection{\texorpdfstring{end}{end}}
+{\footnotesize\ttfamily \label{struct_forward_iterator_a5aa22e4f8febf8fe6808d6f85d82dc9d} 
+template$<$typename Iter$>$ \\
+Iter const \doxymbox{\hyperlink{struct_forward_iterator}{Forward\+Iterator}}$<$ Iter $>$::\+end}
+
+
+
+Definition at line \doxymbox{\hyperlink{utils_8cppm_source_l00232}{232}} of file \doxymbox{\hyperlink{utils_8cppm_source}{utils.\+cppm}}.
+
+\Hypertarget{struct_forward_iterator_a2d1b8f67bb19dfe4f24d292581169a09}\index{ForwardIterator$<$ Iter $>$@{ForwardIterator$<$ Iter $>$}!iterator@{iterator}}
+\index{iterator@{iterator}!ForwardIterator$<$ Iter $>$@{ForwardIterator$<$ Iter $>$}}
+\doxysubsubsection{\texorpdfstring{iterator}{iterator}}
+{\footnotesize\ttfamily \label{struct_forward_iterator_a2d1b8f67bb19dfe4f24d292581169a09} 
+template$<$typename Iter$>$ \\
+Iter \doxymbox{\hyperlink{struct_forward_iterator}{Forward\+Iterator}}$<$ Iter $>$::\+iterator}
+
+
+
+Definition at line \doxymbox{\hyperlink{utils_8cppm_source_l00231}{231}} of file \doxymbox{\hyperlink{utils_8cppm_source}{utils.\+cppm}}.
+
+
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Compress-\/to-\/fit/\+src/\+util/\+\doxymbox{\hyperlink{utils_8cppm}{utils.\+cppm}}\end{DoxyCompactItemize}

@@ -1,0 +1,81 @@
+\doxysection{function\+\_\+traits\texorpdfstring{$<$}{<} fun(\texorpdfstring{$\ast$}{*})(args...)\texorpdfstring{$>$}{>} Struct Template Reference}
+\hypertarget{structfunction__traits_3_01fun_07_5_08_07args_8_8_8_08_4}{}\label{structfunction__traits_3_01fun_07_5_08_07args_8_8_8_08_4}\index{function\_traits$<$ fun(\texorpdfstring{$\ast$}{*})(args...)$>$@{function\_traits$<$ fun(\texorpdfstring{$\ast$}{*})(args...)$>$}}
+
+
+Collaboration diagram for function\+\_\+traits\texorpdfstring{$<$}{<} fun(\texorpdfstring{$\ast$}{*})(args...)\texorpdfstring{$>$}{>}:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=172pt]{structfunction__traits_3_01fun_07_5_08_07args_8_8_8_08_4__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \doxymbox{\hyperlink{structfunction__traits_3_01fun_07_5_08_07args_8_8_8_08_4_aa9120d273c84f0682c1ef41cdc99173a}{return\+\_\+type}} = fun
+\item 
+{\footnotesize template$<$size\+\_\+t N$>$ }\\using \doxymbox{\hyperlink{structfunction__traits_3_01fun_07_5_08_07args_8_8_8_08_4_a5cae8b5dfcdc0cca281c40c6c4f70ecd}{arg}} = std::\+tuple\+\_\+element\+\_\+t$<$N, std::\+tuple$<$args...$>$$>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr size\+\_\+t \doxymbox{\hyperlink{structfunction__traits_3_01fun_07_5_08_07args_8_8_8_08_4_ae34b8514a1e4f8f4218e47eea716db98}{num\+\_\+args}} = sizeof...(args)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename fun, typename... args$>$\newline
+struct function\+\_\+traits$<$ fun(\texorpdfstring{$\ast$}{*})(args...)$>$}
+
+
+Definition at line \doxymbox{\hyperlink{utils_8cppm_source_l00018}{18}} of file \doxymbox{\hyperlink{utils_8cppm_source}{utils.\+cppm}}.
+
+
+
+\label{structfunction__traits_3_01fun_07_5_08_07args_8_8_8_08_4_doc-typedef-members}
+\Hypertarget{structfunction__traits_3_01fun_07_5_08_07args_8_8_8_08_4_doc-typedef-members}
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{structfunction__traits_3_01fun_07_5_08_07args_8_8_8_08_4_a5cae8b5dfcdc0cca281c40c6c4f70ecd}\index{function\_traits$<$ fun(\texorpdfstring{$\ast$}{*})(args...)$>$@{function\_traits$<$ fun(\texorpdfstring{$\ast$}{*})(args...)$>$}!arg@{arg}}
+\index{arg@{arg}!function\_traits$<$ fun(\texorpdfstring{$\ast$}{*})(args...)$>$@{function\_traits$<$ fun(\texorpdfstring{$\ast$}{*})(args...)$>$}}
+\doxysubsubsection{\texorpdfstring{arg}{arg}}
+{\footnotesize\ttfamily \label{structfunction__traits_3_01fun_07_5_08_07args_8_8_8_08_4_a5cae8b5dfcdc0cca281c40c6c4f70ecd} 
+template$<$typename fun, typename... args$>$ \\
+template$<$size\+\_\+t N$>$ \\
+using \doxymbox{\hyperlink{structfunction__traits}{function\+\_\+traits}}$<$ fun(\texorpdfstring{$\ast$}{*})(args...)$>$::\+arg = std::\+tuple\+\_\+element\+\_\+t$<$N, std::\+tuple$<$args...$>$$>$}
+
+
+
+Definition at line \doxymbox{\hyperlink{utils_8cppm_source_l00025}{25}} of file \doxymbox{\hyperlink{utils_8cppm_source}{utils.\+cppm}}.
+
+\Hypertarget{structfunction__traits_3_01fun_07_5_08_07args_8_8_8_08_4_aa9120d273c84f0682c1ef41cdc99173a}\index{function\_traits$<$ fun(\texorpdfstring{$\ast$}{*})(args...)$>$@{function\_traits$<$ fun(\texorpdfstring{$\ast$}{*})(args...)$>$}!return\_type@{return\_type}}
+\index{return\_type@{return\_type}!function\_traits$<$ fun(\texorpdfstring{$\ast$}{*})(args...)$>$@{function\_traits$<$ fun(\texorpdfstring{$\ast$}{*})(args...)$>$}}
+\doxysubsubsection{\texorpdfstring{return\_type}{return\_type}}
+{\footnotesize\ttfamily \label{structfunction__traits_3_01fun_07_5_08_07args_8_8_8_08_4_aa9120d273c84f0682c1ef41cdc99173a} 
+template$<$typename fun, typename... args$>$ \\
+using \doxymbox{\hyperlink{structfunction__traits}{function\+\_\+traits}}$<$ fun(\texorpdfstring{$\ast$}{*})(args...)$>$::\+return\+\_\+type = fun}
+
+
+
+Definition at line \doxymbox{\hyperlink{utils_8cppm_source_l00020}{20}} of file \doxymbox{\hyperlink{utils_8cppm_source}{utils.\+cppm}}.
+
+
+
+\label{structfunction__traits_3_01fun_07_5_08_07args_8_8_8_08_4_doc-variable-members}
+\Hypertarget{structfunction__traits_3_01fun_07_5_08_07args_8_8_8_08_4_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structfunction__traits_3_01fun_07_5_08_07args_8_8_8_08_4_ae34b8514a1e4f8f4218e47eea716db98}\index{function\_traits$<$ fun(\texorpdfstring{$\ast$}{*})(args...)$>$@{function\_traits$<$ fun(\texorpdfstring{$\ast$}{*})(args...)$>$}!num\_args@{num\_args}}
+\index{num\_args@{num\_args}!function\_traits$<$ fun(\texorpdfstring{$\ast$}{*})(args...)$>$@{function\_traits$<$ fun(\texorpdfstring{$\ast$}{*})(args...)$>$}}
+\doxysubsubsection{\texorpdfstring{num\_args}{num\_args}}
+{\footnotesize\ttfamily \label{structfunction__traits_3_01fun_07_5_08_07args_8_8_8_08_4_ae34b8514a1e4f8f4218e47eea716db98} 
+template$<$typename fun, typename... args$>$ \\
+size\+\_\+t \doxymbox{\hyperlink{structfunction__traits}{function\+\_\+traits}}$<$ fun(\texorpdfstring{$\ast$}{*})(args...)$>$::\+num\+\_\+args = sizeof...(args)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{utils_8cppm_source_l00022}{22}} of file \doxymbox{\hyperlink{utils_8cppm_source}{utils.\+cppm}}.
+
+
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Compress-\/to-\/fit/\+src/\+util/\+\doxymbox{\hyperlink{utils_8cppm}{utils.\+cppm}}\end{DoxyCompactItemize}

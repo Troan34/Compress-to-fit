@@ -1,0 +1,28 @@
+<map id="main" name="main">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,181,55,208"/>
+<area shape="rect" id="Node000002" href="$class_l_z77.html#a79cbc4a680b736b23d1119da42569cea" title="Compress the data." alt="" coords="107,31,222,57"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="37,180,64,139,101,93,134,65,131,70,105,96,68,142,42,182"/>
+<area shape="rect" id="Node000004" href="$namespaceparser.html#a7f5ecbf764fc175fc336fcea0dd07be8" title="Parse the cli, fully manages error checking." alt="" coords="116,131,214,157"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="54,183,114,161,112,166,56,188"/>
+<area shape="rect" id="Node000007" href="$class_file_info.html#a088e3df093b7480ac8f26624863b6fa0" title="Read a file into a vector. Will call throw_error if file is not found or inaccessible." alt="" coords="298,181,419,208"/>
+<area shape="poly" id="edge9_Node000001_Node000007" title=" " alt="" coords="55,192,283,192,282,197,56,197"/>
+<area shape="rect" id="Node000008" href="$class_file_info.html#a69041c392ec2ad14c0f356efea36bb54" title=" " alt="" coords="105,232,225,259"/>
+<area shape="poly" id="edge11_Node000001_Node000008" title=" " alt="" coords="55,201,115,224,111,228,55,206"/>
+<area shape="rect" id="Node000010" href="$class_file_info.html#a63ec6528df6855ce6ff971255f490fae" title=" " alt="" coords="103,283,227,309"/>
+<area shape="poly" id="edge15_Node000001_Node000010" title=" " alt="" coords="42,206,69,237,104,269,113,276,108,275,101,273,65,241,40,211"/>
+<area shape="rect" id="Node000003" href="$cli__parser_8cppm.html#aed33cfa2e5bce1002f97dcedaa340988" title="Show a progress bar in terminal." alt="" coords="304,5,413,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="222,34,291,26,287,29,224,39"/>
+<area shape="poly" id="edge7_Node000004_Node000004" title=" " alt="" coords="141,130,137,122,140,113,149,106,165,104,181,107,191,115,186,116,179,112,165,109,151,111,144,116,142,122,146,130"/>
+<area shape="rect" id="Node000005" href="$namespaceparser.html#a883c446b2f982a5d7b6989f2442e8186" title=" " alt="" coords="318,80,400,107"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="213,129,305,106,301,109,215,134"/>
+<area shape="rect" id="Node000006" href="$utils_8cppm.html#a6c327b69ce479189b2946651f162daec" title="throw_error is a custom error logger to the terminal. This will NOT ALWAYS throw." alt="" coords="490,181,577,208"/>
+<area shape="poly" id="edge8_Node000004_Node000006" title=" " alt="" coords="214,143,319,150,443,167,478,177,473,177,442,172,319,156,214,148"/>
+<area shape="poly" id="edge5_Node000005_Node000005" title=" " alt="" coords="328,79,323,71,327,62,339,56,359,53,380,56,392,65,387,65,378,61,359,59,341,61,331,65,329,71,334,80"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="401,104,444,123,478,145,509,172,503,171,475,150,441,128,400,109"/>
+<area shape="poly" id="edge10_Node000007_Node000006" title=" " alt="" coords="419,192,478,194,472,195,420,197"/>
+<area shape="poly" id="edge14_Node000008_Node000006" title=" " alt="" coords="225,240,327,233,442,217,473,213,478,212,443,223,327,238,226,246"/>
+<area shape="rect" id="Node000009" href="$class_file_info.html#a9ec4f681948c70beda564ffd1d40bc10" title=" " alt="" coords="275,283,442,309"/>
+<area shape="poly" id="edge12_Node000008_Node000009" title=" " alt="" coords="219,257,293,278,288,279,219,262"/>
+<area shape="poly" id="edge13_Node000009_Node000006" title=" " alt="" coords="402,280,441,262,475,240,503,219,508,217,478,244,444,266,403,285"/>
+<area shape="poly" id="edge16_Node000010_Node000009" title=" " alt="" coords="227,293,262,296,257,296,227,299"/>
+</map>

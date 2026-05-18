@@ -1,0 +1,12 @@
+<map id="alg::Rabin::bucket_index" name="alg::Rabin::bucket_index">
+<area shape="rect" id="Node000001" title=" " alt="" coords="401,48,528,91"/>
+<area shape="rect" id="Node000002" href="$classalg_1_1_rabin.html#aac69972318494ea1b3b996e03d604d36" title="Find the biggest pattern between the look ahead buffer and search buffer." alt="" coords="197,5,353,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="383,49,327,35,327,30,388,48"/>
+<area shape="rect" id="Node000004" href="$classalg_1_1_rabin.html#a3e845390e40970d04a161dc5797395ba" title=" " alt="" coords="214,56,336,83"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="383,70,337,72,336,67,388,69"/>
+<area shape="rect" id="Node000005" href="$classalg_1_1_rabin.html#a838bad9d27d6ae951862fc5e22ab1e1e" title="Roll and add the hash to the symbol_positions." alt="" coords="205,107,345,133"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="388,90,328,109,327,104,383,91"/>
+<area shape="rect" id="Node000003" href="$classalg_1_1_rabin.html#a1c223004b4686ec7bbf0dca95eee3672" title=" " alt="" coords="5,31,149,57"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="179,32,150,37,148,32,184,30"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="196,60,149,56,149,51,201,59"/>
+</map>

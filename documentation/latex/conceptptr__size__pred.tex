@@ -1,0 +1,21 @@
+\doxysection{ptr\+\_\+size\+\_\+pred Concept Reference}
+\hypertarget{conceptptr__size__pred}{}\label{conceptptr__size__pred}\index{ptr\_size\_pred@{ptr\_size\_pred}}
+\doxysubsection{Concept definition}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{typename}\ fun>}
+\DoxyCodeLine{\textcolor{keyword}{concept\ }\doxymbox{\hyperlink{conceptptr__size__pred}{ptr\_size\_pred}}\ =\ \textcolor{keyword}{requires}}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{requires}\ (\doxymbox{\hyperlink{structfunction__traits}{function\_traits<fun>::num\_args}}\ ==\ 2);}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{requires}\ std::is\_pointer\_v<typename\ function\_traits<fun>::template\ arg<0>>;}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{requires}\ std::is\_integral\_v<typename\ function\_traits<fun>::template\ arg<1>>;}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{utils_8cppm_source_l00041}{41}} of file \doxymbox{\hyperlink{utils_8cppm_source}{utils.\+cppm}}.
+

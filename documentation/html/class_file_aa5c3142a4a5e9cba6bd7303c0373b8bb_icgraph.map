@@ -1,0 +1,5 @@
+<map id="File::has_signature" name="File::has_signature">
+<area shape="rect" id="Node000001" title="Check if file_options.path has the SIGNATURE in the header. Non&#45;throwing version of check_signature." alt="" coords="172,5,303,32"/>
+<area shape="rect" id="Node000002" href="$class_file.html#a1164ed978a508b773c4dd6d1376938bb" title="Extract information from the header of the tzf file." alt="" coords="5,5,124,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="154,19,124,21,124,16,159,18"/>
+</map>
