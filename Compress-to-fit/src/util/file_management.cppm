@@ -18,31 +18,31 @@ enum class HEADER_OFFSET
 {
 	SIGNATURE = 0,
 	ID = ::SIGNATURE.size(),
-	COMP_TYPE = ID + sizeof(size_t),
+	COUNT = ID + sizeof(uint16_t),
+	COMP_TYPE = COUNT + sizeof(size_t),
 	COMP_PRESET = COMP_TYPE + sizeof(uint8_t),
 	MAX = COMP_PRESET + sizeof(uint8_t),
 };
 
 ///									TZF		FILE	HEADER
-///	 ______________________________________________________________________________
-/// | 		     |							   |			    |				   |
-/// |  SIGNATURE | Identifier (file splitting) |  CompType(u8)  |  CompPreset(u8)  |
-/// |____________|_____________________________|________________|__________________|
-///				 ↑							   ↑                ↑				   ↑
-///	HEADER_OFFSET::ID   HEADER_OFFSET::COMP_TYPE  HEADER_OFFSET::COMP_PRESET  HEADER_OFFSET::MAX
-               
-
+///	 ________________________________________________________________________________________________
+/// | 		     |							   |				  |				  |				     |
+/// |  SIGNATURE | Identifier (file splitting) | Count(file splt) |  CompType(u8) |  CompPreset(u8)  |
+/// |____________|_____________________________|__________________|_______________|__________________|
+///				 ↑							   ↑				  ↑               ↑				     ↑
+///	HEADER_OFFSET::ID		HEADER_OFFSET::COUNT   /*...*/::COMP_TYPE  HEADER_OFFSET::COMP_PRESET  HEADER_OFFSET::MAX
+         
+//avoid padding in files
+#pragma pack(push, 1)
 struct Header
 {
 	size_t identifier;
+	std::uint16_t count;
 	CompType comp_type;
 	CompPreset preset;
 
-	static constexpr size_t size_bytes() noexcept
-	{
-		return sizeof(CompType) + sizeof(CompPreset) + sizeof(size_t);
-	}
 };
+#pragma pack(pop)
 
 export struct FileOptions
 {
@@ -187,16 +187,16 @@ public:
 		fs::create_directory(out_path);
 
 
-		//Set up a random number such that num + N_FILES_LIMIT < size_t::max
+		//Set up a random number such that num < size_t::max
 		std::random_device seed;
 		std::default_random_engine rng(seed());
-		std::uniform_int_distribution<size_t> dist(1, std::numeric_limits<size_t>::max() - N_FILES_LIMIT);
+		std::uniform_int_distribution<size_t> dist(1, std::numeric_limits<uint16_t>::max());
 		auto id = dist(rng);
 
-		for (auto file_n = 0u; file_n < portions; file_n++, id++)
+		for (uint16_t file_n = 0; file_n < portions; file_n++)
 		{
 			//create a file with same comp_type and preset, but with id as ID. This file ends with _<file_n>
-			auto file = create_file(Header.value().comp_type, Header.value().preset, out_path / (path.stem().string() + '_' + std::to_string(file_n) + FILE_EXTENSION), id);
+			auto file = create_file(Header.value().comp_type, Header.value().preset, out_path / (path.stem().string() + '_' + std::to_string(file_n) + FILE_EXTENSION), id, file_n);
 
 			//We are at the last file, may be smaller than portions_size and/or SIZE_FILES_MIN
 			if (portions_size > (fs::file_size(path) - source_file.tellg()))
@@ -311,7 +311,7 @@ public:
 			file.seekg(static_cast<size_t>(HEADER_OFFSET::ID));
 
 			std::byte buffer[sizeof(Header)] = { std::byte{0} };
-			file.read(reinterpret_cast<char*>(buffer), Header::size_bytes());
+			file.read(reinterpret_cast<char*>(buffer), sizeof(Header));
 
 			Header header = std::bit_cast<Header>(buffer);
 
@@ -328,18 +328,19 @@ public:
 		return std::optional<Header>{};
 	}
 
-	static std::ofstream create_file(CompType comp_type, CompPreset comp_preset, fs::path path, size_t id)
+	static std::ofstream create_file(CompType comp_type, CompPreset comp_preset, fs::path path, size_t id, uint16_t count)
 	{
 		std::ofstream file(path, std::ios::binary | std::ios::trunc);
 
 		file.seekp(0);
 		file.write(SIGNATURE.data(), SIGNATURE.size());
+		file.write(reinterpret_cast<char const*>(&id), sizeof(decltype(id)));
+		file.write(reinterpret_cast<char const*>(&count), sizeof(decltype(count)));
 		file.seekp(static_cast<int>(HEADER_OFFSET::COMP_PRESET));
 		uint8_t temp = static_cast<uint8_t>(comp_type);
 		file.write(reinterpret_cast<char const*>(&temp), sizeof(decltype(temp)));
 		temp = static_cast<uint8_t>(comp_preset);
 		file.write(reinterpret_cast<char const*>(&temp), sizeof(decltype(temp)));
-		file.write(reinterpret_cast<char const*>(&id), sizeof(size_t));
 
 		return file;
 	}
@@ -422,32 +423,75 @@ private:
 	 */
 	fs::path concatenate_files(fs::path const& path)
 	{
-		std::vector<fs::path> paths_found{};
+		std::vector<fs::path> files_to_concat{};
+		std::vector<size_t> ignored_ids{};
 
-		std::pair<size_t, fs::path> minimum_entry{};
+		size_t id{};
+		bool id_not_set_yet = true;
 
-		//find file with smallest id
+		//add the files to concatenate to #files_to_concat
 		for (auto const& dir_entry : fs::directory_iterator{ path })
 		{
-			if (dir_entry.is_regular_file())
+			if (!dir_entry.is_regular_file())
+				continue;
+
+			auto info = extract_info(dir_entry);
+
+			if (!info.has_value())
+				continue;
+
+			//do this at first, if it is not the first time it's because the user refused both possible ids. Check the following code.
+			if (id_not_set_yet and std::find(ignored_ids.begin(), ignored_ids.end(), info.value().identifier) == ignored_ids.end())
 			{
-				std::ifstream file{ dir_entry.path() };
-
-				auto info = extract_info(dir_entry);
-
-				if (info.has_value())
+				id = info.value().identifier;
+				id_not_set_yet = false;
+				files_to_concat.push_back(dir_entry);
+				continue;//skip the rest!!!
+			}
+			
+			//if id is different from identifier and identifier was not ignored
+			if (id != info.value().identifier and std::find(ignored_ids.begin(), ignored_ids.end(), info.value().identifier) == ignored_ids.end())
+			{
+				print_warn(WarningType::CONCAT_AMBIGUITY, files_to_concat.back().filename().string() + " " + dir_entry.path().filename().string());
+				std::println("Choose which of these files are part of the concatenation. Insert '1' or '2' for the respective file. If neither of these is, insert '0', we will find the next possible file.");
+				auto choice = 0;
+				while (true)
 				{
-					if (minimum_entry.first > info.value().identifier)
-					{
-						minimum_entry.first = info.value().identifier;
-						minimum_entry.second = dir_entry.path();
-					}
+					std::cin >> choice;
 
+					//1 is minimum_entry and 2 is dir_entry and 3 is neither
+					if (choice == 1)
+					{
+						ignored_ids.push_back(id);
+						id_not_set_yet = true;
+						std::println("You selected {}", files_to_concat.back().filename().string());
+						files_to_concat.clear();
+					}
+					else if (choice == 2)
+					{
+						ignored_ids.push_back(info.value().identifier);
+						id_not_set_yet = true;
+						std::println("You selected {}", dir_entry.path().filename().string());
+						files_to_concat.clear();
+					}
+					else if (choice == 0)
+					{
+						ignored_ids.push_back(id);
+						ignored_ids.push_back(info.value().identifier);
+						id_not_set_yet = true;
+						files_to_concat.clear();
+					}
+					else 
+						std::println("Get it right you stoopid. Insert '1', '2', or '0' if neither file is correct.");
 				}
 			}
+			else//everything goes as expected
+			{
+				files_to_concat.push_back(dir_entry);
+			}
+
 		}
 
-		//warn user if there are different ID series
-		
+		//TODO: actually concatenate the files
 	}
 };
