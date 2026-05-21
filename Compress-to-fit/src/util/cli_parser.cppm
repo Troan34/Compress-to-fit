@@ -72,7 +72,7 @@ namespace parser
 		"[comp_options]:"
 		"\"LZ77\": A dictionary based algorithm, good for repetitive patterns of data. Slow compression and fast decompression.";
 	
-
+	export const fs::path default_out_path{ "output.tzf" };
 
 
 	
@@ -111,7 +111,7 @@ namespace parser
 	export struct Options
 	{
 		fs::path filename_in{};
-		fs::path filename_out{};
+		fs::path filename_out{ default_out_path };
 		size_t compressor = static_cast<size_t>(CompType::LZ77);
 		size_t preset = COMP_5;
 		size_t n_files = 1;

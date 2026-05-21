@@ -96,7 +96,7 @@ std::expected<Token, ErrorType> lex(const std::string& option)
 		fs::path path{ token_value };
 		
 		//Test if we can write a file to the given dir
-		auto test_path = path.parent_path() / "test_writability";
+		auto test_path = path.parent_path() / "test_writeability";
 		std::ofstream test_file{test_path};
 		if (!test_file.is_open())
 		{
@@ -110,7 +110,7 @@ std::expected<Token, ErrorType> lex(const std::string& option)
 
 		value.emplace<fs::path>(path);
 	}
-	    break;
+	break;
 	case TokenType::COMPRESSOR_TYPE:
 	{
 		std::transform(token_value.begin(), token_value.end(), token_value.begin(), [](char c) { return std::toupper(c); });
@@ -127,7 +127,7 @@ std::expected<Token, ErrorType> lex(const std::string& option)
 		if (std::holds_alternative<std::monostate>(value))
 			throw_error(ErrorType::SYNTAX_ERROR, token_string + token_value);
 	}
-		break;
+	break;
 	case TokenType::COMPRESSION_PRESET:
 	{
 		//Convert and check the compression preset
@@ -139,7 +139,7 @@ std::expected<Token, ErrorType> lex(const std::string& option)
 
 		value.emplace<size_t>(value_cmpr);
 	}
-	    break;
+	break;
 	case TokenType::N_FILES:
 	{
 		int value_temp;
@@ -195,7 +195,7 @@ Options parse(int argc, char* argv[])
 		{
 			bool valid = false;
 
-			for(;index < argc - 1; index++)
+			for(;index < argc - 1; index++)//keep parsing arguments until we find an ending double quote
 			{
 				std::string option_temp{ argv[index + 1] };
 				option += option_temp;
@@ -266,12 +266,22 @@ Options parse(int argc, char* argv[])
 		}
 	}
 
-	if (fs::is_directory(options.filename_in) and !options.concatenate_files)
+	if (fs::is_directory(options.filename_in) and !options.concatenate_files)//tried codecompressing a dir
 		throw_error(ErrorType::DIR_COMPRESSION, options.filename_in.string());
+	else if (options.filename_in.has_filename() and options.concatenate_files)//tried concatenating a file
+		throw_error(ErrorType::PATH_INVALID, options.filename_in.string());
 
-	if (options.filename_out.empty() or options.filename_out.string().find_first_not_of(' ') == std::string::npos)
+	if (options.filename_out.empty() or options.filename_out.string().find_first_not_of(' ') == std::string::npos)//if filename_out is empty
 	{
-		options.filename_out = options.filename_in.stem() += FILE_EXTENSION;
+		if (options.filename_in.empty() or options.filename_in.string().find_first_not_of(' ') == std::string::npos)//if filename_in is empty
+		{
+			if (options.concatenate_files)
+				options.filename_in = fs::current_path();
+			else
+				throw_error(ErrorType::MISSING_ARGUMENT, token_strings[static_cast<int>(TokenType::FILENAME_IN)].data());
+		}
+		else if (!options.concatenate_files)
+			options.filename_out = options.filename_in.stem() += FILE_EXTENSION;
 	}
 	return options;
 }

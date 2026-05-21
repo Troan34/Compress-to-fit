@@ -265,7 +265,7 @@ public:
 	 * @pre The file shall already exist and be accessible.
 	 * @post file will be unchanged.
 	 */
-	static bool has_signature(std::ifstream& file)
+	static bool has_signature(std::fstream& file)
 	{
 		auto save_pos = file.tellg();
 		file.seekg(0);
@@ -398,20 +398,40 @@ private:
 		fs::remove(path);
 		std::ofstream file{ path, std::ios::binary | std::ios::trunc };
 
-		if (!has_signature() or cli_options.force_compression)
-		{
-			file.seekp(static_cast<size_t>(HEADER_OFFSET::SIGNATURE));
-			file.write(SIGNATURE.data(), SIGNATURE.size());
+		file.seekp(static_cast<size_t>(HEADER_OFFSET::SIGNATURE));
+		file.write(SIGNATURE.data(), SIGNATURE.size());
 
-			file.seekp(static_cast<size_t>(HEADER_OFFSET::ID));
-			size_t id_temp = 0;
-			file.write(reinterpret_cast<char const*>(&id_temp), sizeof(size_t));
-			uint8_t temp = static_cast<uint8_t>(cli_options.compressor);
-			file.write(reinterpret_cast<char const*>(&temp), sizeof(decltype(temp)));
-			temp = static_cast<uint8_t>(cli_options.preset);
-			file.write(reinterpret_cast<char const*>(&temp), sizeof(decltype(temp)));
+		file.seekp(static_cast<size_t>(HEADER_OFFSET::ID));
+		size_t id_temp = 0;
+		file.write(reinterpret_cast<char const*>(&id_temp), sizeof(size_t));
+		uint8_t temp = static_cast<uint8_t>(cli_options.compressor);
+		file.write(reinterpret_cast<char const*>(&temp), sizeof(decltype(temp)));
+		temp = static_cast<uint8_t>(cli_options.preset);
+		file.write(reinterpret_cast<char const*>(&temp), sizeof(decltype(temp)));
 
-		}
+
+		return file;
+	}
+
+	/**
+	 * @brief Creates a compressed file(header). If file exists, it is cleared.
+	 * @param path Where the file is created
+	 * @return A stream to the file.
+	 */
+	[[maybe_unused]] static std::ofstream create_file(fs::path const& path, Header options)
+	{
+		fs::remove(path);
+		std::ofstream file{ path, std::ios::binary | std::ios::trunc };
+
+		file.seekp(static_cast<size_t>(HEADER_OFFSET::SIGNATURE));
+		file.write(SIGNATURE.data(), SIGNATURE.size());
+		file.seekp(static_cast<size_t>(HEADER_OFFSET::ID));
+		size_t id_temp = 0;
+		file.write(reinterpret_cast<char const*>(&id_temp), sizeof(size_t));
+		uint8_t temp = static_cast<uint8_t>(options.comp_type);
+		file.write(reinterpret_cast<char const*>(&temp), sizeof(decltype(temp)));
+		temp = static_cast<uint8_t>(options.preset);
+		file.write(reinterpret_cast<char const*>(&temp), sizeof(decltype(temp)));
 
 		return file;
 	}
@@ -423,7 +443,7 @@ private:
 	 */
 	fs::path concatenate_files(fs::path const& path)
 	{
-		std::vector<fs::path> files_to_concat{};
+		std::vector<std::pair<fs::path, uint16_t>> files_to_concat{};//uint16_t is here to keep a temporary copy of count (we sacrifice a bit of memory for fewer drive accesses)
 		std::vector<size_t> ignored_ids{};
 
 		size_t id{};
@@ -437,7 +457,7 @@ private:
 
 			auto info = extract_info(dir_entry);
 
-			if (!info.has_value())
+			if (!info.has_value())//basically if it's not a tzf file
 				continue;
 
 			//do this at first, if it is not the first time it's because the user refused both possible ids. Check the following code.
@@ -445,16 +465,17 @@ private:
 			{
 				id = info.value().identifier;
 				id_not_set_yet = false;
-				files_to_concat.push_back(dir_entry);
+				files_to_concat.push_back({ dir_entry, info.value().count });
 				continue;//skip the rest!!!
 			}
 			
 			//if id is different from identifier and identifier was not ignored
 			if (id != info.value().identifier and std::find(ignored_ids.begin(), ignored_ids.end(), info.value().identifier) == ignored_ids.end())
 			{
-				print_warn(WarningType::CONCAT_AMBIGUITY, files_to_concat.back().filename().string() + " " + dir_entry.path().filename().string());
+				print_warn(WarningType::CONCAT_AMBIGUITY, files_to_concat.back().first.filename().string() + " " + dir_entry.path().filename().string());
 				std::println("Choose which of these files are part of the concatenation. Insert '1' or '2' for the respective file. If neither of these is, insert '0', we will find the next possible file.");
 				auto choice = 0;
+				//get user to resolve the ambiguity
 				while (true)
 				{
 					std::cin >> choice;
@@ -487,11 +508,52 @@ private:
 			}
 			else//everything goes as expected
 			{
-				files_to_concat.push_back(dir_entry);
+				files_to_concat.push_back({ dir_entry, info.value().count });
 			}
 
 		}
 
-		//TODO: actually concatenate the files
+		auto example = extract_info(files_to_concat[0].first);
+		example.value().count = 0;
+		std::ofstream file{ create_file(cli_options.filename_out, example.value()) };
+
+		//sort the files base on their count
+		std::sort(files_to_concat.begin(), files_to_concat.end(),
+				[](std::pair<fs::path, uint16_t> const& file1, std::pair<fs::path, uint16_t> const& file2)
+				{
+					  return file1.second < file2.second;
+				});
+
+		//Copy all the files into the new file
+		for (auto const& [path_, _] : files_to_concat)//I couldn't get ranges to work, also, the underscore is a placeholder in c++26. However, msvc is slooooow at getting new stuff. I'm looking at you microsoft, not at the developers.
+		{
+			std::ifstream input{ path_ };
+			input.seekg(0, std::ios::end);
+			auto size = static_cast<size_t>(input.tellg()) - sizeof(Header);//I have no fucking idea why std::streampos has no implicit cast to size_t
+			input.seekg(static_cast<int>(HEADER_OFFSET::MAX));
+			
+			while (!input.eof())
+			{
+				std::byte buffer[MB_to_B(1)];//If I get a stack overflow, I will punch the first person that gets in front of me.
+				input.read(reinterpret_cast<char*>(&buffer), sizeof(buffer));
+				file.write(reinterpret_cast<char const*>(&buffer), input.gcount());
+			}
+		}
+
+		//if operations failed
+		switch (errno)
+		{
+		case ENOSPC:
+		case EIO:
+		case ENFILE:
+		case EMFILE:
+			throw_error(ErrorType::DRIVE_ERROR, path.string());
+			fs::remove(cli_options.filename_out);
+		default:
+			break;
+		}
+
+
+		return cli_options.filename_out;
 	}
 };

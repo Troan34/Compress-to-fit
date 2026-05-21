@@ -57,6 +57,7 @@ export enum class ErrorType
 {
 	NO_ERROR,
 	VALUE_ERROR,
+	MISSING_ARGUMENT,
 	SYNTAX_ERROR,
 	OPTION_UNAVAILABLE,
 	PATH_NOT_FOUND,
@@ -75,13 +76,15 @@ namespace ERR_STRING
 
 	const std::string VALUE =				"\033[41mError\033[0m\033[31m[" + std::to_string(static_cast<int>(ErrorType::VALUE_ERROR)) + "]: this is an incorrect value for this option.\033[0m\n";
 
+	const std::string MISSING_ARGUMENT =	"\033[41mError\033[0m\033[31m[" + std::to_string(static_cast<int>(ErrorType::MISSING_ARGUMENT)) + "]: this argument is missing.\033[0m\n";
+
 	const std::string OPTION_UNAVAILABLE =	"\033[41mError\033[0m\033[31m[" + std::to_string(static_cast<int>(ErrorType::OPTION_UNAVAILABLE)) + "]: this option is unavailable in this context.\033[0m\n";
 
 	const std::string PATH_NOT_FOUND =		"\033[41mError\033[0m\033[31m[" + std::to_string(static_cast<int>(ErrorType::PATH_NOT_FOUND)) + "]: this path could not be found, make sure to double quote (\") around your path if there are spaces in it\033[0m\n";
 
 	const std::string PATH_NOT_ACCESSIBLE = "\033[41mError\033[0m\033[31m[" + std::to_string(static_cast<int>(ErrorType::PATH_NOT_ACCESSIBLE)) + "]: this path could not be accessed, the program may not have some required privileges.\033[34mTip\033[0m:Such an error has multiple causes. Check path, folder and other things as such.\033[0m\n";
 
-	const std::string PATH_INVALID =		"\033[41mError\033[0m\033[31m[" + std::to_string(static_cast<int>(ErrorType::PATH_INVALID)) + "]: this path is invalid, it may be a path to a folder. Make sure to double quote (\" \") around your path if there are spaces in it.\033[0m\n";
+	const std::string PATH_INVALID =		"\033[41mError\033[0m\033[31m[" + std::to_string(static_cast<int>(ErrorType::PATH_INVALID)) + "]: this path is invalid for the selected operation (i.e. compressing a folder or concatenating a single file). Make sure to double quote (\" \") around your path if there are spaces in it.\033[0m\n";
 
 	const std::string FILE_INVALID =		"\033[41mError\033[0m\033[31m[" + std::to_string(static_cast<int>(ErrorType::FILE_INVALID)) + "]: this file is invalid. i.e. it is the wrong type or it is unrecognizable.\033[0m\n";
 
@@ -108,43 +111,43 @@ export void throw_error(ErrorType error, const std::string& error_option = "")
 	case ErrorType::NO_ERROR:
 		break;
 	case ErrorType::VALUE_ERROR:
-		std::cerr << error_option + " <- " + ERR_STRING::VALUE;
+		std::print("{} <- {}", error_option, ERR_STRING::VALUE);
 		throw std::runtime_error(error_option + " <- " + ERR_STRING::VALUE);
 		break;
 	case ErrorType::SYNTAX_ERROR:
-		std::cout << error_option + " <- " + ERR_STRING::SYNTAX;
+		std::print("{} <- {}", error_option, ERR_STRING::SYNTAX);
 		throw std::runtime_error(error_option + " <- " + ERR_STRING::SYNTAX);
 		break;
 	case ErrorType::OPTION_UNAVAILABLE:
-		std::cerr << error_option + " <- " + ERR_STRING::OPTION_UNAVAILABLE;
+		std::print("{} <- {}", error_option, ERR_STRING::OPTION_UNAVAILABLE);
 		throw std::runtime_error(error_option + " <- " + ERR_STRING::OPTION_UNAVAILABLE);
 		break;
 	case ErrorType::PATH_NOT_FOUND:
-		std::cout << error_option + " <- " + ERR_STRING::PATH_NOT_FOUND;
+		std::print("{} <- {}", error_option, ERR_STRING::PATH_NOT_FOUND);
 		throw std::runtime_error(error_option + " <- " + ERR_STRING::PATH_NOT_FOUND);
 		break;
 	case ErrorType::PATH_NOT_ACCESSIBLE:
-		std::cerr << error_option + " <- " + ERR_STRING::PATH_NOT_ACCESSIBLE;
+		std::print("{} <- {}", error_option, ERR_STRING::PATH_NOT_ACCESSIBLE);
 		throw std::runtime_error(error_option + " <- " + ERR_STRING::PATH_NOT_ACCESSIBLE);
 		break;
 	case ErrorType::PATH_INVALID:
-		std::cerr << error_option + " <- " + ERR_STRING::PATH_INVALID;
+		std::print("{} <- {}", error_option, ERR_STRING::PATH_INVALID);
 		throw std::runtime_error(error_option + " <- " + ERR_STRING::PATH_INVALID);
 		break;
 	case ErrorType::FILE_INVALID:
-		std::cerr << error_option + " <- " + ERR_STRING::FILE_INVALID;
+		std::print("{} <- {}", error_option, ERR_STRING::FILE_INVALID);
 		throw std::runtime_error(error_option + " <- " + ERR_STRING::FILE_INVALID);
 		break;
 	case ErrorType::FILE_CORRUPTED:
-		std::cerr << error_option + " <- " + ERR_STRING::FILE_INVALID;
+		std::print("{} <- {}", error_option, ERR_STRING::FILE_INVALID);
 		throw std::runtime_error(error_option + " <- " + ERR_STRING::FILE_INVALID);
 		break;
 	case ErrorType::DRIVE_ERROR:
-		std::cerr << error_option + " <- " + ERR_STRING::DRIVE_ERROR;
+		std::print("{} <- {}", error_option, ERR_STRING::DRIVE_ERROR);
 		throw std::runtime_error(error_option + " <- " + ERR_STRING::DRIVE_ERROR);
 		break;
 	case ErrorType::INVALID_DECOMPRESSION:
-		std::cerr << error_option + " <- " + ERR_STRING::INVALID_DECOMPRESSION;
+		std::print("{} <- {}", error_option, ERR_STRING::INVALID_DECOMPRESSION);
 		throw std::runtime_error(error_option + " <- " + ERR_STRING::INVALID_DECOMPRESSION);
 		break;
 	}
