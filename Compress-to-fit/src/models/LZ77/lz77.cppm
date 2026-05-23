@@ -31,7 +31,7 @@ struct Token
 export using LZ77_Token = Token;
 
 inline constexpr int SEARCH_RATIO = 500;//Ratio of the search buf size and la buf
-inline constexpr auto MAX_WINDOW_SIZE = KB_to_B(128);
+inline constexpr auto MAX_WINDOW_SIZE = KiB_to_B(128);
 /**
  * @brief The size of @ref alg::Rabin::poss_table
  */

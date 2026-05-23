@@ -56,6 +56,16 @@ export struct FileOptions
 	}
 };
 
+void try_throw_IO_error(std::ios_base::iostate state, fs::path const& path) noexcept(false)
+{
+	if ((state & ~(std::ios_base::goodbit | std::ios_base::eofbit)) == 0)//we do not care about these
+		return;
+	else if (state == std::ios_base::failbit)
+		throw_error(ErrorType::FILE_CORRUPTED, path.string());
+	else//we fucked fucked
+		throw_error(ErrorType::DRIVE_ERROR, path.string());
+}
+
 /**
  * @brief Interpret a file as to retrieve custom information
  * @details An interpreted file is one where we have the knowledge about it to fill #FileOptions
@@ -76,9 +86,8 @@ public:
 	{
 		if (options.concatenate_files)
 		{
-
+			concatenate_files(cli_options.filename_in);
 		}
-
 
 		file_options = FileOptions{ path, extract_info(path) };
 		out_file = create_file(cli_options.filename_out);
@@ -281,6 +290,29 @@ public:
 	}
 	
 	/**
+	 * @brief Check if file has the #SIGNATURE in the header. Non-throwing version of #check_signature.
+	 * @return True if file has signature, false if not.
+	 *
+	 * @param file File to be checked.
+	 * @pre The file shall already exist and be accessible.
+	 * @post file will be unchanged.
+	 */
+	static bool has_signature(std::ifstream& file)
+	{
+		auto save_pos = file.tellg();
+		file.seekg(0);
+		std::string buffer(SIGNATURE.size(), ' ');
+		file.read(buffer.data(), buffer.size());
+		file.seekg(save_pos);
+
+		if (!(buffer == SIGNATURE.data()))//not recognized
+		{
+			return false;
+		}
+		return true;
+	}
+
+	/**
 	 * @brief Extract information from the header of the tzf file.
 	 * @param path
 	 * @return A FileOptions type constructed with the obtained information
@@ -291,7 +323,7 @@ public:
 	{
 		std::ifstream file{ path, std::ios::binary };
 
-		extract_info(file, path);
+		return extract_info(file, path);
 	}
 
 	/**
@@ -320,6 +352,8 @@ public:
 
 			if (comp_type >= CompType::MAX or comp_preset > COMP_MAX)
 				throw_error(ErrorType::FILE_CORRUPTED, path.string());
+
+			try_throw_IO_error(file.rdstate(), path);
 
 			return std::optional<Header>{header};
 
@@ -485,7 +519,7 @@ private:
 					{
 						ignored_ids.push_back(id);
 						id_not_set_yet = true;
-						std::println("You selected {}", files_to_concat.back().filename().string());
+						std::println("You selected {}", files_to_concat.back().first.filename().string());
 						files_to_concat.clear();
 					}
 					else if (choice == 2)
@@ -532,25 +566,33 @@ private:
 			auto size = static_cast<size_t>(input.tellg()) - sizeof(Header);//I have no fucking idea why std::streampos has no implicit cast to size_t
 			input.seekg(static_cast<int>(HEADER_OFFSET::MAX));
 			
-			while (!input.eof())
+			while (!input.eof())//fill input with file at path_
 			{
-				std::byte buffer[MB_to_B(1)];//If I get a stack overflow, I will punch the first person that gets in front of me.
-				input.read(reinterpret_cast<char*>(&buffer), sizeof(buffer));
-				file.write(reinterpret_cast<char const*>(&buffer), input.gcount());
-			}
-		}
+				//TODO: this exception stuff should be abstracted, also, how about making custom exceptions?
 
-		//if operations failed
-		switch (errno)
-		{
-		case ENOSPC:
-		case EIO:
-		case ENFILE:
-		case EMFILE:
-			throw_error(ErrorType::DRIVE_ERROR, path.string());
-			fs::remove(cli_options.filename_out);
-		default:
-			break;
+				auto buffer = std::make_unique<std::byte[]>(MiB_to_B(1));
+				input.read(reinterpret_cast<char*>(buffer.get()), sizeof(buffer));
+				try
+				{
+					try_throw_IO_error(input.rdstate(), path_);
+				}
+				catch (...)
+				{
+					fs::remove(cli_options.filename_out);//cleanup
+					throw;
+				}
+
+				file.write(reinterpret_cast<char const*>(buffer.get()), input.gcount());
+				try
+				{
+					try_throw_IO_error(file.rdstate(), cli_options.filename_out.string());
+				}
+				catch (...)
+				{
+					fs::remove(cli_options.filename_out);//cleanup
+					throw;
+				}
+			}
 		}
 
 

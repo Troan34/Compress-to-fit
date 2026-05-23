@@ -292,12 +292,12 @@ export struct Sym
 
 };
 
-export [[nodiscard]] constexpr size_t KB_to_B(size_t value)
+export [[nodiscard]] constexpr size_t KiB_to_B(size_t value)
 {
 	return value * 1024;
 }
 
-export [[nodiscard]] constexpr size_t MB_to_B(size_t value)
+export [[nodiscard]] constexpr size_t MiB_to_B(size_t value)
 {
 	return value * 1024 * 1024;
 }
