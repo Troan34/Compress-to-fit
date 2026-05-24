@@ -8,8 +8,7 @@ Include dependency graph for utils.\+cppm:\+\nopagebreak
 \includegraphics[width=350pt]{utils_8cppm__incl}
 \end{center}
 \end{figure}
-This graph shows which files directly or indirectly include this file:\+
-\nopagebreak
+This graph shows which files directly or indirectly include this file:\+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -53,22 +52,25 @@ concept \doxymbox{\hyperlink{conceptsize__pred}{size\+\_\+pred}}
 enum class \doxymbox{\hyperlink{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45a}{Error\+Type}} \{ \newline
 \doxymbox{\hyperlink{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aad306b6fdee05fe87455110ddf6501e6c}{NO\+\_\+\+ERROR}}
 , \doxymbox{\hyperlink{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aab6e89aef4ee41f778bd0dd285f0d5c20}{VALUE\+\_\+\+ERROR}}
+, \doxymbox{\hyperlink{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aa25935ec8650130f4dd9f87d403493ac3}{MISSING\+\_\+\+ARGUMENT}}
 , \doxymbox{\hyperlink{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aa756ec3dd26d1a73363eb3e68b6e820df}{SYNTAX\+\_\+\+ERROR}}
-, \doxymbox{\hyperlink{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aa18dccefdab88f68c78bb114e0e03f61d}{OPTION\+\_\+\+UNAVAILABLE}}
 , \newline
-\doxymbox{\hyperlink{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aa10ea5c18cb2990c51bb9db888917165d}{PATH\+\_\+\+NOT\+\_\+\+FOUND}}
+\doxymbox{\hyperlink{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aa18dccefdab88f68c78bb114e0e03f61d}{OPTION\+\_\+\+UNAVAILABLE}}
+, \doxymbox{\hyperlink{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aa10ea5c18cb2990c51bb9db888917165d}{PATH\+\_\+\+NOT\+\_\+\+FOUND}}
 , \doxymbox{\hyperlink{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aac5d1d2985b0085be54ef3223fae157c7}{PATH\+\_\+\+NOT\+\_\+\+ACCESSIBLE}}
 , \doxymbox{\hyperlink{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aa18d76a5de8f052b40860c3cc1623e5d6}{PATH\+\_\+\+INVALID}}
-, \doxymbox{\hyperlink{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aafc88cb342c01e41f5f45657a51cf65cb}{FILE\+\_\+\+INVALID}}
 , \newline
-\doxymbox{\hyperlink{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aa2cdc1eecb70cc6dabd09b6f9be6c72c8}{FILE\+\_\+\+CORRUPTED}}
+\doxymbox{\hyperlink{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aafc88cb342c01e41f5f45657a51cf65cb}{FILE\+\_\+\+INVALID}}
+, \doxymbox{\hyperlink{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aa2cdc1eecb70cc6dabd09b6f9be6c72c8}{FILE\+\_\+\+CORRUPTED}}
 , \doxymbox{\hyperlink{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aad5459024a3d9e8c304e106f0c0fc8ffe}{DRIVE\+\_\+\+ERROR}}
 , \doxymbox{\hyperlink{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aa6aec2e033766444573e60b2ecdbfcde8}{INVALID\+\_\+\+DECOMPRESSION}}
-, \doxymbox{\hyperlink{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aae8266dd47c23ed1f1c76b1e0669a3e47}{DIR\+\_\+\+COMPRESSION}}
+, \newline
+\doxymbox{\hyperlink{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aae8266dd47c23ed1f1c76b1e0669a3e47}{DIR\+\_\+\+COMPRESSION}}
  \}
 \begin{DoxyCompactList}\small\item\em Parser error types. \end{DoxyCompactList}\item 
 enum class \doxymbox{\hyperlink{utils_8cppm_aa278aa207bdeddc8432b560d1e1312ae}{Warning\+Type}} \{ \doxymbox{\hyperlink{utils_8cppm_aa278aa207bdeddc8432b560d1e1312aea429a96bd6dfce0e85b1d88b7ea7ff59f}{RECOMPRESSION}}
 , \doxymbox{\hyperlink{utils_8cppm_aa278aa207bdeddc8432b560d1e1312aeabd356f5fc145a69a6d0b3cbac5d70c00}{PORTIONS\+\_\+\+OUT\+\_\+\+OF\+\_\+\+RANGE}}
+, \doxymbox{\hyperlink{utils_8cppm_aa278aa207bdeddc8432b560d1e1312aea3679d74393649174baa5db30d7e70081}{CONCAT\+\_\+\+AMBIGUITY}}
  \}
 \item 
 enum \doxymbox{\hyperlink{utils_8cppm_a59fc5d9b777790e56395e645e4205db0}{Comp\+Preset}} :\+ uint8\+\_\+t \{ \newline
@@ -97,9 +99,9 @@ void \doxymbox{\hyperlink{utils_8cppm_a6c327b69ce479189b2946651f162daec}{throw\+
 \begin{DoxyCompactList}\small\item\em throw\+\_\+error is a custom error logger to the terminal. This will WILL throw. \end{DoxyCompactList}\item 
 void \doxymbox{\hyperlink{utils_8cppm_aeee94ed600f26b5d54f52d5bfc10bef7}{print\+\_\+warn}} (\doxymbox{\hyperlink{utils_8cppm_aa278aa207bdeddc8432b560d1e1312ae}{Warning\+Type}} warn, const std::\+string \&warn\+\_\+option="{}"{})
 \item 
-constexpr size\+\_\+t \doxymbox{\hyperlink{utils_8cppm_add31fbd0032fa67fcfec5e586203f0f2}{KB\+\_\+to\+\_\+B}} (size\+\_\+t value)
+constexpr size\+\_\+t \doxymbox{\hyperlink{utils_8cppm_a45f3f635b1fec8af19702b350fb9ea90}{Ki\+B\+\_\+to\+\_\+B}} (size\+\_\+t value)
 \item 
-constexpr size\+\_\+t \doxymbox{\hyperlink{utils_8cppm_acaf024dde014347d648c3d3c7e796e37}{MB\+\_\+to\+\_\+B}} (size\+\_\+t value)
+constexpr size\+\_\+t \doxymbox{\hyperlink{utils_8cppm_a8da911fac7b18fb18595e961a3e37725}{Mi\+B\+\_\+to\+\_\+B}} (size\+\_\+t value)
 \item 
 consteval size\+\_\+t \doxymbox{\hyperlink{utils_8cppm_a78c404083e319e5d50a4293e918cb8ab}{const\+\_\+pow}} (size\+\_\+t base, size\+\_\+t exponent) noexcept
 \begin{DoxyCompactList}\small\item\em Calculate the power at compile time, to make sure of its correct usage it will be consteval. \end{DoxyCompactList}\item 
@@ -116,31 +118,35 @@ constexpr char const  \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{utils_8cpp
 \item 
 constexpr size\+\_\+t \doxymbox{\hyperlink{utils_8cppm_a558c3db94c9beb4d83912931cf4244e7}{SIZE\+\_\+\+CHUNK}} = 4 \texorpdfstring{$\ast$}{*} 1024 \texorpdfstring{$\ast$}{*} 1024
 \item 
-const std::\+string \doxymbox{\hyperlink{namespace_e_r_r___s_t_r_i_n_g_a220301514d7ebf48975be72979b79ddf}{ERR\+\_\+\+STRING::\+\+SYNTAX}} = "{}\textbackslash{}033\+[41m\+Error\textbackslash{}033\+[0m\textbackslash{}033\+[31m\+["{} + std::\+to\+\_\+string(static\+\_\+cast$<$int$>$(\doxymbox{\hyperlink{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aa756ec3dd26d1a73363eb3e68b6e820df}{Error\+Type::\+\+SYNTAX\+\_\+\+ERROR}})) + "{}]\+:\+ the syntax for this option is incorrect. \textbackslash{}033\+[34m\+Tip\textbackslash{}033\+[0m:\+ \textquotesingle{}-\/h\textquotesingle{} or \textquotesingle{}-\/help\textquotesingle{} for help"{}
+const std::\+string \doxymbox{\hyperlink{namespace_e_r_r___s_t_r_i_n_g_a220301514d7ebf48975be72979b79ddf}{ERR\+\_\+\+STRING::\+\+SYNTAX}} = "{}\textbackslash{}033\+[41m\+Error\textbackslash{}033\+[0m\textbackslash{}033\+[31m\+["{} + std::\+to\+\_\+string(static\+\_\+cast$<$int$>$(\doxymbox{\hyperlink{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aa756ec3dd26d1a73363eb3e68b6e820df}{Error\+Type::\+\+SYNTAX\+\_\+\+ERROR}})) + "{}]\+:\+ the syntax for this option is incorrect. \textbackslash{}033\+[34m\+Tip\textbackslash{}033\+[0m:\+ \textquotesingle{}-\/h\textquotesingle{} or \textquotesingle{}-\/help\textquotesingle{} for help\textbackslash{}n"{}
 \item 
-const std::\+string \doxymbox{\hyperlink{namespace_e_r_r___s_t_r_i_n_g_ab87f3f9775ac9b28bca2f1c02520077c}{ERR\+\_\+\+STRING::\+\+VALUE}} = "{}\textbackslash{}033\+[41m\+Error\textbackslash{}033\+[0m\textbackslash{}033\+[31m\+["{} + std::\+to\+\_\+string(static\+\_\+cast$<$int$>$(\doxymbox{\hyperlink{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aab6e89aef4ee41f778bd0dd285f0d5c20}{Error\+Type::\+\+VALUE\+\_\+\+ERROR}})) + "{}]\+:\+ this is an incorrect value for this option.\textbackslash{}033\+[0m"{}
+const std::\+string \doxymbox{\hyperlink{namespace_e_r_r___s_t_r_i_n_g_ab87f3f9775ac9b28bca2f1c02520077c}{ERR\+\_\+\+STRING::\+\+VALUE}} = "{}\textbackslash{}033\+[41m\+Error\textbackslash{}033\+[0m\textbackslash{}033\+[31m\+["{} + std::\+to\+\_\+string(static\+\_\+cast$<$int$>$(\doxymbox{\hyperlink{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aab6e89aef4ee41f778bd0dd285f0d5c20}{Error\+Type::\+\+VALUE\+\_\+\+ERROR}})) + "{}]\+:\+ this is an incorrect value for this option.\textbackslash{}033\+[0m\textbackslash{}n"{}
 \item 
-const std::\+string \doxymbox{\hyperlink{namespace_e_r_r___s_t_r_i_n_g_afc81976c232892e2b4e16e100a14423e}{ERR\+\_\+\+STRING::\+\+OPTION\+\_\+\+UNAVAILABLE}} = "{}\textbackslash{}033\+[41m\+Error\textbackslash{}033\+[0m\textbackslash{}033\+[31m\+["{} + std::\+to\+\_\+string(static\+\_\+cast$<$int$>$(\doxymbox{\hyperlink{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aa18dccefdab88f68c78bb114e0e03f61d}{Error\+Type::\+\+OPTION\+\_\+\+UNAVAILABLE}})) + "{}]\+:\+ this option is unavailable in this context.\textbackslash{}033\+[0m"{}
+const std::\+string \doxymbox{\hyperlink{namespace_e_r_r___s_t_r_i_n_g_af81b6954b18ad24febeb376c7db6fcca}{ERR\+\_\+\+STRING::\+\+MISSING\+\_\+\+ARGUMENT}} = "{}\textbackslash{}033\+[41m\+Error\textbackslash{}033\+[0m\textbackslash{}033\+[31m\+["{} + std::\+to\+\_\+string(static\+\_\+cast$<$int$>$(\doxymbox{\hyperlink{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aa25935ec8650130f4dd9f87d403493ac3}{Error\+Type::\+\+MISSING\+\_\+\+ARGUMENT}})) + "{}]\+:\+ this argument is missing.\textbackslash{}033\+[0m\textbackslash{}n"{}
 \item 
-const std::\+string \doxymbox{\hyperlink{namespace_e_r_r___s_t_r_i_n_g_a4e0f1c39222e841bb9bc92fa5c93f12d}{ERR\+\_\+\+STRING::\+\+PATH\+\_\+\+NOT\+\_\+\+FOUND}} = "{}\textbackslash{}033\+[41m\+Error\textbackslash{}033\+[0m\textbackslash{}033\+[31m\+["{} + std::\+to\+\_\+string(static\+\_\+cast$<$int$>$(\doxymbox{\hyperlink{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aa10ea5c18cb2990c51bb9db888917165d}{Error\+Type::\+\+PATH\+\_\+\+NOT\+\_\+\+FOUND}})) + "{}]\+:\+ this path could not be found, make sure to double quote (\textbackslash{}"{}) around your path if there are spaces in it\textbackslash{}033\+[0m"{}
+const std::\+string \doxymbox{\hyperlink{namespace_e_r_r___s_t_r_i_n_g_afc81976c232892e2b4e16e100a14423e}{ERR\+\_\+\+STRING::\+\+OPTION\+\_\+\+UNAVAILABLE}} = "{}\textbackslash{}033\+[41m\+Error\textbackslash{}033\+[0m\textbackslash{}033\+[31m\+["{} + std::\+to\+\_\+string(static\+\_\+cast$<$int$>$(\doxymbox{\hyperlink{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aa18dccefdab88f68c78bb114e0e03f61d}{Error\+Type::\+\+OPTION\+\_\+\+UNAVAILABLE}})) + "{}]\+:\+ this option is unavailable in this context.\textbackslash{}033\+[0m\textbackslash{}n"{}
 \item 
-const std::\+string \doxymbox{\hyperlink{namespace_e_r_r___s_t_r_i_n_g_adcca934fbf807fcdae04da825c63d620}{ERR\+\_\+\+STRING::\+\+PATH\+\_\+\+NOT\+\_\+\+ACCESSIBLE}} = "{}\textbackslash{}033\+[41m\+Error\textbackslash{}033\+[0m\textbackslash{}033\+[31m\+["{} + std::\+to\+\_\+string(static\+\_\+cast$<$int$>$(\doxymbox{\hyperlink{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aac5d1d2985b0085be54ef3223fae157c7}{Error\+Type::\+\+PATH\+\_\+\+NOT\+\_\+\+ACCESSIBLE}})) + "{}]\+:\+ this path could not be accessed, the program may not have some required privileges.\textbackslash{}033\+[34m\+Tip\textbackslash{}033\+[0m:\+\+Such an error has multiple causes. Check path, folder and other things as such.\textbackslash{}033\+[0m"{}
+const std::\+string \doxymbox{\hyperlink{namespace_e_r_r___s_t_r_i_n_g_a4e0f1c39222e841bb9bc92fa5c93f12d}{ERR\+\_\+\+STRING::\+\+PATH\+\_\+\+NOT\+\_\+\+FOUND}} = "{}\textbackslash{}033\+[41m\+Error\textbackslash{}033\+[0m\textbackslash{}033\+[31m\+["{} + std::\+to\+\_\+string(static\+\_\+cast$<$int$>$(\doxymbox{\hyperlink{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aa10ea5c18cb2990c51bb9db888917165d}{Error\+Type::\+\+PATH\+\_\+\+NOT\+\_\+\+FOUND}})) + "{}]\+:\+ this path could not be found, make sure to double quote (\textbackslash{}"{}) around your path if there are spaces in it\textbackslash{}033\+[0m\textbackslash{}n"{}
 \item 
-const std::\+string \doxymbox{\hyperlink{namespace_e_r_r___s_t_r_i_n_g_a4a1bb1b9a2811049bac67c85d03d4a09}{ERR\+\_\+\+STRING::\+\+PATH\+\_\+\+INVALID}} = "{}\textbackslash{}033\+[41m\+Error\textbackslash{}033\+[0m\textbackslash{}033\+[31m\+["{} + std::\+to\+\_\+string(static\+\_\+cast$<$int$>$(\doxymbox{\hyperlink{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aa18d76a5de8f052b40860c3cc1623e5d6}{Error\+Type::\+\+PATH\+\_\+\+INVALID}})) + "{}]\+:\+ this path is invalid, it may be a path to a folder. Make sure to double quote (\textbackslash{}"{} \textbackslash{}"{}) around your path if there are spaces in it.\textbackslash{}033\+[0m"{}
+const std::\+string \doxymbox{\hyperlink{namespace_e_r_r___s_t_r_i_n_g_adcca934fbf807fcdae04da825c63d620}{ERR\+\_\+\+STRING::\+\+PATH\+\_\+\+NOT\+\_\+\+ACCESSIBLE}} = "{}\textbackslash{}033\+[41m\+Error\textbackslash{}033\+[0m\textbackslash{}033\+[31m\+["{} + std::\+to\+\_\+string(static\+\_\+cast$<$int$>$(\doxymbox{\hyperlink{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aac5d1d2985b0085be54ef3223fae157c7}{Error\+Type::\+\+PATH\+\_\+\+NOT\+\_\+\+ACCESSIBLE}})) + "{}]\+:\+ this path could not be accessed, the program may not have some required privileges.\textbackslash{}033\+[34m\+Tip\textbackslash{}033\+[0m:\+\+Such an error has multiple causes. Check path, folder and other things as such.\textbackslash{}033\+[0m\textbackslash{}n"{}
 \item 
-const std::\+string \doxymbox{\hyperlink{namespace_e_r_r___s_t_r_i_n_g_a6e076d05d154540639df579a40ab57d2}{ERR\+\_\+\+STRING::\+\+FILE\+\_\+\+INVALID}} = "{}\textbackslash{}033\+[41m\+Error\textbackslash{}033\+[0m\textbackslash{}033\+[31m\+["{} + std::\+to\+\_\+string(static\+\_\+cast$<$int$>$(\doxymbox{\hyperlink{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aafc88cb342c01e41f5f45657a51cf65cb}{Error\+Type::\+\+FILE\+\_\+\+INVALID}})) + "{}]\+:\+ this file is invalid. i.\+e. it is the wrong type or it is unrecognizable.\textbackslash{}033\+[0m"{}
+const std::\+string \doxymbox{\hyperlink{namespace_e_r_r___s_t_r_i_n_g_a4a1bb1b9a2811049bac67c85d03d4a09}{ERR\+\_\+\+STRING::\+\+PATH\+\_\+\+INVALID}} = "{}\textbackslash{}033\+[41m\+Error\textbackslash{}033\+[0m\textbackslash{}033\+[31m\+["{} + std::\+to\+\_\+string(static\+\_\+cast$<$int$>$(\doxymbox{\hyperlink{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aa18d76a5de8f052b40860c3cc1623e5d6}{Error\+Type::\+\+PATH\+\_\+\+INVALID}})) + "{}]\+:\+ this path is invalid for the selected operation (i.\+e. compressing a folder or concatenating a single file). Make sure to double quote (\textbackslash{}"{} \textbackslash{}"{}) around your path if there are spaces in it.\textbackslash{}033\+[0m\textbackslash{}n"{}
 \item 
-const std::\+string \doxymbox{\hyperlink{namespace_e_r_r___s_t_r_i_n_g_a6cfbf91e4f1d44fdc579d4aaac395051}{ERR\+\_\+\+STRING::\+\+FILE\+\_\+\+CORRUPTED}} = "{}\textbackslash{}033\+[41m\+Error\textbackslash{}033\+[0m\textbackslash{}033\+[31m\+["{} + std::\+to\+\_\+string(static\+\_\+cast$<$int$>$(\doxymbox{\hyperlink{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aa2cdc1eecb70cc6dabd09b6f9be6c72c8}{Error\+Type::\+\+FILE\+\_\+\+CORRUPTED}})) + "{}]\+:\+ this file\textquotesingle{}s header is corrupted. Unable to continue decompression properly.\textbackslash{}033\+[0m"{}
+const std::\+string \doxymbox{\hyperlink{namespace_e_r_r___s_t_r_i_n_g_a6e076d05d154540639df579a40ab57d2}{ERR\+\_\+\+STRING::\+\+FILE\+\_\+\+INVALID}} = "{}\textbackslash{}033\+[41m\+Error\textbackslash{}033\+[0m\textbackslash{}033\+[31m\+["{} + std::\+to\+\_\+string(static\+\_\+cast$<$int$>$(\doxymbox{\hyperlink{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aafc88cb342c01e41f5f45657a51cf65cb}{Error\+Type::\+\+FILE\+\_\+\+INVALID}})) + "{}]\+:\+ this file is invalid. i.\+e. it is the wrong type or it is unrecognizable.\textbackslash{}033\+[0m\textbackslash{}n"{}
 \item 
-const std::\+string \doxymbox{\hyperlink{namespace_e_r_r___s_t_r_i_n_g_aba29f8774197da0a4890bc532fbbab15}{ERR\+\_\+\+STRING::\+\+DRIVE\+\_\+\+ERROR}} = "{}\textbackslash{}033\+[41m\+Error\textbackslash{}033\+[0m\textbackslash{}033\+[31m\+["{} + std::\+to\+\_\+string(static\+\_\+cast$<$int$>$(\doxymbox{\hyperlink{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aad5459024a3d9e8c304e106f0c0fc8ffe}{Error\+Type::\+\+DRIVE\+\_\+\+ERROR}})) + "{}]\+:\+ there has been a critical error when accessing this file. Please check your drive.\textbackslash{}033\+[0m"{}
+const std::\+string \doxymbox{\hyperlink{namespace_e_r_r___s_t_r_i_n_g_a6cfbf91e4f1d44fdc579d4aaac395051}{ERR\+\_\+\+STRING::\+\+FILE\+\_\+\+CORRUPTED}} = "{}\textbackslash{}033\+[41m\+Error\textbackslash{}033\+[0m\textbackslash{}033\+[31m\+["{} + std::\+to\+\_\+string(static\+\_\+cast$<$int$>$(\doxymbox{\hyperlink{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aa2cdc1eecb70cc6dabd09b6f9be6c72c8}{Error\+Type::\+\+FILE\+\_\+\+CORRUPTED}})) + "{}]\+:\+ this file\textquotesingle{}s header is corrupted. Unable to continue decompression properly.\textbackslash{}033\+[0m\textbackslash{}n"{}
 \item 
-const std::\+string \doxymbox{\hyperlink{namespace_e_r_r___s_t_r_i_n_g_a8797da65711c547cbf975bcf9d287505}{ERR\+\_\+\+STRING::\+\+INVALID\+\_\+\+DECOMPRESSION}} ="{}\textbackslash{}033\+[41m\+Error\textbackslash{}033\+[0m\textbackslash{}033\+[31m\+["{} + std::\+to\+\_\+string(static\+\_\+cast$<$int$>$(\doxymbox{\hyperlink{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aa6aec2e033766444573e60b2ecdbfcde8}{Error\+Type::\+\+INVALID\+\_\+\+DECOMPRESSION}})) + "{}]\+:\+ decompression is invalid on this file, you may have tried to decompress a normal file.\textbackslash{}033\+[0m"{}
+const std::\+string \doxymbox{\hyperlink{namespace_e_r_r___s_t_r_i_n_g_aba29f8774197da0a4890bc532fbbab15}{ERR\+\_\+\+STRING::\+\+DRIVE\+\_\+\+ERROR}} = "{}\textbackslash{}033\+[41m\+Error\textbackslash{}033\+[0m\textbackslash{}033\+[31m\+["{} + std::\+to\+\_\+string(static\+\_\+cast$<$int$>$(\doxymbox{\hyperlink{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aad5459024a3d9e8c304e106f0c0fc8ffe}{Error\+Type::\+\+DRIVE\+\_\+\+ERROR}})) + "{}]\+:\+ there has been a critical error when accessing this file. Please check your drive.\textbackslash{}033\+[0m\textbackslash{}n"{}
 \item 
-const std::\+string \doxymbox{\hyperlink{namespace_e_r_r___s_t_r_i_n_g_a10aa42d66046b2a4263633a39f005124}{ERR\+\_\+\+STRING::\+\+DIR\+\_\+\+COMPRESSION}} = "{}\textbackslash{}033\+[41m\+Error\textbackslash{}033\+[0m\textbackslash{}033\+[31m\+["{} + std::\+to\+\_\+string(static\+\_\+cast$<$int$>$(\doxymbox{\hyperlink{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aae8266dd47c23ed1f1c76b1e0669a3e47}{Error\+Type::\+\+DIR\+\_\+\+COMPRESSION}})) + "{}]\+:\+ folder compression is unvailable. \textbackslash{}033\+[34m\+Tip\textbackslash{}033\+[0m:\+ If you are trying to decompress a folder of files, check the related command in the help page with \textquotesingle{}-\/h\textquotesingle{} or \textquotesingle{}-\/help\textquotesingle{}"{}
+const std::\+string \doxymbox{\hyperlink{namespace_e_r_r___s_t_r_i_n_g_a8797da65711c547cbf975bcf9d287505}{ERR\+\_\+\+STRING::\+\+INVALID\+\_\+\+DECOMPRESSION}} ="{}\textbackslash{}033\+[41m\+Error\textbackslash{}033\+[0m\textbackslash{}033\+[31m\+["{} + std::\+to\+\_\+string(static\+\_\+cast$<$int$>$(\doxymbox{\hyperlink{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aa6aec2e033766444573e60b2ecdbfcde8}{Error\+Type::\+\+INVALID\+\_\+\+DECOMPRESSION}})) + "{}]\+:\+ decompression is invalid on this file, you may have tried to decompress a normal file.\textbackslash{}033\+[0m\textbackslash{}n"{}
+\item 
+const std::\+string \doxymbox{\hyperlink{namespace_e_r_r___s_t_r_i_n_g_a10aa42d66046b2a4263633a39f005124}{ERR\+\_\+\+STRING::\+\+DIR\+\_\+\+COMPRESSION}} = "{}\textbackslash{}033\+[41m\+Error\textbackslash{}033\+[0m\textbackslash{}033\+[31m\+["{} + std::\+to\+\_\+string(static\+\_\+cast$<$int$>$(\doxymbox{\hyperlink{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aae8266dd47c23ed1f1c76b1e0669a3e47}{Error\+Type::\+\+DIR\+\_\+\+COMPRESSION}})) + "{}]\+:\+ folder compression is unvailable. \textbackslash{}033\+[34m\+Tip\textbackslash{}033\+[0m:\+ If you are trying to decompress a folder of files, check the related command in the help page with \textquotesingle{}-\/h\textquotesingle{} or \textquotesingle{}-\/help\textquotesingle{}\textbackslash{}n"{}
 \item 
 const std::\+string \doxymbox{\hyperlink{namespace_w_a_r_n___s_t_r_i_n_g_a3484e445cf1e4cdf965160b363ce9351}{WARN\+\_\+\+STRING::\+\+RECOMPRESSION}}
 \item 
 const std::\+string \doxymbox{\hyperlink{namespace_w_a_r_n___s_t_r_i_n_g_a97695fd577cd87a855b4d08e7d29ed6a}{WARN\+\_\+\+STRING::\+\+PORTIONS\+\_\+\+OUT\+\_\+\+OF\+\_\+\+RANGE}}
+\item 
+const std::\+string \doxymbox{\hyperlink{namespace_w_a_r_n___s_t_r_i_n_g_ae325c9559d30aa8bb285b17b84ae925f}{WARN\+\_\+\+STRING::\+\+CONCAT\+\_\+\+AMBIGUITY}} = "{}\textbackslash{}033\+[43m\+Warn\textbackslash{}033\+[0m\+["{} + std::\+to\+\_\+string(static\+\_\+cast$<$int$>$(\doxymbox{\hyperlink{utils_8cppm_aa278aa207bdeddc8432b560d1e1312aeabd356f5fc145a69a6d0b3cbac5d70c00}{Warning\+Type::\+\+PORTIONS\+\_\+\+OUT\+\_\+\+OF\+\_\+\+RANGE}})) + "{}]\+:\+ there has been found an ambiguity while concatenating. These files do not come from the same compressed file(same session).\textbackslash{}n"{}
 \item 
 constexpr std::\+string\+\_\+view \doxymbox{\hyperlink{utils_8cppm_a00efb0a9acab4c356b0b4550de60af1e}{COMPRESSOR\+\_\+\+STR\+\_\+\+OPTIONS}} \+[$\,$]\+
 \end{DoxyCompactItemize}
@@ -219,7 +225,7 @@ COMP\+\_\+\+MAX&\\
 \end{DoxyEnumFields}
 
 
-Definition at line \doxymbox{\hyperlink{utils_8cppm_source_l00184}{184}} of file \doxymbox{\hyperlink{utils_8cppm_source}{utils.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{utils_8cppm_source_l00191}{191}} of file \doxymbox{\hyperlink{utils_8cppm_source}{utils.\+cppm}}.
 
 \Hypertarget{utils_8cppm_a77b7b3d2b23480b5378dbd65c7af9178}\index{utils.cppm@{utils.cppm}!CompType@{CompType}}
 \index{CompType@{CompType}!utils.cppm@{utils.cppm}}
@@ -250,7 +256,7 @@ MAX&\\
 \end{DoxyEnumFields}
 
 
-Definition at line \doxymbox{\hyperlink{utils_8cppm_source_l00205}{205}} of file \doxymbox{\hyperlink{utils_8cppm_source}{utils.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{utils_8cppm_source_l00212}{212}} of file \doxymbox{\hyperlink{utils_8cppm_source}{utils.\+cppm}}.
 
 \Hypertarget{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45a}\index{utils.cppm@{utils.cppm}!ErrorType@{ErrorType}}
 \index{ErrorType@{ErrorType}!utils.cppm@{utils.cppm}}
@@ -273,6 +279,12 @@ NO\+\_\+\+ERROR&\\
 \index{utils.cppm@{utils.cppm}!VALUE\_ERROR@{VALUE\_ERROR}}
 }\Hypertarget{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aab6e89aef4ee41f778bd0dd285f0d5c20}\label{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aab6e89aef4ee41f778bd0dd285f0d5c20} 
 VALUE\+\_\+\+ERROR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MISSING\_ARGUMENT@{MISSING\_ARGUMENT}!utils.cppm@{utils.cppm}}
+\index{utils.cppm@{utils.cppm}!MISSING\_ARGUMENT@{MISSING\_ARGUMENT}}
+}\Hypertarget{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aa25935ec8650130f4dd9f87d403493ac3}\label{utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45aa25935ec8650130f4dd9f87d403493ac3} 
+MISSING\+\_\+\+ARGUMENT&\\
 \hline
 
 \raisebox{\heightof{T}}[0pt][0pt]{\index{SYNTAX\_ERROR@{SYNTAX\_ERROR}!utils.cppm@{utils.cppm}}
@@ -359,10 +371,16 @@ RECOMPRESSION&\\
 PORTIONS\+\_\+\+OUT\+\_\+\+OF\+\_\+\+RANGE&\\
 \hline
 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CONCAT\_AMBIGUITY@{CONCAT\_AMBIGUITY}!utils.cppm@{utils.cppm}}
+\index{utils.cppm@{utils.cppm}!CONCAT\_AMBIGUITY@{CONCAT\_AMBIGUITY}}
+}\Hypertarget{utils_8cppm_aa278aa207bdeddc8432b560d1e1312aea3679d74393649174baa5db30d7e70081}\label{utils_8cppm_aa278aa207bdeddc8432b560d1e1312aea3679d74393649174baa5db30d7e70081} 
+CONCAT\+\_\+\+AMBIGUITY&\\
+\hline
+
 \end{DoxyEnumFields}
 
 
-Definition at line \doxymbox{\hyperlink{utils_8cppm_source_l00153}{153}} of file \doxymbox{\hyperlink{utils_8cppm_source}{utils.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{utils_8cppm_source_l00156}{156}} of file \doxymbox{\hyperlink{utils_8cppm_source}{utils.\+cppm}}.
 
 
 
@@ -381,7 +399,7 @@ Calculate the power at compile time, to make sure of its correct usage it will b
 
 
 
-Definition at line \doxymbox{\hyperlink{utils_8cppm_source_l00301}{301}} of file \doxymbox{\hyperlink{utils_8cppm_source}{utils.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{utils_8cppm_source_l00308}{308}} of file \doxymbox{\hyperlink{utils_8cppm_source}{utils.\+cppm}}.
 
 \Hypertarget{utils_8cppm_a770361d202fe810d1b063557d36041e3}\index{utils.cppm@{utils.cppm}!count\_equal@{count\_equal}}
 \index{count\_equal@{count\_equal}!utils.cppm@{utils.cppm}}
@@ -413,27 +431,27 @@ The count of initial consecutive elements that are equal in both spans, constrai
 \end{DoxyReturn}
 
 
-Definition at line \doxymbox{\hyperlink{utils_8cppm_source_l00321}{321}} of file \doxymbox{\hyperlink{utils_8cppm_source}{utils.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{utils_8cppm_source_l00328}{328}} of file \doxymbox{\hyperlink{utils_8cppm_source}{utils.\+cppm}}.
 
-\Hypertarget{utils_8cppm_add31fbd0032fa67fcfec5e586203f0f2}\index{utils.cppm@{utils.cppm}!KB\_to\_B@{KB\_to\_B}}
-\index{KB\_to\_B@{KB\_to\_B}!utils.cppm@{utils.cppm}}
-\doxysubsubsection{\texorpdfstring{KB\_to\_B()}{KB\_to\_B()}}
-{\footnotesize\ttfamily \label{utils_8cppm_add31fbd0032fa67fcfec5e586203f0f2} 
-size\+\_\+t KB\+\_\+to\+\_\+B (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [nodiscard]}, {\ttfamily [constexpr]}, {\ttfamily [export]}}
-
-
-
-Definition at line \doxymbox{\hyperlink{utils_8cppm_source_l00288}{288}} of file \doxymbox{\hyperlink{utils_8cppm_source}{utils.\+cppm}}.
-
-\Hypertarget{utils_8cppm_acaf024dde014347d648c3d3c7e796e37}\index{utils.cppm@{utils.cppm}!MB\_to\_B@{MB\_to\_B}}
-\index{MB\_to\_B@{MB\_to\_B}!utils.cppm@{utils.cppm}}
-\doxysubsubsection{\texorpdfstring{MB\_to\_B()}{MB\_to\_B()}}
-{\footnotesize\ttfamily \label{utils_8cppm_acaf024dde014347d648c3d3c7e796e37} 
-size\+\_\+t MB\+\_\+to\+\_\+B (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [nodiscard]}, {\ttfamily [constexpr]}, {\ttfamily [export]}}
+\Hypertarget{utils_8cppm_a45f3f635b1fec8af19702b350fb9ea90}\index{utils.cppm@{utils.cppm}!KiB\_to\_B@{KiB\_to\_B}}
+\index{KiB\_to\_B@{KiB\_to\_B}!utils.cppm@{utils.cppm}}
+\doxysubsubsection{\texorpdfstring{KiB\_to\_B()}{KiB\_to\_B()}}
+{\footnotesize\ttfamily \label{utils_8cppm_a45f3f635b1fec8af19702b350fb9ea90} 
+size\+\_\+t Ki\+B\+\_\+to\+\_\+B (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [nodiscard]}, {\ttfamily [constexpr]}, {\ttfamily [export]}}
 
 
 
-Definition at line \doxymbox{\hyperlink{utils_8cppm_source_l00293}{293}} of file \doxymbox{\hyperlink{utils_8cppm_source}{utils.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{utils_8cppm_source_l00295}{295}} of file \doxymbox{\hyperlink{utils_8cppm_source}{utils.\+cppm}}.
+
+\Hypertarget{utils_8cppm_a8da911fac7b18fb18595e961a3e37725}\index{utils.cppm@{utils.cppm}!MiB\_to\_B@{MiB\_to\_B}}
+\index{MiB\_to\_B@{MiB\_to\_B}!utils.cppm@{utils.cppm}}
+\doxysubsubsection{\texorpdfstring{MiB\_to\_B()}{MiB\_to\_B()}}
+{\footnotesize\ttfamily \label{utils_8cppm_a8da911fac7b18fb18595e961a3e37725} 
+size\+\_\+t Mi\+B\+\_\+to\+\_\+B (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [nodiscard]}, {\ttfamily [constexpr]}, {\ttfamily [export]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{utils_8cppm_source_l00300}{300}} of file \doxymbox{\hyperlink{utils_8cppm_source}{utils.\+cppm}}.
 
 \Hypertarget{utils_8cppm_aeee94ed600f26b5d54f52d5bfc10bef7}\index{utils.cppm@{utils.cppm}!print\_warn@{print\_warn}}
 \index{print\_warn@{print\_warn}!utils.cppm@{utils.cppm}}
@@ -443,7 +461,7 @@ void print\+\_\+warn (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{utils_
 
 
 
-Definition at line \doxymbox{\hyperlink{utils_8cppm_source_l00170}{170}} of file \doxymbox{\hyperlink{utils_8cppm_source}{utils.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{utils_8cppm_source_l00175}{175}} of file \doxymbox{\hyperlink{utils_8cppm_source}{utils.\+cppm}}.
 
 \Hypertarget{utils_8cppm_a6c327b69ce479189b2946651f162daec}\index{utils.cppm@{utils.cppm}!throw\_error@{throw\_error}}
 \index{throw\_error@{throw\_error}!utils.cppm@{utils.cppm}}
@@ -469,7 +487,7 @@ throw\+\_\+error is a custom error logger to the terminal. This will WILL throw.
 \end{DoxyExceptions}
 
 
-Definition at line \doxymbox{\hyperlink{utils_8cppm_source_l00104}{104}} of file \doxymbox{\hyperlink{utils_8cppm_source}{utils.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{utils_8cppm_source_l00107}{107}} of file \doxymbox{\hyperlink{utils_8cppm_source}{utils.\+cppm}}.
 
 
 
@@ -496,7 +514,7 @@ std::\+string\+\_\+view COMPRESSOR\+\_\+\+STR\+\_\+\+OPTIONS\+[$\,$]\+\hspace{0.
 \end{DoxyCode}
 
 
-Definition at line \doxymbox{\hyperlink{utils_8cppm_source_l00211}{211}} of file \doxymbox{\hyperlink{utils_8cppm_source}{utils.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{utils_8cppm_source_l00218}{218}} of file \doxymbox{\hyperlink{utils_8cppm_source}{utils.\+cppm}}.
 
 \Hypertarget{utils_8cppm_a8ba1a78952c247bd1d75301870bba2ce}\index{utils.cppm@{utils.cppm}!FILE\_EXTENSION@{FILE\_EXTENSION}}
 \index{FILE\_EXTENSION@{FILE\_EXTENSION}!utils.cppm@{utils.cppm}}

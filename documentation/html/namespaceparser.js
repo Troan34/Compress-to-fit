@@ -21,6 +21,7 @@ var namespaceparser =
     ] ],
     [ "lex", "namespaceparser.html#a883c446b2f982a5d7b6989f2442e8186", null ],
     [ "parse", "namespaceparser.html#a7f5ecbf764fc175fc336fcea0dd07be8", null ],
+    [ "default_out_path", "namespaceparser.html#a7070ddbab534fb2cd9db4da4392877fb", null ],
     [ "help_str", "namespaceparser.html#a8fb0c61c07575a0d8f64cfc377b885ed", null ],
     [ "token_strings", "namespaceparser.html#a35056580671d6aa5abd316f21007bef6", null ]
 ];

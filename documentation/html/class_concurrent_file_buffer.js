@@ -1,13 +1,15 @@
 var class_concurrent_file_buffer =
 [
     [ "ConcurrentFileBuffer", "class_concurrent_file_buffer.html#a00e2b4803fdfe9ffcab27d98b2121039", null ],
+    [ "~ConcurrentFileBuffer", "class_concurrent_file_buffer.html#a16c74a81c8a7ba2292f65dbf0d472f7a", null ],
     [ "append_range", "class_concurrent_file_buffer.html#a84281e77fbb9afa8b8677c52a12689b3", null ],
     [ "capacity", "class_concurrent_file_buffer.html#a8e4891170bcfa2ba2cff546d5cd6f3ce", null ],
     [ "minimum_size", "class_concurrent_file_buffer.html#a79391fd6953f83b293865ebaed9826a2", null ],
     [ "operator[]", "class_concurrent_file_buffer.html#a50f2f746d2297892ffdbe15cc52a238f", null ],
     [ "push_back", "class_concurrent_file_buffer.html#a05dc56e9dde6301cc399c272df821e4f", null ],
     [ "push_back", "class_concurrent_file_buffer.html#adda68ddaa0de43803ef924fa34c3f066", null ],
-    [ "reserve", "class_concurrent_file_buffer.html#addb9b1059fade88677e053cd1d035ed1", null ],
+    [ "reserve", "class_concurrent_file_buffer.html#a723e5d9f8619dcb94607629a562f2bc1", null ],
+    [ "true_index", "class_concurrent_file_buffer.html#a41a7e3d60e387d1d711eb223000c4717", null ],
     [ "allocator", "class_concurrent_file_buffer.html#a62919f4664acba0c6890ed3dc001325d", null ],
     [ "capacity_", "class_concurrent_file_buffer.html#a296cd0d3b7ac25b7e00cb002b9b7becf", null ],
     [ "data_", "class_concurrent_file_buffer.html#af6016220a98badcda7da620da440e959", null ],

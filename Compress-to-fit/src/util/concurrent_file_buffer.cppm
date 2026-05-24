@@ -3,8 +3,8 @@ export module util:concurrent_file_buffer;
 import std.compat;
 
 /**
- * @brief Circular array where if size > capacity, size - minimum_size is written to stream
- * @tparam T 
+ * @brief Circular array where if size > capacity, the oldest elements are written to stream until 
+ * @tparam T type stored, must be trivially copyable
  */
 export template <typename T>
 	requires std::is_trivially_copyable_v<T>
@@ -18,48 +18,117 @@ public:
 		reserve(minimum_size_ + (1.5f * minimum_size_));
 	}
 
+	~ConcurrentFileBuffer()
+	{
+		auto elements_to_write_n = index_ - written_index_;
 
+		if constexpr (std::is_trivially_copyable_v<T>)
+		{
+			out_stream_.write(reinterpret_cast<char const*>(&data_[written_index_]), elements_to_write_n * sizeof(T));
+		}
+		allocator.deallocate(data_, capacity_);
+	}
+
+	/**
+	 * @brief 
+	 * @param value
+	 * @pre #index_ > #minimum_size_
+	 */
 	constexpr void push_back(T const& value)
 	{
-		auto write_to_disk = []()
-		{
-			if (index_ < minimum_size_)//if buffer is not full
-				return;
+		lock.lock();
 
+
+		if (index_ + 1 - written_index_ > capacity_)//if we need to write elements to disk
+		{
 			auto elements_to_write_n = index_ - minimum_size_ - written_index_;
 
 			if constexpr (std::is_trivially_copyable_v<T>)
 			{
-				//TODO: this technically blocks a thread, but if there are 12 threads AND they aren't writing frequently, it shouldn't be THAT bad. Benchmark this.
+				//TODO: this blocks a thread, but if there are 12 threads AND they aren't writing frequently, it shouldn't be THAT bad. Benchmark this.
+				//We could try coroutines here
+				//Maybe we can lock the stream, or stuff like that
 				out_stream_.write(reinterpret_cast<char const*>(&data_[written_index_]), elements_to_write_n * sizeof(T));
 			}
 
 			written_index_ = index_ - minimum_size_;
-		};
-		
-		lock.lock();
+		}
 
-		auto true_index = index_ % capacity_;
-
-		if (index_ + 1 - written_index_ > capacity_)
-			write_to_disk();
-
-
-		data_[true_index] = value;
+		data_[true_index()] = value;
 		index_++;
 		
 		lock.unlock();
-
 	}
 
-	constexpr void push_back(T&& value);
+	/**
+	 * @brief
+	 * @param value
+	 * @pre #index_ > #minimum_size_
+	 */
+	constexpr void push_back(T&& value)
+	{
+		lock.lock();
 
+		if (index_ + 1 - written_index_ > capacity_)//if we need to write elements to disk
+		{
+			auto elements_to_write_n = index_ - minimum_size_ - written_index_;
 
-	template <std::ranges::input_range R>
+			if constexpr (std::is_trivially_copyable_v<T>)
+			{
+				//TODO: this blocks a thread, but if there are 12 threads AND they aren't writing frequently, it shouldn't be THAT bad. Benchmark this.
+				//We could try coroutines here
+				//Maybe we can lock the stream, or stuff like that
+				out_stream_.write(reinterpret_cast<char const*>(&data_[written_index_]), elements_to_write_n * sizeof(T));
+			}
+
+			written_index_ = index_ - minimum_size_;
+		}
+
+		data_[true_index()] = value;
+		index_++;
+
+		lock.unlock();
+	}
+
+	/**
+	 * @brief
+	 * @param value
+	 * @pre #index_ > #minimum_size_
+	 */
+	template <std::ranges::range R>
 		requires std::convertible_to<std::ranges::range_reference_t<R>, T>
-	constexpr void append_range(R&& rg);
+	constexpr void append_range(R&& rg)
+	{
+		auto size = rg.end() - rg.start();
+		lock.lock();
 
-	constexpr void reserve(size_t new_capacity)
+		if (index_ + size - written_index_ > capacity_)//if we need to write elements to disk
+		{
+			auto elements_to_write_n = index_ - minimum_size_ - written_index_;
+
+			if constexpr (std::is_trivially_copyable_v<T>)
+			{
+				//TODO: this blocks a thread, but if there are 12 threads AND they aren't writing frequently, it shouldn't be THAT bad. Benchmark this.
+				//We could try coroutines here
+				//Maybe we can lock the stream, or stuff like that
+				out_stream_.write(reinterpret_cast<char const*>(&data_[written_index_]), elements_to_write_n * sizeof(T));
+			}
+
+			written_index_ = index_ - minimum_size_;
+		}
+
+		//might be worthwhile to optimize this
+		std::for_each(rg.begin(), rg.end(), 
+					  [](T const& value)
+					  {
+						  data_[index_] = value;
+						  index_++;
+					  });
+
+		lock.unlock();
+	}
+
+	constexpr void reserve(size_t new_capacity) noexcept(false)
 	{
 		if (new_capacity <= capacity_) return;
 
@@ -99,7 +168,7 @@ public:
 		auto size = index_ - written_index_;
 		//holy yap
 		if ((index % capacity_) > (index_ % capacity_) or (index_ % capacity_) < ((index_ % capacity_) - size))
-			throw std::out_of_range("Accessed an element outside of buffer, make sure to increase your index.");
+			throw std::out_of_range("Accessed an element outside of buffer.");
 #endif
 		std::shared_lock<std::mutex> lock(mut);
 		return data_[index];
@@ -121,5 +190,5 @@ private:
 	size_t capacity_ = 0;
 	size_t minimum_size_ = 0;
 
-
+	inline constexpr size_t true_index() noexcept { return index_ % capacity_; }
 };

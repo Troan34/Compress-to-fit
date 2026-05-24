@@ -22,6 +22,7 @@ if(CMAKE_GENERATOR STREQUAL "Ninja")
     set(CMAKE_CXX_MODULE_STD ON)
 endif()
 
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/$<CONFIG>)
 
 include(CTest)
 include(FetchContent)
@@ -65,4 +66,3 @@ if(DOXYGEN_FOUND)
         COMMENT "Generating documentation with Doxygen"
     )
 endif()
-

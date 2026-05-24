@@ -9,6 +9,7 @@ var searchData=
   ['max_5fwindow_5fsize_6',['MAX_WINDOW_SIZE',['../lz77_8cppm.html#a282c82f087f402efca939353e57fca44',1,'lz77.cppm']]],
   ['min_5fmatch_7',['MIN_MATCH',['../namespacealg.html#aeca501bd83e1fd3e65ea2fce9f4e1190',1,'alg']]],
   ['minimum_5fsize_5f_8',['minimum_size_',['../class_concurrent_file_buffer.html#a11cc019c27d20774ea11a0deba7e02f6',1,'ConcurrentFileBuffer']]],
-  ['mod_9',['MOD',['../namespacealg.html#a38d521bade379a8121e61b016ad5397f',1,'alg']]],
-  ['mut_10',['mut',['../class_concurrent_file_buffer.html#a2a78240fe53c680c5281dd26bddb2c3b',1,'ConcurrentFileBuffer']]]
+  ['missing_5fargument_9',['MISSING_ARGUMENT',['../namespace_e_r_r___s_t_r_i_n_g.html#af81b6954b18ad24febeb376c7db6fcca',1,'ERR_STRING']]],
+  ['mod_10',['MOD',['../namespacealg.html#a38d521bade379a8121e61b016ad5397f',1,'alg']]],
+  ['mut_11',['mut',['../class_concurrent_file_buffer.html#a2a78240fe53c680c5281dd26bddb2c3b',1,'ConcurrentFileBuffer']]]
 ];

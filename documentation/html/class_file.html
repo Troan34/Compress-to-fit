@@ -128,13 +128,15 @@ requires std::invocable&lt;Pred, <a class="el" href="struct_codec_interface.html
 Static Public Member Functions</h2></td></tr>
 <tr class="memitem:a30d421f12056fe097e75f2a98a0f480c" id="r_a30d421f12056fe097e75f2a98a0f480c"><td class="memItemLeft">static void&#160;</td><td class="memItemRight"><a class="el" href="#a30d421f12056fe097e75f2a98a0f480c">split_file</a> (fs::path const &amp;path, size_t portions)</td></tr>
 <tr class="memdesc:a30d421f12056fe097e75f2a98a0f480c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Split an encoded file into a certain number of encoded (with header) files.  <br /></td></tr>
+<tr class="memitem:a74344ea69c407c73131db10ffc3292b4" id="r_a74344ea69c407c73131db10ffc3292b4"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="#a74344ea69c407c73131db10ffc3292b4">has_signature</a> (std::fstream &amp;file)</td></tr>
+<tr class="memdesc:a74344ea69c407c73131db10ffc3292b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if file has the <a class="el" href="file__management_8cppm.html#a5d9e3a0a38b084aa0d6d23da7a06be5e">SIGNATURE</a> in the header. Non-throwing version of <a class="el" href="#a2eb241a6b3e045cb9665b0e3742ee424" title="Check if file_options.path has the SIGNATURE in the header, throws if not.">check_signature</a>.  <br /></td></tr>
 <tr class="memitem:a09024be52cad08277a0c2de7ddf22b8b" id="r_a09024be52cad08277a0c2de7ddf22b8b"><td class="memItemLeft">static bool&#160;</td><td class="memItemRight"><a class="el" href="#a09024be52cad08277a0c2de7ddf22b8b">has_signature</a> (std::ifstream &amp;file)</td></tr>
 <tr class="memdesc:a09024be52cad08277a0c2de7ddf22b8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if file has the <a class="el" href="file__management_8cppm.html#a5d9e3a0a38b084aa0d6d23da7a06be5e">SIGNATURE</a> in the header. Non-throwing version of <a class="el" href="#a2eb241a6b3e045cb9665b0e3742ee424" title="Check if file_options.path has the SIGNATURE in the header, throws if not.">check_signature</a>.  <br /></td></tr>
 <tr class="memitem:aeb13eba5c36b3a47feeded0d234bb314" id="r_aeb13eba5c36b3a47feeded0d234bb314"><td class="memItemLeft">static std::optional&lt; <a class="el" href="struct_header.html">Header</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#aeb13eba5c36b3a47feeded0d234bb314">extract_info</a> (const fs::path &amp;path)</td></tr>
 <tr class="memdesc:aeb13eba5c36b3a47feeded0d234bb314"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extract information from the header of the tzf file.  <br /></td></tr>
 <tr class="memitem:ae6dfc687b619fc6f7080deafa67a6c1d" id="r_ae6dfc687b619fc6f7080deafa67a6c1d"><td class="memItemLeft">static std::optional&lt; <a class="el" href="struct_header.html">Header</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ae6dfc687b619fc6f7080deafa67a6c1d">extract_info</a> (std::ifstream &amp;file, fs::path const &amp;path)</td></tr>
 <tr class="memdesc:ae6dfc687b619fc6f7080deafa67a6c1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extract information from the header of the tzf file.  <br /></td></tr>
-<tr class="memitem:aea022386c75771f8fdb7e8a76cf41aef" id="r_aea022386c75771f8fdb7e8a76cf41aef"><td class="memItemLeft">static std::ofstream&#160;</td><td class="memItemRight"><a class="el" href="#aea022386c75771f8fdb7e8a76cf41aef">create_file</a> (<a class="el" href="utils_8cppm.html#a77b7b3d2b23480b5378dbd65c7af9178">CompType</a> comp_type, <a class="el" href="utils_8cppm.html#a59fc5d9b777790e56395e645e4205db0">CompPreset</a> comp_preset, fs::path path, size_t id)</td></tr>
+<tr class="memitem:af2040a812b7004faea79ba7e6fef0968" id="r_af2040a812b7004faea79ba7e6fef0968"><td class="memItemLeft">static std::ofstream&#160;</td><td class="memItemRight"><a class="el" href="#af2040a812b7004faea79ba7e6fef0968">create_file</a> (<a class="el" href="utils_8cppm.html#a77b7b3d2b23480b5378dbd65c7af9178">CompType</a> comp_type, <a class="el" href="utils_8cppm.html#a59fc5d9b777790e56395e645e4205db0">CompPreset</a> comp_preset, fs::path path, size_t id, uint16_t count)</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pri-methods" class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
@@ -147,6 +149,11 @@ Private Member Functions</h2></td></tr>
 <tr class="memitem:aaf7b0f743db8c7343de75d5c4d3f93fb" id="r_aaf7b0f743db8c7343de75d5c4d3f93fb"><td class="memItemLeft">fs::path&#160;</td><td class="memItemRight"><a class="el" href="#aaf7b0f743db8c7343de75d5c4d3f93fb">concatenate_files</a> (fs::path const &amp;path)</td></tr>
 <tr class="memdesc:aaf7b0f743db8c7343de75d5c4d3f93fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concatenate files found in #path into a new file, if.  <br /></td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pri-static-methods" class="groupheader"><a id="pri-static-methods" name="pri-static-methods"></a>
+Static Private Member Functions</h2></td></tr>
+<tr class="memitem:acae28f8736d41a36faa606bd1c27dab7" id="r_acae28f8736d41a36faa606bd1c27dab7"><td class="memItemLeft">static std::ofstream&#160;</td><td class="memItemRight"><a class="el" href="#acae28f8736d41a36faa606bd1c27dab7">create_file</a> (fs::path const &amp;path, <a class="el" href="struct_header.html">Header</a> options)</td></tr>
+<tr class="memdesc:acae28f8736d41a36faa606bd1c27dab7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a compressed file(header). If file exists, it is cleared.  <br /></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pri-attribs" class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr class="memitem:a29e9a211dc95cdfbfcf5c135bcb4fcf5" id="r_a29e9a211dc95cdfbfcf5c135bcb4fcf5"><td class="memItemLeft"><a class="el" href="struct_file_options.html">FileOptions</a>&#160;</td><td class="memItemRight"><a class="el" href="#a29e9a211dc95cdfbfcf5c135bcb4fcf5">file_options</a></td></tr>
@@ -157,7 +164,7 @@ Private Attributes</h2></td></tr>
 <div class="textblock"><p>Interpret a file as to retrieve custom information. </p>
 <p>An interpreted file is one where we have the knowledge about it to fill <a class="el" href="struct_file_options.html">FileOptions</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00063">63</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00073">73</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="af7104229a9098d85f8f631c1d5c2d9a2" name="af7104229a9098d85f8f631c1d5c2d9a2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af7104229a9098d85f8f631c1d5c2d9a2">&#9670;&#160;</a></span>File()</h2>
@@ -196,11 +203,11 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="todo"><dt><b><a class="el" href="todo.html#_todo000001">Todo</a></b></dt><dd>Add a parameter for <a class="el" href="struct_file_options.html#a7cb51e65263f944a8a56b79346dedb71">FileOptions::delete_on_dtor</a> when the parser is updated to do that </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00074">74</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00084">84</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
 
-<p class="reference">References <a class="el" href="file__management_8cppm_source.html#l00074">File()</a>.</p>
+<p class="reference">References <a class="el" href="file__management_8cppm_source.html#l00084">File()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="file__management_8cppm_source.html#l00074">File()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="file__management_8cppm_source.html#l00084">File()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -240,7 +247,7 @@ Here is the caller graph for this function:</div>
 
 <p>Check if #file_options.path has the <a class="el" href="file__management_8cppm.html#a5d9e3a0a38b084aa0d6d23da7a06be5e">SIGNATURE</a> in the header, throws if not. </p>
 
-<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00356">356</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00391">391</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
 
 </div>
 </div>
@@ -276,12 +283,12 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>path to the new concatenated file </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00423">423</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00478">478</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
 
 </div>
 </div>
-<a id="aea022386c75771f8fdb7e8a76cf41aef" name="aea022386c75771f8fdb7e8a76cf41aef"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aea022386c75771f8fdb7e8a76cf41aef">&#9670;&#160;</a></span>create_file() <span class="overload">[1/2]</span></h2>
+<a id="af2040a812b7004faea79ba7e6fef0968" name="af2040a812b7004faea79ba7e6fef0968"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2040a812b7004faea79ba7e6fef0968">&#9670;&#160;</a></span>create_file() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -307,7 +314,12 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>id</em></span>&#160;)</td>
+          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>id</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint16_t</td>          <td class="paramname"><span class="paramname"><em>count</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -317,12 +329,52 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00331">331</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00365">365</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
+
+</div>
+</div>
+<a id="acae28f8736d41a36faa606bd1c27dab7" name="acae28f8736d41a36faa606bd1c27dab7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acae28f8736d41a36faa606bd1c27dab7">&#9670;&#160;</a></span>create_file() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::ofstream File::create_file </td>
+          <td>(</td>
+          <td class="paramtype">fs::path const &amp;</td>          <td class="paramname"><span class="paramname"><em>path</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="struct_header.html">Header</a></td>          <td class="paramname"><span class="paramname"><em>options</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a compressed file(header). If file exists, it is cleared. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>Where the file is created </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A stream to the file. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00455">455</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
 
 </div>
 </div>
 <a id="a942986666cfee9c56f500f9f023e998d" name="a942986666cfee9c56f500f9f023e998d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a942986666cfee9c56f500f9f023e998d">&#9670;&#160;</a></span>create_file() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a942986666cfee9c56f500f9f023e998d">&#9670;&#160;</a></span>create_file() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -353,7 +405,7 @@ Here is the caller graph for this function:</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A stream to the file. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00395">395</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00430">430</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
 
 </div>
 </div>
@@ -390,7 +442,7 @@ Here is the caller graph for this function:</div>
 <dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="struct_file_options.html">FileOptions</a> type constructed with the obtained information</dd></dl>
 <dl class="section pre"><dt>Precondition</dt><dd>path shall exist and be accessible. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00290">290</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00322">322</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
 
 </div>
 </div>
@@ -432,12 +484,12 @@ Here is the caller graph for this function:</div>
 <dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="struct_file_options.html">FileOptions</a> type constructed with the obtained information</dd></dl>
 <dl class="section pre"><dt>Precondition</dt><dd>path shall exist and be accessible. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00305">305</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00337">337</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
 
 </div>
 </div>
 <a id="aa5c3142a4a5e9cba6bd7303c0373b8bb" name="aa5c3142a4a5e9cba6bd7303c0373b8bb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa5c3142a4a5e9cba6bd7303c0373b8bb">&#9670;&#160;</a></span>has_signature() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5c3142a4a5e9cba6bd7303c0373b8bb">&#9670;&#160;</a></span>has_signature() <span class="overload">[1/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -463,12 +515,50 @@ Here is the caller graph for this function:</div>
 <dl class="section return"><dt>Returns</dt><dd>True if #file_options.path has signature, false if not.</dd></dl>
 <dl class="section pre"><dt>Precondition</dt><dd>The file shall already exist and be accessible. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00375">375</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00410">410</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
+
+</div>
+</div>
+<a id="a74344ea69c407c73131db10ffc3292b4" name="a74344ea69c407c73131db10ffc3292b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74344ea69c407c73131db10ffc3292b4">&#9670;&#160;</a></span>has_signature() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool File::has_signature </td>
+          <td>(</td>
+          <td class="paramtype">std::fstream &amp;</td>          <td class="paramname"><span class="paramname"><em>file</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Check if file has the <a class="el" href="file__management_8cppm.html#a5d9e3a0a38b084aa0d6d23da7a06be5e">SIGNATURE</a> in the header. Non-throwing version of <a class="el" href="#a2eb241a6b3e045cb9665b0e3742ee424" title="Check if file_options.path has the SIGNATURE in the header, throws if not.">check_signature</a>. </p>
+<dl class="section return"><dt>Returns</dt><dd>True if file has signature, false if not.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">file</td><td><a class="el" href="class_file.html" title="Interpret a file as to retrieve custom information.">File</a> to be checked. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section pre"><dt>Precondition</dt><dd>The file shall already exist and be accessible. </dd></dl>
+<dl class="section post"><dt>Postcondition</dt><dd>file will be unchanged. </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00277">277</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
 
 </div>
 </div>
 <a id="a09024be52cad08277a0c2de7ddf22b8b" name="a09024be52cad08277a0c2de7ddf22b8b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a09024be52cad08277a0c2de7ddf22b8b">&#9670;&#160;</a></span>has_signature() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a09024be52cad08277a0c2de7ddf22b8b">&#9670;&#160;</a></span>has_signature() <span class="overload">[3/3]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -501,7 +591,7 @@ Here is the caller graph for this function:</div>
 <dl class="section pre"><dt>Precondition</dt><dd>The file shall already exist and be accessible. </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>file will be unchanged. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00268">268</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00300">300</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
 
 </div>
 </div>
@@ -548,7 +638,7 @@ requires std::invocable&lt;Pred, <a class="el" href="struct_codec_interface.html
 </dl>
 <p>This function will ignore the file header </p>
 
-<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00097">97</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00106">106</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
 
 </div>
 </div>
@@ -588,7 +678,7 @@ requires std::invocable&lt;Pred, <a class="el" href="struct_codec_interface.html
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00237">237</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00246">246</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
 
 </div>
 </div>
@@ -628,7 +718,7 @@ requires std::invocable&lt;Pred, <a class="el" href="struct_codec_interface.html
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00165">165</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00174">174</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
 
 </div>
 </div>
@@ -661,7 +751,7 @@ template&lt;typename T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00145">145</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00154">154</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
 
 </div>
 </div>
@@ -686,7 +776,7 @@ template&lt;typename T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00350">350</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00385">385</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
 
 </div>
 </div>
@@ -710,7 +800,7 @@ template&lt;typename T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00349">349</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00384">384</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
 
 </div>
 </div>
@@ -734,7 +824,7 @@ template&lt;typename T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00351">351</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00386">386</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
 
 </div>
 </div>

@@ -30,12 +30,15 @@ var searchData=
   ['compressor_5fstr_5foptions_27',['COMPRESSOR_STR_OPTIONS',['../utils_8cppm.html#a00efb0a9acab4c356b0b4550de60af1e',1,'utils.cppm']]],
   ['compressor_5ftype_28',['COMPRESSOR_TYPE',['../namespaceparser.html#accd7eb1ffd4c925598ec25fab6905369a6695eadf97d6ae0347fe82481a97b993',1,'parser']]],
   ['comptype_29',['CompType',['../utils_8cppm.html#a77b7b3d2b23480b5378dbd65c7af9178',1,'utils.cppm']]],
-  ['concatenate_30',['CONCATENATE',['../namespaceparser.html#accd7eb1ffd4c925598ec25fab6905369a2dd08f693d26ad0ef819a6da487fe438',1,'parser']]],
-  ['concatenate_5ffiles_31',['concatenate_files',['../structparser_1_1_options.html#a4e235b57474a81a3eec424cb4142c8ab',1,'parser::Options::concatenate_files'],['../class_file.html#aaf7b0f743db8c7343de75d5c4d3f93fb',1,'File::concatenate_files()']]],
-  ['concurrent_5ffile_5fbuffer_2ecppm_32',['concurrent_file_buffer.cppm',['../concurrent__file__buffer_8cppm.html',1,'']]],
-  ['concurrentfilebuffer_33',['ConcurrentFileBuffer',['../class_concurrent_file_buffer.html',1,'ConcurrentFileBuffer&lt; T &gt;'],['../class_concurrent_file_buffer.html#a00e2b4803fdfe9ffcab27d98b2121039',1,'ConcurrentFileBuffer::ConcurrentFileBuffer()']]],
-  ['const_5fpow_34',['const_pow',['../utils_8cppm.html#a78c404083e319e5d50a4293e918cb8ab',1,'utils.cppm']]],
-  ['count_5fequal_35',['count_equal',['../utils_8cppm.html#a770361d202fe810d1b063557d36041e3',1,'utils.cppm']]],
-  ['create_5ffile_36',['create_file',['../class_file.html#aea022386c75771f8fdb7e8a76cf41aef',1,'File::create_file(CompType comp_type, CompPreset comp_preset, fs::path path, size_t id)'],['../class_file.html#a942986666cfee9c56f500f9f023e998d',1,'File::create_file(fs::path path) const']]],
-  ['create_5fstream_37',['create_stream',['../file__management_8cpp.html#acd37a664f5354c9a88c2396f0e350b2d',1,'file_management.cpp']]]
+  ['concat_5fambiguity_30',['CONCAT_AMBIGUITY',['../namespace_w_a_r_n___s_t_r_i_n_g.html#ae325c9559d30aa8bb285b17b84ae925f',1,'WARN_STRING::CONCAT_AMBIGUITY'],['../utils_8cppm.html#aa278aa207bdeddc8432b560d1e1312aea3679d74393649174baa5db30d7e70081',1,'CONCAT_AMBIGUITY:&#160;utils.cppm']]],
+  ['concatenate_31',['CONCATENATE',['../namespaceparser.html#accd7eb1ffd4c925598ec25fab6905369a2dd08f693d26ad0ef819a6da487fe438',1,'parser']]],
+  ['concatenate_5ffiles_32',['concatenate_files',['../structparser_1_1_options.html#a4e235b57474a81a3eec424cb4142c8ab',1,'parser::Options::concatenate_files'],['../class_file.html#aaf7b0f743db8c7343de75d5c4d3f93fb',1,'File::concatenate_files()']]],
+  ['concurrent_5ffile_5fbuffer_2ecppm_33',['concurrent_file_buffer.cppm',['../concurrent__file__buffer_8cppm.html',1,'']]],
+  ['concurrentfilebuffer_34',['ConcurrentFileBuffer',['../class_concurrent_file_buffer.html',1,'ConcurrentFileBuffer&lt; T &gt;'],['../class_concurrent_file_buffer.html#a00e2b4803fdfe9ffcab27d98b2121039',1,'ConcurrentFileBuffer::ConcurrentFileBuffer()']]],
+  ['const_5fpow_35',['const_pow',['../utils_8cppm.html#a78c404083e319e5d50a4293e918cb8ab',1,'utils.cppm']]],
+  ['count_36',['COUNT',['../file__management_8cppm.html#ac3f10b5949a91b9cafbbdcf140d0a527a4905ac9d6a22bdfc1ae096094ce6248d',1,'file_management.cppm']]],
+  ['count_37',['count',['../struct_header.html#a7e28f0be834e5db8b42db26058fe99fe',1,'Header']]],
+  ['count_5fequal_38',['count_equal',['../utils_8cppm.html#a770361d202fe810d1b063557d36041e3',1,'utils.cppm']]],
+  ['create_5ffile_39',['create_file',['../class_file.html#af2040a812b7004faea79ba7e6fef0968',1,'File::create_file(CompType comp_type, CompPreset comp_preset, fs::path path, size_t id, uint16_t count)'],['../class_file.html#a942986666cfee9c56f500f9f023e998d',1,'File::create_file(fs::path path) const'],['../class_file.html#acae28f8736d41a36faa606bd1c27dab7',1,'File::create_file(fs::path const &amp;path, Header options)']]],
+  ['create_5fstream_40',['create_stream',['../file__management_8cpp.html#acd37a664f5354c9a88c2396f0e350b2d',1,'file_management.cpp']]]
 ];

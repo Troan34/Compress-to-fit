@@ -123,8 +123,8 @@ export module std;
 
 #if _HAS_CXX23
 #include <expected>
-//#include <flat_map> MSVC used to compile project can't find these files
-//#include <flat_set>
+#include <flat_map>
+#include <flat_set>
 #include <generator>
 #include <mdspan>
 #include <print>

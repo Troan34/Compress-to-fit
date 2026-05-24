@@ -7,8 +7,8 @@
 \DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00003}00003\ import\ std.compat;}
 \DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00004}00004\ }
 \DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00005}00005\ \textcolor{comment}{/**}}
-\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ @brief\ Circular\ array\ where\ if\ size\ >\ capacity,\ size\ -\/\ minimum\_size\ is\ written\ to\ stream}}
-\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ @tparam\ T\ }}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ @brief\ Circular\ array\ where\ if\ size\ >\ capacity,\ the\ oldest\ elements\ are\ written\ to\ stream\ until\ }}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ *\ @tparam\ T\ type\ stored,\ must\ be\ trivially\ copyable}}
 \DoxyCodeLine{00008\ \textcolor{comment}{\ */}}
 \DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00009}00009\ \textcolor{keyword}{export}\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
 \DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00010}00010\ \ \ \ \ requires\ std::is\_trivially\_copyable\_v<T>}
@@ -22,110 +22,179 @@
 \DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00018}00018\ \ \ \ \ \ \ \ \ reserve(minimum\_size\_\ +\ (1.5f\ *\ minimum\_size\_));}
 \DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00019}00019\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00020}00020\ }
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00021}00021\ }
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00022}\doxymbox{\hyperlink{class_concurrent_file_buffer_adda68ddaa0de43803ef924fa34c3f066}{00022}}\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{void}\ push\_back(T\ \textcolor{keyword}{const}\&\ value)}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00023}00023\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00024}00024\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ write\_to\_disk\ =\ []()}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00025}00025\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00026}00026\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (index\_\ <\ minimum\_size\_)\textcolor{comment}{//if\ buffer\ is\ not\ full}}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00028}00028\ }
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00029}00029\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ elements\_to\_write\_n\ =\ index\_\ -\/\ minimum\_size\_\ -\/\ written\_index\_;}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00030}00030\ }
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00031}00031\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_trivially\_copyable\_v<T>)}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00032}00032\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00033}00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//TODO:\ this\ technically\ blocks\ a\ thread,\ but\ if\ there\ are\ 12\ threads\ AND\ they\ aren't\ writing\ frequently,\ it\ shouldn't\ be\ THAT\ bad.\ Benchmark\ this.}}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00034}00034\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ out\_stream\_.write(\textcolor{keyword}{reinterpret\_cast}<\textcolor{keywordtype}{char}\ \textcolor{keyword}{const}*>(\&data\_[written\_index\_]),\ elements\_to\_write\_n\ *\ \textcolor{keyword}{sizeof}(T));}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00036}00036\ }
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ written\_index\_\ =\ index\_\ -\/\ minimum\_size\_;}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00038}00038\ \ \ \ \ \ \ \ \ \};}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00039}00039\ }
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00040}00040\ \ \ \ \ \ \ \ \ lock.lock();}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00021}\doxymbox{\hyperlink{class_concurrent_file_buffer_a16c74a81c8a7ba2292f65dbf0d472f7a}{00021}}\ \ \ \ \ \string~ConcurrentFileBuffer()}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00022}00022\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00023}00023\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ elements\_to\_write\_n\ =\ index\_\ -\/\ written\_index\_;}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00024}00024\ }
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00025}00025\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_trivially\_copyable\_v<T>)}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00026}00026\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ out\_stream\_.write(\textcolor{keyword}{reinterpret\_cast}<\textcolor{keywordtype}{char}\ \textcolor{keyword}{const}*>(\&data\_[written\_index\_]),\ elements\_to\_write\_n\ *\ \textcolor{keyword}{sizeof}(T));}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00028}00028\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00029}00029\ \ \ \ \ \ \ \ \ allocator.deallocate(data\_,\ capacity\_);}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00030}00030\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00032}00032\ \ \ \ \ \textcolor{comment}{/**}}
+\DoxyCodeLine{00033\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ }}
+\DoxyCodeLine{00034\ \textcolor{comment}{\ \ \ \ \ *\ @param\ value}}
+\DoxyCodeLine{00035\ \textcolor{comment}{\ \ \ \ \ *\ @pre\ \#index\_\ >\ \#minimum\_size\_}}
+\DoxyCodeLine{00036\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00037}\doxymbox{\hyperlink{class_concurrent_file_buffer_adda68ddaa0de43803ef924fa34c3f066}{00037}}\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{void}\ push\_back(T\ \textcolor{keyword}{const}\&\ value)}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00038}00038\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00039}00039\ \ \ \ \ \ \ \ \ lock.lock();}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00040}00040\ }
 \DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00041}00041\ }
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00042}00042\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ true\_index\ =\ index\_\ \%\ capacity\_;}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00043}00043\ }
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00044}00044\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (index\_\ +\ 1\ -\/\ written\_index\_\ >\ capacity\_)}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00045}00045\ \ \ \ \ \ \ \ \ \ \ \ \ write\_to\_disk();}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00046}00046\ }
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00047}00047\ }
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00048}00048\ \ \ \ \ \ \ \ \ data\_[true\_index]\ =\ value;}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00049}00049\ \ \ \ \ \ \ \ \ index\_++;}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00050}00050\ }
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00051}00051\ \ \ \ \ \ \ \ \ lock.unlock();}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00052}00052\ }
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00053}00053\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00054}00054\ }
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00055}\doxymbox{\hyperlink{class_concurrent_file_buffer_a05dc56e9dde6301cc399c272df821e4f}{00055}}\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{void}\ push\_back(T\&\&\ value);}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00042}00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (index\_\ +\ 1\ -\/\ written\_index\_\ >\ capacity\_)\textcolor{comment}{//if\ we\ need\ to\ write\ elements\ to\ disk}}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00043}00043\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ elements\_to\_write\_n\ =\ index\_\ -\/\ minimum\_size\_\ -\/\ written\_index\_;}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00046}00046\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_trivially\_copyable\_v<T>)}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00047}00047\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00048}00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//TODO:\ this\ blocks\ a\ thread,\ but\ if\ there\ are\ 12\ threads\ AND\ they\ aren't\ writing\ frequently,\ it\ shouldn't\ be\ THAT\ bad.\ Benchmark\ this.}}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00049}00049\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//We\ could\ try\ coroutines\ here}}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00050}00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Maybe\ we\ can\ lock\ the\ stream,\ or\ stuff\ like\ that}}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00051}00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ out\_stream\_.write(\textcolor{keyword}{reinterpret\_cast}<\textcolor{keywordtype}{char}\ \textcolor{keyword}{const}*>(\&data\_[written\_index\_]),\ elements\_to\_write\_n\ *\ \textcolor{keyword}{sizeof}(T));}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00052}00052\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00054}00054\ \ \ \ \ \ \ \ \ \ \ \ \ written\_index\_\ =\ index\_\ -\/\ minimum\_size\_;}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00055}00055\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00056}00056\ }
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00057}00057\ }
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00058}00058\ \ \ \ \ \textcolor{keyword}{template}\ <std::ranges::input\_range\ R>}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00059}00059\ \ \ \ \ \ \ \ \ requires\ std::convertible\_to<std::ranges::range\_reference\_t<R>,\ T>}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00060}\doxymbox{\hyperlink{class_concurrent_file_buffer_a84281e77fbb9afa8b8677c52a12689b3}{00060}}\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{void}\ append\_range(R\&\&\ rg);}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00061}00061\ }
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00062}\doxymbox{\hyperlink{class_concurrent_file_buffer_addb9b1059fade88677e053cd1d035ed1}{00062}}\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{void}\ reserve(size\_t\ new\_capacity)}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00063}00063\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00064}00064\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (new\_capacity\ <=\ capacity\_)\ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00065}00065\ }
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00066}00066\ \ \ \ \ \ \ \ \ \textcolor{comment}{//allocate\ size\ for\ new\ data}}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00067}00067\ \ \ \ \ \ \ \ \ T*\ new\_data\_\ =\ allocator.allocate(new\_capacity);}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00068}00068\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ size\ =\ index\_\ -\/\ written\_index\_;}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00069}00069\ \ \ \ \ \ \ \ \ std::unique\_lock<std::mutex>\ lock(mut);}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00070}00070\ }
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00071}00071\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_trivially\_copyable\_v<T>)\textcolor{comment}{//if\ trivially\ copyable\ use\ std::memcpy}}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00072}00072\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ std::memcpy(new\_data\_,\ data\_,\ size\ *\ \textcolor{keyword}{sizeof}(T));}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00074}00074\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00057}00057\ \ \ \ \ \ \ \ \ data\_[true\_index()]\ =\ value;}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00058}00058\ \ \ \ \ \ \ \ \ index\_++;}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00060}00060\ \ \ \ \ \ \ \ \ lock.unlock();}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00061}00061\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00063}00063\ \ \ \ \ \textcolor{comment}{/**}}
+\DoxyCodeLine{00064\ \textcolor{comment}{\ \ \ \ \ *\ @brief}}
+\DoxyCodeLine{00065\ \textcolor{comment}{\ \ \ \ \ *\ @param\ value}}
+\DoxyCodeLine{00066\ \textcolor{comment}{\ \ \ \ \ *\ @pre\ \#index\_\ >\ \#minimum\_size\_}}
+\DoxyCodeLine{00067\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00068}\doxymbox{\hyperlink{class_concurrent_file_buffer_a05dc56e9dde6301cc399c272df821e4f}{00068}}\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{void}\ push\_back(T\&\&\ value)}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00069}00069\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00070}00070\ \ \ \ \ \ \ \ \ lock.lock();}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00072}00072\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (index\_\ +\ 1\ -\/\ written\_index\_\ >\ capacity\_)\textcolor{comment}{//if\ we\ need\ to\ write\ elements\ to\ disk}}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00073}00073\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ elements\_to\_write\_n\ =\ index\_\ -\/\ minimum\_size\_\ -\/\ written\_index\_;}
 \DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00075}00075\ }
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00076}00076\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ To\ be\ used\ if\ we\ ever\ want\ to\ use\ non\ trivial\ types}}
-\DoxyCodeLine{00077\ \textcolor{comment}{\ \ \ \ \ \ \ \ else//if\ not,\ call\ T's\ ctor}}
-\DoxyCodeLine{00078\ \textcolor{comment}{\ \ \ \ \ \ \ \ \{}}
-\DoxyCodeLine{00079\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ for\ (size\_t\ i\{\};\ i\ <\ size\_;\ i++)}}
-\DoxyCodeLine{00080\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \{}}
-\DoxyCodeLine{00081\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ new\ (\&new\_data\_[i])\ T(std::move(data\_[i]));}}
-\DoxyCodeLine{00082\ \textcolor{comment}{}}
-\DoxyCodeLine{00083\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ data\_[i].\string~T();}}
-\DoxyCodeLine{00084\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \}}}
-\DoxyCodeLine{00085\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}*/}}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_trivially\_copyable\_v<T>)}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00077}00077\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//TODO:\ this\ blocks\ a\ thread,\ but\ if\ there\ are\ 12\ threads\ AND\ they\ aren't\ writing\ frequently,\ it\ shouldn't\ be\ THAT\ bad.\ Benchmark\ this.}}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//We\ could\ try\ coroutines\ here}}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Maybe\ we\ can\ lock\ the\ stream,\ or\ stuff\ like\ that}}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ out\_stream\_.write(\textcolor{keyword}{reinterpret\_cast}<\textcolor{keywordtype}{char}\ \textcolor{keyword}{const}*>(\&data\_[written\_index\_]),\ elements\_to\_write\_n\ *\ \textcolor{keyword}{sizeof}(T));}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ written\_index\_\ =\ index\_\ -\/\ minimum\_size\_;}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00085}00085\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00086}00086\ }
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00087}00087\ \ \ \ \ \ \ \ \ data\_\ =\ new\_data\_;}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00088}00088\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ old\_cap\ =\ capacity\_;}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00089}00089\ \ \ \ \ \ \ \ \ lock.unlock();}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00090}00090\ }
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00091}00091\ \ \ \ \ \ \ \ \ allocator.deallocate(data\_,\ old\_cap);}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00087}00087\ \ \ \ \ \ \ \ \ data\_[true\_index()]\ =\ value;}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00088}00088\ \ \ \ \ \ \ \ \ index\_++;}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00090}00090\ \ \ \ \ \ \ \ \ lock.unlock();}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00091}00091\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00092}00092\ }
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00093}00093\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00094}00094\ }
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00095}\doxymbox{\hyperlink{class_concurrent_file_buffer_a50f2f746d2297892ffdbe15cc52a238f}{00095}}\ \ \ \ \ \textcolor{keyword}{constexpr}\ T\ operator[](size\_t\ index)\ \textcolor{keyword}{const}}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00096}00096\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00097}00097\ \ \ \ \ \ \ \ \ \textcolor{comment}{//if\ in\ debug\ mode}}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00098}00098\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{ifndef}\ \textcolor{preprocessor}{NDEBUG}}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00099}00099\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ size\ =\ index\_\ -\/\ written\_index\_;}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00100}00100\ \ \ \ \ \ \ \ \ \textcolor{comment}{//holy\ yap}}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00101}00101\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((index\ \%\ capacity\_)\ >\ (index\_\ \%\ capacity\_)\ \textcolor{keyword}{or}\ (index\_\ \%\ capacity\_)\ <\ ((index\_\ \%\ capacity\_)\ -\/\ size))}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::out\_of\_range(\textcolor{stringliteral}{"{}Accessed\ an\ element\ outside\ of\ buffer,\ make\ sure\ to\ increase\ your\ index."{}});}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00103}00103\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{endif}}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00104}00104\ \ \ \ \ \ \ \ \ std::shared\_lock<std::mutex>\ lock(mut);}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00105}00105\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ data\_[index];}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00106}00106\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00107}00107\ }
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00108}00108\ \ \ \ \ \textcolor{comment}{//getters}}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00109}\doxymbox{\hyperlink{class_concurrent_file_buffer_a8e4891170bcfa2ba2cff546d5cd6f3ce}{00109}}\ \ \ \ \ \textcolor{keyword}{constexpr}\ size\_t\ capacity()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ \{\ \textcolor{keywordflow}{return}\ capacity\_;\ \}}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00110}\doxymbox{\hyperlink{class_concurrent_file_buffer_a79391fd6953f83b293865ebaed9826a2}{00110}}\ \ \ \ \ \textcolor{keyword}{constexpr}\ size\_t\ minimum\_size()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ \{\ \textcolor{keywordflow}{return}\ minimum\_size\_;\ \}}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00111}00111\ }
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00112}00112\ }
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00113}00113\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00114}\doxymbox{\hyperlink{class_concurrent_file_buffer_a53cb8ef0ca3df42925c1a5635a06090c}{00114}}\ \ \ \ \ std::ofstream\ out\_stream\_;}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00115}\doxymbox{\hyperlink{class_concurrent_file_buffer_af6016220a98badcda7da620da440e959}{00115}}\ \ \ \ \ T*\ data\_;}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00116}\doxymbox{\hyperlink{class_concurrent_file_buffer_a62919f4664acba0c6890ed3dc001325d}{00116}}\ \ \ \ \ std::allocator<T>\ allocator;}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00117}\doxymbox{\hyperlink{class_concurrent_file_buffer_a2a78240fe53c680c5281dd26bddb2c3b}{00117}}\ \ \ \ \ std::mutex\ mut;}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00118}\doxymbox{\hyperlink{class_concurrent_file_buffer_a78c8dcf0d29b09378e8e503013131817}{00118}}\ \ \ \ \ std::unique\_lock<std::mutex>\ lock\{\ mut,\ std::defer\_lock\ \ \};\ \textcolor{comment}{//only\ one\ thread\ at\ a\ time\ may\ write\ to\ data\_,\ so\ we\ keep\ this\ class-\/wide}}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00119}\doxymbox{\hyperlink{class_concurrent_file_buffer_a3a65ccf605108ae165f5c04ce0ef7ff3}{00119}}\ \ \ \ \ size\_t\ index\_\ =\ 0;}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00120}\doxymbox{\hyperlink{class_concurrent_file_buffer_a1cdbe28b4d0615a58a10131650a689c5}{00120}}\ \ \ \ \ size\_t\ written\_index\_\ =\ 0;\ \textcolor{comment}{//oldest\ index\ that\ has\ not\ yet\ been\ written\ to\ file}}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00121}\doxymbox{\hyperlink{class_concurrent_file_buffer_a296cd0d3b7ac25b7e00cb002b9b7becf}{00121}}\ \ \ \ \ size\_t\ capacity\_\ =\ 0;}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00122}\doxymbox{\hyperlink{class_concurrent_file_buffer_a11cc019c27d20774ea11a0deba7e02f6}{00122}}\ \ \ \ \ size\_t\ minimum\_size\_\ =\ 0;}
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00123}00123\ }
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00124}00124\ }
-\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00125}00125\ \};}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00093}00093\ \ \ \ \ \textcolor{comment}{/**}}
+\DoxyCodeLine{00094\ \textcolor{comment}{\ \ \ \ \ *\ @brief}}
+\DoxyCodeLine{00095\ \textcolor{comment}{\ \ \ \ \ *\ @param\ value}}
+\DoxyCodeLine{00096\ \textcolor{comment}{\ \ \ \ \ *\ @pre\ \#index\_\ >\ \#minimum\_size\_}}
+\DoxyCodeLine{00097\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00098}00098\ \ \ \ \ \textcolor{keyword}{template}\ <std::ranges::range\ R>}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00099}00099\ \ \ \ \ \ \ \ \ requires\ std::convertible\_to<std::ranges::range\_reference\_t<R>,\ T>}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00100}\doxymbox{\hyperlink{class_concurrent_file_buffer_a84281e77fbb9afa8b8677c52a12689b3}{00100}}\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{void}\ append\_range(R\&\&\ rg)}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00101}00101\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00102}00102\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ size\ =\ rg.end()\ -\/\ rg.start();}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00103}00103\ \ \ \ \ \ \ \ \ lock.lock();}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00104}00104\ }
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00105}00105\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (index\_\ +\ size\ -\/\ written\_index\_\ >\ capacity\_)\textcolor{comment}{//if\ we\ need\ to\ write\ elements\ to\ disk}}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00106}00106\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ elements\_to\_write\_n\ =\ index\_\ -\/\ minimum\_size\_\ -\/\ written\_index\_;}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_trivially\_copyable\_v<T>)}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//TODO:\ this\ blocks\ a\ thread,\ but\ if\ there\ are\ 12\ threads\ AND\ they\ aren't\ writing\ frequently,\ it\ shouldn't\ be\ THAT\ bad.\ Benchmark\ this.}}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//We\ could\ try\ coroutines\ here}}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00113}00113\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Maybe\ we\ can\ lock\ the\ stream,\ or\ stuff\ like\ that}}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ out\_stream\_.write(\textcolor{keyword}{reinterpret\_cast}<\textcolor{keywordtype}{char}\ \textcolor{keyword}{const}*>(\&data\_[written\_index\_]),\ elements\_to\_write\_n\ *\ \textcolor{keyword}{sizeof}(T));}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00116}00116\ }
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ written\_index\_\ =\ index\_\ -\/\ minimum\_size\_;}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00118}00118\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00119}00119\ }
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00120}00120\ \ \ \ \ \ \ \ \ \textcolor{comment}{//might\ be\ worthwhile\ to\ optimize\ this}}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00121}00121\ \ \ \ \ \ \ \ \ std::for\_each(rg.begin(),\ rg.end(),}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [](T\ \textcolor{keyword}{const}\&\ value)}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ data\_[index\_]\ =\ value;}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00125}00125\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ index\_++;}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00127}00127\ }
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00128}00128\ \ \ \ \ \ \ \ \ lock.unlock();}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00129}00129\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00130}00130\ }
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00131}\doxymbox{\hyperlink{class_concurrent_file_buffer_a723e5d9f8619dcb94607629a562f2bc1}{00131}}\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{void}\ reserve(size\_t\ new\_capacity)\ \textcolor{keyword}{noexcept}(\textcolor{keyword}{false})}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00132}00132\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00133}00133\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (new\_capacity\ <=\ capacity\_)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00134}00134\ }
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00135}00135\ \ \ \ \ \ \ \ \ \textcolor{comment}{//allocate\ size\ for\ new\ data}}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00136}00136\ \ \ \ \ \ \ \ \ T*\ new\_data\_\ =\ allocator.allocate(new\_capacity);}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00137}00137\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ size\ =\ index\_\ -\/\ written\_index\_;}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00138}00138\ \ \ \ \ \ \ \ \ std::unique\_lock<std::mutex>\ lock(mut);}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00139}00139\ }
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00140}00140\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_trivially\_copyable\_v<T>)\textcolor{comment}{//if\ trivially\ copyable\ use\ std::memcpy}}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00141}00141\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ std::memcpy(new\_data\_,\ data\_,\ size\ *\ \textcolor{keyword}{sizeof}(T));}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00143}00143\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00144}00144\ }
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00145}00145\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ To\ be\ used\ if\ we\ ever\ want\ to\ use\ non\ trivial\ types}}
+\DoxyCodeLine{00146\ \textcolor{comment}{\ \ \ \ \ \ \ \ else//if\ not,\ call\ T's\ ctor}}
+\DoxyCodeLine{00147\ \textcolor{comment}{\ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{00148\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ for\ (size\_t\ i\{\};\ i\ <\ size\_;\ i++)}}
+\DoxyCodeLine{00149\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{00150\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ new\ (\&new\_data\_[i])\ T(std::move(data\_[i]));}}
+\DoxyCodeLine{00151\ \textcolor{comment}{}}
+\DoxyCodeLine{00152\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ data\_[i].\string~T();}}
+\DoxyCodeLine{00153\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00154\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}*/}}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00155}00155\ }
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00156}00156\ \ \ \ \ \ \ \ \ data\_\ =\ new\_data\_;}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00157}00157\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ old\_cap\ =\ capacity\_;}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00158}00158\ \ \ \ \ \ \ \ \ lock.unlock();}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00159}00159\ }
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00160}00160\ \ \ \ \ \ \ \ \ allocator.deallocate(data\_,\ old\_cap);}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00161}00161\ }
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00162}00162\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00163}00163\ }
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00164}\doxymbox{\hyperlink{class_concurrent_file_buffer_a50f2f746d2297892ffdbe15cc52a238f}{00164}}\ \ \ \ \ \textcolor{keyword}{constexpr}\ T\ operator[](size\_t\ index)\ \textcolor{keyword}{const}}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00165}00165\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00166}00166\ \ \ \ \ \ \ \ \ \textcolor{comment}{//if\ in\ debug\ mode}}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00167}00167\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{ifndef}\ \textcolor{preprocessor}{NDEBUG}}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00168}00168\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ size\ =\ index\_\ -\/\ written\_index\_;}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00169}00169\ \ \ \ \ \ \ \ \ \textcolor{comment}{//holy\ yap}}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00170}00170\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((index\ \%\ capacity\_)\ >\ (index\_\ \%\ capacity\_)\ \textcolor{keyword}{or}\ (index\_\ \%\ capacity\_)\ <\ ((index\_\ \%\ capacity\_)\ -\/\ size))}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::out\_of\_range(\textcolor{stringliteral}{"{}Accessed\ an\ element\ outside\ of\ buffer."{}});}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00172}00172\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{endif}}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00173}00173\ \ \ \ \ \ \ \ \ std::shared\_lock<std::mutex>\ lock(mut);}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00174}00174\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ data\_[index];}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00175}00175\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00176}00176\ }
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00177}00177\ \ \ \ \ \textcolor{comment}{//getters}}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00178}\doxymbox{\hyperlink{class_concurrent_file_buffer_a8e4891170bcfa2ba2cff546d5cd6f3ce}{00178}}\ \ \ \ \ \textcolor{keyword}{constexpr}\ size\_t\ capacity()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ \{\ \textcolor{keywordflow}{return}\ capacity\_;\ \}}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00179}\doxymbox{\hyperlink{class_concurrent_file_buffer_a79391fd6953f83b293865ebaed9826a2}{00179}}\ \ \ \ \ \textcolor{keyword}{constexpr}\ size\_t\ minimum\_size()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ \{\ \textcolor{keywordflow}{return}\ minimum\_size\_;\ \}}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00180}00180\ }
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00181}00181\ }
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00182}00182\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00183}\doxymbox{\hyperlink{class_concurrent_file_buffer_a53cb8ef0ca3df42925c1a5635a06090c}{00183}}\ \ \ \ \ std::ofstream\ out\_stream\_;}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00184}\doxymbox{\hyperlink{class_concurrent_file_buffer_af6016220a98badcda7da620da440e959}{00184}}\ \ \ \ \ T*\ data\_;}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00185}\doxymbox{\hyperlink{class_concurrent_file_buffer_a62919f4664acba0c6890ed3dc001325d}{00185}}\ \ \ \ \ std::allocator<T>\ allocator;}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00186}\doxymbox{\hyperlink{class_concurrent_file_buffer_a2a78240fe53c680c5281dd26bddb2c3b}{00186}}\ \ \ \ \ std::mutex\ mut;}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00187}\doxymbox{\hyperlink{class_concurrent_file_buffer_a78c8dcf0d29b09378e8e503013131817}{00187}}\ \ \ \ \ std::unique\_lock<std::mutex>\ lock\{\ mut,\ std::defer\_lock\ \ \};\ \textcolor{comment}{//only\ one\ thread\ at\ a\ time\ may\ write\ to\ data\_,\ so\ we\ keep\ this\ class-\/wide}}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00188}\doxymbox{\hyperlink{class_concurrent_file_buffer_a3a65ccf605108ae165f5c04ce0ef7ff3}{00188}}\ \ \ \ \ size\_t\ index\_\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00189}\doxymbox{\hyperlink{class_concurrent_file_buffer_a1cdbe28b4d0615a58a10131650a689c5}{00189}}\ \ \ \ \ size\_t\ written\_index\_\ =\ 0;\ \textcolor{comment}{//oldest\ index\ that\ has\ not\ yet\ been\ written\ to\ file}}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00190}\doxymbox{\hyperlink{class_concurrent_file_buffer_a296cd0d3b7ac25b7e00cb002b9b7becf}{00190}}\ \ \ \ \ size\_t\ capacity\_\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00191}\doxymbox{\hyperlink{class_concurrent_file_buffer_a11cc019c27d20774ea11a0deba7e02f6}{00191}}\ \ \ \ \ size\_t\ minimum\_size\_\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00192}00192\ }
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00193}\doxymbox{\hyperlink{class_concurrent_file_buffer_a41a7e3d60e387d1d711eb223000c4717}{00193}}\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{constexpr}\ size\_t\ true\_index()\ \textcolor{keyword}{noexcept}\ \{\ \textcolor{keywordflow}{return}\ index\_\ \%\ capacity\_;\ \}}
+\DoxyCodeLine{\Hypertarget{concurrent__file__buffer_8cppm_source_l00194}00194\ \};}
 
 \end{DoxyCode}

@@ -1,11 +1,11 @@
 <map id="File" name="File">
-<area shape="rect" id="Node000001" title="Interpret a file as to retrieve custom information." alt="" coords="189,845,323,1171"/>
+<area shape="rect" id="Node000001" title="Interpret a file as to retrieve custom information." alt="" coords="189,845,323,1213"/>
 <area shape="rect" id="Node000002" href="$struct_file_options.html" title=" " alt="" coords="5,587,157,699"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="108,696,184,852,179,853,107,701"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="107,696,185,865,179,866,105,701"/>
 <area shape="rect" id="Node000003" href="$structparser_1_1_options.html" title="All the options available." alt="" coords="182,512,330,773"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="257,770,259,829,253,828,255,775"/>
 <area shape="rect" id="Node000004" title=" " alt="" coords="355,608,442,677"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="389,675,337,822,332,836,327,834,332,820,386,679"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="389,675,337,822,331,838,327,836,332,820,386,679"/>
 <area shape="rect" id="Node000005" title=" " alt="" coords="336,377,462,463"/>
 <area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="400,475,401,609,396,608,398,480"/>
 <area shape="rect" id="Node000006" title=" " alt="" coords="338,243,460,328"/>

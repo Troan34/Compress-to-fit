@@ -1,4 +1,8 @@
 ﻿#include <mio/mmap.hpp>
+#ifdef _WIN32
+#include <windows.h>
+#endif
+#include "src/util/macros.hpp"
 
 import parser;
 import lz77;
@@ -12,6 +16,8 @@ namespace fs = std::filesystem;
 
 int main(int argc, char* argv[])
 {
+
+	WIN_CALL(SetConsoleOutputCP(CP_UTF8));
 
 	auto options = parser::parse(argc, argv);
 	

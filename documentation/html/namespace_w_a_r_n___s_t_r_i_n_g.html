@@ -107,8 +107,25 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('namespace_w_a_
 Variables</h2></td></tr>
 <tr class="memitem:a3484e445cf1e4cdf965160b363ce9351" id="r_a3484e445cf1e4cdf965160b363ce9351"><td class="memItemLeft">const std::string&#160;</td><td class="memItemRight"><a class="el" href="#a3484e445cf1e4cdf965160b363ce9351">RECOMPRESSION</a></td></tr>
 <tr class="memitem:a97695fd577cd87a855b4d08e7d29ed6a" id="r_a97695fd577cd87a855b4d08e7d29ed6a"><td class="memItemLeft">const std::string&#160;</td><td class="memItemRight"><a class="el" href="#a97695fd577cd87a855b4d08e7d29ed6a">PORTIONS_OUT_OF_RANGE</a></td></tr>
+<tr class="memitem:ae325c9559d30aa8bb285b17b84ae925f" id="r_ae325c9559d30aa8bb285b17b84ae925f"><td class="memItemLeft">const std::string&#160;</td><td class="memItemRight"><a class="el" href="#ae325c9559d30aa8bb285b17b84ae925f">CONCAT_AMBIGUITY</a> = &quot;\033[43mWarn\033[0m[&quot; + std::to_string(static_cast&lt;int&gt;(<a class="el" href="utils_8cppm.html#aa278aa207bdeddc8432b560d1e1312aeabd356f5fc145a69a6d0b3cbac5d70c00">WarningType::PORTIONS_OUT_OF_RANGE</a>)) + &quot;]: there has been found an ambiguity while concatenating. These files do not come from the same compressed file(same session).\n&quot;</td></tr>
 </table>
 <a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a id="ae325c9559d30aa8bb285b17b84ae925f" name="ae325c9559d30aa8bb285b17b84ae925f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae325c9559d30aa8bb285b17b84ae925f">&#9670;&#160;</a></span>CONCAT_AMBIGUITY</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::string WARN_STRING::CONCAT_AMBIGUITY = &quot;\033[43mWarn\033[0m[&quot; + std::to_string(static_cast&lt;int&gt;(<a class="el" href="utils_8cppm.html#aa278aa207bdeddc8432b560d1e1312aeabd356f5fc145a69a6d0b3cbac5d70c00">WarningType::PORTIONS_OUT_OF_RANGE</a>)) + &quot;]: there has been found an ambiguity while concatenating. These files do not come from the same compressed file(same session).\n&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="utils_8cppm_source.html#l00172">172</a> of file <a class="el" href="utils_8cppm_source.html">utils.cppm</a>.</p>
+
+</div>
+</div>
 <a id="a97695fd577cd87a855b4d08e7d29ed6a" name="a97695fd577cd87a855b4d08e7d29ed6a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a97695fd577cd87a855b4d08e7d29ed6a">&#9670;&#160;</a></span>PORTIONS_OUT_OF_RANGE</h2>
 
@@ -120,11 +137,11 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">                                    = <span class="stringliteral">&quot;\033[43mWarn\033[0m [&quot;</span> + std::to_string(<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(<a class="code hl_enumvalue" href="utils_8cppm.html#aa278aa207bdeddc8432b560d1e1312aeabd356f5fc145a69a6d0b3cbac5d70c00">WarningType::PORTIONS_OUT_OF_RANGE</a>)) + <span class="stringliteral">&quot;]: the number of file portions is outside of the accepted range.\n&quot;</span></div>
+<b>Initial value:</b><div class="fragment"><div class="line">                                =   <span class="stringliteral">&quot;\033[43mWarn\033[0m[&quot;</span> + std::to_string(<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(<a class="code hl_enumvalue" href="utils_8cppm.html#aa278aa207bdeddc8432b560d1e1312aeabd356f5fc145a69a6d0b3cbac5d70c00">WarningType::PORTIONS_OUT_OF_RANGE</a>)) + <span class="stringliteral">&quot;]: the number of file portions is outside of the accepted range.&quot;</span></div>
 <div class="line">+ <span class="stringliteral">&quot;\033[34mTip\033[0m: The (not split) output file may have been too small.\nThe number of files created may be different from what you asked.\n&quot;</span></div>
-<div class="ttc" id="autils_8cppm_html_aa278aa207bdeddc8432b560d1e1312aeabd356f5fc145a69a6d0b3cbac5d70c00"><div class="ttname"><a href="utils_8cppm.html#aa278aa207bdeddc8432b560d1e1312aeabd356f5fc145a69a6d0b3cbac5d70c00">WarningType::PORTIONS_OUT_OF_RANGE</a></div><div class="ttdeci">@ PORTIONS_OUT_OF_RANGE</div><div class="ttdef"><b>Definition</b> <a href="utils_8cppm_source.html#l00156">utils.cppm:156</a></div></div>
+<div class="ttc" id="autils_8cppm_html_aa278aa207bdeddc8432b560d1e1312aeabd356f5fc145a69a6d0b3cbac5d70c00"><div class="ttname"><a href="utils_8cppm.html#aa278aa207bdeddc8432b560d1e1312aeabd356f5fc145a69a6d0b3cbac5d70c00">WarningType::PORTIONS_OUT_OF_RANGE</a></div><div class="ttdeci">@ PORTIONS_OUT_OF_RANGE</div><div class="ttdef"><b>Definition</b> <a href="utils_8cppm_source.html#l00159">utils.cppm:159</a></div></div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="utils_8cppm_source.html#l00165">165</a> of file <a class="el" href="utils_8cppm_source.html">utils.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cppm_source.html#l00169">169</a> of file <a class="el" href="utils_8cppm_source.html">utils.cppm</a>.</p>
 
 </div>
 </div>
@@ -139,11 +156,11 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">                        = <span class="stringliteral">&quot;\033[43mWarn [&quot;</span> + std::to_string(<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(<a class="code hl_enumvalue" href="utils_8cppm.html#aa278aa207bdeddc8432b560d1e1312aea429a96bd6dfce0e85b1d88b7ea7ff59f">WarningType::RECOMPRESSION</a>)) + <span class="stringliteral">&quot;]\033[0m: the file being compressed has already been compressed.\n&quot;</span></div>
+<b>Initial value:</b><div class="fragment"><div class="line">                        =           <span class="stringliteral">&quot;\033[43mWarn[&quot;</span> + std::to_string(<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(<a class="code hl_enumvalue" href="utils_8cppm.html#aa278aa207bdeddc8432b560d1e1312aea429a96bd6dfce0e85b1d88b7ea7ff59f">WarningType::RECOMPRESSION</a>)) + <span class="stringliteral">&quot;]\033[0m: the file being compressed has already been compressed.&quot;</span></div>
 <div class="line">+ <span class="stringliteral">&quot;\033[34mTip\033[0m: A file recompression gives negligible, if not counter-productive, results.\n&quot;</span></div>
-<div class="ttc" id="autils_8cppm_html_aa278aa207bdeddc8432b560d1e1312aea429a96bd6dfce0e85b1d88b7ea7ff59f"><div class="ttname"><a href="utils_8cppm.html#aa278aa207bdeddc8432b560d1e1312aea429a96bd6dfce0e85b1d88b7ea7ff59f">WarningType::RECOMPRESSION</a></div><div class="ttdeci">@ RECOMPRESSION</div><div class="ttdef"><b>Definition</b> <a href="utils_8cppm_source.html#l00155">utils.cppm:155</a></div></div>
+<div class="ttc" id="autils_8cppm_html_aa278aa207bdeddc8432b560d1e1312aea429a96bd6dfce0e85b1d88b7ea7ff59f"><div class="ttname"><a href="utils_8cppm.html#aa278aa207bdeddc8432b560d1e1312aea429a96bd6dfce0e85b1d88b7ea7ff59f">WarningType::RECOMPRESSION</a></div><div class="ttdeci">@ RECOMPRESSION</div><div class="ttdef"><b>Definition</b> <a href="utils_8cppm_source.html#l00158">utils.cppm:158</a></div></div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="utils_8cppm_source.html#l00162">162</a> of file <a class="el" href="utils_8cppm_source.html">utils.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cppm_source.html#l00166">166</a> of file <a class="el" href="utils_8cppm_source.html">utils.cppm</a>.</p>
 
 </div>
 </div>

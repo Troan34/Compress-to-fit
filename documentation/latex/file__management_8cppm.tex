@@ -34,11 +34,17 @@ class \doxymbox{\hyperlink{class_file}{File}}
 enum class \doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527}{HEADER\+\_\+\+OFFSET}} \{ \newline
 \doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527aef21bf22481e7930df1e2bda54025095}{SIGNATURE}} = 0
 , \doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527ab718adec73e04ce3ec720dd11a06a308}{ID}} = ::\+SIGNATURE.\+size()
-, \doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527ad539c6567c1f2966df43ad3a2d82b626}{COMP\+\_\+\+TYPE}} = ID + sizeof(size\+\_\+t)
-, \doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527a8d1d3f777392a89d7531871f6c3f2208}{COMP\+\_\+\+PRESET}} = COMP\+\_\+\+TYPE + sizeof(uint8\+\_\+t)
+, \doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527a4905ac9d6a22bdfc1ae096094ce6248d}{COUNT}} = ID + sizeof(uint16\+\_\+t)
+, \doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527ad539c6567c1f2966df43ad3a2d82b626}{COMP\+\_\+\+TYPE}} = COUNT + sizeof(size\+\_\+t)
 , \newline
-\doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527a26a4b44a837bf97b972628509912b4a5}{MAX}} = COMP\+\_\+\+PRESET + sizeof(uint8\+\_\+t)
+\doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527a8d1d3f777392a89d7531871f6c3f2208}{COMP\+\_\+\+PRESET}} = COMP\+\_\+\+TYPE + sizeof(uint8\+\_\+t)
+, \doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527a26a4b44a837bf97b972628509912b4a5}{MAX}} = COMP\+\_\+\+PRESET + sizeof(uint8\+\_\+t)
  \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{file__management_8cppm_a8eafeb61f6d909d1778dc3ce53e51114}{try\+\_\+throw\+\_\+\+IO\+\_\+error}} (std::\+ios\+\_\+base::\+iostate state, fs::\+path const \&path) noexcept(false)
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
@@ -71,6 +77,12 @@ SIGNATURE&\\
 ID&\\
 \hline
 
+\raisebox{\heightof{T}}[0pt][0pt]{\index{COUNT@{COUNT}!file\_management.cppm@{file\_management.cppm}}
+\index{file\_management.cppm@{file\_management.cppm}!COUNT@{COUNT}}
+}\Hypertarget{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527a4905ac9d6a22bdfc1ae096094ce6248d}\label{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527a4905ac9d6a22bdfc1ae096094ce6248d} 
+COUNT&\\
+\hline
+
 \raisebox{\heightof{T}}[0pt][0pt]{\index{COMP\_TYPE@{COMP\_TYPE}!file\_management.cppm@{file\_management.cppm}}
 \index{file\_management.cppm@{file\_management.cppm}!COMP\_TYPE@{COMP\_TYPE}}
 }\Hypertarget{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527ad539c6567c1f2966df43ad3a2d82b626}\label{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527ad539c6567c1f2966df43ad3a2d82b626} 
@@ -93,6 +105,21 @@ MAX&\\
 
 
 Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00017}{17}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+
+
+
+\label{file__management_8cppm_doc-func-members}
+\Hypertarget{file__management_8cppm_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{file__management_8cppm_a8eafeb61f6d909d1778dc3ce53e51114}\index{file\_management.cppm@{file\_management.cppm}!try\_throw\_IO\_error@{try\_throw\_IO\_error}}
+\index{try\_throw\_IO\_error@{try\_throw\_IO\_error}!file\_management.cppm@{file\_management.cppm}}
+\doxysubsubsection{\texorpdfstring{try\_throw\_IO\_error()}{try\_throw\_IO\_error()}}
+{\footnotesize\ttfamily \label{file__management_8cppm_a8eafeb61f6d909d1778dc3ce53e51114} 
+void try\+\_\+throw\+\_\+\+IO\+\_\+error (\begin{DoxyParamCaption}\item[{std::\+ios\+\_\+base::\+iostate}]{state}{, }\item[{fs::\+path const \&}]{path}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00059}{59}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
 
 
 

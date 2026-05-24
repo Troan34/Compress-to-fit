@@ -7,18 +7,15 @@ Collaboration diagram for Header:\+
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=151pt]{struct_header__coll__graph}
+\includegraphics[width=146pt]{struct_header__coll__graph}
 \end{center}
 \end{figure}
-\doxysubsubsection*{Static Public Member Functions}
-\begin{DoxyCompactItemize}
-\item 
-static constexpr size\+\_\+t \doxymbox{\hyperlink{struct_header_a71745d0fd3d493c06a4de669bbd45c24}{size\+\_\+bytes}} () noexcept
-\end{DoxyCompactItemize}
 \doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 size\+\_\+t \doxymbox{\hyperlink{struct_header_a66f6c58d0244bc34895827bab6e9f61a}{identifier}}
+\item 
+std::\+uint16\+\_\+t \doxymbox{\hyperlink{struct_header_a7e28f0be834e5db8b42db26058fe99fe}{count}}
 \item 
 \doxymbox{\hyperlink{utils_8cppm_a77b7b3d2b23480b5378dbd65c7af9178}{Comp\+Type}} \doxymbox{\hyperlink{struct_header_a65653b8a9e7ec9e2d414242c8d1ec0f1}{comp\+\_\+type}}
 \item 
@@ -28,24 +25,9 @@ size\+\_\+t \doxymbox{\hyperlink{struct_header_a66f6c58d0244bc34895827bab6e9f61a
 
 \doxysubsection{Detailed Description}
 TZF FILE HEADER \DoxyHorRuler{0}
- \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} SIGNATURE \texorpdfstring{$\vert$}{|} Identifier (file splitting) \texorpdfstring{$\vert$}{|} \doxylink{utils_8cppm_a77b7b3d2b23480b5378dbd65c7af9178}{Comp\+Type(u8)} \texorpdfstring{$\vert$}{|} \doxylink{utils_8cppm_a59fc5d9b777790e56395e645e4205db0}{Comp\+Preset(u8)} \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|}\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\texorpdfstring{$\vert$}{|}\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\texorpdfstring{$\vert$}{|}\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\texorpdfstring{$\vert$}{|}\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\texorpdfstring{$\vert$}{|} ↑ ↑ ↑ ↑ \doxylink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527ab718adec73e04ce3ec720dd11a06a308}{HEADER\+\_\+\+OFFSET::\+\+ID} \doxylink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527ad539c6567c1f2966df43ad3a2d82b626}{HEADER\+\_\+\+OFFSET::\+\+COMP\+\_\+\+TYPE} \doxylink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527a8d1d3f777392a89d7531871f6c3f2208}{HEADER\+\_\+\+OFFSET::\+\+COMP\+\_\+\+PRESET} \doxylink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527a26a4b44a837bf97b972628509912b4a5}{HEADER\+\_\+\+OFFSET::\+\+MAX} 
+ \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|} SIGNATURE \texorpdfstring{$\vert$}{|} Identifier (file splitting) \texorpdfstring{$\vert$}{|} Count(file splt) \texorpdfstring{$\vert$}{|} \doxylink{utils_8cppm_a77b7b3d2b23480b5378dbd65c7af9178}{Comp\+Type(u8)} \texorpdfstring{$\vert$}{|} \doxylink{utils_8cppm_a59fc5d9b777790e56395e645e4205db0}{Comp\+Preset(u8)} \texorpdfstring{$\vert$}{|} \texorpdfstring{$\vert$}{|}\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\texorpdfstring{$\vert$}{|}\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\texorpdfstring{$\vert$}{|}\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\texorpdfstring{$\vert$}{|}\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\texorpdfstring{$\vert$}{|}\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\+\_\+\texorpdfstring{$\vert$}{|} ↑ ↑ ↑ ↑ ↑ \doxylink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527ab718adec73e04ce3ec720dd11a06a308}{HEADER\+\_\+\+OFFSET::\+\+ID} \doxylink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527a4905ac9d6a22bdfc1ae096094ce6248d}{HEADER\+\_\+\+OFFSET::\+\+COUNT} /\+\texorpdfstring{$\ast$}{*}...\texorpdfstring{$\ast$}{*}/\+::\+\+COMP\+\_\+\+TYPE \doxylink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527a8d1d3f777392a89d7531871f6c3f2208}{HEADER\+\_\+\+OFFSET::\+\+COMP\+\_\+\+PRESET} \doxylink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527a26a4b44a837bf97b972628509912b4a5}{HEADER\+\_\+\+OFFSET::\+\+MAX} 
 
-Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00035}{35}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
-
-
-
-\label{struct_header_doc-func-members}
-\Hypertarget{struct_header_doc-func-members}
-\doxysubsection{Member Function Documentation}
-\Hypertarget{struct_header_a71745d0fd3d493c06a4de669bbd45c24}\index{Header@{Header}!size\_bytes@{size\_bytes}}
-\index{size\_bytes@{size\_bytes}!Header@{Header}}
-\doxysubsubsection{\texorpdfstring{size\_bytes()}{size\_bytes()}}
-{\footnotesize\ttfamily \label{struct_header_a71745d0fd3d493c06a4de669bbd45c24} 
-constexpr size\+\_\+t Header::\+size\+\_\+bytes (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
-
-
-
-Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00041}{41}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00037}{37}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
 
 
 
@@ -60,7 +42,17 @@ Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00041}{41
 
 
 
-Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00038}{38}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00041}{41}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+
+\Hypertarget{struct_header_a7e28f0be834e5db8b42db26058fe99fe}\index{Header@{Header}!count@{count}}
+\index{count@{count}!Header@{Header}}
+\doxysubsubsection{\texorpdfstring{count}{count}}
+{\footnotesize\ttfamily \label{struct_header_a7e28f0be834e5db8b42db26058fe99fe} 
+std::\+uint16\+\_\+t Header::\+count}
+
+
+
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00040}{40}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
 
 \Hypertarget{struct_header_a66f6c58d0244bc34895827bab6e9f61a}\index{Header@{Header}!identifier@{identifier}}
 \index{identifier@{identifier}!Header@{Header}}
@@ -70,7 +62,7 @@ size\+\_\+t Header::\+identifier}
 
 
 
-Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00037}{37}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00039}{39}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
 
 \Hypertarget{struct_header_a38a22e627cdd546a20e434bfd9b754dc}\index{Header@{Header}!preset@{preset}}
 \index{preset@{preset}!Header@{Header}}
@@ -80,7 +72,7 @@ Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00037}{37
 
 
 
-Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00039}{39}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00042}{42}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
 
 
 

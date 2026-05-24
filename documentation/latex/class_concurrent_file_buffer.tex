@@ -2,7 +2,7 @@
 \hypertarget{class_concurrent_file_buffer}{}\label{class_concurrent_file_buffer}\index{ConcurrentFileBuffer$<$ T $>$@{ConcurrentFileBuffer$<$ T $>$}}
 
 
-Circular array where if size \texorpdfstring{$>$}{>} capacity, size -\/ minimum\+\_\+size is written to stream.  
+Circular array where if size \texorpdfstring{$>$}{>} capacity, the oldest elements are written to stream until.  
 
 
 
@@ -20,20 +20,27 @@ Collaboration diagram for Concurrent\+File\+Buffer\texorpdfstring{$<$}{<} T \tex
 \item 
 \doxymbox{\hyperlink{class_concurrent_file_buffer_a00e2b4803fdfe9ffcab27d98b2121039}{Concurrent\+File\+Buffer}} (std::\+ofstream out\+\_\+stream, size\+\_\+t minimum\+\_\+size)
 \item 
+\doxymbox{\hyperlink{class_concurrent_file_buffer_a16c74a81c8a7ba2292f65dbf0d472f7a}{\texorpdfstring{$\sim$}{\string~}\+Concurrent\+File\+Buffer}} ()
+\item 
 constexpr void \doxymbox{\hyperlink{class_concurrent_file_buffer_adda68ddaa0de43803ef924fa34c3f066}{push\+\_\+back}} (T const \&value)
 \item 
 constexpr void \doxymbox{\hyperlink{class_concurrent_file_buffer_a05dc56e9dde6301cc399c272df821e4f}{push\+\_\+back}} (T \&\&value)
 \item 
-{\footnotesize template$<$std::\+ranges::\+input\+\_\+range R$>$ \newline
+{\footnotesize template$<$std::\+ranges::\+range R$>$ \newline
 requires std::\+convertible\+\_\+to$<$std::\+ranges::\+range\+\_\+reference\+\_\+t$<$R$>$, T$>$}\\constexpr void \doxymbox{\hyperlink{class_concurrent_file_buffer_a84281e77fbb9afa8b8677c52a12689b3}{append\+\_\+range}} (R \&\&rg)
 \item 
-constexpr void \doxymbox{\hyperlink{class_concurrent_file_buffer_addb9b1059fade88677e053cd1d035ed1}{reserve}} (size\+\_\+t new\+\_\+capacity)
+constexpr void \doxymbox{\hyperlink{class_concurrent_file_buffer_a723e5d9f8619dcb94607629a562f2bc1}{reserve}} (size\+\_\+t new\+\_\+capacity) noexcept(false)
 \item 
 constexpr T \doxymbox{\hyperlink{class_concurrent_file_buffer_a50f2f746d2297892ffdbe15cc52a238f}{operator\+[$\,$]\+}} (size\+\_\+t index) const
 \item 
 constexpr size\+\_\+t \doxymbox{\hyperlink{class_concurrent_file_buffer_a8e4891170bcfa2ba2cff546d5cd6f3ce}{capacity}} () const noexcept
 \item 
 constexpr size\+\_\+t \doxymbox{\hyperlink{class_concurrent_file_buffer_a79391fd6953f83b293865ebaed9826a2}{minimum\+\_\+size}} () const noexcept
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+constexpr size\+\_\+t \doxymbox{\hyperlink{class_concurrent_file_buffer_a41a7e3d60e387d1d711eb223000c4717}{true\+\_\+index}} () noexcept
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
@@ -62,11 +69,11 @@ size\+\_\+t \doxymbox{\hyperlink{class_concurrent_file_buffer_a11cc019c27d20774e
 \subsubsection*{template$<$typename T$>$\newline
 requires std::\+is\+\_\+trivially\+\_\+copyable\+\_\+v$<$T$>$\newline
 class Concurrent\+File\+Buffer$<$ T $>$}
-Circular array where if size \texorpdfstring{$>$}{>} capacity, size -\/ minimum\+\_\+size is written to stream. 
+Circular array where if size \texorpdfstring{$>$}{>} capacity, the oldest elements are written to stream until. 
 
 
 \begin{DoxyTemplParams}{Template Parameters}
-{\em T} & \\
+{\em T} & type stored, must be trivially copyable \\
 \hline
 \end{DoxyTemplParams}
 
@@ -89,6 +96,17 @@ template$<$typename T$>$ \\
 
 Definition at line \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source_l00015}{15}} of file \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source}{concurrent\+\_\+file\+\_\+buffer.\+cppm}}.
 
+\Hypertarget{class_concurrent_file_buffer_a16c74a81c8a7ba2292f65dbf0d472f7a}\index{ConcurrentFileBuffer$<$ T $>$@{ConcurrentFileBuffer$<$ T $>$}!````~ConcurrentFileBuffer@{\texorpdfstring{$\sim$}{\string~}ConcurrentFileBuffer}}
+\index{````~ConcurrentFileBuffer@{\texorpdfstring{$\sim$}{\string~}ConcurrentFileBuffer}!ConcurrentFileBuffer$<$ T $>$@{ConcurrentFileBuffer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ConcurrentFileBuffer()}{\string~ConcurrentFileBuffer()}}
+{\footnotesize\ttfamily \label{class_concurrent_file_buffer_a16c74a81c8a7ba2292f65dbf0d472f7a} 
+template$<$typename T$>$ \\
+\doxymbox{\hyperlink{class_concurrent_file_buffer}{Concurrent\+File\+Buffer}}$<$ T $>$::\+\texorpdfstring{$\sim$}{\string~}\doxymbox{\hyperlink{class_concurrent_file_buffer}{Concurrent\+File\+Buffer}} (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source_l00021}{21}} of file \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source}{concurrent\+\_\+file\+\_\+buffer.\+cppm}}.
+
 
 
 \label{class_concurrent_file_buffer_doc-func-members}
@@ -99,9 +117,21 @@ Definition at line \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source_l0
 \doxysubsubsection{\texorpdfstring{append\_range()}{append\_range()}}
 {\footnotesize\ttfamily \label{class_concurrent_file_buffer_a84281e77fbb9afa8b8677c52a12689b3} 
 template$<$typename T$>$ \\
-template$<$std::\+ranges::\+input\+\_\+range R$>$ \newline
+template$<$std::\+ranges::\+range R$>$ \newline
 requires std::\+convertible\+\_\+to$<$std::\+ranges::\+range\+\_\+reference\+\_\+t$<$R$>$, T$>$\\
-void \doxymbox{\hyperlink{class_concurrent_file_buffer}{Concurrent\+File\+Buffer}}$<$ T $>$::\+append\+\_\+range (\begin{DoxyParamCaption}\item[{R \&\&}]{rg}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [constexpr]}}
+void \doxymbox{\hyperlink{class_concurrent_file_buffer}{Concurrent\+File\+Buffer}}$<$ T $>$::\+append\+\_\+range (\begin{DoxyParamCaption}\item[{R \&\&}]{rg}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+\doxylink{class_concurrent_file_buffer_a3a65ccf605108ae165f5c04ce0ef7ff3}{index\+\_\+} \texorpdfstring{$>$}{>} \doxylink{class_concurrent_file_buffer_a11cc019c27d20774ea11a0deba7e02f6}{minimum\+\_\+size\+\_\+} 
+\end{DoxyPrecond}
+
+
+Definition at line \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source_l00100}{100}} of file \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source}{concurrent\+\_\+file\+\_\+buffer.\+cppm}}.
 
 \Hypertarget{class_concurrent_file_buffer_a8e4891170bcfa2ba2cff546d5cd6f3ce}\index{ConcurrentFileBuffer$<$ T $>$@{ConcurrentFileBuffer$<$ T $>$}!capacity@{capacity}}
 \index{capacity@{capacity}!ConcurrentFileBuffer$<$ T $>$@{ConcurrentFileBuffer$<$ T $>$}}
@@ -112,7 +142,7 @@ size\+\_\+t \doxymbox{\hyperlink{class_concurrent_file_buffer}{Concurrent\+File\
 
 
 
-Definition at line \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source_l00109}{109}} of file \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source}{concurrent\+\_\+file\+\_\+buffer.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source_l00178}{178}} of file \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source}{concurrent\+\_\+file\+\_\+buffer.\+cppm}}.
 
 \Hypertarget{class_concurrent_file_buffer_a79391fd6953f83b293865ebaed9826a2}\index{ConcurrentFileBuffer$<$ T $>$@{ConcurrentFileBuffer$<$ T $>$}!minimum\_size@{minimum\_size}}
 \index{minimum\_size@{minimum\_size}!ConcurrentFileBuffer$<$ T $>$@{ConcurrentFileBuffer$<$ T $>$}}
@@ -123,7 +153,7 @@ size\+\_\+t \doxymbox{\hyperlink{class_concurrent_file_buffer}{Concurrent\+File\
 
 
 
-Definition at line \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source_l00110}{110}} of file \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source}{concurrent\+\_\+file\+\_\+buffer.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source_l00179}{179}} of file \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source}{concurrent\+\_\+file\+\_\+buffer.\+cppm}}.
 
 \Hypertarget{class_concurrent_file_buffer_a50f2f746d2297892ffdbe15cc52a238f}\index{ConcurrentFileBuffer$<$ T $>$@{ConcurrentFileBuffer$<$ T $>$}!operator\+[]\+@{operator[]}}
 \index{operator\+[]\+@{operator[]}!ConcurrentFileBuffer$<$ T $>$@{ConcurrentFileBuffer$<$ T $>$}}
@@ -134,14 +164,26 @@ T \doxymbox{\hyperlink{class_concurrent_file_buffer}{Concurrent\+File\+Buffer}}$
 
 
 
-Definition at line \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source_l00095}{95}} of file \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source}{concurrent\+\_\+file\+\_\+buffer.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source_l00164}{164}} of file \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source}{concurrent\+\_\+file\+\_\+buffer.\+cppm}}.
 
 \Hypertarget{class_concurrent_file_buffer_a05dc56e9dde6301cc399c272df821e4f}\index{ConcurrentFileBuffer$<$ T $>$@{ConcurrentFileBuffer$<$ T $>$}!push\_back@{push\_back}}
 \index{push\_back@{push\_back}!ConcurrentFileBuffer$<$ T $>$@{ConcurrentFileBuffer$<$ T $>$}}
 \doxysubsubsection{\texorpdfstring{push\_back()}{push\_back()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily \label{class_concurrent_file_buffer_a05dc56e9dde6301cc399c272df821e4f} 
 template$<$typename T$>$ \\
-void \doxymbox{\hyperlink{class_concurrent_file_buffer}{Concurrent\+File\+Buffer}}$<$ T $>$::\+push\+\_\+back (\begin{DoxyParamCaption}\item[{T \&\&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [constexpr]}}
+void \doxymbox{\hyperlink{class_concurrent_file_buffer}{Concurrent\+File\+Buffer}}$<$ T $>$::\+push\+\_\+back (\begin{DoxyParamCaption}\item[{T \&\&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+\doxylink{class_concurrent_file_buffer_a3a65ccf605108ae165f5c04ce0ef7ff3}{index\+\_\+} \texorpdfstring{$>$}{>} \doxylink{class_concurrent_file_buffer_a11cc019c27d20774ea11a0deba7e02f6}{minimum\+\_\+size\+\_\+} 
+\end{DoxyPrecond}
+
+
+Definition at line \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source_l00068}{68}} of file \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source}{concurrent\+\_\+file\+\_\+buffer.\+cppm}}.
 
 \Hypertarget{class_concurrent_file_buffer_adda68ddaa0de43803ef924fa34c3f066}\index{ConcurrentFileBuffer$<$ T $>$@{ConcurrentFileBuffer$<$ T $>$}!push\_back@{push\_back}}
 \index{push\_back@{push\_back}!ConcurrentFileBuffer$<$ T $>$@{ConcurrentFileBuffer$<$ T $>$}}
@@ -151,19 +193,38 @@ template$<$typename T$>$ \\
 void \doxymbox{\hyperlink{class_concurrent_file_buffer}{Concurrent\+File\+Buffer}}$<$ T $>$::\+push\+\_\+back (\begin{DoxyParamCaption}\item[{T const \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
 
 
+\begin{DoxyParams}{Parameters}
+{\em value} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+\doxylink{class_concurrent_file_buffer_a3a65ccf605108ae165f5c04ce0ef7ff3}{index\+\_\+} \texorpdfstring{$>$}{>} \doxylink{class_concurrent_file_buffer_a11cc019c27d20774ea11a0deba7e02f6}{minimum\+\_\+size\+\_\+} 
+\end{DoxyPrecond}
 
-Definition at line \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source_l00022}{22}} of file \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source}{concurrent\+\_\+file\+\_\+buffer.\+cppm}}.
 
-\Hypertarget{class_concurrent_file_buffer_addb9b1059fade88677e053cd1d035ed1}\index{ConcurrentFileBuffer$<$ T $>$@{ConcurrentFileBuffer$<$ T $>$}!reserve@{reserve}}
+Definition at line \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source_l00037}{37}} of file \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source}{concurrent\+\_\+file\+\_\+buffer.\+cppm}}.
+
+\Hypertarget{class_concurrent_file_buffer_a723e5d9f8619dcb94607629a562f2bc1}\index{ConcurrentFileBuffer$<$ T $>$@{ConcurrentFileBuffer$<$ T $>$}!reserve@{reserve}}
 \index{reserve@{reserve}!ConcurrentFileBuffer$<$ T $>$@{ConcurrentFileBuffer$<$ T $>$}}
 \doxysubsubsection{\texorpdfstring{reserve()}{reserve()}}
-{\footnotesize\ttfamily \label{class_concurrent_file_buffer_addb9b1059fade88677e053cd1d035ed1} 
+{\footnotesize\ttfamily \label{class_concurrent_file_buffer_a723e5d9f8619dcb94607629a562f2bc1} 
 template$<$typename T$>$ \\
 void \doxymbox{\hyperlink{class_concurrent_file_buffer}{Concurrent\+File\+Buffer}}$<$ T $>$::\+reserve (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{new\+\_\+capacity}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
 
 
 
-Definition at line \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source_l00062}{62}} of file \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source}{concurrent\+\_\+file\+\_\+buffer.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source_l00131}{131}} of file \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source}{concurrent\+\_\+file\+\_\+buffer.\+cppm}}.
+
+\Hypertarget{class_concurrent_file_buffer_a41a7e3d60e387d1d711eb223000c4717}\index{ConcurrentFileBuffer$<$ T $>$@{ConcurrentFileBuffer$<$ T $>$}!true\_index@{true\_index}}
+\index{true\_index@{true\_index}!ConcurrentFileBuffer$<$ T $>$@{ConcurrentFileBuffer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{true\_index()}{true\_index()}}
+{\footnotesize\ttfamily \label{class_concurrent_file_buffer_a41a7e3d60e387d1d711eb223000c4717} 
+template$<$typename T$>$ \\
+size\+\_\+t \doxymbox{\hyperlink{class_concurrent_file_buffer}{Concurrent\+File\+Buffer}}$<$ T $>$::\+true\+\_\+index (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}, {\ttfamily [private]}, {\ttfamily [noexcept]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source_l00193}{193}} of file \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source}{concurrent\+\_\+file\+\_\+buffer.\+cppm}}.
 
 
 
@@ -179,7 +240,7 @@ std::\+allocator$<$T$>$ \doxymbox{\hyperlink{class_concurrent_file_buffer}{Concu
 
 
 
-Definition at line \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source_l00116}{116}} of file \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source}{concurrent\+\_\+file\+\_\+buffer.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source_l00185}{185}} of file \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source}{concurrent\+\_\+file\+\_\+buffer.\+cppm}}.
 
 \Hypertarget{class_concurrent_file_buffer_a296cd0d3b7ac25b7e00cb002b9b7becf}\index{ConcurrentFileBuffer$<$ T $>$@{ConcurrentFileBuffer$<$ T $>$}!capacity\_@{capacity\_}}
 \index{capacity\_@{capacity\_}!ConcurrentFileBuffer$<$ T $>$@{ConcurrentFileBuffer$<$ T $>$}}
@@ -190,7 +251,7 @@ size\+\_\+t \doxymbox{\hyperlink{class_concurrent_file_buffer}{Concurrent\+File\
 
 
 
-Definition at line \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source_l00121}{121}} of file \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source}{concurrent\+\_\+file\+\_\+buffer.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source_l00190}{190}} of file \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source}{concurrent\+\_\+file\+\_\+buffer.\+cppm}}.
 
 \Hypertarget{class_concurrent_file_buffer_af6016220a98badcda7da620da440e959}\index{ConcurrentFileBuffer$<$ T $>$@{ConcurrentFileBuffer$<$ T $>$}!data\_@{data\_}}
 \index{data\_@{data\_}!ConcurrentFileBuffer$<$ T $>$@{ConcurrentFileBuffer$<$ T $>$}}
@@ -201,7 +262,7 @@ T\texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{class_concurrent_file_buffer}{C
 
 
 
-Definition at line \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source_l00115}{115}} of file \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source}{concurrent\+\_\+file\+\_\+buffer.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source_l00184}{184}} of file \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source}{concurrent\+\_\+file\+\_\+buffer.\+cppm}}.
 
 \Hypertarget{class_concurrent_file_buffer_a3a65ccf605108ae165f5c04ce0ef7ff3}\index{ConcurrentFileBuffer$<$ T $>$@{ConcurrentFileBuffer$<$ T $>$}!index\_@{index\_}}
 \index{index\_@{index\_}!ConcurrentFileBuffer$<$ T $>$@{ConcurrentFileBuffer$<$ T $>$}}
@@ -212,7 +273,7 @@ size\+\_\+t \doxymbox{\hyperlink{class_concurrent_file_buffer}{Concurrent\+File\
 
 
 
-Definition at line \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source_l00119}{119}} of file \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source}{concurrent\+\_\+file\+\_\+buffer.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source_l00188}{188}} of file \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source}{concurrent\+\_\+file\+\_\+buffer.\+cppm}}.
 
 \Hypertarget{class_concurrent_file_buffer_a78c8dcf0d29b09378e8e503013131817}\index{ConcurrentFileBuffer$<$ T $>$@{ConcurrentFileBuffer$<$ T $>$}!lock@{lock}}
 \index{lock@{lock}!ConcurrentFileBuffer$<$ T $>$@{ConcurrentFileBuffer$<$ T $>$}}
@@ -223,7 +284,7 @@ std::\+unique\+\_\+lock$<$std::\+mutex$>$ \doxymbox{\hyperlink{class_concurrent_
 
 
 
-Definition at line \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source_l00118}{118}} of file \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source}{concurrent\+\_\+file\+\_\+buffer.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source_l00187}{187}} of file \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source}{concurrent\+\_\+file\+\_\+buffer.\+cppm}}.
 
 \Hypertarget{class_concurrent_file_buffer_a11cc019c27d20774ea11a0deba7e02f6}\index{ConcurrentFileBuffer$<$ T $>$@{ConcurrentFileBuffer$<$ T $>$}!minimum\_size\_@{minimum\_size\_}}
 \index{minimum\_size\_@{minimum\_size\_}!ConcurrentFileBuffer$<$ T $>$@{ConcurrentFileBuffer$<$ T $>$}}
@@ -234,7 +295,7 @@ size\+\_\+t \doxymbox{\hyperlink{class_concurrent_file_buffer}{Concurrent\+File\
 
 
 
-Definition at line \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source_l00122}{122}} of file \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source}{concurrent\+\_\+file\+\_\+buffer.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source_l00191}{191}} of file \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source}{concurrent\+\_\+file\+\_\+buffer.\+cppm}}.
 
 \Hypertarget{class_concurrent_file_buffer_a2a78240fe53c680c5281dd26bddb2c3b}\index{ConcurrentFileBuffer$<$ T $>$@{ConcurrentFileBuffer$<$ T $>$}!mut@{mut}}
 \index{mut@{mut}!ConcurrentFileBuffer$<$ T $>$@{ConcurrentFileBuffer$<$ T $>$}}
@@ -245,7 +306,7 @@ std::\+mutex \doxymbox{\hyperlink{class_concurrent_file_buffer}{Concurrent\+File
 
 
 
-Definition at line \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source_l00117}{117}} of file \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source}{concurrent\+\_\+file\+\_\+buffer.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source_l00186}{186}} of file \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source}{concurrent\+\_\+file\+\_\+buffer.\+cppm}}.
 
 \Hypertarget{class_concurrent_file_buffer_a53cb8ef0ca3df42925c1a5635a06090c}\index{ConcurrentFileBuffer$<$ T $>$@{ConcurrentFileBuffer$<$ T $>$}!out\_stream\_@{out\_stream\_}}
 \index{out\_stream\_@{out\_stream\_}!ConcurrentFileBuffer$<$ T $>$@{ConcurrentFileBuffer$<$ T $>$}}
@@ -256,7 +317,7 @@ std::\+ofstream \doxymbox{\hyperlink{class_concurrent_file_buffer}{Concurrent\+F
 
 
 
-Definition at line \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source_l00114}{114}} of file \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source}{concurrent\+\_\+file\+\_\+buffer.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source_l00183}{183}} of file \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source}{concurrent\+\_\+file\+\_\+buffer.\+cppm}}.
 
 \Hypertarget{class_concurrent_file_buffer_a1cdbe28b4d0615a58a10131650a689c5}\index{ConcurrentFileBuffer$<$ T $>$@{ConcurrentFileBuffer$<$ T $>$}!written\_index\_@{written\_index\_}}
 \index{written\_index\_@{written\_index\_}!ConcurrentFileBuffer$<$ T $>$@{ConcurrentFileBuffer$<$ T $>$}}
@@ -267,7 +328,7 @@ size\+\_\+t \doxymbox{\hyperlink{class_concurrent_file_buffer}{Concurrent\+File\
 
 
 
-Definition at line \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source_l00120}{120}} of file \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source}{concurrent\+\_\+file\+\_\+buffer.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source_l00189}{189}} of file \doxymbox{\hyperlink{concurrent__file__buffer_8cppm_source}{concurrent\+\_\+file\+\_\+buffer.\+cppm}}.
 
 
 

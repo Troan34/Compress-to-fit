@@ -8,6 +8,6 @@ var searchData=
   ['concurrentfilebuffer_5',['ConcurrentFileBuffer',['../class_concurrent_file_buffer.html#a00e2b4803fdfe9ffcab27d98b2121039',1,'ConcurrentFileBuffer']]],
   ['const_5fpow_6',['const_pow',['../utils_8cppm.html#a78c404083e319e5d50a4293e918cb8ab',1,'utils.cppm']]],
   ['count_5fequal_7',['count_equal',['../utils_8cppm.html#a770361d202fe810d1b063557d36041e3',1,'utils.cppm']]],
-  ['create_5ffile_8',['create_file',['../class_file.html#aea022386c75771f8fdb7e8a76cf41aef',1,'File::create_file(CompType comp_type, CompPreset comp_preset, fs::path path, size_t id)'],['../class_file.html#a942986666cfee9c56f500f9f023e998d',1,'File::create_file(fs::path path) const']]],
+  ['create_5ffile_8',['create_file',['../class_file.html#af2040a812b7004faea79ba7e6fef0968',1,'File::create_file(CompType comp_type, CompPreset comp_preset, fs::path path, size_t id, uint16_t count)'],['../class_file.html#a942986666cfee9c56f500f9f023e998d',1,'File::create_file(fs::path path) const'],['../class_file.html#acae28f8736d41a36faa606bd1c27dab7',1,'File::create_file(fs::path const &amp;path, Header options)']]],
   ['create_5fstream_9',['create_stream',['../file__management_8cpp.html#acd37a664f5354c9a88c2396f0e350b2d',1,'file_management.cpp']]]
 ];

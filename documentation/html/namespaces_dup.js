@@ -7,6 +7,7 @@ var namespaces_dup =
       [ "FILE_CORRUPTED", "namespace_e_r_r___s_t_r_i_n_g.html#a6cfbf91e4f1d44fdc579d4aaac395051", null ],
       [ "FILE_INVALID", "namespace_e_r_r___s_t_r_i_n_g.html#a6e076d05d154540639df579a40ab57d2", null ],
       [ "INVALID_DECOMPRESSION", "namespace_e_r_r___s_t_r_i_n_g.html#a8797da65711c547cbf975bcf9d287505", null ],
+      [ "MISSING_ARGUMENT", "namespace_e_r_r___s_t_r_i_n_g.html#af81b6954b18ad24febeb376c7db6fcca", null ],
       [ "OPTION_UNAVAILABLE", "namespace_e_r_r___s_t_r_i_n_g.html#afc81976c232892e2b4e16e100a14423e", null ],
       [ "PATH_INVALID", "namespace_e_r_r___s_t_r_i_n_g.html#a4a1bb1b9a2811049bac67c85d03d4a09", null ],
       [ "PATH_NOT_ACCESSIBLE", "namespace_e_r_r___s_t_r_i_n_g.html#adcca934fbf807fcdae04da825c63d620", null ],
@@ -16,6 +17,7 @@ var namespaces_dup =
     ] ],
     [ "parser", "namespaceparser.html", "namespaceparser" ],
     [ "WARN_STRING", "namespace_w_a_r_n___s_t_r_i_n_g.html", [
+      [ "CONCAT_AMBIGUITY", "namespace_w_a_r_n___s_t_r_i_n_g.html#ae325c9559d30aa8bb285b17b84ae925f", null ],
       [ "PORTIONS_OUT_OF_RANGE", "namespace_w_a_r_n___s_t_r_i_n_g.html#a97695fd577cd87a855b4d08e7d29ed6a", null ],
       [ "RECOMPRESSION", "namespace_w_a_r_n___s_t_r_i_n_g.html#a3484e445cf1e4cdf965160b363ce9351", null ]
     ] ]

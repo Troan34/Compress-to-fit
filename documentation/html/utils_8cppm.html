@@ -141,23 +141,26 @@ Enumerations</h2></td></tr>
 <tr class="memitem:ab0df38968e4f03a3f1f6d6df0f31f45a" id="r_ab0df38968e4f03a3f1f6d6df0f31f45a"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#ab0df38968e4f03a3f1f6d6df0f31f45a">ErrorType</a> { <br />
 &#160;&#160;<a class="el" href="#ab0df38968e4f03a3f1f6d6df0f31f45aad306b6fdee05fe87455110ddf6501e6c">NO_ERROR</a>
 , <a class="el" href="#ab0df38968e4f03a3f1f6d6df0f31f45aab6e89aef4ee41f778bd0dd285f0d5c20">VALUE_ERROR</a>
+, <a class="el" href="#ab0df38968e4f03a3f1f6d6df0f31f45aa25935ec8650130f4dd9f87d403493ac3">MISSING_ARGUMENT</a>
 , <a class="el" href="#ab0df38968e4f03a3f1f6d6df0f31f45aa756ec3dd26d1a73363eb3e68b6e820df">SYNTAX_ERROR</a>
-, <a class="el" href="#ab0df38968e4f03a3f1f6d6df0f31f45aa18dccefdab88f68c78bb114e0e03f61d">OPTION_UNAVAILABLE</a>
 , <br />
-&#160;&#160;<a class="el" href="#ab0df38968e4f03a3f1f6d6df0f31f45aa10ea5c18cb2990c51bb9db888917165d">PATH_NOT_FOUND</a>
+&#160;&#160;<a class="el" href="#ab0df38968e4f03a3f1f6d6df0f31f45aa18dccefdab88f68c78bb114e0e03f61d">OPTION_UNAVAILABLE</a>
+, <a class="el" href="#ab0df38968e4f03a3f1f6d6df0f31f45aa10ea5c18cb2990c51bb9db888917165d">PATH_NOT_FOUND</a>
 , <a class="el" href="#ab0df38968e4f03a3f1f6d6df0f31f45aac5d1d2985b0085be54ef3223fae157c7">PATH_NOT_ACCESSIBLE</a>
 , <a class="el" href="#ab0df38968e4f03a3f1f6d6df0f31f45aa18d76a5de8f052b40860c3cc1623e5d6">PATH_INVALID</a>
-, <a class="el" href="#ab0df38968e4f03a3f1f6d6df0f31f45aafc88cb342c01e41f5f45657a51cf65cb">FILE_INVALID</a>
 , <br />
-&#160;&#160;<a class="el" href="#ab0df38968e4f03a3f1f6d6df0f31f45aa2cdc1eecb70cc6dabd09b6f9be6c72c8">FILE_CORRUPTED</a>
+&#160;&#160;<a class="el" href="#ab0df38968e4f03a3f1f6d6df0f31f45aafc88cb342c01e41f5f45657a51cf65cb">FILE_INVALID</a>
+, <a class="el" href="#ab0df38968e4f03a3f1f6d6df0f31f45aa2cdc1eecb70cc6dabd09b6f9be6c72c8">FILE_CORRUPTED</a>
 , <a class="el" href="#ab0df38968e4f03a3f1f6d6df0f31f45aad5459024a3d9e8c304e106f0c0fc8ffe">DRIVE_ERROR</a>
 , <a class="el" href="#ab0df38968e4f03a3f1f6d6df0f31f45aa6aec2e033766444573e60b2ecdbfcde8">INVALID_DECOMPRESSION</a>
-, <a class="el" href="#ab0df38968e4f03a3f1f6d6df0f31f45aae8266dd47c23ed1f1c76b1e0669a3e47">DIR_COMPRESSION</a>
+, <br />
+&#160;&#160;<a class="el" href="#ab0df38968e4f03a3f1f6d6df0f31f45aae8266dd47c23ed1f1c76b1e0669a3e47">DIR_COMPRESSION</a>
 <br />
  }</td></tr>
 <tr class="memdesc:ab0df38968e4f03a3f1f6d6df0f31f45a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parser error types.  <a href="#ab0df38968e4f03a3f1f6d6df0f31f45a">More...</a><br /></td></tr>
 <tr class="memitem:aa278aa207bdeddc8432b560d1e1312ae" id="r_aa278aa207bdeddc8432b560d1e1312ae"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#aa278aa207bdeddc8432b560d1e1312ae">WarningType</a> { <a class="el" href="#aa278aa207bdeddc8432b560d1e1312aea429a96bd6dfce0e85b1d88b7ea7ff59f">RECOMPRESSION</a>
 , <a class="el" href="#aa278aa207bdeddc8432b560d1e1312aeabd356f5fc145a69a6d0b3cbac5d70c00">PORTIONS_OUT_OF_RANGE</a>
+, <a class="el" href="#aa278aa207bdeddc8432b560d1e1312aea3679d74393649174baa5db30d7e70081">CONCAT_AMBIGUITY</a>
  }</td></tr>
 <tr class="memitem:a59fc5d9b777790e56395e645e4205db0" id="r_a59fc5d9b777790e56395e645e4205db0"><td class="memItemLeft">enum &#160;</td><td class="memItemRight"><a class="el" href="#a59fc5d9b777790e56395e645e4205db0">CompPreset</a> : uint8_t { <br />
 &#160;&#160;<a class="el" href="#a59fc5d9b777790e56395e645e4205db0a7589a60238783984f16f26794ced40e0">NO_COMP</a>
@@ -184,8 +187,8 @@ Functions</h2></td></tr>
 <tr class="memitem:a6c327b69ce479189b2946651f162daec" id="r_a6c327b69ce479189b2946651f162daec"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a6c327b69ce479189b2946651f162daec">throw_error</a> (<a class="el" href="#ab0df38968e4f03a3f1f6d6df0f31f45a">ErrorType</a> error, const std::string &amp;error_option=&quot;&quot;)</td></tr>
 <tr class="memdesc:a6c327b69ce479189b2946651f162daec"><td class="mdescLeft">&#160;</td><td class="mdescRight">throw_error is a custom error logger to the terminal. This will WILL throw.  <br /></td></tr>
 <tr class="memitem:aeee94ed600f26b5d54f52d5bfc10bef7" id="r_aeee94ed600f26b5d54f52d5bfc10bef7"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#aeee94ed600f26b5d54f52d5bfc10bef7">print_warn</a> (<a class="el" href="#aa278aa207bdeddc8432b560d1e1312ae">WarningType</a> warn, const std::string &amp;warn_option=&quot;&quot;)</td></tr>
-<tr class="memitem:add31fbd0032fa67fcfec5e586203f0f2" id="r_add31fbd0032fa67fcfec5e586203f0f2"><td class="memItemLeft">constexpr size_t&#160;</td><td class="memItemRight"><a class="el" href="#add31fbd0032fa67fcfec5e586203f0f2">KB_to_B</a> (size_t value)</td></tr>
-<tr class="memitem:acaf024dde014347d648c3d3c7e796e37" id="r_acaf024dde014347d648c3d3c7e796e37"><td class="memItemLeft">constexpr size_t&#160;</td><td class="memItemRight"><a class="el" href="#acaf024dde014347d648c3d3c7e796e37">MB_to_B</a> (size_t value)</td></tr>
+<tr class="memitem:a45f3f635b1fec8af19702b350fb9ea90" id="r_a45f3f635b1fec8af19702b350fb9ea90"><td class="memItemLeft">constexpr size_t&#160;</td><td class="memItemRight"><a class="el" href="#a45f3f635b1fec8af19702b350fb9ea90">KiB_to_B</a> (size_t value)</td></tr>
+<tr class="memitem:a8da911fac7b18fb18595e961a3e37725" id="r_a8da911fac7b18fb18595e961a3e37725"><td class="memItemLeft">constexpr size_t&#160;</td><td class="memItemRight"><a class="el" href="#a8da911fac7b18fb18595e961a3e37725">MiB_to_B</a> (size_t value)</td></tr>
 <tr class="memitem:a78c404083e319e5d50a4293e918cb8ab" id="r_a78c404083e319e5d50a4293e918cb8ab"><td class="memItemLeft">consteval size_t&#160;</td><td class="memItemRight"><a class="el" href="#a78c404083e319e5d50a4293e918cb8ab">const_pow</a> (size_t base, size_t exponent) noexcept</td></tr>
 <tr class="memdesc:a78c404083e319e5d50a4293e918cb8ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculate the power at compile time, to make sure of its correct usage it will be consteval.  <br /></td></tr>
 <tr class="memitem:a770361d202fe810d1b063557d36041e3" id="r_a770361d202fe810d1b063557d36041e3"><td class="memTemplParams" colspan="2">template&lt;typename Type&gt; </td></tr>
@@ -198,19 +201,21 @@ Variables</h2></td></tr>
 <tr class="memitem:aec7880c199d5393b78db8e52d180495b" id="r_aec7880c199d5393b78db8e52d180495b"><td class="memItemLeft">constexpr size_t&#160;</td><td class="memItemRight"><a class="el" href="#aec7880c199d5393b78db8e52d180495b">SIZE_FILES_MIN</a> = 512</td></tr>
 <tr class="memitem:a8ba1a78952c247bd1d75301870bba2ce" id="r_a8ba1a78952c247bd1d75301870bba2ce"><td class="memItemLeft">constexpr char const  *&#160;</td><td class="memItemRight"><a class="el" href="#a8ba1a78952c247bd1d75301870bba2ce">FILE_EXTENSION</a> = &quot;.tzf&quot;</td></tr>
 <tr class="memitem:a558c3db94c9beb4d83912931cf4244e7" id="r_a558c3db94c9beb4d83912931cf4244e7"><td class="memItemLeft">constexpr size_t&#160;</td><td class="memItemRight"><a class="el" href="#a558c3db94c9beb4d83912931cf4244e7">SIZE_CHUNK</a> = 4 * 1024 * 1024</td></tr>
-<tr class="memitem:a220301514d7ebf48975be72979b79ddf" id="r_a220301514d7ebf48975be72979b79ddf"><td class="memItemLeft">const std::string&#160;</td><td class="memItemRight"><a class="el" href="namespace_e_r_r___s_t_r_i_n_g.html#a220301514d7ebf48975be72979b79ddf">ERR_STRING::SYNTAX</a> = &quot;\033[41mError\033[0m\033[31m[&quot; + std::to_string(static_cast&lt;int&gt;(<a class="el" href="#ab0df38968e4f03a3f1f6d6df0f31f45aa756ec3dd26d1a73363eb3e68b6e820df">ErrorType::SYNTAX_ERROR</a>)) + &quot;]: the syntax for this option is incorrect. \033[34mTip\033[0m: '-h' or '-help' for help&quot;</td></tr>
-<tr class="memitem:ab87f3f9775ac9b28bca2f1c02520077c" id="r_ab87f3f9775ac9b28bca2f1c02520077c"><td class="memItemLeft">const std::string&#160;</td><td class="memItemRight"><a class="el" href="namespace_e_r_r___s_t_r_i_n_g.html#ab87f3f9775ac9b28bca2f1c02520077c">ERR_STRING::VALUE</a> = &quot;\033[41mError\033[0m\033[31m[&quot; + std::to_string(static_cast&lt;int&gt;(<a class="el" href="#ab0df38968e4f03a3f1f6d6df0f31f45aab6e89aef4ee41f778bd0dd285f0d5c20">ErrorType::VALUE_ERROR</a>)) + &quot;]: this is an incorrect value for this option.\033[0m&quot;</td></tr>
-<tr class="memitem:afc81976c232892e2b4e16e100a14423e" id="r_afc81976c232892e2b4e16e100a14423e"><td class="memItemLeft">const std::string&#160;</td><td class="memItemRight"><a class="el" href="namespace_e_r_r___s_t_r_i_n_g.html#afc81976c232892e2b4e16e100a14423e">ERR_STRING::OPTION_UNAVAILABLE</a> = &quot;\033[41mError\033[0m\033[31m[&quot; + std::to_string(static_cast&lt;int&gt;(<a class="el" href="#ab0df38968e4f03a3f1f6d6df0f31f45aa18dccefdab88f68c78bb114e0e03f61d">ErrorType::OPTION_UNAVAILABLE</a>)) + &quot;]: this option is unavailable in this context.\033[0m&quot;</td></tr>
-<tr class="memitem:a4e0f1c39222e841bb9bc92fa5c93f12d" id="r_a4e0f1c39222e841bb9bc92fa5c93f12d"><td class="memItemLeft">const std::string&#160;</td><td class="memItemRight"><a class="el" href="namespace_e_r_r___s_t_r_i_n_g.html#a4e0f1c39222e841bb9bc92fa5c93f12d">ERR_STRING::PATH_NOT_FOUND</a> = &quot;\033[41mError\033[0m\033[31m[&quot; + std::to_string(static_cast&lt;int&gt;(<a class="el" href="#ab0df38968e4f03a3f1f6d6df0f31f45aa10ea5c18cb2990c51bb9db888917165d">ErrorType::PATH_NOT_FOUND</a>)) + &quot;]: this path could not be found, make sure to double quote (\&quot;) around your path if there are spaces in it\033[0m&quot;</td></tr>
-<tr class="memitem:adcca934fbf807fcdae04da825c63d620" id="r_adcca934fbf807fcdae04da825c63d620"><td class="memItemLeft">const std::string&#160;</td><td class="memItemRight"><a class="el" href="namespace_e_r_r___s_t_r_i_n_g.html#adcca934fbf807fcdae04da825c63d620">ERR_STRING::PATH_NOT_ACCESSIBLE</a> = &quot;\033[41mError\033[0m\033[31m[&quot; + std::to_string(static_cast&lt;int&gt;(<a class="el" href="#ab0df38968e4f03a3f1f6d6df0f31f45aac5d1d2985b0085be54ef3223fae157c7">ErrorType::PATH_NOT_ACCESSIBLE</a>)) + &quot;]: this path could not be accessed, the program may not have some required privileges.\033[34mTip\033[0m:Such an error has multiple causes. Check path, folder and other things as such.\033[0m&quot;</td></tr>
-<tr class="memitem:a4a1bb1b9a2811049bac67c85d03d4a09" id="r_a4a1bb1b9a2811049bac67c85d03d4a09"><td class="memItemLeft">const std::string&#160;</td><td class="memItemRight"><a class="el" href="namespace_e_r_r___s_t_r_i_n_g.html#a4a1bb1b9a2811049bac67c85d03d4a09">ERR_STRING::PATH_INVALID</a> = &quot;\033[41mError\033[0m\033[31m[&quot; + std::to_string(static_cast&lt;int&gt;(<a class="el" href="#ab0df38968e4f03a3f1f6d6df0f31f45aa18d76a5de8f052b40860c3cc1623e5d6">ErrorType::PATH_INVALID</a>)) + &quot;]: this path is invalid, it may be a path to a folder. Make sure to double quote (\&quot; \&quot;) around your path if there are spaces in it.\033[0m&quot;</td></tr>
-<tr class="memitem:a6e076d05d154540639df579a40ab57d2" id="r_a6e076d05d154540639df579a40ab57d2"><td class="memItemLeft">const std::string&#160;</td><td class="memItemRight"><a class="el" href="namespace_e_r_r___s_t_r_i_n_g.html#a6e076d05d154540639df579a40ab57d2">ERR_STRING::FILE_INVALID</a> = &quot;\033[41mError\033[0m\033[31m[&quot; + std::to_string(static_cast&lt;int&gt;(<a class="el" href="#ab0df38968e4f03a3f1f6d6df0f31f45aafc88cb342c01e41f5f45657a51cf65cb">ErrorType::FILE_INVALID</a>)) + &quot;]: this file is invalid. i.e. it is the wrong type or it is unrecognizable.\033[0m&quot;</td></tr>
-<tr class="memitem:a6cfbf91e4f1d44fdc579d4aaac395051" id="r_a6cfbf91e4f1d44fdc579d4aaac395051"><td class="memItemLeft">const std::string&#160;</td><td class="memItemRight"><a class="el" href="namespace_e_r_r___s_t_r_i_n_g.html#a6cfbf91e4f1d44fdc579d4aaac395051">ERR_STRING::FILE_CORRUPTED</a> = &quot;\033[41mError\033[0m\033[31m[&quot; + std::to_string(static_cast&lt;int&gt;(<a class="el" href="#ab0df38968e4f03a3f1f6d6df0f31f45aa2cdc1eecb70cc6dabd09b6f9be6c72c8">ErrorType::FILE_CORRUPTED</a>)) + &quot;]: this file's header is corrupted. Unable to continue decompression properly.\033[0m&quot;</td></tr>
-<tr class="memitem:aba29f8774197da0a4890bc532fbbab15" id="r_aba29f8774197da0a4890bc532fbbab15"><td class="memItemLeft">const std::string&#160;</td><td class="memItemRight"><a class="el" href="namespace_e_r_r___s_t_r_i_n_g.html#aba29f8774197da0a4890bc532fbbab15">ERR_STRING::DRIVE_ERROR</a> = &quot;\033[41mError\033[0m\033[31m[&quot; + std::to_string(static_cast&lt;int&gt;(<a class="el" href="#ab0df38968e4f03a3f1f6d6df0f31f45aad5459024a3d9e8c304e106f0c0fc8ffe">ErrorType::DRIVE_ERROR</a>)) + &quot;]: there has been a critical error when accessing this file. Please check your drive.\033[0m&quot;</td></tr>
-<tr class="memitem:a8797da65711c547cbf975bcf9d287505" id="r_a8797da65711c547cbf975bcf9d287505"><td class="memItemLeft">const std::string&#160;</td><td class="memItemRight"><a class="el" href="namespace_e_r_r___s_t_r_i_n_g.html#a8797da65711c547cbf975bcf9d287505">ERR_STRING::INVALID_DECOMPRESSION</a> =&quot;\033[41mError\033[0m\033[31m[&quot; + std::to_string(static_cast&lt;int&gt;(<a class="el" href="#ab0df38968e4f03a3f1f6d6df0f31f45aa6aec2e033766444573e60b2ecdbfcde8">ErrorType::INVALID_DECOMPRESSION</a>)) + &quot;]: decompression is invalid on this file, you may have tried to decompress a normal file.\033[0m&quot;</td></tr>
-<tr class="memitem:a10aa42d66046b2a4263633a39f005124" id="r_a10aa42d66046b2a4263633a39f005124"><td class="memItemLeft">const std::string&#160;</td><td class="memItemRight"><a class="el" href="namespace_e_r_r___s_t_r_i_n_g.html#a10aa42d66046b2a4263633a39f005124">ERR_STRING::DIR_COMPRESSION</a> = &quot;\033[41mError\033[0m\033[31m[&quot; + std::to_string(static_cast&lt;int&gt;(<a class="el" href="#ab0df38968e4f03a3f1f6d6df0f31f45aae8266dd47c23ed1f1c76b1e0669a3e47">ErrorType::DIR_COMPRESSION</a>)) + &quot;]: folder compression is unvailable. \033[34mTip\033[0m: If you are trying to decompress a folder of files, check the related command in the help page with '-h' or '-help'&quot;</td></tr>
+<tr class="memitem:a220301514d7ebf48975be72979b79ddf" id="r_a220301514d7ebf48975be72979b79ddf"><td class="memItemLeft">const std::string&#160;</td><td class="memItemRight"><a class="el" href="namespace_e_r_r___s_t_r_i_n_g.html#a220301514d7ebf48975be72979b79ddf">ERR_STRING::SYNTAX</a> = &quot;\033[41mError\033[0m\033[31m[&quot; + std::to_string(static_cast&lt;int&gt;(<a class="el" href="#ab0df38968e4f03a3f1f6d6df0f31f45aa756ec3dd26d1a73363eb3e68b6e820df">ErrorType::SYNTAX_ERROR</a>)) + &quot;]: the syntax for this option is incorrect. \033[34mTip\033[0m: '-h' or '-help' for help\n&quot;</td></tr>
+<tr class="memitem:ab87f3f9775ac9b28bca2f1c02520077c" id="r_ab87f3f9775ac9b28bca2f1c02520077c"><td class="memItemLeft">const std::string&#160;</td><td class="memItemRight"><a class="el" href="namespace_e_r_r___s_t_r_i_n_g.html#ab87f3f9775ac9b28bca2f1c02520077c">ERR_STRING::VALUE</a> = &quot;\033[41mError\033[0m\033[31m[&quot; + std::to_string(static_cast&lt;int&gt;(<a class="el" href="#ab0df38968e4f03a3f1f6d6df0f31f45aab6e89aef4ee41f778bd0dd285f0d5c20">ErrorType::VALUE_ERROR</a>)) + &quot;]: this is an incorrect value for this option.\033[0m\n&quot;</td></tr>
+<tr class="memitem:af81b6954b18ad24febeb376c7db6fcca" id="r_af81b6954b18ad24febeb376c7db6fcca"><td class="memItemLeft">const std::string&#160;</td><td class="memItemRight"><a class="el" href="namespace_e_r_r___s_t_r_i_n_g.html#af81b6954b18ad24febeb376c7db6fcca">ERR_STRING::MISSING_ARGUMENT</a> = &quot;\033[41mError\033[0m\033[31m[&quot; + std::to_string(static_cast&lt;int&gt;(<a class="el" href="#ab0df38968e4f03a3f1f6d6df0f31f45aa25935ec8650130f4dd9f87d403493ac3">ErrorType::MISSING_ARGUMENT</a>)) + &quot;]: this argument is missing.\033[0m\n&quot;</td></tr>
+<tr class="memitem:afc81976c232892e2b4e16e100a14423e" id="r_afc81976c232892e2b4e16e100a14423e"><td class="memItemLeft">const std::string&#160;</td><td class="memItemRight"><a class="el" href="namespace_e_r_r___s_t_r_i_n_g.html#afc81976c232892e2b4e16e100a14423e">ERR_STRING::OPTION_UNAVAILABLE</a> = &quot;\033[41mError\033[0m\033[31m[&quot; + std::to_string(static_cast&lt;int&gt;(<a class="el" href="#ab0df38968e4f03a3f1f6d6df0f31f45aa18dccefdab88f68c78bb114e0e03f61d">ErrorType::OPTION_UNAVAILABLE</a>)) + &quot;]: this option is unavailable in this context.\033[0m\n&quot;</td></tr>
+<tr class="memitem:a4e0f1c39222e841bb9bc92fa5c93f12d" id="r_a4e0f1c39222e841bb9bc92fa5c93f12d"><td class="memItemLeft">const std::string&#160;</td><td class="memItemRight"><a class="el" href="namespace_e_r_r___s_t_r_i_n_g.html#a4e0f1c39222e841bb9bc92fa5c93f12d">ERR_STRING::PATH_NOT_FOUND</a> = &quot;\033[41mError\033[0m\033[31m[&quot; + std::to_string(static_cast&lt;int&gt;(<a class="el" href="#ab0df38968e4f03a3f1f6d6df0f31f45aa10ea5c18cb2990c51bb9db888917165d">ErrorType::PATH_NOT_FOUND</a>)) + &quot;]: this path could not be found, make sure to double quote (\&quot;) around your path if there are spaces in it\033[0m\n&quot;</td></tr>
+<tr class="memitem:adcca934fbf807fcdae04da825c63d620" id="r_adcca934fbf807fcdae04da825c63d620"><td class="memItemLeft">const std::string&#160;</td><td class="memItemRight"><a class="el" href="namespace_e_r_r___s_t_r_i_n_g.html#adcca934fbf807fcdae04da825c63d620">ERR_STRING::PATH_NOT_ACCESSIBLE</a> = &quot;\033[41mError\033[0m\033[31m[&quot; + std::to_string(static_cast&lt;int&gt;(<a class="el" href="#ab0df38968e4f03a3f1f6d6df0f31f45aac5d1d2985b0085be54ef3223fae157c7">ErrorType::PATH_NOT_ACCESSIBLE</a>)) + &quot;]: this path could not be accessed, the program may not have some required privileges.\033[34mTip\033[0m:Such an error has multiple causes. Check path, folder and other things as such.\033[0m\n&quot;</td></tr>
+<tr class="memitem:a4a1bb1b9a2811049bac67c85d03d4a09" id="r_a4a1bb1b9a2811049bac67c85d03d4a09"><td class="memItemLeft">const std::string&#160;</td><td class="memItemRight"><a class="el" href="namespace_e_r_r___s_t_r_i_n_g.html#a4a1bb1b9a2811049bac67c85d03d4a09">ERR_STRING::PATH_INVALID</a> = &quot;\033[41mError\033[0m\033[31m[&quot; + std::to_string(static_cast&lt;int&gt;(<a class="el" href="#ab0df38968e4f03a3f1f6d6df0f31f45aa18d76a5de8f052b40860c3cc1623e5d6">ErrorType::PATH_INVALID</a>)) + &quot;]: this path is invalid for the selected operation (i.e. compressing a folder or concatenating a single file). Make sure to double quote (\&quot; \&quot;) around your path if there are spaces in it.\033[0m\n&quot;</td></tr>
+<tr class="memitem:a6e076d05d154540639df579a40ab57d2" id="r_a6e076d05d154540639df579a40ab57d2"><td class="memItemLeft">const std::string&#160;</td><td class="memItemRight"><a class="el" href="namespace_e_r_r___s_t_r_i_n_g.html#a6e076d05d154540639df579a40ab57d2">ERR_STRING::FILE_INVALID</a> = &quot;\033[41mError\033[0m\033[31m[&quot; + std::to_string(static_cast&lt;int&gt;(<a class="el" href="#ab0df38968e4f03a3f1f6d6df0f31f45aafc88cb342c01e41f5f45657a51cf65cb">ErrorType::FILE_INVALID</a>)) + &quot;]: this file is invalid. i.e. it is the wrong type or it is unrecognizable.\033[0m\n&quot;</td></tr>
+<tr class="memitem:a6cfbf91e4f1d44fdc579d4aaac395051" id="r_a6cfbf91e4f1d44fdc579d4aaac395051"><td class="memItemLeft">const std::string&#160;</td><td class="memItemRight"><a class="el" href="namespace_e_r_r___s_t_r_i_n_g.html#a6cfbf91e4f1d44fdc579d4aaac395051">ERR_STRING::FILE_CORRUPTED</a> = &quot;\033[41mError\033[0m\033[31m[&quot; + std::to_string(static_cast&lt;int&gt;(<a class="el" href="#ab0df38968e4f03a3f1f6d6df0f31f45aa2cdc1eecb70cc6dabd09b6f9be6c72c8">ErrorType::FILE_CORRUPTED</a>)) + &quot;]: this file's header is corrupted. Unable to continue decompression properly.\033[0m\n&quot;</td></tr>
+<tr class="memitem:aba29f8774197da0a4890bc532fbbab15" id="r_aba29f8774197da0a4890bc532fbbab15"><td class="memItemLeft">const std::string&#160;</td><td class="memItemRight"><a class="el" href="namespace_e_r_r___s_t_r_i_n_g.html#aba29f8774197da0a4890bc532fbbab15">ERR_STRING::DRIVE_ERROR</a> = &quot;\033[41mError\033[0m\033[31m[&quot; + std::to_string(static_cast&lt;int&gt;(<a class="el" href="#ab0df38968e4f03a3f1f6d6df0f31f45aad5459024a3d9e8c304e106f0c0fc8ffe">ErrorType::DRIVE_ERROR</a>)) + &quot;]: there has been a critical error when accessing this file. Please check your drive.\033[0m\n&quot;</td></tr>
+<tr class="memitem:a8797da65711c547cbf975bcf9d287505" id="r_a8797da65711c547cbf975bcf9d287505"><td class="memItemLeft">const std::string&#160;</td><td class="memItemRight"><a class="el" href="namespace_e_r_r___s_t_r_i_n_g.html#a8797da65711c547cbf975bcf9d287505">ERR_STRING::INVALID_DECOMPRESSION</a> =&quot;\033[41mError\033[0m\033[31m[&quot; + std::to_string(static_cast&lt;int&gt;(<a class="el" href="#ab0df38968e4f03a3f1f6d6df0f31f45aa6aec2e033766444573e60b2ecdbfcde8">ErrorType::INVALID_DECOMPRESSION</a>)) + &quot;]: decompression is invalid on this file, you may have tried to decompress a normal file.\033[0m\n&quot;</td></tr>
+<tr class="memitem:a10aa42d66046b2a4263633a39f005124" id="r_a10aa42d66046b2a4263633a39f005124"><td class="memItemLeft">const std::string&#160;</td><td class="memItemRight"><a class="el" href="namespace_e_r_r___s_t_r_i_n_g.html#a10aa42d66046b2a4263633a39f005124">ERR_STRING::DIR_COMPRESSION</a> = &quot;\033[41mError\033[0m\033[31m[&quot; + std::to_string(static_cast&lt;int&gt;(<a class="el" href="#ab0df38968e4f03a3f1f6d6df0f31f45aae8266dd47c23ed1f1c76b1e0669a3e47">ErrorType::DIR_COMPRESSION</a>)) + &quot;]: folder compression is unvailable. \033[34mTip\033[0m: If you are trying to decompress a folder of files, check the related command in the help page with '-h' or '-help'\n&quot;</td></tr>
 <tr class="memitem:a3484e445cf1e4cdf965160b363ce9351" id="r_a3484e445cf1e4cdf965160b363ce9351"><td class="memItemLeft">const std::string&#160;</td><td class="memItemRight"><a class="el" href="namespace_w_a_r_n___s_t_r_i_n_g.html#a3484e445cf1e4cdf965160b363ce9351">WARN_STRING::RECOMPRESSION</a></td></tr>
 <tr class="memitem:a97695fd577cd87a855b4d08e7d29ed6a" id="r_a97695fd577cd87a855b4d08e7d29ed6a"><td class="memItemLeft">const std::string&#160;</td><td class="memItemRight"><a class="el" href="namespace_w_a_r_n___s_t_r_i_n_g.html#a97695fd577cd87a855b4d08e7d29ed6a">WARN_STRING::PORTIONS_OUT_OF_RANGE</a></td></tr>
+<tr class="memitem:ae325c9559d30aa8bb285b17b84ae925f" id="r_ae325c9559d30aa8bb285b17b84ae925f"><td class="memItemLeft">const std::string&#160;</td><td class="memItemRight"><a class="el" href="namespace_w_a_r_n___s_t_r_i_n_g.html#ae325c9559d30aa8bb285b17b84ae925f">WARN_STRING::CONCAT_AMBIGUITY</a> = &quot;\033[43mWarn\033[0m[&quot; + std::to_string(static_cast&lt;int&gt;(<a class="el" href="#aa278aa207bdeddc8432b560d1e1312aeabd356f5fc145a69a6d0b3cbac5d70c00">WarningType::PORTIONS_OUT_OF_RANGE</a>)) + &quot;]: there has been found an ambiguity while concatenating. These files do not come from the same compressed file(same session).\n&quot;</td></tr>
 <tr class="memitem:a00efb0a9acab4c356b0b4550de60af1e" id="r_a00efb0a9acab4c356b0b4550de60af1e"><td class="memItemLeft">constexpr std::string_view&#160;</td><td class="memItemRight"><a class="el" href="#a00efb0a9acab4c356b0b4550de60af1e">COMPRESSOR_STR_OPTIONS</a> []</td></tr>
 </table>
 <a name="doc-enum-members" id="doc-enum-members"></a><h2 id="header-doc-enum-members" class="groupheader">Enumeration Type Documentation</h2>
@@ -246,7 +251,7 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="a59fc5d9b777790e56395e645e4205db0a623be7eb54f4a715b71e63dbd0d7d314" name="a59fc5d9b777790e56395e645e4205db0a623be7eb54f4a715b71e63dbd0d7d314"></a>COMP_MAX&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="utils_8cppm_source.html#l00184">184</a> of file <a class="el" href="utils_8cppm_source.html">utils.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cppm_source.html#l00191">191</a> of file <a class="el" href="utils_8cppm_source.html">utils.cppm</a>.</p>
 
 </div>
 </div>
@@ -277,7 +282,7 @@ Variables</h2></td></tr>
 <tr><td class="fieldname"><a id="a77b7b3d2b23480b5378dbd65c7af9178a26a4b44a837bf97b972628509912b4a5" name="a77b7b3d2b23480b5378dbd65c7af9178a26a4b44a837bf97b972628509912b4a5"></a>MAX&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="utils_8cppm_source.html#l00205">205</a> of file <a class="el" href="utils_8cppm_source.html">utils.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cppm_source.html#l00212">212</a> of file <a class="el" href="utils_8cppm_source.html">utils.cppm</a>.</p>
 
 </div>
 </div>
@@ -305,6 +310,7 @@ Variables</h2></td></tr>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ab0df38968e4f03a3f1f6d6df0f31f45aad306b6fdee05fe87455110ddf6501e6c" name="ab0df38968e4f03a3f1f6d6df0f31f45aad306b6fdee05fe87455110ddf6501e6c"></a>NO_ERROR&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="ab0df38968e4f03a3f1f6d6df0f31f45aab6e89aef4ee41f778bd0dd285f0d5c20" name="ab0df38968e4f03a3f1f6d6df0f31f45aab6e89aef4ee41f778bd0dd285f0d5c20"></a>VALUE_ERROR&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ab0df38968e4f03a3f1f6d6df0f31f45aa25935ec8650130f4dd9f87d403493ac3" name="ab0df38968e4f03a3f1f6d6df0f31f45aa25935ec8650130f4dd9f87d403493ac3"></a>MISSING_ARGUMENT&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="ab0df38968e4f03a3f1f6d6df0f31f45aa756ec3dd26d1a73363eb3e68b6e820df" name="ab0df38968e4f03a3f1f6d6df0f31f45aa756ec3dd26d1a73363eb3e68b6e820df"></a>SYNTAX_ERROR&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="ab0df38968e4f03a3f1f6d6df0f31f45aa18dccefdab88f68c78bb114e0e03f61d" name="ab0df38968e4f03a3f1f6d6df0f31f45aa18dccefdab88f68c78bb114e0e03f61d"></a>OPTION_UNAVAILABLE&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="ab0df38968e4f03a3f1f6d6df0f31f45aa10ea5c18cb2990c51bb9db888917165d" name="ab0df38968e4f03a3f1f6d6df0f31f45aa10ea5c18cb2990c51bb9db888917165d"></a>PATH_NOT_FOUND&#160;</td><td class="fielddoc"></td></tr>
@@ -343,9 +349,10 @@ Variables</h2></td></tr>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="aa278aa207bdeddc8432b560d1e1312aea429a96bd6dfce0e85b1d88b7ea7ff59f" name="aa278aa207bdeddc8432b560d1e1312aea429a96bd6dfce0e85b1d88b7ea7ff59f"></a>RECOMPRESSION&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="aa278aa207bdeddc8432b560d1e1312aeabd356f5fc145a69a6d0b3cbac5d70c00" name="aa278aa207bdeddc8432b560d1e1312aeabd356f5fc145a69a6d0b3cbac5d70c00"></a>PORTIONS_OUT_OF_RANGE&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="aa278aa207bdeddc8432b560d1e1312aea3679d74393649174baa5db30d7e70081" name="aa278aa207bdeddc8432b560d1e1312aea3679d74393649174baa5db30d7e70081"></a>CONCAT_AMBIGUITY&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="utils_8cppm_source.html#l00153">153</a> of file <a class="el" href="utils_8cppm_source.html">utils.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cppm_source.html#l00156">156</a> of file <a class="el" href="utils_8cppm_source.html">utils.cppm</a>.</p>
 
 </div>
 </div>
@@ -379,7 +386,7 @@ Variables</h2></td></tr>
 
 <p>Calculate the power at compile time, to make sure of its correct usage it will be consteval. </p>
 
-<p class="definition">Definition at line <a class="el" href="utils_8cppm_source.html#l00301">301</a> of file <a class="el" href="utils_8cppm_source.html">utils.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cppm_source.html#l00308">308</a> of file <a class="el" href="utils_8cppm_source.html">utils.cppm</a>.</p>
 
 </div>
 </div>
@@ -434,12 +441,12 @@ template&lt;typename Type&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The count of initial consecutive elements that are equal in both spans, constrained by the shorter span length and max_match. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="utils_8cppm_source.html#l00321">321</a> of file <a class="el" href="utils_8cppm_source.html">utils.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cppm_source.html#l00328">328</a> of file <a class="el" href="utils_8cppm_source.html">utils.cppm</a>.</p>
 
 </div>
 </div>
-<a id="add31fbd0032fa67fcfec5e586203f0f2" name="add31fbd0032fa67fcfec5e586203f0f2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#add31fbd0032fa67fcfec5e586203f0f2">&#9670;&#160;</a></span>KB_to_B()</h2>
+<a id="a45f3f635b1fec8af19702b350fb9ea90" name="a45f3f635b1fec8af19702b350fb9ea90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45f3f635b1fec8af19702b350fb9ea90">&#9670;&#160;</a></span>KiB_to_B()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -448,7 +455,7 @@ template&lt;typename Type&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t KB_to_B </td>
+          <td class="memname">size_t KiB_to_B </td>
           <td>(</td>
           <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
           <td></td>
@@ -461,12 +468,12 @@ template&lt;typename Type&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="utils_8cppm_source.html#l00288">288</a> of file <a class="el" href="utils_8cppm_source.html">utils.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cppm_source.html#l00295">295</a> of file <a class="el" href="utils_8cppm_source.html">utils.cppm</a>.</p>
 
 </div>
 </div>
-<a id="acaf024dde014347d648c3d3c7e796e37" name="acaf024dde014347d648c3d3c7e796e37"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acaf024dde014347d648c3d3c7e796e37">&#9670;&#160;</a></span>MB_to_B()</h2>
+<a id="a8da911fac7b18fb18595e961a3e37725" name="a8da911fac7b18fb18595e961a3e37725"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8da911fac7b18fb18595e961a3e37725">&#9670;&#160;</a></span>MiB_to_B()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -475,7 +482,7 @@ template&lt;typename Type&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t MB_to_B </td>
+          <td class="memname">size_t MiB_to_B </td>
           <td>(</td>
           <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
           <td></td>
@@ -488,7 +495,7 @@ template&lt;typename Type&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="utils_8cppm_source.html#l00293">293</a> of file <a class="el" href="utils_8cppm_source.html">utils.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cppm_source.html#l00300">300</a> of file <a class="el" href="utils_8cppm_source.html">utils.cppm</a>.</p>
 
 </div>
 </div>
@@ -519,7 +526,7 @@ template&lt;typename Type&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="utils_8cppm_source.html#l00170">170</a> of file <a class="el" href="utils_8cppm_source.html">utils.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cppm_source.html#l00175">175</a> of file <a class="el" href="utils_8cppm_source.html">utils.cppm</a>.</p>
 
 </div>
 </div>
@@ -565,7 +572,7 @@ template&lt;typename Type&gt; </div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="utils_8cppm_source.html#l00104">104</a> of file <a class="el" href="utils_8cppm_source.html">utils.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cppm_source.html#l00107">107</a> of file <a class="el" href="utils_8cppm_source.html">utils.cppm</a>.</p>
 
 <p class="reference">References <a class="el" href="utils_8cppm_source.html#l00058">NO_ERROR</a>.</p>
 
@@ -596,7 +603,7 @@ template&lt;typename Type&gt; </div>
 <div class="line">    <span class="stringliteral">&quot;LZ77&quot;</span>,</div>
 <div class="line">}</div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="utils_8cppm_source.html#l00211">211</a> of file <a class="el" href="utils_8cppm_source.html">utils.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="utils_8cppm_source.html#l00218">218</a> of file <a class="el" href="utils_8cppm_source.html">utils.cppm</a>.</p>
 
 </div>
 </div>

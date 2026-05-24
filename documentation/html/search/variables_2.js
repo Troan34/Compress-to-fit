@@ -5,5 +5,7 @@ var searchData=
   ['comp_5ftype_2',['comp_type',['../struct_header.html#a65653b8a9e7ec9e2d414242c8d1ec0f1',1,'Header']]],
   ['compressor_3',['compressor',['../structparser_1_1_options.html#ab8d5641c8bad00296b548aaa3a9522e2',1,'parser::Options']]],
   ['compressor_5fstr_5foptions_4',['COMPRESSOR_STR_OPTIONS',['../utils_8cppm.html#a00efb0a9acab4c356b0b4550de60af1e',1,'utils.cppm']]],
-  ['concatenate_5ffiles_5',['concatenate_files',['../structparser_1_1_options.html#a4e235b57474a81a3eec424cb4142c8ab',1,'parser::Options']]]
+  ['concat_5fambiguity_5',['CONCAT_AMBIGUITY',['../namespace_w_a_r_n___s_t_r_i_n_g.html#ae325c9559d30aa8bb285b17b84ae925f',1,'WARN_STRING']]],
+  ['concatenate_5ffiles_6',['concatenate_files',['../structparser_1_1_options.html#a4e235b57474a81a3eec424cb4142c8ab',1,'parser::Options']]],
+  ['count_7',['count',['../struct_header.html#a7e28f0be834e5db8b42db26058fe99fe',1,'Header']]]
 ];

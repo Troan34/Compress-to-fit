@@ -105,53 +105,22 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('struct_header.
 <div class="dynheader">
 Collaboration diagram for Header:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="struct_header__coll__graph.svg" width="106" height="123"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="struct_header__coll__graph.svg" width="99" height="144"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
-Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a71745d0fd3d493c06a4de669bbd45c24" id="r_a71745d0fd3d493c06a4de669bbd45c24"><td class="memItemLeft">static constexpr size_t&#160;</td><td class="memItemRight"><a class="el" href="#a71745d0fd3d493c06a4de669bbd45c24">size_bytes</a> () noexcept</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a66f6c58d0244bc34895827bab6e9f61a" id="r_a66f6c58d0244bc34895827bab6e9f61a"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="#a66f6c58d0244bc34895827bab6e9f61a">identifier</a></td></tr>
+<tr class="memitem:a7e28f0be834e5db8b42db26058fe99fe" id="r_a7e28f0be834e5db8b42db26058fe99fe"><td class="memItemLeft">std::uint16_t&#160;</td><td class="memItemRight"><a class="el" href="#a7e28f0be834e5db8b42db26058fe99fe">count</a></td></tr>
 <tr class="memitem:a65653b8a9e7ec9e2d414242c8d1ec0f1" id="r_a65653b8a9e7ec9e2d414242c8d1ec0f1"><td class="memItemLeft"><a class="el" href="utils_8cppm.html#a77b7b3d2b23480b5378dbd65c7af9178">CompType</a>&#160;</td><td class="memItemRight"><a class="el" href="#a65653b8a9e7ec9e2d414242c8d1ec0f1">comp_type</a></td></tr>
 <tr class="memitem:a38a22e627cdd546a20e434bfd9b754dc" id="r_a38a22e627cdd546a20e434bfd9b754dc"><td class="memItemLeft"><a class="el" href="utils_8cppm.html#a59fc5d9b777790e56395e645e4205db0">CompPreset</a>&#160;</td><td class="memItemRight"><a class="el" href="#a38a22e627cdd546a20e434bfd9b754dc">preset</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>TZF FILE HEADER </p><hr  />
-<p> | | | | | | SIGNATURE | Identifier (file splitting) | <a class="el" href="utils_8cppm.html#a77b7b3d2b23480b5378dbd65c7af9178" title="Identify compressor used.">CompType(u8)</a> | <a class="el" href="utils_8cppm.html#a59fc5d9b777790e56395e645e4205db0">CompPreset(u8)</a> | |____________|_____________________________|________________|__________________| ↑ ↑ ↑ ↑ <a class="el" href="file__management_8cppm.html#ac3f10b5949a91b9cafbbdcf140d0a527ab718adec73e04ce3ec720dd11a06a308">HEADER_OFFSET::ID</a> <a class="el" href="file__management_8cppm.html#ac3f10b5949a91b9cafbbdcf140d0a527ad539c6567c1f2966df43ad3a2d82b626">HEADER_OFFSET::COMP_TYPE</a> <a class="el" href="file__management_8cppm.html#ac3f10b5949a91b9cafbbdcf140d0a527a8d1d3f777392a89d7531871f6c3f2208">HEADER_OFFSET::COMP_PRESET</a> <a class="el" href="file__management_8cppm.html#ac3f10b5949a91b9cafbbdcf140d0a527a26a4b44a837bf97b972628509912b4a5">HEADER_OFFSET::MAX</a> </p>
+<p> | | | | | | | SIGNATURE | Identifier (file splitting) | Count(file splt) | <a class="el" href="utils_8cppm.html#a77b7b3d2b23480b5378dbd65c7af9178" title="Identify compressor used.">CompType(u8)</a> | <a class="el" href="utils_8cppm.html#a59fc5d9b777790e56395e645e4205db0">CompPreset(u8)</a> | |____________|_____________________________|__________________|_______________|__________________| ↑ ↑ ↑ ↑ ↑ <a class="el" href="file__management_8cppm.html#ac3f10b5949a91b9cafbbdcf140d0a527ab718adec73e04ce3ec720dd11a06a308">HEADER_OFFSET::ID</a> <a class="el" href="file__management_8cppm.html#ac3f10b5949a91b9cafbbdcf140d0a527a4905ac9d6a22bdfc1ae096094ce6248d">HEADER_OFFSET::COUNT</a> /*...*&zwj;/::COMP_TYPE <a class="el" href="file__management_8cppm.html#ac3f10b5949a91b9cafbbdcf140d0a527a8d1d3f777392a89d7531871f6c3f2208">HEADER_OFFSET::COMP_PRESET</a> <a class="el" href="file__management_8cppm.html#ac3f10b5949a91b9cafbbdcf140d0a527a26a4b44a837bf97b972628509912b4a5">HEADER_OFFSET::MAX</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00035">35</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
-</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="a71745d0fd3d493c06a4de669bbd45c24" name="a71745d0fd3d493c06a4de669bbd45c24"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a71745d0fd3d493c06a4de669bbd45c24">&#9670;&#160;</a></span>size_bytes()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr size_t Header::size_bytes </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00041">41</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
-
-</div>
-</div>
-<a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
+<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00037">37</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
+</div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
 <a id="a65653b8a9e7ec9e2d414242c8d1ec0f1" name="a65653b8a9e7ec9e2d414242c8d1ec0f1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a65653b8a9e7ec9e2d414242c8d1ec0f1">&#9670;&#160;</a></span>comp_type</h2>
 
@@ -164,7 +133,23 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00038">38</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00041">41</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
+
+</div>
+</div>
+<a id="a7e28f0be834e5db8b42db26058fe99fe" name="a7e28f0be834e5db8b42db26058fe99fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e28f0be834e5db8b42db26058fe99fe">&#9670;&#160;</a></span>count</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::uint16_t Header::count</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00040">40</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
 
 </div>
 </div>
@@ -180,7 +165,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00037">37</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00039">39</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
 
 </div>
 </div>
@@ -196,7 +181,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00039">39</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00042">42</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
 
 </div>
 </div>

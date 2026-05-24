@@ -132,12 +132,17 @@ Enumerations</h2></td></tr>
 <tr class="memitem:ac3f10b5949a91b9cafbbdcf140d0a527" id="r_ac3f10b5949a91b9cafbbdcf140d0a527"><td class="memItemLeft">enum class &#160;</td><td class="memItemRight"><a class="el" href="#ac3f10b5949a91b9cafbbdcf140d0a527">HEADER_OFFSET</a> { <br />
 &#160;&#160;<a class="el" href="#ac3f10b5949a91b9cafbbdcf140d0a527aef21bf22481e7930df1e2bda54025095">SIGNATURE</a> = 0
 , <a class="el" href="#ac3f10b5949a91b9cafbbdcf140d0a527ab718adec73e04ce3ec720dd11a06a308">ID</a> = ::SIGNATURE.size()
-, <a class="el" href="#ac3f10b5949a91b9cafbbdcf140d0a527ad539c6567c1f2966df43ad3a2d82b626">COMP_TYPE</a> = ID + sizeof(size_t)
-, <a class="el" href="#ac3f10b5949a91b9cafbbdcf140d0a527a8d1d3f777392a89d7531871f6c3f2208">COMP_PRESET</a> = COMP_TYPE + sizeof(uint8_t)
+, <a class="el" href="#ac3f10b5949a91b9cafbbdcf140d0a527a4905ac9d6a22bdfc1ae096094ce6248d">COUNT</a> = ID + sizeof(uint16_t)
+, <a class="el" href="#ac3f10b5949a91b9cafbbdcf140d0a527ad539c6567c1f2966df43ad3a2d82b626">COMP_TYPE</a> = COUNT + sizeof(size_t)
 , <br />
-&#160;&#160;<a class="el" href="#ac3f10b5949a91b9cafbbdcf140d0a527a26a4b44a837bf97b972628509912b4a5">MAX</a> = COMP_PRESET + sizeof(uint8_t)
+&#160;&#160;<a class="el" href="#ac3f10b5949a91b9cafbbdcf140d0a527a8d1d3f777392a89d7531871f6c3f2208">COMP_PRESET</a> = COMP_TYPE + sizeof(uint8_t)
+, <a class="el" href="#ac3f10b5949a91b9cafbbdcf140d0a527a26a4b44a837bf97b972628509912b4a5">MAX</a> = COMP_PRESET + sizeof(uint8_t)
 <br />
  }</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a8eafeb61f6d909d1778dc3ce53e51114" id="r_a8eafeb61f6d909d1778dc3ce53e51114"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a8eafeb61f6d909d1778dc3ce53e51114">try_throw_IO_error</a> (std::ios_base::iostate state, fs::path const &amp;path) noexcept(false)</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
@@ -167,12 +172,37 @@ Variables</h2></td></tr>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="ac3f10b5949a91b9cafbbdcf140d0a527aef21bf22481e7930df1e2bda54025095" name="ac3f10b5949a91b9cafbbdcf140d0a527aef21bf22481e7930df1e2bda54025095"></a>SIGNATURE&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="ac3f10b5949a91b9cafbbdcf140d0a527ab718adec73e04ce3ec720dd11a06a308" name="ac3f10b5949a91b9cafbbdcf140d0a527ab718adec73e04ce3ec720dd11a06a308"></a>ID&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="ac3f10b5949a91b9cafbbdcf140d0a527a4905ac9d6a22bdfc1ae096094ce6248d" name="ac3f10b5949a91b9cafbbdcf140d0a527a4905ac9d6a22bdfc1ae096094ce6248d"></a>COUNT&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="ac3f10b5949a91b9cafbbdcf140d0a527ad539c6567c1f2966df43ad3a2d82b626" name="ac3f10b5949a91b9cafbbdcf140d0a527ad539c6567c1f2966df43ad3a2d82b626"></a>COMP_TYPE&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="ac3f10b5949a91b9cafbbdcf140d0a527a8d1d3f777392a89d7531871f6c3f2208" name="ac3f10b5949a91b9cafbbdcf140d0a527a8d1d3f777392a89d7531871f6c3f2208"></a>COMP_PRESET&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="ac3f10b5949a91b9cafbbdcf140d0a527a26a4b44a837bf97b972628509912b4a5" name="ac3f10b5949a91b9cafbbdcf140d0a527a26a4b44a837bf97b972628509912b4a5"></a>MAX&#160;</td><td class="fielddoc"></td></tr>
 </table>
 
 <p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00017">17</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
+
+</div>
+</div>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a id="a8eafeb61f6d909d1778dc3ce53e51114" name="a8eafeb61f6d909d1778dc3ce53e51114"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8eafeb61f6d909d1778dc3ce53e51114">&#9670;&#160;</a></span>try_throw_IO_error()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void try_throw_IO_error </td>
+          <td>(</td>
+          <td class="paramtype">std::ios_base::iostate</td>          <td class="paramname"><span class="paramname"><em>state</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">fs::path const &amp;</td>          <td class="paramname"><span class="paramname"><em>path</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="file__management_8cppm_source.html#l00059">59</a> of file <a class="el" href="file__management_8cppm_source.html">file_management.cppm</a>.</p>
 
 </div>
 </div>

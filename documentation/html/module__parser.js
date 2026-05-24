@@ -18,5 +18,6 @@ var module__parser =
       [ "parser::TokenType::NO_TYPE", "module__parser.html#accd7eb1ffd4c925598ec25fab6905369a245d11a3709454cc69b2de7911073d57", null ]
     ] ],
     [ "parser::parse", "module__parser.html#a7f5ecbf764fc175fc336fcea0dd07be8", null ],
-    [ "show_progress", "cli__parser_8cppm.html#ae97b52a0806996c1857b54bf4e06253e", null ]
+    [ "show_progress", "cli__parser_8cppm.html#ae97b52a0806996c1857b54bf4e06253e", null ],
+    [ "parser::default_out_path", "module__parser.html#a7070ddbab534fb2cd9db4da4392877fb", null ]
 ];

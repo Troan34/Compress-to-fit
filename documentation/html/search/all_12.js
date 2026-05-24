@@ -6,5 +6,7 @@ var searchData=
   ['token_3',['Token',['../classparser_1_1_token.html',1,'parser::Token'],['../struct_token.html',1,'Token'],['../classparser_1_1_token.html#a1a02f18007b4724b39adab951f180e9f',1,'parser::Token::Token(TokenType type_, ValueType value_)'],['../classparser_1_1_token.html#a03fc54839cfb01b88087c14db5b0fd63',1,'parser::Token::Token(const std::string &amp;option)']]],
   ['token_5fstrings_4',['token_strings',['../namespaceparser.html#a35056580671d6aa5abd316f21007bef6',1,'parser']]],
   ['tokentype_5',['TokenType',['../namespaceparser.html#accd7eb1ffd4c925598ec25fab6905369',1,'parser']]],
-  ['type_6',['type',['../classparser_1_1_token.html#a94a222c963f58b1206743b29e10084df',1,'parser::Token']]]
+  ['true_5findex_6',['true_index',['../class_concurrent_file_buffer.html#a41a7e3d60e387d1d711eb223000c4717',1,'ConcurrentFileBuffer']]],
+  ['try_5fthrow_5fio_5ferror_7',['try_throw_IO_error',['../file__management_8cppm.html#a8eafeb61f6d909d1778dc3ce53e51114',1,'file_management.cppm']]],
+  ['type_8',['type',['../classparser_1_1_token.html#a94a222c963f58b1206743b29e10084df',1,'parser::Token']]]
 ];

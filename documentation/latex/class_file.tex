@@ -32,13 +32,15 @@ void \doxymbox{\hyperlink{class_file_aa9e64b96e1d0814319870297e97edb0e}{read\+\_
 \item 
 static void \doxymbox{\hyperlink{class_file_a30d421f12056fe097e75f2a98a0f480c}{split\+\_\+file}} (fs::\+path const \&path, size\+\_\+t portions)
 \begin{DoxyCompactList}\small\item\em Split an encoded file into a certain number of encoded (with header) files. \end{DoxyCompactList}\item 
+static bool \doxymbox{\hyperlink{class_file_a74344ea69c407c73131db10ffc3292b4}{has\+\_\+signature}} (std::\+fstream \&file)
+\begin{DoxyCompactList}\small\item\em Check if file has the \doxylink{file__management_8cppm_a5d9e3a0a38b084aa0d6d23da7a06be5e}{SIGNATURE} in the header. Non-\/throwing version of \doxylink{class_file_a2eb241a6b3e045cb9665b0e3742ee424}{check\+\_\+signature}. \end{DoxyCompactList}\item 
 static bool \doxymbox{\hyperlink{class_file_a09024be52cad08277a0c2de7ddf22b8b}{has\+\_\+signature}} (std::\+ifstream \&file)
 \begin{DoxyCompactList}\small\item\em Check if file has the \doxylink{file__management_8cppm_a5d9e3a0a38b084aa0d6d23da7a06be5e}{SIGNATURE} in the header. Non-\/throwing version of \doxylink{class_file_a2eb241a6b3e045cb9665b0e3742ee424}{check\+\_\+signature}. \end{DoxyCompactList}\item 
 static std::\+optional$<$ \doxymbox{\hyperlink{struct_header}{Header}} $>$ \doxymbox{\hyperlink{class_file_aeb13eba5c36b3a47feeded0d234bb314}{extract\+\_\+info}} (const fs::\+path \&path)
 \begin{DoxyCompactList}\small\item\em Extract information from the header of the tzf file. \end{DoxyCompactList}\item 
 static std::\+optional$<$ \doxymbox{\hyperlink{struct_header}{Header}} $>$ \doxymbox{\hyperlink{class_file_ae6dfc687b619fc6f7080deafa67a6c1d}{extract\+\_\+info}} (std::\+ifstream \&file, fs::\+path const \&path)
 \begin{DoxyCompactList}\small\item\em Extract information from the header of the tzf file. \end{DoxyCompactList}\item 
-static std::\+ofstream \doxymbox{\hyperlink{class_file_aea022386c75771f8fdb7e8a76cf41aef}{create\+\_\+file}} (\doxymbox{\hyperlink{utils_8cppm_a77b7b3d2b23480b5378dbd65c7af9178}{Comp\+Type}} comp\+\_\+type, \doxymbox{\hyperlink{utils_8cppm_a59fc5d9b777790e56395e645e4205db0}{Comp\+Preset}} comp\+\_\+preset, fs::\+path path, size\+\_\+t id)
+static std::\+ofstream \doxymbox{\hyperlink{class_file_af2040a812b7004faea79ba7e6fef0968}{create\+\_\+file}} (\doxymbox{\hyperlink{utils_8cppm_a77b7b3d2b23480b5378dbd65c7af9178}{Comp\+Type}} comp\+\_\+type, \doxymbox{\hyperlink{utils_8cppm_a59fc5d9b777790e56395e645e4205db0}{Comp\+Preset}} comp\+\_\+preset, fs::\+path path, size\+\_\+t id, uint16\+\_\+t count)
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Private Member Functions}
 \begin{DoxyCompactItemize}
@@ -51,6 +53,11 @@ std::\+ofstream \doxymbox{\hyperlink{class_file_a942986666cfee9c56f500f9f023e998
 \begin{DoxyCompactList}\small\item\em Creates a compressed file(header) with the details of \doxylink{class_file_ab53a042dbb267af48b1a6e5523a2af1d}{cli\+\_\+options}. If file exists, it is cleared. \end{DoxyCompactList}\item 
 fs::\+path \doxymbox{\hyperlink{class_file_aaf7b0f743db8c7343de75d5c4d3f93fb}{concatenate\+\_\+files}} (fs::\+path const \&path)
 \begin{DoxyCompactList}\small\item\em Concatenate files found in \+\#path into a new file, if. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std::\+ofstream \doxymbox{\hyperlink{class_file_acae28f8736d41a36faa606bd1c27dab7}{create\+\_\+file}} (fs::\+path const \&path, \doxymbox{\hyperlink{struct_header}{Header}} options)
+\begin{DoxyCompactList}\small\item\em Creates a compressed file(header). If file exists, it is cleared. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Private Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -67,7 +74,7 @@ Interpret a file as to retrieve custom information.
 
 An interpreted file is one where we have the knowledge about it to fill \doxylink{struct_file_options}{File\+Options} 
 
-Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00063}{63}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00073}{73}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
 
 
 
@@ -95,26 +102,24 @@ Construct member types, such as \doxylink{struct_file_options}{File\+Options}. T
 \item[\doxymbox{\hyperlink{todo__todo000001}{Todo}}]Add a parameter for \doxylink{struct_file_options_a7cb51e65263f944a8a56b79346dedb71}{File\+Options::\+delete\+\_\+on\+\_\+dtor} when the parser is updated to do that \end{DoxyRefDesc}
 
 
-Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00074}{74}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00084}{84}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
 
 
 
-References \doxymbox{\hyperlink{file__management_8cppm_source_l00074}{File()}}.
+References \doxymbox{\hyperlink{file__management_8cppm_source_l00084}{File()}}.
 
 
 
-Referenced by \doxymbox{\hyperlink{file__management_8cppm_source_l00074}{File()}}.
+Referenced by \doxymbox{\hyperlink{file__management_8cppm_source_l00084}{File()}}.
 
-Here is the call graph for this function:\+
-\nopagebreak
+Here is the call graph for this function:\+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
 \includegraphics[width=134pt]{class_file_af7104229a9098d85f8f631c1d5c2d9a2_cgraph}
 \end{center}
 \end{figure}
-Here is the caller graph for this function:\+
-\nopagebreak
+Here is the caller graph for this function:\+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -138,7 +143,7 @@ Check if \+\#file\+\_\+options.\+path has the \doxylink{file__management_8cppm_a
 
 
 
-Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00356}{356}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00391}{391}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
 
 \Hypertarget{class_file_aaf7b0f743db8c7343de75d5c4d3f93fb}\index{File@{File}!concatenate\_files@{concatenate\_files}}
 \index{concatenate\_files@{concatenate\_files}!File@{File}}
@@ -160,21 +165,43 @@ path to the new concatenated file
 \end{DoxyReturn}
 
 
-Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00423}{423}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00478}{478}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
 
-\Hypertarget{class_file_aea022386c75771f8fdb7e8a76cf41aef}\index{File@{File}!create\_file@{create\_file}}
+\Hypertarget{class_file_af2040a812b7004faea79ba7e6fef0968}\index{File@{File}!create\_file@{create\_file}}
 \index{create\_file@{create\_file}!File@{File}}
-\doxysubsubsection{\texorpdfstring{create\_file()}{create\_file()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
-{\footnotesize\ttfamily \label{class_file_aea022386c75771f8fdb7e8a76cf41aef} 
-std::\+ofstream File::\+create\+\_\+file (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{utils_8cppm_a77b7b3d2b23480b5378dbd65c7af9178}{Comp\+Type}}}]{comp\+\_\+type}{, }\item[{\doxymbox{\hyperlink{utils_8cppm_a59fc5d9b777790e56395e645e4205db0}{Comp\+Preset}}}]{comp\+\_\+preset}{, }\item[{fs::\+path}]{path}{, }\item[{size\+\_\+t}]{id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+\doxysubsubsection{\texorpdfstring{create\_file()}{create\_file()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{class_file_af2040a812b7004faea79ba7e6fef0968} 
+std::\+ofstream File::\+create\+\_\+file (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{utils_8cppm_a77b7b3d2b23480b5378dbd65c7af9178}{Comp\+Type}}}]{comp\+\_\+type}{, }\item[{\doxymbox{\hyperlink{utils_8cppm_a59fc5d9b777790e56395e645e4205db0}{Comp\+Preset}}}]{comp\+\_\+preset}{, }\item[{fs::\+path}]{path}{, }\item[{size\+\_\+t}]{id}{, }\item[{uint16\+\_\+t}]{count}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
 
 
 
-Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00331}{331}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00365}{365}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+
+\Hypertarget{class_file_acae28f8736d41a36faa606bd1c27dab7}\index{File@{File}!create\_file@{create\_file}}
+\index{create\_file@{create\_file}!File@{File}}
+\doxysubsubsection{\texorpdfstring{create\_file()}{create\_file()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{class_file_acae28f8736d41a36faa606bd1c27dab7} 
+std::\+ofstream File::\+create\+\_\+file (\begin{DoxyParamCaption}\item[{fs::\+path const \&}]{path}{, }\item[{\doxymbox{\hyperlink{struct_header}{Header}}}]{options}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Creates a compressed file(header). If file exists, it is cleared. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Where the file is created \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A stream to the file. 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00455}{455}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
 
 \Hypertarget{class_file_a942986666cfee9c56f500f9f023e998d}\index{File@{File}!create\_file@{create\_file}}
 \index{create\_file@{create\_file}!File@{File}}
-\doxysubsubsection{\texorpdfstring{create\_file()}{create\_file()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+\doxysubsubsection{\texorpdfstring{create\_file()}{create\_file()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
 {\footnotesize\ttfamily \label{class_file_a942986666cfee9c56f500f9f023e998d} 
 std::\+ofstream File::\+create\+\_\+file (\begin{DoxyParamCaption}\item[{fs::\+path}]{path}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
@@ -192,7 +219,7 @@ A stream to the file.
 \end{DoxyReturn}
 
 
-Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00395}{395}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00430}{430}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
 
 \Hypertarget{class_file_aeb13eba5c36b3a47feeded0d234bb314}\index{File@{File}!extract\_info@{extract\_info}}
 \index{extract\_info@{extract\_info}!File@{File}}
@@ -217,7 +244,7 @@ path shall exist and be accessible.
 \end{DoxyPrecond}
 
 
-Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00290}{290}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00322}{322}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
 
 \Hypertarget{class_file_ae6dfc687b619fc6f7080deafa67a6c1d}\index{File@{File}!extract\_info@{extract\_info}}
 \index{extract\_info@{extract\_info}!File@{File}}
@@ -244,11 +271,11 @@ path shall exist and be accessible.
 \end{DoxyPrecond}
 
 
-Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00305}{305}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00337}{337}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
 
 \Hypertarget{class_file_aa5c3142a4a5e9cba6bd7303c0373b8bb}\index{File@{File}!has\_signature@{has\_signature}}
 \index{has\_signature@{has\_signature}!File@{File}}
-\doxysubsubsection{\texorpdfstring{has\_signature()}{has\_signature()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+\doxysubsubsection{\texorpdfstring{has\_signature()}{has\_signature()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
 {\footnotesize\ttfamily \label{class_file_aa5c3142a4a5e9cba6bd7303c0373b8bb} 
 bool File::\+has\+\_\+signature (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
 
@@ -264,11 +291,39 @@ The file shall already exist and be accessible.
 \end{DoxyPrecond}
 
 
-Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00375}{375}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00410}{410}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+
+\Hypertarget{class_file_a74344ea69c407c73131db10ffc3292b4}\index{File@{File}!has\_signature@{has\_signature}}
+\index{has\_signature@{has\_signature}!File@{File}}
+\doxysubsubsection{\texorpdfstring{has\_signature()}{has\_signature()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{class_file_a74344ea69c407c73131db10ffc3292b4} 
+bool File::\+has\+\_\+signature (\begin{DoxyParamCaption}\item[{std::\+fstream \&}]{file}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Check if file has the \doxylink{file__management_8cppm_a5d9e3a0a38b084aa0d6d23da7a06be5e}{SIGNATURE} in the header. Non-\/throwing version of \doxylink{class_file_a2eb241a6b3e045cb9665b0e3742ee424}{check\+\_\+signature}. 
+
+\begin{DoxyReturn}{Returns}
+True if file has signature, false if not.
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em file} & \doxylink{class_file}{File} to be checked. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+The file shall already exist and be accessible. 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+file will be unchanged. 
+\end{DoxyPostcond}
+
+
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00277}{277}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
 
 \Hypertarget{class_file_a09024be52cad08277a0c2de7ddf22b8b}\index{File@{File}!has\_signature@{has\_signature}}
 \index{has\_signature@{has\_signature}!File@{File}}
-\doxysubsubsection{\texorpdfstring{has\_signature()}{has\_signature()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+\doxysubsubsection{\texorpdfstring{has\_signature()}{has\_signature()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
 {\footnotesize\ttfamily \label{class_file_a09024be52cad08277a0c2de7ddf22b8b} 
 bool File::\+has\+\_\+signature (\begin{DoxyParamCaption}\item[{std::\+ifstream \&}]{file}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
 
@@ -292,7 +347,7 @@ file will be unchanged.
 \end{DoxyPostcond}
 
 
-Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00268}{268}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00300}{300}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
 
 \Hypertarget{class_file_ab58d4159da40e8eeeec3291a1283c051}\index{File@{File}!process\_file@{process\_file}}
 \index{process\_file@{process\_file}!File@{File}}
@@ -322,7 +377,7 @@ Sequentially apply a certain function to the \+\#cli\+\_\+options.\+filename\+\_
 \end{DoxyParams}
 This function will ignore the file header 
 
-Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00097}{97}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00106}{106}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
 
 \Hypertarget{class_file_aa9e64b96e1d0814319870297e97edb0e}\index{File@{File}!read\_file@{read\_file}}
 \index{read\_file@{read\_file}!File@{File}}
@@ -343,7 +398,7 @@ Read a file into a vector. Will call throw\+\_\+error if file is not found or in
 \end{DoxyParams}
 
 
-Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00237}{237}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00246}{246}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
 
 \Hypertarget{class_file_a30d421f12056fe097e75f2a98a0f480c}\index{File@{File}!split\_file@{split\_file}}
 \index{split\_file@{split\_file}!File@{File}}
@@ -364,7 +419,7 @@ Split an encoded file into a certain number of encoded (with header) files.
 \end{DoxyParams}
 
 
-Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00165}{165}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00174}{174}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
 
 \Hypertarget{class_file_a2505fac5cd02bc53f1c6f1f5143e9d73}\index{File@{File}!write\_file@{write\_file}}
 \index{write\_file@{write\_file}!File@{File}}
@@ -375,7 +430,7 @@ void File::\+write\+\_\+file (\begin{DoxyParamCaption}\item[{std::\+span$<$ T $>
 
 
 
-Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00145}{145}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00154}{154}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
 
 
 
@@ -390,7 +445,7 @@ Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00145}{14
 
 
 
-Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00350}{350}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00385}{385}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
 
 \Hypertarget{class_file_a29e9a211dc95cdfbfcf5c135bcb4fcf5}\index{File@{File}!file\_options@{file\_options}}
 \index{file\_options@{file\_options}!File@{File}}
@@ -400,7 +455,7 @@ Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00350}{35
 
 
 
-Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00349}{349}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00384}{384}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
 
 \Hypertarget{class_file_a733e671529f4aff0b4f43e9cfd223779}\index{File@{File}!out\_file@{out\_file}}
 \index{out\_file@{out\_file}!File@{File}}
@@ -410,7 +465,7 @@ std::\+ofstream File::\+out\+\_\+file\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00351}{351}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00386}{386}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
 
 
 

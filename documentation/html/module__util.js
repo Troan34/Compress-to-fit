@@ -7,6 +7,7 @@ var module__util =
     [ "ErrorType", "utils_8cppm.html#ab0df38968e4f03a3f1f6d6df0f31f45a", [
       [ "ErrorType::NO_ERROR", "utils_8cppm.html#ab0df38968e4f03a3f1f6d6df0f31f45aad306b6fdee05fe87455110ddf6501e6c", null ],
       [ "ErrorType::VALUE_ERROR", "utils_8cppm.html#ab0df38968e4f03a3f1f6d6df0f31f45aab6e89aef4ee41f778bd0dd285f0d5c20", null ],
+      [ "ErrorType::MISSING_ARGUMENT", "utils_8cppm.html#ab0df38968e4f03a3f1f6d6df0f31f45aa25935ec8650130f4dd9f87d403493ac3", null ],
       [ "ErrorType::SYNTAX_ERROR", "utils_8cppm.html#ab0df38968e4f03a3f1f6d6df0f31f45aa756ec3dd26d1a73363eb3e68b6e820df", null ],
       [ "ErrorType::OPTION_UNAVAILABLE", "utils_8cppm.html#ab0df38968e4f03a3f1f6d6df0f31f45aa18dccefdab88f68c78bb114e0e03f61d", null ],
       [ "ErrorType::PATH_NOT_FOUND", "utils_8cppm.html#ab0df38968e4f03a3f1f6d6df0f31f45aa10ea5c18cb2990c51bb9db888917165d", null ],
@@ -20,7 +21,8 @@ var module__util =
     ] ],
     [ "WarningType", "utils_8cppm.html#aa278aa207bdeddc8432b560d1e1312ae", [
       [ "WarningType::RECOMPRESSION", "utils_8cppm.html#aa278aa207bdeddc8432b560d1e1312aea429a96bd6dfce0e85b1d88b7ea7ff59f", null ],
-      [ "WarningType::PORTIONS_OUT_OF_RANGE", "utils_8cppm.html#aa278aa207bdeddc8432b560d1e1312aeabd356f5fc145a69a6d0b3cbac5d70c00", null ]
+      [ "WarningType::PORTIONS_OUT_OF_RANGE", "utils_8cppm.html#aa278aa207bdeddc8432b560d1e1312aeabd356f5fc145a69a6d0b3cbac5d70c00", null ],
+      [ "WarningType::CONCAT_AMBIGUITY", "utils_8cppm.html#aa278aa207bdeddc8432b560d1e1312aea3679d74393649174baa5db30d7e70081", null ]
     ] ],
     [ "CompPreset", "utils_8cppm.html#a59fc5d9b777790e56395e645e4205db0", [
       [ "NO_COMP", "utils_8cppm.html#a59fc5d9b777790e56395e645e4205db0a7589a60238783984f16f26794ced40e0", null ],
@@ -40,8 +42,8 @@ var module__util =
     ] ],
     [ "throw_error", "utils_8cppm.html#a6c327b69ce479189b2946651f162daec", null ],
     [ "print_warn", "utils_8cppm.html#aeee94ed600f26b5d54f52d5bfc10bef7", null ],
-    [ "KB_to_B", "utils_8cppm.html#add31fbd0032fa67fcfec5e586203f0f2", null ],
-    [ "MB_to_B", "utils_8cppm.html#acaf024dde014347d648c3d3c7e796e37", null ],
+    [ "KiB_to_B", "utils_8cppm.html#a45f3f635b1fec8af19702b350fb9ea90", null ],
+    [ "MiB_to_B", "utils_8cppm.html#a8da911fac7b18fb18595e961a3e37725", null ],
     [ "const_pow", "utils_8cppm.html#a78c404083e319e5d50a4293e918cb8ab", null ],
     [ "count_equal", "utils_8cppm.html#a770361d202fe810d1b063557d36041e3", null ],
     [ "N_FILES_LIMIT", "utils_8cppm.html#a4f6782c41a389cd9988f6c570fc6dc0c", null ],

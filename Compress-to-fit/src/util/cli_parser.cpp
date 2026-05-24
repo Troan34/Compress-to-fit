@@ -32,7 +32,10 @@ Token::Token(const std::string& option)
 std::expected<Token, ErrorType> lex(const std::string& option)
 {
 	auto token_string = option.substr(0, option.find(' '));
-	auto token_value = option.substr(option.find_first_not_of(' ', option.find(' ')), std::string::npos);
+
+	std::string token_value{};
+	if (auto value_pos = option.find_first_not_of(' ', option.find(' ')); value_pos != std::string::npos)//handles flags
+		token_value = option.substr(value_pos, std::string::npos);
 
 
 	TokenType token_type;
@@ -62,12 +65,12 @@ std::expected<Token, ErrorType> lex(const std::string& option)
 	else
 		throw_error(ErrorType::SYNTAX_ERROR, token_string);
 
-	//handle flags
+	//handle flags (only token_string
 	switch (token_type)
 	{
 	case TokenType::DELETE_INPUT:
 	case TokenType::FORCE_COMPRESSION:
-	case TokenType::CONCATENATE:
+	case TokenType::CONCATENATE:// the if - else if stuff above handles help flags
 		return Token{ token_type, true };
 		break;
 	default:
