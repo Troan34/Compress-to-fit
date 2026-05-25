@@ -52,27 +52,40 @@ namespace parser
 		"-concat:n",
 	};
 	
+
 	constexpr std::string_view help_str =
 		"\033[1m\033[36mWelcome to Compress To Fit!\033[0m\n"
 		"A cli compressor program.\n"
 		"Usage: ctf [options]\n"
 		"options:\n"
-		"\t-i <path>  Take <path> as input path. If <path> contains spaces, make sure to double quote(\"\") around <path>.\n"
-		"\t-o <path>  Take <path> as output path. If <path> contains spaces, make sure to double quote(\"\") around <path>.\n"
-		"\t-c <comp_options>  Use a specific compressor from a list of compressor options (look for [comp_options] in this page).\n"
-		"\t-fc  Force compression of compressed files.\n"
-		"\t-di  Delete input file on compression/extraction\n"
-		"\t-preset <n>  Compression preset n is from 0 to 9 (included).\n"
-		"\t-n_files <n>  In how many files should the output be split in (max 1000).\n"
-		"\t-concat  Concatenate the compressed files in the folder specified by '-i'. Will prompt whether you want to decompress the concatenated file.\n"
-		"\t-concat:y  Concatenate the compressed files in the folder specified by '-i'. WILL decompress the concatenated file.\n"
-		"\t-concat:n  Concatenate the compressed files in the folder specified by '-i'. WILL NOT decompress the concatenated file.\n"
-		"\t-size_files <bytes>  Split the output file in files of <bytes> size (min 512).\n"
+		"  \033[2m-i <path>\033[0m  Take <path> as input path. If <path> contains spaces, make sure to double quote(\"\") around <path>.\n"
+		"  \033[2m-o <path>\033[0m  Take <path> as output path. If <path> contains spaces, make sure to double quote(\"\") around <path>.\n"
+		"  \033[2m-c <comp_options>\033[0m  Use a specific compressor from a list of compressor options (look for [comp_options] in this page).\n"
+		"  \033[2m-fc\033[0m  Force compression of compressed files.\n"
+		"  \033[2m-di\033[0m  Delete input file on compression/extraction\n"
+		"  \033[2m-preset <n>\033[0m  Compression preset n is from 0 to 9 (included).\n"
+		"  \033[2m-n_files <n>\033[0m  In how many files should the output be split in (max 1000).\n"
+		"  \033[2m-concat\033[0m  Concatenate the compressed files in the folder specified by '-i'. Will prompt whether you want to decompress the concatenated file.\n"
+		"  \033[2m-concat:y\033[0m  Concatenate the compressed files in the folder specified by '-i'. WILL decompress the concatenated file.\n"
+		"  \033[2m-concat:n\033[0m  Concatenate the compressed files in the folder specified by '-i'. WILL NOT decompress the concatenated file.\n"
+		"  \033[2m-size_files <bytes>\033[0m  Split the output file in files of <bytes> size (min 512).\n"
 		"\n\n"
-		"[comp_options]:"
-		"\"LZ77\": A dictionary based algorithm, good for repetitive patterns of data. Slow compression and fast decompression.";
+		"[comp_options]:\n"
+		"\033[35m\"LZ77\"\033[0m: A dictionary based algorithm, good for repetitive patterns of data. Slow compression and fast decompression.\n"
+		"\nAdditional details:\n"
+		" - If an option is encountered multiple times, the last occurence shall be considered by the program.";
 	
-	export const fs::path default_out_path{ "output.tzf" };
+	export class HelpException : public std::exception
+	{
+	public:
+		const char* what() const noexcept override
+		{
+			return help_str.data();
+		}
+	};
+
+	export const fs::path DEFAULT_OUT_PATH{ "output.tzf" };
+
 
 
 	
@@ -111,7 +124,7 @@ namespace parser
 	export struct Options
 	{
 		fs::path filename_in{};
-		fs::path filename_out{ default_out_path };
+		fs::path filename_out{ DEFAULT_OUT_PATH };
 		size_t compressor = static_cast<size_t>(CompType::LZ77);
 		size_t preset = COMP_5;
 		size_t n_files = 1;
@@ -119,6 +132,7 @@ namespace parser
 		bool force_compression = false;
 		bool delete_input = false;
 		bool concatenate_files = false;
+		bool need_help = false;
 		std::optional<bool> decomp_after_concat{};
 	};
 	

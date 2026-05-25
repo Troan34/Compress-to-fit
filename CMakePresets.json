@@ -43,7 +43,7 @@
       },
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
-        "CMAKE_CXX_FLAGS": "/W4 /Od"
+        "CMAKE_CXX_FLAGS": "/W4 /Od /Zi /ZI"
       },
       "environment": {
         "CFLAGS": "/fsanitize=address",

@@ -46,16 +46,8 @@ std::expected<Token, ErrorType> lex(const std::string& option)
 	else if (token_string == token_strings[static_cast<size_t>(TokenType::FILENAME_OUT)]) token_type = TokenType::FILENAME_OUT;
 	else if (token_string == token_strings[static_cast<size_t>(TokenType::N_FILES)]) token_type = TokenType::N_FILES;
 	else if (token_string == token_strings[static_cast<size_t>(TokenType::SIZE_FILES)]) token_type = TokenType::SIZE_FILES;
-	else if (token_string == token_strings[static_cast<size_t>(TokenType::LONG_HELP)])
-	{
-		std::print(help_str);
-		std::terminate();
-	}
-	else if (token_string == token_strings[static_cast<size_t>(TokenType::HELP)])
-	{
-		std::print(help_str);
-		std::terminate();
-	}
+	else if (token_string == token_strings[static_cast<size_t>(TokenType::LONG_HELP)]) token_type = TokenType::LONG_HELP;
+	else if (token_string == token_strings[static_cast<size_t>(TokenType::HELP)]) token_type = TokenType::HELP;
 	else if (token_string == token_strings[static_cast<size_t>(TokenType::FORCE_COMPRESSION)]) token_type = TokenType::FORCE_COMPRESSION;
 	else if (token_string == token_strings[static_cast<size_t>(TokenType::DELETE_INPUT)]) token_type = TokenType::DELETE_INPUT;
 	else if (token_string == token_strings[static_cast<size_t>(TokenType::COMPRESSOR_TYPE)]) token_type = TokenType::COMPRESSOR_TYPE;
@@ -65,12 +57,14 @@ std::expected<Token, ErrorType> lex(const std::string& option)
 	else
 		throw_error(ErrorType::SYNTAX_ERROR, token_string);
 
-	//handle flags (only token_string
+	//handle flags
 	switch (token_type)
 	{
 	case TokenType::DELETE_INPUT:
 	case TokenType::FORCE_COMPRESSION:
-	case TokenType::CONCATENATE:// the if - else if stuff above handles help flags
+	case TokenType::CONCATENATE:
+	case TokenType::HELP:
+	case TokenType::LONG_HELP:
 		return Token{ token_type, true };
 		break;
 	default:
@@ -191,7 +185,7 @@ Options parse(int argc, char* argv[])
 		option += ' ';
 		if (index + 1 < argc)//stay in bounds
 			option += argv[++index];
-		
+
 		//If the path has spaces, this makes sure that we take the whole path (we check for ")
 		//else we throw
 		if (std::count(option.begin(), option.end(), '\"') == 1)
@@ -238,24 +232,35 @@ Options parse(int argc, char* argv[])
 				options.size_files = std::get<size_t>(token.value().get_value());
 				break;
 			//DO index-- FOR FLAGS, it stops us from skipping arguments
+			case TokenType::HELP:
+			case TokenType::LONG_HELP:
+				options.need_help = std::get<bool>(token.value().get_value());
+				if (index + 1 < argc)
+					index--;
+				break;
 			case TokenType::FORCE_COMPRESSION:
 				options.force_compression = std::get<bool>(token.value().get_value());
-				index--;
+				if (index + 1 < argc)
+					index--;
 				break;
 			case TokenType::DELETE_INPUT:
 				options.delete_input = std::get<bool>(token.value().get_value());
-				index--;
+				if (index + 1 < argc)
+					index--;
 				break;
 			case TokenType::CONCATENATE:
 				options.concatenate_files = std::get<bool>(token.value().get_value());
-				index--;
+				if (index + 1 < argc)
+					index--;
 				break;
 			case TokenType::DO_DECOMP_AFTER_CONCAT:
 				options.decomp_after_concat = std::get<bool>(token.value().get_value());
-				index--;
+				if (index + 1 < argc)
+					index--;
 				break;
 			case TokenType::DO_NOT_DECOMP_AFTER_CONCAT:
-				index--;
+				if (index + 1 < argc)
+					index--;
 				break;
 			default:
 				std::terminate();
@@ -269,23 +274,30 @@ Options parse(int argc, char* argv[])
 		}
 	}
 
+	if (options.need_help)
+		std::println(help_str);
+
 	if (fs::is_directory(options.filename_in) and !options.concatenate_files)//tried codecompressing a dir
 		throw_error(ErrorType::DIR_COMPRESSION, options.filename_in.string());
 	else if (options.filename_in.has_filename() and options.concatenate_files)//tried concatenating a file
 		throw_error(ErrorType::PATH_INVALID, options.filename_in.string());
 
-	if (options.filename_out.empty() or options.filename_out.string().find_first_not_of(' ') == std::string::npos)//if filename_out is empty
+	//swap ifs
+	if (options.filename_in.empty() or options.filename_in.string().find_first_not_of(' ') == std::string::npos)//if filename_in is empty
 	{
-		if (options.filename_in.empty() or options.filename_in.string().find_first_not_of(' ') == std::string::npos)//if filename_in is empty
+		if (options.concatenate_files)
+			options.filename_in = fs::current_path();
+		else if (!options.need_help)
+			throw_error(ErrorType::MISSING_ARGUMENT, token_strings[static_cast<int>(TokenType::FILENAME_IN)].data());
+		else
 		{
-			if (options.concatenate_files)
-				options.filename_in = fs::current_path();
-			else
-				throw_error(ErrorType::MISSING_ARGUMENT, token_strings[static_cast<int>(TokenType::FILENAME_IN)].data());
+			std::terminate();//if you need help but no arguments
 		}
-		else if (!options.concatenate_files)
-			options.filename_out = options.filename_in.stem() += FILE_EXTENSION;
 	}
+
+	if (options.filename_out == DEFAULT_OUT_PATH)
+		options.filename_out.replace_extension(FILE_EXTENSION);
+
 	return options;
 }
 

@@ -12,7 +12,7 @@ namespace fs = std::filesystem;
 
 
 constexpr std::string_view SIGNATURE = "CTF-1";
-	                                //SIGNATURE     +   IDENTIFIER    	
+									//SIGNATURE     +   IDENTIFIER    	
 export constexpr size_t FILE_HEADER_SIZE = SIGNATURE.size() + sizeof(uint8_t) + sizeof(uint8_t) + sizeof(size_t);
 enum class HEADER_OFFSET
 {
@@ -31,7 +31,7 @@ enum class HEADER_OFFSET
 /// |____________|_____________________________|__________________|_______________|__________________|
 ///				 ↑							   ↑				  ↑               ↑				     ↑
 ///	HEADER_OFFSET::ID		HEADER_OFFSET::COUNT   /*...*/::COMP_TYPE  HEADER_OFFSET::COMP_PRESET  HEADER_OFFSET::MAX
-         
+		 
 //avoid padding in files
 #pragma pack(push, 1)
 struct Header
@@ -56,13 +56,12 @@ export struct FileOptions
 	}
 };
 
-void try_throw_IO_error(std::ios_base::iostate state, fs::path const& path) noexcept(false)
+void try_throw_IO_error(std::ios_base::iostate const state, fs::path const& path) noexcept(false)
 {
-	if ((state & ~(std::ios_base::goodbit | std::ios_base::eofbit)) == 0)//we do not care about these
-		return;
-	else if (state == std::ios_base::failbit)
+	if (((state & std::ios_base::failbit) != 0) and (state & std::ios_base::eofbit) == 0)
 		throw_error(ErrorType::FILE_CORRUPTED, path.string());
-	else//we fucked fucked
+
+	if ((state & std::ios_base::badbit) != 0)//we fucked fucked
 		throw_error(ErrorType::DRIVE_ERROR, path.string());
 }
 
