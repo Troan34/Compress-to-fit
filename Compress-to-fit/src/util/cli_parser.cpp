@@ -1,21 +1,24 @@
 module parser;
 
 import util;
-import std;
+import std.compat;
+
+#if defined(__INTELLISENSE__)
+#include "../../for_intellisense/everything.hpp"
+#endif
 
 namespace fs = std::filesystem;
 
 namespace parser
 {
-Token::Token(TokenType type_, ValueType value_)
-	:type(type_), value(value_)
+Token::Token(TokenType const type_, ValueType const &value_)
+	:value(value_), type(type_)
 {
 }
 
 Token::Token(const std::string& option)
 {
-	auto res = lex(option);
-	if (res)
+	if (auto res = lex(option))
 	{
 		type = res.value().type;
 		value = res.value().value;

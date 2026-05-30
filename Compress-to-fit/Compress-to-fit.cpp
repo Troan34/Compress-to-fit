@@ -1,4 +1,5 @@
 ﻿#include <mio/mmap.hpp>
+import util;
 #ifdef _WIN32
 #include <windows.h>
 #endif
@@ -50,7 +51,6 @@ int main(int argc, char* argv[])
 			File::split_file(options.filename_out, options.n_files);
 		else if (options.size_files != 0)
 			File::split_file(options.filename_out, fs::file_size(options.filename_out) / options.size_files);
-
 	}
 	else
 	{

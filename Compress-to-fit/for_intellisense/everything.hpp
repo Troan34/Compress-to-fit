@@ -1,14 +1,6 @@
-// Copyright (c) Microsoft Corporation.
-// SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+#pragma once
+//This file is for IntelliSense, it will be included in every file in a #if defined(__INTELLISENSE__)
 
-// In a module-file, the optional `module;` must appear first; see [cpp.pre].
-module;
-
-// This named module expects to be built with classic headers, not header units.
-#define _BUILD_STD_MODULE
-
-// The subset of "C headers" [tab:c.headers] corresponding to
-// the "C++ headers for C library facilities" [tab:headers.cpp.c]
 #include <assert.h>
 #include <ctype.h>
 #include <errno.h>
@@ -34,7 +26,6 @@ module;
 // <intrin.h> defines some types outside of `extern "C"` or `extern "C++"`.
 #include <intrin.h>
 
-export module std;
 
 #pragma warning(push)
 #pragma warning(disable : 5244) // '#include <meow>' in the purview of module 'std' appears erroneous.
@@ -157,3 +148,9 @@ export module std;
 #include <cwctype>
 
 #pragma warning(pop)
+
+#include "../src/models/LZ77/lz77.cppm"
+#include "../src/util/utils.cppm"
+#include "../src/util/macros.hpp"
+#include "../src/util/file_management.cppm"
+#include "../src/util/cli_parser.cppm"

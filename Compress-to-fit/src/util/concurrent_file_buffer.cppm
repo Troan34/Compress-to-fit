@@ -1,9 +1,13 @@
 export module util:concurrent_file_buffer;
 
 import std.compat;
+#if defined(__INTELLISENSE__)
+#include "../../for_intellisense/everything.hpp"
+#endif
 
 /**
- * @brief Circular array where if size > capacity, the oldest elements are written to stream until 
+ * @brief Ring queue-like where if size > capacity, the oldest elements are written to stream.
+ *		  At least the most recent #minimum_size_ number of elements shall be available for reading.
  * @tparam T type stored, must be trivially copyable
  */
 export template <typename T>
@@ -13,19 +17,15 @@ class ConcurrentFileBuffer
 public:
 
 	ConcurrentFileBuffer(std::ofstream out_stream, size_t minimum_size)
-		:out_stream_(out_stream), minimum_size_(minimum_size)
+		:out_stream_(std::move(out_stream)), minimum_size_(minimum_size)
 	{
-		reserve(minimum_size_ + (1.5f * minimum_size_));
+		reserve(1.5f * minimum_size_);
 	}
 
 	~ConcurrentFileBuffer()
 	{
 		auto elements_to_write_n = index_ - written_index_;
-
-		if constexpr (std::is_trivially_copyable_v<T>)
-		{
-			out_stream_.write(reinterpret_cast<char const*>(&data_[written_index_]), elements_to_write_n * sizeof(T));
-		}
+		out_stream_.write(reinterpret_cast<char const*>(&data_[written_index_]), elements_to_write_n * sizeof(T));
 		allocator.deallocate(data_, capacity_);
 	}
 
@@ -34,7 +34,7 @@ public:
 	 * @param value
 	 * @pre #index_ > #minimum_size_
 	 */
-	constexpr void push_back(T const& value)
+	constexpr void push(T const& value)
 	{
 		lock.lock();
 
@@ -43,13 +43,10 @@ public:
 		{
 			auto elements_to_write_n = index_ - minimum_size_ - written_index_;
 
-			if constexpr (std::is_trivially_copyable_v<T>)
-			{
-				//TODO: this blocks a thread, but if there are 12 threads AND they aren't writing frequently, it shouldn't be THAT bad. Benchmark this.
-				//We could try coroutines here
-				//Maybe we can lock the stream, or stuff like that
-				out_stream_.write(reinterpret_cast<char const*>(&data_[written_index_]), elements_to_write_n * sizeof(T));
-			}
+			//TODO: this blocks a thread, but if there are 12 threads AND they aren't writing frequently, it shouldn't be THAT bad. Benchmark this.
+			//We could try coroutines here
+			//Maybe we can copy all of this somewhere else and thread will work on it, or stuff like that
+			out_stream_.write(reinterpret_cast<char const*>(&data_[written_index_]), elements_to_write_n * sizeof(T));
 
 			written_index_ = index_ - minimum_size_;
 		}
@@ -65,7 +62,7 @@ public:
 	 * @param value
 	 * @pre #index_ > #minimum_size_
 	 */
-	constexpr void push_back(T&& value)
+	constexpr void push(T&& value)
 	{
 		lock.lock();
 
@@ -91,8 +88,8 @@ public:
 	}
 
 	/**
-	 * @brief
-	 * @param value
+	 * @brief Appends a range to the container
+	 * @param rg range to append
 	 * @pre #index_ > #minimum_size_
 	 */
 	template <std::ranges::range R>
@@ -119,7 +116,7 @@ public:
 
 		//might be worthwhile to optimize this
 		std::for_each(rg.begin(), rg.end(), 
-					  [](T const& value)
+					  [&](T const& value)
 					  {
 						  data_[index_] = value;
 						  index_++;
@@ -134,15 +131,15 @@ public:
 
 		//allocate size for new data
 		T* new_data_ = allocator.allocate(new_capacity);
-		auto size = index_ - written_index_;
-		std::unique_lock<std::mutex> lock(mut);
+		auto const size = index_ - written_index_;
+		std::unique_lock<std::shared_mutex> lock(mut);
 		
 		if constexpr (std::is_trivially_copyable_v<T>)//if trivially copyable use std::memcpy
 		{
 			std::memcpy(new_data_, data_, size * sizeof(T));
 		}
 
-		/* To be used if we ever want to use non trivial types
+		/* To be used if we ever want to use non-trivial types
 		else//if not, call T's ctor
 		{
 			for (size_t i{}; i < size_; i++)
@@ -158,7 +155,6 @@ public:
 		lock.unlock();
 
 		allocator.deallocate(data_, old_cap);
-		
 	}
 
 	constexpr T operator[](size_t index) const
@@ -170,7 +166,7 @@ public:
 		if ((index % capacity_) > (index_ % capacity_) or (index_ % capacity_) < ((index_ % capacity_) - size))
 			throw std::out_of_range("Accessed an element outside of buffer.");
 #endif
-		std::shared_lock<std::mutex> lock(mut);
+		std::shared_lock<std::shared_mutex> lock(mut);
 		return data_[index];
 	}
 
@@ -183,12 +179,12 @@ private:
 	std::ofstream out_stream_;
 	T* data_;
 	std::allocator<T> allocator;
-	std::mutex mut;
-	std::unique_lock<std::mutex> lock{ mut, std::defer_lock  }; //only one thread at a time may write to data_, so we keep this class-wide
+	mutable std::shared_mutex mut;
+	std::unique_lock<std::shared_mutex> lock{ mut, std::defer_lock  }; //only one thread at a time may write to data_, so we keep this class-wide
 	size_t index_ = 0;
 	size_t written_index_ = 0; //oldest index that has not yet been written to file
 	size_t capacity_ = 0;
 	size_t minimum_size_ = 0;
 
-	inline constexpr size_t true_index() noexcept { return index_ % capacity_; }
+	inline constexpr size_t true_index() const noexcept { return index_ % capacity_; }
 };

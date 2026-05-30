@@ -2,6 +2,10 @@ module;
 #include <print>
 export module parser;
 
+#if defined(__INTELLISENSE__)
+#include "../../for_intellisense/everything.hpp"
+#endif
+
 import util;
 import std;
 namespace fs = std::filesystem;
@@ -96,7 +100,7 @@ namespace parser
 	{
 	public:
 	
-		Token(TokenType type_, ValueType value_);
+		Token(TokenType type_, ValueType const &value_);
 		Token(const std::string& option);
 
 		inline ValueType get_value() const noexcept

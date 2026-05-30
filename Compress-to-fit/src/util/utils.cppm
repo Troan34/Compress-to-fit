@@ -1,5 +1,9 @@
 export module util;
 
+#if defined(__INTELLISENSE__)
+#include "../../for_intellisense/everything.hpp"
+#endif
+
 import std.compat;
 namespace fs = std::filesystem;
 

@@ -4,6 +4,10 @@ module;
 
 export module lz77;
 
+#if defined(__INTELLISENSE__)
+#include "../../../for_intellisense/everything.hpp"
+#endif
+
 export import util;
 import std.compat;
 import parser;
@@ -114,7 +118,7 @@ public:
 	 * @brief Slide the window
 	 * @param displacement The offset(or sizes) will moved by this amount
 	 */
-	void slide(size_t displacement)
+	void slide(size_t const displacement)
 	{
 		if (size_search < max_size_search)//size_search should grow
 		{
@@ -132,18 +136,18 @@ public:
 
 		if (offset + max_size > data.size())//we have to cut off size_look_ahead
 		{
-			size_look_ahead = std::clamp(size_look_ahead - (offset + max_size - data.size()), 0ull, max_size_look_ahead);
+			size_look_ahead = std::clamp(size_look_ahead - (offset + max_size - data.size()), 0ul, max_size_look_ahead);
 		}
 
-		offset = std::clamp(offset, 0ull, data.size() - max_size_search);
+		offset = std::clamp(offset, 0ul, data.size() - max_size_search);
 	}
 
-	[[nodiscard]] auto look_ahead_buffer() noexcept -> std::span<Sym const>
+	[[nodiscard]] auto look_ahead_buffer() const noexcept -> std::span<Sym const>
 	{
 		return data.subspan(offset + size_search, size_look_ahead);
 	}
 
-	[[nodiscard]] auto search_buffer() noexcept -> std::span<Sym const>
+	[[nodiscard]] auto search_buffer() const noexcept -> std::span<Sym const>
 	{
 		return data.subspan(offset, size_search);
 	}

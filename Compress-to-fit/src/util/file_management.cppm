@@ -4,6 +4,10 @@ module;
 
 export module file_util;
 
+#if defined(__INTELLISENSE__)
+#include "../../for_intellisense/everything.hpp"
+#endif
+
 export import util;
 import parser;
 import std.compat;
@@ -242,7 +246,7 @@ public:
 	* @param in_path Location of file.
 	* @param received_data The vector that will be filled.
 	*/
-	void read_file(const fs::path& in_path, std::vector<Sym>& received_data)
+	static void read_file(const fs::path& in_path, std::vector<Sym>& received_data)
 	{
 		if (!fs::exists(in_path))
 		{
@@ -254,7 +258,7 @@ public:
 		if (!in_file.is_open())
 			throw_error(ErrorType::PATH_NOT_ACCESSIBLE, in_path.string());
 
-		auto size_file = in_file.tellg() / sizeof(Sym);
+		auto const size_file = in_file.tellg() / sizeof(Sym);
 
 		received_data.resize(size_file);
 
@@ -562,7 +566,6 @@ private:
 		{
 			std::ifstream input{ path_ };
 			input.seekg(0, std::ios::end);
-			auto size = static_cast<size_t>(input.tellg()) - sizeof(Header);//I have no fucking idea why std::streampos has no implicit cast to size_t
 			input.seekg(static_cast<int>(HEADER_OFFSET::MAX));
 			
 			while (!input.eof())//fill input with file at path_
