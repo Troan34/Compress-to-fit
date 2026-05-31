@@ -22,6 +22,7 @@ set(CMAKE_CXX_SCAN_FOR_MODULES ON)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/$<CONFIG>)
 
+set(CMAKE_MAP_IMPORTED_CONFIG_RELWITHDEBINFO RelWithDebInfo)
 include(CTest)
 include(FetchContent)
 enable_testing()

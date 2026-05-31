@@ -54,7 +54,7 @@ export struct FileOptions
 	std::optional<Header> header;
 	bool delete_on_dtor = false;
 
-	bool already_compressed() const noexcept
+	[[nodiscard]] bool already_compressed() const noexcept
 	{
 		return fs::exists(path) and header.has_value();
 	}
@@ -231,7 +231,7 @@ public:
 				break;
 			}
 		}
-		catch (std::runtime_error const& err)
+		catch (std::runtime_error const&)
 		{
 			fs::remove_all(out_path);
 			std::terminate();//terminate as to not call fs::remove(path), also, if these errors do happen it is a good idea to drop everything
@@ -285,7 +285,7 @@ public:
 		file.read(buffer.data(), buffer.size());
 		file.seekg(save_pos);
 
-		if (!(buffer == SIGNATURE.data()))//not recognized
+		if (buffer != SIGNATURE.data())//not recognized
 		{
 			return false;
 		}
@@ -308,7 +308,7 @@ public:
 		file.read(buffer.data(), buffer.size());
 		file.seekg(save_pos);
 
-		if (!(buffer == SIGNATURE.data()))//not recognized
+		if (buffer != SIGNATURE.data())//not recognized
 		{
 			return false;
 		}
@@ -398,7 +398,7 @@ private:
 		file.seekg(0);
 		std::string buffer(SIGNATURE.size(), ' ');
 		file.read(buffer.data(), buffer.size());
-		if (!(buffer == SIGNATURE.data()))//not recognized
+		if (buffer != SIGNATURE.data())//not recognized
 		{
 			throw_error(ErrorType::FILE_INVALID, file_options.path.string());
 		}
@@ -417,7 +417,7 @@ private:
 		file.seekg(0);
 		std::string buffer(SIGNATURE.size(), ' ');
 		file.read(buffer.data(), buffer.size());
-		if (!(buffer == SIGNATURE.data()))//not recognized
+		if (buffer != SIGNATURE.data())//not recognized
 		{
 			return false;
 		}
