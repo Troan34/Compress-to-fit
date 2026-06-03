@@ -1,4 +1,5 @@
-add_library(project_logic)
+add_library(project_logic
+        src/data_streamer.cppm)
 
 
 set_target_properties(project_logic PROPERTIES

@@ -41,7 +41,7 @@ public:
 
 		if (index_ + 1 - written_index_ > capacity_)//if we need to write elements to disk
 		{
-			auto elements_to_write_n = index_ - minimum_size_ - written_index_;
+			auto const elements_to_write_n = index_ - minimum_size_ - written_index_;
 
 			//TODO: this blocks a thread, but if there are 12 threads AND they aren't writing frequently, it shouldn't be THAT bad. Benchmark this.
 			//We could try coroutines here
@@ -68,7 +68,7 @@ public:
 
 		if (index_ + 1 - written_index_ > capacity_)//if we need to write elements to disk
 		{
-			auto elements_to_write_n = index_ - minimum_size_ - written_index_;
+			auto const elements_to_write_n = index_ - minimum_size_ - written_index_;
 
 			if constexpr (std::is_trivially_copyable_v<T>)
 			{
@@ -101,7 +101,7 @@ public:
 
 		if (index_ + size - written_index_ > capacity_)//if we need to write elements to disk
 		{
-			auto elements_to_write_n = index_ - minimum_size_ - written_index_;
+			auto const elements_to_write_n = index_ - minimum_size_ - written_index_;
 
 			if constexpr (std::is_trivially_copyable_v<T>)
 			{

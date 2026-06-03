@@ -112,7 +112,7 @@ public:
 
 		size_t offset = 0;
 		bool compressing = true;
-		if constexpr (std::is_same<Out, Sym>::value)
+		if constexpr (std::is_same_v<Out, Sym>)
 		{
 			offset = FILE_HEADER_SIZE;
 			compressing = false;
@@ -126,7 +126,7 @@ public:
 		auto IO_map = mio::make_mmap_source(cli_options.filename_in.string(), offset, mio::map_entire_file, error);
 
 		//if header is empty and we are decompressing, throw
-		if (!file_options.header.has_value() and std::is_same<Out, Sym>::value)
+		if (!file_options.header.has_value() and std::is_same_v<Out, Sym>)
 		{
 			fs::remove(cli_options.filename_out);
 			throw_error(ErrorType::INVALID_DECOMPRESSION, file_options.path.string());
@@ -149,26 +149,16 @@ public:
 		out_file.write(reinterpret_cast<char const*>(output_buffer.data()), output_buffer.size() * sizeof(Out));
 	}
 
-	/*
-	Given a path, the file will be created there.
-	If the file already exists and the file signature is correct (if not: throw), append new data to the end of the file.
-	*/
+	/**
+	 * @brief Write to the output file.
+	 */
 	template<typename T>
-	void write_file(std::span<T> buffer, const fs::path& out_path)
+	void write_file(std::span<T> buffer) noexcept(false)
 	{
-		std::ofstream file(out_path, std::ios::trunc | std::ios::binary);
-
-		if (file.tellp() > 0)//not empty
-			check_signature();
-		else
-			file.write(SIGNATURE.data(), SIGNATURE.size());
-
-
-		file.write(reinterpret_cast<const char*>(buffer.data()), buffer.size());
+		out_file.write(reinterpret_cast<const char*>(buffer.data()), buffer.size() * sizeof(T));
+		try_throw_IO_error(out_file.rdstate(), cli_options.filename_out);
 	}
 
-	
-	
 	/**
 	 * @brief Split an encoded file into a certain number of encoded (with header) files 
 	 * @param path 
@@ -267,8 +257,6 @@ public:
 		in_file.read(reinterpret_cast<char*>(received_data.data()), size_file * sizeof(Sym));
 	}
 
-	
-	
 	/**
 	 * @brief Check if file has the #SIGNATURE in the header. Non-throwing version of #check_signature.
 	 * @return True if file has signature, false if not.
@@ -382,6 +370,7 @@ public:
 		return file;
 	}
 
+	[[nodiscard]] FileOptions get_file_options() const noexcept {return file_options;}
 
 private:
 	FileOptions file_options;
@@ -430,8 +419,9 @@ private:
 	 * @param path Where the file is created
 	 * @return A stream to the file.
 	 */
-	[[maybe_unused]] std::ofstream create_file(fs::path path) const
+	[[maybe_unused]] std::ofstream create_file(fs::path const& path) const
 	{
+
 		fs::remove(path);
 		std::ofstream file{ path, std::ios::binary | std::ios::trunc };
 
@@ -463,9 +453,9 @@ private:
 		file.seekp(static_cast<size_t>(HEADER_OFFSET::SIGNATURE));
 		file.write(SIGNATURE.data(), SIGNATURE.size());
 		file.seekp(static_cast<size_t>(HEADER_OFFSET::ID));
-		size_t id_temp = 0;
+		constexpr size_t id_temp = 0;
 		file.write(reinterpret_cast<char const*>(&id_temp), sizeof(size_t));
-		uint8_t temp = static_cast<uint8_t>(options.comp_type);
+		auto temp = static_cast<uint8_t>(options.comp_type);
 		file.write(reinterpret_cast<char const*>(&temp), sizeof(decltype(temp)));
 		temp = static_cast<uint8_t>(options.preset);
 		file.write(reinterpret_cast<char const*>(&temp), sizeof(decltype(temp)));
@@ -498,7 +488,7 @@ private:
 				continue;
 
 			//do this at first, if it is not the first time it's because the user refused both possible ids. Check the following code.
-			if (id_not_set_yet and std::find(ignored_ids.begin(), ignored_ids.end(), info.value().identifier) == ignored_ids.end())
+			if (id_not_set_yet and std::ranges::find(ignored_ids, info.value().identifier) == ignored_ids.end())
 			{
 				id = info.value().identifier;
 				id_not_set_yet = false;
