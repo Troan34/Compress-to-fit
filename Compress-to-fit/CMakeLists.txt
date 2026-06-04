@@ -1,5 +1,6 @@
 add_library(project_logic
-        src/data_streamer.cppm)
+        src/data_streamer.cppm
+        src/models/utils.cppm)
 
 
 set_target_properties(project_logic PROPERTIES

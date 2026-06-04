@@ -11,18 +11,23 @@ export module lz77;
 export import util;
 import std.compat;
 import parser;
+import codec_util;
 
 namespace fs = std::filesystem;
 
-
+#pragma pack(push, 1)
 /**
 * @brief This is the type LZ77 will output
 */
 struct Token
 {
-	uint16_t offset;
-	uint8_t length;
-	Sym symbol;
+	uint16_t offset{};
+	uint8_t length{};
+	Sym symbol{};
+
+	constexpr static size_t size() {return sizeof(decltype(offset)) + sizeof(decltype(length)) + sizeof(decltype(symbol));}
+	using SerializedBuffer = std::array<std::byte, Token::size()>;
+
 
 	friend std::ostream& operator<<(std::ostream& os, const Token& token)
 	{
@@ -30,7 +35,16 @@ struct Token
 
 		return os;
 	}
+
+	void serialize(SerializedBuffer& buffer) noexcept
+	{
+		std::memcpy(buffer.data(), &offset, sizeof(decltype(offset)));
+		std::memcpy(buffer.data() + sizeof(decltype(offset)), &length, sizeof(decltype(length)));
+		std::memcpy(buffer.data() + sizeof(decltype(offset)) + sizeof(decltype(length)), &symbol, sizeof(Sym));
+	}
+
 };
+#pragma pack(pop)
 
 export using LZ77_Token = Token;
 
@@ -188,7 +202,7 @@ public:
 		return data[index];
 	}
 
-	[[nodiscard]] const auto get_data() const noexcept //peak function signature
+	[[nodiscard]] auto get_data() const noexcept //peak function signature
 	{
 		return data;
 	}
@@ -230,8 +244,7 @@ namespace alg
 		 */
 		Rabin(const Window& data, uint32_t pos, CompPreset preset)
 			:data(data), position(pos), MAX_CHAIN(get_max_chain_from_preset(preset))
-		{ 
-
+		{
 			//compiler will probably use a memset-like optimization
 			for (int i = 0; i < MAX_HASH_SIZE; i++)
 				poss_table[i] = -1;
@@ -346,113 +359,51 @@ namespace alg
 
 }//namespace algs
 
-template <typename T>
-struct CompressionData {};
 
-template <>
-struct CompressionData<Sym>
+export class LZ77Compressor
 {
+	LZ77Compressor(std::span<Sym const> const data, parser::Options const& options)
+		:cli_options(options), data_(data), window(data, options.preset), pattern_matcher(window, 0, static_cast<CompPreset>(options.preset))
+	{}
+
+private:
+	const parser::Options& cli_options;
+	std::span<Sym const> data_;
 	Window window;
-	CompPreset preset;
 	alg::Rabin pattern_matcher;
-
-	CompressionData(std::span<Sym const> data_, CompPreset preset_)
-		: window(data_, preset_),
-		preset(preset_),
-		pattern_matcher(window, 0, preset)
-	{
-	}
-};
-
-template <typename T>
-concept IsSym = std::is_same_v<T, Sym>;
-
-template <typename T>
-concept IsToken = std::is_same_v<T, Token>;
-
-/**
- * @brief Implement the LZ77 algorithm.
- * @details An overview of the algorithm: 
- */
-export template <typename DataType>
-class LZ77 : protected CompressionData<DataType>
-{
-public:
-	//extracting version
-	LZ77(std::span<DataType const> data_, const parser::Options& options) requires IsToken<DataType>
-		:data(data_), cli_options(options)
-	{
-	}
-
-	LZ77(std::span<DataType const> data_, const parser::Options& options) requires IsSym<DataType>
-		: CompressionData<DataType>(data_, static_cast<CompPreset>(options.preset)),
-		cli_options(options),
-		data(data_)
-	{
-	}
-
 
 	/**
 	 * @brief Compress the data up to max_index
 	 * @param out_stream Where the output will go
 	 * @param max_index The last index to get compressed (included)
-	 * 
+	 *
 	 * @warning #out_stream will be cleared and overwritten
-	 * 
+	 *
 	 * @details This function shall be used as a compression "in steps". Its use is to stop the #out_stream from being too big.
 	 *			The function shall not strictly stop at #max_index, due to the nature of the LZ77 algorithm.
 	 */
-	void compress(CodecInterface<Sym, LZ77_Token>& interface) requires IsSym<DataType>;
+	size_t compress(std::span<const Sym> in_data, std::vector<std::byte const>& out_data, size_t max_size_chunk);
+};
+
+
+export class LZ77Decompressor
+{
+	LZ77Decompressor(std::span<LZ77_Token const> const data, const parser::Options& options)
+		: cli_options(options), data_(data)
+	{}
 
 	/**
-	 * @brief Decompress #data.
-	 * @param out_stream Where the output will go
-	 * @param max_index The last index to get decompressed (included)
-	 * 
-	 * @warning #out_stream will be cleared and overwritten
-	 * 
-	 * @details This function shall be used as a compression "in steps". Its use is to stop the #out_stream from being too big.
+	 * @brief Decompress @p in_data
+	 * @param in_data LZ77 token input, to be represented as raw bytes
+	 * @param out_data Where the output will go
+	 * @param max_size_chunk Max number of tokens decoded
+	 *
+	 *
+	 * @details This function shall be used as a compression "in steps". Its use is to stop the @p out_data from being too big.
 	 */
-	void decompress(CodecInterface<LZ77_Token, Sym>& interface) requires IsToken<DataType>;
+	size_t decompress(std::span<std::byte const> in_data, ConcurrentFileBuffer<Sym>& out_data, size_t max_size_chunk);
 
 private:
 	const parser::Options& cli_options;
-	std::span<DataType const> data;
+	std::span<LZ77_Token const> data_;
 };
-
-template <typename DataType>
-void LZ77<DataType>::compress(CodecInterface<Sym, LZ77_Token>& interface) requires IsSym<DataType>
-{
-	interface.out_data.reserve(SIZE_CHUNK);
-
-	size_t local_index = 0;
-	//loop over the stream
-	while (!interface.in_data.reached_end() and local_index < SIZE_CHUNK)
-	{
-		auto token = this->pattern_matcher.find_pattern();
-
-		auto num_of_rolls = static_cast<int>(token.length + 1);
-		this->pattern_matcher.roll_hash(num_of_rolls);//roll, updates the hash and position
-		this->window.slide(num_of_rolls);
-		interface.in_data += num_of_rolls;
-		local_index += num_of_rolls;
-
-		interface.out_data.push_back(token);
-	}
-}
-
-template<typename DataType>
-void LZ77<DataType>::decompress(CodecInterface<LZ77_Token, Sym>& interface) requires IsToken<DataType>
-{
-	interface.out_data.reserve(interface.in_data.distance_to_end());
-	while (!interface.in_data.reached_end())
-	{
-		if (interface.in_data.iterator->offset != 0)
-		{
-			for (size_t remaining_syms = interface.in_data.iterator->length; remaining_syms > 0; remaining_syms--)
-				interface.out_data.push_back(interface.out_data[interface.out_data.size() - interface.in_data.iterator->offset]);
-		}
-		interface.out_data.emplace_back(interface.in_data.iterator->symbol);
-		interface.in_data++;
-	}
-}

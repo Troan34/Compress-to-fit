@@ -1,4 +1,5 @@
 export module util;
+export import :concurrent_file_buffer;
 
 #if defined(__INTELLISENSE__)
 #include "../../for_intellisense/everything.hpp"
@@ -224,7 +225,7 @@ export constexpr std::string_view COMPRESSOR_STR_OPTIONS[] =
 	"LZ77",
 };
 
-template <typename Iter>
+export template <typename Iter>
 struct ForwardIterator
 {
 	using iterator_concept = std::forward_iterator_tag;
@@ -257,12 +258,7 @@ struct ForwardIterator
 
 };
 
-export template <typename InType, typename OutType>
-struct CodecInterface
-{
-	ForwardIterator<InType const*> in_data;
-	std::vector<OutType>& out_data;
-};
+
 
 
 //definition of the symbol type for compression
@@ -309,7 +305,7 @@ export [[nodiscard]] constexpr size_t MiB_to_B(size_t value)
 /**
 * @brief Calculate the power at compile time, to make sure of its correct usage it will be consteval
 */
-export [[nodiscard]] consteval size_t const_pow(size_t base, size_t exponent) noexcept
+export [[nodiscard]] consteval size_t const_pow(size_t const base, size_t const exponent) noexcept
 {
 	size_t result = 1;
 	for (int i = 0; i < exponent; i++)

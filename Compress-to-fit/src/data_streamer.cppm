@@ -42,14 +42,11 @@ private:
     CompType comp_type_;
     CompPreset preset_;
 
+
     void process_data()
     {
-        switch (comp_type_)
-        {
-            case CompType::LZ77:
 
-            default:
-        }
-        //Try to use something like Strategy.
     }
+
+
 };

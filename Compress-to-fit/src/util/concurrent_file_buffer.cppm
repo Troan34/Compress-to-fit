@@ -1,9 +1,10 @@
-export module util:concurrent_file_buffer;
-
-import std.compat;
+module;
 #if defined(__INTELLISENSE__)
 #include "../../for_intellisense/everything.hpp"
 #endif
+export module util:concurrent_file_buffer;
+
+import std.compat;
 
 /**
  * @brief Ring queue-like where if size > capacity, the oldest elements are written to stream.
@@ -16,7 +17,7 @@ class ConcurrentFileBuffer
 {
 public:
 
-	ConcurrentFileBuffer(std::ofstream out_stream, size_t minimum_size)
+	ConcurrentFileBuffer(std::ofstream out_stream, size_t const minimum_size)
 		:out_stream_(std::move(out_stream)), minimum_size_(minimum_size)
 	{
 		reserve(1.5f * minimum_size_);
@@ -38,18 +39,7 @@ public:
 	{
 		lock.lock();
 
-
-		if (index_ + 1 - written_index_ > capacity_)//if we need to write elements to disk
-		{
-			auto const elements_to_write_n = index_ - minimum_size_ - written_index_;
-
-			//TODO: this blocks a thread, but if there are 12 threads AND they aren't writing frequently, it shouldn't be THAT bad. Benchmark this.
-			//We could try coroutines here
-			//Maybe we can copy all of this somewhere else and thread will work on it, or stuff like that
-			out_stream_.write(reinterpret_cast<char const*>(&data_[written_index_]), elements_to_write_n * sizeof(T));
-
-			written_index_ = index_ - minimum_size_;
-		}
+		write_buffer();
 
 		data_[true_index()] = value;
 		index_++;
@@ -66,20 +56,7 @@ public:
 	{
 		lock.lock();
 
-		if (index_ + 1 - written_index_ > capacity_)//if we need to write elements to disk
-		{
-			auto const elements_to_write_n = index_ - minimum_size_ - written_index_;
-
-			if constexpr (std::is_trivially_copyable_v<T>)
-			{
-				//TODO: this blocks a thread, but if there are 12 threads AND they aren't writing frequently, it shouldn't be THAT bad. Benchmark this.
-				//We could try coroutines here
-				//Maybe we can lock the stream, or stuff like that
-				out_stream_.write(reinterpret_cast<char const*>(&data_[written_index_]), elements_to_write_n * sizeof(T));
-			}
-
-			written_index_ = index_ - minimum_size_;
-		}
+		write_buffer();
 
 		data_[true_index()] = value;
 		index_++;
@@ -125,6 +102,10 @@ public:
 		lock.unlock();
 	}
 
+	/**
+	 * @brief Increase capacity to at least #new_capacity
+	 * @param new_capacity New capacity of the buffer
+	 */
 	constexpr void reserve(size_t new_capacity) noexcept(false)
 	{
 		if (new_capacity <= capacity_) return;
@@ -157,7 +138,7 @@ public:
 		allocator.deallocate(data_, old_cap);
 	}
 
-	constexpr T operator[](size_t index) const
+	constexpr auto operator[](size_t index) const -> T
 	{
 		//if in debug mode
 #ifndef NDEBUG
@@ -174,6 +155,19 @@ public:
 	constexpr size_t capacity() const noexcept { return capacity_; }
 	constexpr size_t minimum_size() const noexcept { return minimum_size_; }
 
+	//setters
+	/**
+	 * @brief Set a new minimum size. A value less than minimum_size will be ignored
+	 *
+	 * @param new_minimum_size New minimum size, shall be at least #minimum_size big
+	 */
+	void set_minimum_size(size_t const new_minimum_size) noexcept
+	{
+		lock.lock();
+		if (new_minimum_size > minimum_size_)
+			minimum_size_ = new_minimum_size;
+		lock.unlock();
+	}
 
 private:
 	std::ofstream out_stream_;
@@ -185,6 +179,26 @@ private:
 	size_t written_index_ = 0; //oldest index that has not yet been written to file
 	size_t capacity_ = 0;
 	size_t minimum_size_ = 0;
+
+	/**
+	 * @brief Writes elements outside the minimum range
+	 * @pre lock MUST be locked with #lock
+	 */
+	auto inline write_buffer()
+	{
+		if (index_ + 1 - written_index_ > capacity_)//if we need to write elements to disk
+		{
+			auto const elements_to_write_n = index_ - minimum_size_ - written_index_;
+
+			//TODO: this blocks a thread, but if there are 12 threads AND they aren't writing frequently, it shouldn't be THAT bad. Benchmark this.
+			//We could try coroutines here
+			//Maybe we can lock the stream, or stuff like that
+			out_stream_.write(reinterpret_cast<char const*>(&data_[written_index_]), elements_to_write_n * sizeof(T));
+
+			written_index_ = index_ - minimum_size_;
+		}
+	}
+
 
 	inline constexpr size_t true_index() const noexcept { return index_ % capacity_; }
 };

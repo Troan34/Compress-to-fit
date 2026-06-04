@@ -47,7 +47,42 @@ Token alg::Rabin::find_pattern()
 		return Token{ .offset = best_offset, .length = --best_length, .symbol = data[position - 1] };
 }
 
+size_t LZ77Compressor::compress(std::span<const Sym> in_data, std::vector<std::byte const>& out_data, size_t const max_size_chunk)
+{
+	out_data.reserve(SIZE_CHUNK);
 
+	size_t consumed_tokens{};
+	//loop over the stream
+	for (auto i = in_data.begin(); i != in_data.end() and consumed_tokens < max_size_chunk; ++i)
+	{
+		auto token = this->pattern_matcher.find_pattern();
 
+		auto const num_of_rolls = static_cast<int>(token.length + 1);
+		this->pattern_matcher.roll_hash(num_of_rolls);//roll, updates the hash and position
+		this->window.slide(num_of_rolls);
+		i += num_of_rolls;
+		consumed_tokens += num_of_rolls;
 
+		Token::SerializedBuffer buffer{};
+		token.serialize(buffer);
+		out_data.append_range(buffer);
+	}
+
+	return consumed_tokens;
+}
+
+size_t LZ77Decompressor::decompress(std::span<std::byte const> in_data, ConcurrentFileBuffer<Sym>& out_data, size_t max_size_chunk)
+{
+	out_data.reserve(in_data.size());
+	while (!in_data.reached_end())
+	{
+		if (in_data.iterator->offset != 0)
+		{
+			for (size_t remaining_syms = in_data.iterator->length; remaining_syms > 0; remaining_syms--)
+				out_data.push_back(out_data[out_data.size() - in_data.iterator->offset]);
+		}
+		out_data.emplace_back(in_data.iterator->symbol);
+		++in_data;
+	}
+}
 
