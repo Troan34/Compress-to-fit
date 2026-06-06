@@ -47,6 +47,38 @@ Token alg::Rabin::find_pattern()
 		return Token{ .offset = best_offset, .length = --best_length, .symbol = data[position - 1] };
 }
 
+
+
+LZ77Block::LZ77Block(std::span<std::byte const> const data_) noexcept
+{
+	constexpr size_t len1 = sizeof(decltype(compressed_length));
+	constexpr size_t len2 = sizeof(decltype(uncompressed_length));
+
+	std::memcpy(&compressed_length, data_.data(), len1);//get compressed_length from data
+	std::memcpy(&uncompressed_length, data_.data() + len1, len2);//get uncompressed_length from data
+
+	block.reserve(data_.size());
+	block = std::vector{
+		reinterpret_cast<LZ77_Token const*>(data_.begin() + len1 + len2),
+		reinterpret_cast<LZ77_Token const*>(data_.end())
+	};
+}
+
+void LZ77Block::serialize(std::vector<std::byte> &output)
+{
+	constexpr size_t len1 = sizeof(decltype(compressed_length));
+	constexpr size_t len2 = sizeof(decltype(uncompressed_length));
+
+	output.resize(len1 + len2 + block.size_bytes());
+
+	std::memcpy(output.data(), &compressed_length, len1);
+	std::memcpy(output.data() + len1, &uncompressed_length, len2);
+
+	std::memcpy(output.data() + len1 + len2, block.data(), block.size_bytes());
+}
+
+
+
 size_t LZ77Compressor::compress(std::span<const Sym> in_data, std::vector<std::byte const>& out_data, size_t const max_size_chunk)
 {
 	out_data.reserve(SIZE_CHUNK);
@@ -71,9 +103,9 @@ size_t LZ77Compressor::compress(std::span<const Sym> in_data, std::vector<std::b
 	return consumed_tokens;
 }
 
-size_t LZ77Decompressor::decompress(std::span<std::byte const> in_data, ConcurrentFileBuffer<Sym>& out_data, size_t max_size_chunk)
+size_t LZ77Decompressor::decompress(std::span<std::byte const> in_data, std::vector<Sym>& out_data, size_t const max_size_chunk)
 {
-	out_data.reserve(in_data.size());
+	out_data.reserve(std::min(in_data.size(), max_size_chunk));
 	while (!in_data.reached_end())
 	{
 		if (in_data.iterator->offset != 0)

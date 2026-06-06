@@ -3,7 +3,8 @@ module;
 #include "../../for_intellisense/everything.hpp"
 #endif
 export module util:concurrent_file_buffer;
-
+import :core_utils;
+import :file;
 import std.compat;
 
 /**
@@ -17,7 +18,7 @@ class ConcurrentFileBuffer
 {
 public:
 
-	ConcurrentFileBuffer(std::ofstream out_stream, size_t const minimum_size)
+	ConcurrentFileBuffer(File out_stream, size_t const minimum_size)
 		:out_stream_(std::move(out_stream)), minimum_size_(minimum_size)
 	{
 		reserve(1.5f * minimum_size_);
@@ -25,7 +26,7 @@ public:
 
 	~ConcurrentFileBuffer()
 	{
-		auto elements_to_write_n = index_ - written_index_;
+		auto const elements_to_write_n = index_ - written_index_;
 		out_stream_.write(reinterpret_cast<char const*>(&data_[written_index_]), elements_to_write_n * sizeof(T));
 		allocator.deallocate(data_, capacity_);
 	}
@@ -170,7 +171,7 @@ public:
 	}
 
 private:
-	std::ofstream out_stream_;
+	File out_stream_;
 	T* data_;
 	std::allocator<T> allocator;
 	mutable std::shared_mutex mut;
@@ -184,7 +185,7 @@ private:
 	 * @brief Writes elements outside the minimum range
 	 * @pre lock MUST be locked with #lock
 	 */
-	auto inline write_buffer()
+	auto constexpr write_buffer() noexcept(false)
 	{
 		if (index_ + 1 - written_index_ > capacity_)//if we need to write elements to disk
 		{
@@ -193,12 +194,12 @@ private:
 			//TODO: this blocks a thread, but if there are 12 threads AND they aren't writing frequently, it shouldn't be THAT bad. Benchmark this.
 			//We could try coroutines here
 			//Maybe we can lock the stream, or stuff like that
-			out_stream_.write(reinterpret_cast<char const*>(&data_[written_index_]), elements_to_write_n * sizeof(T));
+			out_stream_.write(std::span{&data_[written_index_], elements_to_write_n * sizeof(T)});
 
 			written_index_ = index_ - minimum_size_;
 		}
 	}
 
 
-	inline constexpr size_t true_index() const noexcept { return index_ % capacity_; }
+	[[nodiscard]] constexpr size_t true_index() const noexcept { return index_ % capacity_; }
 };

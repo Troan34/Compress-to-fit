@@ -7,7 +7,7 @@ import util;
 
 import parser;
 import lz77;
-import file_util;
+import util;
 import std.compat;
 
 namespace fs = std::filesystem;

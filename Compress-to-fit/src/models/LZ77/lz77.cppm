@@ -1,7 +1,3 @@
-module;
-#include <source_location>
-#include <limits>
-
 export module lz77;
 
 #if defined(__INTELLISENSE__)
@@ -12,6 +8,7 @@ export import util;
 import std.compat;
 import parser;
 import codec_util;
+import file_util;
 
 namespace fs = std::filesystem;
 
@@ -227,13 +224,12 @@ namespace alg
 	inline constexpr uint32_t ROLL_FACTOR = const_pow(BASE, MIN_MATCH - 1);
 
 	/**
-	 * @brief [lz77.Karp-Rabin]
 	 * @brief This class enables fast string matching.
 	 * @brief Makes use of two chained arrays.
 	 * @brief This class is intertwined with LZ77 and should not be used as separate entity.
 	 * @brief This class shall not modify the Window given
 	 *
-	 * @file src/models/LZ77/lz77.cppm
+	 * @file lz77.cppm
 	 */
 	class Rabin
 	{
@@ -269,8 +265,8 @@ namespace alg
 		 * @warning The position will be increased. THE WINDOW WILL NOT SLIDE
 		 * @param num_of_rolls How many times it should roll, defaults to 1
 		 * 
-		 * @details find_pattern checks #poss_table for a pattern match, once, and if, found it will keep searching
-		 * down the chain of previous poss_table entries, which have been saved in #prev_poss_table by #roll_hash, an #MAX_CHAIN amount of times.
+		 * @details find_pattern checks #poss_table for a pattern match, if found it will keep searching down the chain of previous poss_table entries,
+		 *			which have been saved in #prev_poss_table by #roll_hash. This is repeated a #MAX_CHAIN amount of times.
 		 */
 		void roll_hash(uint32_t num_of_rolls = 1) noexcept;
 
@@ -357,53 +353,97 @@ namespace alg
 	};
 
 
-}//namespace algs
+}
 
 
-export class LZ77Compressor
+constexpr size_t MAX_BLOCK_SIZE = 4_MiB;
+
+class LZ77Block
 {
-	LZ77Compressor(std::span<Sym const> const data, parser::Options const& options)
-		:cli_options(options), data_(data), window(data, options.preset), pattern_matcher(window, 0, static_cast<CompPreset>(options.preset))
-	{}
+	explicit LZ77Block(std::span<std::byte const> const data_) noexcept;
+
+	/**
+	 * @brief Convert the block into a byte buffer
+	 * @param output output buffer
+	 */
+	void serialize(std::vector<std::byte>& output);
+
+	void push_back(LZ77_Token const token)
+	{
+		compressed_length += sizeof(LZ77_Token);
+		uncompressed_length += token.length + sizeof(decltype(LZ77_Token::symbol));
+		block.push_back(token);
+	}
+
+
+	[[nodiscard]] uint32_t compressed_length() const noexcept {return compressed_length;}
+	[[nodiscard]] uint32_t uncompressed_length() const noexcept {return uncompressed_length;}
+private:
+	uint32_t compressed_length{};
+	uint32_t uncompressed_length{};
+	std::vector<LZ77_Token const> block{};
+};
+
+
+
+class LZ77Compressor
+{
+	LZ77Compressor(std::span<Sym const> const data, CompPreset const preset)
+		:data_(data), window(data, preset), pattern_matcher(window, 0, preset) {}
 
 private:
-	const parser::Options& cli_options;
-	std::span<Sym const> data_;
+	std::span<Sym const> const data_;
 	Window window;
 	alg::Rabin pattern_matcher;
 
 	/**
 	 * @brief Compress the data up to max_index
-	 * @param out_stream Where the output will go
-	 * @param max_index The last index to get compressed (included)
+	 * @param in_data Input data
+	 * @param out_data Where the output will go
 	 *
-	 * @warning #out_stream will be cleared and overwritten
+	 * @warning out_data will be cleared and overwritten
 	 *
-	 * @details This function shall be used as a compression "in steps". Its use is to stop the #out_stream from being too big.
-	 *			The function shall not strictly stop at #max_index, due to the nature of the LZ77 algorithm.
 	 */
-	size_t compress(std::span<const Sym> in_data, std::vector<std::byte const>& out_data, size_t max_size_chunk);
+	size_t compress(std::span<const Sym> in_data, std::vector<std::byte const>& out_data);
 };
 
-
-export class LZ77Decompressor
+class LZ77Decompressor
 {
-	LZ77Decompressor(std::span<LZ77_Token const> const data, const parser::Options& options)
-		: cli_options(options), data_(data)
-	{}
+	LZ77Decompressor(LZ77Block const& data) : data_(data) {}
 
 	/**
 	 * @brief Decompress @p in_data
 	 * @param in_data LZ77 token input, to be represented as raw bytes
 	 * @param out_data Where the output will go
-	 * @param max_size_chunk Max number of tokens decoded
-	 *
-	 *
-	 * @details This function shall be used as a compression "in steps". Its use is to stop the @p out_data from being too big.
 	 */
-	size_t decompress(std::span<std::byte const> in_data, ConcurrentFileBuffer<Sym>& out_data, size_t max_size_chunk);
+	size_t decompress(std::span<std::byte const> in_data, std::vector<Sym>& out_data);
 
 private:
-	const parser::Options& cli_options;
-	std::span<LZ77_Token const> data_;
+	std::span<LZ77_Token const> data_{};
+};
+
+export class LZ77ConcurrentCompressor
+{
+public:
+	LZ77ConcurrentCompressor(std::span<Sym const> const data, parser::Options const& options)
+		: cli_options(options), data_(data)
+	{
+		File out_file{options.filename_out, options};
+
+		buffer = ConcurrentFileBuffer<LZ77_Token>{out_file, MAX_WINDOW_SIZE};
+	}
+
+	/**
+	 * @brief Run the compression
+	 */
+	void compress() noexcept(false)
+	{
+		//TODO: HERE DUMMY
+		//make a block struct (or class, whatever) with a header, only doing this will decompressing make sense.
+	}
+
+private:
+	parser::Options const& cli_options;
+	std::span<Sym const> const data_{};
+	ConcurrentFileBuffer<LZ77_Token> buffer{};
 };

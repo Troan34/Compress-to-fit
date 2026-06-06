@@ -2,15 +2,15 @@ module;
 #include <mio/mmap.hpp>
 #include <cassert>
 
-export module file_util;
+export module util:file;
 
 #if defined(__INTELLISENSE__)
 #include "../../for_intellisense/everything.hpp"
 #endif
 
-export import util;
 import parser;
 import std.compat;
+import :core_utils;
 namespace fs = std::filesystem;
 
 
@@ -80,7 +80,7 @@ public:
 	/**
 	 * @brief Construct member types, such as #FileOptions. This ctor should be used when a file is to be compressed
 	 * @param path Path of file
-	 * @param comp_type Type of compressor
+	 * @param options Options to create and customize to the file
 	 * 
 	 * @todo Add a parameter for #FileOptions::delete_on_dtor when the parser is updated to do that
 	 */
@@ -153,7 +153,7 @@ public:
 	 * @brief Write to the output file.
 	 */
 	template<typename T>
-	void write_file(std::span<T> buffer) noexcept(false)
+	void write(std::span<T> buffer) noexcept(false)
 	{
 		out_file.write(reinterpret_cast<const char*>(buffer.data()), buffer.size() * sizeof(T));
 		try_throw_IO_error(out_file.rdstate(), cli_options.filename_out);
@@ -372,6 +372,7 @@ public:
 
 	[[nodiscard]] FileOptions get_file_options() const noexcept {return file_options;}
 
+	std::ofstream& get_ref_out_stream(){ return out_file; }
 private:
 	FileOptions file_options;
 	parser::Options const& cli_options;

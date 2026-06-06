@@ -1,6 +1,4 @@
-add_library(project_logic
-        src/data_streamer.cppm
-        src/models/utils.cppm)
+add_library(project_logic)
 
 
 set_target_properties(project_logic PROPERTIES
@@ -13,16 +11,18 @@ target_sources(
     PUBLIC
     FILE_SET CXX_MODULES FILES
     "src/util/utils.cppm"
-    "src/util/cli_parser.cppm"
+    "src/parser/cli_parser.cppm"
     "src/util/file_management.cppm"
     "src/models/LZ77/lz77.cppm"
     "src/util/concurrent_file_buffer.cppm"
+    "src/models/utils.cppm"
+    "src/util/core_utils.cppm"
 )
 
 target_sources(
     project_logic
     PUBLIC
-    "src/util/cli_parser.cpp"
+    "src/parser/cli_parser.cpp"
     "src/models/LZ77/lz77_impl.cpp"
 )
 
