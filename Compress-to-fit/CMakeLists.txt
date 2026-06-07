@@ -10,12 +10,12 @@ target_sources(
     project_logic
     PUBLIC
     FILE_SET CXX_MODULES FILES
-    "src/util/utils.cppm"
     "src/parser/cli_parser.cppm"
-    "src/util/file_management.cppm"
     "src/models/LZ77/lz77.cppm"
-    "src/util/concurrent_file_buffer.cppm"
-    "src/models/utils.cppm"
+    "src/util/utils.cppm"
+    "src/util/file_management.cppm"
+    "src/util/file_buffer.cppm"
+    "src/util/file_queue.cppm"
     "src/util/core_utils.cppm"
 )
 

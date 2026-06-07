@@ -346,4 +346,10 @@ export template <typename Type>
 	return i;
 }
 
-
+template<typename T>
+concept SerializableToDisk = requires(T a, std::ofstream& file)
+{
+	{ a.write_to(file) } -> std::same_as<void>;
+}
+||
+std::is_trivially_copyable_v<T>;

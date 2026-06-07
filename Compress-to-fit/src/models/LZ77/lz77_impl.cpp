@@ -51,70 +51,65 @@ Token alg::Rabin::find_pattern()
 
 LZ77Block::LZ77Block(std::span<std::byte const> const data_) noexcept
 {
-	constexpr size_t len1 = sizeof(decltype(compressed_length));
-	constexpr size_t len2 = sizeof(decltype(uncompressed_length));
+	constexpr size_t len1 = sizeof(decltype(compressed_length_));
+	constexpr size_t len2 = sizeof(decltype(uncompressed_length_));
 
-	std::memcpy(&compressed_length, data_.data(), len1);//get compressed_length from data
-	std::memcpy(&uncompressed_length, data_.data() + len1, len2);//get uncompressed_length from data
+	std::memcpy(&compressed_length_, data_.data(), len1);//get compressed_length from data
+	std::memcpy(&uncompressed_length_, data_.data() + len1, len2);//get uncompressed_length from data
 
 	block.reserve(data_.size());
-	block = std::vector{
-		reinterpret_cast<LZ77_Token const*>(data_.begin() + len1 + len2),
-		reinterpret_cast<LZ77_Token const*>(data_.end())
+	block = std::vector<LZ77_Token const>{
+		reinterpret_cast<LZ77_Token const*>(data_.data() + len1 + len2),
+		reinterpret_cast<LZ77_Token const*>(data_.data() + data_.size())
 	};
 }
 
 void LZ77Block::serialize(std::vector<std::byte> &output)
 {
-	constexpr size_t len1 = sizeof(decltype(compressed_length));
-	constexpr size_t len2 = sizeof(decltype(uncompressed_length));
+	constexpr size_t len1 = sizeof(decltype(compressed_length_));
+	constexpr size_t len2 = sizeof(decltype(uncompressed_length_));
 
-	output.resize(len1 + len2 + block.size_bytes());
+	output.resize(len1 + len2 + block.size() * sizeof(LZ77_Token));
 
-	std::memcpy(output.data(), &compressed_length, len1);
-	std::memcpy(output.data() + len1, &uncompressed_length, len2);
+	std::memcpy(output.data(), &compressed_length_, len1);
+	std::memcpy(output.data() + len1, &uncompressed_length_, len2);
 
-	std::memcpy(output.data() + len1 + len2, block.data(), block.size_bytes());
+	std::memcpy(output.data() + len1 + len2, block.data(), block.size() * sizeof(LZ77_Token));
 }
 
 
 
-size_t LZ77Compressor::compress(std::span<const Sym> in_data, std::vector<std::byte const>& out_data, size_t const max_size_chunk)
+void LZ77Compressor::compress(LZ77Block& out_data)
 {
-	out_data.reserve(SIZE_CHUNK);
+	out_data.reserve(data_.size() / sizeof(LZ77_Token));
 
 	size_t consumed_tokens{};
 	//loop over the stream
-	for (auto i = in_data.begin(); i != in_data.end() and consumed_tokens < max_size_chunk; ++i)
+	for (auto i = data_.begin(); i != data_.end(); ++i)
 	{
-		auto token = this->pattern_matcher.find_pattern();
+		auto const token = this->pattern_matcher.find_pattern();
 
-		auto const num_of_rolls = static_cast<int>(token.length + 1);
+		auto const num_of_rolls = token.length + 1;
 		this->pattern_matcher.roll_hash(num_of_rolls);//roll, updates the hash and position
 		this->window.slide(num_of_rolls);
 		i += num_of_rolls;
 		consumed_tokens += num_of_rolls;
 
-		Token::SerializedBuffer buffer{};
-		token.serialize(buffer);
-		out_data.append_range(buffer);
+		out_data.push_back(token);
 	}
-
-	return consumed_tokens;
 }
 
-size_t LZ77Decompressor::decompress(std::span<std::byte const> in_data, std::vector<Sym>& out_data, size_t const max_size_chunk)
+void LZ77Decompressor::decompress(std::vector<Sym>& out_data) const
 {
-	out_data.reserve(std::min(in_data.size(), max_size_chunk));
-	while (!in_data.reached_end())
+	out_data.reserve(data_.size() / sizeof(Sym));
+	for (auto const token : data_)
 	{
-		if (in_data.iterator->offset != 0)
+		if (token.offset != 0)
 		{
-			for (size_t remaining_syms = in_data.iterator->length; remaining_syms > 0; remaining_syms--)
-				out_data.push_back(out_data[out_data.size() - in_data.iterator->offset]);
+			for (auto _ : std::views::iota(0u, token.length))
+				out_data.push_back(out_data[out_data.size() - token.offset]);
 		}
-		out_data.emplace_back(in_data.iterator->symbol);
-		++in_data;
+		out_data.emplace_back(token.symbol);
 	}
 }
 

@@ -7,24 +7,24 @@ import :core_utils;
 import :file;
 import std.compat;
 
+
 /**
  * @brief Ring queue-like where if size > capacity, the oldest elements are written to stream.
  *		  At least the most recent #minimum_size_ number of elements shall be available for reading.
  * @tparam T type stored, must be trivially copyable
  */
-export template <typename T>
-	requires std::is_trivially_copyable_v<T>
-class ConcurrentFileBuffer
+export template <SerializableToDisk T>
+class ConcFileBuffer
 {
 public:
 
-	ConcurrentFileBuffer(File out_stream, size_t const minimum_size)
-		:out_stream_(std::move(out_stream)), minimum_size_(minimum_size)
+	ConcFileBuffer(File& out_stream, size_t const minimum_size)
+		:out_stream_(out_stream), minimum_size_(minimum_size)
 	{
 		reserve(1.5f * minimum_size_);
 	}
 
-	~ConcurrentFileBuffer()
+	~ConcFileBuffer()
 	{
 		auto const elements_to_write_n = index_ - written_index_;
 		out_stream_.write(reinterpret_cast<char const*>(&data_[written_index_]), elements_to_write_n * sizeof(T));
@@ -38,14 +38,13 @@ public:
 	 */
 	constexpr void push(T const& value)
 	{
-		lock.lock();
-
-		write_buffer();
+		std::unique_lock{mut};
 
 		data_[true_index()] = value;
 		index_++;
-		
-		lock.unlock();
+
+		write_buffer();
+
 	}
 
 	/**
@@ -55,14 +54,12 @@ public:
 	 */
 	constexpr void push(T&& value)
 	{
-		lock.lock();
-
-		write_buffer();
+		std::unique_lock{mut};
 
 		data_[true_index()] = value;
 		index_++;
 
-		lock.unlock();
+		write_buffer();
 	}
 
 	/**
@@ -75,22 +72,8 @@ public:
 	constexpr void append_range(R&& rg)
 	{
 		auto size = rg.end() - rg.start();
-		lock.lock();
+		std::unique_lock{mut};
 
-		if (index_ + size - written_index_ > capacity_)//if we need to write elements to disk
-		{
-			auto const elements_to_write_n = index_ - minimum_size_ - written_index_;
-
-			if constexpr (std::is_trivially_copyable_v<T>)
-			{
-				//TODO: this blocks a thread, but if there are 12 threads AND they aren't writing frequently, it shouldn't be THAT bad. Benchmark this.
-				//We could try coroutines here
-				//Maybe we can lock the stream, or stuff like that
-				out_stream_.write(reinterpret_cast<char const*>(&data_[written_index_]), elements_to_write_n * sizeof(T));
-			}
-
-			written_index_ = index_ - minimum_size_;
-		}
 
 		//might be worthwhile to optimize this
 		std::for_each(rg.begin(), rg.end(), 
@@ -100,7 +83,8 @@ public:
 						  index_++;
 					  });
 
-		lock.unlock();
+		write_buffer();
+
 	}
 
 	/**
@@ -171,11 +155,10 @@ public:
 	}
 
 private:
-	File out_stream_;
+	File& out_stream_;
 	T* data_;
 	std::allocator<T> allocator;
 	mutable std::shared_mutex mut;
-	std::unique_lock<std::shared_mutex> lock{ mut, std::defer_lock  }; //only one thread at a time may write to data_, so we keep this class-wide
 	size_t index_ = 0;
 	size_t written_index_ = 0; //oldest index that has not yet been written to file
 	size_t capacity_ = 0;
@@ -194,7 +177,19 @@ private:
 			//TODO: this blocks a thread, but if there are 12 threads AND they aren't writing frequently, it shouldn't be THAT bad. Benchmark this.
 			//We could try coroutines here
 			//Maybe we can lock the stream, or stuff like that
-			out_stream_.write(std::span{&data_[written_index_], elements_to_write_n * sizeof(T)});
+			if constexpr (std::is_trivially_copyable_v<T>)
+			{
+				out_stream_.write(std::span{&data_[written_index_], elements_to_write_n * sizeof(T)});
+			}
+			else//we expect write_to to have been defined as per SerializableToDisk
+			{
+				std::ranges::for_each(std::views::counted(data_, elements_to_write_n),
+					[](T const& value)
+					{
+						value.write_to(out_stream_);
+					}
+				)
+			}
 
 			written_index_ = index_ - minimum_size_;
 		}

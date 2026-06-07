@@ -1,12 +1,11 @@
 module;
 #include <mio/mmap.hpp>
 #include <cassert>
-
-export module util:file;
-
 #if defined(__INTELLISENSE__)
 #include "../../for_intellisense/everything.hpp"
 #endif
+
+export module util:file;
 
 import parser;
 import std.compat;
@@ -105,58 +104,73 @@ public:
 	 * 
 	 * @details This function will ignore the file header
 	 */
-	template <typename In, typename Out, typename Pred>
-	void process_file(Pred pred) requires std::invocable<Pred, CodecInterface<In, Out>&>
-	{
-		std::ifstream in(cli_options.filename_in, std::ios::binary);
-
-		size_t offset = 0;
-		bool compressing = true;
-		if constexpr (std::is_same_v<Out, Sym>)
-		{
-			offset = FILE_HEADER_SIZE;
-			compressing = false;
-		}
-
-
-		in.seekg(0, std::ios::end);
-		auto file_size = (static_cast<size_t>(in.tellg()) - offset) / sizeof(In) ;
-		in.seekg(0, std::ios::beg);
-		std::error_code error;
-		auto IO_map = mio::make_mmap_source(cli_options.filename_in.string(), offset, mio::map_entire_file, error);
-
-		//if header is empty and we are decompressing, throw
-		if (!file_options.header.has_value() and std::is_same_v<Out, Sym>)
-		{
-			fs::remove(cli_options.filename_out);
-			throw_error(ErrorType::INVALID_DECOMPRESSION, file_options.path.string());
-		}
-
-		std::vector<Out> output_buffer;//Used to receive data from fun()
-
-		CodecInterface<In, Out> codec_interface{
-			.in_data{reinterpret_cast<In const*>(IO_map.data()), reinterpret_cast<In const*>(IO_map.end())},
-			.out_data = output_buffer
-		};
-
-
-		while (!codec_interface.in_data.reached_end())
-		{
-			pred(codec_interface);
-
-			show_progress(cli_options, 1.f - (static_cast<float>(codec_interface.in_data.distance_to_end()) / file_size), compressing);
-		}
-		out_file.write(reinterpret_cast<char const*>(output_buffer.data()), output_buffer.size() * sizeof(Out));
-	}
+	// template <typename In, typename Out, typename Pred>
+	// void process_file(Pred pred) requires std::invocable<Pred, CodecInterface<In, Out>&>
+	// {
+	// 	std::ifstream in(cli_options.filename_in, std::ios::binary);
+	//
+	// 	size_t offset = 0;
+	// 	bool compressing = true;
+	// 	if constexpr (std::is_same_v<Out, Sym>)
+	// 	{
+	// 		offset = FILE_HEADER_SIZE;
+	// 		compressing = false;
+	// 	}
+	//
+	//
+	// 	in.seekg(0, std::ios::end);
+	// 	auto file_size = (static_cast<size_t>(in.tellg()) - offset) / sizeof(In) ;
+	// 	in.seekg(0, std::ios::beg);
+	// 	std::error_code error;
+	// 	auto IO_map = mio::make_mmap_source(cli_options.filename_in.string(), offset, mio::map_entire_file, error);
+	//
+	// 	//if header is empty and we are decompressing, throw
+	// 	if (!file_options.header.has_value() and std::is_same_v<Out, Sym>)
+	// 	{
+	// 		fs::remove(cli_options.filename_out);
+	// 		throw_error(ErrorType::INVALID_DECOMPRESSION, file_options.path.string());
+	// 	}
+	//
+	// 	std::vector<Out> output_buffer;//Used to receive data from fun()
+	//
+	// 	CodecInterface<In, Out> codec_interface{
+	// 		.in_data{reinterpret_cast<In const*>(IO_map.data()), reinterpret_cast<In const*>(IO_map.end())},
+	// 		.out_data = output_buffer
+	// 	};
+	//
+	//
+	// 	while (!codec_interface.in_data.reached_end())
+	// 	{
+	// 		pred(codec_interface);
+	//
+	// 		show_progress(cli_options, 1.f - (static_cast<float>(codec_interface.in_data.distance_to_end()) / file_size), compressing);
+	// 	}
+	// 	out_file.write(reinterpret_cast<char const*>(output_buffer.data()), output_buffer.size() * sizeof(Out));
+	// }
 
 	/**
 	 * @brief Write to the output file.
 	 */
 	template<typename T>
-	void write(std::span<T> buffer) noexcept(false)
+	File& write(std::span<T> buffer) noexcept(false)
 	{
 		out_file.write(reinterpret_cast<const char*>(buffer.data()), buffer.size() * sizeof(T));
 		try_throw_IO_error(out_file.rdstate(), cli_options.filename_out);
+		return *this;
+	}
+
+	/**
+	 * @brief Write to file (forwarding the actual write function) with IO error protection
+	 * @param bytes Bytes to write to file
+	 * @param num Number of bytes
+	 *
+	 * @throws std::runtime_exception An ErrorType
+	 */
+	File& write(const char* bytes, std::streamsize const num)
+	{
+		out_file.write(bytes, num);
+		try_throw_IO_error(out_file.rdstate(), cli_options.filename_out);
+		return *this;
 	}
 
 	/**

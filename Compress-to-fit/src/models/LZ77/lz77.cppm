@@ -1,3 +1,5 @@
+module;
+#include <cassert>
 export module lz77;
 
 #if defined(__INTELLISENSE__)
@@ -8,7 +10,6 @@ export import util;
 import std.compat;
 import parser;
 import codec_util;
-import file_util;
 
 namespace fs = std::filesystem;
 
@@ -59,8 +60,8 @@ inline constexpr auto MAX_HASH_SIZE = MAX_WINDOW_SIZE << 1;
 class Window
 {
 public:
-	Window(const std::span<Sym const>& data_, size_t window_size) noexcept
-		:data(data_), max_size(std::clamp(window_size, window_size, MAX_WINDOW_SIZE)), size_search(0)
+	Window(const std::span<Sym const>& data_, size_t const window_size) noexcept
+		:data(data_), size_search(0), max_size(std::clamp(window_size, window_size, MAX_WINDOW_SIZE))
 	{
 		if (max_size > data.size()) max_size = data.size();
 		size_look_ahead = std::ceil(max_size / (SEARCH_RATIO + 1));
@@ -68,7 +69,7 @@ public:
 		max_size_search = SEARCH_RATIO * max_size_look_ahead;
 	}
 
-	Window(const std::span<Sym const>& data_, CompPreset preset)
+	Window(const std::span<Sym const>& data_, CompPreset const preset)
 		:data(data_)
 	{
 		size_search = 0;
@@ -153,56 +154,21 @@ public:
 		offset = std::clamp(offset, 0ul, data.size() - max_size_search);
 	}
 
-	[[nodiscard]] auto look_ahead_buffer() const noexcept -> std::span<Sym const>
+	[[nodiscard]] auto look_ahead_buffer() const noexcept -> std::span<Sym const>{return data.subspan(offset + size_search, size_look_ahead);}
+	[[nodiscard]] auto search_buffer() const noexcept -> std::span<Sym const>{return data.subspan(offset, size_search);}
+	[[nodiscard]] auto get_size_search() const noexcept{return size_search;}
+	[[nodiscard]] auto get_size_la_buf() const noexcept{return size_look_ahead;}
+	[[nodiscard]] auto get_max_size() const noexcept{return max_size;}
+	[[nodiscard]] auto get_max_size_search() const noexcept{return max_size_search;}
+	[[nodiscard]] auto get_relative_pos() const noexcept{return size_search;}
+	[[nodiscard]] auto get_absolute_pos() const noexcept{return size_search + offset;}
+	[[nodiscard]] auto operator[](size_t const index) const noexcept
 	{
-		return data.subspan(offset + size_search, size_look_ahead);
-	}
-
-	[[nodiscard]] auto search_buffer() const noexcept -> std::span<Sym const>
-	{
-		return data.subspan(offset, size_search);
-	}
-
-	[[nodiscard]] auto get_size_search() const noexcept
-	{
-		return size_search;
-	}
-
-	[[nodiscard]] auto get_size_la_buf() const noexcept
-	{
-		return size_look_ahead;
-	}
-
-	[[nodiscard]] auto get_max_size() const noexcept
-	{
-		return max_size;
-	}
-
-	[[nodiscard]] auto get_max_size_search() const noexcept
-	{
-		return max_size_search;
-	}
-
-	[[nodiscard]] auto get_relative_pos() const noexcept
-	{
-		return size_search;
-	}
-
-	[[nodiscard]] auto get_absolute_pos() const noexcept
-	{
-		return size_search + offset;
-	}
-
-
-	auto operator[](size_t index) const noexcept
-	{
+		assert(index < max_size);
 		return data[index];
 	}
 
-	[[nodiscard]] auto get_data() const noexcept //peak function signature
-	{
-		return data;
-	}
+	[[nodiscard]] auto get_data() const noexcept{return data;}
 
 private:
 	const std::span<const Sym> data;
@@ -360,6 +326,7 @@ constexpr size_t MAX_BLOCK_SIZE = 4_MiB;
 
 class LZ77Block
 {
+public:
 	explicit LZ77Block(std::span<std::byte const> const data_) noexcept;
 
 	/**
@@ -370,20 +337,40 @@ class LZ77Block
 
 	void push_back(LZ77_Token const token)
 	{
-		compressed_length += sizeof(LZ77_Token);
-		uncompressed_length += token.length + sizeof(decltype(LZ77_Token::symbol));
+		compressed_length_ += sizeof(LZ77_Token);
+		uncompressed_length_ += token.length + sizeof(decltype(LZ77_Token::symbol));
 		block.push_back(token);
 	}
 
+	void clear() noexcept
+	{
+		block.clear();
+		compressed_length_ = 0;
+		uncompressed_length_ = 0;
+	}
 
-	[[nodiscard]] uint32_t compressed_length() const noexcept {return compressed_length;}
-	[[nodiscard]] uint32_t uncompressed_length() const noexcept {return uncompressed_length;}
+	constexpr auto reserve(size_t const size) { block.reserve(size);}
+
+	[[nodiscard]] constexpr auto size() const noexcept { return block.size(); }
+	[[nodiscard]] constexpr auto size_bytes() const noexcept -> size_t { return block.size() * sizeof(LZ77_Token); }
+	[[nodiscard]] constexpr auto compressed_length() const noexcept {return compressed_length_;}
+	[[nodiscard]] constexpr auto uncompressed_length() const noexcept {return uncompressed_length_;}
+	[[nodiscard]] constexpr auto const& operator[](size_t const index) const noexcept {return block[index];}
+	[[nodiscard]] constexpr auto begin() const noexcept {return block.begin();}
+	[[nodiscard]] constexpr auto end() const noexcept {return block.end();}
+
+	//setter
+	[[nodiscard]] constexpr auto& operator[](size_t const index) noexcept
+	{
+		assert(index < block.size());
+		return block[index];
+	}
+
 private:
-	uint32_t compressed_length{};
-	uint32_t uncompressed_length{};
-	std::vector<LZ77_Token const> block{};
+	uint32_t compressed_length_{};
+	uint32_t uncompressed_length_{};
+	std::vector<LZ77_Token> block{};
 };
-
 
 
 class LZ77Compressor
@@ -397,40 +384,36 @@ private:
 	alg::Rabin pattern_matcher;
 
 	/**
-	 * @brief Compress the data up to max_index
-	 * @param in_data Input data
+	 * @brief Compress the data received in the constructor
 	 * @param out_data Where the output will go
 	 *
-	 * @warning out_data will be cleared and overwritten
-	 *
+	 * @note Will clear out_data block
 	 */
-	size_t compress(std::span<const Sym> in_data, std::vector<std::byte const>& out_data);
+	void compress(LZ77Block& out_data);
 };
 
 class LZ77Decompressor
 {
-	LZ77Decompressor(LZ77Block const& data) : data_(data) {}
+	explicit LZ77Decompressor(LZ77Block const& data) : data_(data) {}
 
 	/**
-	 * @brief Decompress @p in_data
-	 * @param in_data LZ77 token input, to be represented as raw bytes
+	 * @brief Decompress the data received in the constructor
 	 * @param out_data Where the output will go
+	 *
+	 * @note Will clear out_data buffer
 	 */
-	size_t decompress(std::span<std::byte const> in_data, std::vector<Sym>& out_data);
+	void decompress(std::vector<Sym>& out_data) const;
 
 private:
-	std::span<LZ77_Token const> data_{};
+	LZ77Block const& data_;
 };
 
 export class LZ77ConcurrentCompressor
 {
 public:
-	LZ77ConcurrentCompressor(std::span<Sym const> const data, parser::Options const& options)
+	LZ77ConcurrentCompressor(std::span<std::byte const> const data, parser::Options const& options)
 		: cli_options(options), data_(data)
 	{
-		File out_file{options.filename_out, options};
-
-		buffer = ConcurrentFileBuffer<LZ77_Token>{out_file, MAX_WINDOW_SIZE};
 	}
 
 	/**
@@ -438,12 +421,10 @@ public:
 	 */
 	void compress() noexcept(false)
 	{
-		//TODO: HERE DUMMY
-		//make a block struct (or class, whatever) with a header, only doing this will decompressing make sense.
+		
 	}
 
 private:
 	parser::Options const& cli_options;
-	std::span<Sym const> const data_{};
-	ConcurrentFileBuffer<LZ77_Token> buffer{};
+	std::span<std::byte const> const data_{};
 };
