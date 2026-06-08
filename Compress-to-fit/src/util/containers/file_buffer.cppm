@@ -2,8 +2,8 @@ module;
 #if defined(__INTELLISENSE__)
 #include "../../for_intellisense/everything.hpp"
 #endif
-export module util:concurrent_file_buffer;
-import :core_utils;
+export module containers:concurrent_file_buffer;
+import util;
 import :file;
 import std.compat;
 
@@ -148,10 +148,9 @@ public:
 	 */
 	void set_minimum_size(size_t const new_minimum_size) noexcept
 	{
-		lock.lock();
+		std::unique_lock lock{mut};
 		if (new_minimum_size > minimum_size_)
 			minimum_size_ = new_minimum_size;
-		lock.unlock();
 	}
 
 private:
@@ -184,11 +183,11 @@ private:
 			else//we expect write_to to have been defined as per SerializableToDisk
 			{
 				std::ranges::for_each(std::views::counted(data_, elements_to_write_n),
-					[](T const& value)
+					[this](T const& value)
 					{
-						value.write_to(out_stream_);
+						value.write_to(out_stream_.get_ref_out_stream());
 					}
-				)
+				);
 			}
 
 			written_index_ = index_ - minimum_size_;

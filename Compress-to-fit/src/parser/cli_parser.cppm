@@ -1,5 +1,3 @@
-module;
-#include <print>
 export module parser;
 
 #if defined(__INTELLISENSE__)
@@ -7,7 +5,7 @@ export module parser;
 #endif
 
 import util;
-import std;
+import std.compat;
 namespace fs = std::filesystem;
 
 

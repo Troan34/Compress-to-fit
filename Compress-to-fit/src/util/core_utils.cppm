@@ -305,9 +305,11 @@ export [[nodiscard]] constexpr size_t MiB_to_B(size_t value)
 	return value * 1024 * 1024;
 }
 
-export consteval unsigned long long operator""_MiB(unsigned long long const value)
+export constexpr unsigned long long operator""_MiB(unsigned long long const value)
 {
-	static_assert(value * 1024ULL * 1024ULL < std::numeric_limits<unsigned long long>::max());
+	if (value * 1024ULL * 1024ULL >= std::numeric_limits<unsigned long long>::max()) {
+		throw std::out_of_range("Your value will cause an overflow.");
+	}
 	return value * 1024ULL * 1024ULL;
 }
 
@@ -346,7 +348,7 @@ export template <typename Type>
 	return i;
 }
 
-template<typename T>
+export template<typename T>
 concept SerializableToDisk = requires(T a, std::ofstream& file)
 {
 	{ a.write_to(file) } -> std::same_as<void>;

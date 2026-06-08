@@ -13,10 +13,11 @@ target_sources(
     "src/parser/cli_parser.cppm"
     "src/models/LZ77/lz77.cppm"
     "src/util/utils.cppm"
-    "src/util/file_management.cppm"
-    "src/util/file_buffer.cppm"
-    "src/util/file_queue.cppm"
+    "src/util/containers/file_management.cppm"
+    "src/util/containers/file_buffer.cppm"
+    "src/util/containers/file_queue.cppm"
     "src/util/core_utils.cppm"
+    "src/util/containers/containers.cppm"
 )
 
 target_sources(
@@ -24,6 +25,12 @@ target_sources(
     PUBLIC
     "src/parser/cli_parser.cpp"
     "src/models/LZ77/lz77_impl.cpp"
+)
+
+target_link_libraries(
+        project_logic
+        PUBLIC
+        Qt6::Widgets
 )
 
 FetchContent_GetProperties(mio SOURCE_DIR mio_SOURCE_DIR)

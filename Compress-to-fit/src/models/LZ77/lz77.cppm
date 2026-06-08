@@ -9,7 +9,6 @@ export module lz77;
 export import util;
 import std.compat;
 import parser;
-import codec_util;
 
 namespace fs = std::filesystem;
 
@@ -23,8 +22,7 @@ struct Token
 	uint8_t length{};
 	Sym symbol{};
 
-	constexpr static size_t size() {return sizeof(decltype(offset)) + sizeof(decltype(length)) + sizeof(decltype(symbol));}
-	using SerializedBuffer = std::array<std::byte, Token::size()>;
+	using SerializedBuffer = std::array<std::byte, sizeof(decltype(offset)) + sizeof(decltype(length)) + sizeof(decltype(symbol))>;
 
 
 	friend std::ostream& operator<<(std::ostream& os, const Token& token)

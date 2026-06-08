@@ -58,7 +58,7 @@ LZ77Block::LZ77Block(std::span<std::byte const> const data_) noexcept
 	std::memcpy(&uncompressed_length_, data_.data() + len1, len2);//get uncompressed_length from data
 
 	block.reserve(data_.size());
-	block = std::vector<LZ77_Token const>{
+	block = std::vector<LZ77_Token>{
 		reinterpret_cast<LZ77_Token const*>(data_.data() + len1 + len2),
 		reinterpret_cast<LZ77_Token const*>(data_.data() + data_.size())
 	};

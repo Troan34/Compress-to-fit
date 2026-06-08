@@ -5,11 +5,11 @@ module;
 #include "../../for_intellisense/everything.hpp"
 #endif
 
-export module util:file;
+export module containers:file;
 
 import parser;
 import std.compat;
-import :core_utils;
+import util;
 namespace fs = std::filesystem;
 
 
