@@ -1,3 +1,5 @@
+//This file implements ConcOrderedFileList, a linked list that enables concurrent writing to file through the order of sequence numbers
+//do NOT expect this stuff to be cache friendly in ANY way.
 module;
 #include <cassert>
 export module containers:concurrent_file_queue;
@@ -5,7 +7,6 @@ import :file;
 import util;
 import std.compat;
 
-//do NOT expect this stuff to be cache friendly in ANY way.
 
 template <SerializableToDisk T>
 struct Node
@@ -15,7 +16,7 @@ struct Node
 
     std::unique_ptr<T> element_;
     size_t sequence_num_;
-    std::unique_ptr<Node> next{nullptr};
+    Node* next{nullptr};
     Node* prev{nullptr};
 };
 
@@ -34,6 +35,20 @@ public:
     {
     }
 
+    ~ConcOrderedFileList()
+    {
+        std::unique_lock lock{mut};
+        called_writer = true;
+        writer_notifier.notify_one();
+    }
+
+    //we really don't want to copy a concurrent container with access to a file
+    ConcOrderedFileList(ConcOrderedFileList const&) = delete;
+    ConcOrderedFileList& operator=(ConcOrderedFileList const&) = delete;
+
+    ConcOrderedFileList(ConcOrderedFileList&&) noexcept = default;
+    ConcOrderedFileList& operator=(ConcOrderedFileList&&) noexcept = default;
+
     /**
      * @brief Inserts an element to the list, which it will own. THE FIRST ELEMENT MUST HAVE SEQUENCE NUMBER == 0, check warning for additional info.
      *
@@ -49,50 +64,85 @@ public:
     void insert(std::unique_ptr<T> element, size_t sequence_num)
     {
         {
-            auto new_node = std::make_unique<Node<T>>(std::move(element), sequence_num);
+            Node<T>* new_node{std::move(element), sequence_num};
             std::unique_lock lock{mut};//we could opt for a shared mutex here, profile
 
             size_++;
-            //TODO: add the new node in the correct spot, check the scrivano for the schematics
-            if (head_)
-            {
-                Node<T>* prev_in_sequence = nullptr;
-                for (prev_in_sequence = head_.get(); prev_in_sequence->sequence_num_ != sequence_num - 1; prev_in_sequence = prev_in_sequence->prev)
 
-                prev_in_sequence->next = new_node;
-                new_node->prev = prev_in_sequence;
+            if (head_ == nullptr)
+            {
+                head_ = new_node;
+                tail_ = new_node;
             }
             else
             {
-                tail_ = new_node.get();//if empty, tail_ and head_ point to the same node
-                head_ = std::move(new_node);
+                Node<T>* prev_node{head_};//we actually are searching for the previous node
+                //Make sure the nullptr check stays first (unless you like bugs, I don't judge)
+                while (prev_node and (prev_node->sequence_num_ != sequence_num - 1)) prev_node = prev_node->prev;
+
+                if (!prev_node)//We reached the end
+                {
+                    new_node->next = tail_;
+                    tail_->prev = new_node;
+                    tail_ = new_node;
+                }
+                else//we found a place to squeeze in
+                {
+                    //set up the new node links
+                    new_node->prev = prev_node;
+                    new_node->next = prev_node->next;
+
+                    //update the linking of the next and previous nodes (relative to new node)
+                    if (prev_node->next) //the next node may not exist (head)
+                        prev_node->next->prev = new_node;
+
+                    prev_node->next = new_node;
+                    prev_node = new_node;
+                }
+
             }
-
-
         }
 
         called_writer = true;
         writer_notifier.notify_one();
     }
 
+    /**
+     * @return Size, the number of nodes waiting to get written to file
+     */
+    auto size() const noexcept
+    {
+        std::unique_lock lock{mut};
+        return size_;
+    }
+
+    /**
+     * @brief Returns the next sequence number expected (or missing)
+     * @return The expected sequence number
+     */
+    auto expected_sequence_num() const noexcept
+    {
+        std::unique_lock lock{mut};
+        return expected_sequence_num_;
+    }
 private:
     File& file_;
     size_t size_{};
     size_t expected_sequence_num_{};
-    std::unique_ptr<Node<T>> head_{nullptr};
+    Node<T>* head_{nullptr};
     Node<T>* tail_{nullptr};
     mutable std::mutex mut;
-    std::jthread writer{write_disk};
+    std::jthread writer{write_file};
     std::condition_variable writer_notifier;
     bool called_writer{false};
 
 
     /**
-     *
+     * @brief Writes to file. Should be called by a thread.
      * @param stop
      * @pre tail_ != nullptr
      */
-    void write_disk(std::stop_token stop)
+    void write_file(std::stop_token stop)
     {
         while (!stop.stop_requested())
         {

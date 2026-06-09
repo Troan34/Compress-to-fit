@@ -15,7 +15,7 @@ target_sources(
     "src/util/utils.cppm"
     "src/util/containers/file_management.cppm"
     "src/util/containers/file_buffer.cppm"
-    "src/util/containers/file_queue.cppm"
+    "src/util/containers/file_list.cppm"
     "src/util/core_utils.cppm"
     "src/util/containers/containers.cppm"
 )
