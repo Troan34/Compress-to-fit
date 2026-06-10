@@ -419,6 +419,8 @@ public:
 	 */
 	void compress() noexcept(false)
 	{
+		auto const num_threads = std::thread::hardware_concurrency() ? std::thread::hardware_concurrency() : 1;
+		auto partition_size = data_.size() / num_threads;
 		
 	}
 

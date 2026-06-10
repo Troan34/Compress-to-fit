@@ -25,6 +25,8 @@ struct Node
  * @tparam T Must implement write_to(ofstream&) or be trivially copyable
  *
  * @details Implemented as doubly linked list. A separate write thread is spawned.
+ *
+ * @note Because the list will own the elements, consider using a memory pool (e.g. pmr) as to not reallocate memory.
  */
 export template<SerializableToDisk T>
 class ConcOrderedFileList
@@ -39,7 +41,8 @@ public:
     {
         std::unique_lock lock{mut};
         called_writer = true;
-        writer_notifier.notify_one();
+        writer_notifier.notify_one();//write everything left
+        //the thread will be destroyed automatically thanks to jthread and stop token
     }
 
     //we really don't want to copy a concurrent container with access to a file
@@ -52,19 +55,23 @@ public:
     /**
      * @brief Inserts an element to the list, which it will own. THE FIRST ELEMENT MUST HAVE SEQUENCE NUMBER == 0, check warning for additional info.
      *
-     * @param element Element to be inserted
+     * @param[in] element Element to be inserted
      * @param sequence_num The number of this element's sequence
+     *
+     * @pre \p element must not own a nullptr
+     * @post Any reference to \p element is invalidated.
      *
      * @warning THE FIRST ELEMENT THAT IS GOING TO BE WRITTEN TO FILE MUST HAVE SEQUENCE NUMBER == 0.
      *          This requirement exists as the first element you add could easily be not the first data chunk (i.e. out of order).
      *          Failure to follow this requirement will cause DEADLOCK.
      *
-     * @note Because the list will own the #element , consider using a memory pool (e.g. pmr) as to not reallocate memory.
      */
     void insert(std::unique_ptr<T> element, size_t sequence_num)
     {
+        auto* new_node = new Node<T>{std::move(element), sequence_num};
+
+
         {
-            Node<T>* new_node{std::move(element), sequence_num};
             std::unique_lock lock{mut};//we could opt for a shared mutex here, profile
 
             size_++;
@@ -117,7 +124,7 @@ public:
     }
 
     /**
-     * @brief Returns the next sequence number expected (or missing)
+     * @brief Returns the next sequence number expected or missing. Can be used as a sanity check.
      * @return The expected sequence number
      */
     auto expected_sequence_num() const noexcept
@@ -139,7 +146,6 @@ private:
 
     /**
      * @brief Writes to file. Should be called by a thread.
-     * @param stop
      * @pre tail_ != nullptr
      */
     void write_file(std::stop_token stop)
@@ -150,17 +156,20 @@ private:
             writer_notifier.wait(lock, [this]{return called_writer;});
             called_writer = false;
 
-            if (tail_->sequence_num != expected_sequence_num_)
+            if (tail_->sequence_num != expected_sequence_num_)//we are missing a node
                 continue;
 
             if constexpr (std::is_trivially_copyable_v<T>)
             {
-                file_.write(tail_->element_.get(), sizeof(T));
+                file_.write(tail_->element_, sizeof(T));
             }
             else//T implements a write_to()
             {
-                tail_->element_.get()->write_to(file_.get_ref_out_stream());
+                tail_->element_->write_to(file_.get_ref_out_stream());
             }
+            tail_ = tail_->next;//new tail ptr
+            delete tail_->prev;//delete old tail ptr
+
             expected_sequence_num_++;
         }
     }
