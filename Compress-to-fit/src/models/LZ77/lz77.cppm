@@ -9,8 +9,11 @@ export module lz77;
 export import util;
 import std.compat;
 import parser;
+import containers;
 
 namespace fs = std::filesystem;
+using namespace std::chrono_literals;
+
 
 #pragma pack(push, 1)
 /**
@@ -333,6 +336,8 @@ public:
 	 */
 	void serialize(std::vector<std::byte>& output);
 
+	void write_to(std::ofstream& output);
+
 	void push_back(LZ77_Token const token)
 	{
 		compressed_length_ += sizeof(LZ77_Token);
@@ -410,8 +415,14 @@ export class LZ77ConcurrentCompressor
 {
 public:
 	LZ77ConcurrentCompressor(std::span<std::byte const> const data, parser::Options const& options)
-		: cli_options(options), data_(data)
+		: thread_pool(options.concurrency), options_(options), data_(data)
 	{
+		n_blocks_ = data_.size_bytes() / std::min(data_.size_bytes() / options_.concurrency, MAX_BLOCK_SIZE);
+		if (data_.size_bytes() % MAX_BLOCK_SIZE > 0)
+			n_blocks_++;
+
+		results.reserve(n_blocks_);
+
 	}
 
 	/**
@@ -419,12 +430,58 @@ public:
 	 */
 	void compress() noexcept(false)
 	{
-		auto const num_threads = std::thread::hardware_concurrency() ? std::thread::hardware_concurrency() : 1;
-		auto partition_size = data_.size() / num_threads;
-		
+		auto const partition_size = std::min(data_.size() / options_.concurrency, MAX_BLOCK_SIZE);
+		for (auto completed_size = 0, size_t seq_num{}; completed_size < data_.size(); completed_size += partition_size, seq_num++)
+		{
+			auto const true_partition_size = [data_, completed_size, partition_size]()
+			{
+				if (completed_size + partition_size > data_.size())
+					return data_.size() - completed_size;
+				else
+					return partition_size;
+			}();
+
+			auto data_for_task = data_.subspan(completed_size, true_partition_size);
+			thread_pool.add_task([this, data_for_task, seq_num]
+			{
+				LZ77Block block{};
+				block.reserve(data_for_task.size());
+				LZ77Compressor compressor{data_for_task, options_};
+				compressor.compress(block);
+			});
+
+			check_results();
+			show_progress(options_, )
+			std::this_thread::sleep_for(1ms);
+		}
+
+
 	}
 
 private:
-	parser::Options const& cli_options;
+	ThreadPool thread_pool{};
+	ConcOrderedFileList<LZ77Block> file_list_{};
+	parser::Options const& options_;
 	std::span<std::byte const> const data_{};
+	std::vector<std::future<void>> results{};
+	size_t n_blocks_{};
+	size_t n_completed_blocks{};
+
+	void check_results()
+	{
+		std::erase_if(results,
+		[](std::future<void>& result)
+			{
+				auto const status = result.wait_for(std::chrono::nanoseconds::zero());
+				if (status == std::future_status::ready)
+				{
+					result.get();
+					n_completed_blocks++;
+					return true;
+				}
+				else
+					return false;
+			}
+		)
+	}
 };

@@ -77,6 +77,12 @@ void LZ77Block::serialize(std::vector<std::byte> &output)
 	std::memcpy(output.data() + len1 + len2, block.data(), block.size() * sizeof(LZ77_Token));
 }
 
+void LZ77Block::write_to(std::ofstream& output)
+{
+	std::vector<std::byte> block;
+	this->serialize(block);
+	output.write(block.data(), block.size());
+}
 
 
 void LZ77Compressor::compress(LZ77Block& out_data)

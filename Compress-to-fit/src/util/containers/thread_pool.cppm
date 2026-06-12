@@ -3,10 +3,15 @@ import std.compat;
 #include <type_traits>
 
 
-//TODO: document
+/**
+ * @brief A tool to asynchronously execute tasks without respawning threads
+ */
 export class ThreadPool
 {
 public:
+    /**
+     * @param n_threads The number of threads to spawn. Defaults to the provided thread count from the OS.
+     */
     ThreadPool(size_t n_threads = std::thread::hardware_concurrency())
     {
         if (n_threads == 0) n_threads = 1;
@@ -23,18 +28,23 @@ public:
             stop_threads_ = true;
         }
 
-        cv_.notify_all();
-        for (auto& thread : threads_) {
-            thread.join();
-        }
+        cv_.notify_all();//notify threads
     }
 
     //when in doubt:
-    ThreadPool(ThreadPool&) = delete;
-    ThreadPool(const ThreadPool&) = delete;
+    ThreadPool(ThreadPool&&) = delete;
+    ThreadPool(ThreadPool const&) = delete;
     ThreadPool& operator=(ThreadPool&&) = delete;
-    ThreadPool& operator=(const ThreadPool&) = delete;
+    ThreadPool& operator=(ThreadPool const&) = delete;
 
+    /**
+     * @brief Add a new task for the thread pool
+     * @tparam F Function type
+     * @tparam Args Argument types
+     * @param f function
+     * @param args arguments
+     * @return The future of the task
+     */
     template <typename F, typename... Args>
     auto add_task(F&& f, Args&&... args) -> std::future<decltype(f(args...))>
     {
@@ -61,12 +71,16 @@ public:
     }
 
 private:
-    std::vector<std::thread> threads_;
+    std::vector<std::jthread> threads_;
     std::queue<std::function<void()>> tasks_;
     mutable std::mutex mut_;
     std::condition_variable cv_;
     bool stop_threads_{false};
 
+
+    /**
+     * @brief The callable threads execute.
+     */
     void worker()
     {
         for (;;)
@@ -74,7 +88,7 @@ private:
             std::function<void()> cur_task;
 
             {
-                std::unique_lock lock(mut_);
+                std::unique_lock lock{mut_};
 
                 //after being notified, check that stop is true or that the queue is not empty (if stop_threads_ is true, we go to the next and destroy this thread)
                 cv_.wait(lock, [this]
