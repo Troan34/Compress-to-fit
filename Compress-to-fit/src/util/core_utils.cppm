@@ -96,7 +96,7 @@ namespace ERR_STRING
 
 	const std::string FILE_INVALID =		"\033[41mError\033[0m\033[31m[" + std::to_string(static_cast<int>(ErrorType::FILE_INVALID)) + "]: this file is invalid. i.e. it is the wrong type or it is unrecognizable.\033[0m\n";
 
-	const std::string FILE_CORRUPTED =		"\033[41mError\033[0m\033[31m[" + std::to_string(static_cast<int>(ErrorType::FILE_CORRUPTED)) + "]: this file's header is corrupted. Unable to continue decompression properly.\033[0m\n";
+	const std::string FILE_CORRUPTED =		"\033[41mError\033[0m\033[31m[" + std::to_string(static_cast<int>(ErrorType::FILE_CORRUPTED)) + "]: this file is corrupted. Unable to continue decompression properly.\033[0m\n";
 
 	const std::string DRIVE_ERROR =			"\033[41mError\033[0m\033[31m[" + std::to_string(static_cast<int>(ErrorType::DRIVE_ERROR)) + "]: there has been a critical error when accessing this file. Please check your drive.\033[0m\n";
 

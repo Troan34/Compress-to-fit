@@ -1,4 +1,4 @@
-module lz77;
+module models:lz77;
 
 namespace fs = std::filesystem;
 
@@ -81,7 +81,7 @@ void LZ77Block::write_to(std::ofstream& output)
 {
 	std::vector<std::byte> block;
 	this->serialize(block);
-	output.write(block.data(), block.size());
+	output.write(reinterpret_cast<char const*>(block.data()), block.size());
 }
 
 

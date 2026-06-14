@@ -1,6 +1,7 @@
 module;
 #include <cassert>
-export module lz77;
+#include <cstddef>
+export module models:lz77;
 
 #if defined(__INTELLISENSE__)
 #include "../../../for_intellisense/everything.hpp"
@@ -257,7 +258,7 @@ namespace alg
 		int32_t prev_poss_table[MAX_WINDOW_SIZE];
 		const size_t MAX_CHAIN;
 
-		[[nodiscard]] auto bucket_index(uint32_t hash_) const noexcept -> uint32_t
+		static [[nodiscard]] auto bucket_index(uint32_t const hash_) noexcept -> uint32_t
 		{
 			if constexpr (std::popcount(MAX_HASH_SIZE) == 1)
 			{
@@ -269,7 +270,7 @@ namespace alg
 			}
 		}
 
-		[[nodiscard]] auto prev_bucket_index(uint32_t hash_) const noexcept -> uint32_t
+		static [[nodiscard]] auto prev_bucket_index(uint32_t const hash_) noexcept -> uint32_t
 		{
 			if constexpr (std::popcount(MAX_WINDOW_SIZE) == 1)
 			{
@@ -281,31 +282,21 @@ namespace alg
 			}
 		}
 
-		[[nodiscard]] auto get_max_chain_from_preset(CompPreset preset) const noexcept -> size_t
+		static [[nodiscard]] auto get_max_chain_from_preset(CompPreset const preset) noexcept -> size_t
 		{
 			switch (preset)
 			{
 			case COMP_MAX:
-				return 5;
-				break;
 			case COMP_8:
 				return 5;
 				break;
 			case COMP_7:
-				return 4;
-				break;
 			case COMP_6:
-				return 4;
-				break;
 			case COMP_5:
 				return 4;
 				break;
 			case COMP_4:
-				return 3;
-				break;
 			case COMP_3:
-				return 3;
-				break;
 			case COMP_2:
 				return 3;
 				break;
@@ -313,7 +304,7 @@ namespace alg
 				return 2;
 				break;
 			case NO_COMP:
-				std::terminate();
+				assert(false);
 				break;
 			}
 		}
@@ -325,10 +316,18 @@ namespace alg
 
 constexpr size_t MAX_BLOCK_SIZE = 4_MiB;
 
+/**
+ * @brief Represents a block of data encoded by LZ77.
+ *
+ * @note This class must satisfy [standard-layout](https://en.cppreference.com/cpp/language/classes#Standard-layout_class)
+ */
 class LZ77Block
 {
 public:
+	static_assert(std::is_standard_layout_v<LZ77Block>);
+
 	explicit LZ77Block(std::span<std::byte const> const data_) noexcept;
+	LZ77Block() = default;
 
 	/**
 	 * @brief Convert the block into a byte buffer
@@ -369,6 +368,8 @@ public:
 		return block[index];
 	}
 
+//'private' does not invalidate the standard-layout property: the following clause will clarify:
+// "has the same access control for all non-static data members".
 private:
 	uint32_t compressed_length_{};
 	uint32_t uncompressed_length_{};
@@ -378,13 +379,10 @@ private:
 
 class LZ77Compressor
 {
+public:
 	LZ77Compressor(std::span<Sym const> const data, CompPreset const preset)
-		:data_(data), window(data, preset), pattern_matcher(window, 0, preset) {}
-
-private:
-	std::span<Sym const> const data_;
-	Window window;
-	alg::Rabin pattern_matcher;
+		:data_(data), window(data, preset), pattern_matcher(window, 0, preset)
+	{}
 
 	/**
 	 * @brief Compress the data received in the constructor
@@ -393,6 +391,13 @@ private:
 	 * @note Will clear out_data block
 	 */
 	void compress(LZ77Block& out_data);
+
+private:
+	std::span<Sym const> const data_{};
+	Window window;
+	alg::Rabin pattern_matcher;
+
+
 };
 
 class LZ77Decompressor
@@ -414,15 +419,14 @@ private:
 export class LZ77ConcurrentCompressor
 {
 public:
-	LZ77ConcurrentCompressor(std::span<std::byte const> const data, parser::Options const& options)
-		: thread_pool(options.concurrency), options_(options), data_(data)
+	LZ77ConcurrentCompressor(std::span<std::byte const> const data, size_t const concurrency, File& file, CompPreset const preset) noexcept(false)
+		: preset_(preset), concurrency_(concurrency), data_(data), file_list_(file), thread_pool(concurrency)
 	{
-		n_blocks_ = data_.size_bytes() / std::min(data_.size_bytes() / options_.concurrency, MAX_BLOCK_SIZE);
+		n_blocks_ = data_.size_bytes() / std::min(data_.size_bytes() / concurrency, MAX_BLOCK_SIZE);
 		if (data_.size_bytes() % MAX_BLOCK_SIZE > 0)
 			n_blocks_++;
 
 		results.reserve(n_blocks_);
-
 	}
 
 	/**
@@ -430,10 +434,11 @@ public:
 	 */
 	void compress() noexcept(false)
 	{
-		auto const partition_size = std::min(data_.size() / options_.concurrency, MAX_BLOCK_SIZE);
-		for (auto completed_size = 0, size_t seq_num{}; completed_size < data_.size(); completed_size += partition_size, seq_num++)
+		auto const partition_size = std::min(data_.size() / concurrency_, MAX_BLOCK_SIZE);
+		for (size_t completed_size = 0, seq_num{}; completed_size < data_.size(); completed_size += partition_size, seq_num++)
 		{
-			auto const true_partition_size = [data_, completed_size, partition_size]()
+			//get the true partition size, i.e. the partition can be cut off at the eof
+			auto const true_partition_size = [completed_size, partition_size, this]
 			{
 				if (completed_size + partition_size > data_.size())
 					return data_.size() - completed_size;
@@ -441,36 +446,39 @@ public:
 					return partition_size;
 			}();
 
-			auto data_for_task = data_.subspan(completed_size, true_partition_size);
-			thread_pool.add_task([this, data_for_task, seq_num]
+			auto const data_for_task = data_.subspan(completed_size, true_partition_size);
+
+			thread_pool.add_task([this, data_for_task, seq_num]//'this' shall be strictly used to access const members, or concurrency capable containers
 			{
-				LZ77Block block{};
-				block.reserve(data_for_task.size());
-				LZ77Compressor compressor{data_for_task, options_};
-				compressor.compress(block);
+				auto block = std::make_unique<LZ77Block>(data_for_task);
+				block->reserve(data_for_task.size());
+				LZ77Compressor compressor{{reinterpret_cast<Sym const*>(data_for_task.data()), (data_for_task.size_bytes() / sizeof(Sym))}, preset_};
+				compressor.compress(*block);
+				file_list_.insert(std::move(block), seq_num);
 			});
 
 			check_results();
-			show_progress(options_, )
+			show_progress({}, static_cast<double>(n_completed_blocks) / static_cast<double>(n_blocks_), true);
 			std::this_thread::sleep_for(1ms);
 		}
-
-
 	}
 
 private:
-	ThreadPool thread_pool{};
-	ConcOrderedFileList<LZ77Block> file_list_{};
-	parser::Options const& options_;
+	CompPreset const preset_;
+	size_t const concurrency_;
 	std::span<std::byte const> const data_{};
 	std::vector<std::future<void>> results{};
 	size_t n_blocks_{};
 	size_t n_completed_blocks{};
+	//These have to stay down here (I just found out how objects are destroyed)
+	ConcOrderedFileList<LZ77Block> file_list_;
+	ThreadPool thread_pool{};
+
 
 	void check_results()
 	{
 		std::erase_if(results,
-		[](std::future<void>& result)
+		[this](std::future<void>& result)
 			{
 				auto const status = result.wait_for(std::chrono::nanoseconds::zero());
 				if (status == std::future_status::ready)
@@ -482,6 +490,70 @@ private:
 				else
 					return false;
 			}
-		)
+		);
 	}
+};
+
+export class LZ77ConcurrentDecompressor
+{
+public:
+	LZ77ConcurrentDecompressor(std::span<std::byte const> const data, File& file, size_t const concurrency)
+		: thread_pool(concurrency), data_(data), file_list_(file), concurrency_(concurrency), file_(file)
+	{
+
+	}
+
+	/**
+	 * @brief Decompress the data.
+	 *
+	 * @details The decompression is achieved by considering the first index of the data as the start of the first block.
+	 *			We then check the compressed_size for this block and advance that much, by doing this we know the start of the new block.
+	 */
+	void decompress() noexcept(false)
+	{
+		for (size_t i{}; i < data_.size();)
+		{
+			decltype(LZ77Block::compressed_length_) compressed_length;
+			std::memcpy(&compressed_length, data_.data() + i + offsetof(LZ77Block, compressed_length_), sizeof(compressed_length));
+
+			decltype(LZ77Block::uncompressed_length_) uncompressed_length;
+			std::memcpy(&uncompressed_length, data_.data() + i + offsetof(LZ77Block, uncompressed_length_), sizeof(uncompressed_length));
+
+			if (i + sizeof(compressed_length) + sizeof(uncompressed_length) + compressed_length > data_.size())
+			{
+				throw_error(ErrorType::FILE_CORRUPTED, "An lz77 header is corrupted in file \"" + file_.get_file_options().path.string() + "\"");
+			}
+
+			auto const data_for_task = data_.subspan(i, compressed_length);
+			thread_pool.add_task(
+				[this, compressed_length, uncompressed_length, data_for_task]()
+				{
+					LZ77Decompressor decompressor{data_for_task};
+
+					std::pmr::polymorphic_allocator<Sym> allocator{shared_memory_pool.get()};
+					std::pmr::vector<Sym> buffer{allocator};
+					buffer.reserve(uncompressed_length);
+
+					decompressor.decompress(buffer);
+				});
+
+			i += sizeof(compressed_length) + sizeof(uncompressed_length) + compressed_length;
+		}
+
+	}
+
+
+
+private:
+	std::span<std::byte const> const data_{};
+	size_t const concurrency_{};
+	std::vector<std::future<void>> results{};
+	size_t n_blocks_{};
+	size_t n_completed_blocks{};
+	//IN THIS ORDER
+	auto shared_memory_pool = std::make_shared<std::pmr::synchronized_pool_resource shared_memory_pool>();
+	File const& file_;
+	ConcOrderedFileList<std::byte> file_list_{};
+	ThreadPool thread_pool{};
+
 };

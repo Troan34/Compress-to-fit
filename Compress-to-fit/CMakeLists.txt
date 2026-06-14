@@ -1,5 +1,6 @@
 add_library(project_logic
-        src/util/containers/thread_pool.cppm)
+        src/util/containers/thread_pool.cppm
+        src/models/models.cppm)
 
 
 set_target_properties(project_logic PROPERTIES

@@ -83,7 +83,7 @@ public:
 	 * 
 	 * @todo Add a parameter for #FileOptions::delete_on_dtor when the parser is updated to do that
 	 */
-	File(const fs::path& path, parser::Options const& options)
+	File(parser::Options const& options)
 		:cli_options(options) 
 	{
 		if (options.concatenate_files)
@@ -91,62 +91,10 @@ public:
 			concatenate_files(cli_options.filename_in);
 		}
 
-		file_options = FileOptions{ path, extract_info(path) };
+		file_options = FileOptions{ cli_options.filename_in, extract_info(cli_options.filename_in) };
 		out_file = create_file(cli_options.filename_out);
 	}
 
-	/**
-	 * @brief Sequentially apply a certain function to the #cli_options.filename_in file and write the processed data to #out_file
-	 * @tparam In Type of the data found in #cli_options.filename_in
-	 * @tparam Out Type of the data written to #out_file
-	 * @tparam Pred Function type to be applied, must satisfy `std::invocable<Pred, CodecInterface<In, Out>&>`
-	 * @param pred Function to be applied
-	 * 
-	 * @details This function will ignore the file header
-	 */
-	// template <typename In, typename Out, typename Pred>
-	// void process_file(Pred pred) requires std::invocable<Pred, CodecInterface<In, Out>&>
-	// {
-	// 	std::ifstream in(cli_options.filename_in, std::ios::binary);
-	//
-	// 	size_t offset = 0;
-	// 	bool compressing = true;
-	// 	if constexpr (std::is_same_v<Out, Sym>)
-	// 	{
-	// 		offset = FILE_HEADER_SIZE;
-	// 		compressing = false;
-	// 	}
-	//
-	//
-	// 	in.seekg(0, std::ios::end);
-	// 	auto file_size = (static_cast<size_t>(in.tellg()) - offset) / sizeof(In) ;
-	// 	in.seekg(0, std::ios::beg);
-	// 	std::error_code error;
-	// 	auto IO_map = mio::make_mmap_source(cli_options.filename_in.string(), offset, mio::map_entire_file, error);
-	//
-	// 	//if header is empty and we are decompressing, throw
-	// 	if (!file_options.header.has_value() and std::is_same_v<Out, Sym>)
-	// 	{
-	// 		fs::remove(cli_options.filename_out);
-	// 		throw_error(ErrorType::INVALID_DECOMPRESSION, file_options.path.string());
-	// 	}
-	//
-	// 	std::vector<Out> output_buffer;//Used to receive data from fun()
-	//
-	// 	CodecInterface<In, Out> codec_interface{
-	// 		.in_data{reinterpret_cast<In const*>(IO_map.data()), reinterpret_cast<In const*>(IO_map.end())},
-	// 		.out_data = output_buffer
-	// 	};
-	//
-	//
-	// 	while (!codec_interface.in_data.reached_end())
-	// 	{
-	// 		pred(codec_interface);
-	//
-	// 		show_progress(cli_options, 1.f - (static_cast<float>(codec_interface.in_data.distance_to_end()) / file_size), compressing);
-	// 	}
-	// 	out_file.write(reinterpret_cast<char const*>(output_buffer.data()), output_buffer.size() * sizeof(Out));
-	// }
 
 	/**
 	 * @brief Write to the output file.

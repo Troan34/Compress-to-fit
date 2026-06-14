@@ -157,7 +157,7 @@ namespace parser
 export void show_progress(const parser::Options& options = {}, float progress = 0.f, bool compressing = false)
 {
 	progress = std::min(1.f, progress);
-	const int max_bar_width = 50;
+	constexpr int max_bar_width = 50;
 
 	std::print("\r\033[K");
 	std::print("\033[34mProgress on the ");
@@ -168,7 +168,7 @@ export void show_progress(const parser::Options& options = {}, float progress = 
 
 
 	std::print("[\033[32m");
-	int filled_width = std::ceil(max_bar_width * progress);
+	int const filled_width = std::ceil(max_bar_width * progress);
 	for (int i = 0; i < filled_width; i++)
 	{
 		std::print("█");
