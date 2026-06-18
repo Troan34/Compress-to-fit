@@ -132,6 +132,11 @@ public:
         std::unique_lock lock{mut};
         return expected_sequence_num_;
     }
+
+    auto const& file() const noexcept
+    {
+        return file_;
+    }
 private:
     File& file_;
     size_t size_{};
@@ -139,7 +144,7 @@ private:
     Node<T>* head_{nullptr};
     Node<T>* tail_{nullptr};
     mutable std::mutex mut;
-    std::jthread writer{write_file};
+    std::jthread writer{&ConcOrderedFileList::write_file, this};
     std::condition_variable writer_notifier;
     bool called_writer{false};
 
@@ -156,12 +161,12 @@ private:
             writer_notifier.wait(lock, [this]{return called_writer;});
             called_writer = false;
 
-            if (tail_->sequence_num != expected_sequence_num_)//we are missing a node
+            if (tail_->sequence_num_ != expected_sequence_num_)//we are missing a node
                 continue;
 
             if constexpr (std::is_trivially_copyable_v<T>)
             {
-                file_.write(tail_->element_, sizeof(T));
+                file_.write(reinterpret_cast<char*>(&tail_->element_), sizeof(T));
             }
             else//T implements a write_to()
             {

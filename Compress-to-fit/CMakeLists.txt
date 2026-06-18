@@ -1,6 +1,4 @@
-add_library(project_logic
-        src/util/containers/thread_pool.cppm
-        src/models/models.cppm)
+add_library(project_logic)
 
 
 set_target_properties(project_logic PROPERTIES
@@ -10,23 +8,26 @@ set_target_properties(project_logic PROPERTIES
 
 target_sources(
     project_logic
-    PUBLIC
-    FILE_SET CXX_MODULES FILES
-    "src/parser/cli_parser.cppm"
-    "src/models/LZ77/lz77.cppm"
-    "src/util/utils.cppm"
-    "src/util/containers/file_management.cppm"
-    "src/util/containers/file_buffer.cppm"
-    "src/util/containers/file_list.cppm"
-    "src/util/core_utils.cppm"
-    "src/util/containers/containers.cppm"
+    PUBLIC FILE_SET CXX_MODULES FILES
+        "src/parser/cli_parser.cppm"
+        "src/util/utils.cppm"
+        "src/util/containers/file_management.cppm"
+        "src/util/containers/file_buffer.cppm"
+        "src/util/containers/file_list.cppm"
+        "src/util/core_utils.cppm"
+        "src/util/containers/containers.cppm"
+        "src/util/containers/thread_pool.cppm"
+        "src/models/models.cppm"
+        "src/models/LZ77/lz77.cppm"
+
+    PRIVATE
+        "src/models/LZ77/lz77_impl.cpp"
 )
 
 target_sources(
     project_logic
     PUBLIC
-    "src/parser/cli_parser.cpp"
-    "src/models/LZ77/lz77_impl.cpp"
+        "src/parser/cli_parser.cpp"
 )
 
 target_link_libraries(
@@ -39,7 +40,7 @@ FetchContent_GetProperties(mio SOURCE_DIR mio_SOURCE_DIR)
 target_include_directories(project_logic PUBLIC "${mio_SOURCE_DIR}/include")
 target_compile_definitions(project_logic PUBLIC NOMINMAX WIN32_LEAN_AND_MEAN)
 
-# --- Executable Target: Compress-to-fit ---
+#add the main executable
 add_executable(Compress-to-fit)
 set_target_properties(Compress-to-fit PROPERTIES 
     OUTPUT_NAME "ctf"
@@ -50,7 +51,7 @@ target_link_libraries(Compress-to-fit PRIVATE project_logic)
 target_sources(Compress-to-fit PRIVATE "Compress-to-fit.cpp")
 target_compile_features(Compress-to-fit PRIVATE cxx_std_23)
 
-# --- Executable Target: tests ---
+#add the tests executable
 add_executable(tests)
 set_target_properties(tests PROPERTIES
     CXX_SCAN_FOR_MODULES ON
@@ -69,7 +70,7 @@ target_sources(
     "test/benchmarks/file_management.cpp"
 )
 
-# --- Platform Specific Flag Settings ---
+#platform dependent flags
 if(MSVC)
     target_link_options(project_logic PRIVATE "/STACK:10485760")
     target_compile_options(project_logic PUBLIC "/utf-8")

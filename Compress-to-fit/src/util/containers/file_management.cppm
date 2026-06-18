@@ -91,7 +91,7 @@ public:
 			concatenate_files(cli_options.filename_in);
 		}
 
-		file_options = FileOptions{ cli_options.filename_in, extract_info(cli_options.filename_in) };
+		in_file_options = FileOptions{ cli_options.filename_in, extract_info(cli_options.filename_in) };
 		out_file = create_file(cli_options.filename_out);
 	}
 
@@ -332,11 +332,11 @@ public:
 		return file;
 	}
 
-	[[nodiscard]] FileOptions get_file_options() const noexcept {return file_options;}
+	[[nodiscard]] FileOptions const& get_in_file_options() const noexcept {return in_file_options;}
 
 	std::ofstream& get_ref_out_stream(){ return out_file; }
 private:
-	FileOptions file_options;
+	FileOptions in_file_options;
 	parser::Options const& cli_options;
 	std::ofstream out_file;
 
@@ -345,14 +345,14 @@ private:
 	*/
 	void check_signature()
 	{
-		std::ifstream file{ file_options.path, std::ios::binary };
+		std::ifstream file{ in_file_options.path, std::ios::binary };
 
 		file.seekg(0);
 		std::string buffer(SIGNATURE.size(), ' ');
 		file.read(buffer.data(), buffer.size());
 		if (buffer != SIGNATURE.data())//not recognized
 		{
-			throw_error(ErrorType::FILE_INVALID, file_options.path.string());
+			throw_error(ErrorType::FILE_INVALID, in_file_options.path.string());
 		}
 	}
 	
@@ -364,7 +364,7 @@ private:
 	 */
 	bool has_signature() const
 	{
-		std::ifstream file{ file_options.path, std::ios::binary };
+		std::ifstream file{ in_file_options.path, std::ios::binary };
 
 		file.seekg(0);
 		std::string buffer(SIGNATURE.size(), ' ');

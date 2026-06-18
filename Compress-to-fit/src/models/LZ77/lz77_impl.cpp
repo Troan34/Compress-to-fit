@@ -1,4 +1,4 @@
-module models:lz77;
+module models;
 
 namespace fs = std::filesystem;
 
@@ -49,7 +49,7 @@ Token alg::Rabin::find_pattern()
 
 
 
-LZ77Block::LZ77Block(std::span<std::byte const> const data_) noexcept
+LZ77Block::LZ77Block(std::span<std::byte const> const data_, fs::path const& file) noexcept
 {
 	constexpr size_t len1 = sizeof(decltype(compressed_length_));
 	constexpr size_t len2 = sizeof(decltype(uncompressed_length_));
@@ -57,10 +57,13 @@ LZ77Block::LZ77Block(std::span<std::byte const> const data_) noexcept
 	std::memcpy(&compressed_length_, data_.data(), len1);//get compressed_length from data
 	std::memcpy(&uncompressed_length_, data_.data() + len1, len2);//get uncompressed_length from data
 
+	if (len1 + len2 + compressed_length_ > data_.size())
+		throw_error(ErrorType::FILE_CORRUPTED, "An lz77 header is corrupted in file \"" + file.string() + "\"");
+
 	block.reserve(data_.size());
 	block = std::vector<LZ77_Token>{
 		reinterpret_cast<LZ77_Token const*>(data_.data() + len1 + len2),
-		reinterpret_cast<LZ77_Token const*>(data_.data() + data_.size())
+		reinterpret_cast<LZ77_Token const*>(data_.data() + compressed_length_)
 	};
 }
 
@@ -105,17 +108,5 @@ void LZ77Compressor::compress(LZ77Block& out_data)
 	}
 }
 
-void LZ77Decompressor::decompress(std::vector<Sym>& out_data) const
-{
-	out_data.reserve(data_.size() / sizeof(Sym));
-	for (auto const token : data_)
-	{
-		if (token.offset != 0)
-		{
-			for (auto _ : std::views::iota(0u, token.length))
-				out_data.push_back(out_data[out_data.size() - token.offset]);
-		}
-		out_data.emplace_back(token.symbol);
-	}
-}
+
 

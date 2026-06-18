@@ -1,6 +1,5 @@
 export module containers:thread_pool;
 import std.compat;
-#include <type_traits>
 
 
 /**
@@ -18,7 +17,7 @@ public:
 
         threads_.reserve(n_threads);
         for (size_t i = 0; i < n_threads; i++)
-            threads_.emplace_back(&worker, this);
+            threads_.emplace_back(&ThreadPool::worker, this);
     }
 
     ~ThreadPool()
@@ -55,7 +54,7 @@ public:
         auto task = std::make_shared<std::packaged_task<decltype(f(args...))()>>(command);
 
         //get the future before we start
-        std::future<std::result_of_t<F(Args...)>> future = task->get_future();
+        std::future<std::invoke_result_t<F, Args...>> future = task->get_future();
 
         {
             std::unique_lock lock{mut_};

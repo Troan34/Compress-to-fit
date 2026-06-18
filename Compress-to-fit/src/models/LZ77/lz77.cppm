@@ -258,7 +258,7 @@ namespace alg
 		int32_t prev_poss_table[MAX_WINDOW_SIZE];
 		const size_t MAX_CHAIN;
 
-		static [[nodiscard]] auto bucket_index(uint32_t const hash_) noexcept -> uint32_t
+		[[nodiscard]] static auto bucket_index(uint32_t const hash_) noexcept -> uint32_t
 		{
 			if constexpr (std::popcount(MAX_HASH_SIZE) == 1)
 			{
@@ -270,7 +270,7 @@ namespace alg
 			}
 		}
 
-		static [[nodiscard]] auto prev_bucket_index(uint32_t const hash_) noexcept -> uint32_t
+		[[nodiscard]] static auto prev_bucket_index(uint32_t const hash_) noexcept -> uint32_t
 		{
 			if constexpr (std::popcount(MAX_WINDOW_SIZE) == 1)
 			{
@@ -282,7 +282,7 @@ namespace alg
 			}
 		}
 
-		static [[nodiscard]] auto get_max_chain_from_preset(CompPreset const preset) noexcept -> size_t
+		[[nodiscard]] static auto get_max_chain_from_preset(CompPreset const preset) noexcept -> size_t
 		{
 			switch (preset)
 			{
@@ -318,15 +318,12 @@ constexpr size_t MAX_BLOCK_SIZE = 4_MiB;
 
 /**
  * @brief Represents a block of data encoded by LZ77.
- *
- * @note This class must satisfy [standard-layout](https://en.cppreference.com/cpp/language/classes#Standard-layout_class)
  */
 class LZ77Block
 {
 public:
-	static_assert(std::is_standard_layout_v<LZ77Block>);
 
-	explicit LZ77Block(std::span<std::byte const> const data_) noexcept;
+	explicit LZ77Block(std::span<std::byte const> const data_, fs::path const& file) noexcept;
 	LZ77Block() = default;
 
 	/**
@@ -360,7 +357,6 @@ public:
 	[[nodiscard]] constexpr auto const& operator[](size_t const index) const noexcept {return block[index];}
 	[[nodiscard]] constexpr auto begin() const noexcept {return block.begin();}
 	[[nodiscard]] constexpr auto end() const noexcept {return block.end();}
-
 	//setter
 	[[nodiscard]] constexpr auto& operator[](size_t const index) noexcept
 	{
@@ -368,8 +364,6 @@ public:
 		return block[index];
 	}
 
-//'private' does not invalidate the standard-layout property: the following clause will clarify:
-// "has the same access control for all non-static data members".
 private:
 	uint32_t compressed_length_{};
 	uint32_t uncompressed_length_{};
@@ -402,7 +396,9 @@ private:
 
 class LZ77Decompressor
 {
-	explicit LZ77Decompressor(LZ77Block const& data) : data_(data) {}
+public:
+	explicit LZ77Decompressor(LZ77Block const& data)
+		: data_(data) {}
 
 	/**
 	 * @brief Decompress the data received in the constructor
@@ -410,7 +406,20 @@ class LZ77Decompressor
 	 *
 	 * @note Will clear out_data buffer
 	 */
-	void decompress(std::vector<Sym>& out_data) const;
+	template <typename Allocator = std::allocator<Sym>>
+	void decompress(std::vector<Sym, Allocator>& out_data) const
+	{
+		out_data.reserve(data_.size() / sizeof(Sym));
+		for (auto const token : data_)
+		{
+			if (token.offset != 0)
+			{
+				for (auto _ : std::views::iota(0u, token.length))
+					out_data.push_back(out_data[out_data.size() - token.offset]);
+			}
+			out_data.emplace_back(token.symbol);
+		}
+	}
 
 private:
 	LZ77Block const& data_;
@@ -450,7 +459,7 @@ public:
 
 			thread_pool.add_task([this, data_for_task, seq_num]//'this' shall be strictly used to access const members, or concurrency capable containers
 			{
-				auto block = std::make_unique<LZ77Block>(data_for_task);
+				auto block = std::make_unique<LZ77Block>(data_for_task, file_list_.file().get_in_file_options().path);
 				block->reserve(data_for_task.size());
 				LZ77Compressor compressor{{reinterpret_cast<Sym const*>(data_for_task.data()), (data_for_task.size_bytes() / sizeof(Sym))}, preset_};
 				compressor.compress(*block);
@@ -498,7 +507,7 @@ export class LZ77ConcurrentDecompressor
 {
 public:
 	LZ77ConcurrentDecompressor(std::span<std::byte const> const data, File& file, size_t const concurrency)
-		: thread_pool(concurrency), data_(data), file_list_(file), concurrency_(concurrency), file_(file)
+		: data_(data), concurrency_(concurrency), file_(file), file_list_(file), thread_pool(concurrency)
 	{
 
 	}
@@ -513,31 +522,23 @@ public:
 	{
 		for (size_t i{}; i < data_.size();)
 		{
-			decltype(LZ77Block::compressed_length_) compressed_length;
-			std::memcpy(&compressed_length, data_.data() + i + offsetof(LZ77Block, compressed_length_), sizeof(compressed_length));
+			auto data_for_task = LZ77Block{data_.subspan(i), file_.get_in_file_options().path};
+			i += sizeof(std::invoke_result_t<decltype(&LZ77Block::uncompressed_length), LZ77Block>) +
+				sizeof(std::invoke_result_t<decltype(&LZ77Block::compressed_length), LZ77Block>) +
+				data_for_task.compressed_length();
 
-			decltype(LZ77Block::uncompressed_length_) uncompressed_length;
-			std::memcpy(&uncompressed_length, data_.data() + i + offsetof(LZ77Block, uncompressed_length_), sizeof(uncompressed_length));
-
-			if (i + sizeof(compressed_length) + sizeof(uncompressed_length) + compressed_length > data_.size())
-			{
-				throw_error(ErrorType::FILE_CORRUPTED, "An lz77 header is corrupted in file \"" + file_.get_file_options().path.string() + "\"");
-			}
-
-			auto const data_for_task = data_.subspan(i, compressed_length);
 			thread_pool.add_task(
-				[this, compressed_length, uncompressed_length, data_for_task]()
+				[this, data = std::move(data_for_task)]
 				{
-					LZ77Decompressor decompressor{data_for_task};
+					LZ77Decompressor decompressor{data};
 
 					std::pmr::polymorphic_allocator<Sym> allocator{shared_memory_pool.get()};
 					std::pmr::vector<Sym> buffer{allocator};
-					buffer.reserve(uncompressed_length);
+					buffer.reserve(data.uncompressed_length());
 
 					decompressor.decompress(buffer);
 				});
 
-			i += sizeof(compressed_length) + sizeof(uncompressed_length) + compressed_length;
 		}
 
 	}
@@ -550,10 +551,30 @@ private:
 	std::vector<std::future<void>> results{};
 	size_t n_blocks_{};
 	size_t n_completed_blocks{};
+
 	//IN THIS ORDER
-	auto shared_memory_pool = std::make_shared<std::pmr::synchronized_pool_resource shared_memory_pool>();
+
+	std::shared_ptr<std::pmr::synchronized_pool_resource> shared_memory_pool = std::make_shared<std::pmr::synchronized_pool_resource>();
 	File const& file_;
-	ConcOrderedFileList<std::byte> file_list_{};
+	ConcOrderedFileList<std::byte> file_list_;
 	ThreadPool thread_pool{};
+
+	void check_results()
+	{
+		std::erase_if(results,
+		[this](std::future<void>& result)
+			{
+				auto const status = result.wait_for(std::chrono::nanoseconds::zero());
+				if (status == std::future_status::ready)
+				{
+					result.get();
+					n_completed_blocks++;
+					return true;
+				}
+				else
+					return false;
+			}
+		);
+	}
 
 };

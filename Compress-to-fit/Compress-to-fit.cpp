@@ -16,11 +16,9 @@ int main(int argc, char* argv[])
 {
 	WIN_CALL(SetConsoleOutputCP(CP_UTF8));
 
-	auto options = parser::parse(argc, argv);
+	auto const options = parser::parse(argc, argv);
 
-
-
-
+	process_file(options);
 
 	return 0;
 }
