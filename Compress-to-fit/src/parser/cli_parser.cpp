@@ -3,7 +3,7 @@ module parser;
 import util;
 import std.compat;
 
-#if defined(__INTELLISENSE__)
+#ifdef __INTELLISENSE__
 #include "../../for_intellisense/everything.hpp"
 #endif
 
@@ -79,88 +79,98 @@ std::expected<Token, ErrorType> lex(const std::string& option)
 	//Find token_value and do error checking
 	switch (token_type)
 	{
-	case TokenType::FILENAME_IN:
-	{
-		//Test if we can find and access the input file
-		if (!fs::exists(token_value))
-			throw_error(ErrorType::PATH_NOT_FOUND, token_value);
-
-		if (std::ifstream file(token_value); !file.is_open())
-			throw_error(ErrorType::PATH_NOT_ACCESSIBLE, token_value);
-
-		value.emplace<fs::path>(token_value);
-	}
-	break;
-	case TokenType::FILENAME_OUT:
-	{
-		fs::path path{ token_value };
-		
-		//Test if we can write a file to the given dir
-		auto test_path = path.parent_path() / "test_writeability";
-		std::ofstream test_file{test_path};
-		if (!test_file.is_open())
+		case TokenType::FILENAME_IN:
 		{
-			fs::remove(test_path);
-			throw_error(ErrorType::PATH_NOT_ACCESSIBLE, path.string());
+			//Test if we can find and access the input file
+			if (!fs::exists(token_value))
+				throw_error(ErrorType::PATH_NOT_FOUND, token_value);
+
+			if (std::ifstream file(token_value); !file.is_open())
+				throw_error(ErrorType::PATH_NOT_ACCESSIBLE, token_value);
+
+			value.emplace<fs::path>(token_value);
 		}
-		test_file.close();
-		fs::remove(test_path);
-		
-		path.replace_extension(FILE_EXTENSION);
-
-		value.emplace<fs::path>(path);
-	}
-	break;
-	case TokenType::COMPRESSOR_TYPE:
-	{
-		std::transform(token_value.begin(), token_value.end(), token_value.begin(), [](char c) { return std::toupper(c); });
-
-		for (int i = 0; i < static_cast<int>(CompType::MAX); i++)
+		break;
+		case TokenType::FILENAME_OUT:
 		{
-			if (COMPRESSOR_STR_OPTIONS[i] == token_value)
+			fs::path path{ token_value };
+
+			//Test if we can write a file to the given dir
+			auto test_path = path.parent_path() / "test_writeability";
+			std::ofstream test_file{test_path};
+			if (!test_file.is_open())
 			{
-				value.emplace<size_t>(static_cast<size_t>(i));
-				break;
+				fs::remove(test_path);
+				throw_error(ErrorType::PATH_NOT_ACCESSIBLE, path.string());
 			}
+			test_file.close();
+			fs::remove(test_path);
+
+			path.replace_extension(FILE_EXTENSION);
+
+			value.emplace<fs::path>(path);
 		}
+		break;
+		case TokenType::COMPRESSOR_TYPE:
+		{
+			std::transform(token_value.begin(), token_value.end(), token_value.begin(), [](char c) { return std::toupper(c); });
 
-		if (std::holds_alternative<std::monostate>(value))
-			throw_error(ErrorType::SYNTAX_ERROR, token_string + token_value);
-	}
-	break;
-	case TokenType::COMPRESSION_PRESET:
-	{
-		//Convert and check the compression preset
-		size_t value_cmpr;
-		auto res = std::from_chars(token_value.data(), token_value.data() + token_value.size(), value_cmpr);
+			for (int i = 0; i < static_cast<int>(CompType::MAX); i++)
+			{
+				if (COMPRESSOR_STR_OPTIONS[i] == token_value)
+				{
+					value.emplace<size_t>(static_cast<size_t>(i));
+					break;
+				}
+			}
 
-		if (res.ec != std::errc() or (value_cmpr > CompPreset::COMP_MAX or value_cmpr < CompPreset::NO_COMP))//if not a number or outside of our range
-			throw_error(ErrorType::VALUE_ERROR, token_string + token_value);
+			if (std::holds_alternative<std::monostate>(value))
+				throw_error(ErrorType::SYNTAX_ERROR, token_string + token_value);
+		}
+		break;
+		case TokenType::COMPRESSION_PRESET:
+		{
+			//Convert and check the compression preset
+			size_t value_cmpr;
+			auto res = std::from_chars(token_value.data(), token_value.data() + token_value.size(), value_cmpr);
 
-		value.emplace<size_t>(value_cmpr);
-	}
-	break;
-	case TokenType::N_FILES:
-	{
-		int value_temp;
-		auto res = std::from_chars(token_value.data(), token_value.data() + token_value.size(), value_temp);
+			if (res.ec != std::errc() or (value_cmpr > CompPreset::COMP_MAX or value_cmpr < CompPreset::NO_COMP))//if not a number or outside of our range
+				throw_error(ErrorType::VALUE_ERROR, token_string + token_value);
 
-		if (res.ec != std::errc() or (value_temp > N_FILES_LIMIT or value_temp < 1))//if less than 1 or over N_FILES_LIMIT
-			throw_error(ErrorType::VALUE_ERROR, token_string + token_value);
-		
-		value.emplace<size_t>(value_temp);
-	}
-	break;
-	case TokenType::SIZE_FILES:
-	{
-		int value_temp;
-		auto res = std::from_chars(token_value.data(), token_value.data() + token_value.size(), value_temp);
+			value.emplace<size_t>(value_cmpr);
+		}
+		break;
+		case TokenType::N_FILES:
+		{
+			int value_temp;
+			auto res = std::from_chars(token_value.data(), token_value.data() + token_value.size(), value_temp);
 
-		if (res.ec != std::errc() or (value_temp < SIZE_FILES_MIN))//if negative or under SIZE_FILES_MIN
-			throw_error(ErrorType::VALUE_ERROR, token_string + token_value);
+			if (res.ec != std::errc() or (value_temp > N_FILES_LIMIT or value_temp < 1))//if less than 1 or over N_FILES_LIMIT
+				throw_error(ErrorType::VALUE_ERROR, token_string + token_value);
 
-		value.emplace<size_t>(value_temp);
-	}
+			value.emplace<size_t>(value_temp);
+		}
+		break;
+		case TokenType::SIZE_FILES:
+		{
+			int value_temp;
+			auto res = std::from_chars(token_value.data(), token_value.data() + token_value.size(), value_temp);
+
+			if (res.ec != std::errc() or (value_temp < SIZE_FILES_MIN))//if negative or under SIZE_FILES_MIN
+				throw_error(ErrorType::VALUE_ERROR, token_string + token_value);
+
+			value.emplace<size_t>(value_temp);
+		}
+		//the next are all flags handled by the switch just above
+		case TokenType::LONG_HELP:
+		case TokenType::HELP:
+		case TokenType::FORCE_COMPRESSION:
+		case TokenType::DELETE_INPUT:
+		case TokenType::CONCATENATE:
+		case TokenType::DO_DECOMP_AFTER_CONCAT:
+		case TokenType::DO_NOT_DECOMP_AFTER_CONCAT:
+		case TokenType::NO_TYPE:
+			break;
 	}
 
 	return Token{ token_type, value };

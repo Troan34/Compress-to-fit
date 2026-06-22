@@ -38,13 +38,12 @@ public:
 	 */
 	constexpr void push(T const& value)
 	{
-		std::unique_lock{mut};
+		std::unique_lock lock{mut};
 
 		data_[true_index()] = value;
 		index_++;
 
 		write_buffer();
-
 	}
 
 	/**
@@ -54,7 +53,7 @@ public:
 	 */
 	constexpr void push(T&& value)
 	{
-		std::unique_lock{mut};
+		std::unique_lock lock{mut};
 
 		data_[true_index()] = value;
 		index_++;
@@ -72,7 +71,7 @@ public:
 	constexpr void append_range(R&& rg)
 	{
 		auto size = rg.end() - rg.start();
-		std::unique_lock{mut};
+		std::unique_lock lock{mut};
 
 
 		//might be worthwhile to optimize this

@@ -1,0 +1,22 @@
+---
+Checks:          'clang-diagnostic-*, bugprone-*, cert-*, cppcoreguidelines-*, modernize-*, performance-*, readability-*, -*compat*, -readability-braces-around-statements'
+WarningsAsErrors: ''
+HeaderFileExtensions:
+  - ''
+  - h
+  - hh
+  - hpp
+  - hxx
+ImplementationFileExtensions:
+  - c
+  - cc
+  - cpp
+  - cxx
+  - cppm
+HeaderFilterRegex: '^(?!.*(libc\+\+|libstdc\+\+|include/c\+\+|modules)).*$'
+FormatStyle:     none
+User:            roanbukaci
+CheckOptions:    {}
+SystemHeaders:   false
+...
+

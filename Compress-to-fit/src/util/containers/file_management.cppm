@@ -53,7 +53,7 @@ export struct FileOptions
 	std::optional<Header> header;
 	bool delete_on_dtor = false;
 
-	[[nodiscard]] bool already_compressed() const noexcept
+	[[nodiscard]] auto already_compressed() const noexcept
 	{
 		return fs::exists(path) and header.has_value();
 	}
@@ -258,11 +258,7 @@ public:
 		file.read(buffer.data(), buffer.size());
 		file.seekg(save_pos);
 
-		if (buffer != SIGNATURE.data())//not recognized
-		{
-			return false;
-		}
-		return true;
+		return buffer == SIGNATURE.data();
 	}
 
 	/**
@@ -272,7 +268,7 @@ public:
 	 *
 	 * @pre path shall exist and be accessible.
 	 */
-	static std::optional<Header> extract_info(const fs::path& path)
+	static auto extract_info(const fs::path& path) -> std::optional<Header>
 	{
 		std::ifstream file{ path, std::ios::binary };
 
@@ -287,7 +283,7 @@ public:
 	 *
 	 * @pre path shall exist and be accessible.
 	 */
-	static std::optional<Header> extract_info(std::ifstream& file, fs::path const& path)
+	static auto extract_info(std::ifstream& file, fs::path const& path) -> std::optional<Header>
 	{
 
 		//we are dealing with an already compressed file
@@ -298,24 +294,21 @@ public:
 			std::byte buffer[sizeof(Header)] = { std::byte{0} };
 			file.read(reinterpret_cast<char*>(buffer), sizeof(Header));
 
-			Header header = std::bit_cast<Header>(buffer);
+			auto header = std::bit_cast<Header>(buffer);
 
-			CompType comp_type = header.comp_type;
-			CompPreset comp_preset = header.preset;
-
-			if (comp_type >= CompType::MAX or comp_preset > COMP_MAX)
+			if (header.comp_type >= CompType::MAX or header.preset > COMP_MAX)
 				throw_error(ErrorType::FILE_CORRUPTED, path.string());
 
 			try_throw_IO_error(file.rdstate(), path);
 
-			return std::optional<Header>{header};
+			return std::optional{header};
 
 		}
 
 		return std::optional<Header>{};
 	}
 
-	static std::ofstream create_file(CompType comp_type, CompPreset comp_preset, fs::path path, size_t id, uint16_t count)
+	static auto create_file(CompType const comp_type, CompPreset const comp_preset, fs::path const& path, size_t id, uint16_t count) -> std::ofstream
 	{
 		std::ofstream file(path, std::ios::binary | std::ios::trunc);
 
@@ -324,7 +317,7 @@ public:
 		file.write(reinterpret_cast<char const*>(&id), sizeof(decltype(id)));
 		file.write(reinterpret_cast<char const*>(&count), sizeof(decltype(count)));
 		file.seekp(static_cast<int>(HEADER_OFFSET::COMP_PRESET));
-		uint8_t temp = static_cast<uint8_t>(comp_type);
+		auto temp = static_cast<uint8_t>(comp_type);
 		file.write(reinterpret_cast<char const*>(&temp), sizeof(decltype(temp)));
 		temp = static_cast<uint8_t>(comp_preset);
 		file.write(reinterpret_cast<char const*>(&temp), sizeof(decltype(temp)));
@@ -332,9 +325,9 @@ public:
 		return file;
 	}
 
-	[[nodiscard]] FileOptions const& get_in_file_options() const noexcept {return in_file_options;}
+	[[nodiscard]] auto get_in_file_options() const noexcept -> FileOptions const& {return in_file_options;}
 
-	std::ofstream& get_ref_out_stream(){ return out_file; }
+	auto get_ref_out_stream() -> std::ofstream&{ return out_file; }
 private:
 	FileOptions in_file_options;
 	parser::Options const& cli_options;

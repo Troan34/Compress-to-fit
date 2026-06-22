@@ -91,7 +91,9 @@
       "cacheVariables": {
         "CMAKE_C_COMPILER": "clang",
         "CMAKE_CXX_COMPILER": "clang++",
+        "CMAKE_CXX_FLAGS": "-Wall -Wextra -Weverything -Wpedantic -Wconversion -Wshadow -Wfloat-equal -Wuninitialized -Wthread-safety",
         "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+        "CMAKE_CXX_CLANG_TIDY": "",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
         "CMAKE_PREFIX_PATH": "~/Qt/6.11.1/gcc_64/"
       },
@@ -107,7 +109,7 @@
       "inherits": "linux-base",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Debug",
-        "CMAKE_CXX_FLAGS": "-Wall -Wextra -g -O0 -g3 -ggdb -fsanitize=thread -fno-omit-frame-pointer -fno-optimize-sibling-calls",
+        "CMAKE_CXX_FLAGS": "-g -O0 -g3 -ggdb -fsanitize=thread -fno-omit-frame-pointer -fno-optimize-sibling-calls",
         "CMAKE_EXE_LINKER_FLAGS": "-Wl,--build-id=sha1"
       }
     },
@@ -117,7 +119,7 @@
       "inherits": "linux-base",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "Release",
-        "CMAKE_CXX_FLAGS": "-Wall -Wextra -O3"
+        "CMAKE_CXX_FLAGS": "-O3"
       }
     },
     {
@@ -126,7 +128,7 @@
       "inherits": "linux-base",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "RelWithDebInfo",
-        "CMAKE_CXX_FLAGS": "-Wall -Wextra -g -O2 -g3 -ggdb -fsanitize=thread -fno-omit-frame-pointer -fno-optimize-sibling-calls"
+        "CMAKE_CXX_FLAGS": "-g -O2 -g3 -ggdb -fsanitize=thread -fno-omit-frame-pointer -fno-optimize-sibling-calls"
       }
     }
   ]

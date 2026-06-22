@@ -1,10 +1,9 @@
-//
-// Created by roanbukaci on 6/5/26.
-//
+module;
+#include <cassert>
 
 export module util:core_utils;
 
-#if defined(__INTELLISENSE__)
+#ifdef __INTELLISENSE__
 #include "../../for_intellisense/everything.hpp"
 #endif
 
@@ -15,7 +14,7 @@ namespace fs = std::filesystem;
 export inline constexpr size_t N_FILES_LIMIT = 1'000;
 export inline constexpr size_t SIZE_FILES_MIN = 512;
 export inline constexpr char const* FILE_EXTENSION = ".tzf";
-export constexpr size_t SIZE_CHUNK = 4 * 1024 * 1024;//4MiB
+export constexpr size_t SIZE_CHUNK = 4ULL * 1024 * 1024;//4MiB
 
 
 //All of this is COMPLETELY optional, but why not train our metaprogramming
@@ -102,7 +101,7 @@ namespace ERR_STRING
 
 	const std::string INVALID_DECOMPRESSION="\033[41mError\033[0m\033[31m[" + std::to_string(static_cast<int>(ErrorType::INVALID_DECOMPRESSION)) + "]: decompression is invalid on this file, you may have tried to decompress a normal file.\033[0m\n";
 
-	const std::string DIR_COMPRESSION =		"\033[41mError\033[0m\033[31m[" + std::to_string(static_cast<int>(ErrorType::DIR_COMPRESSION)) + "]: folder compression is unvailable. \033[34mTip\033[0m: If you are trying to decompress a folder of files, check the related command in the help page with '-h' or '-help'\n";
+	const std::string DIR_COMPRESSION =		"\033[41mError\033[0m\033[31m[" + std::to_string(static_cast<int>(ErrorType::DIR_COMPRESSION)) + "]: folder compression is unavailable. \033[34mTip\033[0m: If you are trying to decompress a folder of files, check the related command in the help page with '-h' or '-help'\n";
 
 }
 
@@ -147,8 +146,8 @@ export void throw_error(ErrorType error, const std::string& error_option = "")
 		throw std::runtime_error(error_option + " <- " + ERR_STRING::FILE_INVALID);
 		break;
 	case ErrorType::FILE_CORRUPTED:
-		std::print("{} <- {}", error_option, ERR_STRING::FILE_INVALID);
-		throw std::runtime_error(error_option + " <- " + ERR_STRING::FILE_INVALID);
+		std::print("{} <- {}", error_option, ERR_STRING::FILE_CORRUPTED);
+		throw std::runtime_error(error_option + " <- " + ERR_STRING::FILE_CORRUPTED);
 		break;
 	case ErrorType::DRIVE_ERROR:
 		std::print("{} <- {}", error_option, ERR_STRING::DRIVE_ERROR);
@@ -157,6 +156,17 @@ export void throw_error(ErrorType error, const std::string& error_option = "")
 	case ErrorType::INVALID_DECOMPRESSION:
 		std::print("{} <- {}", error_option, ERR_STRING::INVALID_DECOMPRESSION);
 		throw std::runtime_error(error_option + " <- " + ERR_STRING::INVALID_DECOMPRESSION);
+		break;
+	case ErrorType::MISSING_ARGUMENT:
+		std::print("{} <- {}", error_option, ERR_STRING::MISSING_ARGUMENT);
+		throw std::runtime_error(error_option + " <- " + ERR_STRING::MISSING_ARGUMENT);
+		break;
+	case ErrorType::DIR_COMPRESSION:
+		std::print("{} <- {}", error_option, ERR_STRING::DIR_COMPRESSION);
+		throw std::runtime_error(error_option + " <- " + ERR_STRING::DIR_COMPRESSION);
+		break;
+	default:
+		assert(false);
 		break;
 	}
 }
@@ -231,12 +241,12 @@ export constexpr std::string_view COMPRESSOR_STR_OPTIONS[] =
 export template <typename Iter>
 struct ForwardIterator
 {
-	using iterator_concept = std::forward_iterator_tag;
-	using iterator_category = std::forward_iterator_tag;
-	using value_type = typename std::iterator_traits<Iter>::value_type;
-	using difference_type = typename std::iterator_traits<Iter>::difference_type;
-	using pointer = typename std::iterator_traits<Iter>::pointer;
-	using reference = typename std::iterator_traits<Iter>::reference;
+	using iterator_concept	=	std::forward_iterator_tag;
+	using iterator_category =	std::forward_iterator_tag;
+	using value_type		=	std::iterator_traits<Iter>::value_type;
+	using difference_type	=	std::iterator_traits<Iter>::difference_type;
+	using pointer			=	std::iterator_traits<Iter>::pointer;
+	using reference			=	std::iterator_traits<Iter>::reference;
 
 	ForwardIterator(Iter begin_, Iter const end_)
 		:iterator(begin_), end(end_)
@@ -246,18 +256,18 @@ struct ForwardIterator
 	Iter iterator;
 	Iter const end;
 
-	ForwardIterator& operator++() { ++iterator; return *this; }
-	ForwardIterator operator++(int) { ForwardIterator temp = *this; ++iterator; return temp; }
-	ForwardIterator& operator+=(size_t const size) { iterator += size; return *this; }
+	auto operator++() -> ForwardIterator& { ++iterator; return *this; }
+	auto operator++(int) -> ForwardIterator { ForwardIterator temp = *this; ++iterator; return temp; }
+	auto operator+=(size_t const size) -> ForwardIterator& { iterator += size; return *this; }
 
 
-	reference operator*() { return *iterator; }
+	auto operator*() -> reference { return *iterator; }
 
-	[[nodiscard]] bool operator==(ForwardIterator const& other) const { return iterator == other.iterator; };
-	[[nodiscard]] bool operator!=(ForwardIterator const& other) const { return iterator != other.iterator; };
+	[[nodiscard]] auto operator==(ForwardIterator const& other) const -> bool { return iterator == other.iterator; }
+	[[nodiscard]] auto operator!=(ForwardIterator const& other) const -> bool { return iterator != other.iterator; }
 
-	[[nodiscard]] bool reached_end() const { return iterator >= end; };
-	[[nodiscard]] size_t distance_to_end() const { return static_cast<size_t>(end - iterator); };
+	[[nodiscard]] auto reached_end() const -> bool { return iterator >= end; }
+	[[nodiscard]] size_t distance_to_end() const { return static_cast<size_t>(end - iterator); }
 
 };
 
@@ -295,12 +305,25 @@ export struct Sym
 
 };
 
-export [[nodiscard]] constexpr size_t KiB_to_B(size_t value)
+/**
+* @brief Calculate the power at compile time, to make sure of its correct usage it will be consteval
+*/
+export [[nodiscard]] consteval size_t const_pow(size_t const base, size_t const exponent) noexcept
+{
+	size_t result = 1;
+	for (size_t i = 0; i < exponent; i++)
+	{
+		result *= base;
+	}
+	return result;
+}
+
+export [[nodiscard]] constexpr size_t KiB_to_B(size_t const value)
 {
 	return value * 1024;
 }
 
-export [[nodiscard]] constexpr size_t MiB_to_B(size_t value)
+export [[nodiscard]] constexpr size_t MiB_to_B(size_t const value)
 {
 	return value * 1024 * 1024;
 }
@@ -310,21 +333,10 @@ export constexpr unsigned long long operator""_MiB(unsigned long long const valu
 	if (value * 1024ULL * 1024ULL >= std::numeric_limits<unsigned long long>::max()) {
 		throw std::out_of_range("Your value will cause an overflow.");
 	}
-	return value * 1024ULL * 1024ULL;
+	return MiB_to_B(value);
 }
 
-/**
-* @brief Calculate the power at compile time, to make sure of its correct usage it will be consteval
-*/
-export [[nodiscard]] consteval size_t const_pow(size_t const base, size_t const exponent) noexcept
-{
-	size_t result = 1;
-	for (int i = 0; i < exponent; i++)
-	{
-		result *= base;
-	}
-	return result;
-}
+
 
 
 /**

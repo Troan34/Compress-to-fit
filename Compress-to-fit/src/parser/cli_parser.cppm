@@ -1,6 +1,6 @@
 export module parser;
 
-#if defined(__INTELLISENSE__)
+#ifdef __INTELLISENSE__
 #include "../../for_intellisense/everything.hpp"
 #endif
 
@@ -80,7 +80,7 @@ namespace parser
 	export class HelpException : public std::exception
 	{
 	public:
-		const char* what() const noexcept override
+		[[nodiscard]] const char* what() const noexcept override
 		{
 			return help_str.data();
 		}
@@ -101,12 +101,12 @@ namespace parser
 		Token(TokenType type_, ValueType const &value_);
 		Token(const std::string& option);
 
-		inline ValueType get_value() const noexcept
+		[[nodiscard]] auto get_value() const noexcept
 		{
 			return value;
 		}
 
-		inline TokenType get_type() const noexcept
+		[[nodiscard]] auto get_type() const noexcept
 		{
 			return type;
 		}
@@ -156,7 +156,7 @@ namespace parser
  */
 export void show_progress(const parser::Options& options = {}, float progress = 0.f, bool compressing = false)
 {
-	progress = std::min(1.f, progress);
+	progress = std::min(1.F, progress);
 	constexpr int max_bar_width = 50;
 
 	std::print("\r\033[K");
@@ -179,6 +179,6 @@ export void show_progress(const parser::Options& options = {}, float progress = 
 	}
 
 
-	std::print("\033[0m] {:.1f}%", progress * 100.0f);
+	std::print("\033[0m] {:.1f}%", progress * 100.F);
 	std::cout << std::flush;
 }

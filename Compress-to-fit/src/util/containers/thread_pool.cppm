@@ -33,8 +33,8 @@ public:
     //when in doubt:
     ThreadPool(ThreadPool&&) = delete;
     ThreadPool(ThreadPool const&) = delete;
-    ThreadPool& operator=(ThreadPool&&) = delete;
-    ThreadPool& operator=(ThreadPool const&) = delete;
+    auto operator=(ThreadPool&&) -> ThreadPool& = delete;
+    auto operator=(ThreadPool const&) -> ThreadPool& = delete;
 
     /**
      * @brief Add a new task for the thread pool

@@ -225,7 +225,7 @@ namespace alg
 			
 		}
 
-		Rabin& operator=(const Rabin&) = default;
+		Rabin& operator=(const Rabin&) = delete;
 
 		/**
 		 * @brief Roll and add the hash to the symbol_positions

@@ -1,10 +1,19 @@
 add_library(project_logic)
 
+set(CLANG_TIDY_OPT
+        clang-tidy
+        --use-color
+        "--header-filter=${PROJECT_SOURCE_DIR}/(src|include)/.*"
+)
 
 set_target_properties(project_logic PROPERTIES
-    CXX_SCAN_FOR_MODULES ON
-    CXX_MODULE_STD ON
+        CXX_CLANG_TIDY ""
+        CXX_SCAN_FOR_MODULES ON
+        CXX_MODULE_STD ON
 )
+
+
+
 
 target_sources(
     project_logic
@@ -30,6 +39,8 @@ target_sources(
         "src/parser/cli_parser.cpp"
 )
 
+set_target_properties(project_logic PROPERTIES CXX_CLANG_TIDY ${CLANG_TIDY_OPT})
+
 target_link_libraries(
         project_logic
         PUBLIC
@@ -46,16 +57,21 @@ set_target_properties(Compress-to-fit PROPERTIES
     OUTPUT_NAME "ctf"
     CXX_SCAN_FOR_MODULES ON
     CXX_MODULE_STD ON
+    CXX_CLANG_TIDY ""
 )
 target_link_libraries(Compress-to-fit PRIVATE project_logic)
 target_sources(Compress-to-fit PRIVATE "Compress-to-fit.cpp")
 target_compile_features(Compress-to-fit PRIVATE cxx_std_23)
+set_target_properties(Compress-to-fit PROPERTIES CXX_CLANG_TIDY ${CLANG_TIDY_OPT})
+
+
 
 #add the tests executable
 add_executable(tests)
 set_target_properties(tests PROPERTIES
     CXX_SCAN_FOR_MODULES ON
     CXX_MODULE_STD ON
+    CXX_CLANG_TIDY ""
 )
 target_link_libraries(tests PRIVATE 
     project_logic
@@ -69,6 +85,9 @@ target_sources(
     "test/util/utils.cpp"
     "test/benchmarks/file_management.cpp"
 )
+
+set_target_properties(tests PROPERTIES CXX_CLANG_TIDY ${CLANG_TIDY_OPT})
+
 
 #platform dependent flags
 if(MSVC)
@@ -86,3 +105,10 @@ endif()
 
 include(Catch)
 catch_discover_tests(tests)
+
+if(TARGET __cmake_cxx_std_23)
+    set_property(
+            TARGET __cmake_cxx_std_23
+            PROPERTY CXX_CLANG_TIDY ""
+    )
+endif()
