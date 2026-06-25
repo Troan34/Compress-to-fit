@@ -70,11 +70,12 @@ public:
     }
 
 private:
-    std::vector<std::jthread> threads_;
-    std::queue<std::function<void()>> tasks_;
+    bool stop_threads_{false};
     mutable std::mutex mut_;
     std::condition_variable cv_;
-    bool stop_threads_{false};
+    std::queue<std::function<void()>> tasks_;
+    std::vector<std::jthread> threads_;
+
 
 
     /**

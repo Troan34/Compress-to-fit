@@ -63,16 +63,16 @@ class Window
 {
 public:
 	Window(const std::span<Sym const>& data_, size_t const window_size) noexcept
-		:data(data_), size_search(0), max_size(std::clamp(window_size, window_size, MAX_WINDOW_SIZE))
+		: data(data_), size_search(0), max_size(std::clamp(window_size, window_size, MAX_WINDOW_SIZE))
 	{
 		if (max_size > data.size()) max_size = data.size();
 		size_look_ahead = std::ceil(max_size / (SEARCH_RATIO + 1));
 		max_size_look_ahead = size_look_ahead;
-		max_size_search = SEARCH_RATIO * max_size_look_ahead;
+		max_size_search = SEARCH_RATIO * max_size_look_ahead;//TODO: BUG: MAX_SIZE_SEARCH GOES OUTSIDE OF RANGE
 	}
 
 	Window(const std::span<Sym const>& data_, CompPreset const preset)
-		:data(data_)
+		: data(data_)
 	{
 		size_search = 0;
 		switch (preset)
@@ -191,13 +191,12 @@ namespace alg
 	inline constexpr uint32_t PRIME = 31;
 	inline constexpr uint32_t ROLL_FACTOR = const_pow(BASE, MIN_MATCH - 1);
 
+
 	/**
 	 * @brief This class enables fast string matching.
-	 * @brief Makes use of two chained arrays.
-	 * @brief This class is intertwined with LZ77 and should not be used as separate entity.
-	 * @brief This class shall not modify the Window given
-	 *
-	 * @file lz77.cppm
+	 * 		  Makes use of two chained arrays.
+	 * 		  This class is intertwined with LZ77 and should not be used as separate entity.
+	 * 		  This class shall not modify the Window given
 	 */
 	class Rabin
 	{
@@ -438,6 +437,14 @@ public:
 		results.reserve(n_blocks_);
 	}
 
+	~LZ77ConcurrentCompressor()
+	{
+		for (auto& result : results)
+		{
+			result.get();
+		}
+	}
+
 	/**
 	 * @brief Run the compression
 	 */
@@ -457,18 +464,19 @@ public:
 
 			auto const data_for_task = data_.subspan(completed_size, true_partition_size);
 
-			thread_pool.add_task([this, data_for_task, seq_num]//'this' shall be strictly used to access const members, or concurrency capable containers
+			auto future = thread_pool.add_task([this, data_for_task, seq_num]//'this' shall be strictly used to access const members, or concurrency capable containers
 			{
-				auto block = std::make_unique<LZ77Block>(data_for_task, file_list_.file().get_in_file_options().path);
+				auto block = std::make_unique<LZ77Block>();
 				block->reserve(data_for_task.size());
 				LZ77Compressor compressor{{reinterpret_cast<Sym const*>(data_for_task.data()), (data_for_task.size_bytes() / sizeof(Sym))}, preset_};
 				compressor.compress(*block);
 				file_list_.insert(std::move(block), seq_num);
 			});
 
+			results.emplace_back(std::move(future));
+
 			check_results();
 			show_progress({}, static_cast<double>(n_completed_blocks) / static_cast<double>(n_blocks_), true);
-			std::this_thread::sleep_for(1ms);
 		}
 	}
 

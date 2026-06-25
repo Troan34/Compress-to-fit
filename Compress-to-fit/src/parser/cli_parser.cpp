@@ -201,7 +201,7 @@ Options parse(int argc, char* argv[])
 
 		//If the path has spaces, this makes sure that we take the whole path (we check for ")
 		//else we throw
-		if (std::count(option.begin(), option.end(), '\"') == 1)
+		if (std::ranges::count(option, '\"') == 1)
 		{
 			bool valid = false;
 

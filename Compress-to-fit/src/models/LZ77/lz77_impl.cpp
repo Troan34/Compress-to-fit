@@ -90,11 +90,12 @@ void LZ77Block::write_to(std::ofstream& output)
 
 void LZ77Compressor::compress(LZ77Block& out_data)
 {
+	out_data.clear();
 	out_data.reserve(data_.size() / sizeof(LZ77_Token));
 
 	size_t consumed_tokens{};
 	//loop over the stream
-	for (auto i = data_.begin(); i != data_.end(); ++i)
+	for (auto i = data_.begin(); i != data_.end();)
 	{
 		auto const token = this->pattern_matcher.find_pattern();
 

@@ -42,15 +42,15 @@ public:
         std::unique_lock lock{mut};
         called_writer = true;
         writer_notifier.notify_one();//write everything left
-        //the thread will be destroyed automatically thanks to jthread and stop token
+        //the thread will be destroyed automatically thanks to jthread which updates the stop token
     }
 
     //we really don't want to copy a concurrent container with access to a file
     ConcOrderedFileList(ConcOrderedFileList const&) = delete;
-    ConcOrderedFileList& operator=(ConcOrderedFileList const&) = delete;
+    auto operator=(ConcOrderedFileList const&) -> ConcOrderedFileList& = delete;
 
     ConcOrderedFileList(ConcOrderedFileList&&) noexcept = default;
-    ConcOrderedFileList& operator=(ConcOrderedFileList&&) noexcept = default;
+    auto operator=(ConcOrderedFileList&&) noexcept -> ConcOrderedFileList& = default;
 
     /**
      * @brief Inserts an element to the list, which it will own. THE FIRST ELEMENT MUST HAVE SEQUENCE NUMBER == 0, check warning for additional info.
@@ -70,7 +70,6 @@ public:
     {
         auto* new_node = new Node<T>{std::move(element), sequence_num};
 
-
         {
             std::unique_lock lock{mut};//we could opt for a shared mutex here, profile
 
@@ -83,28 +82,40 @@ public:
             }
             else
             {
-                Node<T>* prev_node{head_};//we actually are searching for the previous node
-                //Make sure the nullptr check stays first (unless you like bugs, I don't judge)
-                while (prev_node and (prev_node->sequence_num_ != sequence_num - 1)) prev_node = prev_node->prev;
+                Node<T>* prev_node{head_};
 
-                if (!prev_node)//We reached the end
+                //Make sure the nullptr check stays first (unless you like bugs, I don't judge)
+                //If sequence_num < prev_node->sequence_num_ it means that we found a spot that keeps the ascending order
+                while (prev_node and (sequence_num < prev_node->sequence_num_)) //walks down the ptrs
                 {
-                    new_node->next = tail_;
-                    tail_->prev = new_node;
+                    prev_node = prev_node->prev;
+                }
+
+                if (!prev_node)//We have to become the tail
+                {
+                    new_node->prev = tail_;
+                    tail_->next = new_node;
                     tail_ = new_node;
                 }
-                else//we found a place to squeeze in
+                else//we either become the head or squeeze in
                 {
-                    //set up the new node links
-                    new_node->prev = prev_node;
-                    new_node->next = prev_node->next;
+                    if (prev_node == head_)//become head
+                    {
+                        new_node->next = head_;
+                        head_->prev = new_node;
+                        head_ = new_node;
+                    }
+                    else//squeeze in
+                    {
+                        //Make the links for the new node to its future neighbors
+                        new_node->prev = prev_node;
+                        new_node->next = prev_node->next;
 
-                    //update the linking of the next and previous nodes (relative to new node)
-                    if (prev_node->next) //the next node may not exist (head)
+                        //Make the links from the neighbors to the new node
                         prev_node->next->prev = new_node;
+                        prev_node->next = new_node;
+                    }
 
-                    prev_node->next = new_node;
-                    prev_node = new_node;
                 }
 
             }
@@ -133,7 +144,7 @@ public:
         return expected_sequence_num_;
     }
 
-    auto const& file() const noexcept
+    auto const& file() const& noexcept
     {
         return file_;
     }
@@ -143,10 +154,10 @@ private:
     size_t expected_sequence_num_{};
     Node<T>* head_{nullptr};
     Node<T>* tail_{nullptr};
-    mutable std::mutex mut;
-    std::jthread writer{&ConcOrderedFileList::write_file, this};
-    std::condition_variable writer_notifier;
     bool called_writer{false};
+    mutable std::mutex mut;
+    std::condition_variable writer_notifier;
+    std::jthread writer{&ConcOrderedFileList::write_file, this};
 
 
     /**
@@ -155,14 +166,15 @@ private:
      */
     void write_file(std::stop_token stop)
     {
-        while (!stop.stop_requested())
+        //NOT thread safe by itself, will not interact with the mutex.
+        //returns true if something has been written otherwise false
+        auto write_func = [this]
         {
-            std::unique_lock lock{mut};
-            writer_notifier.wait(lock, [this]{return called_writer;});
-            called_writer = false;
-
             if (tail_->sequence_num_ != expected_sequence_num_)//we are missing a node
-                continue;
+                return false;
+
+            if (!tail_)
+                return false;
 
             if constexpr (std::is_trivially_copyable_v<T>)
             {
@@ -172,11 +184,34 @@ private:
             {
                 tail_->element_->write_to(file_.get_ref_out_stream());
             }
-            tail_ = tail_->next;//new tail ptr
-            delete tail_->prev;//delete old tail ptr
 
+            auto old_tail = tail_;
+            tail_ = tail_->next;//new tail ptr
+            delete old_tail;//delete old tail ptr
+            if (head_ == old_tail) head_ = nullptr;//we have to account for the head_ ptr too if empty
+
+            size_--;
             expected_sequence_num_++;
+            return true;
+        };
+
+        while (!stop.stop_requested())
+        {
+            std::unique_lock lock{mut};
+            writer_notifier.wait(lock, [this]{return called_writer;});
+
+            if (stop.stop_requested())
+                break;
+            called_writer = false;
+
+            write_func();
         }
+
+        std::unique_lock lock{mut};
+        while (write_func());//write the whole thing
+
+        assert(size_ == 0 && "The file list wasn't able to clean up correctly.");
+
     }
 
 };
