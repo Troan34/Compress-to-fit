@@ -1,0 +1,11 @@
+<map id="LZ77Decompressor" name="LZ77Decompressor">
+<area shape="rect" id="Node000001" title=" " alt="" coords="14,906,161,989"/>
+<area shape="rect" id="Node000002" href="$classLZ77Block.html" title="Represents a block of data encoded by LZ77." alt="" coords="8,483,167,836"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="89,833,90,890,85,889,86,838"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="22,349,152,413"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="88,410,90,466,85,466,87,415"/>
+<area shape="rect" id="Node000004" href="$structToken.html" title="This is the type LZ77 will output." alt="" coords="48,197,127,279"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="88,277,90,333,85,332,87,282"/>
+<area shape="rect" id="Node000005" href="$structSym.html" title=" " alt="" coords="5,5,169,127"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="87,124,90,180,85,180,87,129"/>
+</map>

@@ -2,21 +2,21 @@
 \hypertarget{lz77__impl_8cpp_source}{}\label{lz77__impl_8cpp_source}\index{Compress-\/to-\/fit/src/models/LZ77/lz77\_impl.cpp@{Compress-\/to-\/fit/src/models/LZ77/lz77\_impl.cpp}}
 \doxymbox{\hyperlink{lz77__impl_8cpp}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00001}00001\ module\ lz77;}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00001}00001\ module\ models;}
 \DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00002}00002\ }
 \DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00003}00003\ \textcolor{keyword}{namespace}\ fs\ =\ std::filesystem;}
 \DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00004}00004\ }
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00005}\doxymbox{\hyperlink{classalg_1_1_rabin_a838bad9d27d6ae951862fc5e22ab1e1e}{00005}}\ \textcolor{keywordtype}{void}\ alg::Rabin::roll\_hash(uint32\_t\ num\_of\_rolls)\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00005}\doxymbox{\hyperlink{classalg_1_1Rabin_a838bad9d27d6ae951862fc5e22ab1e1e}{00005}}\ \textcolor{keywordtype}{void}\ alg::Rabin::roll\_hash(uint32\_t\ num\_of\_rolls)\ \textcolor{keyword}{noexcept}}
 \DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00006}00006\ \{}
 \DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00007}00007\ \ \ \ \ \textcolor{keywordflow}{while}\ (num\_of\_rolls\ >\ 0)}
 \DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00008}00008\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00009}00009\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (position\ <\ (data.get\_data().size()\ -\/\ MIN\_MATCH))\textcolor{comment}{//stop\ if\ we\ reached\ the\ end}}
 \DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00010}00010\ \ \ \ \ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00011}00011\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//roll\ hash}}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00012}00012\ \ \ \ \ \ \ \ \ \ \ \ \ hash\ =\ (hash\ +\ MOD\ -\/\ \textcolor{keyword}{static\_cast}<uint64\_t>(data[position])\ *\ ROLL\_FACTOR\ \%\ MOD)\ \%\ MOD;}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00013}00013\ \ \ \ \ \ \ \ \ \ \ \ \ hash\ =\ (hash\ *\ BASE\ +\ data[position\ +\ MIN\_MATCH])\ \%\ MOD;}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00012}00012\ \ \ \ \ \ \ \ \ \ \ \ \ hash\ =\ (hash\ +\ MOD\ -\/\ data[position]\ *\ ROLL\_FACTOR\ \%\ MOD)\ \%\ MOD;}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00013}00013\ \ \ \ \ \ \ \ \ \ \ \ \ hash\ =\ (\textcolor{keyword}{static\_cast}<uint64\_t>(hash)\ *\ BASE\ +\ data[position\ +\ MIN\_MATCH])\ \%\ MOD;}
 \DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00014}00014\ }
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00015}00015\ \ \ \ \ \ \ \ \ \ \ \ \ prev\_poss\_table[prev\_bucket\_index(hash)]\ =\ poss\_table[bucket\_index(hash)];}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00015}00015\ \ \ \ \ \ \ \ \ \ \ \ \ prev\_poss\_table[prev\_bucket\_index(position)]\ =\ poss\_table[bucket\_index(hash)];}
 \DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00016}00016\ \ \ \ \ \ \ \ \ \ \ \ \ poss\_table[bucket\_index(hash)]\ =\ position;}
 \DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00017}00017\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00018}00018\ }
@@ -25,82 +25,92 @@
 \DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00021}00021\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00022}00022\ \}}
 \DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00023}00023\ }
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00024}\doxymbox{\hyperlink{classalg_1_1_rabin_aac69972318494ea1b3b996e03d604d36}{00024}}\ Token\ alg::Rabin::find\_pattern()}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00024}\doxymbox{\hyperlink{classalg_1_1Rabin_aac69972318494ea1b3b996e03d604d36}{00024}}\ Token\ alg::Rabin::find\_pattern()}
 \DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00025}00025\ \{}
 \DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00026}00026\ \ \ \ \ uint8\_t\ best\_length\ =\ 0;}
 \DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00027}00027\ \ \ \ \ uint16\_t\ best\_offset\ =\ 0;}
 \DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00028}00028\ \ \ \ \ \textcolor{keyword}{auto}\ candidate\ =\ poss\_table[bucket\_index(hash)];}
 \DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00029}00029\ \ \ \ \ \textcolor{keywordtype}{int}\ num\_of\_iter\ =\ 0;}
 \DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00030}00030\ }
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00031}00031\ \ \ \ \ \textcolor{comment}{//check\ the\ number\ of\ times\ we\ go\ down\ the\ chain\ -\/-\/-\/\ check\ if\ candidate\ is\ not\ too\ far\ from\ pos\ -\/-\/-\/\ and\ that\ candidate\ exist\ (we\ initialized\ -\/1)}}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00032}00032\ \ \ \ \ \textcolor{keywordflow}{while}\ (num\_of\_iter\ <=\ MAX\_CHAIN\ \textcolor{keyword}{and}\ position\ -\/\ candidate\ <\ data.get\_size\_search()\ \textcolor{keyword}{and}\ candidate\ >=\ 0)}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00031}00031\ \ \ \ \ \textcolor{comment}{//can\ we\ keep\ going\ down\ the\ chain\ -\/and-\/\ check\ if\ possible\ offset\ close\ enough\ to\ pos\ -\/and-\/\ candidate\ exists\ -\/and-\/\ that\ candidate\ is\ not\ this\ position\ (offset\ ==\ 0)}}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00032}00032\ \ \ \ \ \textcolor{keywordflow}{while}\ (num\_of\_iter\ <=\ MAX\_CHAIN\ \textcolor{keyword}{and}\ position\ -\/\ candidate\ <=\ data.get\_max\_size\_search()\ \textcolor{keyword}{and}\ candidate\ >\ -\/1\ \textcolor{keyword}{and}\ candidate\ !=\ position)}
 \DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00033}00033\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00034}00034\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ temp\_len\ =\ std::min(count\_equal(data.get\_data().subspan(position),\ data.get\_data().subspan(candidate)),}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00035}00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static\_cast}<size\_t>(std::numeric\_limits<uint8\_t>::max()));}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00036}00036\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (temp\_len\ >\ best\_length)}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00037}00037\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ best\_length\ =\ temp\_len;}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00039}00039\ \ \ \ \ \ \ \ \ \ \ \ \ best\_offset\ =\ candidate;}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00040}00040\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00041}00041\ \ \ \ \ \ \ \ \ candidate\ =\ prev\_poss\_table[prev\_bucket\_index(candidate)];}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00042}00042\ \ \ \ \ \ \ \ \ num\_of\_iter++;}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00043}00043\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00044}00044\ }
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00045}00045\ \ \ \ \ \textcolor{keywordflow}{if}\ (position\ +\ best\_length\ <\ data.get\_data().size())}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00046}00046\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Token\{\ .offset\ =\ best\_offset,\ .length\ =\ best\_length,\ .symbol\ =\ data[position\ +\ best\_length]\ \};}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00047}00047\ \ \ \ \ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00048}00048\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Token\{\ .offset\ =\ best\_offset,\ .length\ =\ -\/-\/best\_length,\ .symbol\ =\ data[position]\ \};}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00049}00049\ \}}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00034}00034\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ temp\_len\ =\ count\_equal(data.get\_data().subspan(position),\ data.get\_data().subspan(candidate),\ std::numeric\_limits<uint8\_t>::max());}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00035}00035\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (temp\_len\ >\ best\_length)}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00036}00036\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00037}00037\ \ \ \ \ \ \ \ \ \ \ \ \ best\_length\ =\ temp\_len;}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ best\_offset\ =\ position\ -\/\ candidate;}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00039}00039\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00040}00040\ \ \ \ \ \ \ \ \ candidate\ =\ prev\_poss\_table[prev\_bucket\_index(candidate)];}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00041}00041\ \ \ \ \ \ \ \ \ num\_of\_iter++;}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00042}00042\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00044}00044\ \ \ \ \ \textcolor{keywordflow}{if}\ (position\ +\ best\_length\ <\ data.get\_data().size())}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00045}00045\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Token\{\ .offset\ =\ best\_offset,\ .length\ =\ best\_length,\ .symbol\ =\ data[position\ +\ best\_length]\ \};}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00046}00046\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00047}00047\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Token\{\ .offset\ =\ best\_offset,\ .length\ =\ -\/-\/best\_length,\ .symbol\ =\ data[position\ -\/\ 1]\ \};}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00048}00048\ \}}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00049}00049\ }
 \DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00050}00050\ }
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00051}\doxymbox{\hyperlink{class_l_z77_a79cbc4a680b736b23d1119da42569cea}{00051}}\ \textcolor{keywordtype}{void}\ LZ77::compress(\textcolor{keyword}{const}\ parser::Options\&\ option,\ std::vector<Token>\&\ out\_stream)}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00052}00052\ \{}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00053}00053\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ buffer\_size\ =\ 50;}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00054}00054\ }
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00055}00055\ \ \ \ \ \textcolor{keyword}{auto}\ data\_size\ =\ data.size();}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00056}00056\ \ \ \ \ out\_stream.reserve(data\_size);}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00057}00057\ \ \ \ \ std::cout\ <<\ out\_stream.data()\ <<\ std::endl;}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00058}00058\ \ \ \ \ std::array<Token,\ buffer\_size>\ buffer\{\};}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00052}\doxymbox{\hyperlink{classLZ77Block_ae18e40df9227bfa7e45a09c22b3da8e5}{00052}}\ LZ77Block::LZ77Block(std::span<std::byte\ \textcolor{keyword}{const}>\ \textcolor{keyword}{const}\ data\_,\ fs::path\ \textcolor{keyword}{const}\&\ file)\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00053}00053\ \{}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00054}00054\ \ \ \ \ \textcolor{keyword}{constexpr}\ size\_t\ len1\ =\ \textcolor{keyword}{sizeof}(\textcolor{keyword}{decltype}(compressed\_length\_));}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00055}00055\ \ \ \ \ \textcolor{keyword}{constexpr}\ size\_t\ len2\ =\ \textcolor{keyword}{sizeof}(\textcolor{keyword}{decltype}(uncompressed\_length\_));}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00057}00057\ \ \ \ \ std::memcpy(\&compressed\_length\_,\ data\_.data(),\ len1);\textcolor{comment}{//get\ compressed\_length\ from\ data}}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00058}00058\ \ \ \ \ std::memcpy(\&uncompressed\_length\_,\ data\_.data()\ +\ len1,\ len2);\textcolor{comment}{//get\ uncompressed\_length\ from\ data}}
 \DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00059}00059\ }
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00060}00060\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ modulo\_for\_progress\_bar\ =\ (data\_size\ /\ 50);}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00061}00061\ \ \ \ \ \textcolor{keyword}{auto}\ progress\_counter\ =\ 0;}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00062}00062\ \ \ \ \ \textcolor{keyword}{auto}\ buffering\_counter\ =\ 0;}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00063}00063\ }
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00064}00064\ \ \ \ \ \textcolor{comment}{//loop\ over\ the\ stream}}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00065}00065\ \ \ \ \ \textcolor{keywordflow}{while}\ (pattern\_matcher.get\_pos()\ <\ data\_size)}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00066}00066\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00067}00067\ \ \ \ \ \ \ \ \ \textcolor{comment}{//if\ we\ went\ past\ modulo,\ show\ progress}}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00068}00068\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (progress\_counter\ >=\ modulo\_for\_progress\_bar)}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00069}00069\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ show\_progress(option,\ \textcolor{keyword}{static\_cast}<\textcolor{keywordtype}{double}>(pattern\_matcher.get\_pos())\ /\ \textcolor{keyword}{static\_cast}<\textcolor{keywordtype}{double}>(data\_size),\ \textcolor{keyword}{true});}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ progress\_counter\ =\ 0;}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00072}00072\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00073}00073\ }
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00074}00074\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ token\ =\ pattern\_matcher.find\_pattern();}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00075}00075\ }
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00076}00076\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ num\_of\_rolls\ =\ std::max(\textcolor{keyword}{static\_cast}<\textcolor{keywordtype}{int}>(token.length),\ 1);}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00077}00077\ \ \ \ \ \ \ \ \ pattern\_matcher.roll\_hash(num\_of\_rolls);}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00078}00078\ \ \ \ \ \ \ \ \ window.slide(num\_of\_rolls);}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00060}00060\ \ \ \ \ \textcolor{keywordflow}{if}\ (len1\ +\ len2\ +\ compressed\_length\_\ >\ data\_.size())}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00061}00061\ \ \ \ \ \ \ \ \ throw\_error(ErrorType::FILE\_CORRUPTED,\ \textcolor{stringliteral}{"{}An\ lz77\ header\ is\ corrupted\ in\ file\ \(\backslash\)"{}"{}}\ +\ file.string()\ +\ \textcolor{stringliteral}{"{}\(\backslash\)"{}"{}});}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00063}00063\ \ \ \ \ block.reserve(data\_.size());}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00064}00064\ \ \ \ \ block\ =\ std::vector<LZ77\_Token>\{}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00065}00065\ \ \ \ \ \ \ \ \ \textcolor{keyword}{reinterpret\_cast}<LZ77\_Token\ \textcolor{keyword}{const}*>(data\_.data()\ +\ len1\ +\ len2),}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00066}00066\ \ \ \ \ \ \ \ \ \textcolor{keyword}{reinterpret\_cast}<LZ77\_Token\ \textcolor{keyword}{const}*>(data\_.data()\ +\ compressed\_length\_)}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00067}00067\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00068}00068\ \}}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00070}\doxymbox{\hyperlink{classLZ77Block_a2885e7e8eb58a359b0f089957284918b}{00070}}\ \textcolor{keywordtype}{void}\ LZ77Block::serialize(std::vector<std::byte>\ \&output)}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00071}00071\ \{}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00072}00072\ \ \ \ \ \textcolor{keyword}{constexpr}\ size\_t\ len1\ =\ \textcolor{keyword}{sizeof}(\textcolor{keyword}{decltype}(compressed\_length\_));}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00073}00073\ \ \ \ \ \textcolor{keyword}{constexpr}\ size\_t\ len2\ =\ \textcolor{keyword}{sizeof}(\textcolor{keyword}{decltype}(uncompressed\_length\_));}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00074}00074\ }
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00075}00075\ \ \ \ \ output.resize(len1\ +\ len2\ +\ block.size()\ *\ \textcolor{keyword}{sizeof}(LZ77\_Token));}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00077}00077\ \ \ \ \ std::memcpy(output.data(),\ \&compressed\_length\_,\ len1);}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00078}00078\ \ \ \ \ std::memcpy(output.data()\ +\ len1,\ \&uncompressed\_length\_,\ len2);}
 \DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00079}00079\ }
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00080}00080\ \ \ \ \ \ \ \ \ buffer[buffering\_counter]\ =\ token;}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00081}00081\ }
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00082}00082\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (buffering\_counter\ >=\ buffer\_size\ -\/\ 1)}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00083}00083\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ out\_stream.append\_range(buffer);}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ buffering\_counter\ =\ 0;}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00086}00086\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00087}00087\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ buffering\_counter++;}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00080}00080\ \ \ \ \ std::memcpy(output.data()\ +\ len1\ +\ len2,\ block.data(),\ block.size()\ *\ \textcolor{keyword}{sizeof}(LZ77\_Token));}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00081}00081\ \}}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00083}\doxymbox{\hyperlink{classLZ77Block_a18cc7e9b2f24cc2ad99384b352a4a6cb}{00083}}\ \textcolor{keywordtype}{void}\ LZ77Block::write\_to(std::ofstream\&\ output)}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00084}00084\ \{}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00085}00085\ \ \ \ \ std::vector<std::byte>\ block;}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00086}00086\ \ \ \ \ \textcolor{keyword}{this}-\/>serialize(block);}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00087}00087\ \ \ \ \ output.write(\textcolor{keyword}{reinterpret\_cast}<\textcolor{keywordtype}{char}\ \textcolor{keyword}{const}*>(block.data()),\ block.size());}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00088}00088\ \}}
 \DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00089}00089\ }
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00090}00090\ \ \ \ \ \ \ \ \ progress\_counter++;}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00091}00091\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00092}00092\ \ \ \ \ show\_progress(option,\ 1.f,\ \textcolor{keyword}{true});}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00093}00093\ \ \ \ \ out\_stream.insert(out\_stream.end(),\ buffer.begin(),\ buffer.begin()\ +\ buffering\_counter);}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00094}00094\ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{'\(\backslash\)n'};}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00091}\doxymbox{\hyperlink{classLZ77Compressor_a2c4605c1239bcef7f2ea0392d62182d5}{00091}}\ \textcolor{keywordtype}{void}\ LZ77Compressor::compress(LZ77Block\&\ out\_data)}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00092}00092\ \{}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00093}00093\ \ \ \ \ out\_data.clear();}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00094}00094\ \ \ \ \ out\_data.reserve(data\_.size()\ /\ \textcolor{keyword}{sizeof}(LZ77\_Token));}
 \DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00095}00095\ }
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00096}00096\ \}}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00097}00097\ }
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00098}\doxymbox{\hyperlink{class_l_z77_a8f8da75656dc5553eba2ba036eae0a48}{00098}}\ \textcolor{keywordtype}{void}\ LZ77::decompress()}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00099}00099\ \{}
-\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00100}00100\ \}}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00096}00096\ \ \ \ \ size\_t\ consumed\_tokens\{\};}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00097}00097\ \ \ \ \ \textcolor{comment}{//loop\ over\ the\ stream}}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00098}00098\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ i\ =\ data\_.begin();\ i\ !=\ data\_.end();)}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00099}00099\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00100}00100\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \textcolor{keyword}{const}\ token\ =\ \textcolor{keyword}{this}-\/>pattern\_matcher.find\_pattern();}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00102}00102\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \textcolor{keyword}{const}\ num\_of\_rolls\ =\ token.length\ +\ 1;}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00103}00103\ \ \ \ \ \ \ \ \ \textcolor{keyword}{this}-\/>pattern\_matcher.roll\_hash(num\_of\_rolls);\textcolor{comment}{//roll,\ updates\ the\ hash\ and\ position}}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00104}00104\ \ \ \ \ \ \ \ \ \textcolor{keyword}{this}-\/>window.slide(num\_of\_rolls);}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00105}00105\ \ \ \ \ \ \ \ \ i\ +=\ num\_of\_rolls;}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00106}00106\ \ \ \ \ \ \ \ \ consumed\_tokens\ +=\ num\_of\_rolls;}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00108}00108\ \ \ \ \ \ \ \ \ out\_data.push\_back(token);}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00109}00109\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{lz77__impl_8cpp_source_l00110}00110\ \}}
 
 \end{DoxyCode}

@@ -1,0 +1,221 @@
+\doxysection{file\+\_\+list.\+cppm}
+\hypertarget{file__list_8cppm_source}{}\label{file__list_8cppm_source}\index{Compress-\/to-\/fit/src/util/containers/file\_list.cppm@{Compress-\/to-\/fit/src/util/containers/file\_list.cppm}}
+\doxymbox{\hyperlink{file__list_8cppm}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00001}00001\ \textcolor{comment}{//This\ file\ implements\ ConcOrderedFileList,\ a\ linked\ list\ that\ enables\ concurrent\ writing\ to\ file\ through\ the\ order\ of\ sequence\ numbers}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00002}00002\ \textcolor{comment}{//do\ NOT\ expect\ this\ stuff\ to\ be\ cache\ friendly\ in\ ANY\ way.}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00003}00003\ module;}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00004}00004\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{include}\ \textcolor{preprocessor}{<}\textcolor{preprocessor}{cassert}\textcolor{preprocessor}{>}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00005}00005\ \textcolor{keyword}{export}\ module\ containers:concurrent\_file\_queue;}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00006}00006\ import\ :file;}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00007}00007\ import\ util;}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00008}00008\ import\ std.compat;}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00011}00011\ \textcolor{keyword}{template}\ <SerializableToDisk\ T>}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00012}\doxymbox{\hyperlink{structNode}{00012}}\ \textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structNode}{Node}}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00013}00013\ \{}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00014}\doxymbox{\hyperlink{structNode_ab06c4658ae26e0ce4a1ea58965cbc63f}{00014}}\ \ \ \ \ \doxymbox{\hyperlink{structNode_ab06c4658ae26e0ce4a1ea58965cbc63f}{Node}}(\doxymbox{\hyperlink{structNode_ab06c4658ae26e0ce4a1ea58965cbc63f}{std}}::\doxymbox{\hyperlink{structNode_ab06c4658ae26e0ce4a1ea58965cbc63f}{unique\_ptr}}<\doxymbox{\hyperlink{structNode_ab06c4658ae26e0ce4a1ea58965cbc63f}{T}}>\ \doxymbox{\hyperlink{structNode_ab06c4658ae26e0ce4a1ea58965cbc63f}{element}},\ \doxymbox{\hyperlink{structNode_ab06c4658ae26e0ce4a1ea58965cbc63f}{size\_t}}\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structNode_ab06c4658ae26e0ce4a1ea58965cbc63f}{sequence\_num}})}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00015}00015\ \ \ \ \ \ \ \ \ :\ \doxymbox{\hyperlink{structNode}{element\_}}(\doxymbox{\hyperlink{structNode}{std}}::\doxymbox{\hyperlink{structNode}{move}}(\doxymbox{\hyperlink{structNode}{element}})),\ \doxymbox{\hyperlink{structNode}{sequence\_num\_}}(\doxymbox{\hyperlink{structNode}{sequence\_num}})\ \{\}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00017}\doxymbox{\hyperlink{structNode_a87de752ed6f4a3385b6e613c57a48819}{00017}}\ \ \ \ \ \doxymbox{\hyperlink{structNode}{std}}::\doxymbox{\hyperlink{structNode}{unique\_ptr}}<\doxymbox{\hyperlink{structNode}{T}}>\ \doxymbox{\hyperlink{structNode}{element\_}};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00018}\doxymbox{\hyperlink{structNode_ae4a3d7ab0055ff54fee6c87a644ae79e}{00018}}\ \ \ \ \ size\_t\ \doxymbox{\hyperlink{structNode_ae4a3d7ab0055ff54fee6c87a644ae79e}{sequence\_num\_}};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00019}\doxymbox{\hyperlink{structNode_ac1c0563946c59c36bddde431b4adb00b}{00019}}\ \ \ \ \ \doxymbox{\hyperlink{structNode}{Node}}*\ \doxymbox{\hyperlink{structNode_ac1c0563946c59c36bddde431b4adb00b}{next}}\{\textcolor{keywordtype}{nullptr}\};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00020}\doxymbox{\hyperlink{structNode_a4f50b730e5a2a73ecfb42699e3937d17}{00020}}\ \ \ \ \ \doxymbox{\hyperlink{structNode}{Node}}*\ \doxymbox{\hyperlink{structNode_a4f50b730e5a2a73ecfb42699e3937d17}{prev}}\{\textcolor{keywordtype}{nullptr}\};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00021}00021\ \};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00023}00023\ \textcolor{comment}{/**}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ *\ @brief\ First\ sequence\ in\ first\ sequence\ out,\ i.e.\ the\ data\ is\ written\ in\ the\ order\ given\ to\ \#insert().}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ *\ @tparam\ T\ Must\ implement\ write\_to(ofstream\&)\ or\ be\ trivially\ copyable}}
+\DoxyCodeLine{00026\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00027\ \textcolor{comment}{\ *\ @details\ Implemented\ as\ doubly\ linked\ list.\ A\ separate\ write\ thread\ is\ spawned.}}
+\DoxyCodeLine{00028\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00029\ \textcolor{comment}{\ *\ @note\ Because\ the\ list\ will\ own\ the\ elements,\ consider\ using\ a\ memory\ pool\ (e.g.\ pmr)\ as\ to\ not\ reallocate\ memory.}}
+\DoxyCodeLine{00030\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00031}00031\ \textcolor{keyword}{export}\ \textcolor{keyword}{template}<SerializableToDisk\ T>}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00032}\doxymbox{\hyperlink{classConcOrderedFileList}{00032}}\ \textcolor{keyword}{class}\ \doxymbox{\hyperlink{classConcOrderedFileList}{ConcOrderedFileList}}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00033}00033\ \{}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00034}00034\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00035}\doxymbox{\hyperlink{classConcOrderedFileList_a1ff85ae4e67a999054509fd24ee70e15}{00035}}\ \ \ \ \ \doxymbox{\hyperlink{classConcOrderedFileList_a1ff85ae4e67a999054509fd24ee70e15}{ConcOrderedFileList}}(File\&\ file)}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00036}00036\ \ \ \ \ \ \ \ \ :\ \doxymbox{\hyperlink{classConcOrderedFileList}{file\_}}(\doxymbox{\hyperlink{classConcOrderedFileList}{file}})}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00037}00037\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00038}00038\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00040}\doxymbox{\hyperlink{classConcOrderedFileList_af33b113f0e6fd77d4a92fac64908dc05}{00040}}\ \ \ \ \ \string~\doxymbox{\hyperlink{classConcOrderedFileList_af33b113f0e6fd77d4a92fac64908dc05}{ConcOrderedFileList}}()}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00041}00041\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00042}00042\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcOrderedFileList}{std}}::\doxymbox{\hyperlink{classConcOrderedFileList}{unique\_lock}}\ \doxymbox{\hyperlink{classConcOrderedFileList}{lock}}\{\doxymbox{\hyperlink{classConcOrderedFileList}{mut}}\};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00043}00043\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcOrderedFileList}{called\_writer}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00044}00044\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcOrderedFileList}{writer\_notifier}}.\doxymbox{\hyperlink{classConcOrderedFileList}{notify\_one}}();\textcolor{comment}{//write\ everything\ left}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00045}00045\ \ \ \ \ \ \ \ \ \textcolor{comment}{//the\ thread\ will\ be\ destroyed\ automatically\ thanks\ to\ jthread\ which\ updates\ the\ stop\ token}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00046}00046\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00048}00048\ \ \ \ \ \textcolor{comment}{//we\ really\ don't\ want\ to\ copy\ a\ concurrent\ container\ with\ access\ to\ a\ file}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00049}\doxymbox{\hyperlink{classConcOrderedFileList_ab8a2948cac33c9d090ac792a00ae5f14}{00049}}\ \ \ \ \ \doxymbox{\hyperlink{classConcOrderedFileList_ab8a2948cac33c9d090ac792a00ae5f14}{ConcOrderedFileList}}(\doxymbox{\hyperlink{classConcOrderedFileList}{ConcOrderedFileList}}\ \textcolor{keyword}{const}\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00050}\doxymbox{\hyperlink{classConcOrderedFileList_a1349f8db3ea3aebc8bdca6873b04e60f}{00050}}\ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classConcOrderedFileList_a1349f8db3ea3aebc8bdca6873b04e60f}{operator}}=(\doxymbox{\hyperlink{classConcOrderedFileList}{ConcOrderedFileList}}\ \textcolor{keyword}{const}\&)\ -\/>\ \doxymbox{\hyperlink{classConcOrderedFileList}{ConcOrderedFileList}}\&\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00051}00051\ }
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00052}\doxymbox{\hyperlink{classConcOrderedFileList_ad2ebb0d396d396b1e26d1456740c2e6f}{00052}}\ \ \ \ \ \doxymbox{\hyperlink{classConcOrderedFileList_ad2ebb0d396d396b1e26d1456740c2e6f}{ConcOrderedFileList}}(\doxymbox{\hyperlink{classConcOrderedFileList}{ConcOrderedFileList}}\&\&)\ \textcolor{keyword}{noexcept}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00053}\doxymbox{\hyperlink{classConcOrderedFileList_a81ef7509821f2cf3cab477661acb41d8}{00053}}\ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classConcOrderedFileList_a81ef7509821f2cf3cab477661acb41d8}{operator}}=(\doxymbox{\hyperlink{classConcOrderedFileList}{ConcOrderedFileList}}\&\&)\ \textcolor{keyword}{noexcept}\ -\/>\ \doxymbox{\hyperlink{classConcOrderedFileList}{ConcOrderedFileList}}\&\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00054}00054\ }
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00055}00055\ \ \ \ \ \textcolor{comment}{/**}}
+\DoxyCodeLine{00056\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Inserts\ an\ element\ to\ the\ list,\ which\ it\ will\ own.\ THE\ FIRST\ ELEMENT\ MUST\ HAVE\ SEQUENCE\ NUMBER\ ==\ 0,\ check\ warning\ for\ additional\ info.}}
+\DoxyCodeLine{00057\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00058\ \textcolor{comment}{\ \ \ \ \ *\ @param[in]\ element\ Element\ to\ be\ inserted}}
+\DoxyCodeLine{00059\ \textcolor{comment}{\ \ \ \ \ *\ @param\ sequence\_num\ The\ number\ of\ this\ element's\ sequence}}
+\DoxyCodeLine{00060\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00061\ \textcolor{comment}{\ \ \ \ \ *\ @pre\ \(\backslash\)p\ element\ must\ not\ own\ a\ nullptr}}
+\DoxyCodeLine{00062\ \textcolor{comment}{\ \ \ \ \ *\ @post\ Any\ reference\ to\ \(\backslash\)p\ element\ is\ invalidated.}}
+\DoxyCodeLine{00063\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00064\ \textcolor{comment}{\ \ \ \ \ *\ @warning\ THE\ FIRST\ ELEMENT\ THAT\ IS\ GOING\ TO\ BE\ WRITTEN\ TO\ FILE\ MUST\ HAVE\ SEQUENCE\ NUMBER\ ==\ 0.}}
+\DoxyCodeLine{00065\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ \ \ \ \ This\ requirement\ exists\ as\ the\ first\ element\ you\ add\ could\ easily\ be\ not\ the\ first\ data\ chunk\ (i.e.\ out\ of\ order).}}
+\DoxyCodeLine{00066\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ \ \ \ \ Failure\ to\ follow\ this\ requirement\ will\ cause\ DEADLOCK.}}
+\DoxyCodeLine{00067\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00068\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00069}\doxymbox{\hyperlink{classConcOrderedFileList_a2c53a81b8da07b0b7e0502ad83d98e0d}{00069}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classConcOrderedFileList_a2c53a81b8da07b0b7e0502ad83d98e0d}{insert}}(std::unique\_ptr<T>\ element,\ size\_t\ sequence\_num)}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00070}00070\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00071}00071\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}*\ \doxymbox{\hyperlink{classConcOrderedFileList}{new\_node}}\ =\ \textcolor{keyword}{new}\ \doxymbox{\hyperlink{classConcOrderedFileList}{Node}}<\doxymbox{\hyperlink{classConcOrderedFileList}{T}}>\{\doxymbox{\hyperlink{classConcOrderedFileList}{std}}::\doxymbox{\hyperlink{classConcOrderedFileList}{move}}(\doxymbox{\hyperlink{classConcOrderedFileList}{element}}),\ \doxymbox{\hyperlink{classConcOrderedFileList}{sequence\_num}}\};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00073}00073\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00074}00074\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcOrderedFileList}{std}}::\doxymbox{\hyperlink{classConcOrderedFileList}{unique\_lock}}\ \doxymbox{\hyperlink{classConcOrderedFileList}{lock}}\{\doxymbox{\hyperlink{classConcOrderedFileList}{mut}}\};\textcolor{comment}{//we\ could\ opt\ for\ a\ shared\ mutex\ here,\ profile}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcOrderedFileList}{size\_}}++;}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{classConcOrderedFileList}{head\_}}\ ==\ \textcolor{keywordtype}{nullptr})}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcOrderedFileList}{head\_}}\ =\ \doxymbox{\hyperlink{classConcOrderedFileList}{new\_node}};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcOrderedFileList}{tail\_}}\ =\ \doxymbox{\hyperlink{classConcOrderedFileList}{new\_node}};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcOrderedFileList}{Node}}<\doxymbox{\hyperlink{classConcOrderedFileList}{T}}>*\ \doxymbox{\hyperlink{classConcOrderedFileList}{next\_node}}\{\doxymbox{\hyperlink{classConcOrderedFileList}{head\_}}\};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Make\ sure\ the\ nullptr\ check\ stays\ first\ (unless\ you\ like\ bugs,\ I\ don't\ judge)}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//If\ sequence\_num\ >\ next\_node-\/>sequence\_num\_\ it\ means\ that\ we\ found\ a\ spot\ that\ keeps\ the\ ascending\ order}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\doxymbox{\hyperlink{classConcOrderedFileList}{next\_node}}\ \textcolor{keyword}{and}\ (\doxymbox{\hyperlink{classConcOrderedFileList}{sequence\_num}}\ <\ \doxymbox{\hyperlink{classConcOrderedFileList}{next\_node}}-\/>\doxymbox{\hyperlink{classConcOrderedFileList}{sequence\_num\_}}))\ \textcolor{comment}{//walks\ down\ the\ ptrs}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcOrderedFileList}{next\_node}}\ =\ \doxymbox{\hyperlink{classConcOrderedFileList}{next\_node}}-\/>\doxymbox{\hyperlink{classConcOrderedFileList}{next}};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00092}00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\doxymbox{\hyperlink{classConcOrderedFileList}{next\_node}})\textcolor{comment}{//We\ have\ to\ become\ the\ tail}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcOrderedFileList}{new\_node}}-\/>\doxymbox{\hyperlink{classConcOrderedFileList}{prev}}\ =\ \doxymbox{\hyperlink{classConcOrderedFileList}{tail\_}};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcOrderedFileList}{tail\_}}-\/>\doxymbox{\hyperlink{classConcOrderedFileList}{next}}\ =\ \doxymbox{\hyperlink{classConcOrderedFileList}{new\_node}};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00098}00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcOrderedFileList}{tail\_}}\ =\ \doxymbox{\hyperlink{classConcOrderedFileList}{new\_node}};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\textcolor{comment}{//we\ either\ become\ the\ head\ or\ squeeze\ in}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{classConcOrderedFileList}{next\_node}}\ ==\ \doxymbox{\hyperlink{classConcOrderedFileList}{head\_}})\textcolor{comment}{//become\ head}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcOrderedFileList}{new\_node}}-\/>\doxymbox{\hyperlink{classConcOrderedFileList}{next}}\ =\ \doxymbox{\hyperlink{classConcOrderedFileList}{head\_}};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcOrderedFileList}{head\_}}-\/>\doxymbox{\hyperlink{classConcOrderedFileList}{prev}}\ =\ \doxymbox{\hyperlink{classConcOrderedFileList}{new\_node}};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcOrderedFileList}{head\_}}\ =\ \doxymbox{\hyperlink{classConcOrderedFileList}{new\_node}};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00107}00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\textcolor{comment}{//squeeze\ in}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Make\ the\ links\ for\ the\ new\ node\ to\ its\ future\ neighbors}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcOrderedFileList}{new\_node}}-\/>\doxymbox{\hyperlink{classConcOrderedFileList}{next}}\ =\ \doxymbox{\hyperlink{classConcOrderedFileList}{next\_node}};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcOrderedFileList}{new\_node}}-\/>\doxymbox{\hyperlink{classConcOrderedFileList}{prev}}\ =\ \doxymbox{\hyperlink{classConcOrderedFileList}{next\_node}}-\/>\doxymbox{\hyperlink{classConcOrderedFileList}{prev}};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00114}00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Make\ the\ links\ from\ the\ neighbors\ to\ the\ new\ node}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00115}00115\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcOrderedFileList}{next\_node}}-\/>\doxymbox{\hyperlink{classConcOrderedFileList}{prev}}-\/>\doxymbox{\hyperlink{classConcOrderedFileList}{next}}\ =\ \doxymbox{\hyperlink{classConcOrderedFileList}{new\_node}};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00116}00116\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcOrderedFileList}{next\_node}}-\/>\doxymbox{\hyperlink{classConcOrderedFileList}{prev}}\ =\ \doxymbox{\hyperlink{classConcOrderedFileList}{new\_node}};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00117}00117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00118}00118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00119}00119\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00120}00120\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00121}00121\ }
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00122}00122\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcOrderedFileList}{called\_writer}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00123}00123\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcOrderedFileList}{writer\_notifier}}.\doxymbox{\hyperlink{classConcOrderedFileList}{notify\_one}}();}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00124}00124\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00125}00125\ }
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00126}00126\ \ \ \ \ \textcolor{comment}{/**}}
+\DoxyCodeLine{00127\ \textcolor{comment}{\ \ \ \ \ *\ @return\ Size,\ the\ number\ of\ nodes\ waiting\ to\ get\ written\ to\ file}}
+\DoxyCodeLine{00128\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00129}\doxymbox{\hyperlink{classConcOrderedFileList_a7519fc33eb4601804f70122a667a0853}{00129}}\ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classConcOrderedFileList_a7519fc33eb4601804f70122a667a0853}{size}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00130}00130\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00131}00131\ \ \ \ \ \ \ \ \ std::unique\_lock\ lock\{mut\};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00132}00132\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classConcOrderedFileList_adf5cfd5b2e46c73533d28b89a0612f28}{size\_}};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00133}00133\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00134}00134\ }
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00135}00135\ \ \ \ \ \textcolor{comment}{/**}}
+\DoxyCodeLine{00136\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Returns\ the\ next\ sequence\ number\ expected\ or\ missing.\ Can\ be\ used\ as\ a\ sanity\ check.}}
+\DoxyCodeLine{00137\ \textcolor{comment}{\ \ \ \ \ *\ @return\ The\ expected\ sequence\ number}}
+\DoxyCodeLine{00138\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00139}\doxymbox{\hyperlink{classConcOrderedFileList_ae0647fb99e6345fe7eb1408e3356a405}{00139}}\ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classConcOrderedFileList_ae0647fb99e6345fe7eb1408e3356a405}{expected\_sequence\_num}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00140}00140\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00141}00141\ \ \ \ \ \ \ \ \ std::unique\_lock\ lock\{mut\};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00142}00142\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classConcOrderedFileList_abb37a87843fe6a072f05716e21c8d713}{expected\_sequence\_num\_}};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00143}00143\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00144}00144\ }
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00145}\doxymbox{\hyperlink{classConcOrderedFileList_a6bff26055e373a00b9059e91efb4ec8e}{00145}}\ \ \ \ \ \textcolor{keyword}{auto}\ \textcolor{keyword}{const}\&\ \doxymbox{\hyperlink{classConcOrderedFileList_a6bff26055e373a00b9059e91efb4ec8e}{file}}()\ \textcolor{keyword}{const}\&\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00146}00146\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00147}00147\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ file\_;}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00148}00148\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00149}00149\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00150}\doxymbox{\hyperlink{classConcOrderedFileList_ab5ee599d444d42439d7ce6e80f45b57b}{00150}}\ \ \ \ \ \doxymbox{\hyperlink{classConcOrderedFileList_ab5ee599d444d42439d7ce6e80f45b57b}{File}}\&\ \doxymbox{\hyperlink{classConcOrderedFileList_ab5ee599d444d42439d7ce6e80f45b57b}{file\_}};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00151}\doxymbox{\hyperlink{classConcOrderedFileList_adf5cfd5b2e46c73533d28b89a0612f28}{00151}}\ \ \ \ \ size\_t\ \doxymbox{\hyperlink{classConcOrderedFileList_adf5cfd5b2e46c73533d28b89a0612f28}{size\_}}\{\};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00152}\doxymbox{\hyperlink{classConcOrderedFileList_abb37a87843fe6a072f05716e21c8d713}{00152}}\ \ \ \ \ size\_t\ \doxymbox{\hyperlink{classConcOrderedFileList_abb37a87843fe6a072f05716e21c8d713}{expected\_sequence\_num\_}}\{\};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00153}\doxymbox{\hyperlink{classConcOrderedFileList_a6a465978c1ec8d3b74e4d8938d041133}{00153}}\ \ \ \ \ \doxymbox{\hyperlink{structNode}{Node}}<T>*\ \doxymbox{\hyperlink{classConcOrderedFileList_a6a465978c1ec8d3b74e4d8938d041133}{head\_}}\{\textcolor{keywordtype}{nullptr}\};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00154}\doxymbox{\hyperlink{classConcOrderedFileList_a765dda4afe675365fcc4fa7a6ce787e7}{00154}}\ \ \ \ \ \doxymbox{\hyperlink{structNode}{Node}}<T>*\ \doxymbox{\hyperlink{classConcOrderedFileList_a765dda4afe675365fcc4fa7a6ce787e7}{tail\_}}\{\textcolor{keywordtype}{nullptr}\};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00155}\doxymbox{\hyperlink{classConcOrderedFileList_a7b7c2edab71f9952315136b17d12017c}{00155}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{classConcOrderedFileList_a7b7c2edab71f9952315136b17d12017c}{called\_writer}}\{\textcolor{keyword}{false}\};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00156}\doxymbox{\hyperlink{classConcOrderedFileList_a9790d71211b6a70c3cd101d68cba5108}{00156}}\ \ \ \ \ \textcolor{keyword}{mutable}\ \doxymbox{\hyperlink{classConcOrderedFileList}{std}}::\doxymbox{\hyperlink{classConcOrderedFileList}{mutex}}\ \doxymbox{\hyperlink{classConcOrderedFileList}{mut}};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00157}\doxymbox{\hyperlink{classConcOrderedFileList_a37eac0451a0f16409f28c3cfecf274f6}{00157}}\ \ \ \ \ \doxymbox{\hyperlink{classConcOrderedFileList}{std}}::\doxymbox{\hyperlink{classConcOrderedFileList}{condition\_variable}}\ \doxymbox{\hyperlink{classConcOrderedFileList}{writer\_notifier}};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00158}\doxymbox{\hyperlink{classConcOrderedFileList_a831ae809e0d82e6481d9cbefe009b6a0}{00158}}\ \ \ \ \ \doxymbox{\hyperlink{classConcOrderedFileList}{std}}::\doxymbox{\hyperlink{classConcOrderedFileList}{jthread}}\ \doxymbox{\hyperlink{classConcOrderedFileList}{writer}}\{\&\doxymbox{\hyperlink{classConcOrderedFileList}{ConcOrderedFileList}}::\doxymbox{\hyperlink{classConcOrderedFileList}{write\_file}},\ \textcolor{keyword}{this}\};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00159}00159\ }
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00160}00160\ }
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00161}00161\ \ \ \ \ \textcolor{comment}{/**}}
+\DoxyCodeLine{00162\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Writes\ to\ file.\ Should\ be\ called\ by\ a\ thread.}}
+\DoxyCodeLine{00163\ \textcolor{comment}{\ \ \ \ \ *\ @pre\ tail\_\ !=\ nullptr}}
+\DoxyCodeLine{00164\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00165}\doxymbox{\hyperlink{classConcOrderedFileList_a50b2e0386e9d994376546f249bb1f0ad}{00165}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classConcOrderedFileList_a50b2e0386e9d994376546f249bb1f0ad}{write\_file}}(std::stop\_token\ stop)}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00166}00166\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00167}00167\ \ \ \ \ \ \ \ \ \textcolor{comment}{//NOT\ thread\ safe\ by\ itself,\ will\ not\ interact\ with\ the\ mutex.}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00168}00168\ \ \ \ \ \ \ \ \ \textcolor{comment}{//returns\ true\ if\ something\ has\ been\ written\ otherwise\ false}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00169}00169\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classConcOrderedFileList}{write\_func}}\ =\ [\textcolor{keyword}{this}]}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00170}00170\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00171}00171\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\doxymbox{\hyperlink{classConcOrderedFileList}{tail\_}})}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00172}00172\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00173}00173\ }
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00174}00174\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{classConcOrderedFileList}{tail\_}}-\/>\doxymbox{\hyperlink{classConcOrderedFileList}{sequence\_num\_}}\ !=\ \doxymbox{\hyperlink{classConcOrderedFileList}{expected\_sequence\_num\_}})\textcolor{comment}{//we\ are\ missing\ a\ node}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00176}00176\ }
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (\doxymbox{\hyperlink{classConcOrderedFileList}{std}}::\doxymbox{\hyperlink{classConcOrderedFileList}{is\_trivially\_copyable\_v}}<\doxymbox{\hyperlink{classConcOrderedFileList}{T}}>)}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcOrderedFileList}{file\_}}.\doxymbox{\hyperlink{classConcOrderedFileList}{write}}(\textcolor{keyword}{reinterpret\_cast}<\textcolor{keywordtype}{char}*>(\&\doxymbox{\hyperlink{classConcOrderedFileList}{tail\_}}-\/>\doxymbox{\hyperlink{classConcOrderedFileList}{element\_}}),\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{classConcOrderedFileList}{T}}));}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\textcolor{comment}{//T\ implements\ a\ write\_to()}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00182}00182\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcOrderedFileList}{tail\_}}-\/>\doxymbox{\hyperlink{classConcOrderedFileList}{element\_}}-\/>\doxymbox{\hyperlink{classConcOrderedFileList}{write\_to}}(\doxymbox{\hyperlink{classConcOrderedFileList}{file\_}}.\doxymbox{\hyperlink{classConcOrderedFileList}{get\_ref\_out\_stream}}());}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00185}00185\ }
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00186}00186\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classConcOrderedFileList}{old\_tail}}\ =\ \doxymbox{\hyperlink{classConcOrderedFileList}{tail\_}};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00187}00187\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcOrderedFileList}{tail\_}}\ =\ \doxymbox{\hyperlink{classConcOrderedFileList}{tail\_}}-\/>\doxymbox{\hyperlink{classConcOrderedFileList}{prev}};\textcolor{comment}{//new\ tail\ ptr}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00188}00188\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{delete}\ \doxymbox{\hyperlink{classConcOrderedFileList}{old\_tail}};\textcolor{comment}{//delete\ old\ tail\ ptr}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{classConcOrderedFileList}{head\_}}\ ==\ \doxymbox{\hyperlink{classConcOrderedFileList}{old\_tail}})\ \doxymbox{\hyperlink{classConcOrderedFileList}{head\_}}\ =\ \textcolor{keywordtype}{nullptr};\textcolor{comment}{//we\ have\ to\ account\ for\ the\ head\_\ ptr\ too\ if\ empty}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00190}00190\ }
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00191}00191\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcOrderedFileList}{size\_}}-\/-\/;}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00192}00192\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcOrderedFileList}{expected\_sequence\_num\_}}++;}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00193}00193\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00194}00194\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00195}00195\ }
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00196}00196\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (!\doxymbox{\hyperlink{classConcOrderedFileList}{stop}}.\doxymbox{\hyperlink{classConcOrderedFileList}{stop\_requested}}())}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00197}00197\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00198}00198\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcOrderedFileList}{std}}::\doxymbox{\hyperlink{classConcOrderedFileList}{unique\_lock}}\ \doxymbox{\hyperlink{classConcOrderedFileList}{lock}}\{\doxymbox{\hyperlink{classConcOrderedFileList}{mut}}\};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00199}00199\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcOrderedFileList}{writer\_notifier}}.\doxymbox{\hyperlink{classConcOrderedFileList}{wait}}(\doxymbox{\hyperlink{classConcOrderedFileList}{lock}},\ [\textcolor{keyword}{this}]\{\textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classConcOrderedFileList}{called\_writer}};\});}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00200}00200\ }
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00201}00201\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{classConcOrderedFileList}{stop}}.\doxymbox{\hyperlink{classConcOrderedFileList}{stop\_requested}}())}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00202}00202\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00203}00203\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcOrderedFileList}{called\_writer}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00204}00204\ }
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00205}00205\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcOrderedFileList}{write\_func}}();}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00206}00206\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00207}00207\ }
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00208}00208\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcOrderedFileList}{std}}::\doxymbox{\hyperlink{classConcOrderedFileList}{unique\_lock}}\ \doxymbox{\hyperlink{classConcOrderedFileList}{lock}}\{\doxymbox{\hyperlink{classConcOrderedFileList}{mut}}\};}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00209}00209\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\doxymbox{\hyperlink{classConcOrderedFileList}{write\_func}}());\textcolor{comment}{//write\ the\ whole\ thing}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00210}00210\ }
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00211}00211\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcOrderedFileList}{assert}}(\doxymbox{\hyperlink{classConcOrderedFileList}{size\_}}\ ==\ 0\ \&\&\ \textcolor{stringliteral}{"{}The\ file\ list\ wasn't\ able\ to\ clean\ up\ correctly."{}});}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00212}00212\ }
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00213}00213\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00214}00214\ }
+\DoxyCodeLine{\Hypertarget{file__list_8cppm_source_l00215}00215\ \};}
+
+\end{DoxyCode}

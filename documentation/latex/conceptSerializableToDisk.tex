@@ -1,0 +1,21 @@
+\doxysection{Serializable\+To\+Disk Concept Reference}
+\hypertarget{conceptSerializableToDisk}{}\label{conceptSerializableToDisk}\index{SerializableToDisk@{SerializableToDisk}}
+\doxysubsection{Concept definition}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\textcolor{keyword}{concept\ }\doxymbox{\hyperlink{conceptSerializableToDisk}{SerializableToDisk}}\ =\ \textcolor{keyword}{requires}(T\ a,\ std::ofstream\&\ file)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ \{\ a.write\_to(file)\ \}\ -\/>\ std::same\_as<void>;}
+\DoxyCodeLine{\}}
+\DoxyCodeLine{||}
+\DoxyCodeLine{std::is\_trivially\_copyable\_v<T>}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{core__utils_8cppm_source_l00364}{364}} of file \doxymbox{\hyperlink{core__utils_8cppm_source}{core\+\_\+utils.\+cppm}}.
+

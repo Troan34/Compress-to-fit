@@ -1,0 +1,271 @@
+\doxysection{LZ77\+Block Class Reference}
+\hypertarget{classLZ77Block}{}\label{classLZ77Block}\index{LZ77Block@{LZ77Block}}
+
+
+Represents a block of data encoded by LZ77.  
+
+
+
+
+Collaboration diagram for LZ77\+Block:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classLZ77Block__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classLZ77Block_ae18e40df9227bfa7e45a09c22b3da8e5}{LZ77\+Block}} (std::\+span$<$ std::\+byte const $>$ const data\+\_\+, fs::\+path const \&file) noexcept
+\item 
+\doxymbox{\hyperlink{classLZ77Block_a30b2e4506c7e766c4c479a685e943c7f}{LZ77\+Block}} ()=default
+\item 
+void \doxymbox{\hyperlink{classLZ77Block_a2885e7e8eb58a359b0f089957284918b}{serialize}} (std::\+vector$<$ std::\+byte $>$ \&output)
+\begin{DoxyCompactList}\small\item\em Convert the block into a byte buffer. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{classLZ77Block_a18cc7e9b2f24cc2ad99384b352a4a6cb}{write\+\_\+to}} (std::\+ofstream \&output)
+\item 
+void \doxymbox{\hyperlink{classLZ77Block_a7133f9dd936042c100c02cc1bbc9d18b}{push\+\_\+back}} (\doxymbox{\hyperlink{lz77_8cppm_a7184b481ee894966b0eb8845e4a7bcf2}{LZ77\+\_\+\+Token}} const token)
+\item 
+void \doxymbox{\hyperlink{classLZ77Block_af024d53442a08eb868d332a7860e0bc8}{clear}} () noexcept
+\item 
+constexpr auto \doxymbox{\hyperlink{classLZ77Block_ad302b8fac279b04a2f2571a3fdfe1647}{reserve}} (size\+\_\+t const \doxymbox{\hyperlink{classLZ77Block_aeda107dc29c3e636234ad32de9ea39d1}{size}})
+\item 
+constexpr auto \doxymbox{\hyperlink{classLZ77Block_aeda107dc29c3e636234ad32de9ea39d1}{size}} () const noexcept
+\item 
+constexpr auto \doxymbox{\hyperlink{classLZ77Block_abfcad1c47f9bdc5c97b2c2e9ac88c8e5}{size\+\_\+bytes}} () const noexcept -\/$>$ size\+\_\+t
+\item 
+constexpr auto \doxymbox{\hyperlink{classLZ77Block_ae211f9db90db5df3a656614748a87167}{compressed\+\_\+length}} () const noexcept
+\item 
+constexpr auto \doxymbox{\hyperlink{classLZ77Block_abaaebed0fc0abb932ddee1e9dd6386e1}{uncompressed\+\_\+length}} () const noexcept
+\item 
+constexpr auto const \& \doxymbox{\hyperlink{classLZ77Block_a037b8bdbb29c33cbf9653e27eaa79002}{operator\+[$\,$]\+}} (size\+\_\+t const index) const noexcept
+\item 
+constexpr auto \doxymbox{\hyperlink{classLZ77Block_af8c1465ab854939fc0ab8faf52fe8578}{begin}} () const noexcept
+\item 
+constexpr auto \doxymbox{\hyperlink{classLZ77Block_a9af4024186fc27b9e4329c3e1f9c40ac}{end}} () const noexcept
+\item 
+constexpr auto \& \doxymbox{\hyperlink{classLZ77Block_a0b1fc2d8ceeeb356effaca800ba709e4}{operator\+[$\,$]\+}} (size\+\_\+t const index) noexcept
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{classLZ77Block_a7a79fbb2a66f47510603002bdefd8a5f}{compressed\+\_\+length\+\_\+}} \{\}
+\item 
+uint32\+\_\+t \doxymbox{\hyperlink{classLZ77Block_a039b63f164dfa308bba99310d4d706b1}{uncompressed\+\_\+length\+\_\+}} \{\}
+\item 
+std::\+vector$<$ \doxymbox{\hyperlink{lz77_8cppm_a7184b481ee894966b0eb8845e4a7bcf2}{LZ77\+\_\+\+Token}} $>$ \doxymbox{\hyperlink{classLZ77Block_a8a60a5c590f1600ea16bafe8dbc0f8a1}{block}} \{\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a block of data encoded by LZ77. 
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00321}{321}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{classLZ77Block_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classLZ77Block_ae18e40df9227bfa7e45a09c22b3da8e5}\index{LZ77Block@{LZ77Block}!LZ77Block@{LZ77Block}}
+\index{LZ77Block@{LZ77Block}!LZ77Block@{LZ77Block}}
+\doxysubsubsection{\texorpdfstring{LZ77Block()}{LZ77Block()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classLZ77Block_ae18e40df9227bfa7e45a09c22b3da8e5} 
+LZ77\+Block::\+\+LZ77\+Block (\begin{DoxyParamCaption}\item[{std::\+span$<$ std::\+byte const $>$ const}]{data\+\_\+}{, }\item[{fs::\+path const \&}]{file}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}, {\ttfamily [noexcept]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77__impl_8cpp_source_l00052}{52}} of file \doxymbox{\hyperlink{lz77__impl_8cpp_source}{lz77\+\_\+impl.\+cpp}}.
+
+\Hypertarget{classLZ77Block_a30b2e4506c7e766c4c479a685e943c7f}\index{LZ77Block@{LZ77Block}!LZ77Block@{LZ77Block}}
+\index{LZ77Block@{LZ77Block}!LZ77Block@{LZ77Block}}
+\doxysubsubsection{\texorpdfstring{LZ77Block()}{LZ77Block()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classLZ77Block_a30b2e4506c7e766c4c479a685e943c7f} 
+LZ77\+Block::\+\+LZ77\+Block (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classLZ77Block_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classLZ77Block_af8c1465ab854939fc0ab8faf52fe8578}\index{LZ77Block@{LZ77Block}!begin@{begin}}
+\index{begin@{begin}!LZ77Block@{LZ77Block}}
+\doxysubsubsection{\texorpdfstring{begin()}{begin()}}
+{\footnotesize\ttfamily \label{classLZ77Block_af8c1465ab854939fc0ab8faf52fe8578} 
+auto LZ77\+Block::\+begin (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00357}{357}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+\Hypertarget{classLZ77Block_af024d53442a08eb868d332a7860e0bc8}\index{LZ77Block@{LZ77Block}!clear@{clear}}
+\index{clear@{clear}!LZ77Block@{LZ77Block}}
+\doxysubsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily \label{classLZ77Block_af024d53442a08eb868d332a7860e0bc8} 
+void LZ77\+Block::\+clear (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00343}{343}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+\Hypertarget{classLZ77Block_ae211f9db90db5df3a656614748a87167}\index{LZ77Block@{LZ77Block}!compressed\_length@{compressed\_length}}
+\index{compressed\_length@{compressed\_length}!LZ77Block@{LZ77Block}}
+\doxysubsubsection{\texorpdfstring{compressed\_length()}{compressed\_length()}}
+{\footnotesize\ttfamily \label{classLZ77Block_ae211f9db90db5df3a656614748a87167} 
+auto LZ77\+Block::\+compressed\+\_\+length (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00354}{354}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+\Hypertarget{classLZ77Block_a9af4024186fc27b9e4329c3e1f9c40ac}\index{LZ77Block@{LZ77Block}!end@{end}}
+\index{end@{end}!LZ77Block@{LZ77Block}}
+\doxysubsubsection{\texorpdfstring{end()}{end()}}
+{\footnotesize\ttfamily \label{classLZ77Block_a9af4024186fc27b9e4329c3e1f9c40ac} 
+auto LZ77\+Block::\+end (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00358}{358}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+\Hypertarget{classLZ77Block_a037b8bdbb29c33cbf9653e27eaa79002}\index{LZ77Block@{LZ77Block}!operator\+[]\+@{operator[]}}
+\index{operator\+[]\+@{operator[]}!LZ77Block@{LZ77Block}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classLZ77Block_a037b8bdbb29c33cbf9653e27eaa79002} 
+auto const  \& LZ77\+Block::\+operator\+[$\,$]\+ (\begin{DoxyParamCaption}\item[{size\+\_\+t const}]{index}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00356}{356}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+\Hypertarget{classLZ77Block_a0b1fc2d8ceeeb356effaca800ba709e4}\index{LZ77Block@{LZ77Block}!operator\+[]\+@{operator[]}}
+\index{operator\+[]\+@{operator[]}!LZ77Block@{LZ77Block}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classLZ77Block_a0b1fc2d8ceeeb356effaca800ba709e4} 
+auto \& LZ77\+Block::\+operator\+[$\,$]\+ (\begin{DoxyParamCaption}\item[{size\+\_\+t const}]{index}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00360}{360}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+\Hypertarget{classLZ77Block_a7133f9dd936042c100c02cc1bbc9d18b}\index{LZ77Block@{LZ77Block}!push\_back@{push\_back}}
+\index{push\_back@{push\_back}!LZ77Block@{LZ77Block}}
+\doxysubsubsection{\texorpdfstring{push\_back()}{push\_back()}}
+{\footnotesize\ttfamily \label{classLZ77Block_a7133f9dd936042c100c02cc1bbc9d18b} 
+void LZ77\+Block::\+push\+\_\+back (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{lz77_8cppm_a7184b481ee894966b0eb8845e4a7bcf2}{LZ77\+\_\+\+Token}} const}]{token}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00336}{336}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+\Hypertarget{classLZ77Block_ad302b8fac279b04a2f2571a3fdfe1647}\index{LZ77Block@{LZ77Block}!reserve@{reserve}}
+\index{reserve@{reserve}!LZ77Block@{LZ77Block}}
+\doxysubsubsection{\texorpdfstring{reserve()}{reserve()}}
+{\footnotesize\ttfamily \label{classLZ77Block_ad302b8fac279b04a2f2571a3fdfe1647} 
+auto LZ77\+Block::\+reserve (\begin{DoxyParamCaption}\item[{size\+\_\+t const}]{size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00350}{350}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+\Hypertarget{classLZ77Block_a2885e7e8eb58a359b0f089957284918b}\index{LZ77Block@{LZ77Block}!serialize@{serialize}}
+\index{serialize@{serialize}!LZ77Block@{LZ77Block}}
+\doxysubsubsection{\texorpdfstring{serialize()}{serialize()}}
+{\footnotesize\ttfamily \label{classLZ77Block_a2885e7e8eb58a359b0f089957284918b} 
+void LZ77\+Block::\+serialize (\begin{DoxyParamCaption}\item[{std::\+vector$<$ std::\+byte $>$ \&}]{output}{}\end{DoxyParamCaption})}
+
+
+
+Convert the block into a byte buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em output} & output buffer \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{lz77__impl_8cpp_source_l00070}{70}} of file \doxymbox{\hyperlink{lz77__impl_8cpp_source}{lz77\+\_\+impl.\+cpp}}.
+
+\Hypertarget{classLZ77Block_aeda107dc29c3e636234ad32de9ea39d1}\index{LZ77Block@{LZ77Block}!size@{size}}
+\index{size@{size}!LZ77Block@{LZ77Block}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily \label{classLZ77Block_aeda107dc29c3e636234ad32de9ea39d1} 
+auto LZ77\+Block::\+size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00352}{352}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+\Hypertarget{classLZ77Block_abfcad1c47f9bdc5c97b2c2e9ac88c8e5}\index{LZ77Block@{LZ77Block}!size\_bytes@{size\_bytes}}
+\index{size\_bytes@{size\_bytes}!LZ77Block@{LZ77Block}}
+\doxysubsubsection{\texorpdfstring{size\_bytes()}{size\_bytes()}}
+{\footnotesize\ttfamily \label{classLZ77Block_abfcad1c47f9bdc5c97b2c2e9ac88c8e5} 
+auto LZ77\+Block::\+size\+\_\+bytes (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ size\+\_\+t\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00353}{353}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+\Hypertarget{classLZ77Block_abaaebed0fc0abb932ddee1e9dd6386e1}\index{LZ77Block@{LZ77Block}!uncompressed\_length@{uncompressed\_length}}
+\index{uncompressed\_length@{uncompressed\_length}!LZ77Block@{LZ77Block}}
+\doxysubsubsection{\texorpdfstring{uncompressed\_length()}{uncompressed\_length()}}
+{\footnotesize\ttfamily \label{classLZ77Block_abaaebed0fc0abb932ddee1e9dd6386e1} 
+auto LZ77\+Block::\+uncompressed\+\_\+length (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00355}{355}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+\Hypertarget{classLZ77Block_a18cc7e9b2f24cc2ad99384b352a4a6cb}\index{LZ77Block@{LZ77Block}!write\_to@{write\_to}}
+\index{write\_to@{write\_to}!LZ77Block@{LZ77Block}}
+\doxysubsubsection{\texorpdfstring{write\_to()}{write\_to()}}
+{\footnotesize\ttfamily \label{classLZ77Block_a18cc7e9b2f24cc2ad99384b352a4a6cb} 
+void LZ77\+Block::\+write\+\_\+to (\begin{DoxyParamCaption}\item[{std::\+ofstream \&}]{output}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77__impl_8cpp_source_l00083}{83}} of file \doxymbox{\hyperlink{lz77__impl_8cpp_source}{lz77\+\_\+impl.\+cpp}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classLZ77Block_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classLZ77Block_a8a60a5c590f1600ea16bafe8dbc0f8a1}\index{LZ77Block@{LZ77Block}!block@{block}}
+\index{block@{block}!LZ77Block@{LZ77Block}}
+\doxysubsubsection{\texorpdfstring{block}{block}}
+{\footnotesize\ttfamily \label{classLZ77Block_a8a60a5c590f1600ea16bafe8dbc0f8a1} 
+std::\+vector$<$\doxymbox{\hyperlink{lz77_8cppm_a7184b481ee894966b0eb8845e4a7bcf2}{LZ77\+\_\+\+Token}}$>$ LZ77\+Block::\+block \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00369}{369}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+\Hypertarget{classLZ77Block_a7a79fbb2a66f47510603002bdefd8a5f}\index{LZ77Block@{LZ77Block}!compressed\_length\_@{compressed\_length\_}}
+\index{compressed\_length\_@{compressed\_length\_}!LZ77Block@{LZ77Block}}
+\doxysubsubsection{\texorpdfstring{compressed\_length\_}{compressed\_length\_}}
+{\footnotesize\ttfamily \label{classLZ77Block_a7a79fbb2a66f47510603002bdefd8a5f} 
+uint32\+\_\+t LZ77\+Block::\+compressed\+\_\+length\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00367}{367}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+\Hypertarget{classLZ77Block_a039b63f164dfa308bba99310d4d706b1}\index{LZ77Block@{LZ77Block}!uncompressed\_length\_@{uncompressed\_length\_}}
+\index{uncompressed\_length\_@{uncompressed\_length\_}!LZ77Block@{LZ77Block}}
+\doxysubsubsection{\texorpdfstring{uncompressed\_length\_}{uncompressed\_length\_}}
+{\footnotesize\ttfamily \label{classLZ77Block_a039b63f164dfa308bba99310d4d706b1} 
+uint32\+\_\+t LZ77\+Block::\+uncompressed\+\_\+length\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00368}{368}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+Compress-\/to-\/fit/\+src/\+models/\+\+LZ77/\+\doxymbox{\hyperlink{lz77_8cppm}{lz77.\+cppm}}\item 
+Compress-\/to-\/fit/\+src/\+models/\+\+LZ77/\+\doxymbox{\hyperlink{lz77__impl_8cpp}{lz77\+\_\+impl.\+cpp}}\end{DoxyCompactItemize}

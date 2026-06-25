@@ -1,0 +1,204 @@
+\doxysection{file\+\_\+buffer.\+cppm}
+\hypertarget{file__buffer_8cppm_source}{}\label{file__buffer_8cppm_source}\index{Compress-\/to-\/fit/src/util/containers/file\_buffer.cppm@{Compress-\/to-\/fit/src/util/containers/file\_buffer.cppm}}
+\doxymbox{\hyperlink{file__buffer_8cppm}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00001}00001\ module;}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00002}00002\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{if}\ \textcolor{preprocessor}{defined}\textcolor{preprocessor}{(}\textcolor{preprocessor}{\_\_INTELLISENSE\_\_}\textcolor{preprocessor}{)}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00003}00003\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{include}\ \textcolor{stringliteral}{"{}../../for\_intellisense/everything.hpp"{}}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00004}00004\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{endif}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00005}00005\ \textcolor{keyword}{export}\ module\ containers:concurrent\_file\_buffer;}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00006}00006\ import\ util;}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00007}00007\ import\ :file;}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00008}00008\ import\ std.compat;}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00011}00011\ \textcolor{comment}{/**}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ *\ @brief\ Ring\ queue-\/like\ where\ if\ size\ >\ capacity,\ the\ oldest\ elements\ are\ written\ to\ stream.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ *\ \ \ \ \ \ \ \ At\ least\ the\ most\ recent\ \#minimum\_size\_\ number\ of\ elements\ shall\ be\ available\ for\ reading.}}
+\DoxyCodeLine{00014\ \textcolor{comment}{\ *\ @tparam\ T\ type\ stored,\ must\ be\ trivially\ copyable}}
+\DoxyCodeLine{00015\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00016}00016\ \textcolor{keyword}{export}\ \textcolor{keyword}{template}\ <SerializableToDisk\ T>}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00017}\doxymbox{\hyperlink{classConcFileBuffer}{00017}}\ \textcolor{keyword}{class}\ \doxymbox{\hyperlink{classConcFileBuffer}{ConcFileBuffer}}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00018}00018\ \{}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00019}00019\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00021}\doxymbox{\hyperlink{classConcFileBuffer_a928b8cfdfe4acbcb81289ac23251af34}{00021}}\ \ \ \ \ \doxymbox{\hyperlink{classConcFileBuffer_a928b8cfdfe4acbcb81289ac23251af34}{ConcFileBuffer}}(File\&\ out\_stream,\ size\_t\ \textcolor{keyword}{const}\ minimum\_size)}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00022}00022\ \ \ \ \ \ \ \ \ :\doxymbox{\hyperlink{classConcFileBuffer}{out\_stream\_}}(\doxymbox{\hyperlink{classConcFileBuffer}{out\_stream}}),\ \doxymbox{\hyperlink{classConcFileBuffer}{minimum\_size\_}}(\doxymbox{\hyperlink{classConcFileBuffer}{minimum\_size}})}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00023}00023\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00024}00024\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcFileBuffer}{reserve}}(1.5f\ *\ \doxymbox{\hyperlink{classConcFileBuffer}{minimum\_size\_}});}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00025}00025\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00027}\doxymbox{\hyperlink{classConcFileBuffer_a4013b63d013ca30183f746e0ea722781}{00027}}\ \ \ \ \ \string~\doxymbox{\hyperlink{classConcFileBuffer_a4013b63d013ca30183f746e0ea722781}{ConcFileBuffer}}()}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00028}00028\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00029}00029\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{classConcFileBuffer}{elements\_to\_write\_n}}\ =\ \doxymbox{\hyperlink{classConcFileBuffer}{index\_}}\ -\/\ \doxymbox{\hyperlink{classConcFileBuffer}{written\_index\_}};}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00030}00030\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcFileBuffer}{out\_stream\_}}.\doxymbox{\hyperlink{classConcFileBuffer}{write}}(\textcolor{keyword}{reinterpret\_cast}<\textcolor{keywordtype}{char}\ \textcolor{keyword}{const}*>(\&\doxymbox{\hyperlink{classConcFileBuffer}{data\_}}[\doxymbox{\hyperlink{classConcFileBuffer}{written\_index\_}}]),\ \doxymbox{\hyperlink{classConcFileBuffer}{elements\_to\_write\_n}}\ *\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{classConcFileBuffer}{T}}));}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00031}00031\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcFileBuffer}{allocator}}.\doxymbox{\hyperlink{classConcFileBuffer}{deallocate}}(\doxymbox{\hyperlink{classConcFileBuffer}{data\_}},\ \doxymbox{\hyperlink{classConcFileBuffer}{capacity\_}});}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00032}00032\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00034}00034\ \ \ \ \ \textcolor{comment}{/**}}
+\DoxyCodeLine{00035\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ }}
+\DoxyCodeLine{00036\ \textcolor{comment}{\ \ \ \ \ *\ @param\ value}}
+\DoxyCodeLine{00037\ \textcolor{comment}{\ \ \ \ \ *\ @pre\ \#index\_\ >\ \#minimum\_size\_}}
+\DoxyCodeLine{00038\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00039}\doxymbox{\hyperlink{classConcFileBuffer_a6b09de82a3f1c17a3e7c43101d77ebb7}{00039}}\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classConcFileBuffer_a6b09de82a3f1c17a3e7c43101d77ebb7}{push}}(T\ \textcolor{keyword}{const}\&\ value)}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00040}00040\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00041}00041\ \ \ \ \ \ \ \ \ std::unique\_lock\ lock\{mut\};}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00043}00043\ \ \ \ \ \ \ \ \ data\_[true\_index()]\ =\ value;}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00044}00044\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcFileBuffer_a3fd227f7f33db12cae86811db166cb82}{index\_}}++;}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00046}00046\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcFileBuffer_aee05dae159f1fd6d6109ae7f20a839bf}{write\_buffer}}\doxymbox{\hyperlink{classConcFileBuffer_aee05dae159f1fd6d6109ae7f20a839bf}{(}}\doxymbox{\hyperlink{classConcFileBuffer_aee05dae159f1fd6d6109ae7f20a839bf}{)}};}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00047}00047\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00049}00049\ \ \ \ \ \textcolor{comment}{/**}}
+\DoxyCodeLine{00050\ \textcolor{comment}{\ \ \ \ \ *\ @brief}}
+\DoxyCodeLine{00051\ \textcolor{comment}{\ \ \ \ \ *\ @param\ value}}
+\DoxyCodeLine{00052\ \textcolor{comment}{\ \ \ \ \ *\ @pre\ \#index\_\ >\ \#minimum\_size\_}}
+\DoxyCodeLine{00053\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00054}\doxymbox{\hyperlink{classConcFileBuffer_ae4d51c917420b37eb906e2c60bc8b8e5}{00054}}\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classConcFileBuffer_ae4d51c917420b37eb906e2c60bc8b8e5}{push}}(T\&\&\ value)}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00055}00055\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00056}00056\ \ \ \ \ \ \ \ \ std::unique\_lock\ lock\{mut\};}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00058}00058\ \ \ \ \ \ \ \ \ data\_[true\_index()]\ =\ value;}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00059}00059\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcFileBuffer_a3fd227f7f33db12cae86811db166cb82}{index\_}}++;}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00060}00060\ }
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00061}00061\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcFileBuffer_aee05dae159f1fd6d6109ae7f20a839bf}{write\_buffer}}\doxymbox{\hyperlink{classConcFileBuffer_aee05dae159f1fd6d6109ae7f20a839bf}{(}}\doxymbox{\hyperlink{classConcFileBuffer_aee05dae159f1fd6d6109ae7f20a839bf}{)}};}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00062}00062\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00064}00064\ \ \ \ \ \textcolor{comment}{/**}}
+\DoxyCodeLine{00065\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Appends\ a\ range\ to\ the\ container}}
+\DoxyCodeLine{00066\ \textcolor{comment}{\ \ \ \ \ *\ @param\ rg\ range\ to\ append}}
+\DoxyCodeLine{00067\ \textcolor{comment}{\ \ \ \ \ *\ @pre\ \#index\_\ >\ \#minimum\_size\_}}
+\DoxyCodeLine{00068\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00069}00069\ \ \ \ \ \textcolor{keyword}{template}\ <std::ranges::range\ R>}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00070}00070\ \ \ \ \ \ \ \ \ requires\ std::convertible\_to<std::ranges::range\_reference\_t<R>,\ T>}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00071}\doxymbox{\hyperlink{classConcFileBuffer_a40168a78d15939b42fada331013a2b97}{00071}}\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classConcFileBuffer}{append\_range}}(\doxymbox{\hyperlink{classConcFileBuffer}{R}}\&\&\ \doxymbox{\hyperlink{classConcFileBuffer}{rg}})}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00072}00072\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00073}00073\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classConcFileBuffer}{size}}\ =\ \doxymbox{\hyperlink{classConcFileBuffer}{rg}}.\doxymbox{\hyperlink{classConcFileBuffer}{end}}()\ -\/\ \doxymbox{\hyperlink{classConcFileBuffer}{rg}}.\doxymbox{\hyperlink{classConcFileBuffer}{start}}();}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00074}00074\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcFileBuffer}{std}}::\doxymbox{\hyperlink{classConcFileBuffer}{unique\_lock}}\ \doxymbox{\hyperlink{classConcFileBuffer}{lock}}\{\doxymbox{\hyperlink{classConcFileBuffer}{mut}}\};}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00077}00077\ \ \ \ \ \ \ \ \ \textcolor{comment}{//might\ be\ worthwhile\ to\ optimize\ this}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00078}00078\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcFileBuffer}{std}}::\doxymbox{\hyperlink{classConcFileBuffer}{for\_each}}(\doxymbox{\hyperlink{classConcFileBuffer}{rg}}.\doxymbox{\hyperlink{classConcFileBuffer}{begin}}(),\ \doxymbox{\hyperlink{classConcFileBuffer}{rg}}.\doxymbox{\hyperlink{classConcFileBuffer}{end}}(),}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [\&](\doxymbox{\hyperlink{classConcFileBuffer}{T}}\ \textcolor{keyword}{const}\&\ \doxymbox{\hyperlink{classConcFileBuffer}{value}})}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00080}00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcFileBuffer}{data\_}}[\doxymbox{\hyperlink{classConcFileBuffer}{index\_}}]\ =\ \doxymbox{\hyperlink{classConcFileBuffer}{value}};}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcFileBuffer}{index\_}}++;}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00083}00083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00085}00085\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcFileBuffer}{write\_buffer}}();}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00086}00086\ }
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00087}00087\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00089}00089\ \ \ \ \ \textcolor{comment}{/**}}
+\DoxyCodeLine{00090\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Increase\ capacity\ to\ at\ least\ \#new\_capacity}}
+\DoxyCodeLine{00091\ \textcolor{comment}{\ \ \ \ \ *\ @param\ new\_capacity\ New\ capacity\ of\ the\ buffer}}
+\DoxyCodeLine{00092\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00093}\doxymbox{\hyperlink{classConcFileBuffer_abc7d2b30f9275c3a18d996107d55722b}{00093}}\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classConcFileBuffer}{reserve}}(\doxymbox{\hyperlink{classConcFileBuffer}{size\_t}}\ \doxymbox{\hyperlink{classConcFileBuffer}{new\_capacity}})\ \textcolor{keyword}{noexcept}(\textcolor{keyword}{false})}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00094}00094\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00095}00095\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{classConcFileBuffer}{new\_capacity}}\ <=\ \doxymbox{\hyperlink{classConcFileBuffer}{capacity\_}})\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00096}00096\ }
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00097}00097\ \ \ \ \ \ \ \ \ \textcolor{comment}{//allocate\ size\ for\ new\ data}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00098}00098\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcFileBuffer}{T}}*\ \doxymbox{\hyperlink{classConcFileBuffer}{new\_data\_}}\ =\ \doxymbox{\hyperlink{classConcFileBuffer}{allocator}}.\doxymbox{\hyperlink{classConcFileBuffer}{allocate}}(\doxymbox{\hyperlink{classConcFileBuffer}{new\_capacity}});}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00099}00099\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{classConcFileBuffer}{size}}\ =\ \doxymbox{\hyperlink{classConcFileBuffer}{index\_}}\ -\/\ \doxymbox{\hyperlink{classConcFileBuffer}{written\_index\_}};}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00100}00100\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcFileBuffer}{std}}::\doxymbox{\hyperlink{classConcFileBuffer}{unique\_lock}}<\doxymbox{\hyperlink{classConcFileBuffer}{std}}::\doxymbox{\hyperlink{classConcFileBuffer}{shared\_mutex}}>\ \doxymbox{\hyperlink{classConcFileBuffer}{lock}}(\doxymbox{\hyperlink{classConcFileBuffer}{mut}});}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00102}00102\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (\doxymbox{\hyperlink{classConcFileBuffer}{std}}::\doxymbox{\hyperlink{classConcFileBuffer}{is\_trivially\_copyable\_v}}<\doxymbox{\hyperlink{classConcFileBuffer}{T}}>)\textcolor{comment}{//if\ trivially\ copyable\ use\ std::memcpy}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00103}00103\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcFileBuffer}{std}}::\doxymbox{\hyperlink{classConcFileBuffer}{memcpy}}(\doxymbox{\hyperlink{classConcFileBuffer}{new\_data\_}},\ \doxymbox{\hyperlink{classConcFileBuffer}{data\_}},\ \doxymbox{\hyperlink{classConcFileBuffer}{size}}\ *\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{classConcFileBuffer}{T}}));}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00105}00105\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00106}00106\ }
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00107}00107\ \ \ \ \ \ \ \ \ \textcolor{comment}{/*\ To\ be\ used\ if\ we\ ever\ want\ to\ use\ non-\/trivial\ types}}
+\DoxyCodeLine{00108\ \textcolor{comment}{\ \ \ \ \ \ \ \ else//if\ not,\ call\ T's\ ctor}}
+\DoxyCodeLine{00109\ \textcolor{comment}{\ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{00110\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ for\ (size\_t\ i\{\};\ i\ <\ size\_;\ i++)}}
+\DoxyCodeLine{00111\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \{}}
+\DoxyCodeLine{00112\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ new\ (\&new\_data\_[i])\ T(std::move(data\_[i]));}}
+\DoxyCodeLine{00113\ \textcolor{comment}{}}
+\DoxyCodeLine{00114\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ data\_[i].\string~T();}}
+\DoxyCodeLine{00115\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00116\ \textcolor{comment}{\ \ \ \ \ \ \ \ \}*/}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00117}00117\ }
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00118}00118\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcFileBuffer}{data\_}}\ =\ \doxymbox{\hyperlink{classConcFileBuffer}{new\_data\_}};}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00119}00119\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classConcFileBuffer}{old\_cap}}\ =\ \doxymbox{\hyperlink{classConcFileBuffer}{capacity\_}};}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00120}00120\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcFileBuffer}{lock}}.\doxymbox{\hyperlink{classConcFileBuffer}{unlock}}();}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00121}00121\ }
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00122}00122\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcFileBuffer}{allocator}}.\doxymbox{\hyperlink{classConcFileBuffer}{deallocate}}(\doxymbox{\hyperlink{classConcFileBuffer}{data\_}},\ \doxymbox{\hyperlink{classConcFileBuffer}{old\_cap}});}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00123}00123\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00124}00124\ }
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00125}\doxymbox{\hyperlink{classConcFileBuffer_ae3855da3c540a0ba960e7d7d84c843b8}{00125}}\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classConcFileBuffer}{operator}}[](\doxymbox{\hyperlink{classConcFileBuffer}{size\_t}}\ \doxymbox{\hyperlink{classConcFileBuffer}{index}})\ \textcolor{keyword}{const}\ -\/>\ \doxymbox{\hyperlink{classConcFileBuffer}{T}}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00126}00126\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00127}00127\ \ \ \ \ \ \ \ \ \textcolor{comment}{//if\ in\ debug\ mode}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00128}00128\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{ifndef}\ \textcolor{preprocessor}{NDEBUG}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00129}00129\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classConcFileBuffer}{size}}\ =\ \doxymbox{\hyperlink{classConcFileBuffer}{index\_}}\ -\/\ \doxymbox{\hyperlink{classConcFileBuffer}{written\_index\_}};}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00130}00130\ \ \ \ \ \ \ \ \ \textcolor{comment}{//holy\ yap}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00131}00131\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((\doxymbox{\hyperlink{classConcFileBuffer}{index}}\ \%\ \doxymbox{\hyperlink{classConcFileBuffer}{capacity\_}})\ >\ (\doxymbox{\hyperlink{classConcFileBuffer}{index\_}}\ \%\ \doxymbox{\hyperlink{classConcFileBuffer}{capacity\_}})\ \textcolor{keyword}{or}\ (\doxymbox{\hyperlink{classConcFileBuffer}{index\_}}\ \%\ \doxymbox{\hyperlink{classConcFileBuffer}{capacity\_}})\ <\ ((\doxymbox{\hyperlink{classConcFileBuffer}{index\_}}\ \%\ \doxymbox{\hyperlink{classConcFileBuffer}{capacity\_}})\ -\/\ \doxymbox{\hyperlink{classConcFileBuffer}{size}}))}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00132}00132\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \doxymbox{\hyperlink{classConcFileBuffer}{std}}::\doxymbox{\hyperlink{classConcFileBuffer}{out\_of\_range}}(\textcolor{stringliteral}{"{}Accessed\ an\ element\ outside\ of\ buffer."{}});}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00133}00133\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{endif}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00134}00134\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcFileBuffer}{std}}::\doxymbox{\hyperlink{classConcFileBuffer}{shared\_lock}}<\doxymbox{\hyperlink{classConcFileBuffer}{std}}::\doxymbox{\hyperlink{classConcFileBuffer}{shared\_mutex}}>\ \doxymbox{\hyperlink{classConcFileBuffer}{lock}}(\doxymbox{\hyperlink{classConcFileBuffer}{mut}});}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00135}00135\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classConcFileBuffer}{data\_}}[\doxymbox{\hyperlink{classConcFileBuffer}{index}}];}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00136}00136\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00137}00137\ }
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00138}00138\ \ \ \ \ \textcolor{comment}{//getters}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00139}\doxymbox{\hyperlink{classConcFileBuffer_a4d836340bab0b544b85c08ad72722d9e}{00139}}\ \ \ \ \ \textcolor{keyword}{constexpr}\ \doxymbox{\hyperlink{classConcFileBuffer}{size\_t}}\ \doxymbox{\hyperlink{classConcFileBuffer}{capacity}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ \{\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classConcFileBuffer}{capacity\_}};\ \}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00140}\doxymbox{\hyperlink{classConcFileBuffer_a1cf17ecbc16dee0f65dbb2f8e24e924a}{00140}}\ \ \ \ \ \textcolor{keyword}{constexpr}\ \doxymbox{\hyperlink{classConcFileBuffer}{size\_t}}\ \doxymbox{\hyperlink{classConcFileBuffer}{minimum\_size}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ \{\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classConcFileBuffer}{minimum\_size\_}};\ \}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00141}00141\ }
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00142}00142\ \ \ \ \ \textcolor{comment}{//setters}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00143}00143\ \ \ \ \ \textcolor{comment}{/**}}
+\DoxyCodeLine{00144\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Set\ a\ new\ minimum\ size.\ A\ value\ less\ than\ minimum\_size\ will\ be\ ignored}}
+\DoxyCodeLine{00145\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00146\ \textcolor{comment}{\ \ \ \ \ *\ @param\ new\_minimum\_size\ New\ minimum\ size,\ shall\ be\ at\ least\ \#minimum\_size\ big}}
+\DoxyCodeLine{00147\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00148}\doxymbox{\hyperlink{classConcFileBuffer_a1044d60e56cb18ff20aca072fb463980}{00148}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classConcFileBuffer}{set\_minimum\_size}}(\doxymbox{\hyperlink{classConcFileBuffer}{size\_t}}\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{classConcFileBuffer}{new\_minimum\_size}})\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00149}00149\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00150}00150\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcFileBuffer}{std}}::\doxymbox{\hyperlink{classConcFileBuffer}{unique\_lock}}\ \doxymbox{\hyperlink{classConcFileBuffer}{lock}}\{\doxymbox{\hyperlink{classConcFileBuffer}{mut}}\};}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00151}00151\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{classConcFileBuffer}{new\_minimum\_size}}\ >\ \doxymbox{\hyperlink{classConcFileBuffer}{minimum\_size\_}})}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00152}00152\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcFileBuffer}{minimum\_size\_}}\ =\ \doxymbox{\hyperlink{classConcFileBuffer}{new\_minimum\_size}};}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00153}00153\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00154}00154\ }
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00155}00155\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00156}\doxymbox{\hyperlink{classConcFileBuffer_a811cec38963fd5f75b113492f090d1a4}{00156}}\ \ \ \ \ \doxymbox{\hyperlink{classConcFileBuffer}{File}}\&\ \doxymbox{\hyperlink{classConcFileBuffer}{out\_stream\_}};}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00157}\doxymbox{\hyperlink{classConcFileBuffer_abd9cc8a1cbd43ab07f9fcc8bac3b6c9a}{00157}}\ \ \ \ \ \doxymbox{\hyperlink{classConcFileBuffer_abd9cc8a1cbd43ab07f9fcc8bac3b6c9a}{T}}*\ \doxymbox{\hyperlink{classConcFileBuffer_abd9cc8a1cbd43ab07f9fcc8bac3b6c9a}{data\_}};}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00158}\doxymbox{\hyperlink{classConcFileBuffer_a9ecfff683b0da5a0d9308a6fb96e105b}{00158}}\ \ \ \ \ \doxymbox{\hyperlink{classConcFileBuffer}{std}}::\doxymbox{\hyperlink{classConcFileBuffer}{allocator}}<\doxymbox{\hyperlink{classConcFileBuffer}{T}}>\ \doxymbox{\hyperlink{classConcFileBuffer}{allocator}};}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00159}\doxymbox{\hyperlink{classConcFileBuffer_ad66675024341b94f8073586c9169d889}{00159}}\ \ \ \ \ \textcolor{keyword}{mutable}\ \doxymbox{\hyperlink{classConcFileBuffer}{std}}::\doxymbox{\hyperlink{classConcFileBuffer}{shared\_mutex}}\ \doxymbox{\hyperlink{classConcFileBuffer}{mut}};}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00160}\doxymbox{\hyperlink{classConcFileBuffer_a3fd227f7f33db12cae86811db166cb82}{00160}}\ \ \ \ \ size\_t\ \doxymbox{\hyperlink{classConcFileBuffer_a3fd227f7f33db12cae86811db166cb82}{index\_}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00161}\doxymbox{\hyperlink{classConcFileBuffer_a14ee3a05c4b41dfecc4ba4be54309561}{00161}}\ \ \ \ \ size\_t\ \doxymbox{\hyperlink{classConcFileBuffer_a14ee3a05c4b41dfecc4ba4be54309561}{written\_index\_}}\ =\ 0;\ \textcolor{comment}{//oldest\ index\ that\ has\ not\ yet\ been\ written\ to\ file}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00162}\doxymbox{\hyperlink{classConcFileBuffer_ab5e11c88abb82292e764ec0aa538354c}{00162}}\ \ \ \ \ size\_t\ \doxymbox{\hyperlink{classConcFileBuffer_ab5e11c88abb82292e764ec0aa538354c}{capacity\_}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00163}\doxymbox{\hyperlink{classConcFileBuffer_a3ec5d0c05461e4215fbf46e1d4969938}{00163}}\ \ \ \ \ size\_t\ \doxymbox{\hyperlink{classConcFileBuffer_a3ec5d0c05461e4215fbf46e1d4969938}{minimum\_size\_}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00164}00164\ }
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00165}00165\ \ \ \ \ \textcolor{comment}{/**}}
+\DoxyCodeLine{00166\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Writes\ elements\ outside\ the\ minimum\ range}}
+\DoxyCodeLine{00167\ \textcolor{comment}{\ \ \ \ \ *\ @pre\ lock\ MUST\ be\ locked\ with\ \#lock}}
+\DoxyCodeLine{00168\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00169}\doxymbox{\hyperlink{classConcFileBuffer_aee05dae159f1fd6d6109ae7f20a839bf}{00169}}\ \ \ \ \ \textcolor{keyword}{auto}\ \textcolor{keyword}{constexpr}\ \doxymbox{\hyperlink{classConcFileBuffer_aee05dae159f1fd6d6109ae7f20a839bf}{write\_buffer}}()\ \textcolor{keyword}{noexcept}(\textcolor{keyword}{false})}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00170}00170\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00171}00171\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{classConcFileBuffer_a3fd227f7f33db12cae86811db166cb82}{index\_}}\ +\ 1\ -\/\ \doxymbox{\hyperlink{classConcFileBuffer_a14ee3a05c4b41dfecc4ba4be54309561}{written\_index\_}}\ >\ \doxymbox{\hyperlink{classConcFileBuffer_ab5e11c88abb82292e764ec0aa538354c}{capacity\_}})\textcolor{comment}{//if\ we\ need\ to\ write\ elements\ to\ disk}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00172}00172\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00173}00173\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \textcolor{keyword}{const}\ elements\_to\_write\_n\ =\ \doxymbox{\hyperlink{classConcFileBuffer_a3fd227f7f33db12cae86811db166cb82}{index\_}}\ -\/\ \doxymbox{\hyperlink{classConcFileBuffer_a3ec5d0c05461e4215fbf46e1d4969938}{minimum\_size\_}}\ -\/\ \doxymbox{\hyperlink{classConcFileBuffer_a14ee3a05c4b41dfecc4ba4be54309561}{written\_index\_}};}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00174}00174\ }
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//TODO:\ this\ blocks\ a\ thread,\ but\ if\ there\ are\ 12\ threads\ AND\ they\ aren't\ writing\ frequently,\ it\ shouldn't\ be\ THAT\ bad.\ Benchmark\ this.}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//We\ could\ try\ coroutines\ here}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//Maybe\ we\ can\ lock\ the\ stream,\ or\ stuff\ like\ that}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_trivially\_copyable\_v<T>)}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ out\_stream\_.write(std::span\{\&data\_[written\_index\_],\ elements\_to\_write\_n\ *\ \textcolor{keyword}{sizeof}(T)\});}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00182}00182\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\textcolor{comment}{//we\ expect\ write\_to\ to\ have\ been\ defined\ as\ per\ SerializableToDisk}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::ranges::for\_each(std::views::counted(data\_,\ elements\_to\_write\_n),}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [\textcolor{keyword}{this}](T\ \textcolor{keyword}{const}\&\ value)}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00186}00186\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00187}00187\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ value.write\_to(out\_stream\_.get\_ref\_out\_stream());}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00188}00188\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00190}00190\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00191}00191\ }
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00192}00192\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classConcFileBuffer_a14ee3a05c4b41dfecc4ba4be54309561}{written\_index\_}}\ =\ \doxymbox{\hyperlink{classConcFileBuffer_a3fd227f7f33db12cae86811db166cb82}{index\_}}\ -\/\ \doxymbox{\hyperlink{classConcFileBuffer_a3ec5d0c05461e4215fbf46e1d4969938}{minimum\_size\_}};}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00193}00193\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00194}00194\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00195}00195\ }
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00196}00196\ }
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00197}\doxymbox{\hyperlink{classConcFileBuffer_a1f4386e78b91b1c16c7e856cb9c82961}{00197}}\ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{constexpr}\ size\_t\ \doxymbox{\hyperlink{classConcFileBuffer_a1f4386e78b91b1c16c7e856cb9c82961}{true\_index}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ \{\ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classConcFileBuffer_a3fd227f7f33db12cae86811db166cb82}{index\_}}\ \%\ \doxymbox{\hyperlink{classConcFileBuffer_ab5e11c88abb82292e764ec0aa538354c}{capacity\_}};\ \}}
+\DoxyCodeLine{\Hypertarget{file__buffer_8cppm_source_l00198}00198\ \};}
+
+\end{DoxyCode}

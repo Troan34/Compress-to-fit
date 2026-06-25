@@ -1,0 +1,132 @@
+\doxysection{Token Struct Reference}
+\hypertarget{structToken}{}\label{structToken}\index{Token@{Token}}
+
+
+This is the type LZ77 will output.  
+
+
+
+
+Collaboration diagram for Token:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=203pt]{structToken__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \doxymbox{\hyperlink{structToken_ace627907c5341d847b4a2f867e35310e}{Serialized\+Buffer}} = std::\+array$<$std::\+byte, sizeof(decltype(\doxymbox{\hyperlink{structToken_aec92ffb85fbb4c01b8e313b263f988df}{offset}})) + sizeof(decltype(\doxymbox{\hyperlink{structToken_a9da7d833144774881bcb984296321c87}{length}})) + sizeof(decltype(\doxymbox{\hyperlink{structToken_a6f893dab099147a0de1fe04e3f428d0e}{symbol}}))$>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{structToken_a5b817365a63c84bb808a8dbf46fc7b57}{serialize}} (\doxymbox{\hyperlink{structToken_ace627907c5341d847b4a2f867e35310e}{Serialized\+Buffer}} \&buffer) noexcept
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint16\+\_\+t \doxymbox{\hyperlink{structToken_aec92ffb85fbb4c01b8e313b263f988df}{offset}} \{\}
+\item 
+uint8\+\_\+t \doxymbox{\hyperlink{structToken_a9da7d833144774881bcb984296321c87}{length}} \{\}
+\item 
+\doxymbox{\hyperlink{structSym}{Sym}} \doxymbox{\hyperlink{structToken_a6f893dab099147a0de1fe04e3f428d0e}{symbol}} \{\}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+std::\+ostream \& \doxymbox{\hyperlink{structToken_abe142e9574481fef3f1f07e5f4cb6338}{operator$<$$<$}} (std::\+ostream \&os, const \doxymbox{\hyperlink{structToken}{Token}} \&token)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This is the type LZ77 will output. 
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00023}{23}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+
+
+\label{doc-typedef-members}
+\Hypertarget{structToken_doc-typedef-members}
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{structToken_ace627907c5341d847b4a2f867e35310e}\index{Token@{Token}!SerializedBuffer@{SerializedBuffer}}
+\index{SerializedBuffer@{SerializedBuffer}!Token@{Token}}
+\doxysubsubsection{\texorpdfstring{SerializedBuffer}{SerializedBuffer}}
+{\footnotesize\ttfamily \label{structToken_ace627907c5341d847b4a2f867e35310e} 
+using \doxymbox{\hyperlink{structToken_ace627907c5341d847b4a2f867e35310e}{Token::\+\+Serialized\+Buffer}} = std::\+array$<$std::\+byte, sizeof(decltype(\doxymbox{\hyperlink{structToken_aec92ffb85fbb4c01b8e313b263f988df}{offset}})) + sizeof(decltype(\doxymbox{\hyperlink{structToken_a9da7d833144774881bcb984296321c87}{length}})) + sizeof(decltype(\doxymbox{\hyperlink{structToken_a6f893dab099147a0de1fe04e3f428d0e}{symbol}}))$>$}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00029}{29}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{structToken_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{structToken_a5b817365a63c84bb808a8dbf46fc7b57}\index{Token@{Token}!serialize@{serialize}}
+\index{serialize@{serialize}!Token@{Token}}
+\doxysubsubsection{\texorpdfstring{serialize()}{serialize()}}
+{\footnotesize\ttfamily \label{structToken_a5b817365a63c84bb808a8dbf46fc7b57} 
+void Token::\+serialize (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{structToken_ace627907c5341d847b4a2f867e35310e}{Serialized\+Buffer}} \&}]{buffer}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00039}{39}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+
+
+\label{doc-related-members}
+\Hypertarget{structToken_doc-related-members}
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{structToken_abe142e9574481fef3f1f07e5f4cb6338}\index{Token@{Token}!operator$<$$<$@{operator$<$$<$}}
+\index{operator$<$$<$@{operator$<$$<$}!Token@{Token}}
+\doxysubsubsection{\texorpdfstring{operator$<$$<$}{operator<<}}
+{\footnotesize\ttfamily \label{structToken_abe142e9574481fef3f1f07e5f4cb6338} 
+std::\+ostream \& operator$<$$<$ (\begin{DoxyParamCaption}\item[{std::\+ostream \&}]{os}{, }\item[{const \doxymbox{\hyperlink{structToken}{Token}} \&}]{token}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00032}{32}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{structToken_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structToken_a9da7d833144774881bcb984296321c87}\index{Token@{Token}!length@{length}}
+\index{length@{length}!Token@{Token}}
+\doxysubsubsection{\texorpdfstring{length}{length}}
+{\footnotesize\ttfamily \label{structToken_a9da7d833144774881bcb984296321c87} 
+uint8\+\_\+t Token::\+length \{\}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00026}{26}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+\Hypertarget{structToken_aec92ffb85fbb4c01b8e313b263f988df}\index{Token@{Token}!offset@{offset}}
+\index{offset@{offset}!Token@{Token}}
+\doxysubsubsection{\texorpdfstring{offset}{offset}}
+{\footnotesize\ttfamily \label{structToken_aec92ffb85fbb4c01b8e313b263f988df} 
+uint16\+\_\+t Token::\+offset \{\}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00025}{25}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+\Hypertarget{structToken_a6f893dab099147a0de1fe04e3f428d0e}\index{Token@{Token}!symbol@{symbol}}
+\index{symbol@{symbol}!Token@{Token}}
+\doxysubsubsection{\texorpdfstring{symbol}{symbol}}
+{\footnotesize\ttfamily \label{structToken_a6f893dab099147a0de1fe04e3f428d0e} 
+\doxymbox{\hyperlink{structSym}{Sym}} Token::\+symbol \{\}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00027}{27}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Compress-\/to-\/fit/\+src/\+models/\+\+LZ77/\+\doxymbox{\hyperlink{lz77_8cppm}{lz77.\+cppm}}\end{DoxyCompactItemize}

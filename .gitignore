@@ -1,9 +1,11 @@
 *.vs
-out/
+out
 *.pdb
 
-test_set/
+test_set
 
-/.idea
-/.vs
-Design/
+.idea
+.vs
+Design
+.cmake
+documentation/doxygen-awesome-css-2.4.2

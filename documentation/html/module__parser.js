@@ -1,6 +1,7 @@
 var module__parser =
 [
-    [ "Options", "structparser_1_1_options.html", "structparser_1_1_options" ],
+    [ "HelpException", "classparser_1_1HelpException.html", "classparser_1_1HelpException" ],
+    [ "Options", "structparser_1_1Options.html", "structparser_1_1Options" ],
     [ "parser::TokenType", "module__parser.html#accd7eb1ffd4c925598ec25fab6905369", [
       [ "parser::TokenType::FILENAME_IN", "module__parser.html#accd7eb1ffd4c925598ec25fab6905369ad00542cdc8161faa7c73eecd3f4b1488", null ],
       [ "parser::TokenType::FILENAME_OUT", "module__parser.html#accd7eb1ffd4c925598ec25fab6905369a51cbb3e0c50a665a956c0c05989805cc", null ],
@@ -19,5 +20,5 @@ var module__parser =
     ] ],
     [ "parser::parse", "module__parser.html#a7f5ecbf764fc175fc336fcea0dd07be8", null ],
     [ "show_progress", "cli__parser_8cppm.html#ae97b52a0806996c1857b54bf4e06253e", null ],
-    [ "parser::default_out_path", "module__parser.html#a7070ddbab534fb2cd9db4da4392877fb", null ]
+    [ "parser::DEFAULT_OUT_PATH", "module__parser.html#a239b839c0edd6180eb4bd577ad8b3ab9", null ]
 ];

@@ -1,0 +1,432 @@
+\doxysection{Conc\+File\+Buffer\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classConcFileBuffer}{}\label{classConcFileBuffer}\index{ConcFileBuffer$<$ T $>$@{ConcFileBuffer$<$ T $>$}}
+
+
+Ring queue-\/like where if size \texorpdfstring{$>$}{>} capacity, the oldest elements are written to stream. At least the most recent \doxylink{classConcFileBuffer_a3ec5d0c05461e4215fbf46e1d4969938}{minimum\+\_\+size\+\_\+} number of elements shall be available for reading.  
+
+
+
+
+Collaboration diagram for Conc\+File\+Buffer\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classConcFileBuffer__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classConcFileBuffer_a928b8cfdfe4acbcb81289ac23251af34}{Conc\+File\+Buffer}} (\doxymbox{\hyperlink{classFile}{File}} \&out\+\_\+stream, size\+\_\+t const \doxymbox{\hyperlink{classConcFileBuffer_a1cf17ecbc16dee0f65dbb2f8e24e924a}{minimum\+\_\+size}})
+\item 
+\doxymbox{\hyperlink{classConcFileBuffer_a4013b63d013ca30183f746e0ea722781}{\texorpdfstring{$\sim$}{\string~}\+Conc\+File\+Buffer}} ()
+\item 
+constexpr void \doxymbox{\hyperlink{classConcFileBuffer_a6b09de82a3f1c17a3e7c43101d77ebb7}{push}} (T const \&value)
+\item 
+constexpr void \doxymbox{\hyperlink{classConcFileBuffer_ae4d51c917420b37eb906e2c60bc8b8e5}{push}} (T \&\&value)
+\item 
+{\footnotesize template$<$std::\+ranges::\+range R$>$ }\\constexpr void \doxymbox{\hyperlink{classConcFileBuffer_a40168a78d15939b42fada331013a2b97}{append\+\_\+range}} (R \&\&rg)
+\begin{DoxyCompactList}\small\item\em Appends a range to the container. \end{DoxyCompactList}\item 
+constexpr void \doxymbox{\hyperlink{classConcFileBuffer_abc7d2b30f9275c3a18d996107d55722b}{reserve}} (size\+\_\+t new\+\_\+capacity) noexcept(false)
+\begin{DoxyCompactList}\small\item\em Increase capacity to at least \+\#new\+\_\+capacity. \end{DoxyCompactList}\item 
+constexpr auto \doxymbox{\hyperlink{classConcFileBuffer_ae3855da3c540a0ba960e7d7d84c843b8}{operator\+[$\,$]\+}} (size\+\_\+t index) const -\/$>$ T
+\item 
+constexpr size\+\_\+t \doxymbox{\hyperlink{classConcFileBuffer_a4d836340bab0b544b85c08ad72722d9e}{capacity}} () const noexcept
+\item 
+constexpr size\+\_\+t \doxymbox{\hyperlink{classConcFileBuffer_a1cf17ecbc16dee0f65dbb2f8e24e924a}{minimum\+\_\+size}} () const noexcept
+\item 
+void \doxymbox{\hyperlink{classConcFileBuffer_a1044d60e56cb18ff20aca072fb463980}{set\+\_\+minimum\+\_\+size}} (size\+\_\+t const new\+\_\+minimum\+\_\+size) noexcept
+\begin{DoxyCompactList}\small\item\em Set a new minimum size. A value less than minimum\+\_\+size will be ignored. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+auto constexpr \doxymbox{\hyperlink{classConcFileBuffer_aee05dae159f1fd6d6109ae7f20a839bf}{write\+\_\+buffer}} () noexcept(false)
+\begin{DoxyCompactList}\small\item\em Writes elements outside the minimum range. \end{DoxyCompactList}\item 
+constexpr size\+\_\+t \doxymbox{\hyperlink{classConcFileBuffer_a1f4386e78b91b1c16c7e856cb9c82961}{true\+\_\+index}} () const noexcept
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classFile}{File}} \& \doxymbox{\hyperlink{classConcFileBuffer_a811cec38963fd5f75b113492f090d1a4}{out\+\_\+stream\+\_\+}}
+\item 
+T \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{classConcFileBuffer_abd9cc8a1cbd43ab07f9fcc8bac3b6c9a}{data\+\_\+}}
+\item 
+std::\+allocator$<$ T $>$ \doxymbox{\hyperlink{classConcFileBuffer_a9ecfff683b0da5a0d9308a6fb96e105b}{allocator}}
+\item 
+std::\+shared\+\_\+mutex \doxymbox{\hyperlink{classConcFileBuffer_ad66675024341b94f8073586c9169d889}{mut}}
+\item 
+size\+\_\+t \doxymbox{\hyperlink{classConcFileBuffer_a3fd227f7f33db12cae86811db166cb82}{index\+\_\+}} = 0
+\item 
+size\+\_\+t \doxymbox{\hyperlink{classConcFileBuffer_a14ee3a05c4b41dfecc4ba4be54309561}{written\+\_\+index\+\_\+}} = 0
+\item 
+size\+\_\+t \doxymbox{\hyperlink{classConcFileBuffer_ab5e11c88abb82292e764ec0aa538354c}{capacity\+\_\+}} = 0
+\item 
+size\+\_\+t \doxymbox{\hyperlink{classConcFileBuffer_a3ec5d0c05461e4215fbf46e1d4969938}{minimum\+\_\+size\+\_\+}} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$\newline
+class Conc\+File\+Buffer$<$ T $>$}
+Ring queue-\/like where if size \texorpdfstring{$>$}{>} capacity, the oldest elements are written to stream. At least the most recent \doxylink{classConcFileBuffer_a3ec5d0c05461e4215fbf46e1d4969938}{minimum\+\_\+size\+\_\+} number of elements shall be available for reading. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & type stored, must be trivially copyable \\
+\hline
+\end{DoxyTemplParams}
+
+
+Definition at line \doxymbox{\hyperlink{file__buffer_8cppm_source_l00017}{17}} of file \doxymbox{\hyperlink{file__buffer_8cppm_source}{file\+\_\+buffer.\+cppm}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{classConcFileBuffer_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classConcFileBuffer_a928b8cfdfe4acbcb81289ac23251af34}\index{ConcFileBuffer$<$ T $>$@{ConcFileBuffer$<$ T $>$}!ConcFileBuffer@{ConcFileBuffer}}
+\index{ConcFileBuffer@{ConcFileBuffer}!ConcFileBuffer$<$ T $>$@{ConcFileBuffer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{ConcFileBuffer()}{ConcFileBuffer()}}
+{\footnotesize\ttfamily \label{classConcFileBuffer_a928b8cfdfe4acbcb81289ac23251af34} 
+template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+\doxymbox{\hyperlink{classConcFileBuffer}{Conc\+File\+Buffer}}$<$ T $>$::\+\+Conc\+File\+Buffer (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{classFile}{File}} \&}]{out\+\_\+stream}{, }\item[{size\+\_\+t const}]{minimum\+\_\+size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{file__buffer_8cppm_source_l00021}{21}} of file \doxymbox{\hyperlink{file__buffer_8cppm_source}{file\+\_\+buffer.\+cppm}}.
+
+\Hypertarget{classConcFileBuffer_a4013b63d013ca30183f746e0ea722781}\index{ConcFileBuffer$<$ T $>$@{ConcFileBuffer$<$ T $>$}!````~ConcFileBuffer@{\texorpdfstring{$\sim$}{\string~}ConcFileBuffer}}
+\index{````~ConcFileBuffer@{\texorpdfstring{$\sim$}{\string~}ConcFileBuffer}!ConcFileBuffer$<$ T $>$@{ConcFileBuffer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ConcFileBuffer()}{\string~ConcFileBuffer()}}
+{\footnotesize\ttfamily \label{classConcFileBuffer_a4013b63d013ca30183f746e0ea722781} 
+template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+\doxymbox{\hyperlink{classConcFileBuffer}{Conc\+File\+Buffer}}$<$ T $>$::\+\texorpdfstring{$\sim$}{\string~}\doxymbox{\hyperlink{classConcFileBuffer}{Conc\+File\+Buffer}} (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{file__buffer_8cppm_source_l00027}{27}} of file \doxymbox{\hyperlink{file__buffer_8cppm_source}{file\+\_\+buffer.\+cppm}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{classConcFileBuffer_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classConcFileBuffer_a40168a78d15939b42fada331013a2b97}\index{ConcFileBuffer$<$ T $>$@{ConcFileBuffer$<$ T $>$}!append\_range@{append\_range}}
+\index{append\_range@{append\_range}!ConcFileBuffer$<$ T $>$@{ConcFileBuffer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{append\_range()}{append\_range()}}
+{\footnotesize\ttfamily \label{classConcFileBuffer_a40168a78d15939b42fada331013a2b97} 
+template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+template$<$std::\+ranges::\+range R$>$ \\
+void \doxymbox{\hyperlink{classConcFileBuffer}{Conc\+File\+Buffer}}$<$ T $>$::\+append\+\_\+range (\begin{DoxyParamCaption}\item[{R \&\&}]{rg}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Appends a range to the container. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rg} & range to append \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+\doxylink{classConcFileBuffer_a3fd227f7f33db12cae86811db166cb82}{index\+\_\+} \texorpdfstring{$>$}{>} \doxylink{classConcFileBuffer_a3ec5d0c05461e4215fbf46e1d4969938}{minimum\+\_\+size\+\_\+} 
+\end{DoxyPrecond}
+
+
+Definition at line \doxymbox{\hyperlink{file__buffer_8cppm_source_l00071}{71}} of file \doxymbox{\hyperlink{file__buffer_8cppm_source}{file\+\_\+buffer.\+cppm}}.
+
+\Hypertarget{classConcFileBuffer_a4d836340bab0b544b85c08ad72722d9e}\index{ConcFileBuffer$<$ T $>$@{ConcFileBuffer$<$ T $>$}!capacity@{capacity}}
+\index{capacity@{capacity}!ConcFileBuffer$<$ T $>$@{ConcFileBuffer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{capacity()}{capacity()}}
+{\footnotesize\ttfamily \label{classConcFileBuffer_a4d836340bab0b544b85c08ad72722d9e} 
+template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+size\+\_\+t \doxymbox{\hyperlink{classConcFileBuffer}{Conc\+File\+Buffer}}$<$ T $>$::\+capacity (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{file__buffer_8cppm_source_l00139}{139}} of file \doxymbox{\hyperlink{file__buffer_8cppm_source}{file\+\_\+buffer.\+cppm}}.
+
+\Hypertarget{classConcFileBuffer_a1cf17ecbc16dee0f65dbb2f8e24e924a}\index{ConcFileBuffer$<$ T $>$@{ConcFileBuffer$<$ T $>$}!minimum\_size@{minimum\_size}}
+\index{minimum\_size@{minimum\_size}!ConcFileBuffer$<$ T $>$@{ConcFileBuffer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{minimum\_size()}{minimum\_size()}}
+{\footnotesize\ttfamily \label{classConcFileBuffer_a1cf17ecbc16dee0f65dbb2f8e24e924a} 
+template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+size\+\_\+t \doxymbox{\hyperlink{classConcFileBuffer}{Conc\+File\+Buffer}}$<$ T $>$::\+minimum\+\_\+size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{file__buffer_8cppm_source_l00140}{140}} of file \doxymbox{\hyperlink{file__buffer_8cppm_source}{file\+\_\+buffer.\+cppm}}.
+
+\Hypertarget{classConcFileBuffer_ae3855da3c540a0ba960e7d7d84c843b8}\index{ConcFileBuffer$<$ T $>$@{ConcFileBuffer$<$ T $>$}!operator\+[]\+@{operator[]}}
+\index{operator\+[]\+@{operator[]}!ConcFileBuffer$<$ T $>$@{ConcFileBuffer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily \label{classConcFileBuffer_ae3855da3c540a0ba960e7d7d84c843b8} 
+template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+auto \doxymbox{\hyperlink{classConcFileBuffer}{Conc\+File\+Buffer}}$<$ T $>$::\+operator\+[$\,$]\+ (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index}{}\end{DoxyParamCaption}) const -\/$>$ T\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{file__buffer_8cppm_source_l00125}{125}} of file \doxymbox{\hyperlink{file__buffer_8cppm_source}{file\+\_\+buffer.\+cppm}}.
+
+\Hypertarget{classConcFileBuffer_ae4d51c917420b37eb906e2c60bc8b8e5}\index{ConcFileBuffer$<$ T $>$@{ConcFileBuffer$<$ T $>$}!push@{push}}
+\index{push@{push}!ConcFileBuffer$<$ T $>$@{ConcFileBuffer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{push()}{push()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classConcFileBuffer_ae4d51c917420b37eb906e2c60bc8b8e5} 
+template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+void \doxymbox{\hyperlink{classConcFileBuffer}{Conc\+File\+Buffer}}$<$ T $>$::\+push (\begin{DoxyParamCaption}\item[{T \&\&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+\doxylink{classConcFileBuffer_a3fd227f7f33db12cae86811db166cb82}{index\+\_\+} \texorpdfstring{$>$}{>} \doxylink{classConcFileBuffer_a3ec5d0c05461e4215fbf46e1d4969938}{minimum\+\_\+size\+\_\+} 
+\end{DoxyPrecond}
+
+
+Definition at line \doxymbox{\hyperlink{file__buffer_8cppm_source_l00054}{54}} of file \doxymbox{\hyperlink{file__buffer_8cppm_source}{file\+\_\+buffer.\+cppm}}.
+
+
+
+References \doxymbox{\hyperlink{file__buffer_8cppm_source_l00160}{index\+\_\+}}, and \doxymbox{\hyperlink{file__buffer_8cppm_source_l00169}{write\+\_\+buffer()}}.
+
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=331pt]{classConcFileBuffer_ae4d51c917420b37eb906e2c60bc8b8e5_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classConcFileBuffer_a6b09de82a3f1c17a3e7c43101d77ebb7}\index{ConcFileBuffer$<$ T $>$@{ConcFileBuffer$<$ T $>$}!push@{push}}
+\index{push@{push}!ConcFileBuffer$<$ T $>$@{ConcFileBuffer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{push()}{push()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classConcFileBuffer_a6b09de82a3f1c17a3e7c43101d77ebb7} 
+template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+void \doxymbox{\hyperlink{classConcFileBuffer}{Conc\+File\+Buffer}}$<$ T $>$::\+push (\begin{DoxyParamCaption}\item[{T const \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+\doxylink{classConcFileBuffer_a3fd227f7f33db12cae86811db166cb82}{index\+\_\+} \texorpdfstring{$>$}{>} \doxylink{classConcFileBuffer_a3ec5d0c05461e4215fbf46e1d4969938}{minimum\+\_\+size\+\_\+} 
+\end{DoxyPrecond}
+
+
+Definition at line \doxymbox{\hyperlink{file__buffer_8cppm_source_l00039}{39}} of file \doxymbox{\hyperlink{file__buffer_8cppm_source}{file\+\_\+buffer.\+cppm}}.
+
+
+
+References \doxymbox{\hyperlink{file__buffer_8cppm_source_l00160}{index\+\_\+}}, and \doxymbox{\hyperlink{file__buffer_8cppm_source_l00169}{write\+\_\+buffer()}}.
+
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=331pt]{classConcFileBuffer_a6b09de82a3f1c17a3e7c43101d77ebb7_cgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classConcFileBuffer_abc7d2b30f9275c3a18d996107d55722b}\index{ConcFileBuffer$<$ T $>$@{ConcFileBuffer$<$ T $>$}!reserve@{reserve}}
+\index{reserve@{reserve}!ConcFileBuffer$<$ T $>$@{ConcFileBuffer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{reserve()}{reserve()}}
+{\footnotesize\ttfamily \label{classConcFileBuffer_abc7d2b30f9275c3a18d996107d55722b} 
+template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+void \doxymbox{\hyperlink{classConcFileBuffer}{Conc\+File\+Buffer}}$<$ T $>$::\+reserve (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{new\+\_\+capacity}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Increase capacity to at least \+\#new\+\_\+capacity. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+\_\+capacity} & New capacity of the buffer \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{file__buffer_8cppm_source_l00093}{93}} of file \doxymbox{\hyperlink{file__buffer_8cppm_source}{file\+\_\+buffer.\+cppm}}.
+
+\Hypertarget{classConcFileBuffer_a1044d60e56cb18ff20aca072fb463980}\index{ConcFileBuffer$<$ T $>$@{ConcFileBuffer$<$ T $>$}!set\_minimum\_size@{set\_minimum\_size}}
+\index{set\_minimum\_size@{set\_minimum\_size}!ConcFileBuffer$<$ T $>$@{ConcFileBuffer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{set\_minimum\_size()}{set\_minimum\_size()}}
+{\footnotesize\ttfamily \label{classConcFileBuffer_a1044d60e56cb18ff20aca072fb463980} 
+template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+void \doxymbox{\hyperlink{classConcFileBuffer}{Conc\+File\+Buffer}}$<$ T $>$::\+set\+\_\+minimum\+\_\+size (\begin{DoxyParamCaption}\item[{size\+\_\+t const}]{new\+\_\+minimum\+\_\+size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Set a new minimum size. A value less than minimum\+\_\+size will be ignored. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+\_\+minimum\+\_\+size} & New minimum size, shall be at least \doxylink{classConcFileBuffer_a1cf17ecbc16dee0f65dbb2f8e24e924a}{minimum\+\_\+size} big \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{file__buffer_8cppm_source_l00148}{148}} of file \doxymbox{\hyperlink{file__buffer_8cppm_source}{file\+\_\+buffer.\+cppm}}.
+
+\Hypertarget{classConcFileBuffer_a1f4386e78b91b1c16c7e856cb9c82961}\index{ConcFileBuffer$<$ T $>$@{ConcFileBuffer$<$ T $>$}!true\_index@{true\_index}}
+\index{true\_index@{true\_index}!ConcFileBuffer$<$ T $>$@{ConcFileBuffer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{true\_index()}{true\_index()}}
+{\footnotesize\ttfamily \label{classConcFileBuffer_a1f4386e78b91b1c16c7e856cb9c82961} 
+template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+size\+\_\+t \doxymbox{\hyperlink{classConcFileBuffer}{Conc\+File\+Buffer}}$<$ T $>$::\+true\+\_\+index (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [constexpr]}, {\ttfamily [private]}, {\ttfamily [noexcept]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{file__buffer_8cppm_source_l00197}{197}} of file \doxymbox{\hyperlink{file__buffer_8cppm_source}{file\+\_\+buffer.\+cppm}}.
+
+
+
+References \doxymbox{\hyperlink{file__buffer_8cppm_source_l00162}{capacity\+\_\+}}, and \doxymbox{\hyperlink{file__buffer_8cppm_source_l00160}{index\+\_\+}}.
+
+\Hypertarget{classConcFileBuffer_aee05dae159f1fd6d6109ae7f20a839bf}\index{ConcFileBuffer$<$ T $>$@{ConcFileBuffer$<$ T $>$}!write\_buffer@{write\_buffer}}
+\index{write\_buffer@{write\_buffer}!ConcFileBuffer$<$ T $>$@{ConcFileBuffer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{write\_buffer()}{write\_buffer()}}
+{\footnotesize\ttfamily \label{classConcFileBuffer_aee05dae159f1fd6d6109ae7f20a839bf} 
+template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+auto constexpr \doxymbox{\hyperlink{classConcFileBuffer}{Conc\+File\+Buffer}}$<$ T $>$::\+write\+\_\+buffer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}, {\ttfamily [private]}}
+
+
+
+Writes elements outside the minimum range. 
+
+\begin{DoxyPrecond}{Precondition}
+lock MUST be locked with \+\#lock 
+\end{DoxyPrecond}
+
+
+Definition at line \doxymbox{\hyperlink{file__buffer_8cppm_source_l00169}{169}} of file \doxymbox{\hyperlink{file__buffer_8cppm_source}{file\+\_\+buffer.\+cppm}}.
+
+
+
+References \doxymbox{\hyperlink{file__buffer_8cppm_source_l00162}{capacity\+\_\+}}, \doxymbox{\hyperlink{file__buffer_8cppm_source_l00160}{index\+\_\+}}, \doxymbox{\hyperlink{file__buffer_8cppm_source_l00163}{minimum\+\_\+size\+\_\+}}, and \doxymbox{\hyperlink{file__buffer_8cppm_source_l00161}{written\+\_\+index\+\_\+}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{file__buffer_8cppm_source_l00054}{push()}}, and \doxymbox{\hyperlink{file__buffer_8cppm_source_l00039}{push()}}.
+
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=331pt]{classConcFileBuffer_aee05dae159f1fd6d6109ae7f20a839bf_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-variable-members}
+\Hypertarget{classConcFileBuffer_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classConcFileBuffer_a9ecfff683b0da5a0d9308a6fb96e105b}\index{ConcFileBuffer$<$ T $>$@{ConcFileBuffer$<$ T $>$}!allocator@{allocator}}
+\index{allocator@{allocator}!ConcFileBuffer$<$ T $>$@{ConcFileBuffer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{allocator}{allocator}}
+{\footnotesize\ttfamily \label{classConcFileBuffer_a9ecfff683b0da5a0d9308a6fb96e105b} 
+template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+std::\+allocator$<$T$>$ \doxymbox{\hyperlink{classConcFileBuffer}{Conc\+File\+Buffer}}$<$ T $>$::\+allocator\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{file__buffer_8cppm_source_l00158}{158}} of file \doxymbox{\hyperlink{file__buffer_8cppm_source}{file\+\_\+buffer.\+cppm}}.
+
+\Hypertarget{classConcFileBuffer_ab5e11c88abb82292e764ec0aa538354c}\index{ConcFileBuffer$<$ T $>$@{ConcFileBuffer$<$ T $>$}!capacity\_@{capacity\_}}
+\index{capacity\_@{capacity\_}!ConcFileBuffer$<$ T $>$@{ConcFileBuffer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{capacity\_}{capacity\_}}
+{\footnotesize\ttfamily \label{classConcFileBuffer_ab5e11c88abb82292e764ec0aa538354c} 
+template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+size\+\_\+t \doxymbox{\hyperlink{classConcFileBuffer}{Conc\+File\+Buffer}}$<$ T $>$::\+capacity\+\_\+ = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{file__buffer_8cppm_source_l00162}{162}} of file \doxymbox{\hyperlink{file__buffer_8cppm_source}{file\+\_\+buffer.\+cppm}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{file__buffer_8cppm_source_l00197}{true\+\_\+index()}}, and \doxymbox{\hyperlink{file__buffer_8cppm_source_l00169}{write\+\_\+buffer()}}.
+
+\Hypertarget{classConcFileBuffer_abd9cc8a1cbd43ab07f9fcc8bac3b6c9a}\index{ConcFileBuffer$<$ T $>$@{ConcFileBuffer$<$ T $>$}!data\_@{data\_}}
+\index{data\_@{data\_}!ConcFileBuffer$<$ T $>$@{ConcFileBuffer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{data\_}{data\_}}
+{\footnotesize\ttfamily \label{classConcFileBuffer_abd9cc8a1cbd43ab07f9fcc8bac3b6c9a} 
+template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+T\texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{classConcFileBuffer}{Conc\+File\+Buffer}}$<$ T $>$::\+data\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{file__buffer_8cppm_source_l00157}{157}} of file \doxymbox{\hyperlink{file__buffer_8cppm_source}{file\+\_\+buffer.\+cppm}}.
+
+\Hypertarget{classConcFileBuffer_a3fd227f7f33db12cae86811db166cb82}\index{ConcFileBuffer$<$ T $>$@{ConcFileBuffer$<$ T $>$}!index\_@{index\_}}
+\index{index\_@{index\_}!ConcFileBuffer$<$ T $>$@{ConcFileBuffer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{index\_}{index\_}}
+{\footnotesize\ttfamily \label{classConcFileBuffer_a3fd227f7f33db12cae86811db166cb82} 
+template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+size\+\_\+t \doxymbox{\hyperlink{classConcFileBuffer}{Conc\+File\+Buffer}}$<$ T $>$::\+index\+\_\+ = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{file__buffer_8cppm_source_l00160}{160}} of file \doxymbox{\hyperlink{file__buffer_8cppm_source}{file\+\_\+buffer.\+cppm}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{file__buffer_8cppm_source_l00054}{push()}}, \doxymbox{\hyperlink{file__buffer_8cppm_source_l00039}{push()}}, \doxymbox{\hyperlink{file__buffer_8cppm_source_l00197}{true\+\_\+index()}}, and \doxymbox{\hyperlink{file__buffer_8cppm_source_l00169}{write\+\_\+buffer()}}.
+
+\Hypertarget{classConcFileBuffer_a3ec5d0c05461e4215fbf46e1d4969938}\index{ConcFileBuffer$<$ T $>$@{ConcFileBuffer$<$ T $>$}!minimum\_size\_@{minimum\_size\_}}
+\index{minimum\_size\_@{minimum\_size\_}!ConcFileBuffer$<$ T $>$@{ConcFileBuffer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{minimum\_size\_}{minimum\_size\_}}
+{\footnotesize\ttfamily \label{classConcFileBuffer_a3ec5d0c05461e4215fbf46e1d4969938} 
+template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+size\+\_\+t \doxymbox{\hyperlink{classConcFileBuffer}{Conc\+File\+Buffer}}$<$ T $>$::\+minimum\+\_\+size\+\_\+ = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{file__buffer_8cppm_source_l00163}{163}} of file \doxymbox{\hyperlink{file__buffer_8cppm_source}{file\+\_\+buffer.\+cppm}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{file__buffer_8cppm_source_l00169}{write\+\_\+buffer()}}.
+
+\Hypertarget{classConcFileBuffer_ad66675024341b94f8073586c9169d889}\index{ConcFileBuffer$<$ T $>$@{ConcFileBuffer$<$ T $>$}!mut@{mut}}
+\index{mut@{mut}!ConcFileBuffer$<$ T $>$@{ConcFileBuffer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{mut}{mut}}
+{\footnotesize\ttfamily \label{classConcFileBuffer_ad66675024341b94f8073586c9169d889} 
+template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+std::\+shared\+\_\+mutex \doxymbox{\hyperlink{classConcFileBuffer}{Conc\+File\+Buffer}}$<$ T $>$::\+mut\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{file__buffer_8cppm_source_l00159}{159}} of file \doxymbox{\hyperlink{file__buffer_8cppm_source}{file\+\_\+buffer.\+cppm}}.
+
+\Hypertarget{classConcFileBuffer_a811cec38963fd5f75b113492f090d1a4}\index{ConcFileBuffer$<$ T $>$@{ConcFileBuffer$<$ T $>$}!out\_stream\_@{out\_stream\_}}
+\index{out\_stream\_@{out\_stream\_}!ConcFileBuffer$<$ T $>$@{ConcFileBuffer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{out\_stream\_}{out\_stream\_}}
+{\footnotesize\ttfamily \label{classConcFileBuffer_a811cec38963fd5f75b113492f090d1a4} 
+template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+\doxymbox{\hyperlink{classFile}{File}}\& \doxymbox{\hyperlink{classConcFileBuffer}{Conc\+File\+Buffer}}$<$ T $>$::\+out\+\_\+stream\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{file__buffer_8cppm_source_l00156}{156}} of file \doxymbox{\hyperlink{file__buffer_8cppm_source}{file\+\_\+buffer.\+cppm}}.
+
+\Hypertarget{classConcFileBuffer_a14ee3a05c4b41dfecc4ba4be54309561}\index{ConcFileBuffer$<$ T $>$@{ConcFileBuffer$<$ T $>$}!written\_index\_@{written\_index\_}}
+\index{written\_index\_@{written\_index\_}!ConcFileBuffer$<$ T $>$@{ConcFileBuffer$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{written\_index\_}{written\_index\_}}
+{\footnotesize\ttfamily \label{classConcFileBuffer_a14ee3a05c4b41dfecc4ba4be54309561} 
+template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+size\+\_\+t \doxymbox{\hyperlink{classConcFileBuffer}{Conc\+File\+Buffer}}$<$ T $>$::\+written\+\_\+index\+\_\+ = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{file__buffer_8cppm_source_l00161}{161}} of file \doxymbox{\hyperlink{file__buffer_8cppm_source}{file\+\_\+buffer.\+cppm}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{file__buffer_8cppm_source_l00169}{write\+\_\+buffer()}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Compress-\/to-\/fit/\+src/\+util/\+containers/\+\doxymbox{\hyperlink{file__buffer_8cppm}{file\+\_\+buffer.\+cppm}}\end{DoxyCompactItemize}

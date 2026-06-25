@@ -3,14 +3,14 @@
 \doxysubsubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-class \doxymbox{\hyperlink{classalg_1_1_rabin}{Rabin}}
-\end{DoxyCompactItemize}
+class \doxymbox{\hyperlink{classalg_1_1Rabin}{Rabin}}
+\begin{DoxyCompactList}\small\item\em This class enables fast string matching. Makes use of two chained arrays. This class is intertwined with LZ77 and should not be used as separate entity. This class shall not modify the \doxylink{classWindow}{Window} given. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
 constexpr uint32\+\_\+t \doxymbox{\hyperlink{namespacealg_a38d521bade379a8121e61b016ad5397f}{MOD}} = (1u $<$$<$ 31) -\/ 1
 \item 
-constexpr uint32\+\_\+t \doxymbox{\hyperlink{namespacealg_a783a2c45f8f4efe9e425d4e7f1030864}{BASE}} = \doxymbox{\hyperlink{struct_sym_aece773d665ceafaf42273722fa02cf5f}{Sym::\+alphabet\+\_\+size}}()
+constexpr uint32\+\_\+t \doxymbox{\hyperlink{namespacealg_a783a2c45f8f4efe9e425d4e7f1030864}{BASE}} = \doxymbox{\hyperlink{structSym_aece773d665ceafaf42273722fa02cf5f}{Sym::\+alphabet\+\_\+size}}()
 \item 
 constexpr uint32\+\_\+t \doxymbox{\hyperlink{namespacealg_aeca501bd83e1fd3e65ea2fce9f4e1190}{MIN\+\_\+\+MATCH}} = 3
 \item 
@@ -18,22 +18,22 @@ constexpr uint32\+\_\+t \doxymbox{\hyperlink{namespacealg_ad3d2660056a755adc8334
 \item 
 constexpr uint32\+\_\+t \doxymbox{\hyperlink{namespacealg_a38877028f73fde25cba851a5ff43a9a0}{PRIME}} = 31
 \item 
-constexpr uint32\+\_\+t \doxymbox{\hyperlink{namespacealg_a094c81562033f2bf0caafaaa5ea260b0}{ROLL\+\_\+\+FACTOR}} = \doxymbox{\hyperlink{utils_8cppm_a78c404083e319e5d50a4293e918cb8ab}{const\+\_\+pow}}(\doxymbox{\hyperlink{namespacealg_a783a2c45f8f4efe9e425d4e7f1030864}{BASE}}, \doxymbox{\hyperlink{namespacealg_aeca501bd83e1fd3e65ea2fce9f4e1190}{MIN\+\_\+\+MATCH}} -\/ 1)
+constexpr uint32\+\_\+t \doxymbox{\hyperlink{namespacealg_a094c81562033f2bf0caafaaa5ea260b0}{ROLL\+\_\+\+FACTOR}} = \doxymbox{\hyperlink{core__utils_8cppm_aa6f400e1a623643351cd08b0c3cd695c}{const\+\_\+pow}}(\doxymbox{\hyperlink{namespacealg_a783a2c45f8f4efe9e425d4e7f1030864}{BASE}}, \doxymbox{\hyperlink{namespacealg_aeca501bd83e1fd3e65ea2fce9f4e1190}{MIN\+\_\+\+MATCH}} -\/ 1)
 \end{DoxyCompactItemize}
 
 
-\label{namespacealg_doc-var-members}
+\label{doc-var-members}
 \Hypertarget{namespacealg_doc-var-members}
 \doxysubsection{Variable Documentation}
 \Hypertarget{namespacealg_a783a2c45f8f4efe9e425d4e7f1030864}\index{alg@{alg}!BASE@{BASE}}
 \index{BASE@{BASE}!alg@{alg}}
 \doxysubsubsection{\texorpdfstring{BASE}{BASE}}
 {\footnotesize\ttfamily \label{namespacealg_a783a2c45f8f4efe9e425d4e7f1030864} 
-uint32\+\_\+t alg::\+\+BASE = \doxymbox{\hyperlink{struct_sym_aece773d665ceafaf42273722fa02cf5f}{Sym::\+alphabet\+\_\+size}}()\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+uint32\+\_\+t alg::\+\+BASE = \doxymbox{\hyperlink{structSym_aece773d665ceafaf42273722fa02cf5f}{Sym::\+alphabet\+\_\+size}}()\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
 
 
 
-Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00205}{205}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00188}{188}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
 
 \Hypertarget{namespacealg_ad3d2660056a755adc8334b83459060a6}\index{alg@{alg}!MAX\_MATCH@{MAX\_MATCH}}
 \index{MAX\_MATCH@{MAX\_MATCH}!alg@{alg}}
@@ -43,7 +43,7 @@ uint32\+\_\+t alg::\+\+MAX\+\_\+\+MATCH = 250\hspace{0.3cm}{\ttfamily [inline]},
 
 
 
-Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00207}{207}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00190}{190}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
 
 \Hypertarget{namespacealg_aeca501bd83e1fd3e65ea2fce9f4e1190}\index{alg@{alg}!MIN\_MATCH@{MIN\_MATCH}}
 \index{MIN\_MATCH@{MIN\_MATCH}!alg@{alg}}
@@ -53,11 +53,11 @@ uint32\+\_\+t alg::\+\+MIN\+\_\+\+MATCH = 3\hspace{0.3cm}{\ttfamily [inline]}, {
 
 
 
-Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00206}{206}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00189}{189}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
 
 
 
-Referenced by \doxymbox{\hyperlink{lz77_8cppm_source_l00227}{alg::\+\+Rabin::\+\+Rabin()}}.
+Referenced by \doxymbox{\hyperlink{lz77_8cppm_source_l00208}{alg::\+\+Rabin::\+\+Rabin()}}.
 
 \Hypertarget{namespacealg_a38d521bade379a8121e61b016ad5397f}\index{alg@{alg}!MOD@{MOD}}
 \index{MOD@{MOD}!alg@{alg}}
@@ -67,7 +67,7 @@ uint32\+\_\+t alg::\+\+MOD = (1u $<$$<$ 31) -\/ 1\hspace{0.3cm}{\ttfamily [inlin
 
 
 
-Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00204}{204}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00187}{187}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
 
 \Hypertarget{namespacealg_a38877028f73fde25cba851a5ff43a9a0}\index{alg@{alg}!PRIME@{PRIME}}
 \index{PRIME@{PRIME}!alg@{alg}}
@@ -77,15 +77,15 @@ uint32\+\_\+t alg::\+\+PRIME = 31\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily 
 
 
 
-Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00208}{208}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00191}{191}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
 
 \Hypertarget{namespacealg_a094c81562033f2bf0caafaaa5ea260b0}\index{alg@{alg}!ROLL\_FACTOR@{ROLL\_FACTOR}}
 \index{ROLL\_FACTOR@{ROLL\_FACTOR}!alg@{alg}}
 \doxysubsubsection{\texorpdfstring{ROLL\_FACTOR}{ROLL\_FACTOR}}
 {\footnotesize\ttfamily \label{namespacealg_a094c81562033f2bf0caafaaa5ea260b0} 
-uint32\+\_\+t alg::\+\+ROLL\+\_\+\+FACTOR = \doxymbox{\hyperlink{utils_8cppm_a78c404083e319e5d50a4293e918cb8ab}{const\+\_\+pow}}(\doxymbox{\hyperlink{namespacealg_a783a2c45f8f4efe9e425d4e7f1030864}{BASE}}, \doxymbox{\hyperlink{namespacealg_aeca501bd83e1fd3e65ea2fce9f4e1190}{MIN\+\_\+\+MATCH}} -\/ 1)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+uint32\+\_\+t alg::\+\+ROLL\+\_\+\+FACTOR = \doxymbox{\hyperlink{core__utils_8cppm_aa6f400e1a623643351cd08b0c3cd695c}{const\+\_\+pow}}(\doxymbox{\hyperlink{namespacealg_a783a2c45f8f4efe9e425d4e7f1030864}{BASE}}, \doxymbox{\hyperlink{namespacealg_aeca501bd83e1fd3e65ea2fce9f4e1190}{MIN\+\_\+\+MATCH}} -\/ 1)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
 
 
 
-Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00209}{209}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00192}{192}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
 

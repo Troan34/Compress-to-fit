@@ -1,0 +1,247 @@
+\doxysection{LZ77\+Concurrent\+Compressor Class Reference}
+\hypertarget{classLZ77ConcurrentCompressor}{}\label{classLZ77ConcurrentCompressor}\index{LZ77ConcurrentCompressor@{LZ77ConcurrentCompressor}}
+
+
+Collaboration diagram for LZ77\+Concurrent\+Compressor:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classLZ77ConcurrentCompressor__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a3e5c38f00925044e3a3e0d9296840842}{LZ77\+Concurrent\+Compressor}} (std::\+span$<$ std::\+byte const $>$ const data, size\+\_\+t const concurrency, \doxymbox{\hyperlink{classFile}{File}} \&file, \doxymbox{\hyperlink{core__utils_8cppm_a59fc5d9b777790e56395e645e4205db0}{Comp\+Preset}} const preset) noexcept(false)
+\item 
+\doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a6c184eda6cf868288ba5f89b55037a60}{\texorpdfstring{$\sim$}{\string~}\+LZ77\+Concurrent\+Compressor}} ()
+\item 
+void \doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a9f7d12782f0c5a6b78011677b03089a7}{compress}} () noexcept(false)
+\begin{DoxyCompactList}\small\item\em Run the compression. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a1f68f32f3d3d9c7fb2ed7c0b4d1d7cb3}{check\+\_\+results}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{core__utils_8cppm_a59fc5d9b777790e56395e645e4205db0}{Comp\+Preset}} const \doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a2d404109ccd6e938bceee22c9d7114a8}{preset\+\_\+}}
+\item 
+size\+\_\+t const \doxymbox{\hyperlink{classLZ77ConcurrentCompressor_aca869bde10cd0f0dda5a7af9ccf9a5a9}{concurrency\+\_\+}}
+\item 
+std::\+span$<$ std::\+byte const  $>$ const \doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a5e8344e6cc3dea1adc9edeecffeb703d}{data\+\_\+}} \{\}
+\item 
+std::\+vector$<$ std::\+future$<$ void $>$ $>$ \doxymbox{\hyperlink{classLZ77ConcurrentCompressor_ad58bcddad411e4973bde4155c7549b65}{results}} \{\}
+\item 
+size\+\_\+t \doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a3498fd7033bf7154cd0893d339855b2f}{n\+\_\+blocks\+\_\+}} \{\}
+\item 
+size\+\_\+t \doxymbox{\hyperlink{classLZ77ConcurrentCompressor_afc321f0ed8c7916aff617b46f1075af7}{n\+\_\+completed\+\_\+blocks}} \{\}
+\item 
+\doxymbox{\hyperlink{classConcOrderedFileList}{Conc\+Ordered\+File\+List}}$<$ \doxymbox{\hyperlink{classLZ77Block}{LZ77\+Block}} $>$ \doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a4aec362f2336ac62c6b630f1a3244d50}{file\+\_\+list\+\_\+}}
+\item 
+\doxymbox{\hyperlink{classThreadPool}{Thread\+Pool}} \doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a3e8abeacb4374460608fcb4b352a02f8}{thread\+\_\+pool}} \{\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00427}{427}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{classLZ77ConcurrentCompressor_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classLZ77ConcurrentCompressor_a3e5c38f00925044e3a3e0d9296840842}\index{LZ77ConcurrentCompressor@{LZ77ConcurrentCompressor}!LZ77ConcurrentCompressor@{LZ77ConcurrentCompressor}}
+\index{LZ77ConcurrentCompressor@{LZ77ConcurrentCompressor}!LZ77ConcurrentCompressor@{LZ77ConcurrentCompressor}}
+\doxysubsubsection{\texorpdfstring{LZ77ConcurrentCompressor()}{LZ77ConcurrentCompressor()}}
+{\footnotesize\ttfamily \label{classLZ77ConcurrentCompressor_a3e5c38f00925044e3a3e0d9296840842} 
+LZ77\+Concurrent\+Compressor::\+\+LZ77\+Concurrent\+Compressor (\begin{DoxyParamCaption}\item[{std::\+span$<$ std::\+byte const $>$ const}]{data}{, }\item[{size\+\_\+t const}]{concurrency}{, }\item[{\doxymbox{\hyperlink{classFile}{File}} \&}]{file}{, }\item[{\doxymbox{\hyperlink{core__utils_8cppm_a59fc5d9b777790e56395e645e4205db0}{Comp\+Preset}} const}]{preset}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00430}{430}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+
+
+References \doxymbox{\hyperlink{lz77_8cppm_source_l00430}{LZ77\+Concurrent\+Compressor()}}, and \doxymbox{\hyperlink{lz77_8cppm_source_l00488}{n\+\_\+blocks\+\_\+}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{lz77_8cppm_source_l00430}{LZ77\+Concurrent\+Compressor()}}.
+
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=226pt]{classLZ77ConcurrentCompressor_a3e5c38f00925044e3a3e0d9296840842_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=226pt]{classLZ77ConcurrentCompressor_a3e5c38f00925044e3a3e0d9296840842_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classLZ77ConcurrentCompressor_a6c184eda6cf868288ba5f89b55037a60}\index{LZ77ConcurrentCompressor@{LZ77ConcurrentCompressor}!````~LZ77ConcurrentCompressor@{\texorpdfstring{$\sim$}{\string~}LZ77ConcurrentCompressor}}
+\index{````~LZ77ConcurrentCompressor@{\texorpdfstring{$\sim$}{\string~}LZ77ConcurrentCompressor}!LZ77ConcurrentCompressor@{LZ77ConcurrentCompressor}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}LZ77ConcurrentCompressor()}{\string~LZ77ConcurrentCompressor()}}
+{\footnotesize\ttfamily \label{classLZ77ConcurrentCompressor_a6c184eda6cf868288ba5f89b55037a60} 
+LZ77\+Concurrent\+Compressor::\+\texorpdfstring{$\sim$}{\string~}\+LZ77\+Concurrent\+Compressor (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00440}{440}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{classLZ77ConcurrentCompressor_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classLZ77ConcurrentCompressor_a1f68f32f3d3d9c7fb2ed7c0b4d1d7cb3}\index{LZ77ConcurrentCompressor@{LZ77ConcurrentCompressor}!check\_results@{check\_results}}
+\index{check\_results@{check\_results}!LZ77ConcurrentCompressor@{LZ77ConcurrentCompressor}}
+\doxysubsubsection{\texorpdfstring{check\_results()}{check\_results()}}
+{\footnotesize\ttfamily \label{classLZ77ConcurrentCompressor_a1f68f32f3d3d9c7fb2ed7c0b4d1d7cb3} 
+void LZ77\+Concurrent\+Compressor::\+check\+\_\+results (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00495}{495}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{lz77_8cppm_source_l00451}{compress()}}.
+
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classLZ77ConcurrentCompressor_a1f68f32f3d3d9c7fb2ed7c0b4d1d7cb3_icgraph}
+\end{center}
+\end{figure}
+\Hypertarget{classLZ77ConcurrentCompressor_a9f7d12782f0c5a6b78011677b03089a7}\index{LZ77ConcurrentCompressor@{LZ77ConcurrentCompressor}!compress@{compress}}
+\index{compress@{compress}!LZ77ConcurrentCompressor@{LZ77ConcurrentCompressor}}
+\doxysubsubsection{\texorpdfstring{compress()}{compress()}}
+{\footnotesize\ttfamily \label{classLZ77ConcurrentCompressor_a9f7d12782f0c5a6b78011677b03089a7} 
+void LZ77\+Concurrent\+Compressor::\+compress (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Run the compression. 
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00451}{451}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+
+
+References \doxymbox{\hyperlink{lz77_8cppm_source_l00495}{check\+\_\+results()}}, \doxymbox{\hyperlink{lz77_8cppm_source_l00488}{n\+\_\+blocks\+\_\+}}, and \doxymbox{\hyperlink{lz77_8cppm_source_l00489}{n\+\_\+completed\+\_\+blocks}}.
+
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classLZ77ConcurrentCompressor_a9f7d12782f0c5a6b78011677b03089a7_cgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-variable-members}
+\Hypertarget{classLZ77ConcurrentCompressor_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classLZ77ConcurrentCompressor_aca869bde10cd0f0dda5a7af9ccf9a5a9}\index{LZ77ConcurrentCompressor@{LZ77ConcurrentCompressor}!concurrency\_@{concurrency\_}}
+\index{concurrency\_@{concurrency\_}!LZ77ConcurrentCompressor@{LZ77ConcurrentCompressor}}
+\doxysubsubsection{\texorpdfstring{concurrency\_}{concurrency\_}}
+{\footnotesize\ttfamily \label{classLZ77ConcurrentCompressor_aca869bde10cd0f0dda5a7af9ccf9a5a9} 
+size\+\_\+t const LZ77\+Concurrent\+Compressor::\+concurrency\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00485}{485}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+\Hypertarget{classLZ77ConcurrentCompressor_a5e8344e6cc3dea1adc9edeecffeb703d}\index{LZ77ConcurrentCompressor@{LZ77ConcurrentCompressor}!data\_@{data\_}}
+\index{data\_@{data\_}!LZ77ConcurrentCompressor@{LZ77ConcurrentCompressor}}
+\doxysubsubsection{\texorpdfstring{data\_}{data\_}}
+{\footnotesize\ttfamily \label{classLZ77ConcurrentCompressor_a5e8344e6cc3dea1adc9edeecffeb703d} 
+std::\+span$<$std::\+byte const$>$ const LZ77\+Concurrent\+Compressor::\+data\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00486}{486}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+\Hypertarget{classLZ77ConcurrentCompressor_a4aec362f2336ac62c6b630f1a3244d50}\index{LZ77ConcurrentCompressor@{LZ77ConcurrentCompressor}!file\_list\_@{file\_list\_}}
+\index{file\_list\_@{file\_list\_}!LZ77ConcurrentCompressor@{LZ77ConcurrentCompressor}}
+\doxysubsubsection{\texorpdfstring{file\_list\_}{file\_list\_}}
+{\footnotesize\ttfamily \label{classLZ77ConcurrentCompressor_a4aec362f2336ac62c6b630f1a3244d50} 
+\doxymbox{\hyperlink{classConcOrderedFileList}{Conc\+Ordered\+File\+List}}$<$\doxymbox{\hyperlink{classLZ77Block}{LZ77\+Block}}$>$ LZ77\+Concurrent\+Compressor::\+file\+\_\+list\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00491}{491}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+\Hypertarget{classLZ77ConcurrentCompressor_a3498fd7033bf7154cd0893d339855b2f}\index{LZ77ConcurrentCompressor@{LZ77ConcurrentCompressor}!n\_blocks\_@{n\_blocks\_}}
+\index{n\_blocks\_@{n\_blocks\_}!LZ77ConcurrentCompressor@{LZ77ConcurrentCompressor}}
+\doxysubsubsection{\texorpdfstring{n\_blocks\_}{n\_blocks\_}}
+{\footnotesize\ttfamily \label{classLZ77ConcurrentCompressor_a3498fd7033bf7154cd0893d339855b2f} 
+size\+\_\+t LZ77\+Concurrent\+Compressor::\+n\+\_\+blocks\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00488}{488}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{lz77_8cppm_source_l00451}{compress()}}, and \doxymbox{\hyperlink{lz77_8cppm_source_l00430}{LZ77\+Concurrent\+Compressor()}}.
+
+\Hypertarget{classLZ77ConcurrentCompressor_afc321f0ed8c7916aff617b46f1075af7}\index{LZ77ConcurrentCompressor@{LZ77ConcurrentCompressor}!n\_completed\_blocks@{n\_completed\_blocks}}
+\index{n\_completed\_blocks@{n\_completed\_blocks}!LZ77ConcurrentCompressor@{LZ77ConcurrentCompressor}}
+\doxysubsubsection{\texorpdfstring{n\_completed\_blocks}{n\_completed\_blocks}}
+{\footnotesize\ttfamily \label{classLZ77ConcurrentCompressor_afc321f0ed8c7916aff617b46f1075af7} 
+size\+\_\+t LZ77\+Concurrent\+Compressor::\+n\+\_\+completed\+\_\+blocks \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00489}{489}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{lz77_8cppm_source_l00451}{compress()}}.
+
+\Hypertarget{classLZ77ConcurrentCompressor_a2d404109ccd6e938bceee22c9d7114a8}\index{LZ77ConcurrentCompressor@{LZ77ConcurrentCompressor}!preset\_@{preset\_}}
+\index{preset\_@{preset\_}!LZ77ConcurrentCompressor@{LZ77ConcurrentCompressor}}
+\doxysubsubsection{\texorpdfstring{preset\_}{preset\_}}
+{\footnotesize\ttfamily \label{classLZ77ConcurrentCompressor_a2d404109ccd6e938bceee22c9d7114a8} 
+\doxymbox{\hyperlink{core__utils_8cppm_a59fc5d9b777790e56395e645e4205db0}{Comp\+Preset}} const LZ77\+Concurrent\+Compressor::\+preset\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00484}{484}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+\Hypertarget{classLZ77ConcurrentCompressor_ad58bcddad411e4973bde4155c7549b65}\index{LZ77ConcurrentCompressor@{LZ77ConcurrentCompressor}!results@{results}}
+\index{results@{results}!LZ77ConcurrentCompressor@{LZ77ConcurrentCompressor}}
+\doxysubsubsection{\texorpdfstring{results}{results}}
+{\footnotesize\ttfamily \label{classLZ77ConcurrentCompressor_ad58bcddad411e4973bde4155c7549b65} 
+std::\+vector$<$std::\+future$<$void$>$ $>$ LZ77\+Concurrent\+Compressor::\+results \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00487}{487}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+\Hypertarget{classLZ77ConcurrentCompressor_a3e8abeacb4374460608fcb4b352a02f8}\index{LZ77ConcurrentCompressor@{LZ77ConcurrentCompressor}!thread\_pool@{thread\_pool}}
+\index{thread\_pool@{thread\_pool}!LZ77ConcurrentCompressor@{LZ77ConcurrentCompressor}}
+\doxysubsubsection{\texorpdfstring{thread\_pool}{thread\_pool}}
+{\footnotesize\ttfamily \label{classLZ77ConcurrentCompressor_a3e8abeacb4374460608fcb4b352a02f8} 
+\doxymbox{\hyperlink{classThreadPool}{Thread\+Pool}} LZ77\+Concurrent\+Compressor::\+thread\+\_\+pool \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00492}{492}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Compress-\/to-\/fit/\+src/\+models/\+\+LZ77/\+\doxymbox{\hyperlink{lz77_8cppm}{lz77.\+cppm}}\end{DoxyCompactItemize}

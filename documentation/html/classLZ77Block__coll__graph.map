@@ -1,0 +1,9 @@
+<map id="LZ77Block" name="LZ77Block">
+<area shape="rect" id="Node000001" title="Represents a block of data encoded by LZ77." alt="" coords="8,483,167,836"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="22,349,152,413"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="88,410,90,466,85,466,87,415"/>
+<area shape="rect" id="Node000003" href="$structToken.html" title="This is the type LZ77 will output." alt="" coords="48,197,127,279"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="88,277,90,333,85,332,87,282"/>
+<area shape="rect" id="Node000004" href="$structSym.html" title=" " alt="" coords="5,5,169,127"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="88,124,90,180,85,180,87,129"/>
+</map>

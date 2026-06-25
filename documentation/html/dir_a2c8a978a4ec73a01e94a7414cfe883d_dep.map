@@ -1,11 +1,11 @@
 <map id="Compress&#45;to&#45;fit/src/models" name="Compress&#45;to&#45;fit/src/models">
-<area shape="rect" id="node1" href="dir_fb1d874f3d1b8563f7a5a86473ffb2b3.html" title="util" alt="" coords="131,139,170,165"/>
-<area shape="rect" id="node3" href="dir_7302770cb78d483b7160104746487eb1.html" title="LZ77" alt="" coords="126,64,176,91"/>
-<area shape="poly" id="edge2" href="dir_000002_000008.html" alt="" coords="152,89,153,124,148,122,149,93"/>
-<area shape="rect" id="edge2-headlabel" href="dir_000002_000008.html" title="2" alt="" coords="156,112,163,128"/>
-<area shape="rect" id="node4" href="dir_12193e9b8ef4a86b78be1d50c2c79dd3.html" title="modules" alt="" coords="208,139,278,165"/>
-<area shape="poly" id="edge1" href="dir_000002_000004.html" alt="" coords="167,89,218,129,212,129,166,94"/>
-<area shape="rect" id="edge1-headlabel" href="dir_000002_000004.html" title="1" alt="" coords="214,112,221,128"/>
-<area shape="rect" id="clust2" href="dir_a2c8a978a4ec73a01e94a7414cfe883d.html" alt="" coords="27,53,187,101"/>
-<area shape="rect" id="clust1" href="dir_ed00c4861407326d4f38ee8546da7cf0.html" title="src" alt="" coords="16,16,197,176"/>
+<area shape="rect" id="node1" href="dir_3693bba2ff0f1c2fcdf2dcbe8a0f5b7e.html" title="parser" alt="" coords="58,135,116,159"/>
+<area shape="rect" id="node2" href="dir_fb1d874f3d1b8563f7a5a86473ffb2b3.html" title="util" alt="" coords="139,135,178,159"/>
+<area shape="rect" id="node4" href="dir_7302770cb78d483b7160104746487eb1.html" title="LZ77" alt="" coords="125,62,176,87"/>
+<area shape="poly" id="edge1" href="dir_000004_000006.html" alt="" coords="142,86,109,125,105,121,138,89"/>
+<area shape="rect" id="edge1-headlabel" href="dir_000004_000006.html" title="1" alt="" coords="112,120,119,134"/>
+<area shape="poly" id="edge2" href="dir_000004_000009.html" alt="" coords="154,85,158,120,153,118,150,89"/>
+<area shape="rect" id="edge2-headlabel" href="dir_000004_000009.html" title="2" alt="" coords="160,108,167,122"/>
+<area shape="rect" id="clust2" href="dir_a2c8a978a4ec73a01e94a7414cfe883d.html" alt="" coords="27,51,187,97"/>
+<area shape="rect" id="clust1" href="dir_ed00c4861407326d4f38ee8546da7cf0.html" title="src" alt="" coords="16,16,197,170"/>
 </map>

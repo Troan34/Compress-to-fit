@@ -1,0 +1,139 @@
+\doxysection{LZ77\+Compressor Class Reference}
+\hypertarget{classLZ77Compressor}{}\label{classLZ77Compressor}\index{LZ77Compressor@{LZ77Compressor}}
+
+
+Collaboration diagram for LZ77\+Compressor:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classLZ77Compressor__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classLZ77Compressor_aef2378107a1b0091894607b09084cbb8}{LZ77\+Compressor}} (std::\+span$<$ \doxymbox{\hyperlink{structSym}{Sym}} const $>$ const data, \doxymbox{\hyperlink{core__utils_8cppm_a59fc5d9b777790e56395e645e4205db0}{Comp\+Preset}} const preset)
+\item 
+void \doxymbox{\hyperlink{classLZ77Compressor_a2c4605c1239bcef7f2ea0392d62182d5}{compress}} (\doxymbox{\hyperlink{classLZ77Block}{LZ77\+Block}} \&out\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Compress the data received in the constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std::\+span$<$ \doxymbox{\hyperlink{structSym}{Sym}} const  $>$ const \doxymbox{\hyperlink{classLZ77Compressor_aba18cdf2e3817df684081c0033b35fca}{data\+\_\+}} \{\}
+\item 
+\doxymbox{\hyperlink{classWindow}{Window}} \doxymbox{\hyperlink{classLZ77Compressor_acdce76db7049ff0b6d2e77433e59a4ae}{window}}
+\item 
+\doxymbox{\hyperlink{classalg_1_1Rabin}{alg::\+\+Rabin}} \doxymbox{\hyperlink{classLZ77Compressor_ad50f780d88272ead43c161cffa0883f8}{pattern\+\_\+matcher}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00373}{373}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{classLZ77Compressor_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classLZ77Compressor_aef2378107a1b0091894607b09084cbb8}\index{LZ77Compressor@{LZ77Compressor}!LZ77Compressor@{LZ77Compressor}}
+\index{LZ77Compressor@{LZ77Compressor}!LZ77Compressor@{LZ77Compressor}}
+\doxysubsubsection{\texorpdfstring{LZ77Compressor()}{LZ77Compressor()}}
+{\footnotesize\ttfamily \label{classLZ77Compressor_aef2378107a1b0091894607b09084cbb8} 
+LZ77\+Compressor::\+\+LZ77\+Compressor (\begin{DoxyParamCaption}\item[{std::\+span$<$ \doxymbox{\hyperlink{structSym}{Sym}} const $>$ const}]{data}{, }\item[{\doxymbox{\hyperlink{core__utils_8cppm_a59fc5d9b777790e56395e645e4205db0}{Comp\+Preset}} const}]{preset}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00376}{376}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+
+
+References \doxymbox{\hyperlink{lz77_8cppm_source_l00376}{LZ77\+Compressor()}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{lz77_8cppm_source_l00376}{LZ77\+Compressor()}}.
+
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=254pt]{classLZ77Compressor_aef2378107a1b0091894607b09084cbb8_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=254pt]{classLZ77Compressor_aef2378107a1b0091894607b09084cbb8_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-func-members}
+\Hypertarget{classLZ77Compressor_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classLZ77Compressor_a2c4605c1239bcef7f2ea0392d62182d5}\index{LZ77Compressor@{LZ77Compressor}!compress@{compress}}
+\index{compress@{compress}!LZ77Compressor@{LZ77Compressor}}
+\doxysubsubsection{\texorpdfstring{compress()}{compress()}}
+{\footnotesize\ttfamily \label{classLZ77Compressor_a2c4605c1239bcef7f2ea0392d62182d5} 
+void LZ77\+Compressor::\+compress (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{classLZ77Block}{LZ77\+Block}} \&}]{out\+\_\+data}{}\end{DoxyParamCaption})}
+
+
+
+Compress the data received in the constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em out\+\_\+data} & Where the output will go\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Will clear out\+\_\+data block 
+\end{DoxyNote}
+
+
+Definition at line \doxymbox{\hyperlink{lz77__impl_8cpp_source_l00091}{91}} of file \doxymbox{\hyperlink{lz77__impl_8cpp_source}{lz77\+\_\+impl.\+cpp}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classLZ77Compressor_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classLZ77Compressor_aba18cdf2e3817df684081c0033b35fca}\index{LZ77Compressor@{LZ77Compressor}!data\_@{data\_}}
+\index{data\_@{data\_}!LZ77Compressor@{LZ77Compressor}}
+\doxysubsubsection{\texorpdfstring{data\_}{data\_}}
+{\footnotesize\ttfamily \label{classLZ77Compressor_aba18cdf2e3817df684081c0033b35fca} 
+std::\+span$<$\doxymbox{\hyperlink{structSym}{Sym}} const$>$ const LZ77\+Compressor::\+data\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00389}{389}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+\Hypertarget{classLZ77Compressor_ad50f780d88272ead43c161cffa0883f8}\index{LZ77Compressor@{LZ77Compressor}!pattern\_matcher@{pattern\_matcher}}
+\index{pattern\_matcher@{pattern\_matcher}!LZ77Compressor@{LZ77Compressor}}
+\doxysubsubsection{\texorpdfstring{pattern\_matcher}{pattern\_matcher}}
+{\footnotesize\ttfamily \label{classLZ77Compressor_ad50f780d88272ead43c161cffa0883f8} 
+\doxymbox{\hyperlink{classalg_1_1Rabin}{alg::\+\+Rabin}} LZ77\+Compressor::\+pattern\+\_\+matcher\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00391}{391}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+\Hypertarget{classLZ77Compressor_acdce76db7049ff0b6d2e77433e59a4ae}\index{LZ77Compressor@{LZ77Compressor}!window@{window}}
+\index{window@{window}!LZ77Compressor@{LZ77Compressor}}
+\doxysubsubsection{\texorpdfstring{window}{window}}
+{\footnotesize\ttfamily \label{classLZ77Compressor_acdce76db7049ff0b6d2e77433e59a4ae} 
+\doxymbox{\hyperlink{classWindow}{Window}} LZ77\+Compressor::\+window\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00390}{390}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+Compress-\/to-\/fit/\+src/\+models/\+\+LZ77/\+\doxymbox{\hyperlink{lz77_8cppm}{lz77.\+cppm}}\item 
+Compress-\/to-\/fit/\+src/\+models/\+\+LZ77/\+\doxymbox{\hyperlink{lz77__impl_8cpp}{lz77\+\_\+impl.\+cpp}}\end{DoxyCompactItemize}

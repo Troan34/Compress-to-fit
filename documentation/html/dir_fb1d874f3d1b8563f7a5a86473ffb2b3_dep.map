@@ -1,7 +1,8 @@
 <map id="Compress&#45;to&#45;fit/src/util" name="Compress&#45;to&#45;fit/src/util">
-<area shape="rect" id="node1" href="dir_fb1d874f3d1b8563f7a5a86473ffb2b3.html" title="util" alt="" coords="26,53,65,80"/>
-<area shape="rect" id="node2" href="dir_12193e9b8ef4a86b78be1d50c2c79dd3.html" title="modules" alt="" coords="10,128,80,155"/>
-<area shape="poly" id="edge1" href="dir_000008_000004.html" alt="" coords="47,78,48,113,43,112,44,83"/>
-<area shape="rect" id="edge1-headlabel" href="dir_000008_000004.html" title="5" alt="" coords="50,101,57,117"/>
-<area shape="rect" id="clust1" href="dir_ed00c4861407326d4f38ee8546da7cf0.html" title="src" alt="" coords="16,16,75,91"/>
+<area shape="rect" id="node1" href="dir_3693bba2ff0f1c2fcdf2dcbe8a0f5b7e.html" title="parser" alt="" coords="111,135,169,159"/>
+<area shape="rect" id="node3" href="dir_e2fadb3af34a3c502b2d152bd733d805.html" title="containers" alt="" coords="99,62,181,87"/>
+<area shape="poly" id="edge1" href="dir_000002_000006.html" alt="" coords="142,85,142,120,138,118,138,89"/>
+<area shape="rect" id="edge1-headlabel" href="dir_000002_000006.html" title="1" alt="" coords="145,109,152,123"/>
+<area shape="rect" id="clust2" href="dir_fb1d874f3d1b8563f7a5a86473ffb2b3.html" alt="" coords="27,51,192,97"/>
+<area shape="rect" id="clust1" href="dir_ed00c4861407326d4f38ee8546da7cf0.html" title="src" alt="" coords="16,16,203,170"/>
 </map>

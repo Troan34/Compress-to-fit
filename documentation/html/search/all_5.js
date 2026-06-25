@@ -1,7 +1,26 @@
 var searchData=
 [
-  ['end_0',['end',['../struct_forward_iterator.html#a5aa22e4f8febf8fe6808d6f85d82dc9d',1,'ForwardIterator::end'],['../class_window.html#a9af0f12097f7bf387f7b33cabb4f6e44',1,'Window::end()']]],
-  ['err_5fstring_1',['ERR_STRING',['../namespace_e_r_r___s_t_r_i_n_g.html',1,'']]],
-  ['errortype_2',['ErrorType',['../utils_8cppm.html#ab0df38968e4f03a3f1f6d6df0f31f45a',1,'utils.cppm']]],
-  ['extract_5finfo_3',['extract_info',['../class_file.html#aeb13eba5c36b3a47feeded0d234bb314',1,'File::extract_info(const fs::path &amp;path)'],['../class_file.html#ae6dfc687b619fc6f7080deafa67a6c1d',1,'File::extract_info(std::ifstream &amp;file, fs::path const &amp;path)']]]
+  ['file_0',['File',['../classFile.html',1,'File'],['../classFile.html#a58521685afcf0aa7659e34d003f46868',1,'File::File()']]],
+  ['file_1',['file',['../classConcOrderedFileList.html#a6bff26055e373a00b9059e91efb4ec8e',1,'ConcOrderedFileList']]],
+  ['file_5f_2',['file_',['../classLZ77ConcurrentDecompressor.html#af17369616909dba5c00244d3ef0b8382',1,'LZ77ConcurrentDecompressor::file_'],['../classConcOrderedFileList.html#ab5ee599d444d42439d7ce6e80f45b57b',1,'ConcOrderedFileList::file_']]],
+  ['file_5fbuffer_2ecppm_3',['file_buffer.cppm',['../file__buffer_8cppm.html',1,'']]],
+  ['file_5fcorrupted_4',['FILE_CORRUPTED',['../namespaceERR__STRING.html#a6cfbf91e4f1d44fdc579d4aaac395051',1,'ERR_STRING::FILE_CORRUPTED'],['../core__utils_8cppm.html#ab0df38968e4f03a3f1f6d6df0f31f45aa2cdc1eecb70cc6dabd09b6f9be6c72c8',1,'FILE_CORRUPTED:&#160;core_utils.cppm']]],
+  ['file_5fextension_5',['FILE_EXTENSION',['../core__utils_8cppm.html#a8ba1a78952c247bd1d75301870bba2ce',1,'core_utils.cppm']]],
+  ['file_5fheader_5fsize_6',['FILE_HEADER_SIZE',['../file__management_8cppm.html#ae86837d59db95e31826c13b25d7aa994',1,'file_management.cppm']]],
+  ['file_5finvalid_7',['FILE_INVALID',['../namespaceERR__STRING.html#a6e076d05d154540639df579a40ab57d2',1,'ERR_STRING::FILE_INVALID'],['../core__utils_8cppm.html#ab0df38968e4f03a3f1f6d6df0f31f45aafc88cb342c01e41f5f45657a51cf65cb',1,'FILE_INVALID:&#160;core_utils.cppm']]],
+  ['file_5flist_2ecppm_8',['file_list.cppm',['../file__list_8cppm.html',1,'']]],
+  ['file_5flist_5f_9',['file_list_',['../classLZ77ConcurrentCompressor.html#a4aec362f2336ac62c6b630f1a3244d50',1,'LZ77ConcurrentCompressor::file_list_'],['../classLZ77ConcurrentDecompressor.html#a074a3fbec225024db4d1dbf10e945804',1,'LZ77ConcurrentDecompressor::file_list_']]],
+  ['file_5fmanagement_2ecpp_10',['file_management.cpp',['../file__management_8cpp.html',1,'']]],
+  ['file_5fmanagement_2ecppm_11',['file_management.cppm',['../file__management_8cppm.html',1,'']]],
+  ['filename_5fin_12',['FILENAME_IN',['../namespaceparser.html#accd7eb1ffd4c925598ec25fab6905369ad00542cdc8161faa7c73eecd3f4b1488',1,'parser']]],
+  ['filename_5fin_13',['filename_in',['../structparser_1_1Options.html#aa5897e549e45e6c8c0c6528d5f7a301e',1,'parser::Options']]],
+  ['filename_5fout_14',['FILENAME_OUT',['../namespaceparser.html#accd7eb1ffd4c925598ec25fab6905369a51cbb3e0c50a665a956c0c05989805cc',1,'parser']]],
+  ['filename_5fout_15',['filename_out',['../structparser_1_1Options.html#a541071618f10401baff234e8e412fe9e',1,'parser::Options']]],
+  ['fileoptions_16',['FileOptions',['../structFileOptions.html',1,'']]],
+  ['find_5fpattern_17',['find_pattern',['../classalg_1_1Rabin.html#aac69972318494ea1b3b996e03d604d36',1,'alg::Rabin']]],
+  ['force_5fcompression_18',['FORCE_COMPRESSION',['../namespaceparser.html#accd7eb1ffd4c925598ec25fab6905369a07ce3fdb4d7777d766f62bcfcf57532e',1,'parser']]],
+  ['force_5fcompression_19',['force_compression',['../structparser_1_1Options.html#a85021d586a434540f2321e90ebf64ded',1,'parser::Options']]],
+  ['forwarditerator_20',['ForwardIterator',['../structForwardIterator.html',1,'ForwardIterator&lt; Iter &gt;'],['../structForwardIterator.html#a09267b76a90c5288f27fb210ffa22365',1,'ForwardIterator::ForwardIterator()']]],
+  ['function_5ftraits_21',['function_traits',['../structfunction__traits.html',1,'']]],
+  ['function_5ftraits_3c_20fun_28_2a_29_28args_2e_2e_2e_29_3e_22',['function_traits&lt; fun(*)(args...)&gt;',['../structfunction__traits_3_01fun_07_5_08_07args_8_8_8_08_4.html',1,'']]]
 ];

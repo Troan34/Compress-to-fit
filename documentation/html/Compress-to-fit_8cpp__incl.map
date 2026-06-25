@@ -1,0 +1,22 @@
+<map id="Compress&#45;to&#45;fit/Compress&#45;to&#45;fit.cpp" name="Compress&#45;to&#45;fit/Compress&#45;to&#45;fit.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="186,5,361,44"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,165,113,189"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="184,40,91,62,53,77,29,94,24,107,25,122,41,152,36,153,20,123,18,106,25,90,50,72,89,57,187,36"/>
+<area shape="rect" id="Node000003" href="$macros_8hpp.html" title=" " alt="" coords="40,92,172,117"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="231,46,146,88,143,83,235,43"/>
+<area shape="rect" id="Node000004" href="$utils_8cppm.html" title=" " alt="" coords="306,165,345,189"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="282,42,319,150,314,149,278,46"/>
+<area shape="rect" id="Node000005" href="$cli__parser_8cppm.html" title=" " alt="" coords="358,92,416,117"/>
+<area shape="poly" id="edge5_Node000001_Node000005" title=" " alt="" coords="302,42,360,83,355,83,301,47"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="404,165,490,189"/>
+<area shape="poly" id="edge12_Node000001_Node000006" title=" " alt="" coords="355,42,396,61,430,90,445,119,449,151,445,148,440,121,426,94,393,66,355,47"/>
+<area shape="rect" id="Node000007" href="$models_8cppm.html" title=" " alt="" coords="195,92,259,117"/>
+<area shape="poly" id="edge8_Node000001_Node000007" title=" " alt="" coords="264,43,244,80,240,77,260,46"/>
+<area shape="poly" id="edge4_Node000004_Node000004" title=" " alt="" coords="345,162,363,163,369,168,372,177,369,186,361,192,359,187,364,183,366,177,365,171,361,168,345,167"/>
+<area shape="poly" id="edge7_Node000005_Node000004" title=" " alt="" coords="379,116,347,155,344,151,374,118"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="398,115,430,154,425,152,396,120"/>
+<area shape="poly" id="edge9_Node000007_Node000002" title=" " alt="" coords="201,119,102,161,100,156,197,115"/>
+<area shape="poly" id="edge11_Node000007_Node000007" title=" " alt="" coords="254,89,275,90,282,96,285,104,281,115,270,120,268,115,277,111,280,104,278,99,273,95,254,94"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="194,165,260,189"/>
+<area shape="poly" id="edge10_Node000007_Node000008" title=" " alt="" coords="229,115,229,151,225,148,225,119"/>
+</map>

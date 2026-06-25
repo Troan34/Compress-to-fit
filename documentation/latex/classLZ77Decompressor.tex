@@ -1,0 +1,115 @@
+\doxysection{LZ77\+Decompressor Class Reference}
+\hypertarget{classLZ77Decompressor}{}\label{classLZ77Decompressor}\index{LZ77Decompressor@{LZ77Decompressor}}
+
+
+Collaboration diagram for LZ77\+Decompressor:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classLZ77Decompressor__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classLZ77Decompressor_a7a2f3317179ef2e071ca0c1d44d1555c}{LZ77\+Decompressor}} (\doxymbox{\hyperlink{classLZ77Block}{LZ77\+Block}} const \&data)
+\item 
+{\footnotesize template$<$typename Allocator = std::\+allocator$<$\+Sym$>$$>$ }\\void \doxymbox{\hyperlink{classLZ77Decompressor_a242394cc3fb9db938c04b173f2cd3c2c}{decompress}} (std::\+vector$<$ \doxymbox{\hyperlink{structSym}{Sym}}, Allocator $>$ \&out\+\_\+data) const
+\begin{DoxyCompactList}\small\item\em Decompress the data received in the constructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classLZ77Block}{LZ77\+Block}} const  \& \doxymbox{\hyperlink{classLZ77Decompressor_a9eebe0cc24120384446a543df5531038}{data\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00396}{396}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{classLZ77Decompressor_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classLZ77Decompressor_a7a2f3317179ef2e071ca0c1d44d1555c}\index{LZ77Decompressor@{LZ77Decompressor}!LZ77Decompressor@{LZ77Decompressor}}
+\index{LZ77Decompressor@{LZ77Decompressor}!LZ77Decompressor@{LZ77Decompressor}}
+\doxysubsubsection{\texorpdfstring{LZ77Decompressor()}{LZ77Decompressor()}}
+{\footnotesize\ttfamily \label{classLZ77Decompressor_a7a2f3317179ef2e071ca0c1d44d1555c} 
+LZ77\+Decompressor::\+\+LZ77\+Decompressor (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{classLZ77Block}{LZ77\+Block}} const \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00399}{399}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+
+
+References \doxymbox{\hyperlink{lz77_8cppm_source_l00399}{LZ77\+Decompressor()}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{lz77_8cppm_source_l00399}{LZ77\+Decompressor()}}.
+
+Here is the call graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=275pt]{classLZ77Decompressor_a7a2f3317179ef2e071ca0c1d44d1555c_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=275pt]{classLZ77Decompressor_a7a2f3317179ef2e071ca0c1d44d1555c_icgraph}
+\end{center}
+\end{figure}
+
+
+\label{doc-func-members}
+\Hypertarget{classLZ77Decompressor_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classLZ77Decompressor_a242394cc3fb9db938c04b173f2cd3c2c}\index{LZ77Decompressor@{LZ77Decompressor}!decompress@{decompress}}
+\index{decompress@{decompress}!LZ77Decompressor@{LZ77Decompressor}}
+\doxysubsubsection{\texorpdfstring{decompress()}{decompress()}}
+{\footnotesize\ttfamily \label{classLZ77Decompressor_a242394cc3fb9db938c04b173f2cd3c2c} 
+template$<$typename Allocator = std::\+allocator$<$\+Sym$>$$>$ \\
+void LZ77\+Decompressor::\+decompress (\begin{DoxyParamCaption}\item[{std::\+vector$<$ \doxymbox{\hyperlink{structSym}{Sym}}, Allocator $>$ \&}]{out\+\_\+data}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Decompress the data received in the constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em out\+\_\+data} & Where the output will go\\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{Note}
+Will clear out\+\_\+data buffer 
+\end{DoxyNote}
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00409}{409}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classLZ77Decompressor_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classLZ77Decompressor_a9eebe0cc24120384446a543df5531038}\index{LZ77Decompressor@{LZ77Decompressor}!data\_@{data\_}}
+\index{data\_@{data\_}!LZ77Decompressor@{LZ77Decompressor}}
+\doxysubsubsection{\texorpdfstring{data\_}{data\_}}
+{\footnotesize\ttfamily \label{classLZ77Decompressor_a9eebe0cc24120384446a543df5531038} 
+\doxymbox{\hyperlink{classLZ77Block}{LZ77\+Block}} const\& LZ77\+Decompressor::\+data\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00424}{424}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Compress-\/to-\/fit/\+src/\+models/\+\+LZ77/\+\doxymbox{\hyperlink{lz77_8cppm}{lz77.\+cppm}}\end{DoxyCompactItemize}

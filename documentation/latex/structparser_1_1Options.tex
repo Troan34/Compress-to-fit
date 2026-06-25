@@ -1,0 +1,180 @@
+\doxysection{parser::\+Options Struct Reference}
+\hypertarget{structparser_1_1Options}{}\label{structparser_1_1Options}\index{parser::Options@{parser::Options}}
+
+
+All the options available.  
+
+
+
+
+Collaboration diagram for parser::\+Options:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=192pt]{structparser_1_1Options__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+fs::\+path \doxymbox{\hyperlink{structparser_1_1Options_aa5897e549e45e6c8c0c6528d5f7a301e}{filename\+\_\+in}} \{\}
+\item 
+fs::\+path \doxymbox{\hyperlink{structparser_1_1Options_a541071618f10401baff234e8e412fe9e}{filename\+\_\+out}} \{ \doxymbox{\hyperlink{namespaceparser_a239b839c0edd6180eb4bd577ad8b3ab9}{DEFAULT\+\_\+\+OUT\+\_\+\+PATH}} \}
+\item 
+size\+\_\+t \doxymbox{\hyperlink{structparser_1_1Options_ab8d5641c8bad00296b548aaa3a9522e2}{compressor}} = static\+\_\+cast$<$size\+\_\+t$>$(\doxymbox{\hyperlink{core__utils_8cppm_a77b7b3d2b23480b5378dbd65c7af9178af6b1e796b8ffae4172e2752c26dd404c}{Comp\+Type::\+\+LZ77}})
+\item 
+size\+\_\+t \doxymbox{\hyperlink{structparser_1_1Options_a0c00ba38d9089caa976d0a140a984cd7}{preset}} = \doxymbox{\hyperlink{core__utils_8cppm_a59fc5d9b777790e56395e645e4205db0ac4ef8ee83418a3d1bb09cd68c9518653}{COMP\+\_\+5}}
+\item 
+size\+\_\+t \doxymbox{\hyperlink{structparser_1_1Options_a93ba36418ea34555a584ebfd2881496e}{n\+\_\+files}} = 1
+\item 
+size\+\_\+t \doxymbox{\hyperlink{structparser_1_1Options_a31c850f2a96edb31857b56082fed7605}{size\+\_\+files}} = 0
+\item 
+bool \doxymbox{\hyperlink{structparser_1_1Options_a85021d586a434540f2321e90ebf64ded}{force\+\_\+compression}} = false
+\item 
+bool \doxymbox{\hyperlink{structparser_1_1Options_a204eb08002da88bc72fa2a88e99a1782}{delete\+\_\+input}} = false
+\item 
+bool \doxymbox{\hyperlink{structparser_1_1Options_a4e235b57474a81a3eec424cb4142c8ab}{concatenate\+\_\+files}} = false
+\item 
+bool \doxymbox{\hyperlink{structparser_1_1Options_a6f3e3a05c49d128e2ae7a08f0783b32e}{need\+\_\+help}} = false
+\item 
+std::\+optional$<$ bool $>$ \doxymbox{\hyperlink{structparser_1_1Options_af4b3c6d81f03bcc31481e82348ee4153}{decomp\+\_\+after\+\_\+concat}} \{\}
+\item 
+size\+\_\+t \doxymbox{\hyperlink{structparser_1_1Options_a35220fe0e818f4ad7b25b0d3590c5843}{concurrency}} = std::\+thread::\+hardware\+\_\+concurrency()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+All the options available. 
+
+Definition at line \doxymbox{\hyperlink{cli__parser_8cppm_source_l00126}{126}} of file \doxymbox{\hyperlink{cli__parser_8cppm_source}{cli\+\_\+parser.\+cppm}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{structparser_1_1Options_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structparser_1_1Options_ab8d5641c8bad00296b548aaa3a9522e2}\index{parser::Options@{parser::Options}!compressor@{compressor}}
+\index{compressor@{compressor}!parser::Options@{parser::Options}}
+\doxysubsubsection{\texorpdfstring{compressor}{compressor}}
+{\footnotesize\ttfamily \label{structparser_1_1Options_ab8d5641c8bad00296b548aaa3a9522e2} 
+size\+\_\+t parser::\+\+Options::\+compressor = static\+\_\+cast$<$size\+\_\+t$>$(\doxymbox{\hyperlink{core__utils_8cppm_a77b7b3d2b23480b5378dbd65c7af9178af6b1e796b8ffae4172e2752c26dd404c}{Comp\+Type::\+\+LZ77}})}
+
+
+
+Definition at line \doxymbox{\hyperlink{cli__parser_8cppm_source_l00130}{130}} of file \doxymbox{\hyperlink{cli__parser_8cppm_source}{cli\+\_\+parser.\+cppm}}.
+
+\Hypertarget{structparser_1_1Options_a4e235b57474a81a3eec424cb4142c8ab}\index{parser::Options@{parser::Options}!concatenate\_files@{concatenate\_files}}
+\index{concatenate\_files@{concatenate\_files}!parser::Options@{parser::Options}}
+\doxysubsubsection{\texorpdfstring{concatenate\_files}{concatenate\_files}}
+{\footnotesize\ttfamily \label{structparser_1_1Options_a4e235b57474a81a3eec424cb4142c8ab} 
+bool parser::\+\+Options::\+concatenate\+\_\+files = false}
+
+
+
+Definition at line \doxymbox{\hyperlink{cli__parser_8cppm_source_l00136}{136}} of file \doxymbox{\hyperlink{cli__parser_8cppm_source}{cli\+\_\+parser.\+cppm}}.
+
+\Hypertarget{structparser_1_1Options_a35220fe0e818f4ad7b25b0d3590c5843}\index{parser::Options@{parser::Options}!concurrency@{concurrency}}
+\index{concurrency@{concurrency}!parser::Options@{parser::Options}}
+\doxysubsubsection{\texorpdfstring{concurrency}{concurrency}}
+{\footnotesize\ttfamily \label{structparser_1_1Options_a35220fe0e818f4ad7b25b0d3590c5843} 
+size\+\_\+t parser::\+\+Options::\+concurrency = std::\+thread::\+hardware\+\_\+concurrency()}
+
+
+
+Definition at line \doxymbox{\hyperlink{cli__parser_8cppm_source_l00139}{139}} of file \doxymbox{\hyperlink{cli__parser_8cppm_source}{cli\+\_\+parser.\+cppm}}.
+
+\Hypertarget{structparser_1_1Options_af4b3c6d81f03bcc31481e82348ee4153}\index{parser::Options@{parser::Options}!decomp\_after\_concat@{decomp\_after\_concat}}
+\index{decomp\_after\_concat@{decomp\_after\_concat}!parser::Options@{parser::Options}}
+\doxysubsubsection{\texorpdfstring{decomp\_after\_concat}{decomp\_after\_concat}}
+{\footnotesize\ttfamily \label{structparser_1_1Options_af4b3c6d81f03bcc31481e82348ee4153} 
+std::\+optional$<$bool$>$ parser::\+\+Options::\+decomp\+\_\+after\+\_\+concat \{\}}
+
+
+
+Definition at line \doxymbox{\hyperlink{cli__parser_8cppm_source_l00138}{138}} of file \doxymbox{\hyperlink{cli__parser_8cppm_source}{cli\+\_\+parser.\+cppm}}.
+
+\Hypertarget{structparser_1_1Options_a204eb08002da88bc72fa2a88e99a1782}\index{parser::Options@{parser::Options}!delete\_input@{delete\_input}}
+\index{delete\_input@{delete\_input}!parser::Options@{parser::Options}}
+\doxysubsubsection{\texorpdfstring{delete\_input}{delete\_input}}
+{\footnotesize\ttfamily \label{structparser_1_1Options_a204eb08002da88bc72fa2a88e99a1782} 
+bool parser::\+\+Options::\+delete\+\_\+input = false}
+
+
+
+Definition at line \doxymbox{\hyperlink{cli__parser_8cppm_source_l00135}{135}} of file \doxymbox{\hyperlink{cli__parser_8cppm_source}{cli\+\_\+parser.\+cppm}}.
+
+\Hypertarget{structparser_1_1Options_aa5897e549e45e6c8c0c6528d5f7a301e}\index{parser::Options@{parser::Options}!filename\_in@{filename\_in}}
+\index{filename\_in@{filename\_in}!parser::Options@{parser::Options}}
+\doxysubsubsection{\texorpdfstring{filename\_in}{filename\_in}}
+{\footnotesize\ttfamily \label{structparser_1_1Options_aa5897e549e45e6c8c0c6528d5f7a301e} 
+fs::\+path parser::\+\+Options::\+filename\+\_\+in \{\}}
+
+
+
+Definition at line \doxymbox{\hyperlink{cli__parser_8cppm_source_l00128}{128}} of file \doxymbox{\hyperlink{cli__parser_8cppm_source}{cli\+\_\+parser.\+cppm}}.
+
+\Hypertarget{structparser_1_1Options_a541071618f10401baff234e8e412fe9e}\index{parser::Options@{parser::Options}!filename\_out@{filename\_out}}
+\index{filename\_out@{filename\_out}!parser::Options@{parser::Options}}
+\doxysubsubsection{\texorpdfstring{filename\_out}{filename\_out}}
+{\footnotesize\ttfamily \label{structparser_1_1Options_a541071618f10401baff234e8e412fe9e} 
+fs::\+path parser::\+\+Options::\+filename\+\_\+out \{ \doxymbox{\hyperlink{namespaceparser_a239b839c0edd6180eb4bd577ad8b3ab9}{DEFAULT\+\_\+\+OUT\+\_\+\+PATH}} \}}
+
+
+
+Definition at line \doxymbox{\hyperlink{cli__parser_8cppm_source_l00129}{129}} of file \doxymbox{\hyperlink{cli__parser_8cppm_source}{cli\+\_\+parser.\+cppm}}.
+
+\Hypertarget{structparser_1_1Options_a85021d586a434540f2321e90ebf64ded}\index{parser::Options@{parser::Options}!force\_compression@{force\_compression}}
+\index{force\_compression@{force\_compression}!parser::Options@{parser::Options}}
+\doxysubsubsection{\texorpdfstring{force\_compression}{force\_compression}}
+{\footnotesize\ttfamily \label{structparser_1_1Options_a85021d586a434540f2321e90ebf64ded} 
+bool parser::\+\+Options::\+force\+\_\+compression = false}
+
+
+
+Definition at line \doxymbox{\hyperlink{cli__parser_8cppm_source_l00134}{134}} of file \doxymbox{\hyperlink{cli__parser_8cppm_source}{cli\+\_\+parser.\+cppm}}.
+
+\Hypertarget{structparser_1_1Options_a93ba36418ea34555a584ebfd2881496e}\index{parser::Options@{parser::Options}!n\_files@{n\_files}}
+\index{n\_files@{n\_files}!parser::Options@{parser::Options}}
+\doxysubsubsection{\texorpdfstring{n\_files}{n\_files}}
+{\footnotesize\ttfamily \label{structparser_1_1Options_a93ba36418ea34555a584ebfd2881496e} 
+size\+\_\+t parser::\+\+Options::\+n\+\_\+files = 1}
+
+
+
+Definition at line \doxymbox{\hyperlink{cli__parser_8cppm_source_l00132}{132}} of file \doxymbox{\hyperlink{cli__parser_8cppm_source}{cli\+\_\+parser.\+cppm}}.
+
+\Hypertarget{structparser_1_1Options_a6f3e3a05c49d128e2ae7a08f0783b32e}\index{parser::Options@{parser::Options}!need\_help@{need\_help}}
+\index{need\_help@{need\_help}!parser::Options@{parser::Options}}
+\doxysubsubsection{\texorpdfstring{need\_help}{need\_help}}
+{\footnotesize\ttfamily \label{structparser_1_1Options_a6f3e3a05c49d128e2ae7a08f0783b32e} 
+bool parser::\+\+Options::\+need\+\_\+help = false}
+
+
+
+Definition at line \doxymbox{\hyperlink{cli__parser_8cppm_source_l00137}{137}} of file \doxymbox{\hyperlink{cli__parser_8cppm_source}{cli\+\_\+parser.\+cppm}}.
+
+\Hypertarget{structparser_1_1Options_a0c00ba38d9089caa976d0a140a984cd7}\index{parser::Options@{parser::Options}!preset@{preset}}
+\index{preset@{preset}!parser::Options@{parser::Options}}
+\doxysubsubsection{\texorpdfstring{preset}{preset}}
+{\footnotesize\ttfamily \label{structparser_1_1Options_a0c00ba38d9089caa976d0a140a984cd7} 
+size\+\_\+t parser::\+\+Options::\+preset = \doxymbox{\hyperlink{core__utils_8cppm_a59fc5d9b777790e56395e645e4205db0ac4ef8ee83418a3d1bb09cd68c9518653}{COMP\+\_\+5}}}
+
+
+
+Definition at line \doxymbox{\hyperlink{cli__parser_8cppm_source_l00131}{131}} of file \doxymbox{\hyperlink{cli__parser_8cppm_source}{cli\+\_\+parser.\+cppm}}.
+
+\Hypertarget{structparser_1_1Options_a31c850f2a96edb31857b56082fed7605}\index{parser::Options@{parser::Options}!size\_files@{size\_files}}
+\index{size\_files@{size\_files}!parser::Options@{parser::Options}}
+\doxysubsubsection{\texorpdfstring{size\_files}{size\_files}}
+{\footnotesize\ttfamily \label{structparser_1_1Options_a31c850f2a96edb31857b56082fed7605} 
+size\+\_\+t parser::\+\+Options::\+size\+\_\+files = 0}
+
+
+
+Definition at line \doxymbox{\hyperlink{cli__parser_8cppm_source_l00133}{133}} of file \doxymbox{\hyperlink{cli__parser_8cppm_source}{cli\+\_\+parser.\+cppm}}.
+
+
+
+The documentation for this struct was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Compress-\/to-\/fit/\+src/\+parser/\+\doxymbox{\hyperlink{cli__parser_8cppm}{cli\+\_\+parser.\+cppm}}\end{DoxyCompactItemize}

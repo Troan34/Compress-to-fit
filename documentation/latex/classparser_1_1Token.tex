@@ -1,0 +1,130 @@
+\doxysection{parser::\+Token Class Reference}
+\hypertarget{classparser_1_1Token}{}\label{classparser_1_1Token}\index{parser::Token@{parser::Token}}
+
+
+Represents a cli option.  
+
+
+
+
+Collaboration diagram for parser::\+Token:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=147pt]{classparser_1_1Token__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classparser_1_1Token_a50406e2c4754e1247f7d9ef0fde95f27}{Token}} (\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369}{Token\+Type}} type\+\_\+, \doxymbox{\hyperlink{namespaceparser_a69ca3fb1da948707d293c02ddfbedfdf}{Value\+Type}} const \&value\+\_\+)
+\item 
+\doxymbox{\hyperlink{classparser_1_1Token_a03fc54839cfb01b88087c14db5b0fd63}{Token}} (const std::\+string \&option)
+\item 
+auto \doxymbox{\hyperlink{classparser_1_1Token_ab547f23fbebcce7583502b162d0e6659}{get\+\_\+value}} () const noexcept
+\item 
+auto \doxymbox{\hyperlink{classparser_1_1Token_a0780d73b9348e18a2245557a52bed08a}{get\+\_\+type}} () const noexcept
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{namespaceparser_a69ca3fb1da948707d293c02ddfbedfdf}{Value\+Type}} \doxymbox{\hyperlink{classparser_1_1Token_a18b9921061fd6218033e81b4df258a51}{value}}
+\item 
+\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369}{Token\+Type}} \doxymbox{\hyperlink{classparser_1_1Token_a94a222c963f58b1206743b29e10084df}{type}} = \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a245d11a3709454cc69b2de7911073d57}{Token\+Type::\+\+NO\+\_\+\+TYPE}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a cli option. 
+
+Definition at line \doxymbox{\hyperlink{cli__parser_8cppm_source_l00097}{97}} of file \doxymbox{\hyperlink{cli__parser_8cppm_source}{cli\+\_\+parser.\+cppm}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{classparser_1_1Token_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classparser_1_1Token_a50406e2c4754e1247f7d9ef0fde95f27}\index{parser::Token@{parser::Token}!Token@{Token}}
+\index{Token@{Token}!parser::Token@{parser::Token}}
+\doxysubsubsection{\texorpdfstring{Token()}{Token()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classparser_1_1Token_a50406e2c4754e1247f7d9ef0fde95f27} 
+Token::\+\+Token (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369}{Token\+Type}}}]{type\+\_\+}{, }\item[{\doxymbox{\hyperlink{namespaceparser_a69ca3fb1da948707d293c02ddfbedfdf}{Value\+Type}} const \&}]{value\+\_\+}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{cli__parser_8cpp_source_l00014}{14}} of file \doxymbox{\hyperlink{cli__parser_8cpp_source}{cli\+\_\+parser.\+cpp}}.
+
+\Hypertarget{classparser_1_1Token_a03fc54839cfb01b88087c14db5b0fd63}\index{parser::Token@{parser::Token}!Token@{Token}}
+\index{Token@{Token}!parser::Token@{parser::Token}}
+\doxysubsubsection{\texorpdfstring{Token()}{Token()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classparser_1_1Token_a03fc54839cfb01b88087c14db5b0fd63} 
+Token::\+\+Token (\begin{DoxyParamCaption}\item[{const std::\+string \&}]{option}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{cli__parser_8cpp_source_l00019}{19}} of file \doxymbox{\hyperlink{cli__parser_8cpp_source}{cli\+\_\+parser.\+cpp}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{classparser_1_1Token_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classparser_1_1Token_a0780d73b9348e18a2245557a52bed08a}\index{parser::Token@{parser::Token}!get\_type@{get\_type}}
+\index{get\_type@{get\_type}!parser::Token@{parser::Token}}
+\doxysubsubsection{\texorpdfstring{get\_type()}{get\_type()}}
+{\footnotesize\ttfamily \label{classparser_1_1Token_a0780d73b9348e18a2245557a52bed08a} 
+auto parser::\+\+Token::\+get\+\_\+type (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{cli__parser_8cppm_source_l00109}{109}} of file \doxymbox{\hyperlink{cli__parser_8cppm_source}{cli\+\_\+parser.\+cppm}}.
+
+
+
+References \doxymbox{\hyperlink{cli__parser_8cppm_source_l00116}{type}}.
+
+\Hypertarget{classparser_1_1Token_ab547f23fbebcce7583502b162d0e6659}\index{parser::Token@{parser::Token}!get\_value@{get\_value}}
+\index{get\_value@{get\_value}!parser::Token@{parser::Token}}
+\doxysubsubsection{\texorpdfstring{get\_value()}{get\_value()}}
+{\footnotesize\ttfamily \label{classparser_1_1Token_ab547f23fbebcce7583502b162d0e6659} 
+auto parser::\+\+Token::\+get\+\_\+value (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{cli__parser_8cppm_source_l00104}{104}} of file \doxymbox{\hyperlink{cli__parser_8cppm_source}{cli\+\_\+parser.\+cppm}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classparser_1_1Token_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classparser_1_1Token_a94a222c963f58b1206743b29e10084df}\index{parser::Token@{parser::Token}!type@{type}}
+\index{type@{type}!parser::Token@{parser::Token}}
+\doxysubsubsection{\texorpdfstring{type}{type}}
+{\footnotesize\ttfamily \label{classparser_1_1Token_a94a222c963f58b1206743b29e10084df} 
+\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369}{Token\+Type}} parser::\+\+Token::\+type = \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a245d11a3709454cc69b2de7911073d57}{Token\+Type::\+\+NO\+\_\+\+TYPE}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{cli__parser_8cppm_source_l00116}{116}} of file \doxymbox{\hyperlink{cli__parser_8cppm_source}{cli\+\_\+parser.\+cppm}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{cli__parser_8cppm_source_l00109}{get\+\_\+type()}}.
+
+\Hypertarget{classparser_1_1Token_a18b9921061fd6218033e81b4df258a51}\index{parser::Token@{parser::Token}!value@{value}}
+\index{value@{value}!parser::Token@{parser::Token}}
+\doxysubsubsection{\texorpdfstring{value}{value}}
+{\footnotesize\ttfamily \label{classparser_1_1Token_a18b9921061fd6218033e81b4df258a51} 
+\doxymbox{\hyperlink{namespaceparser_a69ca3fb1da948707d293c02ddfbedfdf}{Value\+Type}} parser::\+\+Token::\+value\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{cli__parser_8cppm_source_l00115}{115}} of file \doxymbox{\hyperlink{cli__parser_8cppm_source}{cli\+\_\+parser.\+cppm}}.
+
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+Compress-\/to-\/fit/\+src/\+parser/\+\doxymbox{\hyperlink{cli__parser_8cppm}{cli\+\_\+parser.\+cppm}}\item 
+Compress-\/to-\/fit/\+src/\+parser/\+\doxymbox{\hyperlink{cli__parser_8cpp}{cli\+\_\+parser.\+cpp}}\end{DoxyCompactItemize}

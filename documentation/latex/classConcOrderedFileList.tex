@@ -1,0 +1,363 @@
+\doxysection{Conc\+Ordered\+File\+List\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classConcOrderedFileList}{}\label{classConcOrderedFileList}\index{ConcOrderedFileList$<$ T $>$@{ConcOrderedFileList$<$ T $>$}}
+
+
+First sequence in first sequence out, i.\+e. the data is written in the order given to \doxylink{classConcOrderedFileList_a2c53a81b8da07b0b7e0502ad83d98e0d}{insert()}.  
+
+
+
+
+Collaboration diagram for Conc\+Ordered\+File\+List\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>}:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classConcOrderedFileList__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classConcOrderedFileList_a1ff85ae4e67a999054509fd24ee70e15}{Conc\+Ordered\+File\+List}} (\doxymbox{\hyperlink{classFile}{File}} \&\doxymbox{\hyperlink{classConcOrderedFileList_a6bff26055e373a00b9059e91efb4ec8e}{file}})
+\item 
+\doxymbox{\hyperlink{classConcOrderedFileList_af33b113f0e6fd77d4a92fac64908dc05}{\texorpdfstring{$\sim$}{\string~}\+Conc\+Ordered\+File\+List}} ()
+\item 
+\doxymbox{\hyperlink{classConcOrderedFileList_ab8a2948cac33c9d090ac792a00ae5f14}{Conc\+Ordered\+File\+List}} (\doxymbox{\hyperlink{classConcOrderedFileList}{Conc\+Ordered\+File\+List}} const \&)=delete
+\item 
+auto \doxymbox{\hyperlink{classConcOrderedFileList_a1349f8db3ea3aebc8bdca6873b04e60f}{operator=}} (\doxymbox{\hyperlink{classConcOrderedFileList}{Conc\+Ordered\+File\+List}} const \&) -\/$>$ \doxymbox{\hyperlink{classConcOrderedFileList}{Conc\+Ordered\+File\+List}} \&=delete
+\item 
+\doxymbox{\hyperlink{classConcOrderedFileList_ad2ebb0d396d396b1e26d1456740c2e6f}{Conc\+Ordered\+File\+List}} (\doxymbox{\hyperlink{classConcOrderedFileList}{Conc\+Ordered\+File\+List}} \&\&) noexcept=default
+\item 
+auto \doxymbox{\hyperlink{classConcOrderedFileList_a81ef7509821f2cf3cab477661acb41d8}{operator=}} (\doxymbox{\hyperlink{classConcOrderedFileList}{Conc\+Ordered\+File\+List}} \&\&) noexcept -\/$>$ \doxymbox{\hyperlink{classConcOrderedFileList}{Conc\+Ordered\+File\+List}} \&=default
+\item 
+void \doxymbox{\hyperlink{classConcOrderedFileList_a2c53a81b8da07b0b7e0502ad83d98e0d}{insert}} (std::\+unique\+\_\+ptr$<$ T $>$ element, size\+\_\+t sequence\+\_\+num)
+\begin{DoxyCompactList}\small\item\em Inserts an element to the list, which it will own. THE FIRST ELEMENT MUST HAVE SEQUENCE NUMBER == 0, check warning for additional info. \end{DoxyCompactList}\item 
+auto \doxymbox{\hyperlink{classConcOrderedFileList_a7519fc33eb4601804f70122a667a0853}{size}} () const noexcept
+\item 
+auto \doxymbox{\hyperlink{classConcOrderedFileList_ae0647fb99e6345fe7eb1408e3356a405}{expected\+\_\+sequence\+\_\+num}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Returns the next sequence number expected or missing. Can be used as a sanity check. \end{DoxyCompactList}\item 
+auto const \& \doxymbox{\hyperlink{classConcOrderedFileList_a6bff26055e373a00b9059e91efb4ec8e}{file}} () const \&noexcept
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{classConcOrderedFileList_a50b2e0386e9d994376546f249bb1f0ad}{write\+\_\+file}} (std::\+stop\+\_\+token stop)
+\begin{DoxyCompactList}\small\item\em Writes to file. Should be called by a thread. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classFile}{File}} \& \doxymbox{\hyperlink{classConcOrderedFileList_ab5ee599d444d42439d7ce6e80f45b57b}{file\+\_\+}}
+\item 
+size\+\_\+t \doxymbox{\hyperlink{classConcOrderedFileList_adf5cfd5b2e46c73533d28b89a0612f28}{size\+\_\+}} \{\}
+\item 
+size\+\_\+t \doxymbox{\hyperlink{classConcOrderedFileList_abb37a87843fe6a072f05716e21c8d713}{expected\+\_\+sequence\+\_\+num\+\_\+}} \{\}
+\item 
+\doxymbox{\hyperlink{structNode}{Node}}$<$ T $>$ \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{classConcOrderedFileList_a6a465978c1ec8d3b74e4d8938d041133}{head\+\_\+}} \{nullptr\}
+\item 
+\doxymbox{\hyperlink{structNode}{Node}}$<$ T $>$ \texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{classConcOrderedFileList_a765dda4afe675365fcc4fa7a6ce787e7}{tail\+\_\+}} \{nullptr\}
+\item 
+bool \doxymbox{\hyperlink{classConcOrderedFileList_a7b7c2edab71f9952315136b17d12017c}{called\+\_\+writer}} \{false\}
+\item 
+std::\+mutex \doxymbox{\hyperlink{classConcOrderedFileList_a9790d71211b6a70c3cd101d68cba5108}{mut}}
+\item 
+std::\+condition\+\_\+variable \doxymbox{\hyperlink{classConcOrderedFileList_a37eac0451a0f16409f28c3cfecf274f6}{writer\+\_\+notifier}}
+\item 
+std::\+jthread \doxymbox{\hyperlink{classConcOrderedFileList_a831ae809e0d82e6481d9cbefe009b6a0}{writer}} \{\&\doxymbox{\hyperlink{classConcOrderedFileList_a50b2e0386e9d994376546f249bb1f0ad}{Conc\+Ordered\+File\+List::\+write\+\_\+file}}, this\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$\newline
+class Conc\+Ordered\+File\+List$<$ T $>$}
+First sequence in first sequence out, i.\+e. the data is written in the order given to \doxylink{classConcOrderedFileList_a2c53a81b8da07b0b7e0502ad83d98e0d}{insert()}. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Must implement write\+\_\+to(ofstream\&) or be trivially copyable\\
+\hline
+\end{DoxyTemplParams}
+Implemented as doubly linked list. A separate write thread is spawned.
+
+\begin{DoxyNote}{Note}
+Because the list will own the elements, consider using a memory pool (e.\+g. pmr) as to not reallocate memory. 
+\end{DoxyNote}
+
+
+Definition at line \doxymbox{\hyperlink{file__list_8cppm_source_l00032}{32}} of file \doxymbox{\hyperlink{file__list_8cppm_source}{file\+\_\+list.\+cppm}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{classConcOrderedFileList_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classConcOrderedFileList_a1ff85ae4e67a999054509fd24ee70e15}\index{ConcOrderedFileList$<$ T $>$@{ConcOrderedFileList$<$ T $>$}!ConcOrderedFileList@{ConcOrderedFileList}}
+\index{ConcOrderedFileList@{ConcOrderedFileList}!ConcOrderedFileList$<$ T $>$@{ConcOrderedFileList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{ConcOrderedFileList()}{ConcOrderedFileList()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classConcOrderedFileList_a1ff85ae4e67a999054509fd24ee70e15} 
+template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+\doxymbox{\hyperlink{classConcOrderedFileList}{Conc\+Ordered\+File\+List}}$<$ T $>$::\+\+Conc\+Ordered\+File\+List (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{classFile}{File}} \&}]{file}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{file__list_8cppm_source_l00035}{35}} of file \doxymbox{\hyperlink{file__list_8cppm_source}{file\+\_\+list.\+cppm}}.
+
+\Hypertarget{classConcOrderedFileList_af33b113f0e6fd77d4a92fac64908dc05}\index{ConcOrderedFileList$<$ T $>$@{ConcOrderedFileList$<$ T $>$}!````~ConcOrderedFileList@{\texorpdfstring{$\sim$}{\string~}ConcOrderedFileList}}
+\index{````~ConcOrderedFileList@{\texorpdfstring{$\sim$}{\string~}ConcOrderedFileList}!ConcOrderedFileList$<$ T $>$@{ConcOrderedFileList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ConcOrderedFileList()}{\string~ConcOrderedFileList()}}
+{\footnotesize\ttfamily \label{classConcOrderedFileList_af33b113f0e6fd77d4a92fac64908dc05} 
+template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+\doxymbox{\hyperlink{classConcOrderedFileList}{Conc\+Ordered\+File\+List}}$<$ T $>$::\+\texorpdfstring{$\sim$}{\string~}\doxymbox{\hyperlink{classConcOrderedFileList}{Conc\+Ordered\+File\+List}} (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{file__list_8cppm_source_l00040}{40}} of file \doxymbox{\hyperlink{file__list_8cppm_source}{file\+\_\+list.\+cppm}}.
+
+\Hypertarget{classConcOrderedFileList_ab8a2948cac33c9d090ac792a00ae5f14}\index{ConcOrderedFileList$<$ T $>$@{ConcOrderedFileList$<$ T $>$}!ConcOrderedFileList@{ConcOrderedFileList}}
+\index{ConcOrderedFileList@{ConcOrderedFileList}!ConcOrderedFileList$<$ T $>$@{ConcOrderedFileList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{ConcOrderedFileList()}{ConcOrderedFileList()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classConcOrderedFileList_ab8a2948cac33c9d090ac792a00ae5f14} 
+template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+\doxymbox{\hyperlink{classConcOrderedFileList}{Conc\+Ordered\+File\+List}}$<$ T $>$::\+\+Conc\+Ordered\+File\+List (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{classConcOrderedFileList}{Conc\+Ordered\+File\+List}}$<$ T $>$ const \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\Hypertarget{classConcOrderedFileList_ad2ebb0d396d396b1e26d1456740c2e6f}\index{ConcOrderedFileList$<$ T $>$@{ConcOrderedFileList$<$ T $>$}!ConcOrderedFileList@{ConcOrderedFileList}}
+\index{ConcOrderedFileList@{ConcOrderedFileList}!ConcOrderedFileList$<$ T $>$@{ConcOrderedFileList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{ConcOrderedFileList()}{ConcOrderedFileList()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classConcOrderedFileList_ad2ebb0d396d396b1e26d1456740c2e6f} 
+template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+\doxymbox{\hyperlink{classConcOrderedFileList}{Conc\+Ordered\+File\+List}}$<$ T $>$::\+\+Conc\+Ordered\+File\+List (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{classConcOrderedFileList}{Conc\+Ordered\+File\+List}}$<$ T $>$ \&\&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}, {\ttfamily [noexcept]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classConcOrderedFileList_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classConcOrderedFileList_ae0647fb99e6345fe7eb1408e3356a405}\index{ConcOrderedFileList$<$ T $>$@{ConcOrderedFileList$<$ T $>$}!expected\_sequence\_num@{expected\_sequence\_num}}
+\index{expected\_sequence\_num@{expected\_sequence\_num}!ConcOrderedFileList$<$ T $>$@{ConcOrderedFileList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{expected\_sequence\_num()}{expected\_sequence\_num()}}
+{\footnotesize\ttfamily \label{classConcOrderedFileList_ae0647fb99e6345fe7eb1408e3356a405} 
+template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+auto \doxymbox{\hyperlink{classConcOrderedFileList}{Conc\+Ordered\+File\+List}}$<$ T $>$::\+expected\+\_\+sequence\+\_\+num (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Returns the next sequence number expected or missing. Can be used as a sanity check. 
+
+\begin{DoxyReturn}{Returns}
+The expected sequence number 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{file__list_8cppm_source_l00139}{139}} of file \doxymbox{\hyperlink{file__list_8cppm_source}{file\+\_\+list.\+cppm}}.
+
+
+
+References \doxymbox{\hyperlink{file__list_8cppm_source_l00152}{expected\+\_\+sequence\+\_\+num\+\_\+}}.
+
+\Hypertarget{classConcOrderedFileList_a6bff26055e373a00b9059e91efb4ec8e}\index{ConcOrderedFileList$<$ T $>$@{ConcOrderedFileList$<$ T $>$}!file@{file}}
+\index{file@{file}!ConcOrderedFileList$<$ T $>$@{ConcOrderedFileList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{file()}{file()}}
+{\footnotesize\ttfamily \label{classConcOrderedFileList_a6bff26055e373a00b9059e91efb4ec8e} 
+template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+auto const  \& \doxymbox{\hyperlink{classConcOrderedFileList}{Conc\+Ordered\+File\+List}}$<$ T $>$::\+file (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const \&\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{file__list_8cppm_source_l00145}{145}} of file \doxymbox{\hyperlink{file__list_8cppm_source}{file\+\_\+list.\+cppm}}.
+
+\Hypertarget{classConcOrderedFileList_a2c53a81b8da07b0b7e0502ad83d98e0d}\index{ConcOrderedFileList$<$ T $>$@{ConcOrderedFileList$<$ T $>$}!insert@{insert}}
+\index{insert@{insert}!ConcOrderedFileList$<$ T $>$@{ConcOrderedFileList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{insert()}{insert()}}
+{\footnotesize\ttfamily \label{classConcOrderedFileList_a2c53a81b8da07b0b7e0502ad83d98e0d} 
+template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+void \doxymbox{\hyperlink{classConcOrderedFileList}{Conc\+Ordered\+File\+List}}$<$ T $>$::\+insert (\begin{DoxyParamCaption}\item[{std::\+unique\+\_\+ptr$<$ T $>$}]{element}{, }\item[{size\+\_\+t}]{sequence\+\_\+num}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Inserts an element to the list, which it will own. THE FIRST ELEMENT MUST HAVE SEQUENCE NUMBER == 0, check warning for additional info. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\doxymbox{\texttt{in}}  & {\em element} & Element to be inserted \\
+\hline
+ & {\em sequence\+\_\+num} & The number of this element\textquotesingle{}s sequence\\
+\hline
+\end{DoxyParams}
+\begin{DoxyPrecond}{Precondition}
+{\ttfamily element} must not own a nullptr 
+\end{DoxyPrecond}
+\begin{DoxyPostcond}{Postcondition}
+Any reference to {\ttfamily element} is invalidated.
+\end{DoxyPostcond}
+\begin{DoxyWarning}{Warning}
+THE FIRST ELEMENT THAT IS GOING TO BE WRITTEN TO FILE MUST HAVE SEQUENCE NUMBER == 0. This requirement exists as the first element you add could easily be not the first data chunk (i.\+e. out of order). Failure to follow this requirement will cause DEADLOCK. 
+\end{DoxyWarning}
+
+
+Definition at line \doxymbox{\hyperlink{file__list_8cppm_source_l00069}{69}} of file \doxymbox{\hyperlink{file__list_8cppm_source}{file\+\_\+list.\+cppm}}.
+
+\Hypertarget{classConcOrderedFileList_a81ef7509821f2cf3cab477661acb41d8}\index{ConcOrderedFileList$<$ T $>$@{ConcOrderedFileList$<$ T $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!ConcOrderedFileList$<$ T $>$@{ConcOrderedFileList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classConcOrderedFileList_a81ef7509821f2cf3cab477661acb41d8} 
+template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+auto \doxymbox{\hyperlink{classConcOrderedFileList}{Conc\+Ordered\+File\+List}}$<$ T $>$::\+operator= (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{classConcOrderedFileList}{Conc\+Ordered\+File\+List}}$<$ T $>$ \&\&}]{}{}\end{DoxyParamCaption}) -\/$>$  \doxymbox{\hyperlink{classConcOrderedFileList}{Conc\+Ordered\+File\+List}} \&=default\hspace{0.3cm}{\ttfamily [default]}, {\ttfamily [noexcept]}}
+
+\Hypertarget{classConcOrderedFileList_a1349f8db3ea3aebc8bdca6873b04e60f}\index{ConcOrderedFileList$<$ T $>$@{ConcOrderedFileList$<$ T $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!ConcOrderedFileList$<$ T $>$@{ConcOrderedFileList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classConcOrderedFileList_a1349f8db3ea3aebc8bdca6873b04e60f} 
+template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+auto \doxymbox{\hyperlink{classConcOrderedFileList}{Conc\+Ordered\+File\+List}}$<$ T $>$::\+operator= (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{classConcOrderedFileList}{Conc\+Ordered\+File\+List}}$<$ T $>$ const \&}]{}{}\end{DoxyParamCaption}) -\/$>$  \doxymbox{\hyperlink{classConcOrderedFileList}{Conc\+Ordered\+File\+List}} \&=delete\hspace{0.3cm}{\ttfamily [delete]}}
+
+\Hypertarget{classConcOrderedFileList_a7519fc33eb4601804f70122a667a0853}\index{ConcOrderedFileList$<$ T $>$@{ConcOrderedFileList$<$ T $>$}!size@{size}}
+\index{size@{size}!ConcOrderedFileList$<$ T $>$@{ConcOrderedFileList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily \label{classConcOrderedFileList_a7519fc33eb4601804f70122a667a0853} 
+template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+auto \doxymbox{\hyperlink{classConcOrderedFileList}{Conc\+Ordered\+File\+List}}$<$ T $>$::\+size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+\begin{DoxyReturn}{Returns}
+Size, the number of nodes waiting to get written to file 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{file__list_8cppm_source_l00129}{129}} of file \doxymbox{\hyperlink{file__list_8cppm_source}{file\+\_\+list.\+cppm}}.
+
+
+
+References \doxymbox{\hyperlink{file__list_8cppm_source_l00151}{size\+\_\+}}.
+
+\Hypertarget{classConcOrderedFileList_a50b2e0386e9d994376546f249bb1f0ad}\index{ConcOrderedFileList$<$ T $>$@{ConcOrderedFileList$<$ T $>$}!write\_file@{write\_file}}
+\index{write\_file@{write\_file}!ConcOrderedFileList$<$ T $>$@{ConcOrderedFileList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{write\_file()}{write\_file()}}
+{\footnotesize\ttfamily \label{classConcOrderedFileList_a50b2e0386e9d994376546f249bb1f0ad} 
+template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+void \doxymbox{\hyperlink{classConcOrderedFileList}{Conc\+Ordered\+File\+List}}$<$ T $>$::\+write\+\_\+file (\begin{DoxyParamCaption}\item[{std::\+stop\+\_\+token}]{stop}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Writes to file. Should be called by a thread. 
+
+\begin{DoxyPrecond}{Precondition}
+tail\+\_\+ != nullptr 
+\end{DoxyPrecond}
+
+
+Definition at line \doxymbox{\hyperlink{file__list_8cppm_source_l00165}{165}} of file \doxymbox{\hyperlink{file__list_8cppm_source}{file\+\_\+list.\+cppm}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classConcOrderedFileList_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classConcOrderedFileList_a7b7c2edab71f9952315136b17d12017c}\index{ConcOrderedFileList$<$ T $>$@{ConcOrderedFileList$<$ T $>$}!called\_writer@{called\_writer}}
+\index{called\_writer@{called\_writer}!ConcOrderedFileList$<$ T $>$@{ConcOrderedFileList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{called\_writer}{called\_writer}}
+{\footnotesize\ttfamily \label{classConcOrderedFileList_a7b7c2edab71f9952315136b17d12017c} 
+template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+bool \doxymbox{\hyperlink{classConcOrderedFileList}{Conc\+Ordered\+File\+List}}$<$ T $>$::\+called\+\_\+writer \{false\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{file__list_8cppm_source_l00155}{155}} of file \doxymbox{\hyperlink{file__list_8cppm_source}{file\+\_\+list.\+cppm}}.
+
+\Hypertarget{classConcOrderedFileList_abb37a87843fe6a072f05716e21c8d713}\index{ConcOrderedFileList$<$ T $>$@{ConcOrderedFileList$<$ T $>$}!expected\_sequence\_num\_@{expected\_sequence\_num\_}}
+\index{expected\_sequence\_num\_@{expected\_sequence\_num\_}!ConcOrderedFileList$<$ T $>$@{ConcOrderedFileList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{expected\_sequence\_num\_}{expected\_sequence\_num\_}}
+{\footnotesize\ttfamily \label{classConcOrderedFileList_abb37a87843fe6a072f05716e21c8d713} 
+template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+size\+\_\+t \doxymbox{\hyperlink{classConcOrderedFileList}{Conc\+Ordered\+File\+List}}$<$ T $>$::\+expected\+\_\+sequence\+\_\+num\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{file__list_8cppm_source_l00152}{152}} of file \doxymbox{\hyperlink{file__list_8cppm_source}{file\+\_\+list.\+cppm}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{file__list_8cppm_source_l00139}{expected\+\_\+sequence\+\_\+num()}}.
+
+\Hypertarget{classConcOrderedFileList_ab5ee599d444d42439d7ce6e80f45b57b}\index{ConcOrderedFileList$<$ T $>$@{ConcOrderedFileList$<$ T $>$}!file\_@{file\_}}
+\index{file\_@{file\_}!ConcOrderedFileList$<$ T $>$@{ConcOrderedFileList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{file\_}{file\_}}
+{\footnotesize\ttfamily \label{classConcOrderedFileList_ab5ee599d444d42439d7ce6e80f45b57b} 
+template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+\doxymbox{\hyperlink{classFile}{File}}\& \doxymbox{\hyperlink{classConcOrderedFileList}{Conc\+Ordered\+File\+List}}$<$ T $>$::\+file\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{file__list_8cppm_source_l00150}{150}} of file \doxymbox{\hyperlink{file__list_8cppm_source}{file\+\_\+list.\+cppm}}.
+
+\Hypertarget{classConcOrderedFileList_a6a465978c1ec8d3b74e4d8938d041133}\index{ConcOrderedFileList$<$ T $>$@{ConcOrderedFileList$<$ T $>$}!head\_@{head\_}}
+\index{head\_@{head\_}!ConcOrderedFileList$<$ T $>$@{ConcOrderedFileList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{head\_}{head\_}}
+{\footnotesize\ttfamily \label{classConcOrderedFileList_a6a465978c1ec8d3b74e4d8938d041133} 
+template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+\doxymbox{\hyperlink{structNode}{Node}}$<$T$>$\texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{classConcOrderedFileList}{Conc\+Ordered\+File\+List}}$<$ T $>$::\+head\+\_\+ \{nullptr\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{file__list_8cppm_source_l00153}{153}} of file \doxymbox{\hyperlink{file__list_8cppm_source}{file\+\_\+list.\+cppm}}.
+
+\Hypertarget{classConcOrderedFileList_a9790d71211b6a70c3cd101d68cba5108}\index{ConcOrderedFileList$<$ T $>$@{ConcOrderedFileList$<$ T $>$}!mut@{mut}}
+\index{mut@{mut}!ConcOrderedFileList$<$ T $>$@{ConcOrderedFileList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{mut}{mut}}
+{\footnotesize\ttfamily \label{classConcOrderedFileList_a9790d71211b6a70c3cd101d68cba5108} 
+template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+std::\+mutex \doxymbox{\hyperlink{classConcOrderedFileList}{Conc\+Ordered\+File\+List}}$<$ T $>$::\+mut\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{file__list_8cppm_source_l00156}{156}} of file \doxymbox{\hyperlink{file__list_8cppm_source}{file\+\_\+list.\+cppm}}.
+
+\Hypertarget{classConcOrderedFileList_adf5cfd5b2e46c73533d28b89a0612f28}\index{ConcOrderedFileList$<$ T $>$@{ConcOrderedFileList$<$ T $>$}!size\_@{size\_}}
+\index{size\_@{size\_}!ConcOrderedFileList$<$ T $>$@{ConcOrderedFileList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{size\_}{size\_}}
+{\footnotesize\ttfamily \label{classConcOrderedFileList_adf5cfd5b2e46c73533d28b89a0612f28} 
+template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+size\+\_\+t \doxymbox{\hyperlink{classConcOrderedFileList}{Conc\+Ordered\+File\+List}}$<$ T $>$::\+size\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{file__list_8cppm_source_l00151}{151}} of file \doxymbox{\hyperlink{file__list_8cppm_source}{file\+\_\+list.\+cppm}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{file__list_8cppm_source_l00129}{size()}}.
+
+\Hypertarget{classConcOrderedFileList_a765dda4afe675365fcc4fa7a6ce787e7}\index{ConcOrderedFileList$<$ T $>$@{ConcOrderedFileList$<$ T $>$}!tail\_@{tail\_}}
+\index{tail\_@{tail\_}!ConcOrderedFileList$<$ T $>$@{ConcOrderedFileList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{tail\_}{tail\_}}
+{\footnotesize\ttfamily \label{classConcOrderedFileList_a765dda4afe675365fcc4fa7a6ce787e7} 
+template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+\doxymbox{\hyperlink{structNode}{Node}}$<$T$>$\texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{classConcOrderedFileList}{Conc\+Ordered\+File\+List}}$<$ T $>$::\+tail\+\_\+ \{nullptr\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{file__list_8cppm_source_l00154}{154}} of file \doxymbox{\hyperlink{file__list_8cppm_source}{file\+\_\+list.\+cppm}}.
+
+\Hypertarget{classConcOrderedFileList_a831ae809e0d82e6481d9cbefe009b6a0}\index{ConcOrderedFileList$<$ T $>$@{ConcOrderedFileList$<$ T $>$}!writer@{writer}}
+\index{writer@{writer}!ConcOrderedFileList$<$ T $>$@{ConcOrderedFileList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{writer}{writer}}
+{\footnotesize\ttfamily \label{classConcOrderedFileList_a831ae809e0d82e6481d9cbefe009b6a0} 
+template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+std::\+jthread \doxymbox{\hyperlink{classConcOrderedFileList}{Conc\+Ordered\+File\+List}}$<$ T $>$::\+writer \{\&\doxymbox{\hyperlink{classConcOrderedFileList_a50b2e0386e9d994376546f249bb1f0ad}{Conc\+Ordered\+File\+List::\+write\+\_\+file}}, this\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{file__list_8cppm_source_l00158}{158}} of file \doxymbox{\hyperlink{file__list_8cppm_source}{file\+\_\+list.\+cppm}}.
+
+\Hypertarget{classConcOrderedFileList_a37eac0451a0f16409f28c3cfecf274f6}\index{ConcOrderedFileList$<$ T $>$@{ConcOrderedFileList$<$ T $>$}!writer\_notifier@{writer\_notifier}}
+\index{writer\_notifier@{writer\_notifier}!ConcOrderedFileList$<$ T $>$@{ConcOrderedFileList$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{writer\_notifier}{writer\_notifier}}
+{\footnotesize\ttfamily \label{classConcOrderedFileList_a37eac0451a0f16409f28c3cfecf274f6} 
+template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+std::\+condition\+\_\+variable \doxymbox{\hyperlink{classConcOrderedFileList}{Conc\+Ordered\+File\+List}}$<$ T $>$::\+writer\+\_\+notifier\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{file__list_8cppm_source_l00157}{157}} of file \doxymbox{\hyperlink{file__list_8cppm_source}{file\+\_\+list.\+cppm}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Compress-\/to-\/fit/\+src/\+util/\+containers/\+\doxymbox{\hyperlink{file__list_8cppm}{file\+\_\+list.\+cppm}}\end{DoxyCompactItemize}

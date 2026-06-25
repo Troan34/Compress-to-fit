@@ -1,4 +1,5 @@
 var dir_a2c8a978a4ec73a01e94a7414cfe883d =
 [
-    [ "LZ77", "dir_7302770cb78d483b7160104746487eb1.html", "dir_7302770cb78d483b7160104746487eb1" ]
+    [ "LZ77", "dir_7302770cb78d483b7160104746487eb1.html", "dir_7302770cb78d483b7160104746487eb1" ],
+    [ "models.cppm", "models_8cppm.html", "models_8cppm" ]
 ];

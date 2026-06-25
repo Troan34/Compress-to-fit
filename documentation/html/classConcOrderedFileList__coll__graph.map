@@ -1,0 +1,23 @@
+<map id="ConcOrderedFileList&lt; T &gt;" name="ConcOrderedFileList&lt; T &gt;">
+<area shape="rect" id="Node000001" title="First sequence in first sequence out, i.e. the data is written in the order given to insert()." alt="" coords="298,1273,478,1626"/>
+<area shape="rect" id="Node000002" href="$classFile.html" title="Interpret a file as to retrieve custom information." alt="" coords="184,830,328,1203"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="313,1200,332,1257,327,1256,312,1205"/>
+<area shape="rect" id="Node000003" href="$structFileOptions.html" title=" " alt="" coords="5,571,157,673"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="100,670,158,805,179,852,174,853,153,807,101,676"/>
+<area shape="rect" id="Node000004" href="$structparser_1_1Options.html" title="All the options available." alt="" coords="182,484,330,760"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="256,757,259,813,253,813,256,762"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="355,590,442,654"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="389,651,337,807,334,815,329,813,332,805,388,656"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="336,357,462,435"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="399,447,401,591,396,590,398,452"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="338,231,460,308"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="399,321,401,358,396,357,398,326"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="327,118,470,181"/>
+<area shape="poly" id="edge7_Node000007_Node000008" title=" " alt="" coords="399,194,401,231,396,231,398,199"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="354,5,443,69"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="399,81,401,119,396,118,398,86"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="352,985,424,1048"/>
+<area shape="poly" id="edge9_Node000001_Node000010" title=" " alt="" coords="389,1046,391,1256,385,1255,387,1050"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="449,985,524,1048"/>
+<area shape="poly" id="edge10_Node000001_Node000011" title=" " alt="" coords="481,1046,434,1257,429,1255,478,1050"/>
+</map>

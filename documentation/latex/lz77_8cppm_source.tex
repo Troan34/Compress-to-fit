@@ -3,458 +3,592 @@
 \doxymbox{\hyperlink{lz77_8cppm}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00001}00001\ module;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00002}00002\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{include}\ \textcolor{preprocessor}{<}\textcolor{preprocessor}{source\_location}\textcolor{preprocessor}{>}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00003}00003\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{include}\ \textcolor{preprocessor}{<}\textcolor{preprocessor}{limits}\textcolor{preprocessor}{>}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00004}00004\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00005}00005\ \textcolor{keyword}{export}\ module\ lz77;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00006}00006\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00007}00007\ \textcolor{keyword}{export}\ import\ util;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00008}00008\ import\ std.compat;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00009}00009\ import\ parser;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00010}00010\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00011}00011\ \textcolor{keyword}{namespace}\ fs\ =\ std::filesystem;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00012}00012\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00013}00013\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00014}00014\ \textcolor{comment}{/**}}
-\DoxyCodeLine{00015\ \textcolor{comment}{*\ @brief\ This\ is\ the\ type\ LZ77\ will\ output}}
-\DoxyCodeLine{00016\ \textcolor{comment}{*/}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00017}\doxymbox{\hyperlink{struct_token}{00017}}\ \textcolor{keyword}{struct}\ \doxymbox{\hyperlink{struct_token}{Token}}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00018}00018\ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00019}\doxymbox{\hyperlink{struct_token_aec92ffb85fbb4c01b8e313b263f988df}{00019}}\ \ \ \ \ \doxymbox{\hyperlink{struct_token_aec92ffb85fbb4c01b8e313b263f988df}{uint16\_t}}\ \doxymbox{\hyperlink{struct_token_aec92ffb85fbb4c01b8e313b263f988df}{offset}};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00020}\doxymbox{\hyperlink{struct_token_a9da7d833144774881bcb984296321c87}{00020}}\ \ \ \ \ \doxymbox{\hyperlink{struct_token_a9da7d833144774881bcb984296321c87}{uint8\_t}}\ \doxymbox{\hyperlink{struct_token_a9da7d833144774881bcb984296321c87}{length}};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00021}\doxymbox{\hyperlink{struct_token_a6f893dab099147a0de1fe04e3f428d0e}{00021}}\ \ \ \ \ \doxymbox{\hyperlink{struct_token_a6f893dab099147a0de1fe04e3f428d0e}{Sym}}\ \doxymbox{\hyperlink{struct_token_a6f893dab099147a0de1fe04e3f428d0e}{symbol}};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00022}00022\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00023}\doxymbox{\hyperlink{struct_token_abe142e9574481fef3f1f07e5f4cb6338}{00023}}\ \ \ \ \ \textcolor{keyword}{friend}\ \doxymbox{\hyperlink{struct_token}{std}}::\doxymbox{\hyperlink{struct_token}{ostream}}\&\ \doxymbox{\hyperlink{struct_token}{operator}}<<(\doxymbox{\hyperlink{struct_token}{std}}::\doxymbox{\hyperlink{struct_token}{ostream}}\&\ \doxymbox{\hyperlink{struct_token}{os}},\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{struct_token}{Token}}\&\ \doxymbox{\hyperlink{struct_token}{token}})}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00024}00024\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00025}00025\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{struct_token}{os}}.\doxymbox{\hyperlink{struct_token}{write}}(\textcolor{keyword}{reinterpret\_cast}<\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*>(\&\doxymbox{\hyperlink{struct_token}{token}}),\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{struct_token}{Token}}));}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00026}00026\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00027}00027\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{struct_token}{os}};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00028}00028\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00029}00029\ \};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00002}00002\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{include}\ \textcolor{preprocessor}{<}\textcolor{preprocessor}{cassert}\textcolor{preprocessor}{>}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00003}00003\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{include}\ \textcolor{preprocessor}{<}\textcolor{preprocessor}{cstddef}\textcolor{preprocessor}{>}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00004}00004\ \textcolor{keyword}{export}\ module\ models:lz77;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00005}00005\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00006}00006\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{if}\ \textcolor{preprocessor}{defined}\textcolor{preprocessor}{(}\textcolor{preprocessor}{\_\_INTELLISENSE\_\_}\textcolor{preprocessor}{)}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00007}00007\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{include}\ \textcolor{stringliteral}{"{}../../../for\_intellisense/everything.hpp"{}}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00008}00008\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{endif}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00010}00010\ \textcolor{keyword}{export}\ import\ util;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00011}00011\ import\ std.compat;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00012}00012\ import\ parser;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00013}00013\ import\ containers;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00015}00015\ \textcolor{keyword}{namespace}\ fs\ =\ std::filesystem;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00016}00016\ \textcolor{keyword}{using}\ \textcolor{keyword}{namespace}\ std::chrono\_literals;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00018}00018\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00019}00019\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{pragma}\ \textcolor{preprocessor}{pack}\textcolor{preprocessor}{(}\textcolor{preprocessor}{push}\textcolor{preprocessor}{,}\ 1\textcolor{preprocessor}{)}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00020}00020\ \textcolor{comment}{/**}}
+\DoxyCodeLine{00021\ \textcolor{comment}{*\ @brief\ This\ is\ the\ type\ LZ77\ will\ output}}
+\DoxyCodeLine{00022\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00023}\doxymbox{\hyperlink{structToken}{00023}}\ \textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structToken}{Token}}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00024}00024\ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00025}\doxymbox{\hyperlink{structToken_aec92ffb85fbb4c01b8e313b263f988df}{00025}}\ \ \ \ \ \doxymbox{\hyperlink{structToken_aec92ffb85fbb4c01b8e313b263f988df}{uint16\_t}}\ \doxymbox{\hyperlink{structToken_aec92ffb85fbb4c01b8e313b263f988df}{offset}}\{\};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00026}\doxymbox{\hyperlink{structToken_a9da7d833144774881bcb984296321c87}{00026}}\ \ \ \ \ \doxymbox{\hyperlink{structToken_a9da7d833144774881bcb984296321c87}{uint8\_t}}\ \doxymbox{\hyperlink{structToken_a9da7d833144774881bcb984296321c87}{length}}\{\};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00027}\doxymbox{\hyperlink{structToken_a6f893dab099147a0de1fe04e3f428d0e}{00027}}\ \ \ \ \ \doxymbox{\hyperlink{structToken_a6f893dab099147a0de1fe04e3f428d0e}{Sym}}\ \doxymbox{\hyperlink{structToken_a6f893dab099147a0de1fe04e3f428d0e}{symbol}}\{\};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00029}\doxymbox{\hyperlink{structToken_ace627907c5341d847b4a2f867e35310e}{00029}}\ \ \ \ \ \textcolor{keyword}{using}\ \doxymbox{\hyperlink{structToken}{SerializedBuffer}}\ =\ \doxymbox{\hyperlink{structToken}{std}}::\doxymbox{\hyperlink{structToken}{array}}<\doxymbox{\hyperlink{structToken}{std}}::\doxymbox{\hyperlink{structToken}{byte}},\ \textcolor{keyword}{sizeof}(\textcolor{keyword}{decltype}(\doxymbox{\hyperlink{structToken}{offset}}))\ +\ \textcolor{keyword}{sizeof}(\textcolor{keyword}{decltype}(\doxymbox{\hyperlink{structToken}{length}}))\ +\ \textcolor{keyword}{sizeof}(\textcolor{keyword}{decltype}(\doxymbox{\hyperlink{structToken}{symbol}}))>;}
 \DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00030}00030\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00031}\doxymbox{\hyperlink{lz77_8cppm_a7184b481ee894966b0eb8845e4a7bcf2}{00031}}\ \textcolor{keyword}{export}\ \textcolor{keyword}{using}\ \doxymbox{\hyperlink{lz77_8cppm_a7184b481ee894966b0eb8845e4a7bcf2}{LZ77\_Token}}\ =\ \doxymbox{\hyperlink{struct_token}{Token}};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00032}00032\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00033}\doxymbox{\hyperlink{lz77_8cppm_a99dc63646f54b92729a552eed4b13e91}{00033}}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{lz77_8cppm_a99dc63646f54b92729a552eed4b13e91}{SEARCH\_RATIO}}\ =\ 500;\textcolor{comment}{//Ratio\ of\ the\ search\ buf\ size\ and\ la\ buf}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00034}\doxymbox{\hyperlink{lz77_8cppm_a282c82f087f402efca939353e57fca44}{00034}}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{lz77_8cppm_a282c82f087f402efca939353e57fca44}{MAX\_WINDOW\_SIZE}}\ =\ KiB\_to\_B(128);}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00035}00035\ \textcolor{comment}{/**}}
-\DoxyCodeLine{00036\ \textcolor{comment}{\ *\ @brief\ The\ size\ of\ @ref\ alg::Rabin::poss\_table}}
-\DoxyCodeLine{00037\ \textcolor{comment}{\ */}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00038}\doxymbox{\hyperlink{lz77_8cppm_ac4a340be8c3b526cce9e4074d9389497}{00038}}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{lz77_8cppm_ac4a340be8c3b526cce9e4074d9389497}{MAX\_HASH\_SIZE}}\ =\ MAX\_WINDOW\_SIZE\ <<\ 1;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00039}00039\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00040}00040\ \textcolor{comment}{/**}}
-\DoxyCodeLine{00041\ \textcolor{comment}{\ *\ @brief\ [lz77.Window]}}
-\DoxyCodeLine{00042\ \textcolor{comment}{\ *\ @brief\ This\ class\ gives\ a\ window\ to\ data\ given\ to\ the\ ctor}}
-\DoxyCodeLine{00043\ \textcolor{comment}{\ */}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00044}\doxymbox{\hyperlink{class_window}{00044}}\ \textcolor{keyword}{class}\ \doxymbox{\hyperlink{class_window}{Window}}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00045}00045\ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00046}00046\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00047}\doxymbox{\hyperlink{class_window_a90cb32428b92a9b87dbd0f6f0ee403ff}{00047}}\ \ \ \ \ \doxymbox{\hyperlink{class_window_a90cb32428b92a9b87dbd0f6f0ee403ff}{Window}}(\textcolor{keyword}{const}\ std::span<Sym\ \textcolor{keyword}{const}>\&\ data\_,\ size\_t\ window\_size)\ \textcolor{keyword}{noexcept}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00048}00048\ \ \ \ \ \ \ \ \ :\doxymbox{\hyperlink{class_window_a90cb32428b92a9b87dbd0f6f0ee403ff}{data}}(\doxymbox{\hyperlink{class_window_a90cb32428b92a9b87dbd0f6f0ee403ff}{data\_}}),\ \doxymbox{\hyperlink{class_window_a90cb32428b92a9b87dbd0f6f0ee403ff}{max\_size}}(\doxymbox{\hyperlink{class_window_a90cb32428b92a9b87dbd0f6f0ee403ff}{std}}::\doxymbox{\hyperlink{class_window_a90cb32428b92a9b87dbd0f6f0ee403ff}{clamp}}(\doxymbox{\hyperlink{class_window_a90cb32428b92a9b87dbd0f6f0ee403ff}{window\_size}},\ \doxymbox{\hyperlink{class_window_a90cb32428b92a9b87dbd0f6f0ee403ff}{window\_size}},\ \doxymbox{\hyperlink{class_window_a90cb32428b92a9b87dbd0f6f0ee403ff}{MAX\_WINDOW\_SIZE}})),\ \doxymbox{\hyperlink{class_window_a1021b4fccc4fbdf9e9d325bf805ef577}{size\_search}}(0)}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00049}00049\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00050}00050\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (max\_size\ >\ data.size())\ max\_size\ =\ data.size();}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00051}00051\ \ \ \ \ \ \ \ \ size\_look\_ahead\ =\ std::ceil(max\_size\ /\ (SEARCH\_RATIO\ +\ 1));}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00052}00052\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_window_a0d7ab6e968bbd1b1ccf38f7262b0355c}{max\_size\_look\_ahead}}\ =\ \doxymbox{\hyperlink{class_window_af4884d06fd6bee3d25f2738f82573ade}{size\_look\_ahead}};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00053}00053\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_window_a26862559cda48d21cd2081510daa63ab}{max\_size\_search}}\ =\ \doxymbox{\hyperlink{lz77_8cppm_a99dc63646f54b92729a552eed4b13e91}{SEARCH\_RATIO}}\ *\ \doxymbox{\hyperlink{class_window_a0d7ab6e968bbd1b1ccf38f7262b0355c}{max\_size\_look\_ahead}};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00054}00054\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00055}00055\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00056}\doxymbox{\hyperlink{class_window_a2775a79574306a6a71651d8d9b43bda9}{00056}}\ \ \ \ \ \doxymbox{\hyperlink{class_window_a2775a79574306a6a71651d8d9b43bda9}{Window}}(\textcolor{keyword}{const}\ std::span<Sym\ \textcolor{keyword}{const}>\&\ data\_,\ CompPreset\ preset)}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00057}00057\ \ \ \ \ \ \ \ \ :\doxymbox{\hyperlink{class_window_a2775a79574306a6a71651d8d9b43bda9}{data}}(\doxymbox{\hyperlink{class_window_a2775a79574306a6a71651d8d9b43bda9}{data\_}})}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00058}00058\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00059}00059\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_window_a1021b4fccc4fbdf9e9d325bf805ef577}{size\_search}}\ =\ 0;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00060}00060\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (preset)}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00061}00061\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00062}00062\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ COMP\_MAX:}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_window_ac17eb23134bc4acf3b6c0f3e52ec3f1e}{max\_size}}\ =\ MAX\_WINDOW\_SIZE;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00065}00065\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ COMP\_8:}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00066}00066\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_window_ac17eb23134bc4acf3b6c0f3e52ec3f1e}{max\_size}}\ =\ MAX\_WINDOW\_SIZE\ >>\ 1;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00067}00067\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00068}00068\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ COMP\_7:}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00069}00069\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_window_ac17eb23134bc4acf3b6c0f3e52ec3f1e}{max\_size}}\ =\ MAX\_WINDOW\_SIZE\ >>\ 2;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00070}00070\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00071}00071\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ COMP\_6:}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00072}00072\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_window_ac17eb23134bc4acf3b6c0f3e52ec3f1e}{max\_size}}\ =\ MAX\_WINDOW\_SIZE\ >>\ 3;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00073}00073\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00074}00074\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ COMP\_5:}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00075}00075\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_window_ac17eb23134bc4acf3b6c0f3e52ec3f1e}{max\_size}}\ =\ MAX\_WINDOW\_SIZE\ >>\ 4;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00076}00076\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00077}00077\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ COMP\_4:}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_window_ac17eb23134bc4acf3b6c0f3e52ec3f1e}{max\_size}}\ =\ MAX\_WINDOW\_SIZE\ >>\ 5;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00079}00079\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00080}00080\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ COMP\_3:}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_window_ac17eb23134bc4acf3b6c0f3e52ec3f1e}{max\_size}}\ =\ MAX\_WINDOW\_SIZE\ >>\ 6;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00031}00031\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00032}\doxymbox{\hyperlink{structToken_abe142e9574481fef3f1f07e5f4cb6338}{00032}}\ \ \ \ \ \textcolor{keyword}{friend}\ \doxymbox{\hyperlink{structToken}{std}}::\doxymbox{\hyperlink{structToken}{ostream}}\&\ \doxymbox{\hyperlink{structToken}{operator}}<<(\doxymbox{\hyperlink{structToken}{std}}::\doxymbox{\hyperlink{structToken}{ostream}}\&\ \doxymbox{\hyperlink{structToken}{os}},\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{structToken}{Token}}\&\ \doxymbox{\hyperlink{structToken}{token}})}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00033}00033\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00034}00034\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structToken}{os}}.\doxymbox{\hyperlink{structToken}{write}}(\textcolor{keyword}{reinterpret\_cast}<\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*>(\&\doxymbox{\hyperlink{structToken}{token}}),\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{structToken}{Token}}));}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00036}00036\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{structToken}{os}};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00037}00037\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00039}\doxymbox{\hyperlink{structToken_a5b817365a63c84bb808a8dbf46fc7b57}{00039}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{structToken}{serialize}}(\doxymbox{\hyperlink{structToken}{SerializedBuffer}}\&\ \doxymbox{\hyperlink{structToken}{buffer}})\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00040}00040\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00041}00041\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structToken}{std}}::\doxymbox{\hyperlink{structToken}{memcpy}}(\doxymbox{\hyperlink{structToken}{buffer}}.\doxymbox{\hyperlink{structToken}{data}}(),\ \&\doxymbox{\hyperlink{structToken}{offset}},\ \textcolor{keyword}{sizeof}(\textcolor{keyword}{decltype}(\doxymbox{\hyperlink{structToken}{offset}})));}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00042}00042\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structToken}{std}}::\doxymbox{\hyperlink{structToken}{memcpy}}(\doxymbox{\hyperlink{structToken}{buffer}}.\doxymbox{\hyperlink{structToken}{data}}()\ +\ \textcolor{keyword}{sizeof}(\textcolor{keyword}{decltype}(\doxymbox{\hyperlink{structToken}{offset}})),\ \&\doxymbox{\hyperlink{structToken}{length}},\ \textcolor{keyword}{sizeof}(\textcolor{keyword}{decltype}(\doxymbox{\hyperlink{structToken}{length}})));}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00043}00043\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structToken}{std}}::\doxymbox{\hyperlink{structToken}{memcpy}}(\doxymbox{\hyperlink{structToken}{buffer}}.\doxymbox{\hyperlink{structToken}{data}}()\ +\ \textcolor{keyword}{sizeof}(\textcolor{keyword}{decltype}(\doxymbox{\hyperlink{structToken}{offset}}))\ +\ \textcolor{keyword}{sizeof}(\textcolor{keyword}{decltype}(\doxymbox{\hyperlink{structToken}{length}})),\ \&\doxymbox{\hyperlink{structToken}{symbol}},\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{structToken}{Sym}}));}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00044}00044\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00045}00045\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00046}00046\ \};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00047}00047\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{pragma}\ \textcolor{preprocessor}{pack}\textcolor{preprocessor}{(}\textcolor{preprocessor}{pop}\textcolor{preprocessor}{)}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00048}00048\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00049}\doxymbox{\hyperlink{lz77_8cppm_a7184b481ee894966b0eb8845e4a7bcf2}{00049}}\ \textcolor{keyword}{export}\ \textcolor{keyword}{using}\ \doxymbox{\hyperlink{lz77_8cppm_a7184b481ee894966b0eb8845e4a7bcf2}{LZ77\_Token}}\ =\ \doxymbox{\hyperlink{structToken}{Token}};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00050}00050\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00051}\doxymbox{\hyperlink{lz77_8cppm_a99dc63646f54b92729a552eed4b13e91}{00051}}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{lz77_8cppm_a99dc63646f54b92729a552eed4b13e91}{SEARCH\_RATIO}}\ =\ 500;\textcolor{comment}{//Ratio\ of\ the\ search\ buf\ size\ and\ la\ buf}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00052}\doxymbox{\hyperlink{lz77_8cppm_a282c82f087f402efca939353e57fca44}{00052}}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{lz77_8cppm_a282c82f087f402efca939353e57fca44}{MAX\_WINDOW\_SIZE}}\ =\ KiB\_to\_B(128);}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00053}00053\ \textcolor{comment}{/**}}
+\DoxyCodeLine{00054\ \textcolor{comment}{\ *\ @brief\ The\ size\ of\ @ref\ alg::Rabin::poss\_table}}
+\DoxyCodeLine{00055\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00056}\doxymbox{\hyperlink{lz77_8cppm_ac4a340be8c3b526cce9e4074d9389497}{00056}}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{lz77_8cppm_ac4a340be8c3b526cce9e4074d9389497}{MAX\_HASH\_SIZE}}\ =\ MAX\_WINDOW\_SIZE\ <<\ 1;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00058}00058\ \textcolor{comment}{/**}}
+\DoxyCodeLine{00059\ \textcolor{comment}{\ *\ @brief\ [lz77.Window]}}
+\DoxyCodeLine{00060\ \textcolor{comment}{\ *\ @brief\ This\ class\ gives\ a\ window\ to\ data\ given\ to\ the\ ctor}}
+\DoxyCodeLine{00061\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00062}\doxymbox{\hyperlink{classWindow}{00062}}\ \textcolor{keyword}{class}\ \doxymbox{\hyperlink{classWindow}{Window}}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00063}00063\ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00064}00064\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00065}\doxymbox{\hyperlink{classWindow_a2e5c69b901a3b6a8c849c97eb06fc053}{00065}}\ \ \ \ \ \doxymbox{\hyperlink{classWindow_a2e5c69b901a3b6a8c849c97eb06fc053}{Window}}(\textcolor{keyword}{const}\ std::span<Sym\ \textcolor{keyword}{const}>\&\ data\_,\ size\_t\ \textcolor{keyword}{const}\ window\_size)\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00066}00066\ \ \ \ \ \ \ \ \ :\ \doxymbox{\hyperlink{classWindow_a2e5c69b901a3b6a8c849c97eb06fc053}{data}}(\doxymbox{\hyperlink{classWindow_a2e5c69b901a3b6a8c849c97eb06fc053}{data\_}}),\ \doxymbox{\hyperlink{classWindow_a1021b4fccc4fbdf9e9d325bf805ef577}{size\_search}}(0),\ \doxymbox{\hyperlink{classWindow_a2e5c69b901a3b6a8c849c97eb06fc053}{max\_size}}(\doxymbox{\hyperlink{classWindow_a2e5c69b901a3b6a8c849c97eb06fc053}{std}}::\doxymbox{\hyperlink{classWindow_a2e5c69b901a3b6a8c849c97eb06fc053}{clamp}}(\doxymbox{\hyperlink{classWindow_a2e5c69b901a3b6a8c849c97eb06fc053}{window\_size}},\ \doxymbox{\hyperlink{classWindow_a2e5c69b901a3b6a8c849c97eb06fc053}{window\_size}},\ \doxymbox{\hyperlink{classWindow_a2e5c69b901a3b6a8c849c97eb06fc053}{MAX\_WINDOW\_SIZE}}))}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00067}00067\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00068}00068\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (max\_size\ >\ data.size())\ max\_size\ =\ data.size();}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00069}00069\ \ \ \ \ \ \ \ \ size\_look\_ahead\ =\ std::ceil(max\_size\ /\ (SEARCH\_RATIO\ +\ 1));}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00070}00070\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classWindow_a0d7ab6e968bbd1b1ccf38f7262b0355c}{max\_size\_look\_ahead}}\ =\ \doxymbox{\hyperlink{classWindow_af4884d06fd6bee3d25f2738f82573ade}{size\_look\_ahead}};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00071}00071\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classWindow_a26862559cda48d21cd2081510daa63ab}{max\_size\_search}}\ =\ \doxymbox{\hyperlink{lz77_8cppm_a99dc63646f54b92729a552eed4b13e91}{SEARCH\_RATIO}}\ *\ \doxymbox{\hyperlink{classWindow_a0d7ab6e968bbd1b1ccf38f7262b0355c}{max\_size\_look\_ahead}};\textcolor{comment}{//TODO:\ BUG:\ MAX\_SIZE\_SEARCH\ GOES\ OUTSIDE\ OF\ RANGE}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00072}00072\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00074}\doxymbox{\hyperlink{classWindow_ab4926cf812ec593e7bac1ded97edf43d}{00074}}\ \ \ \ \ \doxymbox{\hyperlink{classWindow_ab4926cf812ec593e7bac1ded97edf43d}{Window}}(\textcolor{keyword}{const}\ std::span<Sym\ \textcolor{keyword}{const}>\&\ data\_,\ CompPreset\ \textcolor{keyword}{const}\ preset)}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00075}00075\ \ \ \ \ \ \ \ \ :\ \doxymbox{\hyperlink{classWindow_ab4926cf812ec593e7bac1ded97edf43d}{data}}(\doxymbox{\hyperlink{classWindow_ab4926cf812ec593e7bac1ded97edf43d}{data\_}})}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00076}00076\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00077}00077\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classWindow_a1021b4fccc4fbdf9e9d325bf805ef577}{size\_search}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00078}00078\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (preset)}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00079}00079\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00080}00080\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ COMP\_MAX:}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00081}00081\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classWindow_ac17eb23134bc4acf3b6c0f3e52ec3f1e}{max\_size}}\ =\ MAX\_WINDOW\_SIZE;}
 \DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00082}00082\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00083}00083\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ COMP\_2:}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_window_ac17eb23134bc4acf3b6c0f3e52ec3f1e}{max\_size}}\ =\ MAX\_WINDOW\_SIZE\ >>\ 7;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00083}00083\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ COMP\_8:}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00084}00084\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classWindow_ac17eb23134bc4acf3b6c0f3e52ec3f1e}{max\_size}}\ =\ MAX\_WINDOW\_SIZE\ >>\ 1;}
 \DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00086}00086\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ COMP\_1:}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_window_ac17eb23134bc4acf3b6c0f3e52ec3f1e}{max\_size}}\ =\ MAX\_WINDOW\_SIZE\ >>\ 8;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00086}00086\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ COMP\_7:}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classWindow_ac17eb23134bc4acf3b6c0f3e52ec3f1e}{max\_size}}\ =\ MAX\_WINDOW\_SIZE\ >>\ 2;}
 \DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00089}00089\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ NO\_COMP:}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}There\ has\ been\ an\ exception\ in\ the\ file\ "{}}\ +\ std::string\{\ std::source\_location::current().file\_name()\ \}\ +\ \textcolor{stringliteral}{"{}\ at\ the\ line\ "{}}\ +\ std::string\{\ std::source\_location::current().line()\ \});}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00089}00089\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ COMP\_6:}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classWindow_ac17eb23134bc4acf3b6c0f3e52ec3f1e}{max\_size}}\ =\ MAX\_WINDOW\_SIZE\ >>\ 3;}
 \DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00092}00092\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}There\ has\ been\ an\ exception\ in\ the\ file\ "{}}\ +\ std::string\{\ std::source\_location::current().file\_name()\ \}\ +\ \textcolor{stringliteral}{"{}\ at\ the\ line\ "{}}\ +\ std::string\{\ std::source\_location::current().line()\ \});}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00092}00092\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ COMP\_5:}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classWindow_ac17eb23134bc4acf3b6c0f3e52ec3f1e}{max\_size}}\ =\ MAX\_WINDOW\_SIZE\ >>\ 4;}
 \DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00095}00095\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00096}00096\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (max\_size\ >\ data.size())\ max\_size\ =\ data.size();}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00097}00097\ \ \ \ \ \ \ \ \ size\_look\_ahead\ =\ std::ceil(max\_size\ /\ \textcolor{keyword}{static\_cast}<\textcolor{keywordtype}{double}>(SEARCH\_RATIO));}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00098}00098\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_window_a0d7ab6e968bbd1b1ccf38f7262b0355c}{max\_size\_look\_ahead}}\ =\ \doxymbox{\hyperlink{class_window_af4884d06fd6bee3d25f2738f82573ade}{size\_look\_ahead}};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00099}00099\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_window_a26862559cda48d21cd2081510daa63ab}{max\_size\_search}}\ =\ \doxymbox{\hyperlink{lz77_8cppm_a99dc63646f54b92729a552eed4b13e91}{SEARCH\_RATIO}}\ *\ \doxymbox{\hyperlink{class_window_a0d7ab6e968bbd1b1ccf38f7262b0355c}{max\_size\_look\_ahead}};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00100}00100\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00101}00101\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00102}00102\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00103}\doxymbox{\hyperlink{class_window_ab03fe4247b35a09d6f9d6b6f7d612c91}{00103}}\ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{class_window_ab03fe4247b35a09d6f9d6b6f7d612c91}{begin}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00104}00104\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00105}00105\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ data.begin()\ +\ offset;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00106}00106\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00107}00107\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00108}\doxymbox{\hyperlink{class_window_a9af0f12097f7bf387f7b33cabb4f6e44}{00108}}\ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{class_window_a9af0f12097f7bf387f7b33cabb4f6e44}{end}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00109}00109\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00110}00110\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ data.begin()\ +\ offset\ +\ size\_search\ +\ size\_look\_ahead\ +\ 1;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00111}00111\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00112}00112\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00113}00113\ \ \ \ \ \textcolor{comment}{/**}}
-\DoxyCodeLine{00114\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Slide\ the\ window}}
-\DoxyCodeLine{00115\ \textcolor{comment}{\ \ \ \ \ *\ @param\ displacement\ The\ offset(or\ sizes)\ will\ moved\ by\ this\ amount}}
-\DoxyCodeLine{00116\ \textcolor{comment}{\ \ \ \ \ */}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00117}\doxymbox{\hyperlink{class_window_a9bbee4bdc07f8f3b9f581278ca677fab}{00117}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_window_a9bbee4bdc07f8f3b9f581278ca677fab}{slide}}(size\_t\ displacement)}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00118}00118\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00119}00119\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_window_a1021b4fccc4fbdf9e9d325bf805ef577}{size\_search}}\ <\ \doxymbox{\hyperlink{class_window_a26862559cda48d21cd2081510daa63ab}{max\_size\_search}})\textcolor{comment}{//size\_search\ should\ grow}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00120}00120\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00121}00121\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_window_a1021b4fccc4fbdf9e9d325bf805ef577}{size\_search}}\ +=\ displacement;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00122}00122\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{class_window_a1021b4fccc4fbdf9e9d325bf805ef577}{size\_search}}\ >\ \doxymbox{\hyperlink{class_window_a26862559cda48d21cd2081510daa63ab}{max\_size\_search}})\textcolor{comment}{//size\_search\ has\ grown\ past\ maximum}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00123}00123\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00124}00124\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_window_ac8356c30e82c99c02e6e4b6f897c5086}{offset}}\ +=\ \doxymbox{\hyperlink{class_window_a1021b4fccc4fbdf9e9d325bf805ef577}{size\_search}}\ -\/\ \doxymbox{\hyperlink{class_window_a26862559cda48d21cd2081510daa63ab}{max\_size\_search}};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00125}00125\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_window_a1021b4fccc4fbdf9e9d325bf805ef577}{size\_search}}\ =\ \doxymbox{\hyperlink{class_window_a26862559cda48d21cd2081510daa63ab}{max\_size\_search}};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00126}00126\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00127}00127\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00128}00128\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00129}00129\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00130}00130\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_window_ac8356c30e82c99c02e6e4b6f897c5086}{offset}}\ +=\ displacement;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00131}00131\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00132}00132\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00133}00133\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (offset\ +\ max\_size\ >\ data.size())\textcolor{comment}{//we\ have\ to\ cut\ off\ size\_look\_ahead}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00134}00134\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ size\_look\_ahead\ =\ std::clamp(size\_look\_ahead\ -\/\ (offset\ +\ max\_size\ -\/\ data.size()),\ 0ull,\ max\_size\_look\_ahead);}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00136}00136\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00137}00137\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00138}00138\ \ \ \ \ \ \ \ \ offset\ =\ std::clamp(offset,\ 0ull,\ data.size()\ -\/\ max\_size\_search);}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00139}00139\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00140}00140\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00141}\doxymbox{\hyperlink{class_window_ac07b9fc0e03a50bf6d2f02e2ac30bb43}{00141}}\ \ \ \ \ [[\doxymbox{\hyperlink{class_window}{nodiscard}}]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{class_window_ac07b9fc0e03a50bf6d2f02e2ac30bb43}{look\_ahead\_buffer}}()\ \textcolor{keyword}{noexcept}\ -\/>\ \doxymbox{\hyperlink{class_window_ac07b9fc0e03a50bf6d2f02e2ac30bb43}{std}}::\doxymbox{\hyperlink{class_window_ac07b9fc0e03a50bf6d2f02e2ac30bb43}{span}}<\doxymbox{\hyperlink{class_window_ac07b9fc0e03a50bf6d2f02e2ac30bb43}{Sym}}\ \textcolor{keyword}{const}>}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00142}00142\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00143}00143\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ data.subspan(offset\ +\ size\_search,\ size\_look\_ahead);}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00144}00144\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00145}00145\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00146}\doxymbox{\hyperlink{class_window_aa9822d4053645c6a08b1a9fff5d8889b}{00146}}\ \ \ \ \ [[\doxymbox{\hyperlink{class_window}{nodiscard}}]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{class_window_aa9822d4053645c6a08b1a9fff5d8889b}{search\_buffer}}()\ \textcolor{keyword}{noexcept}\ -\/>\ \doxymbox{\hyperlink{class_window_aa9822d4053645c6a08b1a9fff5d8889b}{std}}::\doxymbox{\hyperlink{class_window_aa9822d4053645c6a08b1a9fff5d8889b}{span}}<\doxymbox{\hyperlink{class_window_aa9822d4053645c6a08b1a9fff5d8889b}{Sym}}\ \textcolor{keyword}{const}>}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00147}00147\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00148}00148\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ data.subspan(offset,\ size\_search);}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00149}00149\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00095}00095\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ COMP\_4:}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classWindow_ac17eb23134bc4acf3b6c0f3e52ec3f1e}{max\_size}}\ =\ MAX\_WINDOW\_SIZE\ >>\ 5;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00098}00098\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ COMP\_3:}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classWindow_ac17eb23134bc4acf3b6c0f3e52ec3f1e}{max\_size}}\ =\ MAX\_WINDOW\_SIZE\ >>\ 6;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00101}00101\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ COMP\_2:}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classWindow_ac17eb23134bc4acf3b6c0f3e52ec3f1e}{max\_size}}\ =\ MAX\_WINDOW\_SIZE\ >>\ 7;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00103}00103\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00104}00104\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ COMP\_1:}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classWindow_ac17eb23134bc4acf3b6c0f3e52ec3f1e}{max\_size}}\ =\ MAX\_WINDOW\_SIZE\ >>\ 8;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00107}00107\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ NO\_COMP:}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}There\ has\ been\ an\ exception\ in\ the\ file\ "{}}\ +\ std::string\{\ std::source\_location::current().file\_name()\ \}\ +\ \textcolor{stringliteral}{"{}\ at\ the\ line\ "{}}\ +\ std::string\{\ std::source\_location::current().line()\ \});}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00110}00110\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}There\ has\ been\ an\ exception\ in\ the\ file\ "{}}\ +\ std::string\{\ std::source\_location::current().file\_name()\ \}\ +\ \textcolor{stringliteral}{"{}\ at\ the\ line\ "{}}\ +\ std::string\{\ std::source\_location::current().line()\ \});}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00112}00112\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00113}00113\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00114}00114\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (max\_size\ >\ data.size())\ max\_size\ =\ data.size();}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00115}00115\ \ \ \ \ \ \ \ \ size\_look\_ahead\ =\ std::ceil(max\_size\ /\ \textcolor{keyword}{static\_cast}<\textcolor{keywordtype}{double}>(SEARCH\_RATIO));}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00116}00116\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classWindow_a0d7ab6e968bbd1b1ccf38f7262b0355c}{max\_size\_look\_ahead}}\ =\ \doxymbox{\hyperlink{classWindow_af4884d06fd6bee3d25f2738f82573ade}{size\_look\_ahead}};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00117}00117\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classWindow_a26862559cda48d21cd2081510daa63ab}{max\_size\_search}}\ =\ \doxymbox{\hyperlink{lz77_8cppm_a99dc63646f54b92729a552eed4b13e91}{SEARCH\_RATIO}}\ *\ \doxymbox{\hyperlink{classWindow_a0d7ab6e968bbd1b1ccf38f7262b0355c}{max\_size\_look\_ahead}};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00118}00118\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00119}00119\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00120}00120\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00121}\doxymbox{\hyperlink{classWindow_ab03fe4247b35a09d6f9d6b6f7d612c91}{00121}}\ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classWindow_ab03fe4247b35a09d6f9d6b6f7d612c91}{begin}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00122}00122\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00123}00123\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ data.begin()\ +\ offset;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00124}00124\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00125}00125\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00126}\doxymbox{\hyperlink{classWindow_a9af0f12097f7bf387f7b33cabb4f6e44}{00126}}\ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classWindow_a9af0f12097f7bf387f7b33cabb4f6e44}{end}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00127}00127\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00128}00128\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ data.begin()\ +\ offset\ +\ size\_search\ +\ size\_look\_ahead\ +\ 1;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00129}00129\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00130}00130\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00131}00131\ \ \ \ \ \textcolor{comment}{/**}}
+\DoxyCodeLine{00132\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Slide\ the\ window}}
+\DoxyCodeLine{00133\ \textcolor{comment}{\ \ \ \ \ *\ @param\ displacement\ The\ offset(or\ sizes)\ will\ moved\ by\ this\ amount}}
+\DoxyCodeLine{00134\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00135}\doxymbox{\hyperlink{classWindow_a12e2df11533ee97db81673a0422e328b}{00135}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classWindow_a12e2df11533ee97db81673a0422e328b}{slide}}(size\_t\ \textcolor{keyword}{const}\ displacement)}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00136}00136\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00137}00137\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{classWindow_a1021b4fccc4fbdf9e9d325bf805ef577}{size\_search}}\ <\ \doxymbox{\hyperlink{classWindow_a26862559cda48d21cd2081510daa63ab}{max\_size\_search}})\textcolor{comment}{//size\_search\ should\ grow}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00138}00138\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00139}00139\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classWindow_a1021b4fccc4fbdf9e9d325bf805ef577}{size\_search}}\ +=\ displacement;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00140}00140\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{classWindow_a1021b4fccc4fbdf9e9d325bf805ef577}{size\_search}}\ >\ \doxymbox{\hyperlink{classWindow_a26862559cda48d21cd2081510daa63ab}{max\_size\_search}})\textcolor{comment}{//size\_search\ has\ grown\ past\ maximum}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00141}00141\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00142}00142\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classWindow_ac8356c30e82c99c02e6e4b6f897c5086}{offset}}\ +=\ \doxymbox{\hyperlink{classWindow_a1021b4fccc4fbdf9e9d325bf805ef577}{size\_search}}\ -\/\ \doxymbox{\hyperlink{classWindow_a26862559cda48d21cd2081510daa63ab}{max\_size\_search}};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00143}00143\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classWindow_a1021b4fccc4fbdf9e9d325bf805ef577}{size\_search}}\ =\ \doxymbox{\hyperlink{classWindow_a26862559cda48d21cd2081510daa63ab}{max\_size\_search}};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00144}00144\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00145}00145\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00146}00146\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00147}00147\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00148}00148\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classWindow_ac8356c30e82c99c02e6e4b6f897c5086}{offset}}\ +=\ displacement;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00149}00149\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00150}00150\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00151}\doxymbox{\hyperlink{class_window_a5be8f3f89ec60a2105c820bc9e9fdf1b}{00151}}\ \ \ \ \ [[\doxymbox{\hyperlink{class_window}{nodiscard}}]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{class_window_a5be8f3f89ec60a2105c820bc9e9fdf1b}{get\_size\_search}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00152}00152\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00153}00153\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_window_a1021b4fccc4fbdf9e9d325bf805ef577}{size\_search}};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00154}00154\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00151}00151\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (offset\ +\ max\_size\ >\ data.size())\textcolor{comment}{//we\ have\ to\ cut\ off\ size\_look\_ahead}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00152}00152\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00153}00153\ \ \ \ \ \ \ \ \ \ \ \ \ size\_look\_ahead\ =\ std::clamp(size\_look\_ahead\ -\/\ (offset\ +\ max\_size\ -\/\ data.size()),\ 0ul,\ max\_size\_look\_ahead);}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00154}00154\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00155}00155\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00156}\doxymbox{\hyperlink{class_window_a223036d292819493a4c96bc1c21ada81}{00156}}\ \ \ \ \ [[\doxymbox{\hyperlink{class_window}{nodiscard}}]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{class_window_a223036d292819493a4c96bc1c21ada81}{get\_size\_la\_buf}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00157}00157\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00158}00158\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_window_af4884d06fd6bee3d25f2738f82573ade}{size\_look\_ahead}};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00159}00159\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00160}00160\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00161}\doxymbox{\hyperlink{class_window_a10c6b40b20cebc00c8061b59b914e5d2}{00161}}\ \ \ \ \ [[\doxymbox{\hyperlink{class_window}{nodiscard}}]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{class_window_a10c6b40b20cebc00c8061b59b914e5d2}{get\_max\_size}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00162}00162\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00163}00163\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_window_ac17eb23134bc4acf3b6c0f3e52ec3f1e}{max\_size}};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00164}00164\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00165}00165\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00166}\doxymbox{\hyperlink{class_window_abf906e8c855f1166e57d070cb613b8a3}{00166}}\ \ \ \ \ [[\doxymbox{\hyperlink{class_window}{nodiscard}}]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{class_window_abf906e8c855f1166e57d070cb613b8a3}{get\_max\_size\_search}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00167}00167\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00168}00168\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_window_a26862559cda48d21cd2081510daa63ab}{max\_size\_search}};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00169}00169\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00170}00170\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00171}\doxymbox{\hyperlink{class_window_ac2514e007aa303f6fb54b48fe0b35999}{00171}}\ \ \ \ \ [[\doxymbox{\hyperlink{class_window}{nodiscard}}]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{class_window_ac2514e007aa303f6fb54b48fe0b35999}{get\_relative\_pos}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00172}00172\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00173}00173\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_window_a1021b4fccc4fbdf9e9d325bf805ef577}{size\_search}};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00174}00174\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00175}00175\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00176}\doxymbox{\hyperlink{class_window_a545b4c991719d798b71a5caa33b6b332}{00176}}\ \ \ \ \ [[\doxymbox{\hyperlink{class_window}{nodiscard}}]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{class_window_a545b4c991719d798b71a5caa33b6b332}{get\_absolute\_pos}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00177}00177\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00178}00178\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{class_window_a1021b4fccc4fbdf9e9d325bf805ef577}{size\_search}}\ +\ \doxymbox{\hyperlink{class_window_ac8356c30e82c99c02e6e4b6f897c5086}{offset}};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00179}00179\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00180}00180\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00181}00181\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00182}\doxymbox{\hyperlink{class_window_a00a80fb449a7e2a81d7a5161ec652dc4}{00182}}\ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{class_window_a00a80fb449a7e2a81d7a5161ec652dc4}{operator}}[](size\_t\ index)\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00183}00183\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00184}00184\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ data[index];}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00185}00185\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00186}00186\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00187}\doxymbox{\hyperlink{class_window_a8f9a063bda4ec938ec51181f00c2afb3}{00187}}\ \ \ \ \ [[\doxymbox{\hyperlink{class_window}{nodiscard}}]]\ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{class_window_a8f9a063bda4ec938ec51181f00c2afb3}{get\_data}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ \textcolor{comment}{//peak\ function\ signature}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00188}00188\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00189}00189\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ data;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00190}00190\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00191}00191\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00192}00192\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00193}\doxymbox{\hyperlink{class_window_a2215049c98e68d2b886d551cd964ac37}{00193}}\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{class_window}{std}}::\doxymbox{\hyperlink{class_window}{span}}<\textcolor{keyword}{const}\ \doxymbox{\hyperlink{class_window}{Sym}}>\ \doxymbox{\hyperlink{class_window}{data}};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00194}\doxymbox{\hyperlink{class_window_af4884d06fd6bee3d25f2738f82573ade}{00194}}\ \ \ \ \ size\_t\ \doxymbox{\hyperlink{class_window_af4884d06fd6bee3d25f2738f82573ade}{size\_look\_ahead}};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00195}\doxymbox{\hyperlink{class_window_a0d7ab6e968bbd1b1ccf38f7262b0355c}{00195}}\ \ \ \ \ size\_t\ \doxymbox{\hyperlink{class_window_a0d7ab6e968bbd1b1ccf38f7262b0355c}{max\_size\_look\_ahead}};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00196}\doxymbox{\hyperlink{class_window_a1021b4fccc4fbdf9e9d325bf805ef577}{00196}}\ \ \ \ \ size\_t\ \doxymbox{\hyperlink{class_window_a1021b4fccc4fbdf9e9d325bf805ef577}{size\_search}};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00197}\doxymbox{\hyperlink{class_window_a26862559cda48d21cd2081510daa63ab}{00197}}\ \ \ \ \ size\_t\ \doxymbox{\hyperlink{class_window_a26862559cda48d21cd2081510daa63ab}{max\_size\_search}};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00198}\doxymbox{\hyperlink{class_window_ac17eb23134bc4acf3b6c0f3e52ec3f1e}{00198}}\ \ \ \ \ size\_t\ \doxymbox{\hyperlink{class_window_ac17eb23134bc4acf3b6c0f3e52ec3f1e}{max\_size}};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00199}\doxymbox{\hyperlink{class_window_ac8356c30e82c99c02e6e4b6f897c5086}{00199}}\ \ \ \ \ size\_t\ \doxymbox{\hyperlink{class_window_ac8356c30e82c99c02e6e4b6f897c5086}{offset}}\ =\ 0;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00200}00200\ \};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00201}00201\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00202}\doxymbox{\hyperlink{namespacealg}{00202}}\ \textcolor{keyword}{namespace}\ \doxymbox{\hyperlink{namespacealg}{alg}}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00203}00203\ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00204}\doxymbox{\hyperlink{namespacealg_a38d521bade379a8121e61b016ad5397f}{00204}}\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{constexpr}\ \doxymbox{\hyperlink{namespacealg_a38d521bade379a8121e61b016ad5397f}{uint32\_t}}\ \doxymbox{\hyperlink{namespacealg_a38d521bade379a8121e61b016ad5397f}{MOD}}\ =\ (1u\ <<\ 31)\ -\/\ 1;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00205}\doxymbox{\hyperlink{namespacealg_a783a2c45f8f4efe9e425d4e7f1030864}{00205}}\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{constexpr}\ \doxymbox{\hyperlink{namespacealg_a783a2c45f8f4efe9e425d4e7f1030864}{uint32\_t}}\ \doxymbox{\hyperlink{namespacealg_a783a2c45f8f4efe9e425d4e7f1030864}{BASE}}\ =\ \doxymbox{\hyperlink{namespacealg}{Sym}}::\doxymbox{\hyperlink{namespacealg}{alphabet\_size}}();}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00206}\doxymbox{\hyperlink{namespacealg_aeca501bd83e1fd3e65ea2fce9f4e1190}{00206}}\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{constexpr}\ \doxymbox{\hyperlink{namespacealg_aeca501bd83e1fd3e65ea2fce9f4e1190}{uint32\_t}}\ \doxymbox{\hyperlink{namespacealg_aeca501bd83e1fd3e65ea2fce9f4e1190}{MIN\_MATCH}}\ =\ 3;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00207}\doxymbox{\hyperlink{namespacealg_ad3d2660056a755adc8334b83459060a6}{00207}}\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{constexpr}\ \doxymbox{\hyperlink{namespacealg_ad3d2660056a755adc8334b83459060a6}{uint32\_t}}\ \doxymbox{\hyperlink{namespacealg_ad3d2660056a755adc8334b83459060a6}{MAX\_MATCH}}\ =\ 250;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00208}\doxymbox{\hyperlink{namespacealg_a38877028f73fde25cba851a5ff43a9a0}{00208}}\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{constexpr}\ \doxymbox{\hyperlink{namespacealg_a38877028f73fde25cba851a5ff43a9a0}{uint32\_t}}\ \doxymbox{\hyperlink{namespacealg_a38877028f73fde25cba851a5ff43a9a0}{PRIME}}\ =\ 31;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00209}\doxymbox{\hyperlink{namespacealg_a094c81562033f2bf0caafaaa5ea260b0}{00209}}\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{constexpr}\ \doxymbox{\hyperlink{namespacealg_a094c81562033f2bf0caafaaa5ea260b0}{uint32\_t}}\ \doxymbox{\hyperlink{namespacealg_a094c81562033f2bf0caafaaa5ea260b0}{ROLL\_FACTOR}}\ =\ \doxymbox{\hyperlink{namespacealg}{const\_pow}}(\doxymbox{\hyperlink{namespacealg}{BASE}},\ \doxymbox{\hyperlink{namespacealg}{MIN\_MATCH}}\ -\/\ 1);}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00210}00210\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00211}00211\ \ \ \ \ \textcolor{comment}{/**}}
-\DoxyCodeLine{00212\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ [lz77.Karp-\/Rabin]}}
-\DoxyCodeLine{00213\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ This\ class\ enables\ fast\ string\ matching.}}
-\DoxyCodeLine{00214\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Makes\ use\ of\ two\ chained\ arrays.}}
-\DoxyCodeLine{00215\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ This\ class\ is\ intertwined\ with\ LZ77\ and\ should\ not\ be\ used\ as\ separate\ entity.}}
-\DoxyCodeLine{00216\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ This\ class\ shall\ not\ modify\ the\ Window\ given}}
-\DoxyCodeLine{00217\ \textcolor{comment}{\ \ \ \ \ *}}
-\DoxyCodeLine{00218\ \textcolor{comment}{\ \ \ \ \ *\ @file\ src/models/LZ77/lz77.cppm}}
-\DoxyCodeLine{00219\ \textcolor{comment}{\ \ \ \ \ */}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00220}\doxymbox{\hyperlink{classalg_1_1_rabin}{00220}}\ \ \ \ \ \textcolor{keyword}{class}\ \doxymbox{\hyperlink{classalg_1_1_rabin}{Rabin}}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00221}00221\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00222}00222\ \ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00223}00223\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00224}00224\ \ \ \ \ \ \ \ \ \textcolor{comment}{/**}}
-\DoxyCodeLine{00225\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ @pre\ @p\ data.max\_size()\ >\ \#MAX\_HASH\_SIZE}}
-\DoxyCodeLine{00226\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00227}\doxymbox{\hyperlink{classalg_1_1_rabin_a3e845390e40970d04a161dc5797395ba}{00227}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classalg_1_1_rabin_a3e845390e40970d04a161dc5797395ba}{Rabin}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{class_window}{Window}}\&\ data,\ uint32\_t\ pos,\ CompPreset\ preset)}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00228}00228\ \ \ \ \ \ \ \ \ \ \ \ \ :\doxymbox{\hyperlink{classalg_1_1_rabin_a52604c78d10ac675ca95f9fcbbb95e24}{data}}(data),\ \doxymbox{\hyperlink{classalg_1_1_rabin_a3e845390e40970d04a161dc5797395ba}{position}}(\doxymbox{\hyperlink{classalg_1_1_rabin_a3e845390e40970d04a161dc5797395ba}{pos}}),\ \doxymbox{\hyperlink{classalg_1_1_rabin_a3e845390e40970d04a161dc5797395ba}{MAX\_CHAIN}}(\doxymbox{\hyperlink{classalg_1_1_rabin_a3e845390e40970d04a161dc5797395ba}{get\_max\_chain\_from\_preset}}(\doxymbox{\hyperlink{classalg_1_1_rabin_a3e845390e40970d04a161dc5797395ba}{preset}}))}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00229}00229\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00230}00230\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00231}00231\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//compiler\ will\ probably\ use\ a\ memset-\/like\ optimization}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00232}00232\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ MAX\_HASH\_SIZE;\ i++)}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00233}00233\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ poss\_table[i]\ =\ -\/1;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00234}00234\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00235}00235\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ MAX\_WINDOW\_SIZE;\ i++)}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00236}00236\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ prev\_poss\_table[i]\ =\ -\/1;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00237}00237\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00238}00238\ \ \ \ \ \ \ \ \ \ \ \ \ hash\ =\ data[0];}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00239}00239\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 1;\ i\ <\ \doxymbox{\hyperlink{namespacealg_aeca501bd83e1fd3e65ea2fce9f4e1190}{MIN\_MATCH}}\ \textcolor{keyword}{and}\ i\ <\ data\doxymbox{\hyperlink{class_window_a8f9a063bda4ec938ec51181f00c2afb3}{.}}\doxymbox{\hyperlink{class_window_a8f9a063bda4ec938ec51181f00c2afb3}{get\_data}}\doxymbox{\hyperlink{class_window_a8f9a063bda4ec938ec51181f00c2afb3}{(}}\doxymbox{\hyperlink{class_window_a8f9a063bda4ec938ec51181f00c2afb3}{)}}.size();\ i++)\textcolor{comment}{//initialize\ the\ hash}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00240}00240\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00241}00241\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ hash\ =\ (\textcolor{keyword}{static\_cast}<uint64\_t>(hash)\ *\ BASE\ +\ data[position\ +\ i])\ \%\ MOD;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00242}00242\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00243}00243\ \ \ \ \ \ \ \ \ \ \ \ \ poss\_table[bucket\_index(hash)]\ =\ position;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00244}00244\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00245}00245\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00156}00156\ \ \ \ \ \ \ \ \ offset\ =\ std::clamp(offset,\ 0ul,\ data.size()\ -\/\ max\_size\_search);}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00157}00157\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00158}00158\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00159}\doxymbox{\hyperlink{classWindow_ae6a38782b779237a36354d4ee0a65f14}{00159}}\ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classWindow_ae6a38782b779237a36354d4ee0a65f14}{look\_ahead\_buffer}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ -\/>\ \doxymbox{\hyperlink{classWindow_ae6a38782b779237a36354d4ee0a65f14}{std}}::\doxymbox{\hyperlink{classWindow_ae6a38782b779237a36354d4ee0a65f14}{span}}<\doxymbox{\hyperlink{classWindow_ae6a38782b779237a36354d4ee0a65f14}{Sym}}\ \textcolor{keyword}{const}>\{\textcolor{keywordflow}{return}\ data.subspan(offset\ +\ size\_search,\ size\_look\_ahead);\}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00160}\doxymbox{\hyperlink{classWindow_aa7ab401a00d19891166c8e1c995feae0}{00160}}\ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classWindow_aa7ab401a00d19891166c8e1c995feae0}{search\_buffer}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ -\/>\ \doxymbox{\hyperlink{classWindow_aa7ab401a00d19891166c8e1c995feae0}{std}}::\doxymbox{\hyperlink{classWindow_aa7ab401a00d19891166c8e1c995feae0}{span}}<\doxymbox{\hyperlink{classWindow_aa7ab401a00d19891166c8e1c995feae0}{Sym}}\ \textcolor{keyword}{const}>\{\textcolor{keywordflow}{return}\ data.subspan(offset,\ size\_search);\}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00161}\doxymbox{\hyperlink{classWindow_a5be8f3f89ec60a2105c820bc9e9fdf1b}{00161}}\ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classWindow_a5be8f3f89ec60a2105c820bc9e9fdf1b}{get\_size\_search}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\{\textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classWindow_a1021b4fccc4fbdf9e9d325bf805ef577}{size\_search}};\}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00162}\doxymbox{\hyperlink{classWindow_a223036d292819493a4c96bc1c21ada81}{00162}}\ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classWindow_a223036d292819493a4c96bc1c21ada81}{get\_size\_la\_buf}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\{\textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classWindow_af4884d06fd6bee3d25f2738f82573ade}{size\_look\_ahead}};\}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00163}\doxymbox{\hyperlink{classWindow_a10c6b40b20cebc00c8061b59b914e5d2}{00163}}\ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classWindow_a10c6b40b20cebc00c8061b59b914e5d2}{get\_max\_size}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\{\textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classWindow_ac17eb23134bc4acf3b6c0f3e52ec3f1e}{max\_size}};\}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00164}\doxymbox{\hyperlink{classWindow_abf906e8c855f1166e57d070cb613b8a3}{00164}}\ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classWindow_abf906e8c855f1166e57d070cb613b8a3}{get\_max\_size\_search}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\{\textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classWindow_a26862559cda48d21cd2081510daa63ab}{max\_size\_search}};\}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00165}\doxymbox{\hyperlink{classWindow_ac2514e007aa303f6fb54b48fe0b35999}{00165}}\ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classWindow_ac2514e007aa303f6fb54b48fe0b35999}{get\_relative\_pos}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\{\textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classWindow_a1021b4fccc4fbdf9e9d325bf805ef577}{size\_search}};\}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00166}\doxymbox{\hyperlink{classWindow_a545b4c991719d798b71a5caa33b6b332}{00166}}\ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classWindow_a545b4c991719d798b71a5caa33b6b332}{get\_absolute\_pos}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\{\textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classWindow_a1021b4fccc4fbdf9e9d325bf805ef577}{size\_search}}\ +\ \doxymbox{\hyperlink{classWindow_ac8356c30e82c99c02e6e4b6f897c5086}{offset}};\}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00167}\doxymbox{\hyperlink{classWindow_ab5ad9769703a0bacc1deb7c2068c1de8}{00167}}\ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classWindow_ab5ad9769703a0bacc1deb7c2068c1de8}{operator}}[](size\_t\ \textcolor{keyword}{const}\ index)\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00168}00168\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00169}00169\ \ \ \ \ \ \ \ \ assert(index\ <\ \doxymbox{\hyperlink{classWindow_ac17eb23134bc4acf3b6c0f3e52ec3f1e}{max\_size}});}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00170}00170\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ data[index];}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00171}00171\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00172}00172\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00173}\doxymbox{\hyperlink{classWindow_a5f935861ed29efa6e3aebdf4e4c07874}{00173}}\ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classWindow_a5f935861ed29efa6e3aebdf4e4c07874}{get\_data}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\{\textcolor{keywordflow}{return}\ data;\}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00174}00174\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00175}00175\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00176}\doxymbox{\hyperlink{classWindow_a2215049c98e68d2b886d551cd964ac37}{00176}}\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{classWindow}{std}}::\doxymbox{\hyperlink{classWindow}{span}}<\textcolor{keyword}{const}\ \doxymbox{\hyperlink{classWindow}{Sym}}>\ \doxymbox{\hyperlink{classWindow}{data}};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00177}\doxymbox{\hyperlink{classWindow_af4884d06fd6bee3d25f2738f82573ade}{00177}}\ \ \ \ \ size\_t\ \doxymbox{\hyperlink{classWindow_af4884d06fd6bee3d25f2738f82573ade}{size\_look\_ahead}};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00178}\doxymbox{\hyperlink{classWindow_a0d7ab6e968bbd1b1ccf38f7262b0355c}{00178}}\ \ \ \ \ size\_t\ \doxymbox{\hyperlink{classWindow_a0d7ab6e968bbd1b1ccf38f7262b0355c}{max\_size\_look\_ahead}};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00179}\doxymbox{\hyperlink{classWindow_a1021b4fccc4fbdf9e9d325bf805ef577}{00179}}\ \ \ \ \ size\_t\ \doxymbox{\hyperlink{classWindow_a1021b4fccc4fbdf9e9d325bf805ef577}{size\_search}};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00180}\doxymbox{\hyperlink{classWindow_a26862559cda48d21cd2081510daa63ab}{00180}}\ \ \ \ \ size\_t\ \doxymbox{\hyperlink{classWindow_a26862559cda48d21cd2081510daa63ab}{max\_size\_search}};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00181}\doxymbox{\hyperlink{classWindow_ac17eb23134bc4acf3b6c0f3e52ec3f1e}{00181}}\ \ \ \ \ size\_t\ \doxymbox{\hyperlink{classWindow_ac17eb23134bc4acf3b6c0f3e52ec3f1e}{max\_size}};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00182}\doxymbox{\hyperlink{classWindow_ac8356c30e82c99c02e6e4b6f897c5086}{00182}}\ \ \ \ \ size\_t\ \doxymbox{\hyperlink{classWindow_ac8356c30e82c99c02e6e4b6f897c5086}{offset}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00183}00183\ \};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00184}00184\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00185}\doxymbox{\hyperlink{namespacealg}{00185}}\ \textcolor{keyword}{namespace}\ \doxymbox{\hyperlink{namespacealg}{alg}}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00186}00186\ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00187}\doxymbox{\hyperlink{namespacealg_a38d521bade379a8121e61b016ad5397f}{00187}}\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{constexpr}\ \doxymbox{\hyperlink{namespacealg_a38d521bade379a8121e61b016ad5397f}{uint32\_t}}\ \doxymbox{\hyperlink{namespacealg_a38d521bade379a8121e61b016ad5397f}{MOD}}\ =\ (1u\ <<\ 31)\ -\/\ 1;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00188}\doxymbox{\hyperlink{namespacealg_a783a2c45f8f4efe9e425d4e7f1030864}{00188}}\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{constexpr}\ \doxymbox{\hyperlink{namespacealg_a783a2c45f8f4efe9e425d4e7f1030864}{uint32\_t}}\ \doxymbox{\hyperlink{namespacealg_a783a2c45f8f4efe9e425d4e7f1030864}{BASE}}\ =\ \doxymbox{\hyperlink{namespacealg}{Sym}}::\doxymbox{\hyperlink{namespacealg}{alphabet\_size}}();}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00189}\doxymbox{\hyperlink{namespacealg_aeca501bd83e1fd3e65ea2fce9f4e1190}{00189}}\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{constexpr}\ \doxymbox{\hyperlink{namespacealg_aeca501bd83e1fd3e65ea2fce9f4e1190}{uint32\_t}}\ \doxymbox{\hyperlink{namespacealg_aeca501bd83e1fd3e65ea2fce9f4e1190}{MIN\_MATCH}}\ =\ 3;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00190}\doxymbox{\hyperlink{namespacealg_ad3d2660056a755adc8334b83459060a6}{00190}}\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{constexpr}\ \doxymbox{\hyperlink{namespacealg_ad3d2660056a755adc8334b83459060a6}{uint32\_t}}\ \doxymbox{\hyperlink{namespacealg_ad3d2660056a755adc8334b83459060a6}{MAX\_MATCH}}\ =\ 250;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00191}\doxymbox{\hyperlink{namespacealg_a38877028f73fde25cba851a5ff43a9a0}{00191}}\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{constexpr}\ \doxymbox{\hyperlink{namespacealg_a38877028f73fde25cba851a5ff43a9a0}{uint32\_t}}\ \doxymbox{\hyperlink{namespacealg_a38877028f73fde25cba851a5ff43a9a0}{PRIME}}\ =\ 31;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00192}\doxymbox{\hyperlink{namespacealg_a094c81562033f2bf0caafaaa5ea260b0}{00192}}\ \ \ \ \ \textcolor{keyword}{inline}\ \textcolor{keyword}{constexpr}\ \doxymbox{\hyperlink{namespacealg_a094c81562033f2bf0caafaaa5ea260b0}{uint32\_t}}\ \doxymbox{\hyperlink{namespacealg_a094c81562033f2bf0caafaaa5ea260b0}{ROLL\_FACTOR}}\ =\ const\_pow(BASE,\ MIN\_MATCH\ -\/\ 1);}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00193}00193\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00194}00194\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00195}00195\ \ \ \ \ \textcolor{comment}{/**}}
+\DoxyCodeLine{00196\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ This\ class\ enables\ fast\ string\ matching.}}
+\DoxyCodeLine{00197\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ \ \ Makes\ use\ of\ two\ chained\ arrays.}}
+\DoxyCodeLine{00198\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ \ \ This\ class\ is\ intertwined\ with\ LZ77\ and\ should\ not\ be\ used\ as\ separate\ entity.}}
+\DoxyCodeLine{00199\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ \ \ This\ class\ shall\ not\ modify\ the\ Window\ given}}
+\DoxyCodeLine{00200\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00201}\doxymbox{\hyperlink{classalg_1_1Rabin}{00201}}\ \ \ \ \ \textcolor{keyword}{class}\ \doxymbox{\hyperlink{classalg_1_1Rabin}{Rabin}}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00202}00202\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00203}00203\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00204}00204\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00205}00205\ \ \ \ \ \ \ \ \ \textcolor{comment}{/**}}
+\DoxyCodeLine{00206\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ @pre\ @p\ data.max\_size()\ >\ \#MAX\_HASH\_SIZE}}
+\DoxyCodeLine{00207\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00208}\doxymbox{\hyperlink{classalg_1_1Rabin_a3e845390e40970d04a161dc5797395ba}{00208}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classalg_1_1Rabin_a3e845390e40970d04a161dc5797395ba}{Rabin}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{classWindow}{Window}}\&\ data,\ uint32\_t\ pos,\ CompPreset\ preset)}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00209}00209\ \ \ \ \ \ \ \ \ \ \ \ \ :\doxymbox{\hyperlink{classalg_1_1Rabin_a52604c78d10ac675ca95f9fcbbb95e24}{data}}(data),\ \doxymbox{\hyperlink{classalg_1_1Rabin_a3e845390e40970d04a161dc5797395ba}{position}}(\doxymbox{\hyperlink{classalg_1_1Rabin_a3e845390e40970d04a161dc5797395ba}{pos}}),\ \doxymbox{\hyperlink{classalg_1_1Rabin_aa15e426abcd632a784e8c129b586bce9}{MAX\_CHAIN}}(get\_max\_chain\_from\_preset(preset))}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00210}00210\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00211}00211\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//compiler\ will\ probably\ use\ a\ memset-\/like\ optimization}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00212}00212\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ MAX\_HASH\_SIZE;\ i++)}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00213}00213\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ poss\_table[i]\ =\ -\/1;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00214}00214\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00215}00215\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ MAX\_WINDOW\_SIZE;\ i++)}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00216}00216\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ prev\_poss\_table[i]\ =\ -\/1;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00217}00217\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00218}00218\ \ \ \ \ \ \ \ \ \ \ \ \ hash\ =\ data[0];}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00219}00219\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 1;\ i\ <\ \doxymbox{\hyperlink{namespacealg_aeca501bd83e1fd3e65ea2fce9f4e1190}{MIN\_MATCH}}\ \textcolor{keyword}{and}\ i\ <\ data\doxymbox{\hyperlink{classWindow_a5f935861ed29efa6e3aebdf4e4c07874}{.}}\doxymbox{\hyperlink{classWindow_a5f935861ed29efa6e3aebdf4e4c07874}{get\_data}}\doxymbox{\hyperlink{classWindow_a5f935861ed29efa6e3aebdf4e4c07874}{(}}\doxymbox{\hyperlink{classWindow_a5f935861ed29efa6e3aebdf4e4c07874}{)}}.size();\ i++)\textcolor{comment}{//initialize\ the\ hash}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00220}00220\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00221}00221\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ hash\ =\ (\textcolor{keyword}{static\_cast}<uint64\_t>(hash)\ *\ BASE\ +\ data[position\ +\ i])\ \%\ MOD;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00222}00222\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00223}00223\ \ \ \ \ \ \ \ \ \ \ \ \ poss\_table[bucket\_index(hash)]\ =\ position;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00224}00224\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00225}00225\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00226}00226\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00227}\doxymbox{\hyperlink{classalg_1_1Rabin_a0440640c527e5ede9530f690b08eab2d}{00227}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classalg_1_1Rabin}{Rabin}}\&\ \doxymbox{\hyperlink{classalg_1_1Rabin_a0440640c527e5ede9530f690b08eab2d}{operator}}=(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{classalg_1_1Rabin}{Rabin}}\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00228}00228\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00229}00229\ \ \ \ \ \ \ \ \ \textcolor{comment}{/**}}
+\DoxyCodeLine{00230\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ @brief\ Roll\ and\ add\ the\ hash\ to\ the\ symbol\_positions}}
+\DoxyCodeLine{00231\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ @brief\ This\ function\ will\ check\ if\ position\ has\ reached\ the\ end}}
+\DoxyCodeLine{00232\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ @warning\ The\ position\ will\ be\ increased.\ THE\ WINDOW\ WILL\ NOT\ SLIDE}}
+\DoxyCodeLine{00233\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ @param\ num\_of\_rolls\ How\ many\ times\ it\ should\ roll,\ defaults\ to\ 1}}
+\DoxyCodeLine{00234\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ }}
+\DoxyCodeLine{00235\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ @details\ find\_pattern\ checks\ \#poss\_table\ for\ a\ pattern\ match,\ if\ found\ it\ will\ keep\ searching\ down\ the\ chain\ of\ previous\ poss\_table\ entries,}}
+\DoxyCodeLine{00236\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ \ \ \ \ \ \ \ \ \ which\ have\ been\ saved\ in\ \#prev\_poss\_table\ by\ \#roll\_hash.\ This\ is\ repeated\ a\ \#MAX\_CHAIN\ amount\ of\ times.}}
+\DoxyCodeLine{00237\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00238}00238\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classalg_1_1Rabin_a838bad9d27d6ae951862fc5e22ab1e1e}{roll\_hash}}(uint32\_t\ num\_of\_rolls\ =\ 1)\ \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00239}00239\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00240}00240\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00241}00241\ \ \ \ \ \ \ \ \ \textcolor{comment}{/**}}
+\DoxyCodeLine{00242\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ @brief\ Find\ the\ biggest\ pattern\ between\ the\ look\ ahead\ buffer\ and\ search\ buffer}}
+\DoxyCodeLine{00243\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00244}00244\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structToken}{Token}}\ \doxymbox{\hyperlink{classalg_1_1Rabin_aac69972318494ea1b3b996e03d604d36}{find\_pattern}}();}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00245}00245\ }
 \DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00246}00246\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00247}\doxymbox{\hyperlink{classalg_1_1_rabin_a1c223004b4686ec7bbf0dca95eee3672}{00247}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classalg_1_1_rabin}{Rabin}}\&\ \doxymbox{\hyperlink{classalg_1_1_rabin_a1c223004b4686ec7bbf0dca95eee3672}{operator}}=(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{classalg_1_1_rabin}{Rabin}}\&)\ =\ \textcolor{keywordflow}{default};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00248}00248\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00249}00249\ \ \ \ \ \ \ \ \ \textcolor{comment}{/**}}
-\DoxyCodeLine{00250\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ @brief\ Roll\ and\ add\ the\ hash\ to\ the\ symbol\_positions}}
-\DoxyCodeLine{00251\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ @brief\ This\ function\ will\ check\ if\ position\ has\ reached\ the\ end}}
-\DoxyCodeLine{00252\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ @warning\ The\ position\ will\ be\ increased.\ THE\ WINDOW\ WILL\ NOT\ SLIDE}}
-\DoxyCodeLine{00253\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ @param\ num\_of\_rolls\ How\ many\ times\ it\ should\ roll,\ defaults\ to\ 1}}
-\DoxyCodeLine{00254\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ }}
-\DoxyCodeLine{00255\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ @details\ find\_pattern\ checks\ \#poss\_table\ for\ a\ pattern\ match,\ once,\ and\ if,\ found\ it\ will\ keep\ searching}}
-\DoxyCodeLine{00256\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ down\ the\ chain\ of\ previous\ poss\_table\ entries,\ which\ have\ been\ saved\ in\ \#prev\_poss\_table\ by\ \#roll\_hash,\ an\ \#MAX\_CHAIN\ amount\ of\ times.}}
-\DoxyCodeLine{00257\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00258}00258\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classalg_1_1_rabin_a838bad9d27d6ae951862fc5e22ab1e1e}{roll\_hash}}(uint32\_t\ num\_of\_rolls\ =\ 1)\ \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00247}\doxymbox{\hyperlink{classalg_1_1Rabin_a1cd8c6bc9482193fa87e859b511f6147}{00247}}\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classalg_1_1Rabin_a1cd8c6bc9482193fa87e859b511f6147}{get\_pos}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00248}00248\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00249}00249\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ position;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00250}00250\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00251}00251\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00252}00252\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00253}\doxymbox{\hyperlink{classalg_1_1Rabin_a52604c78d10ac675ca95f9fcbbb95e24}{00253}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{classWindow}{Window}}\&\ \doxymbox{\hyperlink{classalg_1_1Rabin_a52604c78d10ac675ca95f9fcbbb95e24}{data}};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00254}\doxymbox{\hyperlink{classalg_1_1Rabin_a94bd0dee44577823c0801f700a6a6328}{00254}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classalg_1_1Rabin_a94bd0dee44577823c0801f700a6a6328}{uint32\_t}}\ \doxymbox{\hyperlink{classalg_1_1Rabin_a94bd0dee44577823c0801f700a6a6328}{hash}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00255}\doxymbox{\hyperlink{classalg_1_1Rabin_aaf17fcaa7e4f69ea0b43a96c392a852e}{00255}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classalg_1_1Rabin_aaf17fcaa7e4f69ea0b43a96c392a852e}{uint32\_t}}\ \doxymbox{\hyperlink{classalg_1_1Rabin_aaf17fcaa7e4f69ea0b43a96c392a852e}{position}};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00256}\doxymbox{\hyperlink{classalg_1_1Rabin_a044b5f0c49e0c52d1ae1a715d00ec0ac}{00256}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classalg_1_1Rabin_a044b5f0c49e0c52d1ae1a715d00ec0ac}{int32\_t}}\ \doxymbox{\hyperlink{classalg_1_1Rabin_a044b5f0c49e0c52d1ae1a715d00ec0ac}{poss\_table}}[MAX\_HASH\_SIZE];}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00257}\doxymbox{\hyperlink{classalg_1_1Rabin_a78250486a2341798edd6c7aef00fbf7f}{00257}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classalg_1_1Rabin_a78250486a2341798edd6c7aef00fbf7f}{int32\_t}}\ \doxymbox{\hyperlink{classalg_1_1Rabin_a78250486a2341798edd6c7aef00fbf7f}{prev\_poss\_table}}[MAX\_WINDOW\_SIZE];}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00258}\doxymbox{\hyperlink{classalg_1_1Rabin_aa15e426abcd632a784e8c129b586bce9}{00258}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ size\_t\ \doxymbox{\hyperlink{classalg_1_1Rabin_aa15e426abcd632a784e8c129b586bce9}{MAX\_CHAIN}};}
 \DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00259}00259\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00260}00260\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00261}00261\ \ \ \ \ \ \ \ \ \textcolor{comment}{/**}}
-\DoxyCodeLine{00262\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ *\ @brief\ Find\ the\ biggest\ pattern\ between\ the\ look\ ahead\ buffer\ and\ search\ buffer}}
-\DoxyCodeLine{00263\ \textcolor{comment}{\ \ \ \ \ \ \ \ \ */}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00264}00264\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{struct_token}{Token}}\ \doxymbox{\hyperlink{classalg_1_1_rabin_aac69972318494ea1b3b996e03d604d36}{find\_pattern}}();}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00265}00265\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00266}00266\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00267}\doxymbox{\hyperlink{classalg_1_1_rabin_a1cd8c6bc9482193fa87e859b511f6147}{00267}}\ \ \ \ \ \ \ \ \ [[\doxymbox{\hyperlink{classalg_1_1_rabin}{nodiscard}}]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classalg_1_1_rabin_a1cd8c6bc9482193fa87e859b511f6147}{get\_pos}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00268}00268\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00269}00269\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ position;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00260}\doxymbox{\hyperlink{classalg_1_1Rabin_ab51dcaf05dd74ff0aa46b5adfbb28369}{00260}}\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classalg_1_1Rabin_ab51dcaf05dd74ff0aa46b5adfbb28369}{bucket\_index}}(uint32\_t\ \textcolor{keyword}{const}\ hash\_)\ \textcolor{keyword}{noexcept}\ -\/>\ \doxymbox{\hyperlink{classalg_1_1Rabin_ab51dcaf05dd74ff0aa46b5adfbb28369}{uint32\_t}}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00261}00261\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00262}00262\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::popcount(MAX\_HASH\_SIZE)\ ==\ 1)}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00263}00263\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00264}00264\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ hash\_\ \&\ (\doxymbox{\hyperlink{lz77_8cppm_ac4a340be8c3b526cce9e4074d9389497}{MAX\_HASH\_SIZE}}\ -\/\ 1);}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00265}00265\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00266}00266\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00267}00267\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00268}00268\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ hash\_\ \%\ MAX\_HASH\_SIZE;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00269}00269\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00270}00270\ \ \ \ \ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00271}00271\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00272}00272\ \ \ \ \ \textcolor{keyword}{private}:}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00273}\doxymbox{\hyperlink{classalg_1_1_rabin_a52604c78d10ac675ca95f9fcbbb95e24}{00273}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{class_window}{Window}}\&\ \doxymbox{\hyperlink{classalg_1_1_rabin_a52604c78d10ac675ca95f9fcbbb95e24}{data}};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00274}\doxymbox{\hyperlink{classalg_1_1_rabin_a94bd0dee44577823c0801f700a6a6328}{00274}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classalg_1_1_rabin_a94bd0dee44577823c0801f700a6a6328}{uint32\_t}}\ \doxymbox{\hyperlink{classalg_1_1_rabin_a94bd0dee44577823c0801f700a6a6328}{hash}}\ =\ 0;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00275}\doxymbox{\hyperlink{classalg_1_1_rabin_aaf17fcaa7e4f69ea0b43a96c392a852e}{00275}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classalg_1_1_rabin_aaf17fcaa7e4f69ea0b43a96c392a852e}{uint32\_t}}\ \doxymbox{\hyperlink{classalg_1_1_rabin_aaf17fcaa7e4f69ea0b43a96c392a852e}{position}};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00276}\doxymbox{\hyperlink{classalg_1_1_rabin_a044b5f0c49e0c52d1ae1a715d00ec0ac}{00276}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classalg_1_1_rabin_a044b5f0c49e0c52d1ae1a715d00ec0ac}{int32\_t}}\ \doxymbox{\hyperlink{classalg_1_1_rabin_a044b5f0c49e0c52d1ae1a715d00ec0ac}{poss\_table}}[MAX\_HASH\_SIZE];}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00277}\doxymbox{\hyperlink{classalg_1_1_rabin_a78250486a2341798edd6c7aef00fbf7f}{00277}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classalg_1_1_rabin_a78250486a2341798edd6c7aef00fbf7f}{int32\_t}}\ \doxymbox{\hyperlink{classalg_1_1_rabin_a78250486a2341798edd6c7aef00fbf7f}{prev\_poss\_table}}[MAX\_WINDOW\_SIZE];}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00278}\doxymbox{\hyperlink{classalg_1_1_rabin_aa15e426abcd632a784e8c129b586bce9}{00278}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ size\_t\ \doxymbox{\hyperlink{classalg_1_1_rabin_aa15e426abcd632a784e8c129b586bce9}{MAX\_CHAIN}};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00279}00279\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00280}\doxymbox{\hyperlink{classalg_1_1_rabin_a72778b4f5a658ef5f0f65b6bf2dac96f}{00280}}\ \ \ \ \ \ \ \ \ [[\doxymbox{\hyperlink{classalg_1_1_rabin}{nodiscard}}]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classalg_1_1_rabin_a72778b4f5a658ef5f0f65b6bf2dac96f}{bucket\_index}}(uint32\_t\ hash\_)\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ -\/>\ \doxymbox{\hyperlink{classalg_1_1_rabin_a72778b4f5a658ef5f0f65b6bf2dac96f}{uint32\_t}}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00281}00281\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00282}00282\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::popcount(MAX\_HASH\_SIZE)\ ==\ 1)}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00283}00283\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00284}00284\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ hash\_\ \&\ (\doxymbox{\hyperlink{lz77_8cppm_ac4a340be8c3b526cce9e4074d9389497}{MAX\_HASH\_SIZE}}\ -\/\ 1);}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00285}00285\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00286}00286\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00272}\doxymbox{\hyperlink{classalg_1_1Rabin_a08d3d56b8697c066f74fc52fd19c3d16}{00272}}\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classalg_1_1Rabin_a08d3d56b8697c066f74fc52fd19c3d16}{prev\_bucket\_index}}(uint32\_t\ \textcolor{keyword}{const}\ hash\_)\ \textcolor{keyword}{noexcept}\ -\/>\ \doxymbox{\hyperlink{classalg_1_1Rabin_a08d3d56b8697c066f74fc52fd19c3d16}{uint32\_t}}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00273}00273\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00274}00274\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::popcount(MAX\_WINDOW\_SIZE)\ ==\ 1)}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00275}00275\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00276}00276\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ hash\_\ \&\ (\doxymbox{\hyperlink{lz77_8cppm_a282c82f087f402efca939353e57fca44}{MAX\_WINDOW\_SIZE}}\ -\/\ 1);}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00277}00277\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00278}00278\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00279}00279\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00280}00280\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ hash\_\ \%\ MAX\_WINDOW\_SIZE;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00281}00281\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00282}00282\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00283}00283\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00284}\doxymbox{\hyperlink{classalg_1_1Rabin_a3d78c24f9020c8fd5f3270c1f103e284}{00284}}\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classalg_1_1Rabin_a3d78c24f9020c8fd5f3270c1f103e284}{get\_max\_chain\_from\_preset}}(CompPreset\ \textcolor{keyword}{const}\ preset)\ \textcolor{keyword}{noexcept}\ -\/>\ size\_t}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00285}00285\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00286}00286\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (preset)}
 \DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00287}00287\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00288}00288\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ hash\_\ \%\ MAX\_HASH\_SIZE;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00289}00289\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00290}00290\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00291}00291\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00292}\doxymbox{\hyperlink{classalg_1_1_rabin_a07a4f8f848f5fe3e55b406b486c3a0fd}{00292}}\ \ \ \ \ \ \ \ \ [[\doxymbox{\hyperlink{classalg_1_1_rabin}{nodiscard}}]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classalg_1_1_rabin_a07a4f8f848f5fe3e55b406b486c3a0fd}{prev\_bucket\_index}}(uint32\_t\ hash\_)\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ -\/>\ \doxymbox{\hyperlink{classalg_1_1_rabin_a07a4f8f848f5fe3e55b406b486c3a0fd}{uint32\_t}}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00293}00293\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00294}00294\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::popcount(MAX\_WINDOW\_SIZE)\ ==\ 1)}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00295}00295\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00296}00296\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ hash\_\ \&\ (\doxymbox{\hyperlink{lz77_8cppm_a282c82f087f402efca939353e57fca44}{MAX\_WINDOW\_SIZE}}\ -\/\ 1);}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00297}00297\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00298}00298\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00299}00299\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00300}00300\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ hash\_\ \%\ MAX\_WINDOW\_SIZE;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00301}00301\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00302}00302\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00303}00303\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00304}\doxymbox{\hyperlink{classalg_1_1_rabin_adf7aeadedcc47129ec1f472e48b0fc9a}{00304}}\ \ \ \ \ \ \ \ \ [[\doxymbox{\hyperlink{classalg_1_1_rabin}{nodiscard}}]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classalg_1_1_rabin_adf7aeadedcc47129ec1f472e48b0fc9a}{get\_max\_chain\_from\_preset}}(CompPreset\ preset)\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ -\/>\ size\_t}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00305}00305\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00306}00306\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (preset)}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00307}00307\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00308}00308\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ COMP\_MAX:}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00309}00309\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 5;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00310}00310\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00311}00311\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ COMP\_8:}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00312}00312\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 5;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00313}00313\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00314}00314\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ COMP\_7:}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00315}00315\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 4;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00316}00316\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00317}00317\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ COMP\_6:}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00318}00318\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 4;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00319}00319\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00320}00320\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ COMP\_5:}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00321}00321\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 4;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00322}00322\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00323}00323\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ COMP\_4:}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00324}00324\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 3;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00325}00325\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00326}00326\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ COMP\_3:}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00327}00327\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 3;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00328}00328\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00329}00329\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ COMP\_2:}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00330}00330\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 3;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00331}00331\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00332}00332\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ COMP\_1:}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00333}00333\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 2;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00334}00334\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00335}00335\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ NO\_COMP:}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00336}00336\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::terminate();}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00337}00337\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00338}00338\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00339}00339\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00340}00340\ \ \ \ \ \};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00341}00341\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00288}00288\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ COMP\_MAX:}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00289}00289\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ COMP\_8:}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00290}00290\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 5;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00291}00291\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00292}00292\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ COMP\_7:}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00293}00293\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ COMP\_6:}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00294}00294\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ COMP\_5:}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00295}00295\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 4;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00296}00296\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00297}00297\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ COMP\_4:}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00298}00298\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ COMP\_3:}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00299}00299\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ COMP\_2:}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00300}00300\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 3;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00301}00301\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00302}00302\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ COMP\_1:}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00303}00303\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 2;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00304}00304\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00305}00305\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ NO\_COMP:}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00306}00306\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ assert(\textcolor{keyword}{false});}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00307}00307\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00308}00308\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00309}00309\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00310}00310\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00311}00311\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00312}00312\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00313}00313\ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00314}00314\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00315}00315\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00316}\doxymbox{\hyperlink{lz77_8cppm_a53a07528c3b884aca1142aad24cc433e}{00316}}\ \textcolor{keyword}{constexpr}\ size\_t\ \doxymbox{\hyperlink{lz77_8cppm_a53a07528c3b884aca1142aad24cc433e}{MAX\_BLOCK\_SIZE}}\ =\ 4\_MiB;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00317}00317\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00318}00318\ \textcolor{comment}{/**}}
+\DoxyCodeLine{00319\ \textcolor{comment}{\ *\ @brief\ Represents\ a\ block\ of\ data\ encoded\ by\ LZ77.}}
+\DoxyCodeLine{00320\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00321}\doxymbox{\hyperlink{classLZ77Block}{00321}}\ \textcolor{keyword}{class}\ \doxymbox{\hyperlink{classLZ77Block}{LZ77Block}}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00322}00322\ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00323}00323\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00324}00324\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00325}00325\ \ \ \ \ \textcolor{keyword}{explicit}\ \doxymbox{\hyperlink{classLZ77Block_ae18e40df9227bfa7e45a09c22b3da8e5}{LZ77Block}}(\doxymbox{\hyperlink{classLZ77Block_ae18e40df9227bfa7e45a09c22b3da8e5}{std}}::\doxymbox{\hyperlink{classLZ77Block_ae18e40df9227bfa7e45a09c22b3da8e5}{span}}<\doxymbox{\hyperlink{classLZ77Block_ae18e40df9227bfa7e45a09c22b3da8e5}{std}}::\doxymbox{\hyperlink{classLZ77Block_ae18e40df9227bfa7e45a09c22b3da8e5}{byte}}\ \textcolor{keyword}{const}>\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{classLZ77Block_ae18e40df9227bfa7e45a09c22b3da8e5}{data\_}},\ \doxymbox{\hyperlink{classLZ77Block_ae18e40df9227bfa7e45a09c22b3da8e5}{fs}}::\doxymbox{\hyperlink{classLZ77Block_ae18e40df9227bfa7e45a09c22b3da8e5}{path}}\ \textcolor{keyword}{const}\&\ \doxymbox{\hyperlink{classLZ77Block_ae18e40df9227bfa7e45a09c22b3da8e5}{file}})\ \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00326}\doxymbox{\hyperlink{classLZ77Block_a30b2e4506c7e766c4c479a685e943c7f}{00326}}\ \ \ \ \ \doxymbox{\hyperlink{classLZ77Block_a30b2e4506c7e766c4c479a685e943c7f}{LZ77Block}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00327}00327\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00328}00328\ \ \ \ \ \textcolor{comment}{/**}}
+\DoxyCodeLine{00329\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Convert\ the\ block\ into\ a\ byte\ buffer}}
+\DoxyCodeLine{00330\ \textcolor{comment}{\ \ \ \ \ *\ @param\ output\ output\ buffer}}
+\DoxyCodeLine{00331\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00332}00332\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classLZ77Block_a2885e7e8eb58a359b0f089957284918b}{serialize}}(std::vector<std::byte>\&\ output);}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00333}00333\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00334}00334\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classLZ77Block_a18cc7e9b2f24cc2ad99384b352a4a6cb}{write\_to}}(std::ofstream\&\ output);}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00335}00335\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00336}\doxymbox{\hyperlink{classLZ77Block_a7133f9dd936042c100c02cc1bbc9d18b}{00336}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classLZ77Block_a7133f9dd936042c100c02cc1bbc9d18b}{push\_back}}(\doxymbox{\hyperlink{lz77_8cppm_a7184b481ee894966b0eb8845e4a7bcf2}{LZ77\_Token}}\ \textcolor{keyword}{const}\ token)}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00337}00337\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00338}00338\ \ \ \ \ \ \ \ \ compressed\_length\_\ +=\ \textcolor{keyword}{sizeof}(LZ77\_Token);}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00339}00339\ \ \ \ \ \ \ \ \ uncompressed\_length\_\ +=\ token.length\ +\ \textcolor{keyword}{sizeof}(\textcolor{keyword}{decltype}(LZ77\_Token::symbol));}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00340}00340\ \ \ \ \ \ \ \ \ block.push\_back(token);}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00341}00341\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00342}00342\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00343}00343\ \}\textcolor{comment}{//namespace\ algs}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00344}00344\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00345}00345\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00346}\doxymbox{\hyperlink{struct_compression_data}{00346}}\ \textcolor{keyword}{struct}\ \doxymbox{\hyperlink{struct_compression_data}{CompressionData}}\ \{\};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00347}00347\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00348}00348\ \textcolor{keyword}{template}\ <>}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00349}\doxymbox{\hyperlink{struct_compression_data_3_01_sym_01_4}{00349}}\ \textcolor{keyword}{struct}\ CompressionData<Sym>}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00350}00350\ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00351}\doxymbox{\hyperlink{struct_compression_data_3_01_sym_01_4_a4c8992335311db5120b3fcb53dd75d57}{00351}}\ \ \ \ \ Window\ window;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00352}\doxymbox{\hyperlink{struct_compression_data_3_01_sym_01_4_adf82ab7c3a7600f3655652dbf7cbe80e}{00352}}\ \ \ \ \ CompPreset\ preset;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00353}\doxymbox{\hyperlink{struct_compression_data_3_01_sym_01_4_a5886a48ded206a8de157dc94690a22aa}{00353}}\ \ \ \ \ alg::Rabin\ pattern\_matcher;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00354}00354\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00355}\doxymbox{\hyperlink{struct_compression_data_3_01_sym_01_4_a57dd52bf48e0462fb06923e1650dce5f}{00355}}\ \ \ \ \ CompressionData(std::span<Sym\ \textcolor{keyword}{const}>\ data\_,\ CompPreset\ preset\_)}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00356}00356\ \ \ \ \ \ \ \ \ :\ window(data\_,\ preset\_),}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00357}00357\ \ \ \ \ \ \ \ \ preset(preset\_),}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00358}00358\ \ \ \ \ \ \ \ \ pattern\_matcher(window,\ 0,\ preset)}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00359}00359\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00360}00360\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00361}00361\ \};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00362}00362\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00363}00363\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ \doxymbox{\hyperlink{concept_is_sym}{T}}>}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00364}\doxymbox{\hyperlink{concept_is_sym}{00364}}\ \doxymbox{\hyperlink{concept_is_sym}{concept}}\ \doxymbox{\hyperlink{concept_is_sym}{IsSym}}\ =\ std::is\_same\_v<T,\ Sym>;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00343}\doxymbox{\hyperlink{classLZ77Block_af024d53442a08eb868d332a7860e0bc8}{00343}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classLZ77Block_af024d53442a08eb868d332a7860e0bc8}{clear}}()\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00344}00344\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00345}00345\ \ \ \ \ \ \ \ \ block.clear();}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00346}00346\ \ \ \ \ \ \ \ \ compressed\_length\_\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00347}00347\ \ \ \ \ \ \ \ \ uncompressed\_length\_\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00348}00348\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00349}00349\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00350}\doxymbox{\hyperlink{classLZ77Block_ad302b8fac279b04a2f2571a3fdfe1647}{00350}}\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classLZ77Block_ad302b8fac279b04a2f2571a3fdfe1647}{reserve}}(size\_t\ \textcolor{keyword}{const}\ size)\ \{\ block.reserve(size);\}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00351}00351\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00352}\doxymbox{\hyperlink{classLZ77Block_aeda107dc29c3e636234ad32de9ea39d1}{00352}}\ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classLZ77Block_aeda107dc29c3e636234ad32de9ea39d1}{size}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ \{\ \textcolor{keywordflow}{return}\ block.size();\ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00353}\doxymbox{\hyperlink{classLZ77Block_abfcad1c47f9bdc5c97b2c2e9ac88c8e5}{00353}}\ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classLZ77Block_abfcad1c47f9bdc5c97b2c2e9ac88c8e5}{size\_bytes}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ -\/>\ size\_t\ \{\ \textcolor{keywordflow}{return}\ block.size()\ *\ \textcolor{keyword}{sizeof}(LZ77\_Token);\ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00354}\doxymbox{\hyperlink{classLZ77Block_ae211f9db90db5df3a656614748a87167}{00354}}\ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classLZ77Block_ae211f9db90db5df3a656614748a87167}{compressed\_length}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ \{\textcolor{keywordflow}{return}\ compressed\_length\_;\}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00355}\doxymbox{\hyperlink{classLZ77Block_abaaebed0fc0abb932ddee1e9dd6386e1}{00355}}\ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classLZ77Block_abaaebed0fc0abb932ddee1e9dd6386e1}{uncompressed\_length}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ \{\textcolor{keywordflow}{return}\ uncompressed\_length\_;\}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00356}\doxymbox{\hyperlink{classLZ77Block_a037b8bdbb29c33cbf9653e27eaa79002}{00356}}\ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \textcolor{keyword}{const}\&\ \doxymbox{\hyperlink{classLZ77Block_a037b8bdbb29c33cbf9653e27eaa79002}{operator}}[](size\_t\ \textcolor{keyword}{const}\ index)\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ \{\textcolor{keywordflow}{return}\ block[index];\}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00357}\doxymbox{\hyperlink{classLZ77Block_af8c1465ab854939fc0ab8faf52fe8578}{00357}}\ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classLZ77Block_af8c1465ab854939fc0ab8faf52fe8578}{begin}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ \{\textcolor{keywordflow}{return}\ block.begin();\}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00358}\doxymbox{\hyperlink{classLZ77Block_a9af4024186fc27b9e4329c3e1f9c40ac}{00358}}\ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classLZ77Block_a9af4024186fc27b9e4329c3e1f9c40ac}{end}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ \{\textcolor{keywordflow}{return}\ block.end();\}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00359}00359\ \ \ \ \ \textcolor{comment}{//setter}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00360}\doxymbox{\hyperlink{classLZ77Block_a0b1fc2d8ceeeb356effaca800ba709e4}{00360}}\ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\&\ \doxymbox{\hyperlink{classLZ77Block_a0b1fc2d8ceeeb356effaca800ba709e4}{operator}}[](size\_t\ \textcolor{keyword}{const}\ index)\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00361}00361\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00362}00362\ \ \ \ \ \ \ \ \ assert(index\ <\ block.size());}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00363}00363\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ block[index];}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00364}00364\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00365}00365\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00366}00366\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ \doxymbox{\hyperlink{concept_is_token}{T}}>}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00367}\doxymbox{\hyperlink{concept_is_token}{00367}}\ \doxymbox{\hyperlink{concept_is_token}{concept}}\ \doxymbox{\hyperlink{concept_is_token}{IsToken}}\ =\ std::is\_same\_v<T,\ Token>;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00368}00368\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00369}00369\ \textcolor{comment}{/**}}
-\DoxyCodeLine{00370\ \textcolor{comment}{\ *\ @brief\ Implement\ the\ LZ77\ algorithm.}}
-\DoxyCodeLine{00371\ \textcolor{comment}{\ *\ @details\ An\ overview\ of\ the\ algorithm:\ }}
-\DoxyCodeLine{00372\ \textcolor{comment}{\ */}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00373}00373\ \textcolor{keyword}{export}\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ DataType>}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00374}\doxymbox{\hyperlink{class_l_z77}{00374}}\ \textcolor{keyword}{class}\ \doxymbox{\hyperlink{class_l_z77}{LZ77}}\ :\ \textcolor{keyword}{protected}\ \doxymbox{\hyperlink{struct_compression_data}{CompressionData}}<DataType>}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00375}00375\ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00376}00376\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00377}00377\ \ \ \ \ \textcolor{comment}{//extracting\ version}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00378}\doxymbox{\hyperlink{class_l_z77_aca8a5f2d80bfbabcd6d2f8c962c6f09a}{00378}}\ \ \ \ \ \doxymbox{\hyperlink{class_l_z77_aca8a5f2d80bfbabcd6d2f8c962c6f09a}{LZ77}}(\doxymbox{\hyperlink{class_l_z77_aca8a5f2d80bfbabcd6d2f8c962c6f09a}{std}}::\doxymbox{\hyperlink{class_l_z77_aca8a5f2d80bfbabcd6d2f8c962c6f09a}{span}}<\doxymbox{\hyperlink{class_l_z77_aca8a5f2d80bfbabcd6d2f8c962c6f09a}{DataType}}\ \textcolor{keyword}{const}>\ \doxymbox{\hyperlink{class_l_z77_aca8a5f2d80bfbabcd6d2f8c962c6f09a}{data\_}},\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{class_l_z77_aca8a5f2d80bfbabcd6d2f8c962c6f09a}{parser}}::\doxymbox{\hyperlink{class_l_z77_aca8a5f2d80bfbabcd6d2f8c962c6f09a}{Options}}\&\ \doxymbox{\hyperlink{class_l_z77_aca8a5f2d80bfbabcd6d2f8c962c6f09a}{options}})\ \doxymbox{\hyperlink{class_l_z77}{requires}}\ \doxymbox{\hyperlink{class_l_z77}{IsToken}}<\doxymbox{\hyperlink{class_l_z77}{DataType}}>}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00379}00379\ \ \ \ \ \ \ \ \ :\doxymbox{\hyperlink{class_l_z77}{data}}(\doxymbox{\hyperlink{class_l_z77}{data\_}}),\ \doxymbox{\hyperlink{class_l_z77}{cli\_options}}(\doxymbox{\hyperlink{class_l_z77}{options}})}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00380}00380\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00381}00381\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00382}00382\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00383}\doxymbox{\hyperlink{class_l_z77_ae500d99f7deb8ba81448e7852e0d4bda}{00383}}\ \ \ \ \ \doxymbox{\hyperlink{class_l_z77}{LZ77}}(\doxymbox{\hyperlink{class_l_z77}{std}}::\doxymbox{\hyperlink{class_l_z77}{span}}<\doxymbox{\hyperlink{class_l_z77}{DataType}}\ \textcolor{keyword}{const}>\ \doxymbox{\hyperlink{class_l_z77}{data\_}},\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{class_l_z77}{parser}}::\doxymbox{\hyperlink{class_l_z77}{Options}}\&\ \doxymbox{\hyperlink{class_l_z77}{options}})\ \doxymbox{\hyperlink{class_l_z77}{requires}}\ \doxymbox{\hyperlink{class_l_z77}{IsSym}}<\doxymbox{\hyperlink{class_l_z77}{DataType}}>}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00384}00384\ \ \ \ \ \ \ \ \ :\ \doxymbox{\hyperlink{class_l_z77}{CompressionData}}<\doxymbox{\hyperlink{class_l_z77}{DataType}}>(\doxymbox{\hyperlink{class_l_z77}{data\_}},\ \textcolor{keyword}{static\_cast}<\doxymbox{\hyperlink{class_l_z77}{CompPreset}}>(\doxymbox{\hyperlink{class_l_z77}{options}}.\doxymbox{\hyperlink{class_l_z77}{preset}})),}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00385}00385\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_l_z77}{cli\_options}}(\doxymbox{\hyperlink{class_l_z77}{options}}),}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00386}00386\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{class_l_z77}{data}}(\doxymbox{\hyperlink{class_l_z77}{data\_}})}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00387}00387\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00388}00388\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00389}00389\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00390}00390\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00391}00391\ \ \ \ \ \textcolor{comment}{/**}}
-\DoxyCodeLine{00392\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Compress\ the\ data\ up\ to\ max\_index}}
-\DoxyCodeLine{00393\ \textcolor{comment}{\ \ \ \ \ *\ @param\ out\_stream\ Where\ the\ output\ will\ go}}
-\DoxyCodeLine{00394\ \textcolor{comment}{\ \ \ \ \ *\ @param\ max\_index\ The\ last\ index\ to\ get\ compressed\ (included)}}
-\DoxyCodeLine{00395\ \textcolor{comment}{\ \ \ \ \ *\ }}
-\DoxyCodeLine{00396\ \textcolor{comment}{\ \ \ \ \ *\ @warning\ \#out\_stream\ will\ be\ cleared\ and\ overwritten}}
-\DoxyCodeLine{00397\ \textcolor{comment}{\ \ \ \ \ *\ }}
-\DoxyCodeLine{00398\ \textcolor{comment}{\ \ \ \ \ *\ @details\ This\ function\ shall\ be\ used\ as\ a\ compression\ "{}in\ steps"{}.\ Its\ use\ is\ to\ stop\ the\ \#out\_stream\ from\ being\ too\ big.}}
-\DoxyCodeLine{00399\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ \ \ \ \ The\ function\ shall\ not\ strictly\ stop\ at\ \#max\_index,\ due\ to\ the\ nature\ of\ the\ LZ77\ algorithm.}}
-\DoxyCodeLine{00400\ \textcolor{comment}{\ \ \ \ \ */}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00401}00401\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_l_z77}{compress}}(\doxymbox{\hyperlink{class_l_z77}{CodecInterface}}<\doxymbox{\hyperlink{class_l_z77}{Sym}},\ \doxymbox{\hyperlink{class_l_z77}{LZ77\_Token}}>\&\ \doxymbox{\hyperlink{class_l_z77}{interface}})\ \doxymbox{\hyperlink{class_l_z77}{requires}}\ \doxymbox{\hyperlink{class_l_z77}{IsSym}}<\doxymbox{\hyperlink{class_l_z77}{DataType}}>;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00402}00402\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00403}00403\ \ \ \ \ \textcolor{comment}{/**}}
-\DoxyCodeLine{00404\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Decompress\ \#data.}}
-\DoxyCodeLine{00405\ \textcolor{comment}{\ \ \ \ \ *\ @param\ out\_stream\ Where\ the\ output\ will\ go}}
-\DoxyCodeLine{00406\ \textcolor{comment}{\ \ \ \ \ *\ @param\ max\_index\ The\ last\ index\ to\ get\ decompressed\ (included)}}
-\DoxyCodeLine{00407\ \textcolor{comment}{\ \ \ \ \ *\ }}
-\DoxyCodeLine{00408\ \textcolor{comment}{\ \ \ \ \ *\ @warning\ \#out\_stream\ will\ be\ cleared\ and\ overwritten}}
-\DoxyCodeLine{00409\ \textcolor{comment}{\ \ \ \ \ *\ }}
-\DoxyCodeLine{00410\ \textcolor{comment}{\ \ \ \ \ *\ @details\ This\ function\ shall\ be\ used\ as\ a\ compression\ "{}in\ steps"{}.\ Its\ use\ is\ to\ stop\ the\ \#out\_stream\ from\ being\ too\ big.}}
-\DoxyCodeLine{00411\ \textcolor{comment}{\ \ \ \ \ */}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00412}00412\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_l_z77_a04ab1e960758a3bc472de1b58d128d75}{decompress}}(CodecInterface<LZ77\_Token,\ Sym>\&\ interface)\ \doxymbox{\hyperlink{class_l_z77}{requires}}\ \doxymbox{\hyperlink{class_l_z77}{IsToken}}<\doxymbox{\hyperlink{class_l_z77}{DataType}}>;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00413}00413\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00414}00414\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00415}\doxymbox{\hyperlink{class_l_z77_a96f8a600c7ebd24240e4f3a806b7b286}{00415}}\ \ \ \ \ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{class_l_z77}{parser}}::\doxymbox{\hyperlink{class_l_z77}{Options}}\&\ \doxymbox{\hyperlink{class_l_z77}{cli\_options}};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00416}\doxymbox{\hyperlink{class_l_z77_a7ab046e149092754e4ca5e8087cc8686}{00416}}\ \ \ \ \ \doxymbox{\hyperlink{class_l_z77}{std}}::\doxymbox{\hyperlink{class_l_z77}{span}}<\doxymbox{\hyperlink{class_l_z77}{DataType}}\ \textcolor{keyword}{const}>\ \doxymbox{\hyperlink{class_l_z77}{data}};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00417}00417\ \};}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00418}00418\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00419}00419\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ DataType>}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00420}\doxymbox{\hyperlink{class_l_z77_aec26a02d93b29b8e173d82e158a3c2d3}{00420}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_l_z77}{LZ77}}<DataType>::compress(CodecInterface<Sym,\ LZ77\_Token>\&\ interface)\ requires\ IsSym<DataType>}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00421}00421\ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00422}00422\ \ \ \ \ interface.out\_data.reserve(SIZE\_CHUNK);}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00423}00423\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00424}00424\ \ \ \ \ size\_t\ local\_index\ =\ 0;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00425}00425\ \ \ \ \ \textcolor{comment}{//loop\ over\ the\ stream}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00426}00426\ \ \ \ \ \textcolor{keywordflow}{while}\ (!interface.in\_data.reached\_end()\ \textcolor{keyword}{and}\ local\_index\ <\ SIZE\_CHUNK)}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00427}00427\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00428}00428\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ token\ =\ \textcolor{keyword}{this}-\/>pattern\_matcher.find\_pattern();}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00429}00429\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00430}00430\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ num\_of\_rolls\ =\ \textcolor{keyword}{static\_cast}<\textcolor{keywordtype}{int}>(token.length\ +\ 1);}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00431}00431\ \ \ \ \ \ \ \ \ \textcolor{keyword}{this}-\/>pattern\_matcher.roll\_hash(num\_of\_rolls);\textcolor{comment}{//roll,\ updates\ the\ hash\ and\ position}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00432}00432\ \ \ \ \ \ \ \ \ \textcolor{keyword}{this}-\/>window.slide(num\_of\_rolls);}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00433}00433\ \ \ \ \ \ \ \ \ interface.in\_data\ +=\ num\_of\_rolls;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00434}00434\ \ \ \ \ \ \ \ \ local\_index\ +=\ num\_of\_rolls;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00435}00435\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00436}00436\ \ \ \ \ \ \ \ \ interface.out\_data.push\_back(token);}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00437}00437\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00438}00438\ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00366}00366\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00367}\doxymbox{\hyperlink{classLZ77Block_a7a79fbb2a66f47510603002bdefd8a5f}{00367}}\ \ \ \ \ \doxymbox{\hyperlink{classLZ77Block_a7a79fbb2a66f47510603002bdefd8a5f}{uint32\_t}}\ \doxymbox{\hyperlink{classLZ77Block_a7a79fbb2a66f47510603002bdefd8a5f}{compressed\_length\_}}\{\};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00368}\doxymbox{\hyperlink{classLZ77Block_a039b63f164dfa308bba99310d4d706b1}{00368}}\ \ \ \ \ \doxymbox{\hyperlink{classLZ77Block_a039b63f164dfa308bba99310d4d706b1}{uint32\_t}}\ \doxymbox{\hyperlink{classLZ77Block_a039b63f164dfa308bba99310d4d706b1}{uncompressed\_length\_}}\{\};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00369}\doxymbox{\hyperlink{classLZ77Block_a8a60a5c590f1600ea16bafe8dbc0f8a1}{00369}}\ \ \ \ \ \doxymbox{\hyperlink{classLZ77Block}{std}}::\doxymbox{\hyperlink{classLZ77Block}{vector}}<\doxymbox{\hyperlink{classLZ77Block}{LZ77\_Token}}>\ \doxymbox{\hyperlink{classLZ77Block}{block}}\{\};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00370}00370\ \};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00371}00371\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00372}00372\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00373}\doxymbox{\hyperlink{classLZ77Compressor}{00373}}\ \textcolor{keyword}{class}\ \doxymbox{\hyperlink{classLZ77Compressor}{LZ77Compressor}}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00374}00374\ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00375}00375\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00376}\doxymbox{\hyperlink{classLZ77Compressor_aef2378107a1b0091894607b09084cbb8}{00376}}\ \ \ \ \ \doxymbox{\hyperlink{classLZ77Compressor_aef2378107a1b0091894607b09084cbb8}{LZ77Compressor}}(\doxymbox{\hyperlink{classLZ77Compressor_aef2378107a1b0091894607b09084cbb8}{std}}::\doxymbox{\hyperlink{classLZ77Compressor_aef2378107a1b0091894607b09084cbb8}{span}}<\doxymbox{\hyperlink{classLZ77Compressor_aef2378107a1b0091894607b09084cbb8}{Sym}}\ \textcolor{keyword}{const}>\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{classLZ77Compressor_aef2378107a1b0091894607b09084cbb8}{data}},\ \doxymbox{\hyperlink{classLZ77Compressor_aef2378107a1b0091894607b09084cbb8}{CompPreset}}\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{classLZ77Compressor_aef2378107a1b0091894607b09084cbb8}{preset}})}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00377}00377\ \ \ \ \ \ \ \ \ :\doxymbox{\hyperlink{classLZ77Compressor_aef2378107a1b0091894607b09084cbb8}{data\_}}(\doxymbox{\hyperlink{classLZ77Compressor_aef2378107a1b0091894607b09084cbb8}{data}}),\ \doxymbox{\hyperlink{classLZ77Compressor_aef2378107a1b0091894607b09084cbb8}{window}}(\doxymbox{\hyperlink{classLZ77Compressor_aef2378107a1b0091894607b09084cbb8}{data}},\ \doxymbox{\hyperlink{classLZ77Compressor_aef2378107a1b0091894607b09084cbb8}{preset}}),\ \doxymbox{\hyperlink{classLZ77Compressor_aef2378107a1b0091894607b09084cbb8}{pattern\_matcher}}(\doxymbox{\hyperlink{classLZ77Compressor_aef2378107a1b0091894607b09084cbb8}{window}},\ 0,\ \doxymbox{\hyperlink{classLZ77Compressor_aef2378107a1b0091894607b09084cbb8}{preset}})}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00378}00378\ \ \ \ \ \{\}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00379}00379\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00380}00380\ \ \ \ \ \textcolor{comment}{/**}}
+\DoxyCodeLine{00381\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Compress\ the\ data\ received\ in\ the\ constructor}}
+\DoxyCodeLine{00382\ \textcolor{comment}{\ \ \ \ \ *\ @param\ out\_data\ Where\ the\ output\ will\ go}}
+\DoxyCodeLine{00383\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00384\ \textcolor{comment}{\ \ \ \ \ *\ @note\ Will\ clear\ out\_data\ block}}
+\DoxyCodeLine{00385\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00386}00386\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classLZ77Compressor_a2c4605c1239bcef7f2ea0392d62182d5}{compress}}(\doxymbox{\hyperlink{classLZ77Block}{LZ77Block}}\&\ out\_data);}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00387}00387\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00388}00388\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00389}\doxymbox{\hyperlink{classLZ77Compressor_aba18cdf2e3817df684081c0033b35fca}{00389}}\ \ \ \ \ \doxymbox{\hyperlink{classLZ77Compressor}{std}}::\doxymbox{\hyperlink{classLZ77Compressor}{span}}<\doxymbox{\hyperlink{classLZ77Compressor}{Sym}}\ \textcolor{keyword}{const}>\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{classLZ77Compressor}{data\_}}\{\};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00390}\doxymbox{\hyperlink{classLZ77Compressor_acdce76db7049ff0b6d2e77433e59a4ae}{00390}}\ \ \ \ \ \doxymbox{\hyperlink{classWindow}{Window}}\ \doxymbox{\hyperlink{classLZ77Compressor_acdce76db7049ff0b6d2e77433e59a4ae}{window}};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00391}\doxymbox{\hyperlink{classLZ77Compressor_ad50f780d88272ead43c161cffa0883f8}{00391}}\ \ \ \ \ \doxymbox{\hyperlink{namespacealg}{alg}}::\doxymbox{\hyperlink{classalg_1_1Rabin}{Rabin}}\ \doxymbox{\hyperlink{classLZ77Compressor_ad50f780d88272ead43c161cffa0883f8}{pattern\_matcher}};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00392}00392\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00393}00393\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00394}00394\ \};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00395}00395\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00396}\doxymbox{\hyperlink{classLZ77Decompressor}{00396}}\ \textcolor{keyword}{class}\ \doxymbox{\hyperlink{classLZ77Decompressor}{LZ77Decompressor}}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00397}00397\ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00398}00398\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00399}\doxymbox{\hyperlink{classLZ77Decompressor_a7a2f3317179ef2e071ca0c1d44d1555c}{00399}}\ \ \ \ \ \textcolor{keyword}{explicit}\ \doxymbox{\hyperlink{classLZ77Decompressor_a7a2f3317179ef2e071ca0c1d44d1555c}{LZ77Decompressor}}(\doxymbox{\hyperlink{classLZ77Block}{LZ77Block}}\ \textcolor{keyword}{const}\&\ data)}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00400}00400\ \ \ \ \ \ \ \ \ :\ \doxymbox{\hyperlink{classLZ77Decompressor_a7a2f3317179ef2e071ca0c1d44d1555c}{data\_}}(\doxymbox{\hyperlink{classLZ77Decompressor_a7a2f3317179ef2e071ca0c1d44d1555c}{data}})\ \{\}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00401}00401\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00402}00402\ \ \ \ \ \textcolor{comment}{/**}}
+\DoxyCodeLine{00403\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Decompress\ the\ data\ received\ in\ the\ constructor}}
+\DoxyCodeLine{00404\ \textcolor{comment}{\ \ \ \ \ *\ @param\ out\_data\ Where\ the\ output\ will\ go}}
+\DoxyCodeLine{00405\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00406\ \textcolor{comment}{\ \ \ \ \ *\ @note\ Will\ clear\ out\_data\ buffer}}
+\DoxyCodeLine{00407\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00408}00408\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ \doxymbox{\hyperlink{classLZ77Decompressor}{Allocator}}\ =\ \doxymbox{\hyperlink{classLZ77Decompressor}{std}}::\doxymbox{\hyperlink{classLZ77Decompressor}{allocator}}<\doxymbox{\hyperlink{classLZ77Decompressor}{Sym}}>>}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00409}\doxymbox{\hyperlink{classLZ77Decompressor_a242394cc3fb9db938c04b173f2cd3c2c}{00409}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classLZ77Decompressor}{decompress}}(\doxymbox{\hyperlink{classLZ77Decompressor}{std}}::\doxymbox{\hyperlink{classLZ77Decompressor}{vector}}<\doxymbox{\hyperlink{classLZ77Decompressor}{Sym}},\ \doxymbox{\hyperlink{classLZ77Decompressor}{Allocator}}>\&\ \doxymbox{\hyperlink{classLZ77Decompressor}{out\_data}})\ \textcolor{keyword}{const}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00410}00410\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00411}00411\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classLZ77Decompressor}{out\_data}}.\doxymbox{\hyperlink{classLZ77Decompressor}{reserve}}(\doxymbox{\hyperlink{classLZ77Decompressor}{data\_}}.\doxymbox{\hyperlink{classLZ77Decompressor}{size}}()\ /\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{classLZ77Decompressor}{Sym}}));}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00412}00412\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{classLZ77Decompressor}{token}}\ :\ \doxymbox{\hyperlink{classLZ77Decompressor}{data\_}})}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00413}00413\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00414}00414\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{classLZ77Decompressor}{token}}.\doxymbox{\hyperlink{classLZ77Decompressor}{offset}}\ !=\ 0)}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00415}00415\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00416}00416\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classLZ77Decompressor}{\_}}\ :\ \doxymbox{\hyperlink{classLZ77Decompressor}{std}}::\doxymbox{\hyperlink{classLZ77Decompressor}{views}}::\doxymbox{\hyperlink{classLZ77Decompressor}{iota}}(0u,\ \doxymbox{\hyperlink{classLZ77Decompressor}{token}}.\doxymbox{\hyperlink{classLZ77Decompressor}{length}}))}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00417}00417\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classLZ77Decompressor}{out\_data}}.\doxymbox{\hyperlink{classLZ77Decompressor}{push\_back}}(\doxymbox{\hyperlink{classLZ77Decompressor}{out\_data}}[\doxymbox{\hyperlink{classLZ77Decompressor}{out\_data}}.\doxymbox{\hyperlink{classLZ77Decompressor}{size}}()\ -\/\ \doxymbox{\hyperlink{classLZ77Decompressor}{token}}.\doxymbox{\hyperlink{classLZ77Decompressor}{offset}}]);}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00418}00418\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00419}00419\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classLZ77Decompressor}{out\_data}}.\doxymbox{\hyperlink{classLZ77Decompressor}{emplace\_back}}(\doxymbox{\hyperlink{classLZ77Decompressor}{token}}.\doxymbox{\hyperlink{classLZ77Decompressor}{symbol}});}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00420}00420\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00421}00421\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00422}00422\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00423}00423\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00424}\doxymbox{\hyperlink{classLZ77Decompressor_a9eebe0cc24120384446a543df5531038}{00424}}\ \ \ \ \ \doxymbox{\hyperlink{classLZ77Decompressor}{LZ77Block}}\ \textcolor{keyword}{const}\&\ \doxymbox{\hyperlink{classLZ77Decompressor}{data\_}};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00425}00425\ \};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00426}00426\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00427}\doxymbox{\hyperlink{classLZ77ConcurrentCompressor}{00427}}\ \textcolor{keyword}{export}\ \textcolor{keyword}{class}\ \doxymbox{\hyperlink{classLZ77ConcurrentCompressor}{LZ77ConcurrentCompressor}}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00428}00428\ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00429}00429\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00430}\doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a3e5c38f00925044e3a3e0d9296840842}{00430}}\ \ \ \ \ \doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a3e5c38f00925044e3a3e0d9296840842}{LZ77ConcurrentCompressor}}(\doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a3e5c38f00925044e3a3e0d9296840842}{std}}::\doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a3e5c38f00925044e3a3e0d9296840842}{span}}<\doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a3e5c38f00925044e3a3e0d9296840842}{std}}::\doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a3e5c38f00925044e3a3e0d9296840842}{byte}}\ \textcolor{keyword}{const}>\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a3e5c38f00925044e3a3e0d9296840842}{data}},\ \doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a3e5c38f00925044e3a3e0d9296840842}{size\_t}}\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a3e5c38f00925044e3a3e0d9296840842}{concurrency}},\ \doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a3e5c38f00925044e3a3e0d9296840842}{File}}\&\ \doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a3e5c38f00925044e3a3e0d9296840842}{file}},\ \doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a3e5c38f00925044e3a3e0d9296840842}{CompPreset}}\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a3e5c38f00925044e3a3e0d9296840842}{preset}})\ \textcolor{keyword}{noexcept}(\textcolor{keyword}{false})}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00431}00431\ \ \ \ \ \ \ \ \ :\ \doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a3e5c38f00925044e3a3e0d9296840842}{preset\_}}(\doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a3e5c38f00925044e3a3e0d9296840842}{preset}}),\ \doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a3e5c38f00925044e3a3e0d9296840842}{concurrency\_}}(\doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a3e5c38f00925044e3a3e0d9296840842}{concurrency}}),\ \doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a3e5c38f00925044e3a3e0d9296840842}{data\_}}(\doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a3e5c38f00925044e3a3e0d9296840842}{data}}),\ \doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a3e5c38f00925044e3a3e0d9296840842}{file\_list\_}}(\doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a3e5c38f00925044e3a3e0d9296840842}{file}}),\ \doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a3e5c38f00925044e3a3e0d9296840842}{thread\_pool}}(\doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a3e5c38f00925044e3a3e0d9296840842}{concurrency}})}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00432}00432\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00433}00433\ \ \ \ \ \ \ \ \ n\_blocks\_\ =\ data\_.size\_bytes()\ /\ std::min(data\_.size\_bytes()\ /\ concurrency,\ MAX\_BLOCK\_SIZE);}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00434}00434\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (data\_.size\_bytes()\ \%\ MAX\_BLOCK\_SIZE\ >\ 0)}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00435}00435\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a3498fd7033bf7154cd0893d339855b2f}{n\_blocks\_}}++;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00436}00436\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00437}00437\ \ \ \ \ \ \ \ \ results.reserve(n\_blocks\_);}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00438}00438\ \ \ \ \ \}}
 \DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00439}00439\ }
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00440}00440\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ DataType>}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00441}\doxymbox{\hyperlink{class_l_z77_a04ab1e960758a3bc472de1b58d128d75}{00441}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{class_l_z77}{LZ77}}<DataType>::\doxymbox{\hyperlink{class_l_z77_a04ab1e960758a3bc472de1b58d128d75}{decompress}}(CodecInterface<LZ77\_Token,\ Sym>\&\ interface)\ requires\ IsToken<DataType>}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00442}00442\ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00443}00443\ \ \ \ \ interface.out\_data.reserve(interface.in\_data.distance\_to\_end());}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00444}00444\ \ \ \ \ \textcolor{keywordflow}{while}\ (!interface.in\_data.reached\_end())}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00445}00445\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00446}00446\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (interface.in\_data.iterator-\/>offset\ !=\ 0)}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00447}00447\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00448}00448\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (size\_t\ remaining\_syms\ =\ interface.in\_data.iterator-\/>length;\ remaining\_syms\ >\ 0;\ remaining\_syms-\/-\/)}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00449}00449\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ interface.out\_data.push\_back(interface.out\_data[interface.out\_data.size()\ -\/\ interface.in\_data.iterator-\/>offset]);}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00450}00450\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00451}00451\ \ \ \ \ \ \ \ \ interface.out\_data.emplace\_back(interface.in\_data.iterator-\/>symbol);}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00452}00452\ \ \ \ \ \ \ \ \ interface.in\_data++;}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00453}00453\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00454}00454\ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00440}\doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a6c184eda6cf868288ba5f89b55037a60}{00440}}\ \ \ \ \ \string~\doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a6c184eda6cf868288ba5f89b55037a60}{LZ77ConcurrentCompressor}}()}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00441}00441\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00442}00442\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ result\ :\ results)}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00443}00443\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00444}00444\ \ \ \ \ \ \ \ \ \ \ \ \ result.get();}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00445}00445\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00446}00446\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00447}00447\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00448}00448\ \ \ \ \ \textcolor{comment}{/**}}
+\DoxyCodeLine{00449\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Run\ the\ compression}}
+\DoxyCodeLine{00450\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00451}\doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a9f7d12782f0c5a6b78011677b03089a7}{00451}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a9f7d12782f0c5a6b78011677b03089a7}{compress}}()\ \textcolor{keyword}{noexcept}(\textcolor{keyword}{false})}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00452}00452\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00453}00453\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \textcolor{keyword}{const}\ partition\_size\ =\ std::min(data\_.size()\ /\ concurrency\_,\ MAX\_BLOCK\_SIZE);}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00454}00454\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (size\_t\ completed\_size\ =\ 0,\ seq\_num\{\};\ completed\_size\ <\ data\_.size();\ completed\_size\ +=\ partition\_size,\ seq\_num++)}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00455}00455\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00456}00456\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//get\ the\ true\ partition\ size,\ i.e.\ the\ partition\ can\ be\ cut\ off\ at\ the\ eof}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00457}00457\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \textcolor{keyword}{const}\ true\_partition\_size\ =\ [completed\_size,\ partition\_size,\ \textcolor{keyword}{this}]}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00458}00458\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00459}00459\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (completed\_size\ +\ partition\_size\ >\ data\_.size())}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00460}00460\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ data\_.size()\ -\/\ completed\_size;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00461}00461\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00462}00462\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ partition\_size;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00463}00463\ \ \ \ \ \ \ \ \ \ \ \ \ \}();}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00464}00464\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00465}00465\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \textcolor{keyword}{const}\ data\_for\_task\ =\ data\_.subspan(completed\_size,\ true\_partition\_size);}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00466}00466\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00467}00467\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ future\ =\ thread\_pool.add\_task([\textcolor{keyword}{this},\ data\_for\_task,\ seq\_num]\textcolor{comment}{//'this'\ shall\ be\ strictly\ used\ to\ access\ const\ members,\ or\ concurrency\ capable\ containers}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00468}00468\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00469}00469\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ block\ =\ std::make\_unique<LZ77Block>();}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00470}00470\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ block-\/>reserve(data\_for\_task.size());}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00471}00471\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ LZ77Compressor\ compressor\{\{\textcolor{keyword}{reinterpret\_cast}<Sym\ \textcolor{keyword}{const}*>(data\_for\_task.data()),\ (data\_for\_task.size\_bytes()\ /\ \textcolor{keyword}{sizeof}(Sym))\},\ preset\_\};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00472}00472\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ compressor.compress(*block);}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00473}00473\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ file\_list\_.insert(std::move(block),\ seq\_num);}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00474}00474\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00475}00475\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00476}00476\ \ \ \ \ \ \ \ \ \ \ \ \ results.emplace\_back(std::move(future));}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00477}00477\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00478}00478\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a1f68f32f3d3d9c7fb2ed7c0b4d1d7cb3}{check\_results}}\doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a1f68f32f3d3d9c7fb2ed7c0b4d1d7cb3}{(}}\doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a1f68f32f3d3d9c7fb2ed7c0b4d1d7cb3}{)}};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00479}00479\ \ \ \ \ \ \ \ \ \ \ \ \ show\_progress(\{\},\ \textcolor{keyword}{static\_cast}<\textcolor{keywordtype}{double}>(\doxymbox{\hyperlink{classLZ77ConcurrentCompressor_afc321f0ed8c7916aff617b46f1075af7}{n\_completed\_blocks}})\ /\ \textcolor{keyword}{static\_cast}<\textcolor{keywordtype}{double}>(\doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a3498fd7033bf7154cd0893d339855b2f}{n\_blocks\_}}),\ \textcolor{keyword}{true});}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00480}00480\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00481}00481\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00482}00482\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00483}00483\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00484}\doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a2d404109ccd6e938bceee22c9d7114a8}{00484}}\ \ \ \ \ \doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a2d404109ccd6e938bceee22c9d7114a8}{CompPreset}}\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a2d404109ccd6e938bceee22c9d7114a8}{preset\_}};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00485}\doxymbox{\hyperlink{classLZ77ConcurrentCompressor_aca869bde10cd0f0dda5a7af9ccf9a5a9}{00485}}\ \ \ \ \ size\_t\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{classLZ77ConcurrentCompressor_aca869bde10cd0f0dda5a7af9ccf9a5a9}{concurrency\_}};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00486}\doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a5e8344e6cc3dea1adc9edeecffeb703d}{00486}}\ \ \ \ \ \doxymbox{\hyperlink{classLZ77ConcurrentCompressor}{std}}::\doxymbox{\hyperlink{classLZ77ConcurrentCompressor}{span}}<\doxymbox{\hyperlink{classLZ77ConcurrentCompressor}{std}}::\doxymbox{\hyperlink{classLZ77ConcurrentCompressor}{byte}}\ \textcolor{keyword}{const}>\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{classLZ77ConcurrentCompressor}{data\_}}\{\};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00487}\doxymbox{\hyperlink{classLZ77ConcurrentCompressor_ad58bcddad411e4973bde4155c7549b65}{00487}}\ \ \ \ \ \doxymbox{\hyperlink{classLZ77ConcurrentCompressor}{std}}::\doxymbox{\hyperlink{classLZ77ConcurrentCompressor}{vector}}<\doxymbox{\hyperlink{classLZ77ConcurrentCompressor}{std}}::\doxymbox{\hyperlink{classLZ77ConcurrentCompressor}{future}}<\textcolor{keywordtype}{void}>>\ \doxymbox{\hyperlink{classLZ77ConcurrentCompressor}{results}}\{\};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00488}\doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a3498fd7033bf7154cd0893d339855b2f}{00488}}\ \ \ \ \ size\_t\ \doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a3498fd7033bf7154cd0893d339855b2f}{n\_blocks\_}}\{\};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00489}\doxymbox{\hyperlink{classLZ77ConcurrentCompressor_afc321f0ed8c7916aff617b46f1075af7}{00489}}\ \ \ \ \ size\_t\ \doxymbox{\hyperlink{classLZ77ConcurrentCompressor_afc321f0ed8c7916aff617b46f1075af7}{n\_completed\_blocks}}\{\};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00490}00490\ \ \ \ \ \textcolor{comment}{//These\ have\ to\ stay\ down\ here\ (I\ just\ found\ out\ how\ objects\ are\ destroyed)}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00491}\doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a4aec362f2336ac62c6b630f1a3244d50}{00491}}\ \ \ \ \ \doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a4aec362f2336ac62c6b630f1a3244d50}{ConcOrderedFileList}}<\doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a4aec362f2336ac62c6b630f1a3244d50}{LZ77Block}}>\ \doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a4aec362f2336ac62c6b630f1a3244d50}{file\_list\_}};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00492}\doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a3e8abeacb4374460608fcb4b352a02f8}{00492}}\ \ \ \ \ \doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a3e8abeacb4374460608fcb4b352a02f8}{ThreadPool}}\ \doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a3e8abeacb4374460608fcb4b352a02f8}{thread\_pool}}\{\};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00493}00493\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00494}00494\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00495}\doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a1f68f32f3d3d9c7fb2ed7c0b4d1d7cb3}{00495}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classLZ77ConcurrentCompressor_a1f68f32f3d3d9c7fb2ed7c0b4d1d7cb3}{check\_results}}()}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00496}00496\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00497}00497\ \ \ \ \ \ \ \ \ std::erase\_if(results,}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00498}00498\ \ \ \ \ \ \ \ \ [\textcolor{keyword}{this}](std::future<\textcolor{keywordtype}{void}>\&\ result)}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00499}00499\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00500}00500\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \textcolor{keyword}{const}\ status\ =\ result.wait\_for(std::chrono::nanoseconds::zero());}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00501}00501\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (status\ ==\ std::future\_status::ready)}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00502}00502\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00503}00503\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.get();}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00504}00504\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ n\_completed\_blocks++;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00505}00505\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00506}00506\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00507}00507\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00508}00508\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00509}00509\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00510}00510\ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00511}00511\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00512}00512\ \};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00513}00513\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00514}\doxymbox{\hyperlink{classLZ77ConcurrentDecompressor}{00514}}\ \textcolor{keyword}{export}\ \textcolor{keyword}{class}\ \doxymbox{\hyperlink{classLZ77ConcurrentDecompressor}{LZ77ConcurrentDecompressor}}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00515}00515\ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00516}00516\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00517}\doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_a3cf081cce8f45bc2680ec231abd3aee8}{00517}}\ \ \ \ \ \doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_a3cf081cce8f45bc2680ec231abd3aee8}{LZ77ConcurrentDecompressor}}(\doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_a3cf081cce8f45bc2680ec231abd3aee8}{std}}::\doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_a3cf081cce8f45bc2680ec231abd3aee8}{span}}<\doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_a3cf081cce8f45bc2680ec231abd3aee8}{std}}::\doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_a3cf081cce8f45bc2680ec231abd3aee8}{byte}}\ \textcolor{keyword}{const}>\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_a3cf081cce8f45bc2680ec231abd3aee8}{data}},\ \doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_a3cf081cce8f45bc2680ec231abd3aee8}{File}}\&\ \doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_a3cf081cce8f45bc2680ec231abd3aee8}{file}},\ \doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_a3cf081cce8f45bc2680ec231abd3aee8}{size\_t}}\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_a3cf081cce8f45bc2680ec231abd3aee8}{concurrency}})}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00518}00518\ \ \ \ \ \ \ \ \ :\ \doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_a3cf081cce8f45bc2680ec231abd3aee8}{data\_}}(\doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_a3cf081cce8f45bc2680ec231abd3aee8}{data}}),\ \doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_a3cf081cce8f45bc2680ec231abd3aee8}{concurrency\_}}(\doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_a3cf081cce8f45bc2680ec231abd3aee8}{concurrency}}),\ \doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_a3cf081cce8f45bc2680ec231abd3aee8}{file\_}}(\doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_a3cf081cce8f45bc2680ec231abd3aee8}{file}}),\ \doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_a3cf081cce8f45bc2680ec231abd3aee8}{file\_list\_}}(\doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_a3cf081cce8f45bc2680ec231abd3aee8}{file}}),\ \doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_a3cf081cce8f45bc2680ec231abd3aee8}{thread\_pool}}(\doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_a3cf081cce8f45bc2680ec231abd3aee8}{concurrency}})}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00519}00519\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00520}00520\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00521}00521\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00522}00522\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00523}00523\ \ \ \ \ \textcolor{comment}{/**}}
+\DoxyCodeLine{00524\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Decompress\ the\ data.}}
+\DoxyCodeLine{00525\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00526\ \textcolor{comment}{\ \ \ \ \ *\ @details\ The\ decompression\ is\ achieved\ by\ considering\ the\ first\ index\ of\ the\ data\ as\ the\ start\ of\ the\ first\ block.}}
+\DoxyCodeLine{00527\ \textcolor{comment}{\ \ \ \ \ *\ \ \ \ \ \ \ \ \ \ We\ then\ check\ the\ compressed\_size\ for\ this\ block\ and\ advance\ that\ much,\ by\ doing\ this\ we\ know\ the\ start\ of\ the\ new\ block.}}
+\DoxyCodeLine{00528\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00529}\doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_a9a115802d2bf0066a391bb6344f6ebce}{00529}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_a9a115802d2bf0066a391bb6344f6ebce}{decompress}}()\ \textcolor{keyword}{noexcept}(\textcolor{keyword}{false})}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00530}00530\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00531}00531\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (size\_t\ i\{\};\ i\ <\ data\_.size();)}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00532}00532\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00533}00533\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ data\_for\_task\ =\ LZ77Block\{data\_.subspan(i),\ file\_.get\_in\_file\_options().path\};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00534}00534\ \ \ \ \ \ \ \ \ \ \ \ \ i\ +=\ \textcolor{keyword}{sizeof}(std::invoke\_result\_t<\textcolor{keyword}{decltype}(\&LZ77Block::uncompressed\_length),\ LZ77Block>)\ +}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00535}00535\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{sizeof}(std::invoke\_result\_t<\textcolor{keyword}{decltype}(\&LZ77Block::compressed\_length),\ LZ77Block>)\ +}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00536}00536\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ data\_for\_task.compressed\_length();}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00537}00537\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00538}00538\ \ \ \ \ \ \ \ \ \ \ \ \ thread\_pool.add\_task(}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00539}00539\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [\textcolor{keyword}{this},\ data\ =\ std::move(data\_for\_task)]}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00540}00540\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00541}00541\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ LZ77Decompressor\ decompressor\{data\};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00542}00542\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00543}00543\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::pmr::polymorphic\_allocator<Sym>\ allocator\{shared\_memory\_pool.get()\};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00544}00544\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::pmr::vector<Sym>\ buffer\{allocator\};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00545}00545\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ buffer.reserve(data.uncompressed\_length());}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00546}00546\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00547}00547\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ decompressor.decompress(buffer);}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00548}00548\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00549}00549\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00550}00550\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00551}00551\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00552}00552\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00553}00553\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00554}00554\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00555}00555\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00556}00556\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00557}\doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_aeb5dead027548e0461cb99f7ee5b75b8}{00557}}\ \ \ \ \ \doxymbox{\hyperlink{classLZ77ConcurrentDecompressor}{std}}::\doxymbox{\hyperlink{classLZ77ConcurrentDecompressor}{span}}<\doxymbox{\hyperlink{classLZ77ConcurrentDecompressor}{std}}::\doxymbox{\hyperlink{classLZ77ConcurrentDecompressor}{byte}}\ \textcolor{keyword}{const}>\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{classLZ77ConcurrentDecompressor}{data\_}}\{\};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00558}\doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_af788a73d728ff6ab578fdd939ca89aaf}{00558}}\ \ \ \ \ size\_t\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_af788a73d728ff6ab578fdd939ca89aaf}{concurrency\_}}\{\};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00559}\doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_a8d998f1bd0faa314e81052aedec9e7c4}{00559}}\ \ \ \ \ \doxymbox{\hyperlink{classLZ77ConcurrentDecompressor}{std}}::\doxymbox{\hyperlink{classLZ77ConcurrentDecompressor}{vector}}<\doxymbox{\hyperlink{classLZ77ConcurrentDecompressor}{std}}::\doxymbox{\hyperlink{classLZ77ConcurrentDecompressor}{future}}<\textcolor{keywordtype}{void}>>\ \doxymbox{\hyperlink{classLZ77ConcurrentDecompressor}{results}}\{\};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00560}\doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_a73499e9aba5d5814facdfd7599371577}{00560}}\ \ \ \ \ size\_t\ \doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_a73499e9aba5d5814facdfd7599371577}{n\_blocks\_}}\{\};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00561}\doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_af1f9ba9f50e1a246812db1f10ef698f8}{00561}}\ \ \ \ \ size\_t\ \doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_af1f9ba9f50e1a246812db1f10ef698f8}{n\_completed\_blocks}}\{\};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00562}00562\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00563}00563\ \ \ \ \ \textcolor{comment}{//IN\ THIS\ ORDER}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00564}00564\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00565}\doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_aa0cb47d0e9fee4be7865ff83052aef1e}{00565}}\ \ \ \ \ \doxymbox{\hyperlink{classLZ77ConcurrentDecompressor}{std}}::\doxymbox{\hyperlink{classLZ77ConcurrentDecompressor}{shared\_ptr}}<\doxymbox{\hyperlink{classLZ77ConcurrentDecompressor}{std}}::\doxymbox{\hyperlink{classLZ77ConcurrentDecompressor}{pmr}}::\doxymbox{\hyperlink{classLZ77ConcurrentDecompressor}{synchronized\_pool\_resource}}>\ \doxymbox{\hyperlink{classLZ77ConcurrentDecompressor}{shared\_memory\_pool}}\ =\ \doxymbox{\hyperlink{classLZ77ConcurrentDecompressor}{std}}::\doxymbox{\hyperlink{classLZ77ConcurrentDecompressor}{make\_shared}}<\doxymbox{\hyperlink{classLZ77ConcurrentDecompressor}{std}}::\doxymbox{\hyperlink{classLZ77ConcurrentDecompressor}{pmr}}::\doxymbox{\hyperlink{classLZ77ConcurrentDecompressor}{synchronized\_pool\_resource}}>();}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00566}\doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_af17369616909dba5c00244d3ef0b8382}{00566}}\ \ \ \ \ \doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_af17369616909dba5c00244d3ef0b8382}{File}}\ \textcolor{keyword}{const}\&\ \doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_af17369616909dba5c00244d3ef0b8382}{file\_}};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00567}\doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_a074a3fbec225024db4d1dbf10e945804}{00567}}\ \ \ \ \ \doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_a074a3fbec225024db4d1dbf10e945804}{ConcOrderedFileList}}<\doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_a074a3fbec225024db4d1dbf10e945804}{std}}::\doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_a074a3fbec225024db4d1dbf10e945804}{byte}}>\ \doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_a074a3fbec225024db4d1dbf10e945804}{file\_list\_}};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00568}\doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_af97c7bbfb681f4a6f07857c9b096d3e9}{00568}}\ \ \ \ \ \doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_af97c7bbfb681f4a6f07857c9b096d3e9}{ThreadPool}}\ \doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_af97c7bbfb681f4a6f07857c9b096d3e9}{thread\_pool}}\{\};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00569}00569\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00570}\doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_a8fae54125a482c0ccf002e2afeeb5da8}{00570}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classLZ77ConcurrentDecompressor_a8fae54125a482c0ccf002e2afeeb5da8}{check\_results}}()}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00571}00571\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00572}00572\ \ \ \ \ \ \ \ \ std::erase\_if(results,}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00573}00573\ \ \ \ \ \ \ \ \ [\textcolor{keyword}{this}](std::future<\textcolor{keywordtype}{void}>\&\ result)}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00574}00574\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00575}00575\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \textcolor{keyword}{const}\ status\ =\ result.wait\_for(std::chrono::nanoseconds::zero());}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00576}00576\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (status\ ==\ std::future\_status::ready)}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00577}00577\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00578}00578\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.get();}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00579}00579\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ n\_completed\_blocks++;}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00580}00580\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00581}00581\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00582}00582\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00583}00583\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00584}00584\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00585}00585\ \ \ \ \ \ \ \ \ );}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00586}00586\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00587}00587\ }
+\DoxyCodeLine{\Hypertarget{lz77_8cppm_source_l00588}00588\ \};}
 
 \end{DoxyCode}

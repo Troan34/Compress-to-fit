@@ -1,17 +1,11 @@
 var searchData=
 [
-  ['data_0',['data',['../class_window.html#a2215049c98e68d2b886d551cd964ac37',1,'Window::data'],['../classalg_1_1_rabin.html#a52604c78d10ac675ca95f9fcbbb95e24',1,'alg::Rabin::data'],['../class_l_z77.html#a7ab046e149092754e4ca5e8087cc8686',1,'LZ77::data']]],
-  ['data_5f_1',['data_',['../class_concurrent_file_buffer.html#af6016220a98badcda7da620da440e959',1,'ConcurrentFileBuffer']]],
-  ['decomp_5fafter_5fconcat_2',['decomp_after_concat',['../structparser_1_1_options.html#af4b3c6d81f03bcc31481e82348ee4153',1,'parser::Options']]],
-  ['decompress_3',['decompress',['../class_l_z77.html#a04ab1e960758a3bc472de1b58d128d75',1,'LZ77']]],
-  ['default_5fout_5fpath_4',['default_out_path',['../namespaceparser.html#a7070ddbab534fb2cd9db4da4392877fb',1,'parser']]],
-  ['delete_5finput_5',['DELETE_INPUT',['../namespaceparser.html#accd7eb1ffd4c925598ec25fab6905369a4eb6ee48803ccd6075e8d129e5167fb8',1,'parser']]],
-  ['delete_5finput_6',['delete_input',['../structparser_1_1_options.html#a204eb08002da88bc72fa2a88e99a1782',1,'parser::Options']]],
-  ['delete_5fon_5fdtor_7',['delete_on_dtor',['../struct_file_options.html#a7cb51e65263f944a8a56b79346dedb71',1,'FileOptions']]],
-  ['difference_5ftype_8',['difference_type',['../struct_forward_iterator.html#a0e9bacd46dc23d6647d5c7ccfb6e9270',1,'ForwardIterator']]],
-  ['dir_5fcompression_9',['DIR_COMPRESSION',['../namespace_e_r_r___s_t_r_i_n_g.html#a10aa42d66046b2a4263633a39f005124',1,'ERR_STRING::DIR_COMPRESSION'],['../utils_8cppm.html#ab0df38968e4f03a3f1f6d6df0f31f45aae8266dd47c23ed1f1c76b1e0669a3e47',1,'DIR_COMPRESSION:&#160;utils.cppm']]],
-  ['distance_5fto_5fend_10',['distance_to_end',['../struct_forward_iterator.html#adbe1d464718886322bbf91c1d5596316',1,'ForwardIterator']]],
-  ['do_5fdecomp_5fafter_5fconcat_11',['DO_DECOMP_AFTER_CONCAT',['../namespaceparser.html#accd7eb1ffd4c925598ec25fab6905369a297a6bb3ef5700bc84563dc87938c1b2',1,'parser']]],
-  ['do_5fnot_5fdecomp_5fafter_5fconcat_12',['DO_NOT_DECOMP_AFTER_CONCAT',['../namespaceparser.html#accd7eb1ffd4c925598ec25fab6905369a8cb317a671dafb2df58c07a6fc9291ef',1,'parser']]],
-  ['drive_5ferror_13',['DRIVE_ERROR',['../namespace_e_r_r___s_t_r_i_n_g.html#aba29f8774197da0a4890bc532fbbab15',1,'ERR_STRING::DRIVE_ERROR'],['../utils_8cppm.html#ab0df38968e4f03a3f1f6d6df0f31f45aad5459024a3d9e8c304e106f0c0fc8ffe',1,'DRIVE_ERROR:&#160;utils.cppm']]]
+  ['element_5f_0',['element_',['../structNode.html#a87de752ed6f4a3385b6e613c57a48819',1,'Node']]],
+  ['end_1',['end',['../structForwardIterator.html#a5aa22e4f8febf8fe6808d6f85d82dc9d',1,'ForwardIterator::end'],['../classWindow.html#a9af0f12097f7bf387f7b33cabb4f6e44',1,'Window::end()'],['../classLZ77Block.html#a9af4024186fc27b9e4329c3e1f9c40ac',1,'LZ77Block::end()']]],
+  ['err_5fstring_2',['ERR_STRING',['../namespaceERR__STRING.html',1,'']]],
+  ['errortype_3',['ErrorType',['../core__utils_8cppm.html#ab0df38968e4f03a3f1f6d6df0f31f45a',1,'core_utils.cppm']]],
+  ['everything_2ehpp_4',['everything.hpp',['../everything_8hpp.html',1,'']]],
+  ['expected_5fsequence_5fnum_5',['expected_sequence_num',['../classConcOrderedFileList.html#ae0647fb99e6345fe7eb1408e3356a405',1,'ConcOrderedFileList']]],
+  ['expected_5fsequence_5fnum_5f_6',['expected_sequence_num_',['../classConcOrderedFileList.html#abb37a87843fe6a072f05716e21c8d713',1,'ConcOrderedFileList']]],
+  ['extract_5finfo_7',['extract_info',['../classFile.html#aef5019792135c243254037a05cd0d7e3',1,'File::extract_info(const fs::path &amp;path) -&gt; std::optional&lt; Header &gt;'],['../classFile.html#a4a6cfc52ae0d0b8bca22a6d11bd033d8',1,'File::extract_info(std::ifstream &amp;file, fs::path const &amp;path) -&gt; std::optional&lt; Header &gt;']]]
 ];

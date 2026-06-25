@@ -1,0 +1,231 @@
+\doxysection{Thread\+Pool Class Reference}
+\hypertarget{classThreadPool}{}\label{classThreadPool}\index{ThreadPool@{ThreadPool}}
+
+
+A tool to asynchronously execute tasks without respawning threads.  
+
+
+
+
+Collaboration diagram for Thread\+Pool:\+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classThreadPool__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classThreadPool_aad44f796416e289e25a59e73f2db58d9}{Thread\+Pool}} (size\+\_\+t n\+\_\+threads=std::\+thread::\+hardware\+\_\+concurrency())
+\item 
+\doxymbox{\hyperlink{classThreadPool_a44d3d2ab618970605e684efc216655eb}{\texorpdfstring{$\sim$}{\string~}\+Thread\+Pool}} ()
+\item 
+\doxymbox{\hyperlink{classThreadPool_ad1bbb23b57e3ae24cdc7df015c49fba1}{Thread\+Pool}} (\doxymbox{\hyperlink{classThreadPool}{Thread\+Pool}} \&\&)=delete
+\item 
+\doxymbox{\hyperlink{classThreadPool_a360a0cf534ac4d6c7953e4a3911f49b6}{Thread\+Pool}} (\doxymbox{\hyperlink{classThreadPool}{Thread\+Pool}} const \&)=delete
+\item 
+auto \doxymbox{\hyperlink{classThreadPool_ad263c1d47b932195bceb25d514fcbf7f}{operator=}} (\doxymbox{\hyperlink{classThreadPool}{Thread\+Pool}} \&\&) -\/$>$ \doxymbox{\hyperlink{classThreadPool}{Thread\+Pool}} \&=delete
+\item 
+auto \doxymbox{\hyperlink{classThreadPool_a4148147ff0af23e41faf2129639f1dd2}{operator=}} (\doxymbox{\hyperlink{classThreadPool}{Thread\+Pool}} const \&) -\/$>$ \doxymbox{\hyperlink{classThreadPool}{Thread\+Pool}} \&=delete
+\item 
+{\footnotesize template$<$typename F, typename... Args$>$ }\\auto \doxymbox{\hyperlink{classThreadPool_a9db5d46d22b868c06551d07b276a9276}{add\+\_\+task}} (F \&\&f, Args \&\&... args) -\/$>$ std::\+future$<$ decltype(f(args...))$>$
+\begin{DoxyCompactList}\small\item\em Add a new task for the thread pool. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{classThreadPool_aae5b85252b91ab697b919c6fad17b039}{worker}} ()
+\begin{DoxyCompactList}\small\item\em The callable threads execute. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \doxymbox{\hyperlink{classThreadPool_a49e2b199d10b5f6c8ddd4394d0220662}{stop\+\_\+threads\+\_\+}} \{false\}
+\item 
+std::\+mutex \doxymbox{\hyperlink{classThreadPool_abea81872556be4746f4be7a396254f08}{mut\+\_\+}}
+\item 
+std::\+condition\+\_\+variable \doxymbox{\hyperlink{classThreadPool_a5aa3883c2fed23b45440f2d8a1ccb63c}{cv\+\_\+}}
+\item 
+std::\+queue$<$ std::\+function$<$ void()$>$ $>$ \doxymbox{\hyperlink{classThreadPool_aa91d4103c2770a7b47e7e45e1d1037a1}{tasks\+\_\+}}
+\item 
+std::\+vector$<$ std::\+jthread $>$ \doxymbox{\hyperlink{classThreadPool_a0bfc20a0a9f4060e1b2c3a471f86592c}{threads\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A tool to asynchronously execute tasks without respawning threads. 
+
+Definition at line \doxymbox{\hyperlink{thread__pool_8cppm_source_l00008}{8}} of file \doxymbox{\hyperlink{thread__pool_8cppm_source}{thread\+\_\+pool.\+cppm}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{classThreadPool_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classThreadPool_aad44f796416e289e25a59e73f2db58d9}\index{ThreadPool@{ThreadPool}!ThreadPool@{ThreadPool}}
+\index{ThreadPool@{ThreadPool}!ThreadPool@{ThreadPool}}
+\doxysubsubsection{\texorpdfstring{ThreadPool()}{ThreadPool()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classThreadPool_aad44f796416e289e25a59e73f2db58d9} 
+Thread\+Pool::\+\+Thread\+Pool (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{n\+\_\+threads}{ = {\ttfamily std:\+:\+thread:\+:\+hardware\+\_\+concurrency()}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em n\+\_\+threads} & The number of threads to spawn. Defaults to the provided thread count from the OS. \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line \doxymbox{\hyperlink{thread__pool_8cppm_source_l00014}{14}} of file \doxymbox{\hyperlink{thread__pool_8cppm_source}{thread\+\_\+pool.\+cppm}}.
+
+\Hypertarget{classThreadPool_a44d3d2ab618970605e684efc216655eb}\index{ThreadPool@{ThreadPool}!````~ThreadPool@{\texorpdfstring{$\sim$}{\string~}ThreadPool}}
+\index{````~ThreadPool@{\texorpdfstring{$\sim$}{\string~}ThreadPool}!ThreadPool@{ThreadPool}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ThreadPool()}{\string~ThreadPool()}}
+{\footnotesize\ttfamily \label{classThreadPool_a44d3d2ab618970605e684efc216655eb} 
+Thread\+Pool::\+\texorpdfstring{$\sim$}{\string~}\+Thread\+Pool (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{thread__pool_8cppm_source_l00023}{23}} of file \doxymbox{\hyperlink{thread__pool_8cppm_source}{thread\+\_\+pool.\+cppm}}.
+
+\Hypertarget{classThreadPool_ad1bbb23b57e3ae24cdc7df015c49fba1}\index{ThreadPool@{ThreadPool}!ThreadPool@{ThreadPool}}
+\index{ThreadPool@{ThreadPool}!ThreadPool@{ThreadPool}}
+\doxysubsubsection{\texorpdfstring{ThreadPool()}{ThreadPool()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classThreadPool_ad1bbb23b57e3ae24cdc7df015c49fba1} 
+Thread\+Pool::\+\+Thread\+Pool (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{classThreadPool}{Thread\+Pool}} \&\&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\Hypertarget{classThreadPool_a360a0cf534ac4d6c7953e4a3911f49b6}\index{ThreadPool@{ThreadPool}!ThreadPool@{ThreadPool}}
+\index{ThreadPool@{ThreadPool}!ThreadPool@{ThreadPool}}
+\doxysubsubsection{\texorpdfstring{ThreadPool()}{ThreadPool()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classThreadPool_a360a0cf534ac4d6c7953e4a3911f49b6} 
+Thread\+Pool::\+\+Thread\+Pool (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{classThreadPool}{Thread\+Pool}} const \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classThreadPool_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classThreadPool_a9db5d46d22b868c06551d07b276a9276}\index{ThreadPool@{ThreadPool}!add\_task@{add\_task}}
+\index{add\_task@{add\_task}!ThreadPool@{ThreadPool}}
+\doxysubsubsection{\texorpdfstring{add\_task()}{add\_task()}}
+{\footnotesize\ttfamily \label{classThreadPool_a9db5d46d22b868c06551d07b276a9276} 
+template$<$typename F, typename... Args$>$ \\
+auto Thread\+Pool::\+add\+\_\+task (\begin{DoxyParamCaption}\item[{F \&\&}]{f}{, }\item[{Args \&\&...}]{args}{}\end{DoxyParamCaption}) -\/$>$ std::\+future$<$ decltype(f(args...))$>$\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Add a new task for the thread pool. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em F} & Function type \\
+\hline
+{\em Args} & Argument types \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em f} & function \\
+\hline
+{\em args} & arguments \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The future of the task 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{thread__pool_8cppm_source_l00048}{48}} of file \doxymbox{\hyperlink{thread__pool_8cppm_source}{thread\+\_\+pool.\+cppm}}.
+
+\Hypertarget{classThreadPool_ad263c1d47b932195bceb25d514fcbf7f}\index{ThreadPool@{ThreadPool}!operator=@{operator=}}
+\index{operator=@{operator=}!ThreadPool@{ThreadPool}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classThreadPool_ad263c1d47b932195bceb25d514fcbf7f} 
+auto Thread\+Pool::\+operator= (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{classThreadPool}{Thread\+Pool}} \&\&}]{}{}\end{DoxyParamCaption}) -\/$>$  \doxymbox{\hyperlink{classThreadPool}{Thread\+Pool}} \&=delete\hspace{0.3cm}{\ttfamily [delete]}}
+
+\Hypertarget{classThreadPool_a4148147ff0af23e41faf2129639f1dd2}\index{ThreadPool@{ThreadPool}!operator=@{operator=}}
+\index{operator=@{operator=}!ThreadPool@{ThreadPool}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classThreadPool_a4148147ff0af23e41faf2129639f1dd2} 
+auto Thread\+Pool::\+operator= (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{classThreadPool}{Thread\+Pool}} const \&}]{}{}\end{DoxyParamCaption}) -\/$>$  \doxymbox{\hyperlink{classThreadPool}{Thread\+Pool}} \&=delete\hspace{0.3cm}{\ttfamily [delete]}}
+
+\Hypertarget{classThreadPool_aae5b85252b91ab697b919c6fad17b039}\index{ThreadPool@{ThreadPool}!worker@{worker}}
+\index{worker@{worker}!ThreadPool@{ThreadPool}}
+\doxysubsubsection{\texorpdfstring{worker()}{worker()}}
+{\footnotesize\ttfamily \label{classThreadPool_aae5b85252b91ab697b919c6fad17b039} 
+void Thread\+Pool::\+worker (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+The callable threads execute. 
+
+
+
+Definition at line \doxymbox{\hyperlink{thread__pool_8cppm_source_l00084}{84}} of file \doxymbox{\hyperlink{thread__pool_8cppm_source}{thread\+\_\+pool.\+cppm}}.
+
+
+
+References \doxymbox{\hyperlink{thread__pool_8cppm_source_l00075}{cv\+\_\+}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classThreadPool_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classThreadPool_a5aa3883c2fed23b45440f2d8a1ccb63c}\index{ThreadPool@{ThreadPool}!cv\_@{cv\_}}
+\index{cv\_@{cv\_}!ThreadPool@{ThreadPool}}
+\doxysubsubsection{\texorpdfstring{cv\_}{cv\_}}
+{\footnotesize\ttfamily \label{classThreadPool_a5aa3883c2fed23b45440f2d8a1ccb63c} 
+std::\+condition\+\_\+variable Thread\+Pool::\+cv\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{thread__pool_8cppm_source_l00075}{75}} of file \doxymbox{\hyperlink{thread__pool_8cppm_source}{thread\+\_\+pool.\+cppm}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{thread__pool_8cppm_source_l00084}{worker()}}.
+
+\Hypertarget{classThreadPool_abea81872556be4746f4be7a396254f08}\index{ThreadPool@{ThreadPool}!mut\_@{mut\_}}
+\index{mut\_@{mut\_}!ThreadPool@{ThreadPool}}
+\doxysubsubsection{\texorpdfstring{mut\_}{mut\_}}
+{\footnotesize\ttfamily \label{classThreadPool_abea81872556be4746f4be7a396254f08} 
+std::\+mutex Thread\+Pool::\+mut\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{thread__pool_8cppm_source_l00074}{74}} of file \doxymbox{\hyperlink{thread__pool_8cppm_source}{thread\+\_\+pool.\+cppm}}.
+
+\Hypertarget{classThreadPool_a49e2b199d10b5f6c8ddd4394d0220662}\index{ThreadPool@{ThreadPool}!stop\_threads\_@{stop\_threads\_}}
+\index{stop\_threads\_@{stop\_threads\_}!ThreadPool@{ThreadPool}}
+\doxysubsubsection{\texorpdfstring{stop\_threads\_}{stop\_threads\_}}
+{\footnotesize\ttfamily \label{classThreadPool_a49e2b199d10b5f6c8ddd4394d0220662} 
+bool Thread\+Pool::\+stop\+\_\+threads\+\_\+ \{false\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{thread__pool_8cppm_source_l00073}{73}} of file \doxymbox{\hyperlink{thread__pool_8cppm_source}{thread\+\_\+pool.\+cppm}}.
+
+\Hypertarget{classThreadPool_aa91d4103c2770a7b47e7e45e1d1037a1}\index{ThreadPool@{ThreadPool}!tasks\_@{tasks\_}}
+\index{tasks\_@{tasks\_}!ThreadPool@{ThreadPool}}
+\doxysubsubsection{\texorpdfstring{tasks\_}{tasks\_}}
+{\footnotesize\ttfamily \label{classThreadPool_aa91d4103c2770a7b47e7e45e1d1037a1} 
+std::\+queue$<$std::\+function$<$void()$>$ $>$ Thread\+Pool::\+tasks\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{thread__pool_8cppm_source_l00076}{76}} of file \doxymbox{\hyperlink{thread__pool_8cppm_source}{thread\+\_\+pool.\+cppm}}.
+
+\Hypertarget{classThreadPool_a0bfc20a0a9f4060e1b2c3a471f86592c}\index{ThreadPool@{ThreadPool}!threads\_@{threads\_}}
+\index{threads\_@{threads\_}!ThreadPool@{ThreadPool}}
+\doxysubsubsection{\texorpdfstring{threads\_}{threads\_}}
+{\footnotesize\ttfamily \label{classThreadPool_a0bfc20a0a9f4060e1b2c3a471f86592c} 
+std::\+vector$<$std::\+jthread$>$ Thread\+Pool::\+threads\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{thread__pool_8cppm_source_l00077}{77}} of file \doxymbox{\hyperlink{thread__pool_8cppm_source}{thread\+\_\+pool.\+cppm}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Compress-\/to-\/fit/\+src/\+util/\+containers/\+\doxymbox{\hyperlink{thread__pool_8cppm}{thread\+\_\+pool.\+cppm}}\end{DoxyCompactItemize}

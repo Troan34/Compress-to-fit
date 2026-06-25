@@ -32,7 +32,6 @@ var NAVTREE =
         [ "All", "modulemembers.html", null ],
         [ "Functions", "modulemembers_func.html", null ],
         [ "Variables", "modulemembers_vars.html", null ],
-        [ "Typedefs", "modulemembers_type.html", null ],
         [ "Enumerations", "modulemembers_enum.html", null ]
       ] ]
     ] ],
@@ -52,7 +51,7 @@ var NAVTREE =
       [ "Class Index", "classes.html", null ],
       [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
       [ "Class Members", "functions.html", [
-        [ "All", "functions.html", null ],
+        [ "All", "functions.html", "functions_dup" ],
         [ "Functions", "functions_func.html", null ],
         [ "Variables", "functions_vars.html", null ],
         [ "Typedefs", "functions_type.html", null ],
@@ -76,11 +75,11 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"_compress-to-fit_8cpp.html",
-"namespace_e_r_r___s_t_r_i_n_g.html#a6e076d05d154540639df579a40ab57d2",
-"utils_8cppm.html#aeee94ed600f26b5d54f52d5bfc10bef7"
+"Compress-to-fit_8cpp.html",
+"classWindow.html#a5f935861ed29efa6e3aebdf4e4c07874",
+"macros_8hpp.html#ab7cf55a2c019bccc72bd8cfe79271eec"
 ];
 
-const SYNCONMSG = 'click to disable panel synchronization';
-const SYNCOFFMSG = 'click to enable panel synchronization';
-const LISTOFALLMEMBERS = 'List of all members';
+var SYNCONMSG = 'click to disable panel synchronization';
+var SYNCOFFMSG = 'click to enable panel synchronization';
+var LISTOFALLMEMBERS = 'List of all members';

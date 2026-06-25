@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['rabin_0',['Rabin',['../classalg_1_1_rabin.html',1,'alg']]]
+  ['options_0',['Options',['../structparser_1_1Options.html',1,'parser']]]
 ];

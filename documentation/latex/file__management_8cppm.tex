@@ -1,10 +1,10 @@
-\doxysection{Compress-\/to-\/fit/\+src/\+util/\+file\+\_\+management.cppm File Reference}
-\hypertarget{file__management_8cppm}{}\label{file__management_8cppm}\index{Compress-\/to-\/fit/src/util/file\_management.cppm@{Compress-\/to-\/fit/src/util/file\_management.cppm}}
+\doxysection{Compress-\/to-\/fit/\+src/\+util/\+containers/\+file\+\_\+management.cppm File Reference}
+\hypertarget{file__management_8cppm}{}\label{file__management_8cppm}\index{Compress-\/to-\/fit/src/util/containers/file\_management.cppm@{Compress-\/to-\/fit/src/util/containers/file\_management.cppm}}
 {\ttfamily \+\#include $<$mio/\+mmap.\+hpp$>$}\newline
 {\ttfamily \+\#include $<$cassert$>$}\newline
+{\ttfamily import util;}\newline
 {\ttfamily import std.\+compat;}\newline
 {\ttfamily import parser;}\newline
-{\ttfamily import util;}\newline
 Include dependency graph for file\+\_\+management.\+cppm:\+\nopagebreak
 \begin{figure}[H]
 \begin{center}
@@ -12,21 +12,14 @@ Include dependency graph for file\+\_\+management.\+cppm:\+\nopagebreak
 \includegraphics[width=350pt]{file__management_8cppm__incl}
 \end{center}
 \end{figure}
-This graph shows which files directly or indirectly include this file:\+\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=216pt]{file__management_8cppm__dep__incl}
-\end{center}
-\end{figure}
 \doxysubsubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
-struct \doxymbox{\hyperlink{struct_header}{Header}}
+struct \doxymbox{\hyperlink{structHeader}{Header}}
 \item 
-struct \doxymbox{\hyperlink{struct_file_options}{File\+Options}}
+struct \doxymbox{\hyperlink{structFileOptions}{File\+Options}}
 \item 
-class \doxymbox{\hyperlink{class_file}{File}}
+class \doxymbox{\hyperlink{classFile}{File}}
 \begin{DoxyCompactList}\small\item\em Interpret a file as to retrieve custom information. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Enumerations}
 \begin{DoxyCompactItemize}
@@ -44,7 +37,7 @@ enum class \doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf1
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \doxymbox{\hyperlink{file__management_8cppm_a8eafeb61f6d909d1778dc3ce53e51114}{try\+\_\+throw\+\_\+\+IO\+\_\+error}} (std::\+ios\+\_\+base::\+iostate state, fs::\+path const \&path) noexcept(false)
+void \doxymbox{\hyperlink{file__management_8cppm_a51ac0d18eaecc636ae1d46e002e310f6}{try\+\_\+throw\+\_\+\+IO\+\_\+error}} (std::\+ios\+\_\+base::\+iostate const state, fs::\+path const \&path) noexcept(false)
 \end{DoxyCompactItemize}
 \doxysubsubsection*{Variables}
 \begin{DoxyCompactItemize}
@@ -55,7 +48,7 @@ constexpr size\+\_\+t \doxymbox{\hyperlink{file__management_8cppm_ae86837d59db95
 \end{DoxyCompactItemize}
 
 
-\label{file__management_8cppm_doc-enum-members}
+\label{doc-enum-members}
 \Hypertarget{file__management_8cppm_doc-enum-members}
 \doxysubsection{Enumeration Type Documentation}
 \Hypertarget{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527}\index{file\_management.cppm@{file\_management.cppm}!HEADER\_OFFSET@{HEADER\_OFFSET}}
@@ -104,26 +97,26 @@ MAX&\\
 \end{DoxyEnumFields}
 
 
-Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00017}{17}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00020}{20}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
 
 
 
-\label{file__management_8cppm_doc-func-members}
+\label{doc-func-members}
 \Hypertarget{file__management_8cppm_doc-func-members}
 \doxysubsection{Function Documentation}
-\Hypertarget{file__management_8cppm_a8eafeb61f6d909d1778dc3ce53e51114}\index{file\_management.cppm@{file\_management.cppm}!try\_throw\_IO\_error@{try\_throw\_IO\_error}}
+\Hypertarget{file__management_8cppm_a51ac0d18eaecc636ae1d46e002e310f6}\index{file\_management.cppm@{file\_management.cppm}!try\_throw\_IO\_error@{try\_throw\_IO\_error}}
 \index{try\_throw\_IO\_error@{try\_throw\_IO\_error}!file\_management.cppm@{file\_management.cppm}}
 \doxysubsubsection{\texorpdfstring{try\_throw\_IO\_error()}{try\_throw\_IO\_error()}}
-{\footnotesize\ttfamily \label{file__management_8cppm_a8eafeb61f6d909d1778dc3ce53e51114} 
-void try\+\_\+throw\+\_\+\+IO\+\_\+error (\begin{DoxyParamCaption}\item[{std::\+ios\+\_\+base::\+iostate}]{state}{, }\item[{fs::\+path const \&}]{path}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{file__management_8cppm_a51ac0d18eaecc636ae1d46e002e310f6} 
+void try\+\_\+throw\+\_\+\+IO\+\_\+error (\begin{DoxyParamCaption}\item[{std::\+ios\+\_\+base::\+iostate const}]{state}{, }\item[{fs::\+path const \&}]{path}{}\end{DoxyParamCaption})}
 
 
 
-Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00059}{59}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00062}{62}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
 
 
 
-\label{file__management_8cppm_doc-var-members}
+\label{doc-var-members}
 \Hypertarget{file__management_8cppm_doc-var-members}
 \doxysubsection{Variable Documentation}
 \Hypertarget{file__management_8cppm_ae86837d59db95e31826c13b25d7aa994}\index{file\_management.cppm@{file\_management.cppm}!FILE\_HEADER\_SIZE@{FILE\_HEADER\_SIZE}}
@@ -134,15 +127,15 @@ size\+\_\+t FILE\+\_\+\+HEADER\+\_\+\+SIZE = SIGNATURE.\+size() + sizeof(uint8\+
 
 
 
-Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00016}{16}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00019}{19}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
 
 \Hypertarget{file__management_8cppm_a5d9e3a0a38b084aa0d6d23da7a06be5e}\index{file\_management.cppm@{file\_management.cppm}!SIGNATURE@{SIGNATURE}}
 \index{SIGNATURE@{SIGNATURE}!file\_management.cppm@{file\_management.cppm}}
 \doxysubsubsection{\texorpdfstring{SIGNATURE}{SIGNATURE}}
 {\footnotesize\ttfamily \label{file__management_8cppm_a5d9e3a0a38b084aa0d6d23da7a06be5e} 
-std::\+string\+\_\+view SIGNATURE = "{}CTF-\/1"{}\hspace{0.3cm}{\ttfamily [constexpr]}, {\ttfamily [export]}}
+std::\+string\+\_\+view SIGNATURE = "{}CTF-\/1"{}\hspace{0.3cm}{\ttfamily [constexpr]}}
 
 
 
-Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00014}{14}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00017}{17}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
 

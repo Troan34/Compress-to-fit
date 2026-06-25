@@ -1,10 +1,10 @@
 <map id="Compress&#45;to&#45;fit/src/models/LZ77" name="Compress&#45;to&#45;fit/src/models/LZ77">
-<area shape="rect" id="node1" href="dir_7302770cb78d483b7160104746487eb1.html" title="LZ77" alt="" coords="55,53,106,80"/>
-<area shape="rect" id="node2" href="dir_12193e9b8ef4a86b78be1d50c2c79dd3.html" title="modules" alt="" coords="5,128,76,155"/>
-<area shape="poly" id="edge1" href="dir_000002_000004.html" alt="" coords="76,79,57,116,53,113,71,82"/>
-<area shape="rect" id="edge1-headlabel" href="dir_000002_000004.html" title="1" alt="" coords="60,108,67,124"/>
-<area shape="rect" id="node3" href="dir_fb1d874f3d1b8563f7a5a86473ffb2b3.html" title="util" alt="" coords="100,128,138,155"/>
-<area shape="poly" id="edge2" href="dir_000002_000008.html" alt="" coords="89,78,108,114,103,114,86,83"/>
-<area shape="rect" id="edge2-headlabel" href="dir_000002_000008.html" title="2" alt="" coords="108,100,115,116"/>
-<area shape="rect" id="clust1" href="dir_a2c8a978a4ec73a01e94a7414cfe883d.html" title="models" alt="" coords="44,16,116,91"/>
+<area shape="rect" id="node1" href="dir_7302770cb78d483b7160104746487eb1.html" title="LZ77" alt="" coords="45,51,96,76"/>
+<area shape="rect" id="node2" href="dir_3693bba2ff0f1c2fcdf2dcbe8a0f5b7e.html" title="parser" alt="" coords="5,124,64,149"/>
+<area shape="poly" id="edge1" href="dir_000004_000006.html" alt="" coords="67,75,49,112,45,109,62,78"/>
+<area shape="rect" id="edge1-headlabel" href="dir_000004_000006.html" title="1" alt="" coords="53,104,60,118"/>
+<area shape="rect" id="node3" href="dir_fb1d874f3d1b8563f7a5a86473ffb2b3.html" title="util" alt="" coords="87,124,126,149"/>
+<area shape="poly" id="edge2" href="dir_000004_000009.html" alt="" coords="78,74,97,110,91,110,75,79"/>
+<area shape="rect" id="edge2-headlabel" href="dir_000004_000009.html" title="2" alt="" coords="96,97,103,111"/>
+<area shape="rect" id="clust1" href="dir_a2c8a978a4ec73a01e94a7414cfe883d.html" title="models" alt="" coords="34,16,106,87"/>
 </map>

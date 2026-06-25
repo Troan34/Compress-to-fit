@@ -1,7 +1,8 @@
 var cli__parser_8cppm =
 [
-    [ "parser::Token", "classparser_1_1_token.html", "classparser_1_1_token" ],
-    [ "parser::Options", "structparser_1_1_options.html", "structparser_1_1_options" ],
+    [ "parser::HelpException", "classparser_1_1HelpException.html", "classparser_1_1HelpException" ],
+    [ "parser::Token", "classparser_1_1Token.html", "classparser_1_1Token" ],
+    [ "parser::Options", "structparser_1_1Options.html", "structparser_1_1Options" ],
     [ "parser::ValueType", "namespaceparser.html#a69ca3fb1da948707d293c02ddfbedfdf", null ],
     [ "parser::TokenType", "namespaceparser.html#accd7eb1ffd4c925598ec25fab6905369", [
       [ "parser::TokenType::FILENAME_IN", "namespaceparser.html#accd7eb1ffd4c925598ec25fab6905369ad00542cdc8161faa7c73eecd3f4b1488", null ],
@@ -22,7 +23,7 @@ var cli__parser_8cppm =
     [ "parser::lex", "namespaceparser.html#a883c446b2f982a5d7b6989f2442e8186", null ],
     [ "parser::parse", "namespaceparser.html#a7f5ecbf764fc175fc336fcea0dd07be8", null ],
     [ "show_progress", "cli__parser_8cppm.html#ae97b52a0806996c1857b54bf4e06253e", null ],
-    [ "parser::default_out_path", "namespaceparser.html#a7070ddbab534fb2cd9db4da4392877fb", null ],
+    [ "parser::DEFAULT_OUT_PATH", "namespaceparser.html#a239b839c0edd6180eb4bd577ad8b3ab9", null ],
     [ "parser::help_str", "namespaceparser.html#a8fb0c61c07575a0d8f64cfc377b885ed", null ],
     [ "parser::token_strings", "namespaceparser.html#a35056580671d6aa5abd316f21007bef6", null ]
 ];

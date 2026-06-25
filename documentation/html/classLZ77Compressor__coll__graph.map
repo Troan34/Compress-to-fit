@@ -1,0 +1,15 @@
+<map id="LZ77Compressor" name="LZ77Compressor">
+<area shape="rect" id="Node000001" title=" " alt="" coords="77,1232,210,1315"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,284,157,347"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="82,344,93,538,108,802,123,1005,141,1208,142,1216,137,1214,136,1208,118,1005,103,802,88,539,82,350"/>
+<area shape="rect" id="Node000003" href="$structSym.html" title=" " alt="" coords="50,5,214,127"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="99,129,93,151,84,211,82,267,76,267,78,211,88,150,100,124"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="120,197,272,260"/>
+<area shape="poly" id="edge5_Node000005_Node000003" title=" " alt="" coords="155,124,180,180,175,181,156,129"/>
+<area shape="rect" id="Node000004" href="$classWindow.html" title="[lz77.Window]" alt="" coords="118,371,277,802"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="164,799,158,872,148,1060,146,1215,141,1214,143,1060,153,872,163,804"/>
+<area shape="rect" id="Node000006" href="$classalg_1_1Rabin.html" title="This class enables fast string matching. Makes use of two chained arrays. This class is intertwined w..." alt="" coords="224,872,370,1162"/>
+<area shape="poly" id="edge7_Node000006_Node000004" title=" " alt="" coords="248,799,262,856,257,855,247,804"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="196,257,199,354,194,354,196,263"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="227,1137,179,1219,175,1216,222,1140"/>
+</map>

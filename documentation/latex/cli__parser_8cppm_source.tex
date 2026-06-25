@@ -1,173 +1,190 @@
 \doxysection{cli\+\_\+parser.\+cppm}
-\hypertarget{cli__parser_8cppm_source}{}\label{cli__parser_8cppm_source}\index{Compress-\/to-\/fit/src/util/cli\_parser.cppm@{Compress-\/to-\/fit/src/util/cli\_parser.cppm}}
+\hypertarget{cli__parser_8cppm_source}{}\label{cli__parser_8cppm_source}\index{Compress-\/to-\/fit/src/parser/cli\_parser.cppm@{Compress-\/to-\/fit/src/parser/cli\_parser.cppm}}
 \doxymbox{\hyperlink{cli__parser_8cppm}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00001}00001\ module;}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00002}00002\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{include}\ \textcolor{preprocessor}{<}\textcolor{preprocessor}{print}\textcolor{preprocessor}{>}}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00003}00003\ \textcolor{keyword}{export}\ module\ parser;}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00004}00004\ }
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00005}00005\ import\ util;}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00006}00006\ import\ std;}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00007}00007\ \textcolor{keyword}{namespace}\ fs\ =\ std::filesystem;}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00008}00008\ }
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00009}00009\ }
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00010}00010\ \textcolor{keyword}{namespace}\ \doxymbox{\hyperlink{namespaceparser}{parser}}}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00011}00011\ \{}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00012}00012\ \ \ \ \ \textcolor{keyword}{namespace}\ \doxymbox{\hyperlink{namespaceparser}{fs}}\ =\ \doxymbox{\hyperlink{namespaceparser}{std}}::\doxymbox{\hyperlink{namespaceparser}{filesystem}};}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00013}\doxymbox{\hyperlink{namespaceparser_a69ca3fb1da948707d293c02ddfbedfdf}{00013}}\ \ \ \ \ \textcolor{keyword}{using}\ \doxymbox{\hyperlink{namespaceparser}{ValueType}}\ =\ \doxymbox{\hyperlink{namespaceparser}{std}}::\doxymbox{\hyperlink{namespaceparser}{variant}}<\doxymbox{\hyperlink{namespaceparser}{std}}::\doxymbox{\hyperlink{namespaceparser}{monostate}},\ \doxymbox{\hyperlink{namespaceparser}{std}}::\doxymbox{\hyperlink{namespaceparser}{size\_t}},\ \doxymbox{\hyperlink{namespaceparser}{fs}}::\doxymbox{\hyperlink{namespaceparser}{path}},\ \textcolor{keywordtype}{bool}>;}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00014}00014\ }
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00015}00015\ \ \ \ \ \textcolor{comment}{/**}}
-\DoxyCodeLine{00016\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Parser\ token\ types.}}
-\DoxyCodeLine{00017\ \textcolor{comment}{\ \ \ \ \ *\ }}
-\DoxyCodeLine{00018\ \textcolor{comment}{\ \ \ \ \ *\ @note\ Keep\ the\ ordering\ as\ this,\ if\ you\ must\ modify\ it,\ modify\ \#token\_strings\ too.}}
-\DoxyCodeLine{00019\ \textcolor{comment}{\ \ \ \ \ */}}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00020}\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369}{00020}}\ \ \ \ \ \textcolor{keyword}{export}\ \textcolor{keyword}{enum}\ \textcolor{keyword}{class}\ \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369}{TokenType}}}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00021}00021\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00022}\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369ad00542cdc8161faa7c73eecd3f4b1488}{00022}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369ad00542cdc8161faa7c73eecd3f4b1488}{FILENAME\_IN}},}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00023}\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a51cbb3e0c50a665a956c0c05989805cc}{00023}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a51cbb3e0c50a665a956c0c05989805cc}{FILENAME\_OUT}},}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00024}\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a6695eadf97d6ae0347fe82481a97b993}{00024}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a6695eadf97d6ae0347fe82481a97b993}{COMPRESSOR\_TYPE}},}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00025}\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a14f6404415ca014c5ce6296b2a77cdf3}{00025}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a14f6404415ca014c5ce6296b2a77cdf3}{COMPRESSION\_PRESET}},}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00026}\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a991cf0c96f388f1b70f0966a0e45a485}{00026}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a991cf0c96f388f1b70f0966a0e45a485}{N\_FILES}},}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00027}\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a286f8ee59548f0a0839777ec3671b778}{00027}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a286f8ee59548f0a0839777ec3671b778}{SIZE\_FILES}},}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00028}\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369aa98228817cdbdd15909489b2743c1f17}{00028}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369aa98228817cdbdd15909489b2743c1f17}{LONG\_HELP}},}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00029}\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a4fc963e213bba362778f5c175eb4d5ff}{00029}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a4fc963e213bba362778f5c175eb4d5ff}{HELP}},}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00030}\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a07ce3fdb4d7777d766f62bcfcf57532e}{00030}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a07ce3fdb4d7777d766f62bcfcf57532e}{FORCE\_COMPRESSION}},}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00031}\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a4eb6ee48803ccd6075e8d129e5167fb8}{00031}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a4eb6ee48803ccd6075e8d129e5167fb8}{DELETE\_INPUT}},}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00032}\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a2dd08f693d26ad0ef819a6da487fe438}{00032}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a2dd08f693d26ad0ef819a6da487fe438}{CONCATENATE}},}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00033}\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a297a6bb3ef5700bc84563dc87938c1b2}{00033}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a297a6bb3ef5700bc84563dc87938c1b2}{DO\_DECOMP\_AFTER\_CONCAT}},}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00034}\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a8cb317a671dafb2df58c07a6fc9291ef}{00034}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a8cb317a671dafb2df58c07a6fc9291ef}{DO\_NOT\_DECOMP\_AFTER\_CONCAT}},}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00035}\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a245d11a3709454cc69b2de7911073d57}{00035}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a245d11a3709454cc69b2de7911073d57}{NO\_TYPE}}\ =\ 696969,\textcolor{comment}{//we\ don't\ want\ this\ to\ be\ an\ index}}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00036}00036\ \ \ \ \ \};}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00037}00037\ \ \ \ \ \textcolor{comment}{//HAS\ to\ follow\ the\ same\ order\ of\ the\ TokenType\ enums}}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00038}\doxymbox{\hyperlink{namespaceparser_a35056580671d6aa5abd316f21007bef6}{00038}}\ \ \ \ \ \textcolor{keyword}{constexpr}\ \doxymbox{\hyperlink{namespaceparser_a35056580671d6aa5abd316f21007bef6}{std}}::\doxymbox{\hyperlink{namespaceparser_a35056580671d6aa5abd316f21007bef6}{string\_view}}\ \doxymbox{\hyperlink{namespaceparser_a35056580671d6aa5abd316f21007bef6}{token\_strings}}[]\ =}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00039}00039\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00040}00040\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}-\/i"{}},}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00041}00041\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}-\/o"{}},}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00042}00042\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}-\/c"{}},}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00043}00043\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}-\/preset"{}},}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00044}00044\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}-\/n\_files"{}},}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00045}00045\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}-\/size\_files"{}},}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00046}00046\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}-\/help"{}},}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00047}00047\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}-\/h"{}},}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00048}00048\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}-\/fc"{}},}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00049}00049\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}-\/di"{}},}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00050}00050\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}-\/concat"{}},}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00051}00051\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}-\/concat:y"{}},}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00052}00052\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}-\/concat:n"{}},}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00053}00053\ \ \ \ \ \};}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00054}00054\ }
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00055}\doxymbox{\hyperlink{namespaceparser_a8fb0c61c07575a0d8f64cfc377b885ed}{00055}}\ \ \ \ \ \textcolor{keyword}{constexpr}\ \doxymbox{\hyperlink{namespaceparser_a8fb0c61c07575a0d8f64cfc377b885ed}{std}}::\doxymbox{\hyperlink{namespaceparser_a8fb0c61c07575a0d8f64cfc377b885ed}{string\_view}}\ \doxymbox{\hyperlink{namespaceparser_a8fb0c61c07575a0d8f64cfc377b885ed}{help\_str}}\ =}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00056}00056\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\(\backslash\)033[1m\(\backslash\)033[36mWelcome\ to\ Compress\ To\ Fit!\(\backslash\)033[0m\(\backslash\)n"{}}}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00057}00057\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}A\ cli\ compressor\ program.\(\backslash\)n"{}}}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00058}00058\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Usage:\ ctf\ [options]\(\backslash\)n"{}}}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00059}00059\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}options:\(\backslash\)n"{}}}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00060}00060\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\(\backslash\)t-\/i\ <path>\ \ Take\ <path>\ as\ input\ path.\ If\ <path>\ contains\ spaces,\ make\ sure\ to\ double\ quote(\(\backslash\)"{}\(\backslash\)"{})\ around\ <path>.\(\backslash\)n"{}}}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00061}00061\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\(\backslash\)t-\/o\ <path>\ \ Take\ <path>\ as\ output\ path.\ If\ <path>\ contains\ spaces,\ make\ sure\ to\ double\ quote(\(\backslash\)"{}\(\backslash\)"{})\ around\ <path>.\(\backslash\)n"{}}}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00062}00062\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\(\backslash\)t-\/c\ <comp\_options>\ \ Use\ a\ specific\ compressor\ from\ a\ list\ of\ compressor\ options\ (look\ for\ [comp\_options]\ in\ this\ page).\(\backslash\)n"{}}}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00063}00063\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\(\backslash\)t-\/fc\ \ Force\ compression\ of\ compressed\ files.\(\backslash\)n"{}}}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00064}00064\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\(\backslash\)t-\/di\ \ Delete\ input\ file\ on\ compression/extraction\(\backslash\)n"{}}}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00065}00065\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\(\backslash\)t-\/preset\ <n>\ \ Compression\ preset\ n\ is\ from\ 0\ to\ 9\ (included).\(\backslash\)n"{}}}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00066}00066\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\(\backslash\)t-\/n\_files\ <n>\ \ In\ how\ many\ files\ should\ the\ output\ be\ split\ in\ (max\ 1000).\(\backslash\)n"{}}}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00067}00067\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\(\backslash\)t-\/concat\ \ Concatenate\ the\ compressed\ files\ in\ the\ folder\ specified\ by\ '-\/i'.\ Will\ prompt\ whether\ you\ want\ to\ decompress\ the\ concatenated\ file.\(\backslash\)n"{}}}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00068}00068\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\(\backslash\)t-\/concat:y\ \ Concatenate\ the\ compressed\ files\ in\ the\ folder\ specified\ by\ '-\/i'.\ WILL\ decompress\ the\ concatenated\ file.\(\backslash\)n"{}}}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00069}00069\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\(\backslash\)t-\/concat:n\ \ Concatenate\ the\ compressed\ files\ in\ the\ folder\ specified\ by\ '-\/i'.\ WILL\ NOT\ decompress\ the\ concatenated\ file.\(\backslash\)n"{}}}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00070}00070\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\(\backslash\)t-\/size\_files\ <bytes>\ \ Split\ the\ output\ file\ in\ files\ of\ <bytes>\ size\ (min\ 512).\(\backslash\)n"{}}}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00071}00071\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n"{}}}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00072}00072\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}[comp\_options]:"{}}}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00073}00073\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\(\backslash\)"{}LZ77\(\backslash\)"{}:\ A\ dictionary\ based\ algorithm,\ good\ for\ repetitive\ patterns\ of\ data.\ Slow\ compression\ and\ fast\ decompression."{}};}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00074}00074\ }
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00075}\doxymbox{\hyperlink{namespaceparser_a7070ddbab534fb2cd9db4da4392877fb}{00075}}\ \ \ \ \ \textcolor{keyword}{export}\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{namespaceparser_a7070ddbab534fb2cd9db4da4392877fb}{fs}}::\doxymbox{\hyperlink{namespaceparser_a7070ddbab534fb2cd9db4da4392877fb}{path}}\ \doxymbox{\hyperlink{namespaceparser_a7070ddbab534fb2cd9db4da4392877fb}{default\_out\_path}}\{\ \textcolor{stringliteral}{"{}output.tzf"{}}\ \};}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00076}00076\ }
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00077}00077\ }
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00078}00078\ }
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00079}00079\ \ \ \ \ \textcolor{comment}{///\ <summary>}}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00080}00080\ \ \ \ \ \textcolor{comment}{///\ Represents\ a\ cli\ option}}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00081}00081\ \ \ \ \ \textcolor{comment}{///\ </summary>}}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00082}\doxymbox{\hyperlink{classparser_1_1_token}{00082}}\ \ \ \ \ \textcolor{keyword}{class}\ \doxymbox{\hyperlink{classparser_1_1_token}{Token}}}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00083}00083\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00084}00084\ \ \ \ \ \textcolor{keyword}{public}:}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00085}00085\ }
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00086}00086\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classparser_1_1_token_a1a02f18007b4724b39adab951f180e9f}{Token}}(\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369}{TokenType}}\ type\_,\ ValueType\ value\_);}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00087}00087\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classparser_1_1_token_a03fc54839cfb01b88087c14db5b0fd63}{Token}}(\textcolor{keyword}{const}\ std::string\&\ option);}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00001}00001\ \textcolor{keyword}{export}\ module\ parser;}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00002}00002\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00003}00003\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{ifdef}\ \textcolor{preprocessor}{\_\_INTELLISENSE\_\_}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00004}00004\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{include}\ \textcolor{stringliteral}{"{}../../for\_intellisense/everything.hpp"{}}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00005}00005\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{endif}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00007}00007\ import\ util;}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00008}00008\ import\ std.compat;}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00009}00009\ \textcolor{keyword}{namespace}\ fs\ =\ std::filesystem;}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00010}00010\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00012}00012\ \textcolor{keyword}{namespace}\ \doxymbox{\hyperlink{namespaceparser}{parser}}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00013}00013\ \{}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00014}00014\ \ \ \ \ \textcolor{keyword}{namespace}\ \doxymbox{\hyperlink{namespaceparser}{fs}}\ =\ \doxymbox{\hyperlink{namespaceparser}{std}}::\doxymbox{\hyperlink{namespaceparser}{filesystem}};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00015}\doxymbox{\hyperlink{namespaceparser_a69ca3fb1da948707d293c02ddfbedfdf}{00015}}\ \ \ \ \ \textcolor{keyword}{using}\ \doxymbox{\hyperlink{namespaceparser}{ValueType}}\ =\ \doxymbox{\hyperlink{namespaceparser}{std}}::\doxymbox{\hyperlink{namespaceparser}{variant}}<\doxymbox{\hyperlink{namespaceparser}{std}}::\doxymbox{\hyperlink{namespaceparser}{monostate}},\ \doxymbox{\hyperlink{namespaceparser}{std}}::\doxymbox{\hyperlink{namespaceparser}{size\_t}},\ \doxymbox{\hyperlink{namespaceparser}{fs}}::\doxymbox{\hyperlink{namespaceparser}{path}},\ \textcolor{keywordtype}{bool}>;}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00017}00017\ \ \ \ \ \textcolor{comment}{/**}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Parser\ token\ types.}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ \ \ \ \ *\ }}
+\DoxyCodeLine{00020\ \textcolor{comment}{\ \ \ \ \ *\ @note\ Keep\ the\ ordering\ as\ this,\ if\ you\ must\ modify\ it,\ modify\ \#token\_strings\ too.}}
+\DoxyCodeLine{00021\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00022}\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369}{00022}}\ \ \ \ \ \textcolor{keyword}{export}\ \textcolor{keyword}{enum}\ \textcolor{keyword}{class}\ \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369}{TokenType}}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00023}00023\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00024}\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369ad00542cdc8161faa7c73eecd3f4b1488}{00024}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369ad00542cdc8161faa7c73eecd3f4b1488}{FILENAME\_IN}},}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00025}\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a51cbb3e0c50a665a956c0c05989805cc}{00025}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a51cbb3e0c50a665a956c0c05989805cc}{FILENAME\_OUT}},}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00026}\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a6695eadf97d6ae0347fe82481a97b993}{00026}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a6695eadf97d6ae0347fe82481a97b993}{COMPRESSOR\_TYPE}},}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00027}\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a14f6404415ca014c5ce6296b2a77cdf3}{00027}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a14f6404415ca014c5ce6296b2a77cdf3}{COMPRESSION\_PRESET}},}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00028}\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a991cf0c96f388f1b70f0966a0e45a485}{00028}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a991cf0c96f388f1b70f0966a0e45a485}{N\_FILES}},}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00029}\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a286f8ee59548f0a0839777ec3671b778}{00029}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a286f8ee59548f0a0839777ec3671b778}{SIZE\_FILES}},}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00030}\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369aa98228817cdbdd15909489b2743c1f17}{00030}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369aa98228817cdbdd15909489b2743c1f17}{LONG\_HELP}},}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00031}\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a4fc963e213bba362778f5c175eb4d5ff}{00031}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a4fc963e213bba362778f5c175eb4d5ff}{HELP}},}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00032}\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a07ce3fdb4d7777d766f62bcfcf57532e}{00032}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a07ce3fdb4d7777d766f62bcfcf57532e}{FORCE\_COMPRESSION}},}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00033}\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a4eb6ee48803ccd6075e8d129e5167fb8}{00033}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a4eb6ee48803ccd6075e8d129e5167fb8}{DELETE\_INPUT}},}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00034}\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a2dd08f693d26ad0ef819a6da487fe438}{00034}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a2dd08f693d26ad0ef819a6da487fe438}{CONCATENATE}},}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00035}\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a297a6bb3ef5700bc84563dc87938c1b2}{00035}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a297a6bb3ef5700bc84563dc87938c1b2}{DO\_DECOMP\_AFTER\_CONCAT}},}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00036}\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a8cb317a671dafb2df58c07a6fc9291ef}{00036}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a8cb317a671dafb2df58c07a6fc9291ef}{DO\_NOT\_DECOMP\_AFTER\_CONCAT}},}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00037}\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a245d11a3709454cc69b2de7911073d57}{00037}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a245d11a3709454cc69b2de7911073d57}{NO\_TYPE}}\ =\ 696969,\textcolor{comment}{//we\ don't\ want\ this\ to\ be\ an\ index}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00038}00038\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00039}00039\ \ \ \ \ \textcolor{comment}{//HAS\ to\ follow\ the\ same\ order\ of\ the\ TokenType\ enums}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00040}\doxymbox{\hyperlink{namespaceparser_a35056580671d6aa5abd316f21007bef6}{00040}}\ \ \ \ \ \textcolor{keyword}{constexpr}\ \doxymbox{\hyperlink{namespaceparser_a35056580671d6aa5abd316f21007bef6}{std}}::\doxymbox{\hyperlink{namespaceparser_a35056580671d6aa5abd316f21007bef6}{string\_view}}\ \doxymbox{\hyperlink{namespaceparser_a35056580671d6aa5abd316f21007bef6}{token\_strings}}[]\ =}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00041}00041\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00042}00042\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}-\/i"{}},}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00043}00043\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}-\/o"{}},}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00044}00044\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}-\/c"{}},}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00045}00045\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}-\/preset"{}},}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00046}00046\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}-\/n\_files"{}},}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00047}00047\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}-\/size\_files"{}},}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00048}00048\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}-\/help"{}},}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00049}00049\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}-\/h"{}},}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00050}00050\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}-\/fc"{}},}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00051}00051\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}-\/di"{}},}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00052}00052\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}-\/concat"{}},}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00053}00053\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}-\/concat:y"{}},}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00054}00054\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}-\/concat:n"{}},}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00055}00055\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00056}00056\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00058}\doxymbox{\hyperlink{namespaceparser_a8fb0c61c07575a0d8f64cfc377b885ed}{00058}}\ \ \ \ \ \textcolor{keyword}{constexpr}\ \doxymbox{\hyperlink{namespaceparser_a8fb0c61c07575a0d8f64cfc377b885ed}{std}}::\doxymbox{\hyperlink{namespaceparser_a8fb0c61c07575a0d8f64cfc377b885ed}{string\_view}}\ \doxymbox{\hyperlink{namespaceparser_a8fb0c61c07575a0d8f64cfc377b885ed}{help\_str}}\ =}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00059}00059\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\(\backslash\)033[1m\(\backslash\)033[36mWelcome\ to\ Compress\ To\ Fit!\(\backslash\)033[0m\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00060}00060\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}A\ cli\ compressor\ program.\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00061}00061\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Usage:\ ctf\ [options]\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00062}00062\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}options:\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00063}00063\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ \ \(\backslash\)033[2m-\/i\ <path>\(\backslash\)033[0m\ \ Take\ <path>\ as\ input\ path.\ If\ <path>\ contains\ spaces,\ make\ sure\ to\ double\ quote(\(\backslash\)"{}\(\backslash\)"{})\ around\ <path>.\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00064}00064\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ \ \(\backslash\)033[2m-\/o\ <path>\(\backslash\)033[0m\ \ Take\ <path>\ as\ output\ path.\ If\ <path>\ contains\ spaces,\ make\ sure\ to\ double\ quote(\(\backslash\)"{}\(\backslash\)"{})\ around\ <path>.\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00065}00065\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ \ \(\backslash\)033[2m-\/c\ <comp\_options>\(\backslash\)033[0m\ \ Use\ a\ specific\ compressor\ from\ a\ list\ of\ compressor\ options\ (look\ for\ [comp\_options]\ in\ this\ page).\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00066}00066\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ \ \(\backslash\)033[2m-\/fc\(\backslash\)033[0m\ \ Force\ compression\ of\ compressed\ files.\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00067}00067\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ \ \(\backslash\)033[2m-\/di\(\backslash\)033[0m\ \ Delete\ input\ file\ on\ compression/extraction\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00068}00068\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ \ \(\backslash\)033[2m-\/preset\ <n>\(\backslash\)033[0m\ \ Compression\ preset\ n\ is\ from\ 0\ to\ 9\ (included).\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00069}00069\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ \ \(\backslash\)033[2m-\/n\_files\ <n>\(\backslash\)033[0m\ \ In\ how\ many\ files\ should\ the\ output\ be\ split\ in\ (max\ 1000).\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00070}00070\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ \ \(\backslash\)033[2m-\/concat\(\backslash\)033[0m\ \ Concatenate\ the\ compressed\ files\ in\ the\ folder\ specified\ by\ '-\/i'.\ Will\ prompt\ whether\ you\ want\ to\ decompress\ the\ concatenated\ file.\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00071}00071\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ \ \(\backslash\)033[2m-\/concat:y\(\backslash\)033[0m\ \ Concatenate\ the\ compressed\ files\ in\ the\ folder\ specified\ by\ '-\/i'.\ WILL\ decompress\ the\ concatenated\ file.\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00072}00072\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ \ \(\backslash\)033[2m-\/concat:n\(\backslash\)033[0m\ \ Concatenate\ the\ compressed\ files\ in\ the\ folder\ specified\ by\ '-\/i'.\ WILL\ NOT\ decompress\ the\ concatenated\ file.\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00073}00073\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ \ \(\backslash\)033[2m-\/size\_files\ <bytes>\(\backslash\)033[0m\ \ Split\ the\ output\ file\ in\ files\ of\ <bytes>\ size\ (min\ 512).\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00074}00074\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00075}00075\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}[comp\_options]:\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00076}00076\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\(\backslash\)033[35m\(\backslash\)"{}LZ77\(\backslash\)"{}\(\backslash\)033[0m:\ A\ dictionary\ based\ algorithm,\ good\ for\ repetitive\ patterns\ of\ data.\ Slow\ compression\ and\ fast\ decompression.\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00077}00077\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\(\backslash\)nAdditional\ details:\(\backslash\)n"{}}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00078}00078\ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\ -\/\ If\ an\ option\ is\ encountered\ multiple\ times,\ the\ last\ occurence\ shall\ be\ considered\ by\ the\ program."{}};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00080}\doxymbox{\hyperlink{classparser_1_1HelpException}{00080}}\ \ \ \ \ \textcolor{keyword}{export}\ \textcolor{keyword}{class}\ \doxymbox{\hyperlink{classparser_1_1HelpException}{HelpException}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{classparser_1_1HelpException}{std}}::\doxymbox{\hyperlink{classparser_1_1HelpException}{exception}}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00081}00081\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00082}00082\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00083}\doxymbox{\hyperlink{classparser_1_1HelpException_aa5d7341ce71c5a2feb5a22fc18f1b047}{00083}}\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \doxymbox{\hyperlink{classparser_1_1HelpException_aa5d7341ce71c5a2feb5a22fc18f1b047}{what}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ \doxymbox{\hyperlink{classparser_1_1HelpException_aa5d7341ce71c5a2feb5a22fc18f1b047}{override}}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00084}00084\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00085}00085\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ help\_str.data();}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00086}00086\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00087}00087\ \ \ \ \ \};}
 \DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00088}00088\ }
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00089}\doxymbox{\hyperlink{classparser_1_1_token_ad5eff5d309bdab33337a5074c8698ab9}{00089}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \doxymbox{\hyperlink{classparser_1_1_token_ad5eff5d309bdab33337a5074c8698ab9}{ValueType}}\ \doxymbox{\hyperlink{classparser_1_1_token_ad5eff5d309bdab33337a5074c8698ab9}{get\_value}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00090}00090\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ value;}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00092}00092\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00089}\doxymbox{\hyperlink{namespaceparser_a239b839c0edd6180eb4bd577ad8b3ab9}{00089}}\ \ \ \ \ \textcolor{keyword}{export}\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{namespaceparser_a239b839c0edd6180eb4bd577ad8b3ab9}{fs}}::\doxymbox{\hyperlink{namespaceparser_a239b839c0edd6180eb4bd577ad8b3ab9}{path}}\ \doxymbox{\hyperlink{namespaceparser_a239b839c0edd6180eb4bd577ad8b3ab9}{DEFAULT\_OUT\_PATH}}\{\ \textcolor{stringliteral}{"{}output.tzf"{}}\ \};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00092}00092\ }
 \DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00093}00093\ }
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00094}\doxymbox{\hyperlink{classparser_1_1_token_a2edf4c2124c79ac25d5105d2aee3e398}{00094}}\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369}{TokenType}}\ \doxymbox{\hyperlink{classparser_1_1_token_a2edf4c2124c79ac25d5105d2aee3e398}{get\_type}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00095}00095\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classparser_1_1_token_a94a222c963f58b1206743b29e10084df}{type}};}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00097}00097\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00098}00098\ }
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00099}00099\ \ \ \ \ \textcolor{keyword}{private}:}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00100}\doxymbox{\hyperlink{classparser_1_1_token_a18b9921061fd6218033e81b4df258a51}{00100}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classparser_1_1_token_a18b9921061fd6218033e81b4df258a51}{ValueType}}\ \doxymbox{\hyperlink{classparser_1_1_token_a18b9921061fd6218033e81b4df258a51}{value}};}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00101}\doxymbox{\hyperlink{classparser_1_1_token_a94a222c963f58b1206743b29e10084df}{00101}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369}{TokenType}}\ \doxymbox{\hyperlink{classparser_1_1_token_a94a222c963f58b1206743b29e10084df}{type}}\ =\ \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369}{TokenType}}\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a245d11a3709454cc69b2de7911073d57}{::}}\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a245d11a3709454cc69b2de7911073d57}{NO\_TYPE}};}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00102}00102\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00094}00094\ \ \ \ \ \textcolor{comment}{///\ <summary>}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00095}00095\ \ \ \ \ \textcolor{comment}{///\ Represents\ a\ cli\ option}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00096}00096\ \ \ \ \ \textcolor{comment}{///\ </summary>}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00097}\doxymbox{\hyperlink{classparser_1_1Token}{00097}}\ \ \ \ \ \textcolor{keyword}{class}\ \doxymbox{\hyperlink{classparser_1_1Token}{Token}}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00098}00098\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00099}00099\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00100}00100\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00101}00101\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classparser_1_1Token_a50406e2c4754e1247f7d9ef0fde95f27}{Token}}(\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369}{TokenType}}\ type\_,\ ValueType\ \textcolor{keyword}{const}\ \&value\_);}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00102}00102\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classparser_1_1Token_a03fc54839cfb01b88087c14db5b0fd63}{Token}}(\textcolor{keyword}{const}\ std::string\&\ option);}
 \DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00103}00103\ }
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00104}00104\ \ \ \ \ \textcolor{comment}{//Constructs\ a\ Token\ given\ a\ string\ that\ looks\ like\ this\ "{}-\/<option>\ <value>"{}}}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00105}00105\ \ \ \ \ \doxymbox{\hyperlink{namespaceparser_a883c446b2f982a5d7b6989f2442e8186}{std}}::\doxymbox{\hyperlink{namespaceparser_a883c446b2f982a5d7b6989f2442e8186}{expected}}<\doxymbox{\hyperlink{namespaceparser_a883c446b2f982a5d7b6989f2442e8186}{Token}},\ \doxymbox{\hyperlink{namespaceparser_a883c446b2f982a5d7b6989f2442e8186}{ErrorType}}>\ \doxymbox{\hyperlink{namespaceparser_a883c446b2f982a5d7b6989f2442e8186}{lex}}(\textcolor{keyword}{const}\ std::string\&\ option);}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00106}00106\ }
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00107}00107\ }
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00108}00108\ \ \ \ \ \textcolor{comment}{///\ <summary>}}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00109}00109\ \ \ \ \ \textcolor{comment}{///\ All\ the\ options\ available}}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00110}00110\ \ \ \ \ \textcolor{comment}{///\ </summary>}}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00111}\doxymbox{\hyperlink{structparser_1_1_options}{00111}}\ \ \ \ \ \textcolor{keyword}{export}\ \textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structparser_1_1_options}{Options}}}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00112}00112\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00113}\doxymbox{\hyperlink{structparser_1_1_options_aa5897e549e45e6c8c0c6528d5f7a301e}{00113}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structparser_1_1_options_aa5897e549e45e6c8c0c6528d5f7a301e}{fs}}::\doxymbox{\hyperlink{structparser_1_1_options_aa5897e549e45e6c8c0c6528d5f7a301e}{path}}\ \doxymbox{\hyperlink{structparser_1_1_options_aa5897e549e45e6c8c0c6528d5f7a301e}{filename\_in}}\{\};}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00114}\doxymbox{\hyperlink{structparser_1_1_options_a541071618f10401baff234e8e412fe9e}{00114}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structparser_1_1_options_a541071618f10401baff234e8e412fe9e}{fs}}::\doxymbox{\hyperlink{structparser_1_1_options_a541071618f10401baff234e8e412fe9e}{path}}\ \doxymbox{\hyperlink{structparser_1_1_options_a541071618f10401baff234e8e412fe9e}{filename\_out}}\{\ \doxymbox{\hyperlink{structparser_1_1_options}{default\_out\_path}}\ \};}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00115}\doxymbox{\hyperlink{structparser_1_1_options_ab8d5641c8bad00296b548aaa3a9522e2}{00115}}\ \ \ \ \ \ \ \ \ size\_t\ \doxymbox{\hyperlink{structparser_1_1_options_ab8d5641c8bad00296b548aaa3a9522e2}{compressor}}\ =\ \textcolor{keyword}{static\_cast}<\doxymbox{\hyperlink{structparser_1_1_options}{size\_t}}>(\doxymbox{\hyperlink{structparser_1_1_options}{CompType}}::\doxymbox{\hyperlink{structparser_1_1_options}{LZ77}});}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00116}\doxymbox{\hyperlink{structparser_1_1_options_a0c00ba38d9089caa976d0a140a984cd7}{00116}}\ \ \ \ \ \ \ \ \ size\_t\ \doxymbox{\hyperlink{structparser_1_1_options_a0c00ba38d9089caa976d0a140a984cd7}{preset}}\ =\ \doxymbox{\hyperlink{structparser_1_1_options}{COMP\_5}};}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00117}\doxymbox{\hyperlink{structparser_1_1_options_a93ba36418ea34555a584ebfd2881496e}{00117}}\ \ \ \ \ \ \ \ \ size\_t\ \doxymbox{\hyperlink{structparser_1_1_options_a93ba36418ea34555a584ebfd2881496e}{n\_files}}\ =\ 1;}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00118}\doxymbox{\hyperlink{structparser_1_1_options_a31c850f2a96edb31857b56082fed7605}{00118}}\ \ \ \ \ \ \ \ \ size\_t\ \doxymbox{\hyperlink{structparser_1_1_options_a31c850f2a96edb31857b56082fed7605}{size\_files}}\ =\ 0;}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00119}\doxymbox{\hyperlink{structparser_1_1_options_a85021d586a434540f2321e90ebf64ded}{00119}}\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{structparser_1_1_options_a85021d586a434540f2321e90ebf64ded}{force\_compression}}\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00120}\doxymbox{\hyperlink{structparser_1_1_options_a204eb08002da88bc72fa2a88e99a1782}{00120}}\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{structparser_1_1_options_a204eb08002da88bc72fa2a88e99a1782}{delete\_input}}\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00121}\doxymbox{\hyperlink{structparser_1_1_options_a4e235b57474a81a3eec424cb4142c8ab}{00121}}\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{structparser_1_1_options_a4e235b57474a81a3eec424cb4142c8ab}{concatenate\_files}}\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00122}\doxymbox{\hyperlink{structparser_1_1_options_af4b3c6d81f03bcc31481e82348ee4153}{00122}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structparser_1_1_options}{std}}::\doxymbox{\hyperlink{structparser_1_1_options}{optional}}<\textcolor{keywordtype}{bool}>\ \doxymbox{\hyperlink{structparser_1_1_options}{decomp\_after\_concat}}\{\};}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00123}00123\ \ \ \ \ \};}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00124}00124\ }
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00125}00125\ \ \ \ \ \textcolor{comment}{/**}}
-\DoxyCodeLine{00126\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Parse\ the\ cli,\ fully\ manages\ error\ checking.}}
-\DoxyCodeLine{00127\ \textcolor{comment}{\ \ \ \ \ *\ @return\ The\ options\ received\ from\ the\ cli.}}
-\DoxyCodeLine{00128\ \textcolor{comment}{\ \ \ \ \ *\ }}
-\DoxyCodeLine{00129\ \textcolor{comment}{\ \ \ \ \ *\ @post\ Paths\ will\ be\ validated\ ONLY\ FOR\ THEIR\ EXISTANCE\ AND\ ACCESSIBILITY.}}
-\DoxyCodeLine{00130\ \textcolor{comment}{\ \ \ \ \ */}}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00131}00131\ \ \ \ \ \textcolor{keyword}{export}\ \doxymbox{\hyperlink{structparser_1_1_options}{Options}}\ \doxymbox{\hyperlink{namespaceparser_a7f5ecbf764fc175fc336fcea0dd07be8}{parse}}(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}*\ argv[]);}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00132}00132\ }
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00133}00133\ \}\textcolor{comment}{//namespace\ parser}}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00134}00134\ }
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00135}00135\ \textcolor{comment}{/**}}
-\DoxyCodeLine{00136\ \textcolor{comment}{\ *\ @brief\ Show\ a\ progress\ bar\ in\ terminal.}}
-\DoxyCodeLine{00137\ \textcolor{comment}{\ *\ @param\ options\ Receive\ miscellaneus\ data.}}
-\DoxyCodeLine{00138\ \textcolor{comment}{\ *\ @param\ progress\ From\ 0\ to\ 1}}
-\DoxyCodeLine{00139\ \textcolor{comment}{\ */}}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00140}\doxymbox{\hyperlink{cli__parser_8cppm_ae97b52a0806996c1857b54bf4e06253e}{00140}}\ \textcolor{keyword}{export}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{cli__parser_8cppm_ae97b52a0806996c1857b54bf4e06253e}{show\_progress}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{namespaceparser}{parser}}::\doxymbox{\hyperlink{structparser_1_1_options}{Options}}\&\ options\ =\ \{\},\ \textcolor{keywordtype}{float}\ progress\ =\ 0.f,\ \textcolor{keywordtype}{bool}\ compressing\ =\ \textcolor{keyword}{false})}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00141}00141\ \{}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00142}00142\ \ \ \ \ progress\ =\ std::min(1.f,\ progress);}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00143}00143\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ max\_bar\_width\ =\ 50;}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00144}00144\ }
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00145}00145\ \ \ \ \ std::print(\textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)033[K"{}});}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00146}00146\ \ \ \ \ std::print(\textcolor{stringliteral}{"{}\(\backslash\)033[34mProgress\ on\ the\ "{}});}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00147}00147\ \ \ \ \ \textcolor{keywordflow}{if}\ (compressing)}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00148}00148\ \ \ \ \ \ \ \ \ std::print(\textcolor{stringliteral}{"{}compression:\(\backslash\)033[0m"{}});}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00149}00149\ \ \ \ \ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00150}00150\ \ \ \ \ \ \ \ \ std::print(\textcolor{stringliteral}{"{}extraction:\(\backslash\)033[0m"{}});}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00104}\doxymbox{\hyperlink{classparser_1_1Token_ab547f23fbebcce7583502b162d0e6659}{00104}}\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classparser_1_1Token_ab547f23fbebcce7583502b162d0e6659}{get\_value}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00105}00105\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ value;}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00107}00107\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00108}00108\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00109}\doxymbox{\hyperlink{classparser_1_1Token_a0780d73b9348e18a2245557a52bed08a}{00109}}\ \ \ \ \ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classparser_1_1Token_a0780d73b9348e18a2245557a52bed08a}{get\_type}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00110}00110\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classparser_1_1Token_a94a222c963f58b1206743b29e10084df}{type}};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00112}00112\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00114}00114\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00115}\doxymbox{\hyperlink{classparser_1_1Token_a18b9921061fd6218033e81b4df258a51}{00115}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classparser_1_1Token_a18b9921061fd6218033e81b4df258a51}{ValueType}}\ \doxymbox{\hyperlink{classparser_1_1Token_a18b9921061fd6218033e81b4df258a51}{value}};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00116}\doxymbox{\hyperlink{classparser_1_1Token_a94a222c963f58b1206743b29e10084df}{00116}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369}{TokenType}}\ \doxymbox{\hyperlink{classparser_1_1Token_a94a222c963f58b1206743b29e10084df}{type}}\ =\ \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369}{TokenType}}\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a245d11a3709454cc69b2de7911073d57}{::}}\doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a245d11a3709454cc69b2de7911073d57}{NO\_TYPE}};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00117}00117\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00118}00118\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00119}00119\ \ \ \ \ \textcolor{comment}{//Constructs\ a\ Token\ given\ a\ string\ that\ looks\ like\ this\ "{}-\/<option>\ <value>"{}}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00120}00120\ \ \ \ \ \doxymbox{\hyperlink{namespaceparser_a883c446b2f982a5d7b6989f2442e8186}{std}}::\doxymbox{\hyperlink{namespaceparser_a883c446b2f982a5d7b6989f2442e8186}{expected}}<\doxymbox{\hyperlink{namespaceparser_a883c446b2f982a5d7b6989f2442e8186}{Token}},\ \doxymbox{\hyperlink{namespaceparser_a883c446b2f982a5d7b6989f2442e8186}{ErrorType}}>\ \doxymbox{\hyperlink{namespaceparser_a883c446b2f982a5d7b6989f2442e8186}{lex}}(\textcolor{keyword}{const}\ std::string\&\ option);}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00121}00121\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00123}00123\ \ \ \ \ \textcolor{comment}{///\ <summary>}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00124}00124\ \ \ \ \ \textcolor{comment}{///\ All\ the\ options\ available}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00125}00125\ \ \ \ \ \textcolor{comment}{///\ </summary>}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00126}\doxymbox{\hyperlink{structparser_1_1Options}{00126}}\ \ \ \ \ \textcolor{keyword}{export}\ \textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structparser_1_1Options}{Options}}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00127}00127\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00128}\doxymbox{\hyperlink{structparser_1_1Options_aa5897e549e45e6c8c0c6528d5f7a301e}{00128}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structparser_1_1Options_aa5897e549e45e6c8c0c6528d5f7a301e}{fs}}::\doxymbox{\hyperlink{structparser_1_1Options_aa5897e549e45e6c8c0c6528d5f7a301e}{path}}\ \doxymbox{\hyperlink{structparser_1_1Options_aa5897e549e45e6c8c0c6528d5f7a301e}{filename\_in}}\{\};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00129}\doxymbox{\hyperlink{structparser_1_1Options_a541071618f10401baff234e8e412fe9e}{00129}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structparser_1_1Options_a541071618f10401baff234e8e412fe9e}{fs}}::\doxymbox{\hyperlink{structparser_1_1Options_a541071618f10401baff234e8e412fe9e}{path}}\ \doxymbox{\hyperlink{structparser_1_1Options_a541071618f10401baff234e8e412fe9e}{filename\_out}}\{\ \doxymbox{\hyperlink{structparser_1_1Options}{DEFAULT\_OUT\_PATH}}\ \};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00130}\doxymbox{\hyperlink{structparser_1_1Options_ab8d5641c8bad00296b548aaa3a9522e2}{00130}}\ \ \ \ \ \ \ \ \ size\_t\ \doxymbox{\hyperlink{structparser_1_1Options_ab8d5641c8bad00296b548aaa3a9522e2}{compressor}}\ =\ \textcolor{keyword}{static\_cast}<\doxymbox{\hyperlink{structparser_1_1Options}{size\_t}}>(\doxymbox{\hyperlink{structparser_1_1Options}{CompType}}::\doxymbox{\hyperlink{structparser_1_1Options}{LZ77}});}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00131}\doxymbox{\hyperlink{structparser_1_1Options_a0c00ba38d9089caa976d0a140a984cd7}{00131}}\ \ \ \ \ \ \ \ \ size\_t\ \doxymbox{\hyperlink{structparser_1_1Options_a0c00ba38d9089caa976d0a140a984cd7}{preset}}\ =\ \doxymbox{\hyperlink{structparser_1_1Options}{COMP\_5}};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00132}\doxymbox{\hyperlink{structparser_1_1Options_a93ba36418ea34555a584ebfd2881496e}{00132}}\ \ \ \ \ \ \ \ \ size\_t\ \doxymbox{\hyperlink{structparser_1_1Options_a93ba36418ea34555a584ebfd2881496e}{n\_files}}\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00133}\doxymbox{\hyperlink{structparser_1_1Options_a31c850f2a96edb31857b56082fed7605}{00133}}\ \ \ \ \ \ \ \ \ size\_t\ \doxymbox{\hyperlink{structparser_1_1Options_a31c850f2a96edb31857b56082fed7605}{size\_files}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00134}\doxymbox{\hyperlink{structparser_1_1Options_a85021d586a434540f2321e90ebf64ded}{00134}}\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{structparser_1_1Options_a85021d586a434540f2321e90ebf64ded}{force\_compression}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00135}\doxymbox{\hyperlink{structparser_1_1Options_a204eb08002da88bc72fa2a88e99a1782}{00135}}\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{structparser_1_1Options_a204eb08002da88bc72fa2a88e99a1782}{delete\_input}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00136}\doxymbox{\hyperlink{structparser_1_1Options_a4e235b57474a81a3eec424cb4142c8ab}{00136}}\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{structparser_1_1Options_a4e235b57474a81a3eec424cb4142c8ab}{concatenate\_files}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00137}\doxymbox{\hyperlink{structparser_1_1Options_a6f3e3a05c49d128e2ae7a08f0783b32e}{00137}}\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{structparser_1_1Options_a6f3e3a05c49d128e2ae7a08f0783b32e}{need\_help}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00138}\doxymbox{\hyperlink{structparser_1_1Options_af4b3c6d81f03bcc31481e82348ee4153}{00138}}\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structparser_1_1Options}{std}}::\doxymbox{\hyperlink{structparser_1_1Options}{optional}}<\textcolor{keywordtype}{bool}>\ \doxymbox{\hyperlink{structparser_1_1Options}{decomp\_after\_concat}}\{\};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00139}\doxymbox{\hyperlink{structparser_1_1Options_a35220fe0e818f4ad7b25b0d3590c5843}{00139}}\ \ \ \ \ \ \ \ \ size\_t\ \doxymbox{\hyperlink{structparser_1_1Options_a35220fe0e818f4ad7b25b0d3590c5843}{concurrency}}\ =\ \doxymbox{\hyperlink{structparser_1_1Options}{std}}::\doxymbox{\hyperlink{structparser_1_1Options}{thread}}::\doxymbox{\hyperlink{structparser_1_1Options}{hardware\_concurrency}}();}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00140}00140\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00141}00141\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00142}00142\ \ \ \ \ \textcolor{comment}{/**}}
+\DoxyCodeLine{00143\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Parse\ the\ cli,\ fully\ manages\ error\ checking.}}
+\DoxyCodeLine{00144\ \textcolor{comment}{\ \ \ \ \ *\ @return\ The\ options\ received\ from\ the\ cli.}}
+\DoxyCodeLine{00145\ \textcolor{comment}{\ \ \ \ \ *\ }}
+\DoxyCodeLine{00146\ \textcolor{comment}{\ \ \ \ \ *\ @post\ Paths\ will\ be\ validated\ ONLY\ FOR\ THEIR\ EXISTANCE\ AND\ ACCESSIBILITY.}}
+\DoxyCodeLine{00147\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00148}00148\ \ \ \ \ \textcolor{keyword}{export}\ \doxymbox{\hyperlink{structparser_1_1Options}{Options}}\ \doxymbox{\hyperlink{namespaceparser_a7f5ecbf764fc175fc336fcea0dd07be8}{parse}}(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}*\ argv[]);}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00149}00149\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00150}00150\ \}\textcolor{comment}{//namespace\ parser}}
 \DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00151}00151\ }
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00152}00152\ }
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00153}00153\ \ \ \ \ std::print(\textcolor{stringliteral}{"{}[\(\backslash\)033[32m"{}});}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00154}00154\ \ \ \ \ \textcolor{keywordtype}{int}\ filled\_width\ =\ std::ceil(max\_bar\_width\ *\ progress);}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00155}00155\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ filled\_width;\ i++)}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00156}00156\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00157}00157\ \ \ \ \ \ \ \ \ std::print(\textcolor{stringliteral}{"{}█"{}});}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00158}00158\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00159}00159\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ filled\_width;\ i\ <\ max\_bar\_width;\ i++)}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00160}00160\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00161}00161\ \ \ \ \ \ \ \ \ std::print(\textcolor{stringliteral}{"{}-\/"{}});}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00162}00162\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00163}00163\ }
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00164}00164\ }
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00165}00165\ \ \ \ \ std::print(\textcolor{stringliteral}{"{}\(\backslash\)033[0m]\ \{:.1f\}\%"{}},\ progress\ *\ 100.0f);}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00166}00166\ \ \ \ \ std::cout\ <<\ std::flush;}
-\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00167}00167\ \}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00152}00152\ \textcolor{comment}{/**}}
+\DoxyCodeLine{00153\ \textcolor{comment}{\ *\ @brief\ Show\ a\ progress\ bar\ in\ terminal.}}
+\DoxyCodeLine{00154\ \textcolor{comment}{\ *\ @param\ options\ Receive\ miscellaneus\ data.}}
+\DoxyCodeLine{00155\ \textcolor{comment}{\ *\ @param\ progress\ From\ 0\ to\ 1}}
+\DoxyCodeLine{00156\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00157}\doxymbox{\hyperlink{cli__parser_8cppm_ae97b52a0806996c1857b54bf4e06253e}{00157}}\ \textcolor{keyword}{export}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{cli__parser_8cppm_ae97b52a0806996c1857b54bf4e06253e}{show\_progress}}(\textcolor{keyword}{const}\ \doxymbox{\hyperlink{namespaceparser}{parser}}::\doxymbox{\hyperlink{structparser_1_1Options}{Options}}\&\ options\ =\ \{\},\ \textcolor{keywordtype}{float}\ progress\ =\ 0.f,\ \textcolor{keywordtype}{bool}\ compressing\ =\ \textcolor{keyword}{false})}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00158}00158\ \{}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00159}00159\ \ \ \ \ progress\ =\ std::min(1.F,\ progress);}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00160}00160\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ max\_bar\_width\ =\ 50;}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00161}00161\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00162}00162\ \ \ \ \ std::print(\textcolor{stringliteral}{"{}\(\backslash\)r\(\backslash\)033[K"{}});}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00163}00163\ \ \ \ \ std::print(\textcolor{stringliteral}{"{}\(\backslash\)033[34mProgress\ on\ the\ "{}});}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00164}00164\ \ \ \ \ \textcolor{keywordflow}{if}\ (compressing)}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00165}00165\ \ \ \ \ \ \ \ \ std::print(\textcolor{stringliteral}{"{}compression:\(\backslash\)033[0m"{}});}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00166}00166\ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00167}00167\ \ \ \ \ \ \ \ \ std::print(\textcolor{stringliteral}{"{}extraction:\(\backslash\)033[0m"{}});}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00168}00168\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00169}00169\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00170}00170\ \ \ \ \ std::print(\textcolor{stringliteral}{"{}[\(\backslash\)033[32m"{}});}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00171}00171\ \ \ \ \ \textcolor{keywordtype}{int}\ \textcolor{keyword}{const}\ filled\_width\ =\ std::ceil(max\_bar\_width\ *\ progress);}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00172}00172\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ filled\_width;\ i++)}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00173}00173\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00174}00174\ \ \ \ \ \ \ \ \ std::print(\textcolor{stringliteral}{"{}█"{}});}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00175}00175\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00176}00176\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ filled\_width;\ i\ <\ max\_bar\_width;\ i++)}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00177}00177\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00178}00178\ \ \ \ \ \ \ \ \ std::print(\textcolor{stringliteral}{"{}-\/"{}});}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00179}00179\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00180}00180\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00181}00181\ }
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00182}00182\ \ \ \ \ std::print(\textcolor{stringliteral}{"{}\(\backslash\)033[0m]\ \{:.1f\}\%"{}},\ progress\ *\ 100.F);}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00183}00183\ \ \ \ \ std::cout\ <<\ std::flush;}
+\DoxyCodeLine{\Hypertarget{cli__parser_8cppm_source_l00184}00184\ \}}
 
 \end{DoxyCode}

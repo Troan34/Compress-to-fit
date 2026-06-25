@@ -82,16 +82,16 @@ public:
             }
             else
             {
-                Node<T>* prev_node{head_};
+                Node<T>* next_node{head_};
 
                 //Make sure the nullptr check stays first (unless you like bugs, I don't judge)
-                //If sequence_num < prev_node->sequence_num_ it means that we found a spot that keeps the ascending order
-                while (prev_node and (sequence_num < prev_node->sequence_num_)) //walks down the ptrs
+                //If sequence_num > next_node->sequence_num_ it means that we found a spot that keeps the ascending order
+                while (next_node and (sequence_num < next_node->sequence_num_)) //walks down the ptrs
                 {
-                    prev_node = prev_node->prev;
+                    next_node = next_node->next;
                 }
 
-                if (!prev_node)//We have to become the tail
+                if (!next_node)//We have to become the tail
                 {
                     new_node->prev = tail_;
                     tail_->next = new_node;
@@ -99,7 +99,7 @@ public:
                 }
                 else//we either become the head or squeeze in
                 {
-                    if (prev_node == head_)//become head
+                    if (next_node == head_)//become head
                     {
                         new_node->next = head_;
                         head_->prev = new_node;
@@ -108,16 +108,14 @@ public:
                     else//squeeze in
                     {
                         //Make the links for the new node to its future neighbors
-                        new_node->prev = prev_node;
-                        new_node->next = prev_node->next;
+                        new_node->next = next_node;
+                        new_node->prev = next_node->prev;
 
                         //Make the links from the neighbors to the new node
-                        prev_node->next->prev = new_node;
-                        prev_node->next = new_node;
+                        next_node->prev->next = new_node;
+                        next_node->prev = new_node;
                     }
-
                 }
-
             }
         }
 
@@ -170,10 +168,10 @@ private:
         //returns true if something has been written otherwise false
         auto write_func = [this]
         {
-            if (tail_->sequence_num_ != expected_sequence_num_)//we are missing a node
+            if (!tail_)
                 return false;
 
-            if (!tail_)
+            if (tail_->sequence_num_ != expected_sequence_num_)//we are missing a node
                 return false;
 
             if constexpr (std::is_trivially_copyable_v<T>)
@@ -186,7 +184,7 @@ private:
             }
 
             auto old_tail = tail_;
-            tail_ = tail_->next;//new tail ptr
+            tail_ = tail_->prev;//new tail ptr
             delete old_tail;//delete old tail ptr
             if (head_ == old_tail) head_ = nullptr;//we have to account for the head_ ptr too if empty
 

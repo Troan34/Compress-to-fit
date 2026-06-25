@@ -1,0 +1,118 @@
+\doxysection{thread\+\_\+pool.\+cppm}
+\hypertarget{thread__pool_8cppm_source}{}\label{thread__pool_8cppm_source}\index{Compress-\/to-\/fit/src/util/containers/thread\_pool.cppm@{Compress-\/to-\/fit/src/util/containers/thread\_pool.cppm}}
+\doxymbox{\hyperlink{thread__pool_8cppm}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00001}00001\ \textcolor{keyword}{export}\ module\ containers:thread\_pool;}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00002}00002\ import\ std.compat;}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00003}00003\ }
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00004}00004\ }
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00005}00005\ \textcolor{comment}{/**}}
+\DoxyCodeLine{00006\ \textcolor{comment}{\ *\ @brief\ A\ tool\ to\ asynchronously\ execute\ tasks\ without\ respawning\ threads}}
+\DoxyCodeLine{00007\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00008}\doxymbox{\hyperlink{classThreadPool}{00008}}\ \textcolor{keyword}{export}\ \textcolor{keyword}{class}\ \doxymbox{\hyperlink{classThreadPool}{ThreadPool}}}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00009}00009\ \{}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00010}00010\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00011}00011\ \ \ \ \ \textcolor{comment}{/**}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ \ \ \ \ *\ @param\ n\_threads\ The\ number\ of\ threads\ to\ spawn.\ Defaults\ to\ the\ provided\ thread\ count\ from\ the\ OS.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00014}\doxymbox{\hyperlink{classThreadPool_aad44f796416e289e25a59e73f2db58d9}{00014}}\ \ \ \ \ \doxymbox{\hyperlink{classThreadPool_aad44f796416e289e25a59e73f2db58d9}{ThreadPool}}(size\_t\ n\_threads\ =\ \doxymbox{\hyperlink{classThreadPool_aad44f796416e289e25a59e73f2db58d9}{std}}::\doxymbox{\hyperlink{classThreadPool_aad44f796416e289e25a59e73f2db58d9}{thread}}::\doxymbox{\hyperlink{classThreadPool_aad44f796416e289e25a59e73f2db58d9}{hardware\_concurrency}}())}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00015}00015\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00016}00016\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (n\_threads\ ==\ 0)\ n\_threads\ =\ 1;}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00018}00018\ \ \ \ \ \ \ \ \ threads\_.reserve(n\_threads);}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00019}00019\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (size\_t\ i\ =\ 0;\ i\ <\ n\_threads;\ i++)}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00020}00020\ \ \ \ \ \ \ \ \ \ \ \ \ threads\_.emplace\_back(\&ThreadPool::worker,\ \textcolor{keyword}{this});}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00021}00021\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00023}\doxymbox{\hyperlink{classThreadPool_a44d3d2ab618970605e684efc216655eb}{00023}}\ \ \ \ \ \string~\doxymbox{\hyperlink{classThreadPool_a44d3d2ab618970605e684efc216655eb}{ThreadPool}}()}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00024}00024\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00025}00025\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00026}00026\ \ \ \ \ \ \ \ \ \ \ \ \ std::unique\_lock\ lock\{mut\_\};}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00027}00027\ \ \ \ \ \ \ \ \ \ \ \ \ stop\_threads\_\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00028}00028\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00029}00029\ }
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00030}00030\ \ \ \ \ \ \ \ \ cv\_.notify\_all();\textcolor{comment}{//notify\ threads}}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00031}00031\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00033}00033\ \ \ \ \ \textcolor{comment}{//when\ in\ doubt:}}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00034}\doxymbox{\hyperlink{classThreadPool_ad1bbb23b57e3ae24cdc7df015c49fba1}{00034}}\ \ \ \ \ \doxymbox{\hyperlink{classThreadPool_ad1bbb23b57e3ae24cdc7df015c49fba1}{ThreadPool}}(\doxymbox{\hyperlink{classThreadPool}{ThreadPool}}\&\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00035}\doxymbox{\hyperlink{classThreadPool_a360a0cf534ac4d6c7953e4a3911f49b6}{00035}}\ \ \ \ \ \doxymbox{\hyperlink{classThreadPool_a360a0cf534ac4d6c7953e4a3911f49b6}{ThreadPool}}(\doxymbox{\hyperlink{classThreadPool}{ThreadPool}}\ \textcolor{keyword}{const}\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00036}\doxymbox{\hyperlink{classThreadPool_ad263c1d47b932195bceb25d514fcbf7f}{00036}}\ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classThreadPool_ad263c1d47b932195bceb25d514fcbf7f}{operator}}=(\doxymbox{\hyperlink{classThreadPool}{ThreadPool}}\&\&)\ -\/>\ \doxymbox{\hyperlink{classThreadPool}{ThreadPool}}\&\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00037}\doxymbox{\hyperlink{classThreadPool_a4148147ff0af23e41faf2129639f1dd2}{00037}}\ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classThreadPool_a4148147ff0af23e41faf2129639f1dd2}{operator}}=(\doxymbox{\hyperlink{classThreadPool}{ThreadPool}}\ \textcolor{keyword}{const}\&)\ -\/>\ \doxymbox{\hyperlink{classThreadPool}{ThreadPool}}\&\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00038}00038\ }
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00039}00039\ \ \ \ \ \textcolor{comment}{/**}}
+\DoxyCodeLine{00040\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Add\ a\ new\ task\ for\ the\ thread\ pool}}
+\DoxyCodeLine{00041\ \textcolor{comment}{\ \ \ \ \ *\ @tparam\ F\ Function\ type}}
+\DoxyCodeLine{00042\ \textcolor{comment}{\ \ \ \ \ *\ @tparam\ Args\ Argument\ types}}
+\DoxyCodeLine{00043\ \textcolor{comment}{\ \ \ \ \ *\ @param\ f\ function}}
+\DoxyCodeLine{00044\ \textcolor{comment}{\ \ \ \ \ *\ @param\ args\ arguments}}
+\DoxyCodeLine{00045\ \textcolor{comment}{\ \ \ \ \ *\ @return\ The\ future\ of\ the\ task}}
+\DoxyCodeLine{00046\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00047}00047\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ F,\ \textcolor{keyword}{typename}...\ Args>}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00048}\doxymbox{\hyperlink{classThreadPool_a9db5d46d22b868c06551d07b276a9276}{00048}}\ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classThreadPool_a9db5d46d22b868c06551d07b276a9276}{add\_task}}(F\&\&\ f,\ Args\&\&...\ args)\ -\/>\ \doxymbox{\hyperlink{classThreadPool_a9db5d46d22b868c06551d07b276a9276}{std}}::\doxymbox{\hyperlink{classThreadPool}{future}}<\textcolor{keyword}{decltype}(\doxymbox{\hyperlink{classThreadPool}{f}}(\doxymbox{\hyperlink{classThreadPool}{args}}...))>}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00049}00049\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00050}00050\ \ \ \ \ \ \ \ \ \textcolor{comment}{//make\ a\ callable\ with\ \ \ \ \ \ \ \ \ \ function\ v\ \ \ \ \ \ \ \ \ \ \ \ \ arguments\ v...}}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00051}00051\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classThreadPool}{command}}\ =\ \doxymbox{\hyperlink{classThreadPool}{std}}::\doxymbox{\hyperlink{classThreadPool}{bind}}(\doxymbox{\hyperlink{classThreadPool}{std}}::\doxymbox{\hyperlink{classThreadPool}{forward}}<\doxymbox{\hyperlink{classThreadPool}{F}}>(\doxymbox{\hyperlink{classThreadPool}{f}}),\ \doxymbox{\hyperlink{classThreadPool}{std}}::\doxymbox{\hyperlink{classThreadPool}{forward}}<\doxymbox{\hyperlink{classThreadPool}{Args}}>(\doxymbox{\hyperlink{classThreadPool}{args}})...);}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00053}00053\ \ \ \ \ \ \ \ \ \textcolor{comment}{//make\ a\ shared\_ptr\ to\ a\ task\ for\ the\ callable}}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00054}00054\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ task\ =\ \doxymbox{\hyperlink{classThreadPool}{std}}::\doxymbox{\hyperlink{classThreadPool}{make\_shared}}<\doxymbox{\hyperlink{classThreadPool}{std}}::\doxymbox{\hyperlink{classThreadPool}{packaged\_task}}<\textcolor{keyword}{decltype}(\doxymbox{\hyperlink{classThreadPool}{f}}(\doxymbox{\hyperlink{classThreadPool}{args}}...))()>>(\doxymbox{\hyperlink{classThreadPool}{command}});}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00056}00056\ \ \ \ \ \ \ \ \ \textcolor{comment}{//get\ the\ future\ before\ we\ start}}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00057}00057\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classThreadPool}{std}}::\doxymbox{\hyperlink{classThreadPool}{future}}<\doxymbox{\hyperlink{classThreadPool}{std}}::\doxymbox{\hyperlink{classThreadPool}{invoke\_result\_t}}<\doxymbox{\hyperlink{classThreadPool}{F}},\ \doxymbox{\hyperlink{classThreadPool}{Args}}...>>\ \doxymbox{\hyperlink{classThreadPool}{future}}\ =\ \doxymbox{\hyperlink{classThreadPool}{task}}-\/>\doxymbox{\hyperlink{classThreadPool}{get\_future}}();}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00058}00058\ }
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00059}00059\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00060}00060\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classThreadPool}{std}}::\doxymbox{\hyperlink{classThreadPool}{unique\_lock}}\ \doxymbox{\hyperlink{classThreadPool}{lock}}\{\doxymbox{\hyperlink{classThreadPool}{mut\_}}\};}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00061}00061\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//enqueue\ the\ command}}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00062}00062\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classThreadPool}{tasks\_}}.\doxymbox{\hyperlink{classThreadPool}{emplace}}([\doxymbox{\hyperlink{classThreadPool}{task}}]}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00063}00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00064}00064\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ (*\doxymbox{\hyperlink{classThreadPool}{task}})();}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00065}00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00066}00066\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00067}00067\ \ \ \ \ \ \ \ \ \textcolor{comment}{//execute\ the\ command}}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00068}00068\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classThreadPool}{cv\_}}.\doxymbox{\hyperlink{classThreadPool}{notify\_one}}();}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00069}00069\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classThreadPool}{future}};}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00070}00070\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00072}00072\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00073}\doxymbox{\hyperlink{classThreadPool_a49e2b199d10b5f6c8ddd4394d0220662}{00073}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ stop\_threads\_\{\textcolor{keyword}{false}\};}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00074}\doxymbox{\hyperlink{classThreadPool_abea81872556be4746f4be7a396254f08}{00074}}\ \ \ \ \ \textcolor{keyword}{mutable}\ \doxymbox{\hyperlink{classThreadPool_abea81872556be4746f4be7a396254f08}{std}}::\doxymbox{\hyperlink{classThreadPool_abea81872556be4746f4be7a396254f08}{mutex}}\ \doxymbox{\hyperlink{classThreadPool_abea81872556be4746f4be7a396254f08}{mut\_}};}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00075}\doxymbox{\hyperlink{classThreadPool_a5aa3883c2fed23b45440f2d8a1ccb63c}{00075}}\ \ \ \ \ \doxymbox{\hyperlink{classThreadPool_a5aa3883c2fed23b45440f2d8a1ccb63c}{std}}::\doxymbox{\hyperlink{classThreadPool_a5aa3883c2fed23b45440f2d8a1ccb63c}{condition\_variable}}\ \doxymbox{\hyperlink{classThreadPool_a5aa3883c2fed23b45440f2d8a1ccb63c}{cv\_}};}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00076}\doxymbox{\hyperlink{classThreadPool_aa91d4103c2770a7b47e7e45e1d1037a1}{00076}}\ \ \ \ \ std::queue<std::function<\textcolor{keywordtype}{void}()>>\ tasks\_;}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00077}\doxymbox{\hyperlink{classThreadPool_a0bfc20a0a9f4060e1b2c3a471f86592c}{00077}}\ \ \ \ \ \doxymbox{\hyperlink{classThreadPool_a0bfc20a0a9f4060e1b2c3a471f86592c}{std}}::\doxymbox{\hyperlink{classThreadPool_a0bfc20a0a9f4060e1b2c3a471f86592c}{vector}}<\doxymbox{\hyperlink{classThreadPool_a0bfc20a0a9f4060e1b2c3a471f86592c}{std}}::\doxymbox{\hyperlink{classThreadPool_a0bfc20a0a9f4060e1b2c3a471f86592c}{jthread}}>\ \doxymbox{\hyperlink{classThreadPool_a0bfc20a0a9f4060e1b2c3a471f86592c}{threads\_}};}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00078}00078\ }
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00080}00080\ }
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00081}00081\ \ \ \ \ \textcolor{comment}{/**}}
+\DoxyCodeLine{00082\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ The\ callable\ threads\ execute.}}
+\DoxyCodeLine{00083\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00084}\doxymbox{\hyperlink{classThreadPool_aae5b85252b91ab697b919c6fad17b039}{00084}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classThreadPool_aae5b85252b91ab697b919c6fad17b039}{worker}}()}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00085}00085\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00086}00086\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (;;)}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00087}00087\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00088}00088\ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{void}()>\ cur\_task;}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00089}00089\ }
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00090}00090\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::unique\_lock\ lock\{mut\_\};}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00092}00092\ }
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00093}00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//after\ being\ notified,\ check\ that\ stop\ is\ true\ or\ that\ the\ queue\ is\ not\ empty\ (if\ stop\_threads\_\ is\ true,\ we\ go\ to\ the\ next\ and\ destroy\ this\ thread)}}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00094}00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classThreadPool_a5aa3883c2fed23b45440f2d8a1ccb63c}{cv\_}}.wait(lock,\ [\textcolor{keyword}{this}]}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00095}00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00096}00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ stop\_threads\_\ \textcolor{keyword}{or}\ !tasks\_.empty();}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00098}00098\ }
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00099}00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (stop\_threads\_\ \textcolor{keyword}{and}\ tasks\_.empty())}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00100}00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00101}00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (tasks\_.empty())}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00102}00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00103}00103\ }
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00104}00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ cur\_task\ =\ tasks\_.front();}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ tasks\_.pop();}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00106}00106\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00108}00108\ \ \ \ \ \ \ \ \ \ \ \ \ cur\_task();}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00109}00109\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00110}00110\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00111}00111\ }
+\DoxyCodeLine{\Hypertarget{thread__pool_8cppm_source_l00112}00112\ \};}
+
+\end{DoxyCode}

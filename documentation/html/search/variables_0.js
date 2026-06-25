@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['allocator_0',['allocator',['../class_concurrent_file_buffer.html#a62919f4664acba0c6890ed3dc001325d',1,'ConcurrentFileBuffer']]]
+  ['allocator_0',['allocator',['../classConcFileBuffer.html#a9ecfff683b0da5a0d9308a6fb96e105b',1,'ConcFileBuffer']]]
 ];

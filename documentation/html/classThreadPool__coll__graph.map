@@ -1,0 +1,11 @@
+<map id="ThreadPool" name="ThreadPool">
+<area shape="rect" id="Node000001" title="A tool to asynchronously execute tasks without respawning threads." alt="" coords="127,286,233,504"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,146,78,209"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="61,206,121,296,115,298,60,211"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="102,139,258,216"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="181,213,183,269,178,268,179,218"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="283,146,443,209"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="340,207,246,320,242,316,336,210"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="325,5,401,69"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="364,66,366,129,360,128,362,71"/>
+</map>

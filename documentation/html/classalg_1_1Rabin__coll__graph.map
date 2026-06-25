@@ -1,0 +1,9 @@
+<map id="alg::Rabin" name="alg::Rabin">
+<area shape="rect" id="Node000001" title="This class enables fast string matching. Makes use of two chained arrays. This class is intertwined w..." alt="" coords="14,831,160,1121"/>
+<area shape="rect" id="Node000002" href="$classWindow.html" title="[lz77.Window]" alt="" coords="8,330,167,761"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="88,758,90,814,85,813,87,763"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="12,197,163,260"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="87,257,90,313,85,313,87,262"/>
+<area shape="rect" id="Node000004" href="$structSym.html" title=" " alt="" coords="5,5,169,127"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="87,124,90,180,85,180,87,129"/>
+</map>

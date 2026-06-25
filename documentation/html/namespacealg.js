@@ -1,6 +1,6 @@
 var namespacealg =
 [
-    [ "Rabin", "classalg_1_1_rabin.html", "classalg_1_1_rabin" ],
+    [ "Rabin", "classalg_1_1Rabin.html", "classalg_1_1Rabin" ],
     [ "BASE", "namespacealg.html#a783a2c45f8f4efe9e425d4e7f1030864", null ],
     [ "MAX_MATCH", "namespacealg.html#ad3d2660056a755adc8334b83459060a6", null ],
     [ "MIN_MATCH", "namespacealg.html#aeca501bd83e1fd3e65ea2fce9f4e1190", null ],

@@ -1,4 +1,4 @@
-/* The standard CSS for doxygen 1.17.0*/
+/* The standard CSS for doxygen 1.16.1*/
 
 html {
 /* page base colors */
@@ -540,19 +540,6 @@ td.navtabHL {
 	padding-left: 6px;
 	border-radius: 0 6px 6px 0;
 	background-color: var(--nav-menu-active-bg);
-}
-
-div.alphasepar:before{
-  content: " | " ;
-  width: 14px;
-  display: inline-block;
-  text-align: center;
-  line-height: 140%;
-  font-size: 130%;
-}
-
-div.alphasepar{
-  display: inline-block;
 }
 
 div.qindex{
@@ -2521,40 +2508,14 @@ details > summary::-webkit-details-marker {
 }
 
 details>summary::before {
-        content: "\25bc";
-        padding-right:4px;
-        font-size: 80%;
-        display: inline-block;
-        transform: rotate(-90deg);
+	content: "\25ba";
+	padding-right:4px;
+	font-size: 80%;
 }
 
 details[open]>summary::before {
-        content: "\25bc";
-        padding-right:4px;
-        font-size: 80%;
-        display: inline-block;
-        transform: rotate(0deg);
-}
-:root {
-    scrollbar-width: thin;
-    scrollbar-color: var(--scrollbar-thumb-color) var(--scrollbar-background-color);
-}
-
-:root.dark-mode {
-    color-scheme: dark;
-}
-
-::-webkit-scrollbar {
-        background-color: var(--scrollbar-background-color);
-        height: 12px;
-        width: 12px;
-}
-::-webkit-scrollbar-thumb {
-        border-radius: 6px;
-        box-shadow: inset 0 0 12px 12px var(--scrollbar-thumb-color);
-        border: solid 2px transparent;
-}
-::-webkit-scrollbar-corner {
-        background-color: var(--scrollbar-background-color);
+	content: "\25bc";
+	padding-right:4px;
+	font-size: 80%;
 }
 

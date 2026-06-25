@@ -1,12 +1,8 @@
 var searchData=
 [
-  ['test_5fcase_0',['TEST_CASE',['../file__management_8cpp.html#a307cb7aa5957086c4f031f5b33432ff5',1,'TEST_CASE(&quot;stream creation &quot;):&#160;file_management.cpp'],['../utils_8cpp.html#ac45a3c34aab05875a20ee1cfdeb3b27a',1,'TEST_CASE(&quot;Count matching substring size&quot;, &quot;count_equal&quot;):&#160;utils.cpp']]],
-  ['throw_5ferror_1',['throw_error',['../utils_8cppm.html#a6c327b69ce479189b2946651f162daec',1,'utils.cppm']]],
-  ['todo_20list_2',['Todo List',['../todo.html',1,'']]],
-  ['token_3',['Token',['../classparser_1_1_token.html',1,'parser::Token'],['../struct_token.html',1,'Token'],['../classparser_1_1_token.html#a1a02f18007b4724b39adab951f180e9f',1,'parser::Token::Token(TokenType type_, ValueType value_)'],['../classparser_1_1_token.html#a03fc54839cfb01b88087c14db5b0fd63',1,'parser::Token::Token(const std::string &amp;option)']]],
-  ['token_5fstrings_4',['token_strings',['../namespaceparser.html#a35056580671d6aa5abd316f21007bef6',1,'parser']]],
-  ['tokentype_5',['TokenType',['../namespaceparser.html#accd7eb1ffd4c925598ec25fab6905369',1,'parser']]],
-  ['true_5findex_6',['true_index',['../class_concurrent_file_buffer.html#a41a7e3d60e387d1d711eb223000c4717',1,'ConcurrentFileBuffer']]],
-  ['try_5fthrow_5fio_5ferror_7',['try_throw_IO_error',['../file__management_8cppm.html#a8eafeb61f6d909d1778dc3ce53e51114',1,'file_management.cppm']]],
-  ['type_8',['type',['../classparser_1_1_token.html#a94a222c963f58b1206743b29e10084df',1,'parser::Token']]]
+  ['uncompressed_5flength_0',['uncompressed_length',['../classLZ77Block.html#abaaebed0fc0abb932ddee1e9dd6386e1',1,'LZ77Block']]],
+  ['uncompressed_5flength_5f_1',['uncompressed_length_',['../classLZ77Block.html#a039b63f164dfa308bba99310d4d706b1',1,'LZ77Block']]],
+  ['util_2',['util',['../module__util.html',1,'']]],
+  ['utils_2ecpp_3',['utils.cpp',['../utils_8cpp.html',1,'']]],
+  ['utils_2ecppm_4',['utils.cppm',['../utils_8cppm.html',1,'']]]
 ];

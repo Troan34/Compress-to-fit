@@ -1,9 +1,7 @@
 var modules_dup =
 [
-    [ "std.compat", "module__std_8compat.html", null ],
-    [ "std", "module__std.html", null ],
-    [ "lz77", "module__lz77.html", "module__lz77" ],
+    [ "models", "module__models.html", "module__models" ],
     [ "parser", "module__parser.html", "module__parser" ],
-    [ "file_util", "module__file__util.html", "module__file__util" ],
+    [ "containers", "module__containers.html", "module__containers" ],
     [ "util", "module__util.html", "module__util" ]
 ];

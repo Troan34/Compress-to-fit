@@ -1,0 +1,37 @@
+<map id="LZ77ConcurrentCompressor" name="LZ77ConcurrentCompressor">
+<area shape="rect" id="Node000001" title=" " alt="" coords="293,1652,498,1831"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="107,1389,234,1466"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="185,1463,213,1521,247,1580,294,1640,289,1640,243,1584,208,1523,184,1468"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="258,1389,400,1466"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="339,1464,376,1635,371,1635,335,1468"/>
+<area shape="rect" id="Node000004" href="$classConcOrderedFileList.html" title=" " alt="" coords="424,1273,604,1582"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="458,1580,437,1638,433,1635,454,1584"/>
+<area shape="rect" id="Node000005" href="$classFile.html" title="Interpret a file as to retrieve custom information." alt="" coords="218,830,362,1203"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="363,1146,425,1258,420,1258,362,1151"/>
+<area shape="rect" id="Node000006" href="$structFileOptions.html" title=" " alt="" coords="145,571,297,673"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="230,670,257,813,252,813,230,676"/>
+<area shape="rect" id="Node000007" href="$structparser_1_1Options.html" title="All the options available." alt="" coords="321,484,470,760"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="365,757,354,807,352,815,347,813,349,805,363,762"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="33,590,121,654"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="87,651,110,703,136,759,212,892,207,894,131,761,105,705,88,656"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="14,357,140,435"/>
+<area shape="poly" id="edge8_Node000008_Node000009" title=" " alt="" coords="77,447,80,591,75,590,77,452"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="16,231,138,308"/>
+<area shape="poly" id="edge9_Node000009_Node000010" title=" " alt="" coords="77,321,80,358,75,357,77,326"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="5,118,149,181"/>
+<area shape="poly" id="edge10_Node000010_Node000011" title=" " alt="" coords="77,193,80,231,75,231,77,199"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="33,5,122,69"/>
+<area shape="poly" id="edge11_Node000011_Node000012" title=" " alt="" coords="77,81,80,118,75,118,77,86"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="552,985,624,1048"/>
+<area shape="poly" id="edge12_Node000004_Node000013" title=" " alt="" coords="584,1045,548,1257,543,1255,581,1050"/>
+<area shape="rect" id="Node000015" href="$classThreadPool.html" title="A tool to asynchronously execute tasks without respawning threads." alt="" coords="666,1318,772,1536"/>
+<area shape="poly" id="edge15_Node000015_Node000013" title=" " alt="" coords="596,1045,640,1202,674,1303,669,1302,635,1203,594,1050"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="506,590,582,654"/>
+<area shape="poly" id="edge13_Node000004_Node000014" title=" " alt="" coords="535,651,516,733,498,830,490,940,489,1052,492,1159,499,1256,493,1255,487,1159,484,1052,485,940,493,830,511,732,534,656"/>
+<area shape="rect" id="Node000017" title=" " alt="" coords="829,985,990,1048"/>
+<area shape="poly" id="edge18_Node000017_Node000014" title=" " alt="" coords="581,642,634,673,696,716,760,769,818,828,843,862,864,899,895,969,890,969,859,902,838,865,814,832,756,773,693,721,631,678,582,647"/>
+<area shape="poly" id="edge14_Node000001_Node000015" title=" " alt="" coords="668,1519,619,1584,568,1630,513,1671,511,1667,565,1626,615,1580,663,1522"/>
+<area shape="rect" id="Node000016" title=" " alt="" coords="649,978,804,1055"/>
+<area shape="poly" id="edge16_Node000015_Node000016" title=" " alt="" coords="727,1053,723,1302,718,1301,724,1057"/>
+<area shape="poly" id="edge17_Node000015_Node000017" title=" " alt="" coords="897,1046,778,1304,774,1301,893,1050"/>
+</map>
