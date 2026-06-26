@@ -66,7 +66,7 @@ public:
 		: data(data_), size_search(0), max_size(std::clamp(window_size, window_size, MAX_WINDOW_SIZE))
 	{
 		if (max_size > data.size()) max_size = data.size();
-		size_look_ahead = std::ceil(max_size / (SEARCH_RATIO + 1));
+		size_look_ahead = std::floor(max_size / (SEARCH_RATIO + 1));
 		max_size_look_ahead = size_look_ahead;
 		max_size_search = SEARCH_RATIO * max_size_look_ahead;//TODO: BUG: MAX_SIZE_SEARCH GOES OUTSIDE OF RANGE
 	}
@@ -112,9 +112,9 @@ public:
 			break;
 		}
 		if (max_size > data.size()) max_size = data.size();
-		size_look_ahead = std::ceil(max_size / static_cast<double>(SEARCH_RATIO));
+		size_look_ahead = std::floor(max_size / (SEARCH_RATIO + 1));
 		max_size_look_ahead = size_look_ahead;
-		max_size_search = SEARCH_RATIO * max_size_look_ahead;
+		max_size_search = SEARCH_RATIO * max_size_look_ahead;//TODO: BUG: MAX_SIZE_SEARCH GOES OUTSIDE OF RANGE
 	}
 
 
@@ -166,7 +166,7 @@ public:
 	[[nodiscard]] auto get_absolute_pos() const noexcept{return size_search + offset;}
 	[[nodiscard]] auto operator[](size_t const index) const noexcept
 	{
-		assert(index < max_size);
+		assert(index < data.size());
 		return data[index];
 	}
 
@@ -432,15 +432,17 @@ public:
 	{
 		n_blocks_ = data_.size_bytes() / std::min(data_.size_bytes() / concurrency, MAX_BLOCK_SIZE);
 		if (data_.size_bytes() % MAX_BLOCK_SIZE > 0)
-			n_blocks_++;
+			++n_blocks_;
 
 		results.reserve(n_blocks_);
 	}
 
 	~LZ77ConcurrentCompressor()
 	{
+		std::unique_lock lock{mutex_};
 		for (auto& result : results)
 		{
+			result.wait();
 			result.get();
 		}
 	}
@@ -473,10 +475,8 @@ public:
 				file_list_.insert(std::move(block), seq_num);
 			});
 
+			std::unique_lock lock{mutex_};
 			results.emplace_back(std::move(future));
-
-			check_results();
-			show_progress({}, static_cast<double>(n_completed_blocks) / static_cast<double>(n_blocks_), true);
 		}
 	}
 
@@ -485,31 +485,43 @@ private:
 	size_t const concurrency_;
 	std::span<std::byte const> const data_{};
 	std::vector<std::future<void>> results{};
-	size_t n_blocks_{};
+	std::atomic<size_t> n_blocks_{};
 	size_t n_completed_blocks{};
+	std::mutex mutex_;//to be used to access results
+	std::jthread progress_checker{&LZ77ConcurrentCompressor::check_results, this};
 	//These have to stay down here (I just found out how objects are destroyed)
 	ConcOrderedFileList<LZ77Block> file_list_;
 	ThreadPool thread_pool{};
 
 
-	void check_results()
+	void check_results(std::stop_token stop)
 	{
-		std::erase_if(results,
-		[this](std::future<void>& result)
-			{
-				auto const status = result.wait_for(std::chrono::nanoseconds::zero());
-				if (status == std::future_status::ready)
+		while (!stop.stop_requested())
+		{
+			std::unique_lock lock{mutex_};
+			std::erase_if(results,
+			[this](std::future<void>& result)
 				{
-					result.get();
-					n_completed_blocks++;
-					return true;
+					if (result.valid())
+					{
+						result.get();
+						n_completed_blocks++;
+						return true;
+					}
+					else
+						return false;
 				}
-				else
-					return false;
-			}
-		);
+			);
+			show_progress({}, static_cast<float>(n_completed_blocks) / static_cast<float>(n_blocks_), true);
+			std::this_thread::sleep_for(1ms);
+		}
+
+		show_progress({}, 1.F, true);
 	}
 };
+
+
+
 
 export class LZ77ConcurrentDecompressor
 {

@@ -20,6 +20,9 @@ struct Node
     Node* prev{nullptr};
 };
 
+//If there are less than this amount of nodes, don't bother waking the disk
+constexpr int LEAST_NODES_FOR_WRITING = 10;
+
 /**
  * @brief First sequence in first sequence out, i.e. the data is written in the order given to #insert().
  * @tparam T Must implement write_to(ofstream&) or be trivially copyable
@@ -117,10 +120,9 @@ public:
                     }
                 }
             }
+            called_writer = true;
+            writer_notifier.notify_one();
         }
-
-        called_writer = true;
-        writer_notifier.notify_one();
     }
 
     /**
@@ -184,9 +186,17 @@ private:
             }
 
             auto old_tail = tail_;
-            tail_ = tail_->prev;//new tail ptr
+            if (size_ == 1)
+            {
+                tail_ = nullptr;
+                head_ = nullptr;
+            }
+            else
+            {
+                tail_ = tail_->prev;//new tail ptr
+                tail_->next = nullptr;
+            }
             delete old_tail;//delete old tail ptr
-            if (head_ == old_tail) head_ = nullptr;//we have to account for the head_ ptr too if empty
 
             size_--;
             expected_sequence_num_++;
@@ -202,14 +212,17 @@ private:
                 break;
             called_writer = false;
 
-            write_func();
+            if (size_ > LEAST_NODES_FOR_WRITING)
+            {
+                for (auto _ : std::views::iota(0u, size_))
+                    write_func();
+            }
         }
 
         std::unique_lock lock{mut};
         while (write_func());//write the whole thing
 
         assert(size_ == 0 && "The file list wasn't able to clean up correctly.");
-
     }
 
 };

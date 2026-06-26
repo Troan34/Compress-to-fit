@@ -6,7 +6,7 @@ void alg::Rabin::roll_hash(uint32_t num_of_rolls) noexcept
 {
 	while (num_of_rolls > 0)
 	{
-		if (position < (data.get_data().size() - MIN_MATCH))//stop if we reached the end
+		if (position + MIN_MATCH < data.get_max_size())//stop if we reached the end
 		{
 			//roll hash
 			hash = (hash + MOD - data[position] * ROLL_FACTOR % MOD) % MOD;
