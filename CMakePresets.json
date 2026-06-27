@@ -128,7 +128,7 @@
       "inherits": "linux-base",
       "cacheVariables": {
         "CMAKE_BUILD_TYPE": "RelWithDebInfo",
-        "CMAKE_CXX_FLAGS": "-g -O2 -g3 -ggdb -fsanitize=thread -fno-omit-frame-pointer -fno-optimize-sibling-calls"
+        "CMAKE_CXX_FLAGS": "-g -O3 -g3 -ggdb -fno-omit-frame-pointer"
       }
     }
   ]

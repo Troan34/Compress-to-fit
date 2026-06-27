@@ -34,6 +34,7 @@ namespace parser
 		CONCATENATE,
 		DO_DECOMP_AFTER_CONCAT,
 		DO_NOT_DECOMP_AFTER_CONCAT,
+		CONCURRENCY,
 		NO_TYPE = 696969,//we don't want this to be an index
 	};
 	//HAS to follow the same order of the TokenType enums
@@ -52,6 +53,7 @@ namespace parser
 		"-concat",
 		"-concat:y",
 		"-concat:n",
+		"-t"
 	};
 	
 
@@ -67,15 +69,16 @@ namespace parser
 		"  \033[2m-di\033[0m  Delete input file on compression/extraction\n"
 		"  \033[2m-preset <n>\033[0m  Compression preset n is from 0 to 9 (included).\n"
 		"  \033[2m-n_files <n>\033[0m  In how many files should the output be split in (max 1000).\n"
+		"  \033[2m-size_files <bytes>\033[0m  Split the output file in files of <bytes> size (min 512).\n"
 		"  \033[2m-concat\033[0m  Concatenate the compressed files in the folder specified by '-i'. Will prompt whether you want to decompress the concatenated file.\n"
 		"  \033[2m-concat:y\033[0m  Concatenate the compressed files in the folder specified by '-i'. WILL decompress the concatenated file.\n"
 		"  \033[2m-concat:n\033[0m  Concatenate the compressed files in the folder specified by '-i'. WILL NOT decompress the concatenated file.\n"
-		"  \033[2m-size_files <bytes>\033[0m  Split the output file in files of <bytes> size (min 512).\n"
+		"  \033[2m-t <n>\033[0m  Number of threads to be used.\n"
 		"\n\n"
 		"[comp_options]:\n"
 		"\033[35m\"LZ77\"\033[0m: A dictionary based algorithm, good for repetitive patterns of data. Slow compression and fast decompression.\n"
 		"\nAdditional details:\n"
-		" - If an option is encountered multiple times, the last occurence shall be considered by the program.";
+		" - If an option is encountered multiple times, only the last occurrence shall be considered by the program.";
 	
 	export class HelpException : public std::exception
 	{

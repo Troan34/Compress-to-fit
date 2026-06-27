@@ -513,7 +513,6 @@ private:
 				}
 			);
 			show_progress({}, static_cast<float>(n_completed_blocks) / static_cast<float>(n_blocks_), true);
-			std::this_thread::sleep_for(1ms);
 		}
 
 		show_progress({}, 1.F, true);

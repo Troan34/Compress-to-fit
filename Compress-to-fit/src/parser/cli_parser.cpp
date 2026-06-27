@@ -57,6 +57,7 @@ std::expected<Token, ErrorType> lex(const std::string& option)
 	else if (token_string == token_strings[static_cast<size_t>(TokenType::CONCATENATE)]) token_type = TokenType::CONCATENATE;
 	else if (token_string == token_strings[static_cast<size_t>(TokenType::DO_DECOMP_AFTER_CONCAT)]) token_type = TokenType::DO_DECOMP_AFTER_CONCAT;
 	else if (token_string == token_strings[static_cast<size_t>(TokenType::DO_NOT_DECOMP_AFTER_CONCAT)]) token_type = TokenType::DO_NOT_DECOMP_AFTER_CONCAT;
+	else if (token_string == token_strings[static_cast<size_t>(TokenType::CONCURRENCY)]) token_type = TokenType::CONCURRENCY;
 	else
 		throw_error(ErrorType::SYNTAX_ERROR, token_string);
 
@@ -161,6 +162,27 @@ std::expected<Token, ErrorType> lex(const std::string& option)
 
 			value.emplace<size_t>(value_temp);
 		}
+		break;
+		case TokenType::CONCURRENCY:
+		{
+			size_t value_temp;
+			auto const res = std::from_chars(token_value.data(), token_value.data() + token_value.size(), value_temp);
+
+			if (res.ec != std::errc())
+				throw_error(ErrorType::VALUE_ERROR, token_string + token_value);
+
+			if (value_temp < 0)
+				print_warn(WarningType::CONCURRENCY_OUT_OF_RANGE_LOWER, token_string + token_value);
+
+			if (value_temp > std::thread::hardware_concurrency())
+				print_warn(WarningType::CONCURRENCY_OUT_OF_RANGE_UPPER, token_string + token_value);
+
+			//I had no fucking idea size_t had suffix 'uz'
+			value_temp = std::clamp(value_temp, 0uz, static_cast<size_t>(std::thread::hardware_concurrency()));
+
+			value.emplace<size_t>(value_temp);
+		}
+		break;
 		//the next are all flags handled by the switch just above
 		case TokenType::LONG_HELP:
 		case TokenType::HELP:
@@ -244,6 +266,9 @@ Options parse(int argc, char* argv[])
 			case TokenType::SIZE_FILES:
 				options.size_files = std::get<size_t>(token.value().get_value());
 				break;
+			case TokenType::CONCURRENCY:
+				options.concurrency = std::get<size_t>(token.value().get_value());
+				break;
 			//DO index-- FOR FLAGS, it stops us from skipping arguments
 			case TokenType::HELP:
 			case TokenType::LONG_HELP:
@@ -290,7 +315,7 @@ Options parse(int argc, char* argv[])
 	if (options.need_help)
 		std::println(help_str);
 
-	if (fs::is_directory(options.filename_in) and !options.concatenate_files)//tried codecompressing a dir
+	if (fs::is_directory(options.filename_in) and !options.concatenate_files)//tried de/compressing a dir
 		throw_error(ErrorType::DIR_COMPRESSION, options.filename_in.string());
 	else if (options.filename_in.has_filename() and options.concatenate_files)//tried concatenating a file
 		throw_error(ErrorType::PATH_INVALID, options.filename_in.string());
@@ -309,7 +334,11 @@ Options parse(int argc, char* argv[])
 	}
 
 	if (options.filename_out == DEFAULT_OUT_PATH)
+	{
+		options.filename_out = options.filename_in.parent_path();
+		options.filename_out /= DEFAULT_OUT_PATH;
 		options.filename_out.replace_extension(FILE_EXTENSION);
+	}
 
 	return options;
 }

@@ -176,18 +176,28 @@ export enum class WarningType
 	RECOMPRESSION,
 	PORTIONS_OUT_OF_RANGE,
 	CONCAT_AMBIGUITY,
-
+	CONCURRENCY_OUT_OF_RANGE_UPPER,
+	CONCURRENCY_OUT_OF_RANGE_LOWER,
 };
 
 namespace WARN_STRING
 {
-	const std::string RECOMPRESSION =			"\033[43mWarn[" + std::to_string(static_cast<int>(WarningType::RECOMPRESSION)) + "]\033[0m: the file being compressed has already been compressed."
+	const std::string RECOMPRESSION =			"\033[43mWarn[" + std::to_string(static_cast<int>(WarningType::RECOMPRESSION)) +
+		"]\033[0m: the file being compressed has already been compressed."
 		+ "\033[34mTip\033[0m: A file recompression gives negligible, if not counter-productive, results.\n";
 
-	const std::string PORTIONS_OUT_OF_RANGE =	"\033[43mWarn\033[0m[" + std::to_string(static_cast<int>(WarningType::PORTIONS_OUT_OF_RANGE)) + "]: the number of file portions is outside of the accepted range."
+	const std::string PORTIONS_OUT_OF_RANGE =	"\033[43mWarn\033[0m[" + std::to_string(static_cast<int>(WarningType::PORTIONS_OUT_OF_RANGE)) +
+		"]: the number of file portions is outside of the accepted range."
 		+ "\033[34mTip\033[0m: The (not split) output file may have been too small.\nThe number of files created may be different from what you asked.\n";
 
-	const std::string CONCAT_AMBIGUITY = "\033[43mWarn\033[0m[" + std::to_string(static_cast<int>(WarningType::PORTIONS_OUT_OF_RANGE)) + "]: there has been found an ambiguity while concatenating. These files do not come from the same compressed file(same session).\n";
+	const std::string CONCAT_AMBIGUITY =		"\033[43mWarn\033[0m[" + std::to_string(static_cast<int>(WarningType::PORTIONS_OUT_OF_RANGE)) +
+		"]: there has been found an ambiguity while concatenating. These files do not come from the same compressed file(same session).\n";
+
+	const std::string CONCURRENCY_OUT_OF_RANGE_UPPER ="\033[43mWarn\033[0m[" + std::to_string(static_cast<int>(WarningType::CONCURRENCY_OUT_OF_RANGE_UPPER)) +
+		"]: you have selected more threads than available on your machine, will default to using all your threads.";
+
+	const std::string CONCURRENCY_OUT_OF_RANGE_LOWER ="\033[43mWarn\033[0m[" + std::to_string(static_cast<int>(WarningType::CONCURRENCY_OUT_OF_RANGE_UPPER)) +
+		"]: you have selected zero or a negative number of threads, will default to use only one thread.";
 }
 
 export void print_warn(WarningType warn, const std::string& warn_option = "")
@@ -202,6 +212,13 @@ export void print_warn(WarningType warn, const std::string& warn_option = "")
 		break;
 	case WarningType::CONCAT_AMBIGUITY:
 		std::cout << warn_option << " <- " + WARN_STRING::CONCAT_AMBIGUITY;
+		break;
+	case WarningType::CONCURRENCY_OUT_OF_RANGE_UPPER:
+		std::cout << warn_option << " <- " << WARN_STRING::CONCURRENCY_OUT_OF_RANGE_UPPER;
+		break;
+	case WarningType::CONCURRENCY_OUT_OF_RANGE_LOWER:
+		std::cout << warn_option << " <- " << WARN_STRING::CONCURRENCY_OUT_OF_RANGE_LOWER;
+		break;
 	}
 }
 
