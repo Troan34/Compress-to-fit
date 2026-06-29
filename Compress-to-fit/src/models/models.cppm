@@ -22,7 +22,7 @@ export void process_file(parser::Options const& options)
                 break;
             }
             default:
-                auto location = std::source_location::current();
+                auto const location = std::source_location::current();
                 auto error_string = std::string{"Unreachable branch, file: "} + location.file_name() + std::string{"\nline: "} + std::to_string(location.line());
                 assert(false && error_string.c_str());
                 break;
@@ -34,12 +34,12 @@ export void process_file(parser::Options const& options)
         {
             case CompType::LZ77:
             {
-                LZ77ConcurrentDecompressor decomp{data, file, options.concurrency};
+                LZ77ConcurrentDecompressor decomp{data.subspan(FILE_HEADER_SIZE), file, options.concurrency};
                 decomp.decompress();
                 break;
             }
             default:
-                auto location = std::source_location::current();
+                auto const location = std::source_location::current();
                 auto error_string = std::string{"Unreachable branch, file: "} + location.file_name() + std::string{"\nline: "} + std::to_string(location.line());
                 assert(false && error_string.c_str());
                 break;

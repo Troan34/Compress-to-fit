@@ -16,7 +16,7 @@ namespace fs = std::filesystem;
 
 constexpr std::string_view SIGNATURE = "CTF-1";
 									//SIGNATURE     +   IDENTIFIER    	
-export constexpr size_t FILE_HEADER_SIZE = SIGNATURE.size() + sizeof(uint8_t) + sizeof(uint8_t) + sizeof(size_t);
+export constexpr size_t FILE_HEADER_SIZE = SIGNATURE.size() + sizeof(size_t) + sizeof(uint16_t) + sizeof(uint8_t) + sizeof(uint8_t);
 enum class HEADER_OFFSET
 {
 	SIGNATURE = 0,
@@ -40,10 +40,9 @@ enum class HEADER_OFFSET
 struct Header
 {
 	size_t identifier;
-	std::uint16_t count;
+	uint16_t count;
 	CompType comp_type;
 	CompPreset preset;
-
 };
 #pragma pack(pop)
 
@@ -84,15 +83,15 @@ public:
 	 * @todo Add a parameter for #FileOptions::delete_on_dtor when the parser is updated to do that
 	 */
 	File(parser::Options const& options)
-		:cli_options(options) 
+		:options_(options)
 	{
 		if (options.concatenate_files)
 		{
-			concatenate_files(cli_options.filename_in);
+			concatenate_files(options_.filename_in);
 		}
 
-		in_file_options = FileOptions{ cli_options.filename_in, extract_info(cli_options.filename_in) };
-		out_file = create_file(cli_options.filename_out);
+		in_file_options = FileOptions{ options_.filename_in, extract_info(options_.filename_in) };
+		out_file = create_file(options_.filename_out);
 	}
 
 
@@ -103,7 +102,7 @@ public:
 	File& write(std::span<T> buffer) noexcept(false)
 	{
 		out_file.write(reinterpret_cast<const char*>(buffer.data()), buffer.size() * sizeof(T));
-		try_throw_IO_error(out_file.rdstate(), cli_options.filename_out);
+		try_throw_IO_error(out_file.rdstate(), options_.filename_out);
 		return *this;
 	}
 
@@ -117,7 +116,7 @@ public:
 	File& write(const char* bytes, std::streamsize const num)
 	{
 		out_file.write(bytes, num);
-		try_throw_IO_error(out_file.rdstate(), cli_options.filename_out);
+		try_throw_IO_error(out_file.rdstate(), options_.filename_out);
 		return *this;
 	}
 
@@ -330,7 +329,7 @@ public:
 	auto get_ref_out_stream() -> std::ofstream&{ return out_file; }
 private:
 	FileOptions in_file_options;
-	parser::Options const& cli_options;
+	parser::Options const& options_;
 	std::ofstream out_file;
 
 	/**
@@ -371,29 +370,13 @@ private:
 
 
 	/**
-	 * @brief Creates a compressed file(header) with the details of #cli_options. If file exists, it is cleared.
+	 * @brief Creates a compressed file(header) with the details of #cli_options. If file exists, it is not cleared.
 	 * @param path Where the file is created
 	 * @return A stream to the file.
 	 */
 	[[maybe_unused]] std::ofstream create_file(fs::path const& path) const
 	{
-
-		fs::remove(path);
-		std::ofstream file{ path, std::ios::binary | std::ios::trunc };
-
-		file.seekp(static_cast<size_t>(HEADER_OFFSET::SIGNATURE));
-		file.write(SIGNATURE.data(), SIGNATURE.size());
-
-		file.seekp(static_cast<size_t>(HEADER_OFFSET::ID));
-		size_t id_temp = 0;
-		file.write(reinterpret_cast<char const*>(&id_temp), sizeof(size_t));
-		uint8_t temp = static_cast<uint8_t>(cli_options.compressor);
-		file.write(reinterpret_cast<char const*>(&temp), sizeof(decltype(temp)));
-		temp = static_cast<uint8_t>(cli_options.preset);
-		file.write(reinterpret_cast<char const*>(&temp), sizeof(decltype(temp)));
-
-
-		return file;
+		return create_file(path, {0, 0, static_cast<CompType>(options_.compressor),static_cast<CompPreset>(options_.preset)});
 	}
 
 	/**
@@ -409,10 +392,16 @@ private:
 		file.seekp(static_cast<size_t>(HEADER_OFFSET::SIGNATURE));
 		file.write(SIGNATURE.data(), SIGNATURE.size());
 		file.seekp(static_cast<size_t>(HEADER_OFFSET::ID));
+
 		constexpr size_t id_temp = 0;
 		file.write(reinterpret_cast<char const*>(&id_temp), sizeof(size_t));
+
+		auto temp_u16 = options.count;
+		file.write(reinterpret_cast<char const*>(&temp_u16), sizeof(decltype(temp_u16)));
+
 		auto temp = static_cast<uint8_t>(options.comp_type);
 		file.write(reinterpret_cast<char const*>(&temp), sizeof(decltype(temp)));
+
 		temp = static_cast<uint8_t>(options.preset);
 		file.write(reinterpret_cast<char const*>(&temp), sizeof(decltype(temp)));
 
@@ -498,7 +487,7 @@ private:
 
 		auto example = extract_info(files_to_concat[0].first);
 		example.value().count = 0;
-		std::ofstream file{ create_file(cli_options.filename_out, example.value()) };
+		std::ofstream file{ create_file(options_.filename_out, example.value()) };
 
 		//sort the files base on their count
 		std::sort(files_to_concat.begin(), files_to_concat.end(),
@@ -526,24 +515,24 @@ private:
 				}
 				catch (...)
 				{
-					fs::remove(cli_options.filename_out);//cleanup
+					fs::remove(options_.filename_out);//cleanup
 					throw;
 				}
 
 				file.write(reinterpret_cast<char const*>(buffer.get()), input.gcount());
 				try
 				{
-					try_throw_IO_error(file.rdstate(), cli_options.filename_out.string());
+					try_throw_IO_error(file.rdstate(), options_.filename_out.string());
 				}
 				catch (...)
 				{
-					fs::remove(cli_options.filename_out);//cleanup
+					fs::remove(options_.filename_out);//cleanup
 					throw;
 				}
 			}
 		}
 
 
-		return cli_options.filename_out;
+		return options_.filename_out;
 	}
 };

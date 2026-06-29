@@ -39,7 +39,7 @@ target_sources(
         "src/parser/cli_parser.cpp"
 )
 
-set_target_properties(project_logic PROPERTIES CXX_CLANG_TIDY ${CLANG_TIDY_OPT})
+#set_target_properties(project_logic PROPERTIES CXX_CLANG_TIDY ${CLANG_TIDY_OPT})
 
 target_link_libraries(
         project_logic

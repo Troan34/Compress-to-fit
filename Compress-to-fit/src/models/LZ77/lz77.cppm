@@ -164,6 +164,7 @@ public:
 	[[nodiscard]] auto get_max_size_search() const noexcept{return max_size_search;}
 	[[nodiscard]] auto get_relative_pos() const noexcept{return size_search;}
 	[[nodiscard]] auto get_absolute_pos() const noexcept{return size_search + offset;}
+	[[nodiscard]] auto get_offset() const noexcept{return offset;}
 	[[nodiscard]] auto operator[](size_t const index) const noexcept
 	{
 		assert(index < data.size());
@@ -498,6 +499,7 @@ private:
 	{
 		while (!stop.stop_requested())
 		{
+			std::this_thread::sleep_for(2ms);
 			std::unique_lock lock{mutex_};
 			std::erase_if(results,
 			[this](std::future<void>& result)
@@ -521,7 +523,6 @@ private:
 
 
 
-
 export class LZ77ConcurrentDecompressor
 {
 public:
@@ -529,6 +530,16 @@ public:
 		: data_(data), concurrency_(concurrency), file_(file), file_list_(file), thread_pool(concurrency)
 	{
 
+	}
+
+	~LZ77ConcurrentDecompressor()
+	{
+		std::unique_lock lock{mutex_};
+		for (auto& result : results)
+		{
+			result.wait();
+			result.get();
+		}
 	}
 
 	/**
@@ -539,7 +550,7 @@ public:
 	 */
 	void decompress() noexcept(false)
 	{
-		for (size_t i{}; i < data_.size();)
+		for (size_t i{}, seq_n{}; i < data_.size(); seq_n++)
 		{
 			auto data_for_task = LZ77Block{data_.subspan(i), file_.get_in_file_options().path};
 			i += sizeof(std::invoke_result_t<decltype(&LZ77Block::uncompressed_length), LZ77Block>) +
@@ -547,7 +558,7 @@ public:
 				data_for_task.compressed_length();
 
 			thread_pool.add_task(
-				[this, data = std::move(data_for_task)]
+				[this, data = std::move(data_for_task), seq_n]
 				{
 					LZ77Decompressor decompressor{data};
 
@@ -556,6 +567,10 @@ public:
 					buffer.reserve(data.uncompressed_length());
 
 					decompressor.decompress(buffer);
+
+					std::unique_ptr<std::pmr::vector<Sym>> ptr{&buffer};
+
+					file_list_.insert(std::move(ptr), seq_n);
 				});
 
 		}
@@ -570,13 +585,15 @@ private:
 	std::vector<std::future<void>> results{};
 	size_t n_blocks_{};
 	size_t n_completed_blocks{};
+	std::mutex mutex_;//to be used to access results
 
 	//IN THIS ORDER
 
 	std::shared_ptr<std::pmr::synchronized_pool_resource> shared_memory_pool = std::make_shared<std::pmr::synchronized_pool_resource>();
 	File const& file_;
-	ConcOrderedFileList<std::byte> file_list_;
+	ConcOrderedFileList<std::pmr::vector<Sym>> file_list_;
 	ThreadPool thread_pool{};
+
 
 	void check_results()
 	{

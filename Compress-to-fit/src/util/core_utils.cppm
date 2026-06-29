@@ -377,10 +377,51 @@ export template <typename Type>
 	return i;
 }
 
-export template<typename T>
-concept SerializableToDisk = requires(T a, std::ofstream& file)
+template<std::ranges::input_range R>
+void write_to(R const& range, std::ostream& file);
+
+
+template <typename T>
+concept MemberWriteable = requires(T const& a, std::ofstream& file)
 {
-	{ a.write_to(file) } -> std::same_as<void>;
+	a.write_to(file);
+};
+
+template <typename T>
+concept FreeWriteable = requires(T const& a, std::ofstream& file)
+{
+	write_to(a, file);
+};
+
+export template<typename T>
+concept SerializableToDisk = std::is_trivially_copyable_v<T> or MemberWriteable<T> or FreeWriteable<T>;
+
+template<SerializableToDisk T>
+void write_to_disk(T const& t, std::ostream& file)
+{
+	if constexpr (std::is_trivially_copyable_v<T> and !MemberWriteable<T> and !FreeWriteable<T>)
+	{
+		file.write(reinterpret_cast<char const *>(&t), sizeof(T));
+	}
+	else if constexpr (MemberWriteable<T>)
+	{
+		t.write_to(file);
+	}
+	else
+	{
+		write_to(t, file);
+	}
 }
-||
-std::is_trivially_copyable_v<T>;
+
+
+export template<std::ranges::input_range R>
+	requires SerializableToDisk<std::ranges::range_value_t<R>>
+void write_to(R const& range, std::ostream& file)
+{
+	for (auto const& elem : range)
+	{
+		write_to_disk(elem, file);
+	}
+}
+
+

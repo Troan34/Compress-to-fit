@@ -340,6 +340,11 @@ Options parse(int argc, char* argv[])
 		options.filename_out.replace_extension(FILE_EXTENSION);
 	}
 
+	if (options.filename_in == options.filename_out)
+	{
+		options.filename_out.replace_filename(options.filename_out.stem().string() + "_out" + FILE_EXTENSION);
+	}
+
 	return options;
 }
 

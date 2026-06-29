@@ -176,14 +176,7 @@ private:
             if (tail_->sequence_num_ != expected_sequence_num_)//we are missing a node
                 return false;
 
-            if constexpr (std::is_trivially_copyable_v<T>)
-            {
-                file_.write(reinterpret_cast<char*>(&tail_->element_), sizeof(T));
-            }
-            else//T implements a write_to()
-            {
-                tail_->element_->write_to(file_.get_ref_out_stream());
-            }
+            write_to(*tail_->element_.get(), file_.get_ref_out_stream());
 
             auto old_tail = tail_;
             if (size_ == 1)
