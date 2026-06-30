@@ -8,7 +8,8 @@ import util;
 import std.compat;
 
 
-template <SerializableToDisk T>
+template <typename T>
+    requires SerializableToDisk<std::ranges::range_value_t<T>> or SerializableToDisk<T>
 struct Node
 {
     Node(std::unique_ptr<T> element, size_t const sequence_num)
@@ -31,7 +32,8 @@ constexpr int LEAST_NODES_FOR_WRITING = 10;
  *
  * @note Because the list will own the elements, consider using a memory pool (e.g. pmr) as to not reallocate memory.
  */
-export template<SerializableToDisk T>
+export template<typename T>
+    requires SerializableToDisk<std::ranges::range_value_t<T>> or SerializableToDisk<T>
 class ConcOrderedFileList
 {
 public:
@@ -176,7 +178,7 @@ private:
             if (tail_->sequence_num_ != expected_sequence_num_)//we are missing a node
                 return false;
 
-            write_to(*tail_->element_.get(), file_.get_ref_out_stream());
+            write_to_disk(*tail_->element_.get(), file_.get_ref_out_stream());
 
             auto old_tail = tail_;
             if (size_ == 1)

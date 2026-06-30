@@ -28,12 +28,12 @@ enum class HEADER_OFFSET
 };
 
 ///									TZF		FILE	HEADER
-///	 ________________________________________________________________________________________________
-/// | 		     |							   |				  |				  |				     |
-/// |  SIGNATURE | Identifier (file splitting) | Count(file splt) |  CompType(u8) |  CompPreset(u8)  |
-/// |____________|_____________________________|__________________|_______________|__________________|
-///				 ↑							   ↑				  ↑               ↑				     ↑
-///	HEADER_OFFSET::ID		HEADER_OFFSET::COUNT   /*...*/::COMP_TYPE  HEADER_OFFSET::COMP_PRESET  HEADER_OFFSET::MAX
+///	 ___________________________________________________________________________________________________________________
+/// | 		     |									 |								|				 |				    |
+/// |  SIGNATURE | Identifier (file splitting) (u64) |  Count(file splitting)(u16)  |  CompType(u8)  |  CompPreset(u8)  |
+/// |____________|___________________________________|______________________________|________________|__________________|
+///				 ↑								     ↑								↑                ↑				    ↑
+///	HEADER_OFFSET::ID			  HEADER_OFFSET::COUNT			   /*...*/::COMP_TYPE	HEADER_OFFSET::COMP_PRESET		HEADER_OFFSET::MAX
 		 
 //avoid padding in files
 #pragma pack(push, 1)
@@ -91,7 +91,16 @@ public:
 		}
 
 		in_file_options = FileOptions{ options_.filename_in, extract_info(options_.filename_in) };
-		out_file = create_file(options_.filename_out);
+
+		if (extract_info(options_.filename_out))
+		{
+			out_file = create_file(options_.filename_out);//create the file with header
+		}
+		else
+		{
+			options_.filename_out.replace_extension("");
+			out_file = { options_.filename_out, std::ios::binary };//create empty file
+		}
 	}
 
 
@@ -329,7 +338,7 @@ public:
 	auto get_ref_out_stream() -> std::ofstream&{ return out_file; }
 private:
 	FileOptions in_file_options;
-	parser::Options const& options_;
+	parser::Options options_;
 	std::ofstream out_file;
 
 	/**

@@ -319,55 +319,102 @@ constexpr size_t MAX_BLOCK_SIZE = 4_MiB;
 /**
  * @brief Represents a block of data encoded by LZ77.
  */
+template <typename Alloc = std::allocator<LZ77_Token>>
 class LZ77Block
 {
 public:
+	using value_type = LZ77_Token;
 
-	explicit LZ77Block(std::span<std::byte const> const data_, fs::path const& file) noexcept;
-	LZ77Block() = default;
+	explicit LZ77Block(std::span<std::byte const> const data_, fs::path const& file, Alloc const& alloc = Alloc())
+		: buffer_(alloc)
+	{
+		constexpr size_t len1 = sizeof(decltype(compressed_length_));
+		constexpr size_t len2 = sizeof(decltype(uncompressed_length_));
+
+		std::memcpy(&compressed_length_, data_.data(), len1);//get compressed_length from data
+		std::memcpy(&uncompressed_length_, data_.data() + len1, len2);//get uncompressed_length from data
+
+		if (len1 + len2 + compressed_length_ > data_.size())
+			throw_error(ErrorType::FILE_CORRUPTED, "An lz77 header is corrupted in file \"" + file.string() + "\"");
+
+		buffer_.reserve(data_.size());
+		buffer_ = std::vector<LZ77_Token>{
+			reinterpret_cast<LZ77_Token const*>(data_.data() + len1 + len2),
+			reinterpret_cast<LZ77_Token const*>(data_.data() + compressed_length_)
+		};
+	}
+
+	LZ77Block(Alloc const& alloc = Alloc()) : buffer_(alloc) {}
 
 	/**
 	 * @brief Convert the block into a byte buffer
 	 * @param output output buffer
 	 */
-	void serialize(std::vector<std::byte>& output);
+	void serialize(std::vector<std::byte>& output)
+	{
+		constexpr size_t len1 = sizeof(decltype(compressed_length_));
+		constexpr size_t len2 = sizeof(decltype(uncompressed_length_));
 
-	void write_to(std::ofstream& output);
+		output.resize(len1 + len2 + buffer_.size() * sizeof(LZ77_Token));
+
+		std::memcpy(output.data(), &compressed_length_, len1);
+		std::memcpy(output.data() + len1, &uncompressed_length_, len2);
+
+		std::memcpy(output.data() + len1 + len2, buffer_.data(), buffer_.size() * sizeof(LZ77_Token));
+	}
+
+	void write_to(std::ofstream& output) const
+	{
+		constexpr size_t len1 = sizeof(decltype(compressed_length_));
+		constexpr size_t len2 = sizeof(decltype(uncompressed_length_));
+
+		output.write(reinterpret_cast<char const*>(&compressed_length_), len1);
+		output.write(reinterpret_cast<char const*>(&uncompressed_length_), len2);
+		output.write(reinterpret_cast<char const*>(buffer_.data()), buffer_.size() * sizeof(typename decltype(buffer_)::value_type));
+	}
 
 	void push_back(LZ77_Token const token)
 	{
 		compressed_length_ += sizeof(LZ77_Token);
 		uncompressed_length_ += token.length + sizeof(decltype(LZ77_Token::symbol));
-		block.push_back(token);
+		buffer_.push_back(token);
 	}
 
 	void clear() noexcept
 	{
-		block.clear();
+		buffer_.clear();
 		compressed_length_ = 0;
 		uncompressed_length_ = 0;
 	}
 
-	constexpr auto reserve(size_t const size) { block.reserve(size);}
+	constexpr auto reserve(size_t const size) { buffer_.reserve(size);}
 
-	[[nodiscard]] constexpr auto size() const noexcept { return block.size(); }
-	[[nodiscard]] constexpr auto size_bytes() const noexcept -> size_t { return block.size() * sizeof(LZ77_Token); }
+	[[nodiscard]] constexpr auto size() const noexcept { return buffer_.size(); }
+	[[nodiscard]] constexpr auto size_bytes() const noexcept -> size_t { return buffer_.size() * sizeof(LZ77_Token); }
 	[[nodiscard]] constexpr auto compressed_length() const noexcept {return compressed_length_;}
 	[[nodiscard]] constexpr auto uncompressed_length() const noexcept {return uncompressed_length_;}
-	[[nodiscard]] constexpr auto const& operator[](size_t const index) const noexcept {return block[index];}
-	[[nodiscard]] constexpr auto begin() const noexcept {return block.begin();}
-	[[nodiscard]] constexpr auto end() const noexcept {return block.end();}
+	[[nodiscard]] constexpr auto const& operator[](size_t const index) const noexcept {return buffer_[index];}
+	[[nodiscard]] constexpr auto begin() const noexcept {return buffer_.begin();}
+	[[nodiscard]] constexpr auto end() const noexcept {return buffer_.end();}
+
+	template <typename Self>
+	auto&& buffer(this Self& self) noexcept
+	{
+		return std::forward<Self>(self).buffer_;
+	}
+
+
 	//setter
 	[[nodiscard]] constexpr auto& operator[](size_t const index) noexcept
 	{
-		assert(index < block.size());
-		return block[index];
+		assert(index < buffer_.size());
+		return buffer_[index];
 	}
 
 private:
 	uint32_t compressed_length_{};
 	uint32_t uncompressed_length_{};
-	std::vector<LZ77_Token> block{};
+	std::vector<LZ77_Token, Alloc> buffer_;
 };
 
 
@@ -384,7 +431,27 @@ public:
 	 *
 	 * @note Will clear out_data block
 	 */
-	void compress(LZ77Block& out_data);
+	template <typename Alloc>
+	void compress(LZ77Block<Alloc>& out_data)
+	{
+		out_data.clear();
+		out_data.reserve(data_.size() / sizeof(LZ77_Token));
+
+		size_t consumed_tokens{};
+		//loop over the stream
+		for (auto i = data_.begin(); i != data_.end();)
+		{
+			auto const token = this->pattern_matcher.find_pattern();
+
+			auto const num_of_rolls = token.length + 1;
+			this->pattern_matcher.roll_hash(num_of_rolls);//roll, updates the hash and position
+			this->window.slide(num_of_rolls);
+			i += num_of_rolls;
+			consumed_tokens += num_of_rolls;
+
+			out_data.push_back(token);
+		}
+	}
 
 private:
 	std::span<Sym const> const data_{};
@@ -394,10 +461,11 @@ private:
 
 };
 
+template<typename Alloc = std::allocator<LZ77Block<>::value_type>>
 class LZ77Decompressor
 {
 public:
-	explicit LZ77Decompressor(LZ77Block const& data)
+	explicit LZ77Decompressor(LZ77Block<Alloc> const& data)
 		: data_(data) {}
 
 	/**
@@ -422,8 +490,10 @@ public:
 	}
 
 private:
-	LZ77Block const& data_;
+	LZ77Block<Alloc> const& data_;
 };
+
+
 
 export class LZ77ConcurrentCompressor
 {
@@ -469,7 +539,7 @@ public:
 
 			auto future = thread_pool.add_task([this, data_for_task, seq_num]//'this' shall be strictly used to access const members, or concurrency capable containers
 			{
-				auto block = std::make_unique<LZ77Block>();
+				auto block = std::make_unique<LZ77Block<>>();
 				block->reserve(data_for_task.size());
 				LZ77Compressor compressor{{reinterpret_cast<Sym const*>(data_for_task.data()), (data_for_task.size_bytes() / sizeof(Sym))}, preset_};
 				compressor.compress(*block);
@@ -491,7 +561,7 @@ private:
 	std::mutex mutex_;//to be used to access results
 	std::jthread progress_checker{&LZ77ConcurrentCompressor::check_results, this};
 	//These have to stay down here (I just found out how objects are destroyed)
-	ConcOrderedFileList<LZ77Block> file_list_;
+	ConcOrderedFileList<LZ77Block<>> file_list_;
 	ThreadPool thread_pool{};
 
 
@@ -553,26 +623,25 @@ public:
 		for (size_t i{}, seq_n{}; i < data_.size(); seq_n++)
 		{
 			auto data_for_task = LZ77Block{data_.subspan(i), file_.get_in_file_options().path};
-			i += sizeof(std::invoke_result_t<decltype(&LZ77Block::uncompressed_length), LZ77Block>) +
-				sizeof(std::invoke_result_t<decltype(&LZ77Block::compressed_length), LZ77Block>) +
+			i += sizeof(std::invoke_result_t<decltype(&LZ77Block<>::uncompressed_length), LZ77Block<>>) +
+				sizeof(std::invoke_result_t<decltype(&LZ77Block<>::compressed_length), LZ77Block<>>) +
 				data_for_task.compressed_length();
 
-			thread_pool.add_task(
+			auto future = thread_pool.add_task(
 				[this, data = std::move(data_for_task), seq_n]
 				{
 					LZ77Decompressor decompressor{data};
 
-					std::pmr::polymorphic_allocator<Sym> allocator{shared_memory_pool.get()};
-					std::pmr::vector<Sym> buffer{allocator};
-					buffer.reserve(data.uncompressed_length());
+					auto buffer = std::make_unique<std::vector<Sym>>();
+					buffer->reserve(data.uncompressed_length());
 
-					decompressor.decompress(buffer);
+					decompressor.decompress(*buffer);
 
-					std::unique_ptr<std::pmr::vector<Sym>> ptr{&buffer};
-
-					file_list_.insert(std::move(ptr), seq_n);
+					file_list_.insert(std::move(buffer), seq_n);
 				});
 
+			std::unique_lock lock{mutex_};
+			results.emplace_back(std::move(future));
 		}
 
 	}
@@ -588,29 +657,35 @@ private:
 	std::mutex mutex_;//to be used to access results
 
 	//IN THIS ORDER
-
-	std::shared_ptr<std::pmr::synchronized_pool_resource> shared_memory_pool = std::make_shared<std::pmr::synchronized_pool_resource>();
+	std::jthread progress_checker{&LZ77ConcurrentDecompressor::check_results, this};
 	File const& file_;
-	ConcOrderedFileList<std::pmr::vector<Sym>> file_list_;
+	ConcOrderedFileList<std::vector<Sym>> file_list_;
 	ThreadPool thread_pool{};
 
 
-	void check_results()
+	void check_results(std::stop_token stop)
 	{
-		std::erase_if(results,
-		[this](std::future<void>& result)
-			{
-				auto const status = result.wait_for(std::chrono::nanoseconds::zero());
-				if (status == std::future_status::ready)
+		while (!stop.stop_requested())
+		{
+			std::this_thread::sleep_for(2ms);
+			std::unique_lock lock{mutex_};
+			std::erase_if(results,
+			[this](std::future<void>& result)
 				{
-					result.get();
-					n_completed_blocks++;
-					return true;
+					if (result.valid())
+					{
+						result.get();
+						n_completed_blocks++;
+						return true;
+					}
+					else
+						return false;
 				}
-				else
-					return false;
-			}
-		);
+			);
+			show_progress({}, static_cast<float>(n_completed_blocks) / static_cast<float>(n_blocks_), false);
+		}
+
+		show_progress({}, 1.F, false);
 	}
 
 };

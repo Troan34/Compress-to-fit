@@ -13,7 +13,8 @@ import std.compat;
  *		  At least the most recent #minimum_size_ number of elements shall be available for reading.
  * @tparam T type stored, must be trivially copyable
  */
-export template <SerializableToDisk T>
+export template <typename T>
+	requires SerializableToDisk<std::ranges::range_value_t<T>> or SerializableToDisk<T>
 class ConcFileBuffer
 {
 public:
