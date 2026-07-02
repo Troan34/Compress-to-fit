@@ -340,7 +340,7 @@ public:
 		buffer_.reserve(data_.size());
 		buffer_ = std::vector<LZ77_Token>{
 			reinterpret_cast<LZ77_Token const*>(data_.data() + len1 + len2),
-			reinterpret_cast<LZ77_Token const*>(data_.data() + compressed_length_)
+			reinterpret_cast<LZ77_Token const*>(data_.data() + len1 + len2 +  compressed_length_)
 		};
 	}
 
@@ -482,11 +482,13 @@ public:
 		{
 			if (token.offset != 0)
 			{
+				auto size = out_data.size();
 				for (auto _ : std::views::iota(0u, token.length))
-					out_data.push_back(out_data[out_data.size() - token.offset]);
+					out_data.push_back(out_data[size - token.offset]);
 			}
 			out_data.emplace_back(token.symbol);
 		}
+		assert(out_data.capacity() == out_data.size());
 	}
 
 private:
