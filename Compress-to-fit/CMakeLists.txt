@@ -37,6 +37,8 @@ target_sources(
     project_logic
     PUBLIC
         "src/parser/cli_parser.cpp"
+
+        "../Design/Main.qml"
 )
 
 #set_target_properties(project_logic PROPERTIES CXX_CLANG_TIDY ${CLANG_TIDY_OPT})
@@ -44,7 +46,8 @@ target_sources(
 target_link_libraries(
         project_logic
         PUBLIC
-        Qt6::Widgets
+        Qt6::Quick
+        Qt6::Qml
 )
 
 FetchContent_GetProperties(mio SOURCE_DIR mio_SOURCE_DIR)
@@ -60,10 +63,19 @@ set_target_properties(Compress-to-fit PROPERTIES
     CXX_CLANG_TIDY ""
 )
 target_link_libraries(Compress-to-fit PRIVATE project_logic)
-target_sources(Compress-to-fit PRIVATE "Compress-to-fit.cpp")
+target_sources(Compress-to-fit PRIVATE "Compress-to-fit.cpp" "qml.qrc")
+
 target_compile_features(Compress-to-fit PRIVATE cxx_std_23)
 set_target_properties(Compress-to-fit PROPERTIES CXX_CLANG_TIDY ${CLANG_TIDY_OPT})
 
+qt_add_qml_module(
+        Compress-to-fit
+        URI ctf
+        VERSION 0.1
+
+        QML_FILES
+            ../Design/Main.qml
+)
 
 
 #add the tests executable
