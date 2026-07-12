@@ -2,7 +2,9 @@
 #include <mio/mmap.hpp>
 #include "src/util/macros.hpp"
 #include <QGuiApplication>
+#include <QApplication>
 #include <QQmlApplicationEngine>
+#include <QCoreApplication>
 
 import util;
 
@@ -17,17 +19,20 @@ namespace fs = std::filesystem;
 int main(int argc, char* argv[])
 {
 
-	QGuiApplication app(argc, argv);
+	QApplication app(argc, argv);
 
 	QQmlApplicationEngine engine;
+
 	QObject::connect(
 		&engine,
 		&QQmlApplicationEngine::objectCreationFailed,
 		&app,
-		[]() { QCoreApplication::exit(-1); },
+		[] { QCoreApplication::exit(-1); },
 		Qt::QueuedConnection);
+
 	engine.load(QUrl(u"qrc:/Main.qml"_qs));
-	return QGuiApplication::exec();
+
+	return app.exec();
 
 	WIN_CALL(SetConsoleOutputCP(CP_UTF8));
 

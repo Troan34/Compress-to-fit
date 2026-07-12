@@ -48,6 +48,7 @@ target_link_libraries(
         PUBLIC
         Qt6::Quick
         Qt6::Qml
+        Qt6::Widgets
 )
 
 FetchContent_GetProperties(mio SOURCE_DIR mio_SOURCE_DIR)
