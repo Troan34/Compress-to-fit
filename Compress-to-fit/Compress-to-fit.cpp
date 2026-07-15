@@ -19,20 +19,18 @@ namespace fs = std::filesystem;
 int main(int argc, char* argv[])
 {
 
-	QApplication app(argc, argv);
+	QGuiApplication app(argc, argv);
 
 	QQmlApplicationEngine engine;
-
 	QObject::connect(
 		&engine,
 		&QQmlApplicationEngine::objectCreationFailed,
 		&app,
-		[] { QCoreApplication::exit(-1); },
+		[]() { QCoreApplication::exit(-1); },
 		Qt::QueuedConnection);
+	engine.loadFromModule("CompressToFit", "Main");
 
-	engine.load(QUrl(u"qrc:/Main.qml"_qs));
-
-	return app.exec();
+	return QGuiApplication::exec();
 
 	WIN_CALL(SetConsoleOutputCP(CP_UTF8));
 

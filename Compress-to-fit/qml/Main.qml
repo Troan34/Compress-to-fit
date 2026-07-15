@@ -21,7 +21,7 @@ ApplicationWindow {
             text: "Choose file to process..."
             icon.name: "folder"
             onClicked: fileDialog.open()
-            
+
         }
 
         FileDialog {
