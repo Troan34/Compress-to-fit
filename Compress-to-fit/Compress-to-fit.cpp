@@ -30,7 +30,7 @@ int main(int argc, char* argv[])
 		Qt::QueuedConnection);
 	engine.loadFromModule("CompressToFit", "Main");
 
-	return QGuiApplication::exec();
+	//return QGuiApplication::exec();
 
 	WIN_CALL(SetConsoleOutputCP(CP_UTF8));
 

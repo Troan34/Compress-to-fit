@@ -205,8 +205,9 @@ public:
 	* @brief Read a file into a vector. Will call throw_error if file is not found or inaccessible.
 	* @param in_path Location of file.
 	* @param received_data The vector that will be filled.
+	* @param pos Read position.
 	*/
-	static void read_file(const fs::path& in_path, std::vector<Sym>& received_data)
+	static void read_file(const fs::path& in_path, std::vector<Sym>& received_data, size_t pos = 0)
 	{
 		if (!fs::exists(in_path))
 		{
@@ -222,10 +223,11 @@ public:
 
 		received_data.resize(size_file);
 
-		in_file.seekg(0);
+		in_file.seekg(pos);
 
 		in_file.read(reinterpret_cast<char*>(received_data.data()), size_file * sizeof(Sym));
 	}
+
 
 	/**
 	 * @brief Check if file has the #SIGNATURE in the header. Non-throwing version of #check_signature.

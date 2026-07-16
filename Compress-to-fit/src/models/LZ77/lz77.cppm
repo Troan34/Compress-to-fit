@@ -1,9 +1,10 @@
 module;
 #include <cassert>
 #include <cstddef>
+#include <mio/mmap.hpp>
 export module models:lz77;
 
-#if defined(__INTELLISENSE__)
+#ifdef __INTELLISENSE__
 #include "../../../for_intellisense/everything.hpp"
 #endif
 
@@ -325,22 +326,41 @@ class LZ77Block
 public:
 	using value_type = LZ77_Token;
 
-	explicit LZ77Block(std::span<std::byte const> const data_, fs::path const& file, Alloc const& alloc = Alloc())
+	static auto extract_header(std::span<std::byte const> const data)
+	{
+		constexpr size_t len1 = sizeof(decltype(compressed_length_));
+		constexpr size_t len2 = sizeof(decltype(uncompressed_length_));
+
+		if (data.size() < len1 + len2)
+			throw std::out_of_range("LZ77 block size is too small");
+
+		decltype(compressed_length_) compressed_length;
+		decltype(uncompressed_length_) uncompressed_length;
+
+		std::memcpy(&compressed_length, data.data(), len1);//get compressed_length from data
+		std::memcpy(&uncompressed_length, data.data() + len1, len2);//get uncompressed_length from data
+
+		return std::make_pair(compressed_length, uncompressed_length);
+	}
+
+
+	explicit LZ77Block(std::span<std::byte const> const data, fs::path const& file, Alloc const& alloc = Alloc())
 		: buffer_(alloc)
 	{
 		constexpr size_t len1 = sizeof(decltype(compressed_length_));
 		constexpr size_t len2 = sizeof(decltype(uncompressed_length_));
 
-		std::memcpy(&compressed_length_, data_.data(), len1);//get compressed_length from data
-		std::memcpy(&uncompressed_length_, data_.data() + len1, len2);//get uncompressed_length from data
+		auto const [compressed_length__, uncompressed_length__] = extract_header(data);
+		compressed_length_ = compressed_length__;
+		uncompressed_length_ = uncompressed_length__;
 
-		if (len1 + len2 + compressed_length_ > data_.size())
+		if (len1 + len2 + compressed_length_ > data.size())
 			throw_error(ErrorType::FILE_CORRUPTED, "An lz77 header is corrupted in file \"" + file.string() + "\"");
 
-		buffer_.reserve(data_.size());
+		buffer_.reserve(data.size());
 		buffer_ = std::vector<LZ77_Token>{
-			reinterpret_cast<LZ77_Token const*>(data_.data() + len1 + len2),
-			reinterpret_cast<LZ77_Token const*>(data_.data() + len1 + len2 +  compressed_length_)
+			reinterpret_cast<LZ77_Token const*>(data.data() + len1 + len2),
+			reinterpret_cast<LZ77_Token const*>(data.data() + len1 + len2 +  compressed_length_)
 		};
 	}
 
@@ -410,6 +430,7 @@ public:
 		assert(index < buffer_.size());
 		return buffer_[index];
 	}
+
 
 private:
 	uint32_t compressed_length_{};
@@ -500,11 +521,11 @@ private:
 export class LZ77ConcurrentCompressor
 {
 public:
-	LZ77ConcurrentCompressor(std::span<std::byte const> const data, size_t const concurrency, File& file, CompPreset const preset) noexcept(false)
-		: preset_(preset), concurrency_(concurrency), data_(data), file_list_(file), thread_pool(concurrency)
+	LZ77ConcurrentCompressor(size_t const concurrency, File& file, CompPreset const preset) noexcept(false)
+		: preset_(preset), concurrency_(concurrency), file_(file), file_list_(file), thread_pool(concurrency), file_size_(fs::file_size(file_.get_in_file_options().path))
 	{
-		n_blocks_ = data_.size_bytes() / std::min(data_.size_bytes() / concurrency, MAX_BLOCK_SIZE);
-		if (data_.size_bytes() % MAX_BLOCK_SIZE > 0)
+		n_blocks_ = file_size_ / std::min(file_size_ / concurrency, MAX_BLOCK_SIZE);
+		if (file_size_ % MAX_BLOCK_SIZE > 0)
 			++n_blocks_;
 
 		results.reserve(n_blocks_);
@@ -525,27 +546,35 @@ public:
 	 */
 	void compress() noexcept(false)
 	{
-		auto const partition_size = std::min(data_.size() / concurrency_, MAX_BLOCK_SIZE);
-		for (size_t completed_size = 0, seq_num{}; completed_size < data_.size(); completed_size += partition_size, seq_num++)
+
+		auto const partition_size = std::min(file_size_ / concurrency_, MAX_BLOCK_SIZE);
+		for (size_t completed_size = 0, seq_num{}; completed_size < file_size_; completed_size += partition_size, seq_num++)
 		{
 			//get the true partition size, i.e. the partition can be cut off at the eof
 			auto const true_partition_size = [completed_size, partition_size, this]
 			{
-				if (completed_size + partition_size > data_.size())
-					return data_.size() - completed_size;
-				else
-					return partition_size;
+				if (completed_size + partition_size > file_size_)
+					return file_size_ - completed_size;
+				return partition_size;
 			}();
 
-			auto const data_for_task = data_.subspan(completed_size, true_partition_size);
 
-			auto future = thread_pool.add_task([this, data_for_task, seq_num]//'this' shall be strictly used to access const members, or concurrency capable containers
+			auto future = thread_pool.add_task([this, completed_size, true_partition_size, seq_num]//'this' shall be strictly used to access const members, or concurrency capable containers
 			{
-				auto block = std::make_unique<LZ77Block<>>();
-				block->reserve(data_for_task.size());
-				LZ77Compressor compressor{{reinterpret_cast<Sym const*>(data_for_task.data()), (data_for_task.size_bytes() / sizeof(Sym))}, preset_};
-				compressor.compress(*block);
-				file_list_.insert(std::move(block), seq_num);
+				std::ifstream in_file{file_.get_in_file_options().path, std::ios::binary | std::ios::in};
+				in_file.seekg(completed_size);
+
+				std::vector<Sym> data_for_task;
+				data_for_task.resize(true_partition_size - completed_size);
+
+				in_file.read(reinterpret_cast<char*>(data_for_task.data()), true_partition_size - completed_size);
+
+				auto out_buffer = std::make_unique<LZ77Block<>>();
+				out_buffer->reserve(true_partition_size - completed_size);
+
+				LZ77Compressor compressor{{reinterpret_cast<Sym const*>(data_for_task.data()), (data_for_task.size())}, preset_};
+				compressor.compress(*out_buffer);
+				file_list_.insert(std::move(out_buffer), seq_num);
 			});
 
 			std::unique_lock lock{mutex_};
@@ -556,7 +585,8 @@ public:
 private:
 	CompPreset const preset_;
 	size_t const concurrency_;
-	std::span<std::byte const> const data_{};
+	File const& file_;
+	size_t const file_size_;
 	std::vector<std::future<void>> results{};
 	std::atomic<size_t> n_blocks_{};
 	size_t n_completed_blocks{};
@@ -598,10 +628,9 @@ private:
 export class LZ77ConcurrentDecompressor
 {
 public:
-	LZ77ConcurrentDecompressor(std::span<std::byte const> const data, File& file, size_t const concurrency)
+	LZ77ConcurrentDecompressor(mio::basic_mmap_source<std::byte> const data, File& file, size_t const concurrency)
 		: data_(data), concurrency_(concurrency), file_(file), file_list_(file), thread_pool(concurrency)
 	{
-
 	}
 
 	~LZ77ConcurrentDecompressor()
@@ -622,7 +651,11 @@ public:
 	 */
 	void decompress() noexcept(false)
 	{
-		for (size_t i{}, seq_n{}; i < data_.size(); seq_n++)
+		auto const size = fs::file_size(file_.get_in_file_options().path);
+
+
+
+		for (size_t i{}, seq_n{}; i < size; seq_n++)
 		{
 			auto data_for_task = LZ77Block{data_.subspan(i), file_.get_in_file_options().path};
 			i += sizeof(std::invoke_result_t<decltype(&LZ77Block<>::uncompressed_length), LZ77Block<>>) +
@@ -651,7 +684,6 @@ public:
 
 
 private:
-	std::span<std::byte const> const data_{};
 	size_t const concurrency_{};
 	std::vector<std::future<void>> results{};
 	size_t n_blocks_{};

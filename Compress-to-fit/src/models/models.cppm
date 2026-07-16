@@ -19,7 +19,7 @@ export void process_file(parser::Options const& options)
         {
             case static_cast<size_t>(CompType::LZ77):
             {
-                LZ77ConcurrentCompressor comp{data, options.concurrency, file, static_cast<CompPreset>(options.preset)};
+                LZ77ConcurrentCompressor comp{options.concurrency, file, static_cast<CompPreset>(options.preset)};
                 comp.compress();
                 break;
             }
