@@ -628,8 +628,8 @@ private:
 export class LZ77ConcurrentDecompressor
 {
 public:
-	LZ77ConcurrentDecompressor(mio::basic_mmap_source<std::byte> const data, File& file, size_t const concurrency)
-		: data_(data), concurrency_(concurrency), file_(file), file_list_(file), thread_pool(concurrency)
+	LZ77ConcurrentDecompressor(mio::basic_mmap_source<std::byte>&& data, File& file, size_t const concurrency)
+		: data_(std::move(data)), concurrency_(concurrency), file_(file), file_list_(file), thread_pool(concurrency)
 	{
 	}
 
@@ -652,12 +652,12 @@ public:
 	void decompress() noexcept(false)
 	{
 		auto const size = fs::file_size(file_.get_in_file_options().path);
-
+		std::span const data{data_};
 
 
 		for (size_t i{}, seq_n{}; i < size; seq_n++)
 		{
-			auto data_for_task = LZ77Block{data_.subspan(i), file_.get_in_file_options().path};
+			auto data_for_task = LZ77Block{data.subspan(i), file_.get_in_file_options().path};
 			i += sizeof(std::invoke_result_t<decltype(&LZ77Block<>::uncompressed_length), LZ77Block<>>) +
 				sizeof(std::invoke_result_t<decltype(&LZ77Block<>::compressed_length), LZ77Block<>>) +
 				data_for_task.compressed_length();
@@ -689,7 +689,7 @@ private:
 	size_t n_blocks_{};
 	size_t n_completed_blocks{};
 	std::mutex mutex_;//to be used to access results
-
+	mio::basic_mmap_source<std::byte> data_;
 	//IN THIS ORDER
 	std::jthread progress_checker{&LZ77ConcurrentDecompressor::check_results, this};
 	File const& file_;

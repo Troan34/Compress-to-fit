@@ -9,9 +9,6 @@ export void process_file(parser::Options const& options)
 {
     File file{options};
 
-    mio::basic_mmap_source<std::byte> data_map{file.get_in_file_options().path.string()};
-
-    std::span data{data_map};
 
     if (!file.get_in_file_options().header)//it's a normal file
     {
@@ -36,7 +33,8 @@ export void process_file(parser::Options const& options)
         {
             case CompType::LZ77:
             {
-                LZ77ConcurrentDecompressor decomp{data.subspan(FILE_HEADER_SIZE), file, options.concurrency};
+                mio::basic_mmap_source<std::byte> data_map{file.get_in_file_options().path.string(), FILE_HEADER_SIZE};
+                LZ77ConcurrentDecompressor decomp{std::move(data_map), file, options.concurrency};
                 decomp.decompress();
                 break;
             }
