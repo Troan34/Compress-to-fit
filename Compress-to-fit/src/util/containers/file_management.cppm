@@ -92,7 +92,7 @@ public:
 
 		in_file_options = FileOptions{ options_.filename_in, extract_info(options_.filename_in) };
 
-		if (extract_info(options_.filename_out))
+		if (!extract_info(options_.filename_in))
 		{
 			out_file = create_file(options_.filename_out);//create the file with header
 		}

@@ -565,12 +565,12 @@ public:
 				in_file.seekg(completed_size);
 
 				std::vector<Sym> data_for_task;
-				data_for_task.resize(true_partition_size - completed_size);
+				data_for_task.resize(true_partition_size);
 
-				in_file.read(reinterpret_cast<char*>(data_for_task.data()), true_partition_size - completed_size);
+				in_file.read(reinterpret_cast<char*>(data_for_task.data()), true_partition_size);
 
 				auto out_buffer = std::make_unique<LZ77Block<>>();
-				out_buffer->reserve(true_partition_size - completed_size);
+				out_buffer->reserve(true_partition_size);
 
 				LZ77Compressor compressor{{reinterpret_cast<Sym const*>(data_for_task.data()), (data_for_task.size())}, preset_};
 				compressor.compress(*out_buffer);
@@ -651,11 +651,10 @@ public:
 	 */
 	void decompress() noexcept(false)
 	{
-		auto const size = fs::file_size(file_.get_in_file_options().path);
 		std::span const data{data_};
 
 
-		for (size_t i{}, seq_n{}; i < size; seq_n++)
+		for (size_t i{}, seq_n{}; i < data_.size(); seq_n++)
 		{
 			auto data_for_task = LZ77Block{data.subspan(i), file_.get_in_file_options().path};
 			i += sizeof(std::invoke_result_t<decltype(&LZ77Block<>::uncompressed_length), LZ77Block<>>) +
