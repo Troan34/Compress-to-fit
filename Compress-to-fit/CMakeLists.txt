@@ -28,7 +28,7 @@ target_sources(
         "src/util/containers/thread_pool.cppm"
         "src/models/models.cppm"
         "src/models/LZ77/lz77.cppm"
-
+        "src/gui/interface.cpp"
     PRIVATE
         "src/models/LZ77/lz77_impl.cpp"
 )
@@ -59,19 +59,35 @@ set_target_properties(Compress-to-fit PROPERTIES
 )
 target_link_libraries(Compress-to-fit PRIVATE project_logic)
 
+target_sources(Compress-to-fit PRIVATE "Compress-to-fit.cpp")
+
+target_compile_features(Compress-to-fit PRIVATE cxx_std_23)
+set_target_properties(Compress-to-fit PROPERTIES CXX_CLANG_TIDY ${CLANG_TIDY_OPT})
+
+
+#add the gui executable
+add_executable(Compress-to-fit-gui)
+set_target_properties(Compress-to-fit-gui PROPERTIES
+        OUTPUT_NAME "ctf_gui"
+        CXX_SCAN_FOR_MODULES ON
+        CXX_MODULE_STD ON
+        CXX_CLANG_TIDY ""
+)
+target_link_libraries(Compress-to-fit-gui PRIVATE project_logic)
+
 target_link_libraries(
-        Compress-to-fit
+        Compress-to-fit-gui
         PRIVATE
         Qt6::Quick
         Qt6::Qml
         Qt6::Widgets
 )
 
-target_sources(Compress-to-fit PRIVATE "Compress-to-fit.cpp")
+target_sources(Compress-to-fit-gui PRIVATE "Compress-to-fit-gui.cpp")
 
-target_compile_features(Compress-to-fit PRIVATE cxx_std_23)
-set_target_properties(Compress-to-fit PROPERTIES CXX_CLANG_TIDY ${CLANG_TIDY_OPT})
-qt_add_qml_module(Compress-to-fit
+target_compile_features(Compress-to-fit-gui PRIVATE cxx_std_23)
+set_target_properties(Compress-to-fit-gui PROPERTIES CXX_CLANG_TIDY ${CLANG_TIDY_OPT})
+qt_add_qml_module(Compress-to-fit-gui
         URI CompressToFit
         VERSION 1.0
 
@@ -79,7 +95,13 @@ qt_add_qml_module(Compress-to-fit
         qml/Main.qml
 )
 
-
+target_sources(
+    Compress-to-fit-gui
+    PRIVATE
+        "src/gui/interface.hpp"
+        "src/gui/compress_options.hpp"
+        "src/gui/compress_options.cpp"
+)
 
 #add the tests executable
 add_executable(tests)

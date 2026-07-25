@@ -138,7 +138,7 @@ namespace parser
 		bool delete_input = false;
 		bool concatenate_files = false;
 		bool need_help = false;
-		std::optional<bool> decomp_after_concat{};
+		std::optional<bool> decomp_after_concat;
 		size_t concurrency = std::thread::hardware_concurrency();
 	};
 	
