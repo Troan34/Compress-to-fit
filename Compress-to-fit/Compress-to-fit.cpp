@@ -1,10 +1,4 @@
-﻿
-#include <mio/mmap.hpp>
-#include "src/util/macros.hpp"
-#include <QGuiApplication>
-#include <QApplication>
-#include <QQmlApplicationEngine>
-#include <QCoreApplication>
+﻿#include "src/util/macros.hpp"
 
 import util;
 

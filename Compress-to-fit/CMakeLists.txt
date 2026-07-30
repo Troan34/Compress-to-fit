@@ -1,4 +1,5 @@
-add_library(project_logic SHARED)
+add_library(project_logic SHARED
+        src/common/comp_options.hpp)
 
 set(CLANG_TIDY_OPT
         clang-tidy
@@ -11,8 +12,6 @@ set_target_properties(project_logic PROPERTIES
         CXX_SCAN_FOR_MODULES ON
         CXX_MODULE_STD ON
 )
-
-
 
 
 target_sources(
@@ -28,7 +27,6 @@ target_sources(
         "src/util/containers/thread_pool.cppm"
         "src/models/models.cppm"
         "src/models/LZ77/lz77.cppm"
-        "src/gui/interface.cpp"
     PRIVATE
         "src/models/LZ77/lz77_impl.cpp"
 )
@@ -99,21 +97,20 @@ target_sources(
     Compress-to-fit-gui
     PRIVATE
         "src/gui/interface.hpp"
-        "src/gui/compress_options.hpp"
-        "src/gui/compress_options.cpp"
+        "src/gui/interface.cpp"
 )
 
 #add the tests executable
 add_executable(tests)
 set_target_properties(tests PROPERTIES
-    CXX_SCAN_FOR_MODULES ON
-    CXX_MODULE_STD ON
-    CXX_CLANG_TIDY ""
+        CXX_SCAN_FOR_MODULES ON
+        CXX_MODULE_STD ON
+        CXX_CLANG_TIDY ""
 )
-target_link_libraries(tests PRIVATE 
-    project_logic
-    Catch2::Catch2WithMain
-    mio
+target_link_libraries(tests PRIVATE
+        project_logic
+        Catch2::Catch2WithMain
+        mio
 )
 
 target_sources(
@@ -128,16 +125,14 @@ set_target_properties(tests PROPERTIES CXX_CLANG_TIDY ${CLANG_TIDY_OPT})
 
 #platform dependent flags
 if(MSVC)
-    target_link_options(project_logic PRIVATE "/STACK:10485760")
+    target_link_options(project_logic PUBLIC "/STACK:10485760")
     target_compile_options(project_logic PUBLIC "/utf-8")
-    target_link_options(Compress-to-fit PRIVATE "/STACK:10485760")
-    target_compile_options(Compress-to-fit PRIVATE "/utf-8")
 elseif(APPLE)
-    target_link_options(Compress-to-fit PRIVATE "LINKER:-stack_size,0x1000000")
+    target_link_options(Compress-to-fit PUBLIC "LINKER:-stack_size,0x1000000")
 elseif(WIN32 AND NOT MSVC) # MinGW
-    target_link_options(Compress-to-fit PRIVATE "-Wl,--stack,10485760")
+    target_link_options(Compress-to-fit PUBLIC "-Wl,--stack,10485760")
 else() # Linux
-    target_link_options(Compress-to-fit PRIVATE "LINKER:-z,stack-size=10485760")
+    target_link_options(Compress-to-fit PUBLIC "LINKER:-z,stack-size=10485760")
 endif()
 
 include(Catch)
