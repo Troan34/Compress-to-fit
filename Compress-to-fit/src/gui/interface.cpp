@@ -1,19 +1,22 @@
 #include "interface.hpp"
+import std;
 import parser;
 
 CompressConfig::CompressConfig(QObject *parent)
     : path_out_(parser::DEFAULT_OUT_PATH.c_str())
 {
-
 }
 
 void CompressConfig::setPathIn(QUrl const& path)
 {
     path_in_ = path;
+    std::println("{}", path_in_.toString().toStdString());
+    emit pathInChanged();
 }
 void CompressConfig::setPathOut(QUrl const& path)
 {
     path_out_ = path;
+    emit pathOutChanged();
 }
 void CompressConfig::setCompressor(Compressor const comp_type)
 {

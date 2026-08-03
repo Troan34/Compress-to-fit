@@ -31,12 +31,13 @@ public:
 class CompressConfig : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QUrl path_in READ pathIn WRITE setPathIn)
-    Q_PROPERTY(QUrl path_out READ pathOut WRITE setPathOut)
-    Q_PROPERTY(Compressor comp_type READ compressor WRITE setCompressor)
-    Q_PROPERTY(CompressorPreset comp_preset READ compressorPreset WRITE setCompressorPreset)
-    Q_PROPERTY(bool force_compression READ forceCompression WRITE setForceCompression)
-    Q_PROPERTY(bool delete_input READ deleteInput WRITE setDeleteInput)
+    Q_PROPERTY(QUrl pathIn READ pathIn WRITE setPathIn NOTIFY pathInChanged)
+    Q_PROPERTY(QUrl pathOut READ pathOut WRITE setPathOut NOTIFY pathOutChanged)
+    Q_PROPERTY(Compressor compType READ compressor WRITE setCompressor)
+    Q_PROPERTY(CompressorPreset compType READ compressorPreset WRITE setCompressorPreset)
+    Q_PROPERTY(bool forceCompression READ forceCompression WRITE setForceCompression)
+    Q_PROPERTY(bool deleteInput READ deleteInput WRITE setDeleteInput)
+
 public:
     explicit CompressConfig(QObject *parent = nullptr);
 
@@ -54,6 +55,10 @@ public:
     [[nodiscard]] auto compressorPreset() const -> CompressorPreset;
     [[nodiscard]] auto forceCompression() const -> bool;
     [[nodiscard]] auto deleteInput() const -> bool;
+
+signals:
+    void pathInChanged();
+    void pathOutChanged();
 
 private:
     QUrl path_in_{};

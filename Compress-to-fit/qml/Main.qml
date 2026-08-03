@@ -3,45 +3,20 @@ import QtQuick.Window
 import QtQuick.Controls
 import QtQuick.Dialogs
 import QtCore
+import CompressToFit
 
 ApplicationWindow {
-    width: 640
-    height: 480
+    width: 1280
+    height: 720
     visible: true
     title: "Compress To Fit"
 
-
-    component FileEntry: Item {
-        property string source
-        Button {
-            id: folderButton
-
-            anchors.centerIn: parent
-
-            text: "Choose file to process..."
-            icon.name: "folder"
-            onClicked: fileDialog.open()
-
-        }
-
-        FileDialog {
-            id: fileDialog
-            currentFolder: StandardPaths.standardLocations(StandardPaths.HomeLocation)[0]
-            onAccepted: image.source = selectedFile
-        }
-    }
-
     FileEntry {
         anchors.top: parent.top
-        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.left: parent.left
         anchors.margins: 20
+        width: parent.width
     }
-    Image {
-        id: image
-        anchors.fill: parent
-        fillMode: Image.PreserveAspectFit
-    }
-
 
 }
 

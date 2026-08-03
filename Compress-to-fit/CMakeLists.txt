@@ -1,5 +1,4 @@
-add_library(project_logic SHARED
-        src/common/comp_options.hpp)
+add_library(project_logic SHARED)
 
 set(CLANG_TIDY_OPT
         clang-tidy
@@ -35,6 +34,7 @@ target_sources(
     project_logic
     PUBLIC
         "src/parser/cli_parser.cpp"
+        "src/common/comp_options.hpp"
 )
 
 #set_target_properties(project_logic PROPERTIES CXX_CLANG_TIDY ${CLANG_TIDY_OPT})
@@ -90,7 +90,8 @@ qt_add_qml_module(Compress-to-fit-gui
         VERSION 1.0
 
         QML_FILES
-        qml/Main.qml
+            qml/Main.qml
+            qml/common/FileEntry.qml
 )
 
 target_sources(
