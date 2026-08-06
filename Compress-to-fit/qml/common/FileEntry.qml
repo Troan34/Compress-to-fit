@@ -9,12 +9,14 @@ Item {
 
     RowLayout {
         anchors.fill: parent
-        
-        TextArea {
+        spacing: 8
+
+        Text {
             id: textPath
-            placeholderText: qsTr("Insert the path of the file you want to elaborate.")
+            Layout.fillWidth: true
             text: fileDialog.selectedFile
-            width: parent.width
+            color: palette.text
+            font.pixelSize: 20
         }
 
         Button {

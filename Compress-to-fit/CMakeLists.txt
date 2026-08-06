@@ -26,6 +26,8 @@ target_sources(
         "src/util/containers/thread_pool.cppm"
         "src/models/models.cppm"
         "src/models/LZ77/lz77.cppm"
+        "src/util/text_style.cppm"
+        "src/util/fixed_string.cppm"
     PRIVATE
         "src/models/LZ77/lz77_impl.cpp"
 )
@@ -35,6 +37,7 @@ target_sources(
     PUBLIC
         "src/parser/cli_parser.cpp"
         "src/common/comp_options.hpp"
+        "src/common/error_warn_print.hpp"
 )
 
 #set_target_properties(project_logic PROPERTIES CXX_CLANG_TIDY ${CLANG_TIDY_OPT})
@@ -129,11 +132,11 @@ if(MSVC)
     target_link_options(project_logic PUBLIC "/STACK:10485760")
     target_compile_options(project_logic PUBLIC "/utf-8")
 elseif(APPLE)
-    target_link_options(Compress-to-fit PUBLIC "LINKER:-stack_size,0x1000000")
+    target_link_options(project_logic PUBLIC "LINKER:-stack_size,0x1000000")
 elseif(WIN32 AND NOT MSVC) # MinGW
-    target_link_options(Compress-to-fit PUBLIC "-Wl,--stack,10485760")
+    target_link_options(project_logic PUBLIC "-Wl,--stack,10485760")
 else() # Linux
-    target_link_options(Compress-to-fit PUBLIC "LINKER:-z,stack-size=10485760")
+    target_link_options(project_logic PUBLIC "LINKER:-z,stack-size=10485760")
 endif()
 
 include(Catch)

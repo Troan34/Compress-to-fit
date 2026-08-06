@@ -313,7 +313,11 @@ Options parse(int argc, char* argv[])
 	}
 
 	if (options.need_help)
-		std::println(help_str);
+	{
+		std::println("{}", help_str);
+		return options;
+	}
+
 
 	if (fs::is_directory(options.filename_in) and !options.concatenate_files)//tried de/compressing a dir
 		throw_error(ErrorType::DIR_COMPRESSION, options.filename_in.string());

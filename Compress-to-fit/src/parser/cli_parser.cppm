@@ -53,33 +53,33 @@ namespace parser
 		"-concat",
 		"-concat:y",
 		"-concat:n",
-		"-t"
+		"-t",
 	};
-	
 
-	constexpr std::string_view help_str =
-		"\033[1m\033[36mWelcome to Compress To Fit!\033[0m\n"
-		"A cli compressor program.\n"
-		"Usage: ctf [options]\n"
+	using namespace ANSI;
+	const auto help_str =
+		style(BOLD_CYAN, "Welcome to Compress To Fit!") +
+		"\nA cli compressor program.\n" +
+		style(YELLOW, "Usage") + ": ctf [options]\n"
 		"options:\n"
-		"  \033[2m-i <path>\033[0m  Take <path> as input path. If <path> contains spaces, make sure to double quote(\"\") around <path>.\n"
-		"  \033[2m-o <path>\033[0m  Take <path> as output path. If <path> contains spaces, make sure to double quote(\"\") around <path>.\n"
-		"  \033[2m-c <comp_options>\033[0m  Use a specific compressor from a list of compressor options (look for [comp_options] in this page).\n"
-		"  \033[2m-fc\033[0m  Force compression of compressed files.\n"
-		"  \033[2m-di\033[0m  Delete input file on compression/extraction\n"
-		"  \033[2m-preset <n>\033[0m  Compression preset n is from 0 to 9 (included).\n"
-		"  \033[2m-n_files <n>\033[0m  In how many files should the output be split in (max 1000).\n"
-		"  \033[2m-size_files <bytes>\033[0m  Split the output file in files of <bytes> size (min 512).\n"
-		"  \033[2m-concat\033[0m  Concatenate the compressed files in the folder specified by '-i'. Will prompt whether you want to decompress the concatenated file.\n"
-		"  \033[2m-concat:y\033[0m  Concatenate the compressed files in the folder specified by '-i'. WILL decompress the concatenated file.\n"
-		"  \033[2m-concat:n\033[0m  Concatenate the compressed files in the folder specified by '-i'. WILL NOT decompress the concatenated file.\n"
-		"  \033[2m-t <n>\033[0m  Number of threads to be used.\n"
+		"  " + style(BOLD_BLUE, "-i <path>") + "  Take <path> as input path. If <path> contains spaces, make sure to double quote(\"\") around <path>.\n"
+		"  " + style(BOLD_BLUE, "-o <path>") + "  Take <path> as output path. If <path> contains spaces, make sure to double quote(\"\") around <path>.\n"
+		"  " + style(BOLD_BLUE, "-c <comp_options>") + "  Use a specific compressor from a list of compressor options (look for [comp_options] in this page).\n"
+		"  " + style(BOLD_BLUE, "-fc") + "  Force compression of compressed files.\n"
+		"  " + style(BOLD_BLUE, "-di") + "  Delete input file on compression/extraction\n"
+		"  " + style(BOLD_BLUE, "-preset <n>") + "  Compression preset n is from 0 to 9 (included).\n"
+		"  " + style(BOLD_BLUE, "-n_files <n>") + "  In how many files should the output be split in (max 1000).\n"
+		"  " + style(BOLD_BLUE, "-size_files <bytes>") + "  Split the output file in files of <bytes> size (min 512).\n"
+		"  " + style(BOLD_BLUE, "-concat") + "  Concatenate the compressed files in the folder specified by '-i'. Will prompt whether you want to decompress the concatenated file.\n"
+		"  " + style(BOLD_BLUE, "-concat:y") + "  Concatenate the compressed files in the folder specified by '-i'. " + style(UNDERLINE, "WILL") + " decompress the concatenated file.\n"
+		"  " + style(BOLD_BLUE, "-concat:n") + "  Concatenate the compressed files in the folder specified by '-i'. " + style(UNDERLINE, "WILL NOT") + " decompress the concatenated file.\n"
+		"  " + style(BOLD_BLUE, "-t <n>") + "  Number of threads to be used.\n"
 		"\n\n"
-		"[comp_options]:\n"
-		"\033[35m\"LZ77\"\033[0m: A dictionary based algorithm, good for repetitive patterns of data. Slow compression and fast decompression.\n"
-		"\nAdditional details:\n"
+		+ style(YELLOW, "[comp_options]") + ":\n"
+		+ style(MAGENTA, "\"LZ77\"") + ":A dictionary based algorithm, good for repetitive patterns of data. Slow compression and fast decompression.\n"
+		+ style(YELLOW, "\nAdditional details") + ":\n"
 		" - If an option is encountered multiple times, only the last occurrence shall be considered by the program.";
-	
+
 	export class HelpException : public std::exception
 	{
 	public:
