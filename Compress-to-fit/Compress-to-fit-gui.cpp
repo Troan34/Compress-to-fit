@@ -17,15 +17,16 @@ namespace fs = std::filesystem;
 
 int main(int argc, char* argv[])
 {
-
-    qDebug() << QCoreApplication::applicationName()
-             << "Qt version:" << QT_VERSION_STR;
     QGuiApplication app(argc, argv);
 
     CompressConfig compressor_conf;
 
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextProperty("compressor_conf", &compressor_conf);
+
+    qDebug() << "Qt version:" << QT_VERSION_STR
+             << "Import paths:" << engine.importPathList();
+
 
     QObject::connect(
         &engine,

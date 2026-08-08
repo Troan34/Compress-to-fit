@@ -20,16 +20,7 @@ ApplicationWindow {
             Layout.fillWidth: true
             Layout.fillHeight: true
         }
-        Rectangle {
-            color: "slategray"
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-        }
-        Rectangle {
-            color: "lightskyblue"
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-        }
+
     }
 }
 

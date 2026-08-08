@@ -1,5 +1,5 @@
 import QtQuick
-import QtQuick.Controls
+import QtQuick.Controls.Material
 import QtQuick.Dialogs
 import QtCore
 import QtQuick.Layouts
@@ -10,44 +10,63 @@ Item {
     ColumnLayout {
         anchors.fill: parent
         spacing: 8
+        Layout.margins: 10
 
-
-        DropArea {
+        Rectangle {
+            id: dropAreaRect
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            Layout.preferredHeight: 150
-            Layout.preferredWidth: 150
 
-            onEntered: (drag) => {
-                dropAreaRect.color = "gray";
-                drag.accept (Qt.LinkAction);
-            }
-            onDropped: (drop) => {
-                console.log(drop.urls);
-                dropAreaRect.color = Qt.rgba(palette.dark.r, palette.dark.g, palette.dark.b, palette.dark.a * 0.8);
-            }
-            onExited: {
-                dropAreaRect.color = Qt.rgba(palette.dark.r, palette.dark.g, palette.dark.b, palette.dark.a / 2);
-            }
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            Layout.preferredHeight: 200
+            Layout.preferredWidth: Layout.preferredHeight
+            Layout.minimumHeight: 100
+            Layout.minimumWidth: Layout.minimumHeight
+            Layout.maximumHeight: 300
+            Layout.maximumWidth: Layout.maximumHeight
 
-            Rectangle {
-                id: dropAreaRect
+
+            radius: 15
+
+            color: Qt.rgba(palette.dark.r, palette.dark.g, palette.dark.b, palette.dark.a / 2)
+
+            DropArea {
                 anchors.fill: parent
-                radius: 10
 
-                color: Qt.rgba(palette.dark.r, palette.dark.g, palette.dark.b, palette.dark.a / 2)
+                onEntered: (drag) => {
+                    dropAreaRect.color = "gray";
+                    drag.accept(Qt.LinkAction);
+                }
+                onDropped: (drop) => {
+                    console.log(drop.urls);
+                    dropAreaRect.color = Qt.rgba(palette.dark.r, palette.dark.g, palette.dark.b, palette.dark.a * 0.8);
+                }
+                onExited: {
+                    dropAreaRect.color = Qt.rgba(palette.dark.r, palette.dark.g, palette.dark.b, palette.dark.a / 2);
+                }
 
                 Text {
                     anchors.centerIn: parent
+                    color: palette.text
+                    font.pointSize: 15
                     text: "Drop files here"
                 }
             }
+
         }
 
         Button {
-            text: qsTr("Choose file to process...")
+            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+
+            /*
+            background: Rectangle {
+                color: parent.hovered ? "lightblue" : palette.button
+            }
+            */
+
+            text: qsTr("Choose files to process...")
             icon.name: "folder"
             onClicked: fileDialog.open()
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
         }
     }
 
