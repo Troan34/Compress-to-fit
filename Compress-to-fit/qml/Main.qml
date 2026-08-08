@@ -17,15 +17,20 @@ ApplicationWindow {
 
         FileEntry {
             id: fileEntry
-            anchors.fill: parent
-            anchors.margins: 20
+            Layout.fillWidth: true
+            Layout.fillHeight: true
         }
-        Layout.fillWidth: true
-        Layout.preferredHeight: 100
-
-
+        Rectangle {
+            color: "slategray"
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+        }
+        Rectangle {
+            color: "lightskyblue"
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+        }
     }
-
 }
 
 
