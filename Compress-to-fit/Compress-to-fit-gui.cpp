@@ -4,6 +4,7 @@
 #include <QQmlContext>
 #include <QDebug>
 #include "src/gui/interface.hpp"
+#include "src/gui/fs_helper.hpp"
 
 import util;
 
@@ -19,10 +20,14 @@ int main(int argc, char* argv[])
 {
     QGuiApplication app(argc, argv);
 
-    CompressConfig compressor_conf;
 
     QQmlApplicationEngine engine;
+
+    FileSystem file_helper;
+    CompressConfig compressor_conf;
     engine.rootContext()->setContextProperty("compressor_conf", &compressor_conf);
+    engine.rootContext()->setContextProperty("file_helper", &file_helper);
+
 
     qDebug() << "Qt version:" << QT_VERSION_STR
              << "Import paths:" << engine.importPathList();

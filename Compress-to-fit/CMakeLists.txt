@@ -95,6 +95,12 @@ qt_add_qml_module(Compress-to-fit-gui
         QML_FILES
             qml/Main.qml
             qml/common/FileEntry.qml
+            qml/common/InteractiveDropArea.qml
+
+        RESOURCES
+            qml/icons/docs_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg
+            qml/icons/folder_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg
+            qml/icons/photo_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg
 )
 
 target_sources(
@@ -102,6 +108,8 @@ target_sources(
     PRIVATE
         "src/gui/interface.hpp"
         "src/gui/interface.cpp"
+        "src/gui/fs_helper.hpp"
+        "src/gui/fs_helper.cpp"
 )
 
 #add the tests executable

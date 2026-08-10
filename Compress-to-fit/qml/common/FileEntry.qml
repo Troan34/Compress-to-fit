@@ -3,6 +3,7 @@ import QtQuick.Controls.Material
 import QtQuick.Dialogs
 import QtCore
 import QtQuick.Layouts
+import CompressToFit
 
 Item {
     property string source
@@ -12,8 +13,7 @@ Item {
         spacing: 8
         Layout.margins: 10
 
-        Rectangle {
-            id: dropAreaRect
+        InteractiveDropArea {
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
             Layout.fillWidth: true
@@ -24,35 +24,6 @@ Item {
             Layout.minimumWidth: Layout.minimumHeight
             Layout.maximumHeight: 300
             Layout.maximumWidth: Layout.maximumHeight
-
-
-            radius: 15
-
-            color: Qt.rgba(palette.dark.r, palette.dark.g, palette.dark.b, palette.dark.a / 2)
-
-            DropArea {
-                anchors.fill: parent
-
-                onEntered: (drag) => {
-                    dropAreaRect.color = "gray";
-                    drag.accept(Qt.LinkAction);
-                }
-                onDropped: (drop) => {
-                    console.log(drop.urls);
-                    dropAreaRect.color = Qt.rgba(palette.dark.r, palette.dark.g, palette.dark.b, palette.dark.a * 0.8);
-                }
-                onExited: {
-                    dropAreaRect.color = Qt.rgba(palette.dark.r, palette.dark.g, palette.dark.b, palette.dark.a / 2);
-                }
-
-                Text {
-                    anchors.centerIn: parent
-                    color: palette.text
-                    font.pointSize: 15
-                    text: "Drop files here"
-                }
-            }
-
         }
 
         Button {

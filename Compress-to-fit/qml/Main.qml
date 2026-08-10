@@ -9,6 +9,9 @@ import CompressToFit
 ApplicationWindow {
     width: 1280
     height: 720
+    minimumWidth: 360
+    minimumHeight: 240
+
     visible: true
     title: "Compress To Fit"
 
