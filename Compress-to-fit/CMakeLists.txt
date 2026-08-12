@@ -101,6 +101,7 @@ qt_add_qml_module(Compress-to-fit-gui
             qml/icons/docs_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg
             qml/icons/folder_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg
             qml/icons/photo_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg
+            qml/icons/files_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg
 )
 
 target_sources(

@@ -23,10 +23,10 @@ int main(int argc, char* argv[])
 
     QQmlApplicationEngine engine;
 
-    FileSystem file_helper;
+    FileSystem file_system;
     CompressConfig compressor_conf;
     engine.rootContext()->setContextProperty("compressor_conf", &compressor_conf);
-    engine.rootContext()->setContextProperty("file_helper", &file_helper);
+    engine.rootContext()->setContextProperty("fileSystem", &file_system);
 
 
     qDebug() << "Qt version:" << QT_VERSION_STR

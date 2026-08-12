@@ -15,5 +15,7 @@ public:
     Q_INVOKABLE auto extension(QUrl const& path) -> QString;
     Q_INVOKABLE auto exists(QUrl const& path) -> bool;
     Q_INVOKABLE auto fileName(QUrl const& path) -> QString;
+    Q_INVOKABLE auto fileSize(QUrl const& path) -> qint64;
+    Q_INVOKABLE auto toUnit(quint64 const size) -> QString;
 };
 
