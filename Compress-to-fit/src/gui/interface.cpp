@@ -1,4 +1,6 @@
 #include "interface.hpp"
+
+#include <algorithm>
 import std;
 import parser;
 
@@ -7,11 +9,16 @@ CompressConfig::CompressConfig(QObject *parent)
 {
 }
 
-void CompressConfig::setPathIn(QUrl const& path)
+void CompressConfig::setPathsIn(QList<QUrl> const& paths)
 {
-    path_in_ = path;
-    std::println("{}", path_in_.toString().toStdString());
-    emit pathInChanged();
+    std::ranges::for_each(
+        paths,
+        [](QUrl const& path)
+    {
+        std::println("{}", path.toString().toStdString());
+    });
+
+    emit pathsInChanged();
 }
 void CompressConfig::setPathOut(QUrl const& path)
 {
@@ -41,9 +48,9 @@ void CompressConfig::setErrorType(ErrorType const error_type)
 }
 
 
-auto CompressConfig::pathIn() const -> QUrl
+auto CompressConfig::pathsIn() const -> QList<QUrl>
 {
-    return path_in_;
+    return paths_in_;
 }
 auto CompressConfig::pathOut() const -> QUrl
 {

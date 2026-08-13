@@ -70,6 +70,8 @@ Item {
 
             dropAreaCont.color = Qt.rgba(palette.dark.r, palette.dark.g, palette.dark.b, palette.dark.a * 0.3)
             dropAreaText.text = ""
+
+            compressor_conf.pathsIn = drop.urls
         }
 
         ColumnLayout {

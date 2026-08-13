@@ -12,7 +12,7 @@
 class CompressConfig : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QUrl pathIn READ pathIn WRITE setPathIn NOTIFY pathInChanged)
+    Q_PROPERTY(QList<QUrl> pathsIn READ pathsIn WRITE setPathsIn NOTIFY pathsInChanged)
     Q_PROPERTY(QUrl pathOut READ pathOut WRITE setPathOut NOTIFY pathOutChanged)
     Q_PROPERTY(CompType compressor READ compressor WRITE setCompressor)
     Q_PROPERTY(CompPreset compressorPreset READ compressorPreset WRITE setCompressorPreset)
@@ -23,7 +23,7 @@ class CompressConfig : public QObject
 public:
     explicit CompressConfig(QObject *parent = nullptr);
 
-    void setPathIn(QUrl const& path);
+    void setPathsIn(QList<QUrl> const& paths);
     void setPathOut(QUrl const& path);
     void setCompressor(CompType comp_type);
     void setCompressorPreset(CompPreset comp_preset);
@@ -35,7 +35,7 @@ public:
     Q_ENUM(CompPreset)
     Q_ENUM(ErrorType)
 
-    [[nodiscard]] auto pathIn() const -> QUrl;
+    [[nodiscard]] auto pathsIn() const -> QList<QUrl>;
     [[nodiscard]] auto pathOut() const -> QUrl;
     [[nodiscard]] auto compressor() const -> CompType;
     [[nodiscard]] auto compressorPreset() const -> CompPreset;
@@ -44,7 +44,7 @@ public:
     [[nodiscard]] auto errorType() const -> ErrorType;
 
 signals:
-    void pathInChanged();
+    void pathsInChanged();
     void pathOutChanged();
     /*
     void compressorChanged();
@@ -55,7 +55,7 @@ signals:
     void errorTypeChanged();
 
 private:
-    QUrl path_in_{};
+    QList<QUrl> paths_in_;
     QUrl path_out_{};
     CompType comp_type_;
     CompPreset comp_preset_;

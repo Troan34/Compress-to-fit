@@ -6,7 +6,6 @@ import QtQuick.Layouts
 import CompressToFit
 
 Item {
-    property string source
 
     ColumnLayout {
         anchors.fill: parent
@@ -45,6 +44,6 @@ Item {
     FileDialog {
         id: fileDialog
         currentFolder: StandardPaths.standardLocations(StandardPaths.HomeLocation)[0]
-        onAccepted: compressor_conf.pathIn = selectedFile
+        onAccepted: compressor_conf.pathsIn = selectedFiles
     }
 }
