@@ -23,17 +23,32 @@ ApplicationWindow {
 
     color: palette.window
 
-    ColumnLayout {
+    RowLayout {
         anchors.fill: parent
 
         FileEntry {
             id: fileEntry
+
+            onReceivedPath: compressorSettings.visible = true
+
             Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.preferredHeight: window.height / 2
             Layout.maximumHeight: window.height / 2
             Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
         }
+
+        SettingsPanel {
+            id: compressorSettings
+
+            visible: false
+
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+
+            Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+        }
+
 
         /*
         Button {

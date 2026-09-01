@@ -6,6 +6,7 @@ import QtQuick.Layouts
 import CompressToFit
 
 Item {
+    signal receivedPath()
 
     ColumnLayout {
         anchors.fill: parent
@@ -14,6 +15,8 @@ Item {
 
         InteractiveDropArea {
             id: dropArea
+
+            onReceivedDrop: receivedPath()
 
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
@@ -49,6 +52,7 @@ Item {
         onAccepted: {
             compressor_conf.pathsIn = selectedFiles
             dropArea.receiveUrls(selectedFiles)
+            receivedPath()
         }
     }
 }

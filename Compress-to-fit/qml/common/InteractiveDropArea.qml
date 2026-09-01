@@ -13,8 +13,11 @@ Item {
     implicitWidth: 200
     implicitHeight: 200
 
+    signal receivedDrop()
+
     function receiveDrop(drop) {
         receiveUrls(drop.urls)
+        receivedDrop()
     }
 
     function receiveUrls(urls) {
