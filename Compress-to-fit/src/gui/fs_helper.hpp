@@ -1,3 +1,10 @@
+/*
+*   Copyright (C) 2026 Roan Bukaci
+*   SPDX-License-Identifier: GPL-3.0
+*
+*   Exposes filesystem utilities to frontend
+*/
+
 #pragma once
 
 #include <QObject>

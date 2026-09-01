@@ -1,3 +1,10 @@
+/*
+*   Copyright (C) 2026 Roan Bukaci
+*   SPDX-License-Identifier: GPL-3.0
+*
+*   Implements a ring buffer that writes to-be-overwritten (or not) data to a stream
+*/
+
 module;
 #if defined(__INTELLISENSE__)
 #include "../../for_intellisense/everything.hpp"

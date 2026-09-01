@@ -1,3 +1,10 @@
+/*
+*   Copyright (C) 2026 Roan Bukaci
+*   SPDX-License-Identifier: GPL-3.0
+*
+*   Module interface for the models
+*/
+
 module;
 #include "mio/mmap.hpp"
 #include <cassert>

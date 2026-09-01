@@ -1,3 +1,10 @@
+/*
+*   Copyright (C) 2026 Roan Bukaci
+*   SPDX-License-Identifier: GPL-3.0
+*
+*   This header groups together some symbols that the qml backend requires (Qt's moc doesn't understand modules)
+*/
+
 #pragma once
 #include <stdexcept>
 #include <string>

@@ -1,3 +1,10 @@
+/*
+*   Copyright (C) 2026 Roan Bukaci
+*   SPDX-License-Identifier: GPL-3.0
+*
+*   Implement the LZ77 compression model
+*/
+
 module;
 #include <cassert>
 #include <cstddef>

@@ -1,3 +1,10 @@
+/*
+*   Copyright (C) 2026 Roan Bukaci
+*   SPDX-License-Identifier: GPL-3.0
+*
+*   Implements 'File' which represents an ordinary or encoded file
+*/
+
 module;
 #include <mio/mmap.hpp>
 #include <cassert>

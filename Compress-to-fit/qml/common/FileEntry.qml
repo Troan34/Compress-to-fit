@@ -13,6 +13,8 @@ Item {
         Layout.margins: 10
 
         InteractiveDropArea {
+            id: dropArea
+
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
             Layout.fillWidth: true
@@ -44,6 +46,9 @@ Item {
     FileDialog {
         id: fileDialog
         currentFolder: StandardPaths.standardLocations(StandardPaths.HomeLocation)[0]
-        onAccepted: compressor_conf.pathsIn = selectedFiles
+        onAccepted: {
+            compressor_conf.pathsIn = selectedFiles
+            dropArea.receiveUrls(selectedFiles)
+        }
     }
 }

@@ -1,4 +1,10 @@
-/*REMEMBER: YOU MUST ADD EXPORTS FOR EACH SYMBOL TO ITS CORRESPONDING MODULE IN THE LIBRARY*/
+/*
+*   Copyright (C) 2026 Roan Bukaci
+*   SPDX-License-Identifier: GPL-3.0
+*
+*   This header groups together some symbols that the qml backend requires (Qt's moc doesn't understand modules)
+*/
+
 /*REMEMBER: YOU MUST ADD EXPORTS FOR EACH SYMBOL TO ITS CORRESPONDING MODULE IN THE LIBRARY*/
 
 #pragma once

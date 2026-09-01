@@ -1,3 +1,10 @@
+/*
+*   Copyright (C) 2026 Roan Bukaci
+*   SPDX-License-Identifier: GPL-3.0
+*
+*   Implements a simple thread pool
+*/
+
 export module containers:thread_pool;
 import std.compat;
 

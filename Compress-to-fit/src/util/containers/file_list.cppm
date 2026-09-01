@@ -1,5 +1,10 @@
-//This file implements ConcOrderedFileList, a linked list that enables concurrent writing to file through the order of sequence numbers
-//do NOT expect this stuff to be cache friendly in ANY way.
+/*
+*   Copyright (C) 2026 Roan Bukaci
+*   SPDX-License-Identifier: GPL-3.0
+*
+*   Implements ConcOrderedFileList, a linked list that enables concurrent writing to file through the order of sequence numbers
+*/
+
 module;
 #include <cassert>
 export module containers:concurrent_file_queue;
@@ -25,12 +30,13 @@ struct Node
 constexpr int LEAST_NODES_FOR_WRITING = 10;
 
 /**
- * @brief First sequence in first sequence out, i.e. the data is written in the order given to #insert().
+ * @brief First sequence in first sequence out, i.e. the data is written in the order given to the 'insert()' member function.
  * @tparam T Must implement write_to(ofstream&) or be trivially copyable
  *
  * @details Implemented as doubly linked list. A separate write thread is spawned.
  *
  * @note Because the list will own the elements, consider using a memory pool (e.g. pmr) as to not reallocate memory.
+ *       Do NOT expect this stuff to be cache friendly in ANY way.
  */
 export template<typename T>
     requires SerializableToDisk<std::ranges::range_value_t<T>> or SerializableToDisk<T>
@@ -67,7 +73,7 @@ public:
      * @post Any reference to \p element is invalidated.
      *
      * @warning THE FIRST ELEMENT THAT IS GOING TO BE WRITTEN TO FILE MUST HAVE SEQUENCE NUMBER == 0.
-     *          This requirement exists as the first element you add could easily be not the first data chunk (i.e. out of order).
+     *          This requirement exists as the first element you add could easily not be the first data chunk (i.e. out of order).
      *          Failure to follow this requirement will cause DEADLOCK.
      *
      */

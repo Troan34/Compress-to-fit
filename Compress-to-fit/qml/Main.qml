@@ -1,3 +1,7 @@
+/*
+*   Copyright (C) 2026 Roan Bukaci
+*   SPDX-License-Identifier: GPL-3.0
+*/
 import QtQuick
 import QtQuick.Window
 import QtQuick.Controls.Material
@@ -31,6 +35,7 @@ ApplicationWindow {
             Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
         }
 
+        /*
         Button {
             id: nextButton
             //TODO: Maybe customize the Animation when the button is added
@@ -45,7 +50,7 @@ ApplicationWindow {
                     nextButton.visible = true
                 }
             }
-        }
+        }*/
 
     }
 }

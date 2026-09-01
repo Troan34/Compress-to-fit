@@ -1,3 +1,10 @@
+/*
+*   Copyright (C) 2026 Roan Bukaci
+*   SPDX-License-Identifier: GPL-3.0
+*
+*	Parses the cli
+*/
+
 module parser;
 
 import util;
@@ -205,6 +212,7 @@ std::expected<Token, ErrorType> lex(const std::string& option)
  * @return The options obtained from the cli
  * 
  * @throws std::runtime_error for any kind of syntactic or semantic error
+ * @todo simplify whatever spaghetti is inside of this
  */
 Options parse(int argc, char* argv[])
 {

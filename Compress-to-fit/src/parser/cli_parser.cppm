@@ -1,3 +1,10 @@
+/*
+*   Copyright (C) 2026 Roan Bukaci
+*   SPDX-License-Identifier: GPL-3.0
+*
+*	Utilities for the parser
+*/
+
 export module parser;
 
 #ifdef __INTELLISENSE__

@@ -96,6 +96,7 @@ qt_add_qml_module(Compress-to-fit-gui
             qml/Main.qml
             qml/common/FileEntry.qml
             qml/common/InteractiveDropArea.qml
+            qml/common/CompressorSettingsPanel.qml
 
         RESOURCES
             qml/icons/docs_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg
