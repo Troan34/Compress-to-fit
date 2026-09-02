@@ -17,11 +17,11 @@ ApplicationWindow {
     height: 720
     minimumWidth: 360
     minimumHeight: 240
+    Material.theme: Material.System
 
     visible: true
     title: "Compress To Fit"
 
-    color: palette.window
 
     RowLayout {
         anchors.fill: parent

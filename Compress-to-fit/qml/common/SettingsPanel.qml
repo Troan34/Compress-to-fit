@@ -23,17 +23,75 @@ Item {
 
         //models
         RowLayout {
-            RadioButton {
-                checked: true
-                text: qsTr("LZ77")
+            Text {
+                text: qsTr("Compressor")
 
-                contentItem: Text {
-                    text: parent.text
-                    color: palette.text
+                color: palette.text
+                fontSizeMode: Text.Fit
+                font.pointSize: 12
+                minimumPointSize: 8
+            }
+            ColumnLayout {
 
-                    opacity: enabled ? 1.0 : 0.3
-                    verticalAlignment: Text.AlignVCenter
-                    leftPadding: parent.indicator.width + parent.spacing
+                RadioButton {
+                    checked: true
+                    text: "LZ77"
+                    id: lz77Button
+
+                    ToolTip {
+                        id: lz77ToolTip
+                        width: 200
+
+                        visible: parent.hovered
+                        text: qsTr("Length-distance based algorithm, good for repetitive patterns of data. Slow-ish compression and fast decompression.")
+
+                        x: lz77Button.width / 2 - width / 2
+                        y: -height - 5
+
+                        contentItem: Text {
+                            text: lz77ToolTip.text
+                            wrapMode: Text.Wrap
+                            verticalAlignment: Text.AlignVCenter
+                            horizontalAlignment: Text.AlignHCenter
+
+                            color: palette.text
+
+                            fontSizeMode: Text.Fit
+                            font.pointSize: 12
+                            minimumPointSize: 8
+                        }
+                    }
+                }
+
+                RadioButton {
+                    text: "LZ78"
+                    id: lz78Button
+                    ToolTip {
+                        id: lz78ToolTip
+                        width: 200
+
+                        visible: parent.hovered
+                        text: qsTr( "Dictionary based algorithm, good for repetitive patterns of data. " +
+                                    "Slow-ish compression and fast decompression. " +
+                                    "More advanced and faster than LZ77. "
+                        )
+
+                        x: lz78Button.width / 2 - width / 2
+                        y: -height - 5
+
+                        contentItem: Text {
+                            text: lz78ToolTip.text
+                            wrapMode: Text.Wrap
+                            verticalAlignment: Text.AlignVCenter
+                            horizontalAlignment: Text.AlignHCenter
+
+                            color: palette.text
+
+                            fontSizeMode: Text.Fit
+                            font.pointSize: 12
+                            minimumPointSize: 8
+                        }
+                    }
                 }
             }
         }
@@ -51,9 +109,7 @@ Item {
                 minimumPointSize: 8
             }
 
-            /**
-             * Sets the preset to the backend and updates the frontend
-             */
+            //Sets the preset to the backend and updates the frontend
             function setPreset(value)
             {
                 slider.value = Math.round(value)
@@ -89,6 +145,7 @@ Item {
                 Layout.maximumWidth: 40
                 Layout.maximumHeight: Layout.maximumWidth
 
+                text: "4"
                 onTextChanged: { compressorOptions.setPreset(Number(text)) }
                 validator: IntValidator { bottom: slider.from; top: slider.to; }
             }
