@@ -31,25 +31,27 @@ Item {
                 font.pointSize: 12
                 minimumPointSize: 8
             }
-            ColumnLayout {
-
+            RowLayout {
+                //LZ77 button
                 RadioButton {
                     checked: true
                     text: "LZ77"
                     id: lz77Button
 
-                    ToolTip {
-                        id: lz77ToolTip
-                        width: 200
-
-                        visible: parent.hovered
-                        text: qsTr("Length-distance based algorithm, good for repetitive patterns of data. Slow-ish compression and fast decompression.")
-
+                    Popup {
                         x: lz77Button.width / 2 - width / 2
                         y: -height - 5
 
+                        width: 200
+                        padding: 8
+
+                        visible: lz77Button.hovered
+
                         contentItem: Text {
-                            text: lz77ToolTip.text
+                            text: qsTr(
+                                "Length-distance based algorithm, good for repetitive " +
+                                "patterns of data. Slow-ish compression and fast decompression."
+                            )
                             wrapMode: Text.Wrap
                             verticalAlignment: Text.AlignVCenter
                             horizontalAlignment: Text.AlignHCenter
@@ -63,24 +65,25 @@ Item {
                     }
                 }
 
+                //LZ78 button
                 RadioButton {
                     text: "LZ78"
                     id: lz78Button
-                    ToolTip {
-                        id: lz78ToolTip
+
+                    Popup {
                         width: 200
 
-                        visible: parent.hovered
-                        text: qsTr( "Dictionary based algorithm, good for repetitive patterns of data. " +
-                                    "Slow-ish compression and fast decompression. " +
-                                    "More advanced and faster than LZ77. "
-                        )
+                        visible: lz78Button.hovered
 
                         x: lz78Button.width / 2 - width / 2
                         y: -height - 5
 
                         contentItem: Text {
-                            text: lz78ToolTip.text
+                            text: qsTr( "Dictionary based algorithm, good for repetitive patterns of data. " +
+                                "Slow-ish compression and fast decompression. " +
+                                "More advanced and faster than LZ77. "
+                            )
+
                             wrapMode: Text.Wrap
                             verticalAlignment: Text.AlignVCenter
                             horizontalAlignment: Text.AlignHCenter
