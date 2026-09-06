@@ -7,6 +7,7 @@
 #include <algorithm>
 import std;
 import parser;
+import util;
 
 CompressConfig::CompressConfig(QObject *parent)
     : path_out_(parser::DEFAULT_OUT_PATH.c_str())
@@ -32,18 +33,27 @@ void CompressConfig::setPathOut(QUrl const& path)
 void CompressConfig::setCompressor(CompType const comp_type)
 {
     comp_type_ = comp_type;
+    emit compressorChanged();
 }
 void CompressConfig::setCompressorPreset(CompPreset const comp_preset)
 {
     comp_preset_ = comp_preset;
+    emit compressorPresetChanged();
 }
 void CompressConfig::setForceCompression(bool const force_compression)
 {
     force_compression_ = force_compression;
+    emit forceCompressionChanged();
 }
 void CompressConfig::setDeleteInput(bool const delete_input)
 {
     delete_input_ = delete_input;
+    emit deleteInputChanged();
+}
+void CompressConfig::setNumberOfFiles(size_t const number_of_files)
+{
+    numberOfFiles_ = number_of_files;
+    emit numberOfFilesChanged();
 }
 void CompressConfig::setErrorType(ErrorType const error_type)
 {
@@ -75,6 +85,10 @@ auto CompressConfig::forceCompression() const -> bool
 auto CompressConfig::deleteInput() const -> bool
 {
     return delete_input_;
+}
+auto CompressConfig::numberOfFiles() const -> size_t
+{
+    return numberOfFiles_;
 }
 auto CompressConfig::errorType() const -> ErrorType
 {

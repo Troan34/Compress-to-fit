@@ -25,8 +25,8 @@ export using ::COMPRESSOR_STR_OPTIONS;
 namespace fs = std::filesystem;
 
 
-export inline constexpr size_t N_FILES_LIMIT = 1'000;
-export inline constexpr size_t SIZE_FILES_MIN = 512;
+export using ::SIZE_FILES_MIN;
+export using ::N_FILES_LIMIT;
 export inline constexpr char const* FILE_EXTENSION = ".tzf";
 export constexpr size_t SIZE_CHUNK = 4ULL * 1024 * 1024;//4MiB
 

@@ -38,6 +38,8 @@ Item {
                     text: "LZ77"
                     id: lz77Button
 
+                    onCheckedChanged: checked ? compressor_conf.compressor = "LZ77" : compressor_conf.compressor = ""
+
                     Popup {
                         x: lz77Button.width / 2 - width / 2
                         y: -height - 5
@@ -69,6 +71,8 @@ Item {
                 RadioButton {
                     text: "LZ78"
                     id: lz78Button
+
+                    onCheckedChanged: checked ? compressor_conf.compressor = "LZ78" : compressor_conf.compressor = "LZ78"
 
                     Popup {
                         width: 200
@@ -155,6 +159,45 @@ Item {
             Item {
                 Layout.fillWidth: true
                 Layout.preferredWidth: 10
+            }
+        }
+
+
+        RowLayout {
+            id: misc
+            Text {
+                text: qsTr("Misc options")
+                color: palette.text
+
+                fontSizeMode: Text.Fit
+                font.pointSize: 12
+                minimumPointSize: 8
+            }
+
+            RowLayout {
+                //forceCompression
+                CheckBox {
+                    text: qsTr("force compression")
+                    onCheckedChanged: checked ? compressor_conf.forceCompression = true : compressor_conf.forceCompression = false
+                }
+
+                CheckBox {
+                    text: qsTr("delete input on completion")
+                    onCheckedChanged: checked ? compressor_conf.deleteInput = true : compressor_conf.deleteInput = false
+                }
+            }
+
+            TextField {
+                color: palette.text
+                placeholderText: qsTr("Choose number of files the output will be split into")
+
+                Layout.minimumWidth: 40
+                Layout.minimumHeight: Layout.minimumWidth
+                Layout.preferredWidth: 40
+                Layout.preferredHeight: Layout.preferredWidth
+
+                onTextChanged: { compressor_conf.numberOfFiles = Number(text) }
+                validator: IntValidator { bottom: 1; top: 1000; }
             }
         }
 

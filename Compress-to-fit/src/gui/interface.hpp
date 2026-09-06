@@ -1,6 +1,7 @@
 /*
 *   Copyright (C) 2026 Roan Bukaci
 *   SPDX-License-Identifier: GPL-3.0
+*   Defines the front end to compressor interface
 */
 #pragma once
 #include <QObject>
@@ -9,6 +10,7 @@
 #include "src/common/comp_options.hpp"
 #include "src/common/error_warn_print.hpp"
 
+//TODO: Make error handling: read the return value to check for non EXIT_SUCCESS, if so, parse. Also, what do we do with concat ambiguity???
 
 /**
  * @brief parser::Options but for the frontend
@@ -22,8 +24,8 @@ class CompressConfig : public QObject
     Q_PROPERTY(CompPreset compressorPreset READ compressorPreset WRITE setCompressorPreset)
     Q_PROPERTY(bool forceCompression READ forceCompression WRITE setForceCompression)
     Q_PROPERTY(bool deleteInput READ deleteInput WRITE setDeleteInput)
+    Q_PROPERTY(size_t numberOfFiles READ numberOfFiles WRITE setNumberOfFiles NOTIFY numberOfFilesChanged)
     Q_PROPERTY(ErrorType errorType READ errorType NOTIFY errorTypeChanged)
-
 public:
     explicit CompressConfig(QObject *parent = nullptr);
 
@@ -33,6 +35,7 @@ public:
     void setCompressorPreset(CompPreset comp_preset);
     void setForceCompression(bool force_compression);
     void setDeleteInput(bool delete_input);
+    void setNumberOfFiles(size_t number_of_files);
     void setErrorType(ErrorType error_type);
 
     Q_ENUM(CompType)
@@ -45,17 +48,17 @@ public:
     [[nodiscard]] auto compressorPreset() const -> CompPreset;
     [[nodiscard]] auto forceCompression() const -> bool;
     [[nodiscard]] auto deleteInput() const -> bool;
+    [[nodiscard]] auto numberOfFiles() const -> size_t;
     [[nodiscard]] auto errorType() const -> ErrorType;
 
 signals:
     void pathsInChanged();
     void pathOutChanged();
-    /*
     void compressorChanged();
     void compressorPresetChanged();
     void forceCompressionChanged();
     void deleteInputChanged();
-    */
+    void numberOfFilesChanged();
     void errorTypeChanged();
 
 private:
@@ -65,5 +68,6 @@ private:
     CompPreset comp_preset_;
     bool force_compression_ = false;
     bool delete_input_ = false;
+    size_t numberOfFiles_{};
     ErrorType error_type_{ErrorType::NO_ERROR};
 };

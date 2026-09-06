@@ -6,6 +6,7 @@
 */
 
 #pragma once
+#include <cassert>
 #include <stdexcept>
 #include <string>
 #include <print>
@@ -13,7 +14,7 @@
 /**
  * @brief Parser error types.
  */
-enum class ErrorType
+enum class ErrorType : int
 {
 	NO_ERROR,
 	VALUE_ERROR,
@@ -58,11 +59,21 @@ namespace ERR_STRING
 
 }
 
+struct ErrorException : std::exception
+{
+	ErrorType error_type;
+	std::string msg;
+
+	ErrorException(ErrorType const error_type_, std::string msg) : error_type(error_type_), msg(std::move(msg)) {}
+	[[nodiscard]] auto what() const noexcept -> char const* override { return msg.c_str(); }
+};
+
+
 /**
  * @brief throw_error is a custom error logger to the terminal. This will WILL throw.
  * @param error Your type of error.
  * @param error_option An optional string to be added at the start, could be a path, text...
- * @throw runtime_exception
+ * @throw ErrorException
  */
 inline void throw_error(ErrorType const error, const std::string& error_option = "")
 {
@@ -71,52 +82,40 @@ inline void throw_error(ErrorType const error, const std::string& error_option =
 	case ErrorType::NO_ERROR:
 		break;
 	case ErrorType::VALUE_ERROR:
-		std::print("{} <- {}", error_option, ERR_STRING::VALUE);
-		throw std::runtime_error(error_option + " <- " + ERR_STRING::VALUE);
+		throw ErrorException(ErrorType::VALUE_ERROR, error_option + " <- " + ERR_STRING::VALUE);
 		break;
 	case ErrorType::SYNTAX_ERROR:
-		std::print("{} <- {}", error_option, ERR_STRING::SYNTAX);
-		throw std::runtime_error(error_option + " <- " + ERR_STRING::SYNTAX);
+		throw ErrorException(ErrorType::SYNTAX_ERROR, error_option + " <- " + ERR_STRING::SYNTAX);
 		break;
 	case ErrorType::OPTION_UNAVAILABLE:
-		std::print("{} <- {}", error_option, ERR_STRING::OPTION_UNAVAILABLE);
-		throw std::runtime_error(error_option + " <- " + ERR_STRING::OPTION_UNAVAILABLE);
+		throw ErrorException(ErrorType::OPTION_UNAVAILABLE, error_option + " <- " + ERR_STRING::OPTION_UNAVAILABLE);
 		break;
 	case ErrorType::PATH_NOT_FOUND:
-		std::print("{} <- {}", error_option, ERR_STRING::PATH_NOT_FOUND);
-		throw std::runtime_error(error_option + " <- " + ERR_STRING::PATH_NOT_FOUND);
+		throw ErrorException(ErrorType::PATH_NOT_FOUND, error_option + " <- " + ERR_STRING::PATH_NOT_FOUND);
 		break;
 	case ErrorType::PATH_NOT_ACCESSIBLE:
-		std::print("{} <- {}", error_option, ERR_STRING::PATH_NOT_ACCESSIBLE);
-		throw std::runtime_error(error_option + " <- " + ERR_STRING::PATH_NOT_ACCESSIBLE);
+		throw ErrorException(ErrorType::PATH_NOT_ACCESSIBLE, error_option + " <- " + ERR_STRING::PATH_NOT_ACCESSIBLE);
 		break;
 	case ErrorType::PATH_INVALID:
-		std::print("{} <- {}", error_option, ERR_STRING::PATH_INVALID);
-		throw std::runtime_error(error_option + " <- " + ERR_STRING::PATH_INVALID);
+		throw ErrorException(ErrorType::PATH_INVALID, error_option + " <- " + ERR_STRING::PATH_INVALID);
 		break;
 	case ErrorType::FILE_INVALID:
-		std::print("{} <- {}", error_option, ERR_STRING::FILE_INVALID);
-		throw std::runtime_error(error_option + " <- " + ERR_STRING::FILE_INVALID);
+		throw ErrorException(ErrorType::FILE_INVALID, error_option + " <- " + ERR_STRING::FILE_INVALID);
 		break;
 	case ErrorType::FILE_CORRUPTED:
-		std::print("{} <- {}", error_option, ERR_STRING::FILE_CORRUPTED);
-		throw std::runtime_error(error_option + " <- " + ERR_STRING::FILE_CORRUPTED);
+		throw ErrorException(ErrorType::FILE_CORRUPTED, error_option + " <- " + ERR_STRING::FILE_CORRUPTED);
 		break;
 	case ErrorType::DRIVE_ERROR:
-		std::print("{} <- {}", error_option, ERR_STRING::DRIVE_ERROR);
-		throw std::runtime_error(error_option + " <- " + ERR_STRING::DRIVE_ERROR);
+		throw ErrorException(ErrorType::DRIVE_ERROR, error_option + " <- " + ERR_STRING::DRIVE_ERROR);
 		break;
 	case ErrorType::INVALID_DECOMPRESSION:
-		std::print("{} <- {}", error_option, ERR_STRING::INVALID_DECOMPRESSION);
-		throw std::runtime_error(error_option + " <- " + ERR_STRING::INVALID_DECOMPRESSION);
+		throw ErrorException(ErrorType::INVALID_DECOMPRESSION, error_option + " <- " + ERR_STRING::INVALID_DECOMPRESSION);
 		break;
 	case ErrorType::MISSING_ARGUMENT:
-		std::print("{} <- {}", error_option, ERR_STRING::MISSING_ARGUMENT);
-		throw std::runtime_error(error_option + " <- " + ERR_STRING::MISSING_ARGUMENT);
+		throw ErrorException(ErrorType::MISSING_ARGUMENT, error_option + " <- " + ERR_STRING::MISSING_ARGUMENT);
 		break;
 	case ErrorType::DIR_COMPRESSION:
-		std::print("{} <- {}", error_option, ERR_STRING::DIR_COMPRESSION);
-		throw std::runtime_error(error_option + " <- " + ERR_STRING::DIR_COMPRESSION);
+		throw ErrorException(ErrorType::DIR_COMPRESSION, error_option + " <- " + ERR_STRING::DIR_COMPRESSION);
 		break;
 	default:
 		assert(false);
@@ -141,7 +140,7 @@ namespace WARN_STRING
 
 	const std::string PORTIONS_OUT_OF_RANGE =	"\033[43mWarn\033[0m[" + std::to_string(static_cast<int>(WarningType::PORTIONS_OUT_OF_RANGE)) +
 		"]: the number of file portions is outside of the accepted range."
-		+ "\033[34mTip\033[0m: The (not split) output file may have been too small.\nThe number of files created may be different from what you asked.\n";
+		+ "The number of files created may be different from what you asked.\n\033[34mTip\033[0m: The (not split) output file may have been too small.\n";
 
 	const std::string CONCAT_AMBIGUITY =		"\033[43mWarn\033[0m[" + std::to_string(static_cast<int>(WarningType::PORTIONS_OUT_OF_RANGE)) +
 		"]: there has been found an ambiguity while concatenating. These files do not come from the same compressed file(same session).\n";

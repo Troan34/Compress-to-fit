@@ -138,8 +138,8 @@ public:
 
 	/**
 	 * @brief Split an encoded file into a certain number of encoded (with header) files 
-	 * @param path 
-	 * @param portions 
+	 * @param path to be split
+	 * @param portions number of files that will be made
 	 */
 	static void split_file(fs::path const& path, size_t portions)
 	{

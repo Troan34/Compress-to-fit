@@ -43,3 +43,6 @@ inline constexpr std::string_view COMPRESSOR_STR_OPTIONS[] =
 {
     "LZ77",
 };
+
+inline constexpr size_t N_FILES_LIMIT = 1'000;
+inline constexpr size_t SIZE_FILES_MIN = 512;

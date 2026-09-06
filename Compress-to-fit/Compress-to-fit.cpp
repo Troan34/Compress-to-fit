@@ -1,5 +1,6 @@
 ﻿#include <cstdlib>
 
+#include "src/common/error_warn_print.hpp"
 #include "src/util/macros.hpp"
 
 import util;
@@ -17,13 +18,31 @@ int main(int argc, char* argv[])
 
 	WIN_CALL(SetConsoleOutputCP(CP_UTF8));
 
-	auto const options = parser::parse(argc, argv);
-	if (options.need_help)
+	try
 	{
-		return EXIT_SUCCESS;
+		auto const options = parser::parse(argc, argv);
+		if (options.need_help)
+		{
+			return EXIT_SUCCESS;
+		}
+
+		process_file(options);
+	}
+	catch (ErrorException const& e)
+	{
+		std::cout << e.what() << '\n';
+		return static_cast<int>(e.error_type);
+	}
+	catch (std::exception const& e)
+	{
+		return -1;
+	}
+	catch (...)
+	{
+		std::cout << "unknown error\n";
+		return -1;
 	}
 
-	process_file(options);
 
 	return 0;
 }
