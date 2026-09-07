@@ -187,20 +187,31 @@ Item {
                 }
             }
 
+
+        }
+
+        RowLayout {
+            Text {
+                text: qsTr("Number of files to split the output into")
+                color: palette.text
+
+                fontSizeMode: Text.Fit
+                font.pointSize: 12
+                minimumPointSize: 8
+            }
+
             TextField {
                 color: palette.text
-                placeholderText: qsTr("Choose number of files the output will be split into")
+                placeholderText: "1-1000"
 
                 Layout.minimumWidth: 40
                 Layout.minimumHeight: Layout.minimumWidth
-                Layout.preferredWidth: 40
-                Layout.preferredHeight: Layout.preferredWidth
+                text: "1"
 
                 onTextChanged: { compressor_conf.numberOfFiles = Number(text) }
                 validator: IntValidator { bottom: 1; top: 1000; }
             }
         }
-
 
         Item {
             Layout.fillHeight: true

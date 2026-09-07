@@ -26,6 +26,7 @@ ApplicationWindow {
     RowLayout {
         anchors.fill: parent
 
+        //The file receiver
         FileEntry {
             id: fileEntry
 
@@ -38,6 +39,7 @@ ApplicationWindow {
             Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
         }
 
+        //initially non-visible settings for the compressor
         SettingsPanel {
             id: compressorSettings
 
@@ -48,24 +50,6 @@ ApplicationWindow {
 
             Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
         }
-
-
-        /*
-        Button {
-            id: nextButton
-            //TODO: Maybe customize the Animation when the button is added
-            Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
-
-            visible: false
-            text: qsTr("Next")
-
-            Connections {
-                target: compressor_conf
-                function onPathsInChanged() {
-                    nextButton.visible = true
-                }
-            }
-        }*/
 
     }
 }

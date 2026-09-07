@@ -4,7 +4,8 @@
 *
 *	Parses the cli
 */
-
+module;
+#include "../common/error_warn_print.hpp"
 module parser;
 
 import util;
@@ -13,6 +14,7 @@ import std.compat;
 #ifdef __INTELLISENSE__
 #include "../../for_intellisense/everything.hpp"
 #endif
+
 
 namespace fs = std::filesystem;
 
@@ -211,7 +213,8 @@ std::expected<Token, ErrorType> lex(const std::string& option)
  * @param argv Pointer to the arguments
  * @return The options obtained from the cli
  * 
- * @throws std::runtime_error for any kind of syntactic or semantic error
+ * @throws ErrorException for any kind of syntactic or semantic error
+ * @throws HelpException if help command was used
  * @todo simplify whatever spaghetti is inside of this
  */
 Options parse(int argc, char* argv[])
@@ -340,9 +343,7 @@ Options parse(int argc, char* argv[])
 		else if (!options.need_help)
 			throw_error(ErrorType::MISSING_ARGUMENT, token_strings[static_cast<int>(TokenType::FILENAME_IN)].data());
 		else
-		{
-			std::terminate();//if you need help but no arguments
-		}
+			throw HelpException();
 	}
 
 	if (options.filename_out == DEFAULT_OUT_PATH)

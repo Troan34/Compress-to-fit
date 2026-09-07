@@ -90,7 +90,7 @@ namespace parser
 	export class HelpException : public std::exception
 	{
 	public:
-		[[nodiscard]] const char* what() const noexcept override
+		[[nodiscard]] auto what() const noexcept -> char const* override
 		{
 			return help_str.data();
 		}

@@ -112,6 +112,7 @@ target_sources(
         "src/gui/interface.cpp"
         "src/gui/fs_helper.hpp"
         "src/gui/fs_helper.cpp"
+        "src/gui/interpreter.hpp"
 )
 
 #add the tests executable

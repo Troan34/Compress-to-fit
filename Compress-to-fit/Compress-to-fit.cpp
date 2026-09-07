@@ -21,10 +21,6 @@ int main(int argc, char* argv[])
 	try
 	{
 		auto const options = parser::parse(argc, argv);
-		if (options.need_help)
-		{
-			return EXIT_SUCCESS;
-		}
 
 		process_file(options);
 	}
@@ -32,6 +28,10 @@ int main(int argc, char* argv[])
 	{
 		std::cout << e.what() << '\n';
 		return static_cast<int>(e.error_type);
+	}
+	catch (parser::HelpException const& e)
+	{
+		std::cout << e.what() << '\n';
 	}
 	catch (std::exception const& e)
 	{
