@@ -12,7 +12,7 @@ Item {
     id: rootDropArea
     implicitWidth: 200
     implicitHeight: 200
-
+    Material.theme: Material.System
     signal receivedDrop()
 
     function receiveDrop(drop) {

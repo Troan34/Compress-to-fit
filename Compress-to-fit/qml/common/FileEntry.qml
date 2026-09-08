@@ -6,6 +6,7 @@ import QtQuick.Layouts
 import CompressToFit
 
 Item {
+    Material.theme: Material.System
     signal receivedPath()
 
     ColumnLayout {

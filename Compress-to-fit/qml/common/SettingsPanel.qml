@@ -12,7 +12,7 @@ import QtQuick.Layouts
 
 Item {
     id: rootPanel
-
+    Material.theme: Material.System
     //overarching layout, i.e. a first compressor row, a second preset row et cetera
     ColumnLayout {
         anchors.fill: parent
