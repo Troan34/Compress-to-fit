@@ -6,8 +6,14 @@
 #pragma once
 
 #include <expected>
+#include <regex>
 #include <variant>
 #include "src/common/error_warn_print.hpp"
+
+
+
+auto strip_ansi(const std::string& str) -> std::string;
+
 
 struct ProgressType
 {
@@ -28,34 +34,7 @@ struct BadMessage {};
 
 /**
  * @brief Receive and interpret the compressor's output
- * @param str To be interpreted
+ * @param str_ To be interpreted
  * @return The BackendMessage, or a BadMessage if the parsing failed
  */
-auto interpret(std::string const& str) -> std::expected<BackendMessage, BadMessage>
-{
-    //If not an error/warning
-    if (str.empty() or
-        !(str.contains("Error") or str.contains("Warn")))
-    {
-        //if not an info on the progress
-        if (!str.contains("Progress"))
-        {
-            return std::unexpected(BadMessage{});
-        }
-        else
-        {
-            //get the percentage
-            auto const progress = std::stof(str.substr(str.rfind(' ', str.rfind('%')), str.rfind('%') - 1));
-            //initialize the variant
-            std::variant<ErrorType, WarningType, ProgressType> const message_ID_or_progress_{ProgressType{ progress }};
-            //init the backend_message without the optional
-            BackendMessage backend_message{.message_ID_or_progress = message_ID_or_progress_};
-            return backend_message;
-        }
-    }
-    else if (str.contains("Warn"))
-    {
-        
-    }
-
-}
+auto interpret(std::string const& str_) -> std::expected<BackendMessage, BadMessage>;
