@@ -37,4 +37,4 @@ struct BadMessage {};
  * @param str_ To be interpreted
  * @return The BackendMessage, or a BadMessage if the parsing failed
  */
-auto interpret(std::string const& str_) -> std::expected<BackendMessage, BadMessage>;
+auto interpret(std::string const& str) -> std::expected<BackendMessage, BadMessage>;

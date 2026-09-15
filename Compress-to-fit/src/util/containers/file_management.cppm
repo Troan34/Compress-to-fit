@@ -97,9 +97,10 @@ public:
 			concatenate_files(options_.filename_in);
 		}
 
-		in_file_options = FileOptions{ options_.filename_in, extract_info(options_.filename_in) };
+		in_file_options = FileOptions{ .path = options_.filename_in, .header = extract_info(options_.filename_in) };
 
-		if (!extract_info(options_.filename_in))
+		//TODO: What if the uncompressed file is a compressed file?
+		if (!extract_info(options_.filename_in) or options_.force_compression)
 		{
 			out_file = create_file(options_.filename_out);//create the file with header
 		}
@@ -460,7 +461,7 @@ private:
 			}
 			
 			//if id is different from identifier and identifier was not ignored
-			if (id != info.value().identifier and std::find(ignored_ids.begin(), ignored_ids.end(), info.value().identifier) == ignored_ids.end())
+			if (id != info.value().identifier and std::ranges::find(ignored_ids, info.value().identifier) == ignored_ids.end())
 			{
 				print_warn(WarningType::CONCAT_AMBIGUITY, files_to_concat.back().first.filename().string() + " " + dir_entry.path().filename().string());
 				std::println("Choose which of these files are part of the concatenation. Insert '1' or '2' for the respective file. If neither of these is, insert '0', we will find the next possible file.");
@@ -508,14 +509,14 @@ private:
 		std::ofstream file{ create_file(options_.filename_out, example.value()) };
 
 		//sort the files base on their count
-		std::sort(files_to_concat.begin(), files_to_concat.end(),
-				[](std::pair<fs::path, uint16_t> const& file1, std::pair<fs::path, uint16_t> const& file2)
-				{
-					  return file1.second < file2.second;
-				});
+		std::ranges::sort(files_to_concat,
+		                  [](std::pair<fs::path, uint16_t> const& file1, std::pair<fs::path, uint16_t> const& file2)
+		                  {
+			                  return file1.second < file2.second;
+		                  });
 
 		//Copy all the files into the new file
-		for (auto const& [path_, _] : files_to_concat)//I couldn't get ranges to work, also, the underscore is a placeholder in c++26. However, msvc is slooooow at getting new stuff. I'm looking at you microsoft, not at the developers.
+		for (auto const& [path_, _] : files_to_concat)//I couldn't get ranges to work (actually (auto const &path_: files_to_concat | std::views::keys) works on clang). However, msvc is slooooow at getting new stuff.
 		{
 			std::ifstream input{ path_ };
 			input.seekg(0, std::ios::end);

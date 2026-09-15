@@ -17,7 +17,7 @@ export void process_file(parser::Options const& options)
     File file{options};
 
 
-    if (!file.get_in_file_options().header)//it's a normal file
+    if (!file.get_in_file_options().header or options.force_compression)//it's a normal file or -fc option
     {
         switch (options.compressor)
         {
@@ -51,6 +51,5 @@ export void process_file(parser::Options const& options)
                 assert(false && error_string.c_str());
                 break;
         }
-
     }
 }
