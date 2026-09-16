@@ -11,9 +11,19 @@
 #include "src/common/error_warn_print.hpp"
 
 
+/**
+ * @brief Remove ANSI \x1b sequences (color, underline...)
+ * @param str Input string
+ * @return The string without ANSI sequences
+ */
+auto strip_ansi(std::string const& str) -> std::string;
 
-auto strip_ansi(const std::string& str) -> std::string;
-
+/**
+ * @brief Remove leading and trailing whitespace
+ * @param str Input string
+ * @return The trimmed string
+ */
+auto trim_whitespace(std::string const& str) -> std::string;
 
 struct ProgressType
 {
@@ -30,6 +40,7 @@ struct BackendMessage
                                               //So this contains '-wrongSyntax'
 };
 
+//A dummy type to check against for a bad backend message
 struct BadMessage {};
 
 /**
