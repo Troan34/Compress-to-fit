@@ -6,6 +6,7 @@
 #pragma once
 
 #include <expected>
+#include <QObject>
 #include <regex>
 #include <variant>
 #include "src/common/error_warn_print.hpp"
@@ -45,7 +46,40 @@ struct BadMessage {};
 
 /**
  * @brief Receive and interpret the compressor's output
- * @param str_ To be interpreted
+ * @param str To be interpreted
  * @return The BackendMessage, or a BadMessage if the parsing failed
  */
 auto interpret(std::string const& str) -> std::expected<BackendMessage, BadMessage>;
+
+class QmlBackendMessage : public QObject
+{
+    Q_GADGET
+    Q_PROPERTY(Severity severity READ severity CONSTANT)
+    Q_PROPERTY(QString text READ text CONSTANT)
+
+public:
+    enum class Severity { Info, Warning, Error };
+    Q_ENUM(Severity)
+
+    explicit QmlBackendMessage(QObject *parent = nullptr);
+
+
+};
+
+Q_DECLARE_METATYPE(QmlBackendMessage)
+
+class StatusBridge : public QObject
+{
+    Q_OBJECT
+public:
+    explicit StatusBridge(QObject* parent = nullptr) : QObject(parent) {}
+
+
+
+signals:
+    void messageReceived(BackendMessage const& message);
+
+};
+
+
+

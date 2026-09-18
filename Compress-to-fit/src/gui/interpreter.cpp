@@ -81,7 +81,7 @@ auto interpret(std::string const& str) -> std::expected<BackendMessage, BadMessa
     };
 
     //Get the failing option that is behind the '<-'
-    auto get_failing_opt = [stripped_str, get_code] -> std::expected<std::string, BadMessage>
+    auto get_failing_opt = [stripped_str] -> std::expected<std::string, BadMessage>
     {
         auto const arrow_index = stripped_str.rfind("<-");//The user might insert (GUI wise) something like "-i <-" (I have no idea if that is possible)
                                                                    //It's important that we don't have a warn/err string with <-
@@ -101,14 +101,14 @@ auto interpret(std::string const& str) -> std::expected<BackendMessage, BadMessa
 
     if (stripped_str.contains("Warn"))
     {
-        return BackendMessage{ .message_ID_or_progress = WarningType{result.value().first},
-                                  .failing_option = result.value().second, };
+        return BackendMessage{ .message_ID_or_progress = WarningType{code},
+                                  .failing_option = result.value(), };
     }
 
     if (stripped_str.contains("Error"))
     {
-        return BackendMessage{ .message_ID_or_progress = ErrorType{result.value().first},
-                                  .failing_option = result.value().second, };
+        return BackendMessage{ .message_ID_or_progress = ErrorType{code},
+                                  .failing_option = result.value(), };
     }
 
     return std::unexpected(BadMessage{});

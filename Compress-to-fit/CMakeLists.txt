@@ -134,7 +134,6 @@ target_sources(
     PRIVATE
     "test/util/utils.cpp"
     "test/benchmarks/file_management.cpp"
-    "test/common/error_warn_print.cpp"
 )
 
 set_target_properties(tests PROPERTIES CXX_CLANG_TIDY ${CLANG_TIDY_OPT})

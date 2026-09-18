@@ -56,7 +56,7 @@ namespace ERR_STRING
 	const std::string INVALID_DECOMPRESSION="\033[41mError\033[0m\033[31m[" + std::to_string(static_cast<int>(ErrorType::INVALID_DECOMPRESSION)) + "]: decompression is invalid on this file, you may have tried to decompress a normal file.\033[0m\n";
 
 	const std::string DIR_COMPRESSION =		"\033[41mError\033[0m\033[31m[" + std::to_string(static_cast<int>(ErrorType::DIR_COMPRESSION)) + "]: folder compression is unavailable. \033[34mTip\033[0m: If you are trying to decompress a folder of files, check the related command in the help page with '-h' or '-help'\n";
-
+	//DO NOT USE A <- IN THE STRINGS
 }
 
 struct ErrorException : std::exception
@@ -150,6 +150,8 @@ namespace WARN_STRING
 
 	const std::string CONCURRENCY_OUT_OF_RANGE_LOWER ="\033[43mWarn\033[0m[" + std::to_string(static_cast<int>(WarningType::CONCURRENCY_OUT_OF_RANGE_UPPER)) +
 		"]: you have selected zero or a negative number of threads, will default to use only one thread.";
+
+	//DO NOT USE A <- IN THE STRINGS
 }
 
 inline void print_warn(WarningType const warn, const std::string& warn_option = "")
