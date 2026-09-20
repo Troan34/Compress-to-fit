@@ -113,3 +113,19 @@ auto interpret(std::string const& str) -> std::expected<BackendMessage, BadMessa
 
     return std::unexpected(BadMessage{});
 }
+
+
+auto QmlBackendMessage::severity() const -> Severity
+{
+    return severity_;
+}
+
+auto QmlBackendMessage::text() const -> QString
+{
+    return text_;
+}
+
+auto QmlBackendMessage::ID() const -> qint32
+{
+    return ID_;
+}

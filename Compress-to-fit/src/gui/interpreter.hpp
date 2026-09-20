@@ -61,14 +61,21 @@ public:
     enum class Severity { Info, Warning, Error };
     Q_ENUM(Severity)
 
-    explicit QmlBackendMessage(QObject *parent = nullptr);
+    explicit QmlBackendMessage(QObject *parent = nullptr) {}
 
+    [[nodiscard]] auto severity() const -> Severity;
+    [[nodiscard]] auto ID() const -> qint32;
+    [[nodiscard]] auto text() const -> QString;
 
+private:
+    Severity severity_{};
+    qint32 ID_{};
+    QString text_{};
 };
 
 Q_DECLARE_METATYPE(QmlBackendMessage)
 
-class StatusBridge : public QObject
+class StatusBridge : public QObject//TODO: set up bridge on creation, ask some kind of pointer to the stdout of the compressor
 {
     Q_OBJECT
 public:
@@ -77,7 +84,7 @@ public:
 
 
 signals:
-    void messageReceived(BackendMessage const& message);
+    void messageReceived(QmlBackendMessage const& message);
 
 };
 
