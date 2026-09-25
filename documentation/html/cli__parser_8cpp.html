@@ -92,12 +92,13 @@ $(function(){initNavTree('cli__parser_8cpp.html','',''); });
   <div class="headertitle"><div class="title">cli_parser.cpp File Reference<div class="ingroups">module <a class="el" href="module__parser.html">parser</a></div></div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><code>import std.compat;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="error__warn__print_8hpp_source.html">../common/error_warn_print.hpp</a>&quot;</code><br />
+<code>import std.compat;</code><br />
 <code>import <a class="el" href="utils_8cppm_source.html">util</a>;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for cli_parser.cpp:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="cli__parser_8cpp__incl.svg" width="184" height="124"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="cli__parser_8cpp__incl.svg" width="455" height="210"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div>
 <p><a href="cli__parser_8cpp_source.html">Go to the source code of this file.</a></p>
@@ -108,7 +109,7 @@ Namespaces</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a883c446b2f982a5d7b6989f2442e8186" id="r_a883c446b2f982a5d7b6989f2442e8186"><td class="memItemLeft">std::expected&lt; <a class="el" href="structToken.html">Token</a>, <a class="el" href="core__utils_8cppm.html#ab0df38968e4f03a3f1f6d6df0f31f45a">ErrorType</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="namespaceparser.html#a883c446b2f982a5d7b6989f2442e8186">parser::lex</a> (const std::string &amp;option)</td></tr>
+<tr class="memitem:a883c446b2f982a5d7b6989f2442e8186" id="r_a883c446b2f982a5d7b6989f2442e8186"><td class="memItemLeft">std::expected&lt; <a class="el" href="structToken.html">Token</a>, <a class="el" href="error__warn__print_8hpp.html#aed6e5d8e0c233046b51a0726eeae42de">ErrorType</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="namespaceparser.html#a883c446b2f982a5d7b6989f2442e8186">parser::lex</a> (const std::string &amp;option)</td></tr>
 <tr class="memdesc:a883c446b2f982a5d7b6989f2442e8186"><td class="mdescLeft">&#160;</td><td class="mdescRight">Semantically check an argument (e.g. -preset 8).  <br /></td></tr>
 <tr class="memitem:a7f5ecbf764fc175fc336fcea0dd07be8" id="r_a7f5ecbf764fc175fc336fcea0dd07be8"><td class="memItemLeft"><a class="el" href="structparser_1_1Options.html">Options</a>&#160;</td><td class="memItemRight"><a class="el" href="namespaceparser.html#a7f5ecbf764fc175fc336fcea0dd07be8">parser::parse</a> (int argc, char *argv[])</td></tr>
 <tr class="memdesc:a7f5ecbf764fc175fc336fcea0dd07be8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the cli.  <br /></td></tr>

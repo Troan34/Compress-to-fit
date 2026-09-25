@@ -4,12 +4,7 @@
 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
-\DoxyCodeLine{\textcolor{keyword}{concept\ }\doxymbox{\hyperlink{conceptSerializableToDisk}{SerializableToDisk}}\ =\ \textcolor{keyword}{requires}(T\ a,\ std::ofstream\&\ file)}
-\DoxyCodeLine{\{}
-\DoxyCodeLine{\ \ \ \ \{\ a.write\_to(file)\ \}\ -\/>\ std::same\_as<void>;}
-\DoxyCodeLine{\}}
-\DoxyCodeLine{||}
-\DoxyCodeLine{std::is\_trivially\_copyable\_v<T>}
+\DoxyCodeLine{\textcolor{keyword}{concept\ }\doxymbox{\hyperlink{conceptSerializableToDisk}{SerializableToDisk}}\ =\ std::is\_trivially\_copyable\_v<T>\ or\ \doxymbox{\hyperlink{conceptMemberWriteable}{MemberWriteable<T>}}\ or\ \doxymbox{\hyperlink{conceptFreeWriteable}{FreeWriteable<T>}}}
 
 \end{DoxyCode}
 
@@ -17,5 +12,5 @@
 \doxysubsection{Detailed Description}
 
 
-Definition at line \doxymbox{\hyperlink{core__utils_8cppm_source_l00364}{364}} of file \doxymbox{\hyperlink{core__utils_8cppm_source}{core\+\_\+utils.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{core__utils_8cppm_source_l00216}{216}} of file \doxymbox{\hyperlink{core__utils_8cppm_source}{core\+\_\+utils.\+cppm}}.
 

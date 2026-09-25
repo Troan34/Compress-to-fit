@@ -10,6 +10,7 @@
 #include <regex>
 #include <variant>
 #include "src/common/error_warn_print.hpp"
+#include "src/common/sink.hpp"
 
 
 /**
@@ -26,20 +27,6 @@ auto strip_ansi(std::string const& str) -> std::string;
  */
 auto trim_whitespace(std::string const& str) -> std::string;
 
-struct ProgressType
-{
-    float progress;
-};
-
-/**
- * @brief Package a message from the compressor
- */
-struct BackendMessage
-{
-    std::variant<ErrorType, WarningType, ProgressType> message_ID_or_progress;//ID of the error/warning or amount of progress from 0 to 1
-    std::optional<std::string> failing_option;//option causing error/warn, i.e. './ctf -wrongSyntax' prints -wrongSyntax <- Error[3]: the syntax...
-                                              //So this contains '-wrongSyntax'
-};
 
 //A dummy type to check against for a bad backend message
 struct BadMessage {};
@@ -49,7 +36,7 @@ struct BadMessage {};
  * @param str To be interpreted
  * @return The BackendMessage, or a BadMessage if the parsing failed
  */
-auto interpret(std::string const& str) -> std::expected<BackendMessage, BadMessage>;
+auto interpret(std::string const& str) -> std::expected<Status, BadMessage>;
 
 class QmlBackendMessage : public QObject
 {

@@ -1,0 +1,596 @@
+\doxysection{Compress\+Config Class Reference}
+\hypertarget{classCompressConfig}{}\label{classCompressConfig}\index{CompressConfig@{CompressConfig}}
+
+
+\doxylink{structparser_1_1Options}{parser::\+\+Options} but for the frontend  
+
+
+
+
+{\ttfamily \+\#include $<$interface.\+hpp$>$}
+
+
+
+Inheritance diagram for Compress\+Config:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classCompressConfig__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Compress\+Config:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{classCompressConfig__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Signals}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{classCompressConfig_a134b10185241b7dc77be2aa0b6f4dd7e}{paths\+In\+Changed}} ()
+\item 
+void \doxymbox{\hyperlink{classCompressConfig_a3d0b2e4203885bbe2492d7fd51d87062}{path\+Out\+Changed}} ()
+\item 
+void \doxymbox{\hyperlink{classCompressConfig_ada5cd059c89e43e3fed1dc31108a58ab}{compressor\+Changed}} ()
+\item 
+void \doxymbox{\hyperlink{classCompressConfig_a6dfbcaf81a2d5d61ea3285281a9787d9}{compressor\+Preset\+Changed}} ()
+\item 
+void \doxymbox{\hyperlink{classCompressConfig_ad584fde30e3307afbb9fc6c9e969ae96}{force\+Compression\+Changed}} ()
+\item 
+void \doxymbox{\hyperlink{classCompressConfig_ab2d502367e3f31b5bf777d0e8256a170}{delete\+Input\+Changed}} ()
+\item 
+void \doxymbox{\hyperlink{classCompressConfig_a395ddbc8a63b02075e78ce0baa2c3824}{number\+Of\+Files\+Changed}} ()
+\item 
+void \doxymbox{\hyperlink{classCompressConfig_ab6b6e7bf012d16e6fc437f891c46dc13}{error\+Type\+Changed}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classCompressConfig_a92d95c16509ccff1b1b94005804457d8}{Compress\+Config}} (QObject \texorpdfstring{$\ast$}{*}parent=nullptr)
+\item 
+void \doxymbox{\hyperlink{classCompressConfig_ae3f398c2b5e0a945f300996bafb553ed}{set\+Paths\+In}} (QList$<$ QUrl $>$ const \&paths)
+\item 
+void \doxymbox{\hyperlink{classCompressConfig_ab6a78433abe59e015c9acd1b7146fae7}{set\+Path\+Out}} (QUrl const \&path)
+\item 
+void \doxymbox{\hyperlink{classCompressConfig_ae18aedf1084d258802e4a811e80a6875}{set\+Compressor}} (\doxymbox{\hyperlink{comp__options_8hpp_a77b7b3d2b23480b5378dbd65c7af9178}{Comp\+Type}} comp\+\_\+type)
+\item 
+void \doxymbox{\hyperlink{classCompressConfig_a55226a4613a7991ebaac88e29bdcc0b2}{set\+Compressor\+Preset}} (\doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0}{Comp\+Preset}} comp\+\_\+preset)
+\item 
+void \doxymbox{\hyperlink{classCompressConfig_a08dfd8b4ffca07842944c8582cbceb56}{set\+Force\+Compression}} (bool force\+\_\+compression)
+\item 
+void \doxymbox{\hyperlink{classCompressConfig_a26a7800de7b4ebed2981a4d35562536d}{set\+Delete\+Input}} (bool delete\+\_\+input)
+\item 
+void \doxymbox{\hyperlink{classCompressConfig_a42ba33a1f1b8ebf83976e8e668e7c827}{set\+Number\+Of\+Files}} (size\+\_\+t number\+\_\+of\+\_\+files)
+\item 
+void \doxymbox{\hyperlink{classCompressConfig_acb332759e277f9c0ad0be87081e5fabf}{set\+Error\+Type}} (\doxymbox{\hyperlink{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42de}{Error\+Type}} error\+\_\+type)
+\item 
+auto \doxymbox{\hyperlink{classCompressConfig_a811e0571804e1ee90fab8d6ab9911ccd}{paths\+In}} () const -\/$>$ QList$<$ QUrl $>$
+\item 
+auto \doxymbox{\hyperlink{classCompressConfig_a944c3b15562fe769f768c525140b4ac5}{path\+Out}} () const -\/$>$ QUrl
+\item 
+auto \doxymbox{\hyperlink{classCompressConfig_ac490cd204d049e6e37645b6755755eb5}{compressor}} () const -\/$>$ \doxymbox{\hyperlink{comp__options_8hpp_a77b7b3d2b23480b5378dbd65c7af9178}{Comp\+Type}}
+\item 
+auto \doxymbox{\hyperlink{classCompressConfig_a5a20553136343f5e5ac12059b39b1fe5}{compressor\+Preset}} () const -\/$>$ \doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0}{Comp\+Preset}}
+\item 
+auto \doxymbox{\hyperlink{classCompressConfig_af325c24e43c2be561ccfe572d79447d4}{force\+Compression}} () const -\/$>$ bool
+\item 
+auto \doxymbox{\hyperlink{classCompressConfig_abdf2fbbce13920e78f0921edd2de3f09}{delete\+Input}} () const -\/$>$ bool
+\item 
+auto \doxymbox{\hyperlink{classCompressConfig_a759b2424d6d05da8654fca9437a9f528}{number\+Of\+Files}} () const -\/$>$ size\+\_\+t
+\item 
+auto \doxymbox{\hyperlink{classCompressConfig_a94dd8d1fa9ccff88ca51f363743f4096}{error\+Type}} () const -\/$>$ \doxymbox{\hyperlink{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42de}{Error\+Type}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+QList$<$ QUrl $>$ \doxymbox{\hyperlink{classCompressConfig_ab72cf05b8ca02f27fe469c38de569315}{paths\+In}}
+\item 
+QUrl \doxymbox{\hyperlink{classCompressConfig_a6d0df396de8acaf7db221daac36f38bf}{path\+Out}}
+\item 
+\doxymbox{\hyperlink{comp__options_8hpp_a77b7b3d2b23480b5378dbd65c7af9178}{Comp\+Type}} \doxymbox{\hyperlink{classCompressConfig_ac3ed8cdd9612670dffa6434090b6047a}{compressor}}
+\item 
+\doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0}{Comp\+Preset}} \doxymbox{\hyperlink{classCompressConfig_ad025089bf6bd5186cc165a83dae42251}{compressor\+Preset}}
+\item 
+bool \doxymbox{\hyperlink{classCompressConfig_aca0eb6009c398a0a01745ec35eb0b692}{force\+Compression}}
+\item 
+bool \doxymbox{\hyperlink{classCompressConfig_a4c68a11f24e617c41ace6b3471337320}{delete\+Input}}
+\item 
+size\+\_\+t \doxymbox{\hyperlink{classCompressConfig_a06930c0a59a9c2223dc257e32fc85da9}{number\+Of\+Files}}
+\item 
+\doxymbox{\hyperlink{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42de}{Error\+Type}} \doxymbox{\hyperlink{classCompressConfig_a5f642f77cdd603a3d36e87e80b2faf9f}{error\+Type}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+QList$<$ QUrl $>$ \doxymbox{\hyperlink{classCompressConfig_a673f6072b5f8225f00c7cf23727f3d04}{paths\+\_\+in\+\_\+}}
+\item 
+QUrl \doxymbox{\hyperlink{classCompressConfig_aa5e3218072e62281ea1eb0f6bfb6508a}{path\+\_\+out\+\_\+}} \{\}
+\item 
+\doxymbox{\hyperlink{comp__options_8hpp_a77b7b3d2b23480b5378dbd65c7af9178}{Comp\+Type}} \doxymbox{\hyperlink{classCompressConfig_a529dfe62147c6f801ec8bb7f140c9d92}{comp\+\_\+type\+\_\+}}
+\item 
+\doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0}{Comp\+Preset}} \doxymbox{\hyperlink{classCompressConfig_ae5e7b97fff9999bb4a55a63a91f28792}{comp\+\_\+preset\+\_\+}}
+\item 
+bool \doxymbox{\hyperlink{classCompressConfig_a56ce867af9dbb83d3801d6d332f9cc83}{force\+\_\+compression\+\_\+}} = false
+\item 
+bool \doxymbox{\hyperlink{classCompressConfig_a6a3eb5226b37a7a60100a0a90b9dcbd5}{delete\+\_\+input\+\_\+}} = false
+\item 
+size\+\_\+t \doxymbox{\hyperlink{classCompressConfig_ad5b4c9470e76dfce08689bcd20bc1860}{number\+Of\+Files\+\_\+}} \{\}
+\item 
+\doxymbox{\hyperlink{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42de}{Error\+Type}} \doxymbox{\hyperlink{classCompressConfig_ad9fe0d1319e7e31c3689278d9182fcb0}{error\+\_\+type\+\_\+}} \{\doxymbox{\hyperlink{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42dead306b6fdee05fe87455110ddf6501e6c}{Error\+Type::\+\+NO\+\_\+\+ERROR}}\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{structparser_1_1Options}{parser::\+\+Options} but for the frontend 
+
+Definition at line \doxymbox{\hyperlink{interface_8hpp_source_l00018}{18}} of file \doxymbox{\hyperlink{interface_8hpp_source}{interface.\+hpp}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{classCompressConfig_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classCompressConfig_a92d95c16509ccff1b1b94005804457d8}\index{CompressConfig@{CompressConfig}!CompressConfig@{CompressConfig}}
+\index{CompressConfig@{CompressConfig}!CompressConfig@{CompressConfig}}
+\doxysubsubsection{\texorpdfstring{CompressConfig()}{CompressConfig()}}
+{\footnotesize\ttfamily \label{classCompressConfig_a92d95c16509ccff1b1b94005804457d8} 
+Compress\+Config::\+\+Compress\+Config (\begin{DoxyParamCaption}\item[{QObject \texorpdfstring{$\ast$}{*}}]{parent}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{interface_8cpp_source_l00012}{12}} of file \doxymbox{\hyperlink{interface_8cpp_source}{interface.\+cpp}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{classCompressConfig_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classCompressConfig_ac490cd204d049e6e37645b6755755eb5}\index{CompressConfig@{CompressConfig}!compressor@{compressor}}
+\index{compressor@{compressor}!CompressConfig@{CompressConfig}}
+\doxysubsubsection{\texorpdfstring{compressor()}{compressor()}}
+{\footnotesize\ttfamily \label{classCompressConfig_ac490cd204d049e6e37645b6755755eb5} 
+auto Compress\+Config::\+compressor (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ \doxymbox{\hyperlink{comp__options_8hpp_a77b7b3d2b23480b5378dbd65c7af9178}{Comp\+Type}}\hspace{0.3cm}{\ttfamily [nodiscard]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{interface_8cpp_source_l00073}{73}} of file \doxymbox{\hyperlink{interface_8cpp_source}{interface.\+cpp}}.
+
+\Hypertarget{classCompressConfig_ada5cd059c89e43e3fed1dc31108a58ab}\index{CompressConfig@{CompressConfig}!compressorChanged@{compressorChanged}}
+\index{compressorChanged@{compressorChanged}!CompressConfig@{CompressConfig}}
+\doxysubsubsection{\texorpdfstring{compressorChanged}{compressorChanged}}
+{\footnotesize\ttfamily \label{classCompressConfig_ada5cd059c89e43e3fed1dc31108a58ab} 
+void Compress\+Config::\+compressor\+Changed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\Hypertarget{classCompressConfig_a5a20553136343f5e5ac12059b39b1fe5}\index{CompressConfig@{CompressConfig}!compressorPreset@{compressorPreset}}
+\index{compressorPreset@{compressorPreset}!CompressConfig@{CompressConfig}}
+\doxysubsubsection{\texorpdfstring{compressorPreset()}{compressorPreset()}}
+{\footnotesize\ttfamily \label{classCompressConfig_a5a20553136343f5e5ac12059b39b1fe5} 
+auto Compress\+Config::\+compressor\+Preset (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ \doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0}{Comp\+Preset}}\hspace{0.3cm}{\ttfamily [nodiscard]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{interface_8cpp_source_l00077}{77}} of file \doxymbox{\hyperlink{interface_8cpp_source}{interface.\+cpp}}.
+
+
+
+References \doxymbox{\hyperlink{interface_8hpp_source_l00068}{comp\+\_\+preset\+\_\+}}.
+
+\Hypertarget{classCompressConfig_a6dfbcaf81a2d5d61ea3285281a9787d9}\index{CompressConfig@{CompressConfig}!compressorPresetChanged@{compressorPresetChanged}}
+\index{compressorPresetChanged@{compressorPresetChanged}!CompressConfig@{CompressConfig}}
+\doxysubsubsection{\texorpdfstring{compressorPresetChanged}{compressorPresetChanged}}
+{\footnotesize\ttfamily \label{classCompressConfig_a6dfbcaf81a2d5d61ea3285281a9787d9} 
+void Compress\+Config::\+compressor\+Preset\+Changed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\Hypertarget{classCompressConfig_abdf2fbbce13920e78f0921edd2de3f09}\index{CompressConfig@{CompressConfig}!deleteInput@{deleteInput}}
+\index{deleteInput@{deleteInput}!CompressConfig@{CompressConfig}}
+\doxysubsubsection{\texorpdfstring{deleteInput()}{deleteInput()}}
+{\footnotesize\ttfamily \label{classCompressConfig_abdf2fbbce13920e78f0921edd2de3f09} 
+auto Compress\+Config::\+delete\+Input (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool\hspace{0.3cm}{\ttfamily [nodiscard]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{interface_8cpp_source_l00085}{85}} of file \doxymbox{\hyperlink{interface_8cpp_source}{interface.\+cpp}}.
+
+
+
+References \doxymbox{\hyperlink{interface_8hpp_source_l00070}{delete\+\_\+input\+\_\+}}.
+
+\Hypertarget{classCompressConfig_ab2d502367e3f31b5bf777d0e8256a170}\index{CompressConfig@{CompressConfig}!deleteInputChanged@{deleteInputChanged}}
+\index{deleteInputChanged@{deleteInputChanged}!CompressConfig@{CompressConfig}}
+\doxysubsubsection{\texorpdfstring{deleteInputChanged}{deleteInputChanged}}
+{\footnotesize\ttfamily \label{classCompressConfig_ab2d502367e3f31b5bf777d0e8256a170} 
+void Compress\+Config::\+delete\+Input\+Changed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\Hypertarget{classCompressConfig_a94dd8d1fa9ccff88ca51f363743f4096}\index{CompressConfig@{CompressConfig}!errorType@{errorType}}
+\index{errorType@{errorType}!CompressConfig@{CompressConfig}}
+\doxysubsubsection{\texorpdfstring{errorType()}{errorType()}}
+{\footnotesize\ttfamily \label{classCompressConfig_a94dd8d1fa9ccff88ca51f363743f4096} 
+auto Compress\+Config::\+error\+Type (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ \doxymbox{\hyperlink{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42de}{Error\+Type}}\hspace{0.3cm}{\ttfamily [nodiscard]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{interface_8cpp_source_l00093}{93}} of file \doxymbox{\hyperlink{interface_8cpp_source}{interface.\+cpp}}.
+
+
+
+References \doxymbox{\hyperlink{interface_8hpp_source_l00072}{error\+\_\+type\+\_\+}}.
+
+\Hypertarget{classCompressConfig_ab6b6e7bf012d16e6fc437f891c46dc13}\index{CompressConfig@{CompressConfig}!errorTypeChanged@{errorTypeChanged}}
+\index{errorTypeChanged@{errorTypeChanged}!CompressConfig@{CompressConfig}}
+\doxysubsubsection{\texorpdfstring{errorTypeChanged}{errorTypeChanged}}
+{\footnotesize\ttfamily \label{classCompressConfig_ab6b6e7bf012d16e6fc437f891c46dc13} 
+void Compress\+Config::\+error\+Type\+Changed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\Hypertarget{classCompressConfig_af325c24e43c2be561ccfe572d79447d4}\index{CompressConfig@{CompressConfig}!forceCompression@{forceCompression}}
+\index{forceCompression@{forceCompression}!CompressConfig@{CompressConfig}}
+\doxysubsubsection{\texorpdfstring{forceCompression()}{forceCompression()}}
+{\footnotesize\ttfamily \label{classCompressConfig_af325c24e43c2be561ccfe572d79447d4} 
+auto Compress\+Config::\+force\+Compression (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ bool\hspace{0.3cm}{\ttfamily [nodiscard]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{interface_8cpp_source_l00081}{81}} of file \doxymbox{\hyperlink{interface_8cpp_source}{interface.\+cpp}}.
+
+
+
+References \doxymbox{\hyperlink{interface_8hpp_source_l00069}{force\+\_\+compression\+\_\+}}.
+
+\Hypertarget{classCompressConfig_ad584fde30e3307afbb9fc6c9e969ae96}\index{CompressConfig@{CompressConfig}!forceCompressionChanged@{forceCompressionChanged}}
+\index{forceCompressionChanged@{forceCompressionChanged}!CompressConfig@{CompressConfig}}
+\doxysubsubsection{\texorpdfstring{forceCompressionChanged}{forceCompressionChanged}}
+{\footnotesize\ttfamily \label{classCompressConfig_ad584fde30e3307afbb9fc6c9e969ae96} 
+void Compress\+Config::\+force\+Compression\+Changed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\Hypertarget{classCompressConfig_a759b2424d6d05da8654fca9437a9f528}\index{CompressConfig@{CompressConfig}!numberOfFiles@{numberOfFiles}}
+\index{numberOfFiles@{numberOfFiles}!CompressConfig@{CompressConfig}}
+\doxysubsubsection{\texorpdfstring{numberOfFiles()}{numberOfFiles()}}
+{\footnotesize\ttfamily \label{classCompressConfig_a759b2424d6d05da8654fca9437a9f528} 
+auto Compress\+Config::\+number\+Of\+Files (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ size\+\_\+t\hspace{0.3cm}{\ttfamily [nodiscard]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{interface_8cpp_source_l00089}{89}} of file \doxymbox{\hyperlink{interface_8cpp_source}{interface.\+cpp}}.
+
+
+
+References \doxymbox{\hyperlink{interface_8hpp_source_l00071}{number\+Of\+Files\+\_\+}}.
+
+\Hypertarget{classCompressConfig_a395ddbc8a63b02075e78ce0baa2c3824}\index{CompressConfig@{CompressConfig}!numberOfFilesChanged@{numberOfFilesChanged}}
+\index{numberOfFilesChanged@{numberOfFilesChanged}!CompressConfig@{CompressConfig}}
+\doxysubsubsection{\texorpdfstring{numberOfFilesChanged}{numberOfFilesChanged}}
+{\footnotesize\ttfamily \label{classCompressConfig_a395ddbc8a63b02075e78ce0baa2c3824} 
+void Compress\+Config::\+number\+Of\+Files\+Changed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\Hypertarget{classCompressConfig_a944c3b15562fe769f768c525140b4ac5}\index{CompressConfig@{CompressConfig}!pathOut@{pathOut}}
+\index{pathOut@{pathOut}!CompressConfig@{CompressConfig}}
+\doxysubsubsection{\texorpdfstring{pathOut()}{pathOut()}}
+{\footnotesize\ttfamily \label{classCompressConfig_a944c3b15562fe769f768c525140b4ac5} 
+auto Compress\+Config::\+path\+Out (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ QUrl\hspace{0.3cm}{\ttfamily [nodiscard]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{interface_8cpp_source_l00069}{69}} of file \doxymbox{\hyperlink{interface_8cpp_source}{interface.\+cpp}}.
+
+\Hypertarget{classCompressConfig_a3d0b2e4203885bbe2492d7fd51d87062}\index{CompressConfig@{CompressConfig}!pathOutChanged@{pathOutChanged}}
+\index{pathOutChanged@{pathOutChanged}!CompressConfig@{CompressConfig}}
+\doxysubsubsection{\texorpdfstring{pathOutChanged}{pathOutChanged}}
+{\footnotesize\ttfamily \label{classCompressConfig_a3d0b2e4203885bbe2492d7fd51d87062} 
+void Compress\+Config::\+path\+Out\+Changed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\Hypertarget{classCompressConfig_a811e0571804e1ee90fab8d6ab9911ccd}\index{CompressConfig@{CompressConfig}!pathsIn@{pathsIn}}
+\index{pathsIn@{pathsIn}!CompressConfig@{CompressConfig}}
+\doxysubsubsection{\texorpdfstring{pathsIn()}{pathsIn()}}
+{\footnotesize\ttfamily \label{classCompressConfig_a811e0571804e1ee90fab8d6ab9911ccd} 
+auto Compress\+Config::\+paths\+In (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ QList$<$ QUrl $>$\hspace{0.3cm}{\ttfamily [nodiscard]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{interface_8cpp_source_l00065}{65}} of file \doxymbox{\hyperlink{interface_8cpp_source}{interface.\+cpp}}.
+
+\Hypertarget{classCompressConfig_a134b10185241b7dc77be2aa0b6f4dd7e}\index{CompressConfig@{CompressConfig}!pathsInChanged@{pathsInChanged}}
+\index{pathsInChanged@{pathsInChanged}!CompressConfig@{CompressConfig}}
+\doxysubsubsection{\texorpdfstring{pathsInChanged}{pathsInChanged}}
+{\footnotesize\ttfamily \label{classCompressConfig_a134b10185241b7dc77be2aa0b6f4dd7e} 
+void Compress\+Config::\+paths\+In\+Changed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [signal]}}
+
+\Hypertarget{classCompressConfig_ae18aedf1084d258802e4a811e80a6875}\index{CompressConfig@{CompressConfig}!setCompressor@{setCompressor}}
+\index{setCompressor@{setCompressor}!CompressConfig@{CompressConfig}}
+\doxysubsubsection{\texorpdfstring{setCompressor()}{setCompressor()}}
+{\footnotesize\ttfamily \label{classCompressConfig_ae18aedf1084d258802e4a811e80a6875} 
+void Compress\+Config::\+set\+Compressor (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{comp__options_8hpp_a77b7b3d2b23480b5378dbd65c7af9178}{Comp\+Type}}}]{comp\+\_\+type}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{interface_8cpp_source_l00033}{33}} of file \doxymbox{\hyperlink{interface_8cpp_source}{interface.\+cpp}}.
+
+\Hypertarget{classCompressConfig_a55226a4613a7991ebaac88e29bdcc0b2}\index{CompressConfig@{CompressConfig}!setCompressorPreset@{setCompressorPreset}}
+\index{setCompressorPreset@{setCompressorPreset}!CompressConfig@{CompressConfig}}
+\doxysubsubsection{\texorpdfstring{setCompressorPreset()}{setCompressorPreset()}}
+{\footnotesize\ttfamily \label{classCompressConfig_a55226a4613a7991ebaac88e29bdcc0b2} 
+void Compress\+Config::\+set\+Compressor\+Preset (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0}{Comp\+Preset}}}]{comp\+\_\+preset}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{interface_8cpp_source_l00038}{38}} of file \doxymbox{\hyperlink{interface_8cpp_source}{interface.\+cpp}}.
+
+
+
+References \doxymbox{\hyperlink{interface_8hpp_source_l00068}{comp\+\_\+preset\+\_\+}}.
+
+\Hypertarget{classCompressConfig_a26a7800de7b4ebed2981a4d35562536d}\index{CompressConfig@{CompressConfig}!setDeleteInput@{setDeleteInput}}
+\index{setDeleteInput@{setDeleteInput}!CompressConfig@{CompressConfig}}
+\doxysubsubsection{\texorpdfstring{setDeleteInput()}{setDeleteInput()}}
+{\footnotesize\ttfamily \label{classCompressConfig_a26a7800de7b4ebed2981a4d35562536d} 
+void Compress\+Config::\+set\+Delete\+Input (\begin{DoxyParamCaption}\item[{bool}]{delete\+\_\+input}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{interface_8cpp_source_l00048}{48}} of file \doxymbox{\hyperlink{interface_8cpp_source}{interface.\+cpp}}.
+
+
+
+References \doxymbox{\hyperlink{interface_8hpp_source_l00070}{delete\+\_\+input\+\_\+}}.
+
+\Hypertarget{classCompressConfig_acb332759e277f9c0ad0be87081e5fabf}\index{CompressConfig@{CompressConfig}!setErrorType@{setErrorType}}
+\index{setErrorType@{setErrorType}!CompressConfig@{CompressConfig}}
+\doxysubsubsection{\texorpdfstring{setErrorType()}{setErrorType()}}
+{\footnotesize\ttfamily \label{classCompressConfig_acb332759e277f9c0ad0be87081e5fabf} 
+void Compress\+Config::\+set\+Error\+Type (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42de}{Error\+Type}}}]{error\+\_\+type}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{interface_8cpp_source_l00058}{58}} of file \doxymbox{\hyperlink{interface_8cpp_source}{interface.\+cpp}}.
+
+
+
+References \doxymbox{\hyperlink{interface_8hpp_source_l00072}{error\+\_\+type\+\_\+}}.
+
+\Hypertarget{classCompressConfig_a08dfd8b4ffca07842944c8582cbceb56}\index{CompressConfig@{CompressConfig}!setForceCompression@{setForceCompression}}
+\index{setForceCompression@{setForceCompression}!CompressConfig@{CompressConfig}}
+\doxysubsubsection{\texorpdfstring{setForceCompression()}{setForceCompression()}}
+{\footnotesize\ttfamily \label{classCompressConfig_a08dfd8b4ffca07842944c8582cbceb56} 
+void Compress\+Config::\+set\+Force\+Compression (\begin{DoxyParamCaption}\item[{bool}]{force\+\_\+compression}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{interface_8cpp_source_l00043}{43}} of file \doxymbox{\hyperlink{interface_8cpp_source}{interface.\+cpp}}.
+
+
+
+References \doxymbox{\hyperlink{interface_8hpp_source_l00069}{force\+\_\+compression\+\_\+}}.
+
+\Hypertarget{classCompressConfig_a42ba33a1f1b8ebf83976e8e668e7c827}\index{CompressConfig@{CompressConfig}!setNumberOfFiles@{setNumberOfFiles}}
+\index{setNumberOfFiles@{setNumberOfFiles}!CompressConfig@{CompressConfig}}
+\doxysubsubsection{\texorpdfstring{setNumberOfFiles()}{setNumberOfFiles()}}
+{\footnotesize\ttfamily \label{classCompressConfig_a42ba33a1f1b8ebf83976e8e668e7c827} 
+void Compress\+Config::\+set\+Number\+Of\+Files (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{number\+\_\+of\+\_\+files}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{interface_8cpp_source_l00053}{53}} of file \doxymbox{\hyperlink{interface_8cpp_source}{interface.\+cpp}}.
+
+
+
+References \doxymbox{\hyperlink{interface_8hpp_source_l00071}{number\+Of\+Files\+\_\+}}.
+
+\Hypertarget{classCompressConfig_ab6a78433abe59e015c9acd1b7146fae7}\index{CompressConfig@{CompressConfig}!setPathOut@{setPathOut}}
+\index{setPathOut@{setPathOut}!CompressConfig@{CompressConfig}}
+\doxysubsubsection{\texorpdfstring{setPathOut()}{setPathOut()}}
+{\footnotesize\ttfamily \label{classCompressConfig_ab6a78433abe59e015c9acd1b7146fae7} 
+void Compress\+Config::\+set\+Path\+Out (\begin{DoxyParamCaption}\item[{QUrl const \&}]{path}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{interface_8cpp_source_l00028}{28}} of file \doxymbox{\hyperlink{interface_8cpp_source}{interface.\+cpp}}.
+
+\Hypertarget{classCompressConfig_ae3f398c2b5e0a945f300996bafb553ed}\index{CompressConfig@{CompressConfig}!setPathsIn@{setPathsIn}}
+\index{setPathsIn@{setPathsIn}!CompressConfig@{CompressConfig}}
+\doxysubsubsection{\texorpdfstring{setPathsIn()}{setPathsIn()}}
+{\footnotesize\ttfamily \label{classCompressConfig_ae3f398c2b5e0a945f300996bafb553ed} 
+void Compress\+Config::\+set\+Paths\+In (\begin{DoxyParamCaption}\item[{QList$<$ QUrl $>$ const \&}]{paths}{}\end{DoxyParamCaption})}
+
+
+
+Definition at line \doxymbox{\hyperlink{interface_8cpp_source_l00017}{17}} of file \doxymbox{\hyperlink{interface_8cpp_source}{interface.\+cpp}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classCompressConfig_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classCompressConfig_ae5e7b97fff9999bb4a55a63a91f28792}\index{CompressConfig@{CompressConfig}!comp\_preset\_@{comp\_preset\_}}
+\index{comp\_preset\_@{comp\_preset\_}!CompressConfig@{CompressConfig}}
+\doxysubsubsection{\texorpdfstring{comp\_preset\_}{comp\_preset\_}}
+{\footnotesize\ttfamily \label{classCompressConfig_ae5e7b97fff9999bb4a55a63a91f28792} 
+\doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0}{Comp\+Preset}} Compress\+Config::\+comp\+\_\+preset\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{interface_8hpp_source_l00068}{68}} of file \doxymbox{\hyperlink{interface_8hpp_source}{interface.\+hpp}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{interface_8cpp_source_l00077}{compressor\+Preset()}}, and \doxymbox{\hyperlink{interface_8cpp_source_l00038}{set\+Compressor\+Preset()}}.
+
+\Hypertarget{classCompressConfig_a529dfe62147c6f801ec8bb7f140c9d92}\index{CompressConfig@{CompressConfig}!comp\_type\_@{comp\_type\_}}
+\index{comp\_type\_@{comp\_type\_}!CompressConfig@{CompressConfig}}
+\doxysubsubsection{\texorpdfstring{comp\_type\_}{comp\_type\_}}
+{\footnotesize\ttfamily \label{classCompressConfig_a529dfe62147c6f801ec8bb7f140c9d92} 
+\doxymbox{\hyperlink{comp__options_8hpp_a77b7b3d2b23480b5378dbd65c7af9178}{Comp\+Type}} Compress\+Config::\+comp\+\_\+type\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{interface_8hpp_source_l00067}{67}} of file \doxymbox{\hyperlink{interface_8hpp_source}{interface.\+hpp}}.
+
+\Hypertarget{classCompressConfig_a6a3eb5226b37a7a60100a0a90b9dcbd5}\index{CompressConfig@{CompressConfig}!delete\_input\_@{delete\_input\_}}
+\index{delete\_input\_@{delete\_input\_}!CompressConfig@{CompressConfig}}
+\doxysubsubsection{\texorpdfstring{delete\_input\_}{delete\_input\_}}
+{\footnotesize\ttfamily \label{classCompressConfig_a6a3eb5226b37a7a60100a0a90b9dcbd5} 
+bool Compress\+Config::\+delete\+\_\+input\+\_\+ = false\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{interface_8hpp_source_l00070}{70}} of file \doxymbox{\hyperlink{interface_8hpp_source}{interface.\+hpp}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{interface_8cpp_source_l00085}{delete\+Input()}}, and \doxymbox{\hyperlink{interface_8cpp_source_l00048}{set\+Delete\+Input()}}.
+
+\Hypertarget{classCompressConfig_ad9fe0d1319e7e31c3689278d9182fcb0}\index{CompressConfig@{CompressConfig}!error\_type\_@{error\_type\_}}
+\index{error\_type\_@{error\_type\_}!CompressConfig@{CompressConfig}}
+\doxysubsubsection{\texorpdfstring{error\_type\_}{error\_type\_}}
+{\footnotesize\ttfamily \label{classCompressConfig_ad9fe0d1319e7e31c3689278d9182fcb0} 
+\doxymbox{\hyperlink{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42de}{Error\+Type}} Compress\+Config::\+error\+\_\+type\+\_\+ \{\doxymbox{\hyperlink{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42dead306b6fdee05fe87455110ddf6501e6c}{Error\+Type::\+\+NO\+\_\+\+ERROR}}\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{interface_8hpp_source_l00072}{72}} of file \doxymbox{\hyperlink{interface_8hpp_source}{interface.\+hpp}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{interface_8cpp_source_l00093}{error\+Type()}}, and \doxymbox{\hyperlink{interface_8cpp_source_l00058}{set\+Error\+Type()}}.
+
+\Hypertarget{classCompressConfig_a56ce867af9dbb83d3801d6d332f9cc83}\index{CompressConfig@{CompressConfig}!force\_compression\_@{force\_compression\_}}
+\index{force\_compression\_@{force\_compression\_}!CompressConfig@{CompressConfig}}
+\doxysubsubsection{\texorpdfstring{force\_compression\_}{force\_compression\_}}
+{\footnotesize\ttfamily \label{classCompressConfig_a56ce867af9dbb83d3801d6d332f9cc83} 
+bool Compress\+Config::\+force\+\_\+compression\+\_\+ = false\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{interface_8hpp_source_l00069}{69}} of file \doxymbox{\hyperlink{interface_8hpp_source}{interface.\+hpp}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{interface_8cpp_source_l00081}{force\+Compression()}}, and \doxymbox{\hyperlink{interface_8cpp_source_l00043}{set\+Force\+Compression()}}.
+
+\Hypertarget{classCompressConfig_ad5b4c9470e76dfce08689bcd20bc1860}\index{CompressConfig@{CompressConfig}!numberOfFiles\_@{numberOfFiles\_}}
+\index{numberOfFiles\_@{numberOfFiles\_}!CompressConfig@{CompressConfig}}
+\doxysubsubsection{\texorpdfstring{numberOfFiles\_}{numberOfFiles\_}}
+{\footnotesize\ttfamily \label{classCompressConfig_ad5b4c9470e76dfce08689bcd20bc1860} 
+size\+\_\+t Compress\+Config::\+number\+Of\+Files\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{interface_8hpp_source_l00071}{71}} of file \doxymbox{\hyperlink{interface_8hpp_source}{interface.\+hpp}}.
+
+
+
+Referenced by \doxymbox{\hyperlink{interface_8cpp_source_l00089}{number\+Of\+Files()}}, and \doxymbox{\hyperlink{interface_8cpp_source_l00053}{set\+Number\+Of\+Files()}}.
+
+\Hypertarget{classCompressConfig_aa5e3218072e62281ea1eb0f6bfb6508a}\index{CompressConfig@{CompressConfig}!path\_out\_@{path\_out\_}}
+\index{path\_out\_@{path\_out\_}!CompressConfig@{CompressConfig}}
+\doxysubsubsection{\texorpdfstring{path\_out\_}{path\_out\_}}
+{\footnotesize\ttfamily \label{classCompressConfig_aa5e3218072e62281ea1eb0f6bfb6508a} 
+QUrl Compress\+Config::\+path\+\_\+out\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{interface_8hpp_source_l00066}{66}} of file \doxymbox{\hyperlink{interface_8hpp_source}{interface.\+hpp}}.
+
+\Hypertarget{classCompressConfig_a673f6072b5f8225f00c7cf23727f3d04}\index{CompressConfig@{CompressConfig}!paths\_in\_@{paths\_in\_}}
+\index{paths\_in\_@{paths\_in\_}!CompressConfig@{CompressConfig}}
+\doxysubsubsection{\texorpdfstring{paths\_in\_}{paths\_in\_}}
+{\footnotesize\ttfamily \label{classCompressConfig_a673f6072b5f8225f00c7cf23727f3d04} 
+QList$<$QUrl$>$ Compress\+Config::\+paths\+\_\+in\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{interface_8hpp_source_l00065}{65}} of file \doxymbox{\hyperlink{interface_8hpp_source}{interface.\+hpp}}.
+
+
+
+\label{doc-property-members}
+\Hypertarget{classCompressConfig_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{classCompressConfig_ac3ed8cdd9612670dffa6434090b6047a}\index{CompressConfig@{CompressConfig}!compressor@{compressor}}
+\index{compressor@{compressor}!CompressConfig@{CompressConfig}}
+\doxysubsubsection{\texorpdfstring{compressor}{compressor}}
+{\footnotesize\ttfamily \label{classCompressConfig_ac3ed8cdd9612670dffa6434090b6047a} 
+\doxymbox{\hyperlink{comp__options_8hpp_a77b7b3d2b23480b5378dbd65c7af9178}{Comp\+Type}} Compress\+Config::\+compressor\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{interface_8hpp_source_l00023}{23}} of file \doxymbox{\hyperlink{interface_8hpp_source}{interface.\+hpp}}.
+
+\Hypertarget{classCompressConfig_ad025089bf6bd5186cc165a83dae42251}\index{CompressConfig@{CompressConfig}!compressorPreset@{compressorPreset}}
+\index{compressorPreset@{compressorPreset}!CompressConfig@{CompressConfig}}
+\doxysubsubsection{\texorpdfstring{compressorPreset}{compressorPreset}}
+{\footnotesize\ttfamily \label{classCompressConfig_ad025089bf6bd5186cc165a83dae42251} 
+\doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0}{Comp\+Preset}} Compress\+Config::\+compressor\+Preset\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{interface_8hpp_source_l00024}{24}} of file \doxymbox{\hyperlink{interface_8hpp_source}{interface.\+hpp}}.
+
+\Hypertarget{classCompressConfig_a4c68a11f24e617c41ace6b3471337320}\index{CompressConfig@{CompressConfig}!deleteInput@{deleteInput}}
+\index{deleteInput@{deleteInput}!CompressConfig@{CompressConfig}}
+\doxysubsubsection{\texorpdfstring{deleteInput}{deleteInput}}
+{\footnotesize\ttfamily \label{classCompressConfig_a4c68a11f24e617c41ace6b3471337320} 
+bool Compress\+Config::\+delete\+Input\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{interface_8hpp_source_l00026}{26}} of file \doxymbox{\hyperlink{interface_8hpp_source}{interface.\+hpp}}.
+
+\Hypertarget{classCompressConfig_a5f642f77cdd603a3d36e87e80b2faf9f}\index{CompressConfig@{CompressConfig}!errorType@{errorType}}
+\index{errorType@{errorType}!CompressConfig@{CompressConfig}}
+\doxysubsubsection{\texorpdfstring{errorType}{errorType}}
+{\footnotesize\ttfamily \label{classCompressConfig_a5f642f77cdd603a3d36e87e80b2faf9f} 
+\doxymbox{\hyperlink{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42de}{Error\+Type}} Compress\+Config::\+error\+Type\hspace{0.3cm}{\ttfamily [read]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{interface_8hpp_source_l00028}{28}} of file \doxymbox{\hyperlink{interface_8hpp_source}{interface.\+hpp}}.
+
+\Hypertarget{classCompressConfig_aca0eb6009c398a0a01745ec35eb0b692}\index{CompressConfig@{CompressConfig}!forceCompression@{forceCompression}}
+\index{forceCompression@{forceCompression}!CompressConfig@{CompressConfig}}
+\doxysubsubsection{\texorpdfstring{forceCompression}{forceCompression}}
+{\footnotesize\ttfamily \label{classCompressConfig_aca0eb6009c398a0a01745ec35eb0b692} 
+bool Compress\+Config::\+force\+Compression\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{interface_8hpp_source_l00025}{25}} of file \doxymbox{\hyperlink{interface_8hpp_source}{interface.\+hpp}}.
+
+\Hypertarget{classCompressConfig_a06930c0a59a9c2223dc257e32fc85da9}\index{CompressConfig@{CompressConfig}!numberOfFiles@{numberOfFiles}}
+\index{numberOfFiles@{numberOfFiles}!CompressConfig@{CompressConfig}}
+\doxysubsubsection{\texorpdfstring{numberOfFiles}{numberOfFiles}}
+{\footnotesize\ttfamily \label{classCompressConfig_a06930c0a59a9c2223dc257e32fc85da9} 
+size\+\_\+t Compress\+Config::\+number\+Of\+Files\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{interface_8hpp_source_l00027}{27}} of file \doxymbox{\hyperlink{interface_8hpp_source}{interface.\+hpp}}.
+
+\Hypertarget{classCompressConfig_a6d0df396de8acaf7db221daac36f38bf}\index{CompressConfig@{CompressConfig}!pathOut@{pathOut}}
+\index{pathOut@{pathOut}!CompressConfig@{CompressConfig}}
+\doxysubsubsection{\texorpdfstring{pathOut}{pathOut}}
+{\footnotesize\ttfamily \label{classCompressConfig_a6d0df396de8acaf7db221daac36f38bf} 
+QUrl Compress\+Config::\+path\+Out\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{interface_8hpp_source_l00022}{22}} of file \doxymbox{\hyperlink{interface_8hpp_source}{interface.\+hpp}}.
+
+\Hypertarget{classCompressConfig_ab72cf05b8ca02f27fe469c38de569315}\index{CompressConfig@{CompressConfig}!pathsIn@{pathsIn}}
+\index{pathsIn@{pathsIn}!CompressConfig@{CompressConfig}}
+\doxysubsubsection{\texorpdfstring{pathsIn}{pathsIn}}
+{\footnotesize\ttfamily \label{classCompressConfig_ab72cf05b8ca02f27fe469c38de569315} 
+QList$<$QUrl$>$ Compress\+Config::\+paths\+In\hspace{0.3cm}{\ttfamily [read]}, {\ttfamily [write]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{interface_8hpp_source_l00021}{21}} of file \doxymbox{\hyperlink{interface_8hpp_source}{interface.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+Compress-\/to-\/fit/\+src/\+gui/\+\doxymbox{\hyperlink{interface_8hpp}{interface.\+hpp}}\item 
+Compress-\/to-\/fit/\+src/\+gui/\+\doxymbox{\hyperlink{interface_8cpp}{interface.\+cpp}}\end{DoxyCompactItemize}

@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['file_0',['File',['../classFile.html',1,'']]],
-  ['fileoptions_1',['FileOptions',['../structFileOptions.html',1,'']]],
-  ['forwarditerator_2',['ForwardIterator',['../structForwardIterator.html',1,'']]],
-  ['function_5ftraits_3',['function_traits',['../structfunction__traits.html',1,'']]],
-  ['function_5ftraits_3c_20fun_28_2a_29_28args_2e_2e_2e_29_3e_4',['function_traits&lt; fun(*)(args...)&gt;',['../structfunction__traits_3_01fun_07_5_08_07args_8_8_8_08_4.html',1,'']]]
+  ['compressconfig_0',['CompressConfig',['../classCompressConfig.html',1,'']]],
+  ['concfilebuffer_1',['ConcFileBuffer',['../classConcFileBuffer.html',1,'']]],
+  ['concorderedfilelist_2',['ConcOrderedFileList',['../classConcOrderedFileList.html',1,'']]],
+  ['concorderedfilelist_3c_20lz77block_3c_3e_20_3e_3',['ConcOrderedFileList&lt; LZ77Block&lt;&gt; &gt;',['../classConcOrderedFileList.html',1,'']]],
+  ['concorderedfilelist_3c_20std_3a_3avector_3c_20sym_20_3e_20_3e_4',['ConcOrderedFileList&lt; std::vector&lt; Sym &gt; &gt;',['../classConcOrderedFileList.html',1,'']]]
 ];

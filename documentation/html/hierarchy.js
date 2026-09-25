@@ -1,8 +1,11 @@
 var hierarchy =
 [
+    [ "BackendMessage", "structBackendMessage.html", null ],
+    [ "BadMessage", "structBadMessage.html", null ],
     [ "ConcFileBuffer&lt; T &gt;", "classConcFileBuffer.html", null ],
     [ "ConcOrderedFileList&lt; T &gt;", "classConcOrderedFileList.html", null ],
     [ "std::exception", null, [
+      [ "ErrorException", "structErrorException.html", null ],
       [ "parser::HelpException", "classparser_1_1HelpException.html", null ]
     ] ],
     [ "std::false_type", null, [
@@ -11,17 +14,25 @@ var hierarchy =
     ] ],
     [ "File", "classFile.html", null ],
     [ "FileOptions", "structFileOptions.html", null ],
+    [ "FixedString&lt; N &gt;", "classFixedString.html", null ],
     [ "ForwardIterator&lt; Iter &gt;", "structForwardIterator.html", null ],
     [ "function_traits&lt; not_a_fun &gt;", "structfunction__traits.html", null ],
     [ "function_traits&lt; fun(*)(args...)&gt;", "structfunction__traits_3_01fun_07_5_08_07args_8_8_8_08_4.html", null ],
     [ "Header", "structHeader.html", null ],
-    [ "LZ77Block", "classLZ77Block.html", null ],
+    [ "LZ77Block&lt; Alloc &gt;", "classLZ77Block.html", null ],
     [ "LZ77Compressor", "classLZ77Compressor.html", null ],
     [ "LZ77ConcurrentCompressor", "classLZ77ConcurrentCompressor.html", null ],
     [ "LZ77ConcurrentDecompressor", "classLZ77ConcurrentDecompressor.html", null ],
-    [ "LZ77Decompressor", "classLZ77Decompressor.html", null ],
+    [ "LZ77Decompressor&lt; Alloc &gt;", "classLZ77Decompressor.html", null ],
     [ "Node&lt; T &gt;", "structNode.html", null ],
     [ "parser::Options", "structparser_1_1Options.html", null ],
+    [ "ProgressType", "structProgressType.html", null ],
+    [ "QObject", null, [
+      [ "CompressConfig", "classCompressConfig.html", null ],
+      [ "FileSystem", "classFileSystem.html", null ],
+      [ "QmlBackendMessage", "classQmlBackendMessage.html", null ],
+      [ "StatusBridge", "classStatusBridge.html", null ]
+    ] ],
     [ "alg::Rabin", "classalg_1_1Rabin.html", null ],
     [ "Sym", "structSym.html", null ],
     [ "ThreadPool", "classThreadPool.html", null ],

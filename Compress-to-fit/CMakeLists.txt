@@ -1,4 +1,5 @@
-add_library(project_logic SHARED)
+add_library(project_logic SHARED
+        src/common/sink.hpp)
 
 set(CLANG_TIDY_OPT
         clang-tidy
@@ -114,6 +115,8 @@ target_sources(
         "src/gui/fs_helper.cpp"
         "src/gui/interpreter.hpp"
         "src/gui/interpreter.cpp"
+        "src/gui/compressor_manager.cpp"
+        "src/gui/compressor_manager.hpp"
 )
 
 #add the tests executable

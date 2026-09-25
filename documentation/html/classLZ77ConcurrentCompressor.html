@@ -100,32 +100,35 @@ Collaboration diagram for LZ77ConcurrentCompressor:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3e5c38f00925044e3a3e0d9296840842" id="r_a3e5c38f00925044e3a3e0d9296840842"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a3e5c38f00925044e3a3e0d9296840842">LZ77ConcurrentCompressor</a> (std::span&lt; std::byte const &gt; const data, size_t const concurrency, <a class="el" href="classFile.html">File</a> &amp;file, <a class="el" href="core__utils_8cppm.html#a59fc5d9b777790e56395e645e4205db0">CompPreset</a> const preset) noexcept(false)</td></tr>
+<tr class="memitem:ac6be1ab42e2fe26c6d96d17865dde037" id="r_ac6be1ab42e2fe26c6d96d17865dde037"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#ac6be1ab42e2fe26c6d96d17865dde037">LZ77ConcurrentCompressor</a> (size_t const concurrency, <a class="el" href="classFile.html">File</a> &amp;file, <a class="el" href="comp__options_8hpp.html#a59fc5d9b777790e56395e645e4205db0">CompPreset</a> const preset) noexcept(false)</td></tr>
 <tr class="memitem:a6c184eda6cf868288ba5f89b55037a60" id="r_a6c184eda6cf868288ba5f89b55037a60"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a6c184eda6cf868288ba5f89b55037a60">~LZ77ConcurrentCompressor</a> ()</td></tr>
 <tr class="memitem:a9f7d12782f0c5a6b78011677b03089a7" id="r_a9f7d12782f0c5a6b78011677b03089a7"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a9f7d12782f0c5a6b78011677b03089a7">compress</a> () noexcept(false)</td></tr>
 <tr class="memdesc:a9f7d12782f0c5a6b78011677b03089a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run the compression.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pri-methods" class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
-<tr class="memitem:a1f68f32f3d3d9c7fb2ed7c0b4d1d7cb3" id="r_a1f68f32f3d3d9c7fb2ed7c0b4d1d7cb3"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a1f68f32f3d3d9c7fb2ed7c0b4d1d7cb3">check_results</a> ()</td></tr>
+<tr class="memitem:a430440bfe92d03f9f10bc89f16d8eebd" id="r_a430440bfe92d03f9f10bc89f16d8eebd"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a430440bfe92d03f9f10bc89f16d8eebd">check_results</a> (std::stop_token stop)</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pri-attribs" class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a2d404109ccd6e938bceee22c9d7114a8" id="r_a2d404109ccd6e938bceee22c9d7114a8"><td class="memItemLeft"><a class="el" href="core__utils_8cppm.html#a59fc5d9b777790e56395e645e4205db0">CompPreset</a> const&#160;</td><td class="memItemRight"><a class="el" href="#a2d404109ccd6e938bceee22c9d7114a8">preset_</a></td></tr>
+<tr class="memitem:a2d404109ccd6e938bceee22c9d7114a8" id="r_a2d404109ccd6e938bceee22c9d7114a8"><td class="memItemLeft"><a class="el" href="comp__options_8hpp.html#a59fc5d9b777790e56395e645e4205db0">CompPreset</a> const&#160;</td><td class="memItemRight"><a class="el" href="#a2d404109ccd6e938bceee22c9d7114a8">preset_</a></td></tr>
 <tr class="memitem:aca869bde10cd0f0dda5a7af9ccf9a5a9" id="r_aca869bde10cd0f0dda5a7af9ccf9a5a9"><td class="memItemLeft">size_t const&#160;</td><td class="memItemRight"><a class="el" href="#aca869bde10cd0f0dda5a7af9ccf9a5a9">concurrency_</a></td></tr>
-<tr class="memitem:a5e8344e6cc3dea1adc9edeecffeb703d" id="r_a5e8344e6cc3dea1adc9edeecffeb703d"><td class="memItemLeft">std::span&lt; std::byte const  &gt; const&#160;</td><td class="memItemRight"><a class="el" href="#a5e8344e6cc3dea1adc9edeecffeb703d">data_</a> {}</td></tr>
+<tr class="memitem:a3cc04ff6e6014f3a1f926de1ac3b6eaa" id="r_a3cc04ff6e6014f3a1f926de1ac3b6eaa"><td class="memItemLeft"><a class="el" href="classFile.html">File</a> const  &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a3cc04ff6e6014f3a1f926de1ac3b6eaa">file_</a></td></tr>
+<tr class="memitem:a1b083b178664d6b940ba5463d22996d6" id="r_a1b083b178664d6b940ba5463d22996d6"><td class="memItemLeft">size_t const&#160;</td><td class="memItemRight"><a class="el" href="#a1b083b178664d6b940ba5463d22996d6">file_size_</a></td></tr>
 <tr class="memitem:ad58bcddad411e4973bde4155c7549b65" id="r_ad58bcddad411e4973bde4155c7549b65"><td class="memItemLeft">std::vector&lt; std::future&lt; void &gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ad58bcddad411e4973bde4155c7549b65">results</a> {}</td></tr>
-<tr class="memitem:a3498fd7033bf7154cd0893d339855b2f" id="r_a3498fd7033bf7154cd0893d339855b2f"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="#a3498fd7033bf7154cd0893d339855b2f">n_blocks_</a> {}</td></tr>
+<tr class="memitem:aaa6ace7f10d6e2f5ff3c8bdbc85b70f6" id="r_aaa6ace7f10d6e2f5ff3c8bdbc85b70f6"><td class="memItemLeft">std::atomic&lt; size_t &gt;&#160;</td><td class="memItemRight"><a class="el" href="#aaa6ace7f10d6e2f5ff3c8bdbc85b70f6">n_blocks_</a> {}</td></tr>
 <tr class="memitem:afc321f0ed8c7916aff617b46f1075af7" id="r_afc321f0ed8c7916aff617b46f1075af7"><td class="memItemLeft">size_t&#160;</td><td class="memItemRight"><a class="el" href="#afc321f0ed8c7916aff617b46f1075af7">n_completed_blocks</a> {}</td></tr>
-<tr class="memitem:a4aec362f2336ac62c6b630f1a3244d50" id="r_a4aec362f2336ac62c6b630f1a3244d50"><td class="memItemLeft"><a class="el" href="classConcOrderedFileList.html">ConcOrderedFileList</a>&lt; <a class="el" href="classLZ77Block.html">LZ77Block</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="#a4aec362f2336ac62c6b630f1a3244d50">file_list_</a></td></tr>
+<tr class="memitem:aadbf5c339f2bfaddde1b70a50d942845" id="r_aadbf5c339f2bfaddde1b70a50d942845"><td class="memItemLeft">std::mutex&#160;</td><td class="memItemRight"><a class="el" href="#aadbf5c339f2bfaddde1b70a50d942845">mutex_</a></td></tr>
+<tr class="memitem:aa0628689e6c8fb5ea63cbadfb98aece9" id="r_aa0628689e6c8fb5ea63cbadfb98aece9"><td class="memItemLeft">std::jthread&#160;</td><td class="memItemRight"><a class="el" href="#aa0628689e6c8fb5ea63cbadfb98aece9">progress_checker</a> {&amp;<a class="el" href="#a430440bfe92d03f9f10bc89f16d8eebd">LZ77ConcurrentCompressor::check_results</a>, this}</td></tr>
+<tr class="memitem:aebebf3a1adde21334a6c1aa2e20a0a40" id="r_aebebf3a1adde21334a6c1aa2e20a0a40"><td class="memItemLeft"><a class="el" href="classConcOrderedFileList.html">ConcOrderedFileList</a>&lt; <a class="el" href="classLZ77Block.html">LZ77Block</a>&lt;&gt; &gt;&#160;</td><td class="memItemRight"><a class="el" href="#aebebf3a1adde21334a6c1aa2e20a0a40">file_list_</a></td></tr>
 <tr class="memitem:a3e8abeacb4374460608fcb4b352a02f8" id="r_a3e8abeacb4374460608fcb4b352a02f8"><td class="memItemLeft"><a class="el" href="classThreadPool.html">ThreadPool</a>&#160;</td><td class="memItemRight"><a class="el" href="#a3e8abeacb4374460608fcb4b352a02f8">thread_pool</a> {}</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00427">427</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00528">528</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a3e5c38f00925044e3a3e0d9296840842" name="a3e5c38f00925044e3a3e0d9296840842"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3e5c38f00925044e3a3e0d9296840842">&#9670;&#160;</a></span>LZ77ConcurrentCompressor()</h2>
+<a id="ac6be1ab42e2fe26c6d96d17865dde037" name="ac6be1ab42e2fe26c6d96d17865dde037"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6be1ab42e2fe26c6d96d17865dde037">&#9670;&#160;</a></span>LZ77ConcurrentCompressor()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -136,11 +139,6 @@ Private Attributes</h2></td></tr>
         <tr>
           <td class="memname">LZ77ConcurrentCompressor::LZ77ConcurrentCompressor </td>
           <td>(</td>
-          <td class="paramtype">std::span&lt; std::byte const &gt; const</td>          <td class="paramname"><span class="paramname"><em>data</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">size_t const</td>          <td class="paramname"><span class="paramname"><em>concurrency</em></span>, </td>
         </tr>
         <tr>
@@ -151,7 +149,7 @@ Private Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="core__utils_8cppm.html#a59fc5d9b777790e56395e645e4205db0">CompPreset</a> const</td>          <td class="paramname"><span class="paramname"><em>preset</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="comp__options_8hpp.html#a59fc5d9b777790e56395e645e4205db0">CompPreset</a> const</td>          <td class="paramname"><span class="paramname"><em>preset</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -161,20 +159,20 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00430">430</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00531">531</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
 
-<p class="reference">References <a class="el" href="lz77_8cppm_source.html#l00430">LZ77ConcurrentCompressor()</a>, and <a class="el" href="lz77_8cppm_source.html#l00488">n_blocks_</a>.</p>
+<p class="reference">References <a class="el" href="lz77_8cppm_source.html#l00594">concurrency_</a>, and <a class="el" href="lz77_8cppm_source.html#l00531">LZ77ConcurrentCompressor()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="lz77_8cppm_source.html#l00430">LZ77ConcurrentCompressor()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="lz77_8cppm_source.html#l00531">LZ77ConcurrentCompressor()</a>.</p>
 <div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classLZ77ConcurrentCompressor_a3e5c38f00925044e3a3e0d9296840842_cgraph.svg" width="206" height="74"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classLZ77ConcurrentCompressor_ac6be1ab42e2fe26c6d96d17865dde037_cgraph.svg" width="206" height="74"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classLZ77ConcurrentCompressor_a3e5c38f00925044e3a3e0d9296840842_icgraph.svg" width="206" height="74"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classLZ77ConcurrentCompressor_ac6be1ab42e2fe26c6d96d17865dde037_icgraph.svg" width="206" height="74"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 
 </div>
@@ -202,13 +200,13 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00440">440</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00541">541</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
 
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="a1f68f32f3d3d9c7fb2ed7c0b4d1d7cb3" name="a1f68f32f3d3d9c7fb2ed7c0b4d1d7cb3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1f68f32f3d3d9c7fb2ed7c0b4d1d7cb3">&#9670;&#160;</a></span>check_results()</h2>
+<a id="a430440bfe92d03f9f10bc89f16d8eebd" name="a430440bfe92d03f9f10bc89f16d8eebd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a430440bfe92d03f9f10bc89f16d8eebd">&#9670;&#160;</a></span>check_results()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -219,7 +217,7 @@ Here is the caller graph for this function:</div>
         <tr>
           <td class="memname">void LZ77ConcurrentCompressor::check_results </td>
           <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">std::stop_token</td>          <td class="paramname"><span class="paramname"><em>stop</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -230,14 +228,7 @@ Here is the caller graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00495">495</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="lz77_8cppm_source.html#l00451">compress()</a>.</p>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classLZ77ConcurrentCompressor_a1f68f32f3d3d9c7fb2ed7c0b4d1d7cb3_icgraph.svg" width="432" height="50"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00607">607</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
 
 </div>
 </div>
@@ -266,14 +257,9 @@ Here is the caller graph for this function:</div>
 
 <p>Run the compression. </p>
 
-<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00451">451</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00554">554</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
 
-<p class="reference">References <a class="el" href="lz77_8cppm_source.html#l00495">check_results()</a>, <a class="el" href="lz77_8cppm_source.html#l00488">n_blocks_</a>, and <a class="el" href="lz77_8cppm_source.html#l00489">n_completed_blocks</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classLZ77ConcurrentCompressor_a9f7d12782f0c5a6b78011677b03089a7_cgraph.svg" width="432" height="50"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<p class="reference">References <a class="el" href="lz77_8cppm_source.html#l00596">file_size_</a>.</p>
 
 </div>
 </div>
@@ -298,12 +284,14 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00485">485</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00594">594</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="lz77_8cppm_source.html#l00531">LZ77ConcurrentCompressor()</a>.</p>
 
 </div>
 </div>
-<a id="a5e8344e6cc3dea1adc9edeecffeb703d" name="a5e8344e6cc3dea1adc9edeecffeb703d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5e8344e6cc3dea1adc9edeecffeb703d">&#9670;&#160;</a></span>data_</h2>
+<a id="a3cc04ff6e6014f3a1f926de1ac3b6eaa" name="a3cc04ff6e6014f3a1f926de1ac3b6eaa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3cc04ff6e6014f3a1f926de1ac3b6eaa">&#9670;&#160;</a></span>file_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -312,7 +300,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">std::span&lt;std::byte const&gt; const LZ77ConcurrentCompressor::data_ {}</td>
+          <td class="memname"><a class="el" href="classFile.html">File</a> const&amp; LZ77ConcurrentCompressor::file_</td>
         </tr>
       </table>
   </td>
@@ -322,12 +310,12 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00486">486</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00595">595</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
 
 </div>
 </div>
-<a id="a4aec362f2336ac62c6b630f1a3244d50" name="a4aec362f2336ac62c6b630f1a3244d50"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4aec362f2336ac62c6b630f1a3244d50">&#9670;&#160;</a></span>file_list_</h2>
+<a id="aebebf3a1adde21334a6c1aa2e20a0a40" name="aebebf3a1adde21334a6c1aa2e20a0a40"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aebebf3a1adde21334a6c1aa2e20a0a40">&#9670;&#160;</a></span>file_list_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -336,7 +324,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classConcOrderedFileList.html">ConcOrderedFileList</a>&lt;<a class="el" href="classLZ77Block.html">LZ77Block</a>&gt; LZ77ConcurrentCompressor::file_list_</td>
+          <td class="memname"><a class="el" href="classConcOrderedFileList.html">ConcOrderedFileList</a>&lt;<a class="el" href="classLZ77Block.html">LZ77Block</a>&lt;&gt; &gt; LZ77ConcurrentCompressor::file_list_</td>
         </tr>
       </table>
   </td>
@@ -346,12 +334,12 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00491">491</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00603">603</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
 
 </div>
 </div>
-<a id="a3498fd7033bf7154cd0893d339855b2f" name="a3498fd7033bf7154cd0893d339855b2f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3498fd7033bf7154cd0893d339855b2f">&#9670;&#160;</a></span>n_blocks_</h2>
+<a id="a1b083b178664d6b940ba5463d22996d6" name="a1b083b178664d6b940ba5463d22996d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b083b178664d6b940ba5463d22996d6">&#9670;&#160;</a></span>file_size_</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -360,7 +348,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">size_t LZ77ConcurrentCompressor::n_blocks_ {}</td>
+          <td class="memname">size_t const LZ77ConcurrentCompressor::file_size_</td>
         </tr>
       </table>
   </td>
@@ -370,9 +358,57 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00488">488</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00596">596</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="lz77_8cppm_source.html#l00451">compress()</a>, and <a class="el" href="lz77_8cppm_source.html#l00430">LZ77ConcurrentCompressor()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="lz77_8cppm_source.html#l00554">compress()</a>.</p>
+
+</div>
+</div>
+<a id="aadbf5c339f2bfaddde1b70a50d942845" name="aadbf5c339f2bfaddde1b70a50d942845"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aadbf5c339f2bfaddde1b70a50d942845">&#9670;&#160;</a></span>mutex_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::mutex LZ77ConcurrentCompressor::mutex_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00600">600</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
+
+</div>
+</div>
+<a id="aaa6ace7f10d6e2f5ff3c8bdbc85b70f6" name="aaa6ace7f10d6e2f5ff3c8bdbc85b70f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa6ace7f10d6e2f5ff3c8bdbc85b70f6">&#9670;&#160;</a></span>n_blocks_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::atomic&lt;size_t&gt; LZ77ConcurrentCompressor::n_blocks_ {}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00598">598</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
 
 </div>
 </div>
@@ -396,9 +432,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00489">489</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="lz77_8cppm_source.html#l00451">compress()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00599">599</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
 
 </div>
 </div>
@@ -412,7 +446,7 @@ Here is the call graph for this function:</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="core__utils_8cppm.html#a59fc5d9b777790e56395e645e4205db0">CompPreset</a> const LZ77ConcurrentCompressor::preset_</td>
+          <td class="memname"><a class="el" href="comp__options_8hpp.html#a59fc5d9b777790e56395e645e4205db0">CompPreset</a> const LZ77ConcurrentCompressor::preset_</td>
         </tr>
       </table>
   </td>
@@ -422,7 +456,31 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00484">484</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00593">593</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
+
+</div>
+</div>
+<a id="aa0628689e6c8fb5ea63cbadfb98aece9" name="aa0628689e6c8fb5ea63cbadfb98aece9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0628689e6c8fb5ea63cbadfb98aece9">&#9670;&#160;</a></span>progress_checker</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::jthread LZ77ConcurrentCompressor::progress_checker {&amp;<a class="el" href="#a430440bfe92d03f9f10bc89f16d8eebd">LZ77ConcurrentCompressor::check_results</a>, this}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel private">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00601">601</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
 
 </div>
 </div>
@@ -446,7 +504,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00487">487</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00597">597</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
 
 </div>
 </div>
@@ -470,7 +528,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00492">492</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00604">604</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
 
 </div>
 </div>

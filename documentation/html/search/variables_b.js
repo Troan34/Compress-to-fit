@@ -1,7 +1,11 @@
 var searchData=
 [
-  ['offset_0',['offset',['../structToken.html#aec92ffb85fbb4c01b8e313b263f988df',1,'Token::offset'],['../classWindow.html#ac8356c30e82c99c02e6e4b6f897c5086',1,'Window::offset']]],
-  ['option_5funavailable_1',['OPTION_UNAVAILABLE',['../namespaceERR__STRING.html#afc81976c232892e2b4e16e100a14423e',1,'ERR_STRING']]],
-  ['out_5ffile_2',['out_file',['../classFile.html#a733e671529f4aff0b4f43e9cfd223779',1,'File']]],
-  ['out_5fstream_5f_3',['out_stream_',['../classConcFileBuffer.html#a811cec38963fd5f75b113492f090d1a4',1,'ConcFileBuffer']]]
+  ['n_5fblocks_5f_0',['n_blocks_',['../classLZ77ConcurrentCompressor.html#aaa6ace7f10d6e2f5ff3c8bdbc85b70f6',1,'LZ77ConcurrentCompressor::n_blocks_'],['../classLZ77ConcurrentDecompressor.html#a73499e9aba5d5814facdfd7599371577',1,'LZ77ConcurrentDecompressor::n_blocks_']]],
+  ['n_5fcompleted_5fblocks_1',['n_completed_blocks',['../classLZ77ConcurrentCompressor.html#afc321f0ed8c7916aff617b46f1075af7',1,'LZ77ConcurrentCompressor::n_completed_blocks'],['../classLZ77ConcurrentDecompressor.html#af1f9ba9f50e1a246812db1f10ef698f8',1,'LZ77ConcurrentDecompressor::n_completed_blocks']]],
+  ['n_5ffiles_2',['n_files',['../structparser_1_1Options.html#a93ba36418ea34555a584ebfd2881496e',1,'parser::Options']]],
+  ['n_5ffiles_5flimit_3',['N_FILES_LIMIT',['../comp__options_8hpp.html#a4f6782c41a389cd9988f6c570fc6dc0c',1,'N_FILES_LIMIT:&#160;comp_options.hpp'],['../core__utils_8cppm.html#a4f6782c41a389cd9988f6c570fc6dc0c',1,'N_FILES_LIMIT:&#160;comp_options.hpp']]],
+  ['need_5fhelp_4',['need_help',['../structparser_1_1Options.html#a6f3e3a05c49d128e2ae7a08f0783b32e',1,'parser::Options']]],
+  ['next_5',['next',['../structNode.html#ac1c0563946c59c36bddde431b4adb00b',1,'Node']]],
+  ['num_5fargs_6',['num_args',['../structfunction__traits_3_01fun_07_5_08_07args_8_8_8_08_4.html#ae34b8514a1e4f8f4218e47eea716db98',1,'function_traits&lt; fun(*)(args...)&gt;']]],
+  ['numberoffiles_5f_7',['numberOfFiles_',['../classCompressConfig.html#ad5b4c9470e76dfce08689bcd20bc1860',1,'CompressConfig']]]
 ];

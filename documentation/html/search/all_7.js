@@ -7,6 +7,6 @@ var searchData=
   ['header_4',['header',['../structFileOptions.html#ae86a7b9e2da8adbab5c3b20a76dd7454',1,'FileOptions']]],
   ['header_5foffset_5',['HEADER_OFFSET',['../file__management_8cppm.html#ac3f10b5949a91b9cafbbdcf140d0a527',1,'file_management.cppm']]],
   ['help_6',['HELP',['../namespaceparser.html#accd7eb1ffd4c925598ec25fab6905369a4fc963e213bba362778f5c175eb4d5ff',1,'parser']]],
-  ['help_5fstr_7',['help_str',['../namespaceparser.html#a8fb0c61c07575a0d8f64cfc377b885ed',1,'parser']]],
+  ['help_5fstr_7',['help_str',['../namespaceparser.html#ad8ab5c1ee924ccb278d79ba52ae20c5a',1,'parser']]],
   ['helpexception_8',['HelpException',['../classparser_1_1HelpException.html',1,'parser']]]
 ];

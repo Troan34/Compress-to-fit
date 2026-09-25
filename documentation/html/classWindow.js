@@ -8,6 +8,7 @@ var classWindow =
     [ "get_data", "classWindow.html#a5f935861ed29efa6e3aebdf4e4c07874", null ],
     [ "get_max_size", "classWindow.html#a10c6b40b20cebc00c8061b59b914e5d2", null ],
     [ "get_max_size_search", "classWindow.html#abf906e8c855f1166e57d070cb613b8a3", null ],
+    [ "get_offset", "classWindow.html#ae436ef7cac460780cf76716baa2e97ea", null ],
     [ "get_relative_pos", "classWindow.html#ac2514e007aa303f6fb54b48fe0b35999", null ],
     [ "get_size_la_buf", "classWindow.html#a223036d292819493a4c96bc1c21ada81", null ],
     [ "get_size_search", "classWindow.html#a5be8f3f89ec60a2105c820bc9e9fdf1b", null ],

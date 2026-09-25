@@ -1,3 +1,7 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="Node000000" href="$classWindow.html" title="[lz77.Window]" alt="" coords="5,5,74,30"/>
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,31,108,55"/>
+<area shape="rect" id="Node000001" href="$structErrorException.html" title=" " alt="" coords="178,5,284,30"/>
+<area shape="poly" id="edge5_Node000000_Node000001" title=" " alt="" coords="122,31,180,24,175,26,123,36"/>
+<area shape="rect" id="Node000002" href="$classparser_1_1HelpException.html" title=" " alt="" coords="156,55,306,79"/>
+<area shape="poly" id="edge6_Node000000_Node000002" title=" " alt="" coords="123,49,158,56,153,57,123,55"/>
 </map>

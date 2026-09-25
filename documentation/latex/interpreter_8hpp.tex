@@ -1,0 +1,116 @@
+\doxysection{Compress-\/to-\/fit/\+src/\+gui/\+interpreter.hpp File Reference}
+\hypertarget{interpreter_8hpp}{}\label{interpreter_8hpp}\index{Compress-\/to-\/fit/src/gui/interpreter.hpp@{Compress-\/to-\/fit/src/gui/interpreter.hpp}}
+{\ttfamily \+\#include $<$expected$>$}\newline
+{\ttfamily \+\#include $<$QObject$>$}\newline
+{\ttfamily \+\#include $<$regex$>$}\newline
+{\ttfamily \+\#include $<$variant$>$}\newline
+{\ttfamily \+\#include "{}src/\+common/\+error\+\_\+warn\+\_\+print.\+hpp"{}}\newline
+Include dependency graph for interpreter.\+hpp:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{interpreter_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=180pt]{interpreter_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{structProgressType}{Progress\+Type}}
+\item 
+struct \doxymbox{\hyperlink{structBackendMessage}{Backend\+Message}}
+\begin{DoxyCompactList}\small\item\em Package a message from the compressor. \end{DoxyCompactList}\item 
+struct \doxymbox{\hyperlink{structBadMessage}{Bad\+Message}}
+\item 
+class \doxymbox{\hyperlink{classQmlBackendMessage}{Qml\+Backend\+Message}}
+\item 
+class \doxymbox{\hyperlink{classStatusBridge}{Status\+Bridge}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+auto \doxymbox{\hyperlink{interpreter_8hpp_a4e782c34ec65ee82a6848090e25f2ec3}{strip\+\_\+ansi}} (std::\+string const \&str) -\/$>$ std::\+string
+\begin{DoxyCompactList}\small\item\em Remove \doxylink{namespaceANSI}{ANSI} \textbackslash{}x1b sequences (color, underline...). \end{DoxyCompactList}\item 
+auto \doxymbox{\hyperlink{interpreter_8hpp_aece5c8effea071621f0e1f2a87aade5f}{trim\+\_\+whitespace}} (std::\+string const \&str) -\/$>$ std::\+string
+\begin{DoxyCompactList}\small\item\em Remove leading and trailing whitespace. \end{DoxyCompactList}\item 
+auto \doxymbox{\hyperlink{interpreter_8hpp_a2f6fd731a78be1f73c85feb304d532b4}{interpret}} (std::\+string const \&str) -\/$>$ std::\+expected$<$ \doxymbox{\hyperlink{structBackendMessage}{Backend\+Message}}, \doxymbox{\hyperlink{structBadMessage}{Bad\+Message}} $>$
+\begin{DoxyCompactList}\small\item\em Receive and interpret the compressor\textquotesingle{}s output. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{interpreter_8hpp_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{interpreter_8hpp_a2f6fd731a78be1f73c85feb304d532b4}\index{interpreter.hpp@{interpreter.hpp}!interpret@{interpret}}
+\index{interpret@{interpret}!interpreter.hpp@{interpreter.hpp}}
+\doxysubsubsection{\texorpdfstring{interpret()}{interpret()}}
+{\footnotesize\ttfamily \label{interpreter_8hpp_a2f6fd731a78be1f73c85feb304d532b4} 
+auto interpret (\begin{DoxyParamCaption}\item[{std::\+string const \&}]{str}{}\end{DoxyParamCaption}) -\/$>$  std::\+expected$<$ \doxymbox{\hyperlink{structBackendMessage}{Backend\+Message}}, \doxymbox{\hyperlink{structBadMessage}{Bad\+Message}} $>$}
+
+
+
+Receive and interpret the compressor\textquotesingle{}s output. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & To be interpreted \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The \doxylink{structBackendMessage}{Backend\+Message}, or a \doxylink{structBadMessage}{Bad\+Message} if the parsing failed 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{interpreter_8cpp_source_l00034}{34}} of file \doxymbox{\hyperlink{interpreter_8cpp_source}{interpreter.\+cpp}}.
+
+\Hypertarget{interpreter_8hpp_a4e782c34ec65ee82a6848090e25f2ec3}\index{interpreter.hpp@{interpreter.hpp}!strip\_ansi@{strip\_ansi}}
+\index{strip\_ansi@{strip\_ansi}!interpreter.hpp@{interpreter.hpp}}
+\doxysubsubsection{\texorpdfstring{strip\_ansi()}{strip\_ansi()}}
+{\footnotesize\ttfamily \label{interpreter_8hpp_a4e782c34ec65ee82a6848090e25f2ec3} 
+auto strip\+\_\+ansi (\begin{DoxyParamCaption}\item[{std::\+string const \&}]{str}{}\end{DoxyParamCaption}) -\/$>$  std::\+string}
+
+
+
+Remove \doxylink{namespaceANSI}{ANSI} \textbackslash{}x1b sequences (color, underline...). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & Input string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The string without \doxylink{namespaceANSI}{ANSI} sequences 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{interpreter_8cpp_source_l00010}{10}} of file \doxymbox{\hyperlink{interpreter_8cpp_source}{interpreter.\+cpp}}.
+
+\Hypertarget{interpreter_8hpp_aece5c8effea071621f0e1f2a87aade5f}\index{interpreter.hpp@{interpreter.hpp}!trim\_whitespace@{trim\_whitespace}}
+\index{trim\_whitespace@{trim\_whitespace}!interpreter.hpp@{interpreter.hpp}}
+\doxysubsubsection{\texorpdfstring{trim\_whitespace()}{trim\_whitespace()}}
+{\footnotesize\ttfamily \label{interpreter_8hpp_aece5c8effea071621f0e1f2a87aade5f} 
+auto trim\+\_\+whitespace (\begin{DoxyParamCaption}\item[{std::\+string const \&}]{str}{}\end{DoxyParamCaption}) -\/$>$  std::\+string}
+
+
+
+Remove leading and trailing whitespace. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & Input string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The trimmed string 
+\end{DoxyReturn}
+
+
+Definition at line \doxymbox{\hyperlink{interpreter_8cpp_source_l00020}{20}} of file \doxymbox{\hyperlink{interpreter_8cpp_source}{interpreter.\+cpp}}.
+

@@ -97,7 +97,9 @@ $(function(){initNavTree('namespaceWARN__STRING.html','',''); });
 Variables</h2></td></tr>
 <tr class="memitem:a3484e445cf1e4cdf965160b363ce9351" id="r_a3484e445cf1e4cdf965160b363ce9351"><td class="memItemLeft">const std::string&#160;</td><td class="memItemRight"><a class="el" href="#a3484e445cf1e4cdf965160b363ce9351">RECOMPRESSION</a></td></tr>
 <tr class="memitem:a97695fd577cd87a855b4d08e7d29ed6a" id="r_a97695fd577cd87a855b4d08e7d29ed6a"><td class="memItemLeft">const std::string&#160;</td><td class="memItemRight"><a class="el" href="#a97695fd577cd87a855b4d08e7d29ed6a">PORTIONS_OUT_OF_RANGE</a></td></tr>
-<tr class="memitem:ae325c9559d30aa8bb285b17b84ae925f" id="r_ae325c9559d30aa8bb285b17b84ae925f"><td class="memItemLeft">const std::string&#160;</td><td class="memItemRight"><a class="el" href="#ae325c9559d30aa8bb285b17b84ae925f">CONCAT_AMBIGUITY</a> = &quot;\033[43mWarn\033[0m[&quot; + std::to_string(static_cast&lt;int&gt;(<a class="el" href="core__utils_8cppm.html#aa278aa207bdeddc8432b560d1e1312aeabd356f5fc145a69a6d0b3cbac5d70c00">WarningType::PORTIONS_OUT_OF_RANGE</a>)) + &quot;]: there has been found an ambiguity while concatenating. These files do not come from the same compressed file(same session).\n&quot;</td></tr>
+<tr class="memitem:ae325c9559d30aa8bb285b17b84ae925f" id="r_ae325c9559d30aa8bb285b17b84ae925f"><td class="memItemLeft">const std::string&#160;</td><td class="memItemRight"><a class="el" href="#ae325c9559d30aa8bb285b17b84ae925f">CONCAT_AMBIGUITY</a></td></tr>
+<tr class="memitem:a78e1b884c0f4442ef73c83d720cb8bc1" id="r_a78e1b884c0f4442ef73c83d720cb8bc1"><td class="memItemLeft">const std::string&#160;</td><td class="memItemRight"><a class="el" href="#a78e1b884c0f4442ef73c83d720cb8bc1">CONCURRENCY_OUT_OF_RANGE_UPPER</a></td></tr>
+<tr class="memitem:a8be1a21d9eb2f06f3b7bf5bc00393c15" id="r_a8be1a21d9eb2f06f3b7bf5bc00393c15"><td class="memItemLeft">const std::string&#160;</td><td class="memItemRight"><a class="el" href="#a8be1a21d9eb2f06f3b7bf5bc00393c15">CONCURRENCY_OUT_OF_RANGE_LOWER</a></td></tr>
 </table>
 <a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
 <a id="ae325c9559d30aa8bb285b17b84ae925f" name="ae325c9559d30aa8bb285b17b84ae925f"></a>
@@ -107,12 +109,52 @@ Variables</h2></td></tr>
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const std::string WARN_STRING::CONCAT_AMBIGUITY = &quot;\033[43mWarn\033[0m[&quot; + std::to_string(static_cast&lt;int&gt;(<a class="el" href="core__utils_8cppm.html#aa278aa207bdeddc8432b560d1e1312aeabd356f5fc145a69a6d0b3cbac5d70c00">WarningType::PORTIONS_OUT_OF_RANGE</a>)) + &quot;]: there has been found an ambiguity while concatenating. These files do not come from the same compressed file(same session).\n&quot;</td>
+          <td class="memname">const std::string WARN_STRING::CONCAT_AMBIGUITY</td>
         </tr>
       </table>
 </div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">                           =        <span class="stringliteral">&quot;\033[43mWarn\033[0m[&quot;</span> + std::to_string(<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(<a class="code hl_enumvalue" href="error__warn__print_8hpp.html#aa278aa207bdeddc8432b560d1e1312aeabd356f5fc145a69a6d0b3cbac5d70c00">WarningType::PORTIONS_OUT_OF_RANGE</a>)) +</div>
+<div class="line"><span class="stringliteral">&quot;]: there has been found an ambiguity while concatenating. These files do not come from the same compressed file(same session).\n&quot;</span></div>
+<div class="ttc" id="aerror__warn__print_8hpp_html_aa278aa207bdeddc8432b560d1e1312aeabd356f5fc145a69a6d0b3cbac5d70c00"><div class="ttname"><a href="error__warn__print_8hpp.html#aa278aa207bdeddc8432b560d1e1312aeabd356f5fc145a69a6d0b3cbac5d70c00">WarningType::PORTIONS_OUT_OF_RANGE</a></div><div class="ttdeci">@ PORTIONS_OUT_OF_RANGE</div><div class="ttdef"><b>Definition</b> <a href="error__warn__print_8hpp_source.html#l00129">error_warn_print.hpp:129</a></div></div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="error__warn__print_8hpp_source.html#l00145">145</a> of file <a class="el" href="error__warn__print_8hpp_source.html">error_warn_print.hpp</a>.</p>
 
-<p class="definition">Definition at line <a class="el" href="core__utils_8cppm_source.html#l00190">190</a> of file <a class="el" href="core__utils_8cppm_source.html">core_utils.cppm</a>.</p>
+</div>
+</div>
+<a id="a8be1a21d9eb2f06f3b7bf5bc00393c15" name="a8be1a21d9eb2f06f3b7bf5bc00393c15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8be1a21d9eb2f06f3b7bf5bc00393c15">&#9670;&#160;</a></span>CONCURRENCY_OUT_OF_RANGE_LOWER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::string WARN_STRING::CONCURRENCY_OUT_OF_RANGE_LOWER</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">                                         =<span class="stringliteral">&quot;\033[43mWarn\033[0m[&quot;</span> + std::to_string(<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(<a class="code hl_enumvalue" href="error__warn__print_8hpp.html#aa278aa207bdeddc8432b560d1e1312aeac45bc9105bed6251f81376a78a1f5c25">WarningType::CONCURRENCY_OUT_OF_RANGE_UPPER</a>)) +</div>
+<div class="line"><span class="stringliteral">&quot;]: you have selected zero or a negative number of threads, will default to use only one thread.&quot;</span></div>
+<div class="ttc" id="aerror__warn__print_8hpp_html_aa278aa207bdeddc8432b560d1e1312aeac45bc9105bed6251f81376a78a1f5c25"><div class="ttname"><a href="error__warn__print_8hpp.html#aa278aa207bdeddc8432b560d1e1312aeac45bc9105bed6251f81376a78a1f5c25">WarningType::CONCURRENCY_OUT_OF_RANGE_UPPER</a></div><div class="ttdeci">@ CONCURRENCY_OUT_OF_RANGE_UPPER</div><div class="ttdef"><b>Definition</b> <a href="error__warn__print_8hpp_source.html#l00131">error_warn_print.hpp:131</a></div></div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="error__warn__print_8hpp_source.html#l00151">151</a> of file <a class="el" href="error__warn__print_8hpp_source.html">error_warn_print.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a78e1b884c0f4442ef73c83d720cb8bc1" name="a78e1b884c0f4442ef73c83d720cb8bc1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a78e1b884c0f4442ef73c83d720cb8bc1">&#9670;&#160;</a></span>CONCURRENCY_OUT_OF_RANGE_UPPER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::string WARN_STRING::CONCURRENCY_OUT_OF_RANGE_UPPER</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<b>Initial value:</b><div class="fragment"><div class="line">                                         =<span class="stringliteral">&quot;\033[43mWarn\033[0m[&quot;</span> + std::to_string(<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(<a class="code hl_enumvalue" href="error__warn__print_8hpp.html#aa278aa207bdeddc8432b560d1e1312aeac45bc9105bed6251f81376a78a1f5c25">WarningType::CONCURRENCY_OUT_OF_RANGE_UPPER</a>)) +</div>
+<div class="line"><span class="stringliteral">&quot;]: you have selected more threads than available on your machine, will default to using all your threads.&quot;</span></div>
+</div><!-- fragment -->
+<p class="definition">Definition at line <a class="el" href="error__warn__print_8hpp_source.html#l00148">148</a> of file <a class="el" href="error__warn__print_8hpp_source.html">error_warn_print.hpp</a>.</p>
 
 </div>
 </div>
@@ -127,11 +169,11 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">                                =   <span class="stringliteral">&quot;\033[43mWarn\033[0m[&quot;</span> + std::to_string(<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(<a class="code hl_enumvalue" href="core__utils_8cppm.html#aa278aa207bdeddc8432b560d1e1312aeabd356f5fc145a69a6d0b3cbac5d70c00">WarningType::PORTIONS_OUT_OF_RANGE</a>)) + <span class="stringliteral">&quot;]: the number of file portions is outside of the accepted range.&quot;</span></div>
-<div class="line">+ <span class="stringliteral">&quot;\033[34mTip\033[0m: The (not split) output file may have been too small.\nThe number of files created may be different from what you asked.\n&quot;</span></div>
-<div class="ttc" id="acore__utils_8cppm_html_aa278aa207bdeddc8432b560d1e1312aeabd356f5fc145a69a6d0b3cbac5d70c00"><div class="ttname"><a href="core__utils_8cppm.html#aa278aa207bdeddc8432b560d1e1312aeabd356f5fc145a69a6d0b3cbac5d70c00">WarningType::PORTIONS_OUT_OF_RANGE</a></div><div class="ttdeci">@ PORTIONS_OUT_OF_RANGE</div><div class="ttdef"><b>Definition</b> <a href="core__utils_8cppm_source.html#l00177">core_utils.cppm:177</a></div></div>
+<b>Initial value:</b><div class="fragment"><div class="line">                                =   <span class="stringliteral">&quot;\033[43mWarn\033[0m[&quot;</span> + std::to_string(<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(<a class="code hl_enumvalue" href="error__warn__print_8hpp.html#aa278aa207bdeddc8432b560d1e1312aeabd356f5fc145a69a6d0b3cbac5d70c00">WarningType::PORTIONS_OUT_OF_RANGE</a>)) +</div>
+<div class="line"><span class="stringliteral">&quot;]: the number of file portions is outside of the accepted range.&quot;</span></div>
+<div class="line">+ <span class="stringliteral">&quot;The number of files created may be different from what you asked.\n\033[34mTip\033[0m: The (not split) output file may have been too small.\n&quot;</span></div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="core__utils_8cppm_source.html#l00187">187</a> of file <a class="el" href="core__utils_8cppm_source.html">core_utils.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="error__warn__print_8hpp_source.html#l00141">141</a> of file <a class="el" href="error__warn__print_8hpp_source.html">error_warn_print.hpp</a>.</p>
 
 </div>
 </div>
@@ -146,11 +188,12 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<b>Initial value:</b><div class="fragment"><div class="line">                        =           <span class="stringliteral">&quot;\033[43mWarn[&quot;</span> + std::to_string(<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(<a class="code hl_enumvalue" href="core__utils_8cppm.html#aa278aa207bdeddc8432b560d1e1312aea429a96bd6dfce0e85b1d88b7ea7ff59f">WarningType::RECOMPRESSION</a>)) + <span class="stringliteral">&quot;]\033[0m: the file being compressed has already been compressed.&quot;</span></div>
+<b>Initial value:</b><div class="fragment"><div class="line">                        =           <span class="stringliteral">&quot;\033[43mWarn[&quot;</span> + std::to_string(<span class="keyword">static_cast&lt;</span><span class="keywordtype">int</span><span class="keyword">&gt;</span>(<a class="code hl_enumvalue" href="error__warn__print_8hpp.html#aa278aa207bdeddc8432b560d1e1312aea429a96bd6dfce0e85b1d88b7ea7ff59f">WarningType::RECOMPRESSION</a>)) +</div>
+<div class="line"><span class="stringliteral">&quot;]\033[0m: the file being compressed has already been compressed.&quot;</span></div>
 <div class="line">+ <span class="stringliteral">&quot;\033[34mTip\033[0m: A file recompression gives negligible, if not counter-productive, results.\n&quot;</span></div>
-<div class="ttc" id="acore__utils_8cppm_html_aa278aa207bdeddc8432b560d1e1312aea429a96bd6dfce0e85b1d88b7ea7ff59f"><div class="ttname"><a href="core__utils_8cppm.html#aa278aa207bdeddc8432b560d1e1312aea429a96bd6dfce0e85b1d88b7ea7ff59f">WarningType::RECOMPRESSION</a></div><div class="ttdeci">@ RECOMPRESSION</div><div class="ttdef"><b>Definition</b> <a href="core__utils_8cppm_source.html#l00176">core_utils.cppm:176</a></div></div>
+<div class="ttc" id="aerror__warn__print_8hpp_html_aa278aa207bdeddc8432b560d1e1312aea429a96bd6dfce0e85b1d88b7ea7ff59f"><div class="ttname"><a href="error__warn__print_8hpp.html#aa278aa207bdeddc8432b560d1e1312aea429a96bd6dfce0e85b1d88b7ea7ff59f">WarningType::RECOMPRESSION</a></div><div class="ttdeci">@ RECOMPRESSION</div><div class="ttdef"><b>Definition</b> <a href="error__warn__print_8hpp_source.html#l00128">error_warn_print.hpp:128</a></div></div>
 </div><!-- fragment -->
-<p class="definition">Definition at line <a class="el" href="core__utils_8cppm_source.html#l00184">184</a> of file <a class="el" href="core__utils_8cppm_source.html">core_utils.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="error__warn__print_8hpp_source.html#l00137">137</a> of file <a class="el" href="error__warn__print_8hpp_source.html">error_warn_print.hpp</a>.</p>
 
 </div>
 </div>

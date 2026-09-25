@@ -28,11 +28,12 @@ size\+\_\+t \doxymbox{\hyperlink{structNode_ae4a3d7ab0055ff54fee6c87a644ae79e}{s
 
 
 \doxysubsection{Detailed Description}
-\subsubsection*{template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$\newline
+\subsubsection*{template$<$typename T$>$\newline
+requires \doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}}$<$std::\+ranges::\+range\+\_\+value\+\_\+t$<$T$>$$>$ or \doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}}$<$T$>$\newline
 struct Node$<$ T $>$}
 
 
-Definition at line \doxymbox{\hyperlink{file__list_8cppm_source_l00012}{12}} of file \doxymbox{\hyperlink{file__list_8cppm_source}{file\+\_\+list.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{file__list_8cppm_source_l00018}{18}} of file \doxymbox{\hyperlink{file__list_8cppm_source}{file\+\_\+list.\+cppm}}.
 
 
 
@@ -43,12 +44,12 @@ Definition at line \doxymbox{\hyperlink{file__list_8cppm_source_l00012}{12}} of 
 \index{Node@{Node}!Node$<$ T $>$@{Node$<$ T $>$}}
 \doxysubsubsection{\texorpdfstring{Node()}{Node()}}
 {\footnotesize\ttfamily \label{structNode_ab06c4658ae26e0ce4a1ea58965cbc63f} 
-template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+template$<$typename T$>$ \\
 \doxymbox{\hyperlink{structNode}{Node}}$<$ T $>$::\+\+Node (\begin{DoxyParamCaption}\item[{std::\+unique\+\_\+ptr$<$ T $>$}]{element}{, }\item[{size\+\_\+t const}]{sequence\+\_\+num}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Definition at line \doxymbox{\hyperlink{file__list_8cppm_source_l00014}{14}} of file \doxymbox{\hyperlink{file__list_8cppm_source}{file\+\_\+list.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{file__list_8cppm_source_l00020}{20}} of file \doxymbox{\hyperlink{file__list_8cppm_source}{file\+\_\+list.\+cppm}}.
 
 
 
@@ -59,45 +60,45 @@ Definition at line \doxymbox{\hyperlink{file__list_8cppm_source_l00014}{14}} of 
 \index{element\_@{element\_}!Node$<$ T $>$@{Node$<$ T $>$}}
 \doxysubsubsection{\texorpdfstring{element\_}{element\_}}
 {\footnotesize\ttfamily \label{structNode_a87de752ed6f4a3385b6e613c57a48819} 
-template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+template$<$typename T$>$ \\
 std::\+unique\+\_\+ptr$<$T$>$ \doxymbox{\hyperlink{structNode}{Node}}$<$ T $>$::\+element\+\_\+}
 
 
 
-Definition at line \doxymbox{\hyperlink{file__list_8cppm_source_l00017}{17}} of file \doxymbox{\hyperlink{file__list_8cppm_source}{file\+\_\+list.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{file__list_8cppm_source_l00023}{23}} of file \doxymbox{\hyperlink{file__list_8cppm_source}{file\+\_\+list.\+cppm}}.
 
 \Hypertarget{structNode_ac1c0563946c59c36bddde431b4adb00b}\index{Node$<$ T $>$@{Node$<$ T $>$}!next@{next}}
 \index{next@{next}!Node$<$ T $>$@{Node$<$ T $>$}}
 \doxysubsubsection{\texorpdfstring{next}{next}}
 {\footnotesize\ttfamily \label{structNode_ac1c0563946c59c36bddde431b4adb00b} 
-template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+template$<$typename T$>$ \\
 \doxymbox{\hyperlink{structNode}{Node}}\texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{structNode}{Node}}$<$ T $>$::\+next \{nullptr\}}
 
 
 
-Definition at line \doxymbox{\hyperlink{file__list_8cppm_source_l00019}{19}} of file \doxymbox{\hyperlink{file__list_8cppm_source}{file\+\_\+list.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{file__list_8cppm_source_l00025}{25}} of file \doxymbox{\hyperlink{file__list_8cppm_source}{file\+\_\+list.\+cppm}}.
 
 \Hypertarget{structNode_a4f50b730e5a2a73ecfb42699e3937d17}\index{Node$<$ T $>$@{Node$<$ T $>$}!prev@{prev}}
 \index{prev@{prev}!Node$<$ T $>$@{Node$<$ T $>$}}
 \doxysubsubsection{\texorpdfstring{prev}{prev}}
 {\footnotesize\ttfamily \label{structNode_a4f50b730e5a2a73ecfb42699e3937d17} 
-template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+template$<$typename T$>$ \\
 \doxymbox{\hyperlink{structNode}{Node}}\texorpdfstring{$\ast$}{*} \doxymbox{\hyperlink{structNode}{Node}}$<$ T $>$::\+prev \{nullptr\}}
 
 
 
-Definition at line \doxymbox{\hyperlink{file__list_8cppm_source_l00020}{20}} of file \doxymbox{\hyperlink{file__list_8cppm_source}{file\+\_\+list.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{file__list_8cppm_source_l00026}{26}} of file \doxymbox{\hyperlink{file__list_8cppm_source}{file\+\_\+list.\+cppm}}.
 
 \Hypertarget{structNode_ae4a3d7ab0055ff54fee6c87a644ae79e}\index{Node$<$ T $>$@{Node$<$ T $>$}!sequence\_num\_@{sequence\_num\_}}
 \index{sequence\_num\_@{sequence\_num\_}!Node$<$ T $>$@{Node$<$ T $>$}}
 \doxysubsubsection{\texorpdfstring{sequence\_num\_}{sequence\_num\_}}
 {\footnotesize\ttfamily \label{structNode_ae4a3d7ab0055ff54fee6c87a644ae79e} 
-template$<$\doxymbox{\hyperlink{conceptSerializableToDisk}{Serializable\+To\+Disk}} T$>$ \\
+template$<$typename T$>$ \\
 size\+\_\+t \doxymbox{\hyperlink{structNode}{Node}}$<$ T $>$::\+sequence\+\_\+num\+\_\+}
 
 
 
-Definition at line \doxymbox{\hyperlink{file__list_8cppm_source_l00018}{18}} of file \doxymbox{\hyperlink{file__list_8cppm_source}{file\+\_\+list.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{file__list_8cppm_source_l00024}{24}} of file \doxymbox{\hyperlink{file__list_8cppm_source}{file\+\_\+list.\+cppm}}.
 
 
 

@@ -16,6 +16,7 @@ var module__parser =
       [ "parser::TokenType::CONCATENATE", "module__parser.html#accd7eb1ffd4c925598ec25fab6905369a2dd08f693d26ad0ef819a6da487fe438", null ],
       [ "parser::TokenType::DO_DECOMP_AFTER_CONCAT", "module__parser.html#accd7eb1ffd4c925598ec25fab6905369a297a6bb3ef5700bc84563dc87938c1b2", null ],
       [ "parser::TokenType::DO_NOT_DECOMP_AFTER_CONCAT", "module__parser.html#accd7eb1ffd4c925598ec25fab6905369a8cb317a671dafb2df58c07a6fc9291ef", null ],
+      [ "parser::TokenType::CONCURRENCY", "module__parser.html#accd7eb1ffd4c925598ec25fab6905369a8fe82dc3c5d457c702ccdf336a955e06", null ],
       [ "parser::TokenType::NO_TYPE", "module__parser.html#accd7eb1ffd4c925598ec25fab6905369a245d11a3709454cc69b2de7911073d57", null ]
     ] ],
     [ "parser::parse", "module__parser.html#a7f5ecbf764fc175fc336fcea0dd07be8", null ],

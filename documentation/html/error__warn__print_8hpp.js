@@ -1,0 +1,45 @@
+var error__warn__print_8hpp =
+[
+    [ "ErrorException", "structErrorException.html", "structErrorException" ],
+    [ "ErrorType", "error__warn__print_8hpp.html#aed6e5d8e0c233046b51a0726eeae42de", [
+      [ "NO_ERROR", "error__warn__print_8hpp.html#aed6e5d8e0c233046b51a0726eeae42dead306b6fdee05fe87455110ddf6501e6c", null ],
+      [ "VALUE_ERROR", "error__warn__print_8hpp.html#aed6e5d8e0c233046b51a0726eeae42deab6e89aef4ee41f778bd0dd285f0d5c20", null ],
+      [ "MISSING_ARGUMENT", "error__warn__print_8hpp.html#aed6e5d8e0c233046b51a0726eeae42dea25935ec8650130f4dd9f87d403493ac3", null ],
+      [ "SYNTAX_ERROR", "error__warn__print_8hpp.html#aed6e5d8e0c233046b51a0726eeae42dea756ec3dd26d1a73363eb3e68b6e820df", null ],
+      [ "OPTION_UNAVAILABLE", "error__warn__print_8hpp.html#aed6e5d8e0c233046b51a0726eeae42dea18dccefdab88f68c78bb114e0e03f61d", null ],
+      [ "PATH_NOT_FOUND", "error__warn__print_8hpp.html#aed6e5d8e0c233046b51a0726eeae42dea10ea5c18cb2990c51bb9db888917165d", null ],
+      [ "PATH_NOT_ACCESSIBLE", "error__warn__print_8hpp.html#aed6e5d8e0c233046b51a0726eeae42deac5d1d2985b0085be54ef3223fae157c7", null ],
+      [ "PATH_INVALID", "error__warn__print_8hpp.html#aed6e5d8e0c233046b51a0726eeae42dea18d76a5de8f052b40860c3cc1623e5d6", null ],
+      [ "FILE_INVALID", "error__warn__print_8hpp.html#aed6e5d8e0c233046b51a0726eeae42deafc88cb342c01e41f5f45657a51cf65cb", null ],
+      [ "FILE_CORRUPTED", "error__warn__print_8hpp.html#aed6e5d8e0c233046b51a0726eeae42dea2cdc1eecb70cc6dabd09b6f9be6c72c8", null ],
+      [ "DRIVE_ERROR", "error__warn__print_8hpp.html#aed6e5d8e0c233046b51a0726eeae42dead5459024a3d9e8c304e106f0c0fc8ffe", null ],
+      [ "INVALID_DECOMPRESSION", "error__warn__print_8hpp.html#aed6e5d8e0c233046b51a0726eeae42dea6aec2e033766444573e60b2ecdbfcde8", null ],
+      [ "DIR_COMPRESSION", "error__warn__print_8hpp.html#aed6e5d8e0c233046b51a0726eeae42deae8266dd47c23ed1f1c76b1e0669a3e47", null ]
+    ] ],
+    [ "WarningType", "error__warn__print_8hpp.html#aa278aa207bdeddc8432b560d1e1312ae", [
+      [ "RECOMPRESSION", "error__warn__print_8hpp.html#aa278aa207bdeddc8432b560d1e1312aea429a96bd6dfce0e85b1d88b7ea7ff59f", null ],
+      [ "PORTIONS_OUT_OF_RANGE", "error__warn__print_8hpp.html#aa278aa207bdeddc8432b560d1e1312aeabd356f5fc145a69a6d0b3cbac5d70c00", null ],
+      [ "CONCAT_AMBIGUITY", "error__warn__print_8hpp.html#aa278aa207bdeddc8432b560d1e1312aea3679d74393649174baa5db30d7e70081", null ],
+      [ "CONCURRENCY_OUT_OF_RANGE_UPPER", "error__warn__print_8hpp.html#aa278aa207bdeddc8432b560d1e1312aeac45bc9105bed6251f81376a78a1f5c25", null ],
+      [ "CONCURRENCY_OUT_OF_RANGE_LOWER", "error__warn__print_8hpp.html#aa278aa207bdeddc8432b560d1e1312aea20185411fe4cc4b2188d1fd0838cfec3", null ]
+    ] ],
+    [ "print_warn", "error__warn__print_8hpp.html#a28a87d9ff3c635c4d6bfdd3b8c1c21dc", null ],
+    [ "throw_error", "error__warn__print_8hpp.html#a2242bb8ed849903356437dd8961008b9", null ],
+    [ "WARN_STRING::CONCAT_AMBIGUITY", "namespaceWARN__STRING.html#ae325c9559d30aa8bb285b17b84ae925f", null ],
+    [ "WARN_STRING::CONCURRENCY_OUT_OF_RANGE_LOWER", "namespaceWARN__STRING.html#a8be1a21d9eb2f06f3b7bf5bc00393c15", null ],
+    [ "WARN_STRING::CONCURRENCY_OUT_OF_RANGE_UPPER", "namespaceWARN__STRING.html#a78e1b884c0f4442ef73c83d720cb8bc1", null ],
+    [ "ERR_STRING::DIR_COMPRESSION", "namespaceERR__STRING.html#a10aa42d66046b2a4263633a39f005124", null ],
+    [ "ERR_STRING::DRIVE_ERROR", "namespaceERR__STRING.html#aba29f8774197da0a4890bc532fbbab15", null ],
+    [ "ERR_STRING::FILE_CORRUPTED", "namespaceERR__STRING.html#a6cfbf91e4f1d44fdc579d4aaac395051", null ],
+    [ "ERR_STRING::FILE_INVALID", "namespaceERR__STRING.html#a6e076d05d154540639df579a40ab57d2", null ],
+    [ "ERR_STRING::INVALID_DECOMPRESSION", "namespaceERR__STRING.html#a8797da65711c547cbf975bcf9d287505", null ],
+    [ "ERR_STRING::MISSING_ARGUMENT", "namespaceERR__STRING.html#af81b6954b18ad24febeb376c7db6fcca", null ],
+    [ "ERR_STRING::OPTION_UNAVAILABLE", "namespaceERR__STRING.html#afc81976c232892e2b4e16e100a14423e", null ],
+    [ "ERR_STRING::PATH_INVALID", "namespaceERR__STRING.html#a4a1bb1b9a2811049bac67c85d03d4a09", null ],
+    [ "ERR_STRING::PATH_NOT_ACCESSIBLE", "namespaceERR__STRING.html#adcca934fbf807fcdae04da825c63d620", null ],
+    [ "ERR_STRING::PATH_NOT_FOUND", "namespaceERR__STRING.html#a4e0f1c39222e841bb9bc92fa5c93f12d", null ],
+    [ "WARN_STRING::PORTIONS_OUT_OF_RANGE", "namespaceWARN__STRING.html#a97695fd577cd87a855b4d08e7d29ed6a", null ],
+    [ "WARN_STRING::RECOMPRESSION", "namespaceWARN__STRING.html#a3484e445cf1e4cdf965160b363ce9351", null ],
+    [ "ERR_STRING::SYNTAX", "namespaceERR__STRING.html#a220301514d7ebf48975be72979b79ddf", null ],
+    [ "ERR_STRING::VALUE", "namespaceERR__STRING.html#ab87f3f9775ac9b28bca2f1c02520077c", null ]
+];

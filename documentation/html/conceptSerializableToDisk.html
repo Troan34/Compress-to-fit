@@ -94,16 +94,13 @@ $(function(){initNavTree('conceptSerializableToDisk.html','',''); });
 <div class="contents">
 <h2 id="header-conceptdef" class="groupheader">Concept definition</h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><span class="keyword">concept </span><a class="code hl_concept" href="conceptSerializableToDisk.html">SerializableToDisk</a> = <span class="keyword">requires</span>(T a, std::ofstream&amp; file)</div>
-<div class="line">{</div>
-<div class="line">    { a.write_to(file) } -&gt; std::same_as&lt;void&gt;;</div>
-<div class="line">}</div>
-<div class="line">||</div>
-<div class="line">std::is_trivially_copyable_v&lt;T&gt;</div>
-<div class="ttc" id="aconceptSerializableToDisk_html"><div class="ttname"><a href="conceptSerializableToDisk.html">SerializableToDisk</a></div><div class="ttdef"><b>Definition</b> <a href="core__utils_8cppm_source.html#l00364">core_utils.cppm:364</a></div></div>
+<div class="line"><span class="keyword">concept </span><a class="code hl_concept" href="conceptSerializableToDisk.html">SerializableToDisk</a> = std::is_trivially_copyable_v&lt;T&gt; or <a class="code hl_concept" href="conceptMemberWriteable.html">MemberWriteable&lt;T&gt;</a> or <a class="code hl_concept" href="conceptFreeWriteable.html">FreeWriteable&lt;T&gt;</a></div>
+<div class="ttc" id="aconceptFreeWriteable_html"><div class="ttname"><a href="conceptFreeWriteable.html">FreeWriteable</a></div><div class="ttdef"><b>Definition</b> <a href="core__utils_8cppm_source.html#l00210">core_utils.cppm:210</a></div></div>
+<div class="ttc" id="aconceptMemberWriteable_html"><div class="ttname"><a href="conceptMemberWriteable.html">MemberWriteable</a></div><div class="ttdef"><b>Definition</b> <a href="core__utils_8cppm_source.html#l00204">core_utils.cppm:204</a></div></div>
+<div class="ttc" id="aconceptSerializableToDisk_html"><div class="ttname"><a href="conceptSerializableToDisk.html">SerializableToDisk</a></div><div class="ttdef"><b>Definition</b> <a href="core__utils_8cppm_source.html#l00216">core_utils.cppm:216</a></div></div>
 </div><!-- fragment --><a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock">
-<p class="definition">Definition at line <a class="el" href="core__utils_8cppm_source.html#l00364">364</a> of file <a class="el" href="core__utils_8cppm_source.html">core_utils.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="core__utils_8cppm_source.html#l00216">216</a> of file <a class="el" href="core__utils_8cppm_source.html">core_utils.cppm</a>.</p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

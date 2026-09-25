@@ -2,11 +2,13 @@
 \hypertarget{lz77_8cppm}{}\label{lz77_8cppm}\index{Compress-\/to-\/fit/src/models/LZ77/lz77.cppm@{Compress-\/to-\/fit/src/models/LZ77/lz77.cppm}}
 {\ttfamily \+\#include $<$cassert$>$}\newline
 {\ttfamily \+\#include $<$cstddef$>$}\newline
+{\ttfamily \+\#include $<$mio/\+mmap.\+hpp$>$}\newline
 {\ttfamily import containers;}\newline
 {\ttfamily import parser;}\newline
 {\ttfamily import std.\+compat;}\newline
 {\ttfamily import util;}\newline
-Include dependency graph for lz77.\+cppm:\+\nopagebreak
+Include dependency graph for lz77.\+cppm:\+
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -29,11 +31,11 @@ class \doxymbox{\hyperlink{classWindow}{Window}}
 \begin{DoxyCompactList}\small\item\em \+[lz77.\+Window]\+ \end{DoxyCompactList}\item 
 class \doxymbox{\hyperlink{classalg_1_1Rabin}{alg::\+\+Rabin}}
 \begin{DoxyCompactList}\small\item\em This class enables fast string matching. Makes use of two chained arrays. This class is intertwined with LZ77 and should not be used as separate entity. This class shall not modify the \doxylink{classWindow}{Window} given. \end{DoxyCompactList}\item 
-class \doxymbox{\hyperlink{classLZ77Block}{LZ77\+Block}}
+class \doxymbox{\hyperlink{classLZ77Block}{LZ77\+Block$<$ Alloc $>$}}
 \begin{DoxyCompactList}\small\item\em Represents a block of data encoded by LZ77. \end{DoxyCompactList}\item 
 class \doxymbox{\hyperlink{classLZ77Compressor}{LZ77\+Compressor}}
 \item 
-class \doxymbox{\hyperlink{classLZ77Decompressor}{LZ77\+Decompressor}}
+class \doxymbox{\hyperlink{classLZ77Decompressor}{LZ77\+Decompressor$<$ Alloc $>$}}
 \item 
 class \doxymbox{\hyperlink{classLZ77ConcurrentCompressor}{LZ77\+Concurrent\+Compressor}}
 \item 
@@ -85,7 +87,7 @@ using \doxymbox{\hyperlink{lz77_8cppm_a7184b481ee894966b0eb8845e4a7bcf2}{LZ77\+\
 
 
 
-Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00049}{49}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00057}{57}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
 
 
 
@@ -100,7 +102,7 @@ size\+\_\+t MAX\+\_\+\+BLOCK\+\_\+\+SIZE = 4\+\_\+\+MiB\hspace{0.3cm}{\ttfamily 
 
 
 
-Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00316}{316}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00325}{325}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
 
 \Hypertarget{lz77_8cppm_ac4a340be8c3b526cce9e4074d9389497}\index{lz77.cppm@{lz77.cppm}!MAX\_HASH\_SIZE@{MAX\_HASH\_SIZE}}
 \index{MAX\_HASH\_SIZE@{MAX\_HASH\_SIZE}!lz77.cppm@{lz77.cppm}}
@@ -114,11 +116,11 @@ The size of \doxylink{classalg_1_1Rabin_a044b5f0c49e0c52d1ae1a715d00ec0ac}{alg::
 
 
 
-Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00056}{56}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00064}{64}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
 
 
 
-Referenced by \doxymbox{\hyperlink{lz77_8cppm_source_l00260}{alg::\+\+Rabin::\+bucket\+\_\+index()}}.
+Referenced by \doxymbox{\hyperlink{lz77_8cppm_source_l00269}{alg::\+\+Rabin::\+bucket\+\_\+index()}}.
 
 \Hypertarget{lz77_8cppm_a282c82f087f402efca939353e57fca44}\index{lz77.cppm@{lz77.cppm}!MAX\_WINDOW\_SIZE@{MAX\_WINDOW\_SIZE}}
 \index{MAX\_WINDOW\_SIZE@{MAX\_WINDOW\_SIZE}!lz77.cppm@{lz77.cppm}}
@@ -128,11 +130,11 @@ auto MAX\+\_\+\+WINDOW\+\_\+\+SIZE = \doxymbox{\hyperlink{core__utils_8cppm_aa04
 
 
 
-Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00052}{52}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00060}{60}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
 
 
 
-Referenced by \doxymbox{\hyperlink{lz77_8cppm_source_l00272}{alg::\+\+Rabin::\+prev\+\_\+bucket\+\_\+index()}}.
+Referenced by \doxymbox{\hyperlink{lz77_8cppm_source_l00281}{alg::\+\+Rabin::\+prev\+\_\+bucket\+\_\+index()}}.
 
 \Hypertarget{lz77_8cppm_a99dc63646f54b92729a552eed4b13e91}\index{lz77.cppm@{lz77.cppm}!SEARCH\_RATIO@{SEARCH\_RATIO}}
 \index{SEARCH\_RATIO@{SEARCH\_RATIO}!lz77.cppm@{lz77.cppm}}
@@ -142,9 +144,9 @@ int SEARCH\+\_\+\+RATIO = 500\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [con
 
 
 
-Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00051}{51}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00059}{59}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
 
 
 
-Referenced by \doxymbox{\hyperlink{lz77_8cppm_source_l00074}{Window::\+\+Window()}}, and \doxymbox{\hyperlink{lz77_8cppm_source_l00065}{Window::\+\+Window()}}.
+Referenced by \doxymbox{\hyperlink{lz77_8cppm_source_l00082}{Window::\+\+Window()}}, and \doxymbox{\hyperlink{lz77_8cppm_source_l00073}{Window::\+\+Window()}}.
 

@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Compress-to-fit: LZ77Decompressor Class Reference</title>
+<title>Compress-to-fit: LZ77Decompressor&lt; Alloc &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -89,43 +89,46 @@ $(function(){initNavTree('classLZ77Decompressor.html','','classLZ77Decompressor-
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">LZ77Decompressor Class Reference<div class="ingroups">module <a class="el" href="module__models.html">models</a></div></div></div>
+  <div class="headertitle"><div class="title">LZ77Decompressor&lt; Alloc &gt; Class Template Reference<div class="ingroups">module <a class="el" href="module__models.html">models</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 <div class="dynheader">
-Collaboration diagram for LZ77Decompressor:</div>
+Collaboration diagram for LZ77Decompressor&lt; Alloc &gt;:</div>
 <div class="dyncontent">
 <div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="classLZ77Decompressor__coll__graph.svg" width="100%" height="600"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a7a2f3317179ef2e071ca0c1d44d1555c" id="r_a7a2f3317179ef2e071ca0c1d44d1555c"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a7a2f3317179ef2e071ca0c1d44d1555c">LZ77Decompressor</a> (<a class="el" href="classLZ77Block.html">LZ77Block</a> const &amp;data)</td></tr>
-<tr class="memitem:a242394cc3fb9db938c04b173f2cd3c2c" id="r_a242394cc3fb9db938c04b173f2cd3c2c"><td class="memTemplParams" colspan="2">template&lt;typename Allocator = std::allocator&lt;Sym&gt;&gt; </td></tr>
-<tr class="memitem:a242394cc3fb9db938c04b173f2cd3c2c template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a242394cc3fb9db938c04b173f2cd3c2c">decompress</a> (std::vector&lt; <a class="el" href="structSym.html">Sym</a>, Allocator &gt; &amp;out_data) const</td></tr>
-<tr class="memdesc:a242394cc3fb9db938c04b173f2cd3c2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decompress the data received in the constructor.  <br /></td></tr>
+<tr class="memitem:a4b0601ceb84ba3e9eed186b44603e4bc" id="r_a4b0601ceb84ba3e9eed186b44603e4bc"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a4b0601ceb84ba3e9eed186b44603e4bc">LZ77Decompressor</a> (<a class="el" href="classLZ77Block.html">LZ77Block</a>&lt; Alloc &gt; const &amp;data)</td></tr>
+<tr class="memitem:a83570bdf41a526abf706037733207441" id="r_a83570bdf41a526abf706037733207441"><td class="memTemplParams" colspan="2">template&lt;typename Allocator = std::allocator&lt;Sym&gt;&gt; </td></tr>
+<tr class="memitem:a83570bdf41a526abf706037733207441 template"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a83570bdf41a526abf706037733207441">decompress</a> (std::vector&lt; <a class="el" href="structSym.html">Sym</a>, Allocator &gt; &amp;out_data) const</td></tr>
+<tr class="memdesc:a83570bdf41a526abf706037733207441"><td class="mdescLeft">&#160;</td><td class="mdescRight">Decompress the data received in the constructor.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pri-attribs" class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
-<tr class="memitem:a9eebe0cc24120384446a543df5531038" id="r_a9eebe0cc24120384446a543df5531038"><td class="memItemLeft"><a class="el" href="classLZ77Block.html">LZ77Block</a> const  &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a9eebe0cc24120384446a543df5531038">data_</a></td></tr>
+<tr class="memitem:a4a9b100982bdc1edb1449a5e4b42eafa" id="r_a4a9b100982bdc1edb1449a5e4b42eafa"><td class="memItemLeft"><a class="el" href="classLZ77Block.html">LZ77Block</a>&lt; Alloc &gt; const  &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a4a9b100982bdc1edb1449a5e4b42eafa">data_</a></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00396">396</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename Alloc = std::allocator&lt;LZ77Block&lt;&gt;::value_type&gt;&gt;<br />
+class LZ77Decompressor&lt; Alloc &gt;</div>
+<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00493">493</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a7a2f3317179ef2e071ca0c1d44d1555c" name="a7a2f3317179ef2e071ca0c1d44d1555c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7a2f3317179ef2e071ca0c1d44d1555c">&#9670;&#160;</a></span>LZ77Decompressor()</h2>
+<a id="a4b0601ceb84ba3e9eed186b44603e4bc" name="a4b0601ceb84ba3e9eed186b44603e4bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b0601ceb84ba3e9eed186b44603e4bc">&#9670;&#160;</a></span>LZ77Decompressor()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename Alloc = std::allocator&lt;LZ77Block&lt;&gt;::value_type&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">LZ77Decompressor::LZ77Decompressor </td>
+          <td class="memname"><a class="el" href="classLZ77Decompressor.html">LZ77Decompressor</a>&lt; Alloc &gt;::LZ77Decompressor </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classLZ77Block.html">LZ77Block</a> const &amp;</td>          <td class="paramname"><span class="paramname"><em>data</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="classLZ77Block.html">LZ77Block</a>&lt; Alloc &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>data</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -136,30 +139,18 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00399">399</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
-
-<p class="reference">References <a class="el" href="lz77_8cppm_source.html#l00399">LZ77Decompressor()</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="lz77_8cppm_source.html#l00399">LZ77Decompressor()</a>.</p>
-<div class="dynheader">
-Here is the call graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classLZ77Decompressor_a7a2f3317179ef2e071ca0c1d44d1555c_cgraph.svg" width="271" height="60"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
-<div class="dynheader">
-Here is the caller graph for this function:</div>
-<div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="classLZ77Decompressor_a7a2f3317179ef2e071ca0c1d44d1555c_icgraph.svg" width="271" height="60"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
-</div>
+<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00496">496</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
 
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="a242394cc3fb9db938c04b173f2cd3c2c" name="a242394cc3fb9db938c04b173f2cd3c2c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a242394cc3fb9db938c04b173f2cd3c2c">&#9670;&#160;</a></span>decompress()</h2>
+<a id="a83570bdf41a526abf706037733207441" name="a83570bdf41a526abf706037733207441"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83570bdf41a526abf706037733207441">&#9670;&#160;</a></span>decompress()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename Alloc = std::allocator&lt;LZ77Block&lt;&gt;::value_type&gt;&gt; </div>
 <div class="memtemplate">
 template&lt;typename Allocator = std::allocator&lt;Sym&gt;&gt; </div>
 <table class="mlabels">
@@ -167,7 +158,7 @@ template&lt;typename Allocator = std::allocator&lt;Sym&gt;&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void LZ77Decompressor::decompress </td>
+          <td class="memname">void <a class="el" href="classLZ77Decompressor.html">LZ77Decompressor</a>&lt; Alloc &gt;::decompress </td>
           <td>(</td>
           <td class="paramtype">std::vector&lt; <a class="el" href="structSym.html">Sym</a>, Allocator &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>out_data</em></span></td><td>)</td>
           <td> const</td>
@@ -189,22 +180,24 @@ template&lt;typename Allocator = std::allocator&lt;Sym&gt;&gt; </div>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>Will clear out_data buffer </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00409">409</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00506">506</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
 
 </div>
 </div>
 <a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Member Data Documentation</h2>
-<a id="a9eebe0cc24120384446a543df5531038" name="a9eebe0cc24120384446a543df5531038"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9eebe0cc24120384446a543df5531038">&#9670;&#160;</a></span>data_</h2>
+<a id="a4a9b100982bdc1edb1449a5e4b42eafa" name="a4a9b100982bdc1edb1449a5e4b42eafa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a9b100982bdc1edb1449a5e4b42eafa">&#9670;&#160;</a></span>data_</h2>
 
 <div class="memitem">
 <div class="memproto">
+<div class="memtemplate">
+template&lt;typename Alloc = std::allocator&lt;LZ77Block&lt;&gt;::value_type&gt;&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classLZ77Block.html">LZ77Block</a> const&amp; LZ77Decompressor::data_</td>
+          <td class="memname"><a class="el" href="classLZ77Block.html">LZ77Block</a>&lt;Alloc&gt; const&amp; <a class="el" href="classLZ77Decompressor.html">LZ77Decompressor</a>&lt; Alloc &gt;::data_</td>
         </tr>
       </table>
   </td>
@@ -214,7 +207,7 @@ template&lt;typename Allocator = std::allocator&lt;Sym&gt;&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00424">424</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00523">523</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
 
 </div>
 </div>

@@ -1,0 +1,33 @@
+\doxysection{fs\+\_\+helper.\+hpp}
+\hypertarget{fs__helper_8hpp_source}{}\label{fs__helper_8hpp_source}\index{Compress-\/to-\/fit/src/gui/fs\_helper.hpp@{Compress-\/to-\/fit/src/gui/fs\_helper.hpp}}
+\doxymbox{\hyperlink{fs__helper_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{fs__helper_8hpp_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{*\ \ \ Copyright\ (C)\ 2026\ Roan\ Bukaci}}
+\DoxyCodeLine{00003\ \textcolor{comment}{*\ \ \ SPDX-\/License-\/Identifier:\ GPL-\/3.0}}
+\DoxyCodeLine{00004\ \textcolor{comment}{*}}
+\DoxyCodeLine{00005\ \textcolor{comment}{*\ \ \ Exposes\ filesystem\ utilities\ to\ frontend}}
+\DoxyCodeLine{00006\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{fs__helper_8hpp_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{fs__helper_8hpp_source_l00008}00008\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{pragma}\ \textcolor{preprocessor}{once}}
+\DoxyCodeLine{\Hypertarget{fs__helper_8hpp_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{fs__helper_8hpp_source_l00010}00010\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{include}\ \textcolor{preprocessor}{<}\textcolor{preprocessor}{QObject}\textcolor{preprocessor}{>}}
+\DoxyCodeLine{\Hypertarget{fs__helper_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{include}\ \textcolor{preprocessor}{<}\textcolor{preprocessor}{QUrl}\textcolor{preprocessor}{>}}
+\DoxyCodeLine{\Hypertarget{fs__helper_8hpp_source_l00012}00012\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{include}\ \textcolor{preprocessor}{<}\textcolor{preprocessor}{qqmlintegration}\textcolor{preprocessor}{.}\textcolor{preprocessor}{h}\textcolor{preprocessor}{>}}
+\DoxyCodeLine{\Hypertarget{fs__helper_8hpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{fs__helper_8hpp_source_l00014}\doxymbox{\hyperlink{classFileSystem}{00014}}\ \textcolor{keyword}{class}\ \doxymbox{\hyperlink{classFileSystem}{FileSystem}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{classFileSystem}{QObject}}}
+\DoxyCodeLine{\Hypertarget{fs__helper_8hpp_source_l00015}00015\ \{}
+\DoxyCodeLine{\Hypertarget{fs__helper_8hpp_source_l00016}00016\ \ \ \ \ \doxymbox{\hyperlink{classFileSystem}{Q\_OBJECT}}}
+\DoxyCodeLine{\Hypertarget{fs__helper_8hpp_source_l00017}00017\ }
+\DoxyCodeLine{\Hypertarget{fs__helper_8hpp_source_l00018}00018\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{fs__helper_8hpp_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{fs__helper_8hpp_source_l00020}00020\ \ \ \ \ \doxymbox{\hyperlink{classFileSystem}{Q\_INVOKABLE}}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classFileSystem}{isDirectory}}(\doxymbox{\hyperlink{classFileSystem}{QUrl}}\ \textcolor{keyword}{const}\&\ \doxymbox{\hyperlink{classFileSystem}{path}})\ -\/>\ \textcolor{keywordtype}{bool};}
+\DoxyCodeLine{\Hypertarget{fs__helper_8hpp_source_l00021}00021\ \ \ \ \ \doxymbox{\hyperlink{classFileSystem_a69b0810f7d1d99cb22e736201472e236}{Q\_INVOKABLE}}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classFileSystem_a69b0810f7d1d99cb22e736201472e236}{isFile}}(QUrl\ \textcolor{keyword}{const}\&\ path)\ -\/>\ \textcolor{keywordtype}{bool};}
+\DoxyCodeLine{\Hypertarget{fs__helper_8hpp_source_l00022}00022\ \ \ \ \ \doxymbox{\hyperlink{classFileSystem_aeeb6a797414969a49df11ef1887318f7}{Q\_INVOKABLE}}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classFileSystem_aeeb6a797414969a49df11ef1887318f7}{extension}}(QUrl\ \textcolor{keyword}{const}\&\ path)\ -\/>\ \doxymbox{\hyperlink{classFileSystem_aeeb6a797414969a49df11ef1887318f7}{QString}};}
+\DoxyCodeLine{\Hypertarget{fs__helper_8hpp_source_l00023}00023\ \ \ \ \ \doxymbox{\hyperlink{classFileSystem_a7404ae1c32874f4f5aa89a2cf8fb9ee8}{Q\_INVOKABLE}}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classFileSystem_a7404ae1c32874f4f5aa89a2cf8fb9ee8}{exists}}(QUrl\ \textcolor{keyword}{const}\&\ path)\ -\/>\ \textcolor{keywordtype}{bool};}
+\DoxyCodeLine{\Hypertarget{fs__helper_8hpp_source_l00024}00024\ \ \ \ \ \doxymbox{\hyperlink{classFileSystem_a0a522672cf6bf00ab49ee68dc6f04c9c}{Q\_INVOKABLE}}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classFileSystem_a0a522672cf6bf00ab49ee68dc6f04c9c}{fileName}}(QUrl\ \textcolor{keyword}{const}\&\ path)\ -\/>\ \doxymbox{\hyperlink{classFileSystem_a0a522672cf6bf00ab49ee68dc6f04c9c}{QString}};}
+\DoxyCodeLine{\Hypertarget{fs__helper_8hpp_source_l00025}00025\ \ \ \ \ \doxymbox{\hyperlink{classFileSystem_a013c15bd306204db33f0d12011028173}{Q\_INVOKABLE}}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classFileSystem_a013c15bd306204db33f0d12011028173}{fileSize}}(QUrl\ \textcolor{keyword}{const}\&\ path)\ -\/>\ \doxymbox{\hyperlink{classFileSystem_a013c15bd306204db33f0d12011028173}{qint64}};}
+\DoxyCodeLine{\Hypertarget{fs__helper_8hpp_source_l00026}00026\ \ \ \ \ \doxymbox{\hyperlink{classFileSystem_acc33e0f7a4815d6d1f77f4a592e088fd}{Q\_INVOKABLE}}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classFileSystem_acc33e0f7a4815d6d1f77f4a592e088fd}{toUnit}}(quint64\ \textcolor{keyword}{const}\ size)\ -\/>\ \doxymbox{\hyperlink{classFileSystem_acc33e0f7a4815d6d1f77f4a592e088fd}{QString}};}
+\DoxyCodeLine{\Hypertarget{fs__helper_8hpp_source_l00027}00027\ \};}
+
+\end{DoxyCode}

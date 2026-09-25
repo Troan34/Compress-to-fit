@@ -1,0 +1,57 @@
+\doxysection{Compress-\/to-\/fit-\/gui.cpp}
+\hypertarget{Compress-to-fit-gui_8cpp_source}{}\label{Compress-to-fit-gui_8cpp_source}\index{Compress-\/to-\/fit/Compress-\/to-\/fit-\/gui.cpp@{Compress-\/to-\/fit/Compress-\/to-\/fit-\/gui.cpp}}
+\doxymbox{\hyperlink{Compress-to-fit-gui_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{*\ \ \ Copyright\ (C)\ 2026\ Roan\ Bukaci}}
+\DoxyCodeLine{00003\ \textcolor{comment}{*\ \ \ SPDX-\/License-\/Identifier:\ GPL-\/3.0}}
+\DoxyCodeLine{00004\ \textcolor{comment}{*\ \ \ Entry\ for\ the\ GUI\ program}}
+\DoxyCodeLine{00005\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00006}00006\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{include}\ \textcolor{preprocessor}{<}\textcolor{preprocessor}{QApplication}\textcolor{preprocessor}{>}}
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00007}00007\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{include}\ \textcolor{preprocessor}{<}\textcolor{preprocessor}{QQmlApplicationEngine}\textcolor{preprocessor}{>}}
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00008}00008\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{include}\ \textcolor{preprocessor}{<}\textcolor{preprocessor}{QCoreApplication}\textcolor{preprocessor}{>}}
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00009}00009\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{include}\ \textcolor{preprocessor}{<}\textcolor{preprocessor}{QQmlContext}\textcolor{preprocessor}{>}}
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00010}00010\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{include}\ \textcolor{preprocessor}{<}\textcolor{preprocessor}{QDebug}\textcolor{preprocessor}{>}}
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00011}00011\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{include}\ \textcolor{preprocessor}{"{}src/gui/interface.hpp"{}}}
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00012}00012\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{include}\ \textcolor{preprocessor}{"{}src/gui/fs\_helper.hpp"{}}}
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00014}00014\ import\ util;}
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00016}00016\ import\ parser;}
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00017}00017\ import\ models;}
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00018}00018\ import\ util;}
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00019}00019\ import\ std.compat;}
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00020}00020\ }
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00021}00021\ \textcolor{keyword}{namespace}\ fs\ =\ std::filesystem;}
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00024}\doxymbox{\hyperlink{Compress-to-fit-gui_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{00024}}\ \textcolor{keywordtype}{int}\ \doxymbox{\hyperlink{Compress-to-fit-gui_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main}}(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}*\ argv[])}
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00025}00025\ \{}
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00026}00026\ \ \ \ \ QGuiApplication\ app(argc,\ argv);}
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00029}00029\ \ \ \ \ QQmlApplicationEngine\ engine;}
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00031}00031\ \ \ \ \ \doxymbox{\hyperlink{classFileSystem}{FileSystem}}\ file\_system;}
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00032}00032\ \ \ \ \ \doxymbox{\hyperlink{classCompressConfig}{CompressConfig}}\ compressor\_conf;}
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00033}00033\ \ \ \ \ engine.rootContext()-\/>setContextProperty(\textcolor{stringliteral}{"{}compressor\_conf"{}},\ \&compressor\_conf);}
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00034}00034\ \ \ \ \ engine.rootContext()-\/>setContextProperty(\textcolor{stringliteral}{"{}fileSystem"{}},\ \&file\_system);}
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00035}00035\ }
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00037}00037\ \ \ \ \ qDebug()\ <<\ \textcolor{stringliteral}{"{}Qt\ version:"{}}\ <<\ QT\_VERSION\_STR}
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00038}00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \textcolor{stringliteral}{"{}Import\ paths:"{}}\ <<\ engine.importPathList();}
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00039}00039\ }
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00040}00040\ }
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00041}00041\ \ \ \ \ QObject::connect(}
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00042}00042\ \ \ \ \ \ \ \ \ \&engine,}
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00043}00043\ \ \ \ \ \ \ \ \ \&QQmlApplicationEngine::objectCreationFailed,}
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00044}00044\ \ \ \ \ \ \ \ \ \&app,}
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00045}00045\ \ \ \ \ \ \ \ \ []()\ \{\ QCoreApplication::exit(-\/1);\ \},}
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00046}00046\ \ \ \ \ \ \ \ \ Qt::QueuedConnection);}
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00048}00048\ \ \ \ \ engine.loadFromModule(\textcolor{stringliteral}{"{}CompressToFit"{}},\ \textcolor{stringliteral}{"{}Main"{}});}
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00049}00049\ }
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00050}00050\ \ \ \ \ \textcolor{keywordflow}{return}\ QGuiApplication::exec();}
+\DoxyCodeLine{\Hypertarget{Compress-to-fit-gui_8cpp_source_l00051}00051\ \}}
+
+\end{DoxyCode}

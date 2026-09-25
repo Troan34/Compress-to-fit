@@ -58,7 +58,7 @@ var sectionId = 'dynsection-0';
 <!-- Node1 -->
 <g id="Node000001" class="node">
 <title>Node1</title>
-<g id="a_Node000001"><a xlink:title="First sequence in first sequence out, i.e. the data is written in the order given to insert().">
+<g id="a_Node000001"><a xlink:title="First sequence in first sequence out, i.e. the data is written in the order given to the &#39;insert()&#39; m...">
 <polygon fill="#999999" stroke="none" points="354.5,-265 219.5,-265 219.5,0 354.5,0 354.5,-265"/>
 <text xml:space="preserve" text-anchor="start" x="230.38" y="-253.5" font-family="Helvetica,sans-Serif" font-size="10.00">ConcOrderedFileList&lt; T &gt;</text>
 <text xml:space="preserve" text-anchor="start" x="225" y="-239" font-family="Helvetica,sans-Serif" font-size="10.00">&#45;</text>
@@ -236,7 +236,7 @@ var sectionId = 'dynsection-0';
 <polygon fill="none" stroke="#63b8ff" points="188,-609.8 184,-603.8 188,-597.8 192,-603.8 188,-609.8"/>
 </a>
 </g>
-<text xml:space="preserve" text-anchor="start" x="191" y="-621" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">&#45;cli_options</text>
+<text xml:space="preserve" text-anchor="start" x="191" y="-621" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">&#45;options_</text>
 </g>
 <!-- Node5 -->
 <g id="Node000005" class="node">
@@ -256,11 +256,11 @@ var sectionId = 'dynsection-0';
 <g id="edge4_Node000002_Node000005" class="edge">
 <title>Node5&#45;&gt;Node2</title>
 <g id="a_edge4_Node000002_Node000005"><a xlink:title=" ">
-<path fill="none" stroke="#63b8ff" d="M287.34,-729.64C278,-702.47 261.63,-655.27 247,-615 246.25,-612.93 245.49,-610.85 244.73,-608.76"/>
-<polygon fill="none" stroke="#63b8ff" points="244.73,-608.77 238.91,-604.51 240.6,-597.5 246.42,-601.76 244.73,-608.77"/>
+<path fill="none" stroke="#63b8ff" d="M286.78,-729.44C277.08,-702.81 260.09,-656.16 242.9,-608.98"/>
+<polygon fill="none" stroke="#63b8ff" points="242.95,-609.1 237.14,-604.84 238.84,-597.83 244.65,-602.1 242.95,-609.1"/>
 </a>
 </g>
-<text xml:space="preserve" text-anchor="start" x="255.35" y="-621" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">&#45;out_file</text>
+<text xml:space="preserve" text-anchor="start" x="254.08" y="-621" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">&#45;out_file</text>
 </g>
 <!-- Node6 -->
 <g id="Node000006" class="node">

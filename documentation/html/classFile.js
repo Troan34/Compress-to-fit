@@ -13,11 +13,11 @@ var classFile =
     [ "has_signature", "classFile.html#aa5c3142a4a5e9cba6bd7303c0373b8bb", null ],
     [ "has_signature", "classFile.html#a74344ea69c407c73131db10ffc3292b4", null ],
     [ "has_signature", "classFile.html#a09024be52cad08277a0c2de7ddf22b8b", null ],
-    [ "read_file", "classFile.html#a055e2d7dcee51ebb9212c9e5c0e853b3", null ],
+    [ "read_file", "classFile.html#a619fe73c935f1fd4e2bc68da329e75b1", null ],
     [ "split_file", "classFile.html#a30d421f12056fe097e75f2a98a0f480c", null ],
     [ "write", "classFile.html#a3f0bd1fcb9423f20e7ad5313deba5945", null ],
     [ "write", "classFile.html#a71a366962da0748bf6f89e800593e58a", null ],
-    [ "cli_options", "classFile.html#ab53a042dbb267af48b1a6e5523a2af1d", null ],
     [ "in_file_options", "classFile.html#a9a900e39be5848aad9e046bf6e7b5005", null ],
+    [ "options_", "classFile.html#ae7b639eecda0e97d09b9e51d313b24a8", null ],
     [ "out_file", "classFile.html#a733e671529f4aff0b4f43e9cfd223779", null ]
 ];

@@ -1,0 +1,54 @@
+\doxysection{comp\+\_\+options.\+hpp}
+\hypertarget{comp__options_8hpp_source}{}\label{comp__options_8hpp_source}\index{Compress-\/to-\/fit/src/common/comp\_options.hpp@{Compress-\/to-\/fit/src/common/comp\_options.hpp}}
+\doxymbox{\hyperlink{comp__options_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{comp__options_8hpp_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{*\ \ \ Copyright\ (C)\ 2026\ Roan\ Bukaci}}
+\DoxyCodeLine{00003\ \textcolor{comment}{*\ \ \ SPDX-\/License-\/Identifier:\ GPL-\/3.0}}
+\DoxyCodeLine{00004\ \textcolor{comment}{*}}
+\DoxyCodeLine{00005\ \textcolor{comment}{*\ \ \ This\ header\ groups\ together\ some\ symbols\ that\ the\ qml\ backend\ requires\ (Qt's\ moc\ doesn't\ understand\ modules)}}
+\DoxyCodeLine{00006\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{comp__options_8hpp_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{comp__options_8hpp_source_l00008}00008\ \textcolor{comment}{/*REMEMBER:\ YOU\ MUST\ ADD\ EXPORTS\ FOR\ EACH\ SYMBOL\ TO\ ITS\ CORRESPONDING\ MODULE\ IN\ THE\ LIBRARY*/}}
+\DoxyCodeLine{\Hypertarget{comp__options_8hpp_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{comp__options_8hpp_source_l00010}00010\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{pragma}\ \textcolor{preprocessor}{once}}
+\DoxyCodeLine{\Hypertarget{comp__options_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{include}\ \textcolor{preprocessor}{<}\textcolor{preprocessor}{cstdint}\textcolor{preprocessor}{>}}
+\DoxyCodeLine{\Hypertarget{comp__options_8hpp_source_l00012}00012\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{include}\ \textcolor{preprocessor}{<}\textcolor{preprocessor}{string\_view}\textcolor{preprocessor}{>}}
+\DoxyCodeLine{\Hypertarget{comp__options_8hpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{comp__options_8hpp_source_l00014}00014\ \textcolor{comment}{//unscoped\ because\ having\ to\ add\ static\_cast\ becomes\ annoying}}
+\DoxyCodeLine{\Hypertarget{comp__options_8hpp_source_l00015}\doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0}{00015}}\ \textcolor{keyword}{enum}\ \doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0}{CompPreset}}\ :\ \doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0}{uint8\_t}}}
+\DoxyCodeLine{\Hypertarget{comp__options_8hpp_source_l00016}00016\ \{}
+\DoxyCodeLine{\Hypertarget{comp__options_8hpp_source_l00017}\doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0a7589a60238783984f16f26794ced40e0}{00017}}\ \ \ \ \ \doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0a7589a60238783984f16f26794ced40e0}{NO\_COMP}},}
+\DoxyCodeLine{\Hypertarget{comp__options_8hpp_source_l00018}\doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0a2894f87570ca4378c250f2c5e96d6ba0}{00018}}\ \ \ \ \ \doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0a2894f87570ca4378c250f2c5e96d6ba0}{COMP\_1}},}
+\DoxyCodeLine{\Hypertarget{comp__options_8hpp_source_l00019}\doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0a7669e287d92a06f35336399b2ec255dd}{00019}}\ \ \ \ \ \doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0a7669e287d92a06f35336399b2ec255dd}{COMP\_2}},}
+\DoxyCodeLine{\Hypertarget{comp__options_8hpp_source_l00020}\doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0aaaac41c5762f6ce8e8477482b93a1b52}{00020}}\ \ \ \ \ \doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0aaaac41c5762f6ce8e8477482b93a1b52}{COMP\_3}},}
+\DoxyCodeLine{\Hypertarget{comp__options_8hpp_source_l00021}\doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0a1011fe2cf6eba162403018ba22443819}{00021}}\ \ \ \ \ \doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0a1011fe2cf6eba162403018ba22443819}{COMP\_4}},}
+\DoxyCodeLine{\Hypertarget{comp__options_8hpp_source_l00022}\doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0ac4ef8ee83418a3d1bb09cd68c9518653}{00022}}\ \ \ \ \ \doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0ac4ef8ee83418a3d1bb09cd68c9518653}{COMP\_5}},}
+\DoxyCodeLine{\Hypertarget{comp__options_8hpp_source_l00023}\doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0a9195bcab05e9ae5cf5b829e8e9d9a38a}{00023}}\ \ \ \ \ \doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0a9195bcab05e9ae5cf5b829e8e9d9a38a}{COMP\_6}},}
+\DoxyCodeLine{\Hypertarget{comp__options_8hpp_source_l00024}\doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0ab8888debd18c782f0498759f5adb66e3}{00024}}\ \ \ \ \ \doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0ab8888debd18c782f0498759f5adb66e3}{COMP\_7}},}
+\DoxyCodeLine{\Hypertarget{comp__options_8hpp_source_l00025}\doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0a6c7cd5bf0cb0515ed3a8bbe53b8059f7}{00025}}\ \ \ \ \ \doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0a6c7cd5bf0cb0515ed3a8bbe53b8059f7}{COMP\_8}},}
+\DoxyCodeLine{\Hypertarget{comp__options_8hpp_source_l00026}\doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0a623be7eb54f4a715b71e63dbd0d7d314}{00026}}\ \ \ \ \ \doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0a623be7eb54f4a715b71e63dbd0d7d314}{COMP\_MAX}},}
+\DoxyCodeLine{\Hypertarget{comp__options_8hpp_source_l00027}00027\ \};}
+\DoxyCodeLine{\Hypertarget{comp__options_8hpp_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{comp__options_8hpp_source_l00029}00029\ \textcolor{comment}{/**}}
+\DoxyCodeLine{00030\ \textcolor{comment}{\ *\ @brief\ Identify\ compressor\ used}}
+\DoxyCodeLine{00031\ \textcolor{comment}{\ *}}
+\DoxyCodeLine{00032\ \textcolor{comment}{\ *\ @note\ You\ must\ not\ reorder\ the\ enums\ or\ (especially)\ remove\ MAX.}}
+\DoxyCodeLine{00033\ \textcolor{comment}{\ *\ \ \ \ \ \ \ For\ every\ new\ enum,\ MAX\ shall\ always\ stay\ the\ max\ enum\ possible.}}
+\DoxyCodeLine{00034\ \textcolor{comment}{\ *\ \ \ \ \ \ \ DO\ NOT\ CUSTOMIZE\ THE\ VALUES.\ YOU\ WILL\ MAKE\ PREEXISTING\ .tzf\ FILES\ INVALID.}}
+\DoxyCodeLine{00035\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{comp__options_8hpp_source_l00036}\doxymbox{\hyperlink{comp__options_8hpp_a77b7b3d2b23480b5378dbd65c7af9178}{00036}}\ \textcolor{keyword}{enum}\ \textcolor{keyword}{class}\ \doxymbox{\hyperlink{comp__options_8hpp_a77b7b3d2b23480b5378dbd65c7af9178}{CompType}}\ :\ \doxymbox{\hyperlink{comp__options_8hpp_a77b7b3d2b23480b5378dbd65c7af9178}{uint8\_t}}}
+\DoxyCodeLine{\Hypertarget{comp__options_8hpp_source_l00037}00037\ \{}
+\DoxyCodeLine{\Hypertarget{comp__options_8hpp_source_l00038}\doxymbox{\hyperlink{comp__options_8hpp_a77b7b3d2b23480b5378dbd65c7af9178af6b1e796b8ffae4172e2752c26dd404c}{00038}}\ \ \ \ \ \doxymbox{\hyperlink{comp__options_8hpp_a77b7b3d2b23480b5378dbd65c7af9178af6b1e796b8ffae4172e2752c26dd404c}{LZ77}},}
+\DoxyCodeLine{\Hypertarget{comp__options_8hpp_source_l00039}\doxymbox{\hyperlink{comp__options_8hpp_a77b7b3d2b23480b5378dbd65c7af9178a26a4b44a837bf97b972628509912b4a5}{00039}}\ \ \ \ \ \doxymbox{\hyperlink{comp__options_8hpp_a77b7b3d2b23480b5378dbd65c7af9178a26a4b44a837bf97b972628509912b4a5}{MAX}},}
+\DoxyCodeLine{\Hypertarget{comp__options_8hpp_source_l00040}00040\ \};}
+\DoxyCodeLine{\Hypertarget{comp__options_8hpp_source_l00041}00041\ }
+\DoxyCodeLine{\Hypertarget{comp__options_8hpp_source_l00042}\doxymbox{\hyperlink{comp__options_8hpp_a00efb0a9acab4c356b0b4550de60af1e}{00042}}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{constexpr}\ \doxymbox{\hyperlink{comp__options_8hpp_a00efb0a9acab4c356b0b4550de60af1e}{std}}::\doxymbox{\hyperlink{comp__options_8hpp_a00efb0a9acab4c356b0b4550de60af1e}{string\_view}}\ \doxymbox{\hyperlink{comp__options_8hpp_a00efb0a9acab4c356b0b4550de60af1e}{COMPRESSOR\_STR\_OPTIONS}}[]\ =}
+\DoxyCodeLine{\Hypertarget{comp__options_8hpp_source_l00043}00043\ \{}
+\DoxyCodeLine{\Hypertarget{comp__options_8hpp_source_l00044}00044\ \ \ \ \ \textcolor{stringliteral}{"{}LZ77"{}},}
+\DoxyCodeLine{\Hypertarget{comp__options_8hpp_source_l00045}00045\ \};}
+\DoxyCodeLine{\Hypertarget{comp__options_8hpp_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{comp__options_8hpp_source_l00047}\doxymbox{\hyperlink{comp__options_8hpp_a4f6782c41a389cd9988f6c570fc6dc0c}{00047}}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{constexpr}\ size\_t\ \doxymbox{\hyperlink{comp__options_8hpp_a4f6782c41a389cd9988f6c570fc6dc0c}{N\_FILES\_LIMIT}}\ =\ 1'000;}
+\DoxyCodeLine{\Hypertarget{comp__options_8hpp_source_l00048}\doxymbox{\hyperlink{comp__options_8hpp_aec7880c199d5393b78db8e52d180495b}{00048}}\ \textcolor{keyword}{inline}\ \textcolor{keyword}{constexpr}\ size\_t\ \doxymbox{\hyperlink{comp__options_8hpp_aec7880c199d5393b78db8e52d180495b}{SIZE\_FILES\_MIN}}\ =\ 512;}
+
+\end{DoxyCode}

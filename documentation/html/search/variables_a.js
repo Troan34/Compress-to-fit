@@ -1,10 +1,21 @@
 var searchData=
 [
-  ['n_5fblocks_5f_0',['n_blocks_',['../classLZ77ConcurrentCompressor.html#a3498fd7033bf7154cd0893d339855b2f',1,'LZ77ConcurrentCompressor::n_blocks_'],['../classLZ77ConcurrentDecompressor.html#a73499e9aba5d5814facdfd7599371577',1,'LZ77ConcurrentDecompressor::n_blocks_']]],
-  ['n_5fcompleted_5fblocks_1',['n_completed_blocks',['../classLZ77ConcurrentCompressor.html#afc321f0ed8c7916aff617b46f1075af7',1,'LZ77ConcurrentCompressor::n_completed_blocks'],['../classLZ77ConcurrentDecompressor.html#af1f9ba9f50e1a246812db1f10ef698f8',1,'LZ77ConcurrentDecompressor::n_completed_blocks']]],
-  ['n_5ffiles_2',['n_files',['../structparser_1_1Options.html#a93ba36418ea34555a584ebfd2881496e',1,'parser::Options']]],
-  ['n_5ffiles_5flimit_3',['N_FILES_LIMIT',['../core__utils_8cppm.html#a4f6782c41a389cd9988f6c570fc6dc0c',1,'core_utils.cppm']]],
-  ['need_5fhelp_4',['need_help',['../structparser_1_1Options.html#a6f3e3a05c49d128e2ae7a08f0783b32e',1,'parser::Options']]],
-  ['next_5',['next',['../structNode.html#ac1c0563946c59c36bddde431b4adb00b',1,'Node']]],
-  ['num_5fargs_6',['num_args',['../structfunction__traits_3_01fun_07_5_08_07args_8_8_8_08_4.html#ae34b8514a1e4f8f4218e47eea716db98',1,'function_traits&lt; fun(*)(args...)&gt;']]]
+  ['magenta_0',['MAGENTA',['../namespaceANSI.html#aabcb01df16b1546fdea301745aa8d60c',1,'ANSI']]],
+  ['max_5fblock_5fsize_1',['MAX_BLOCK_SIZE',['../lz77_8cppm.html#a53a07528c3b884aca1142aad24cc433e',1,'lz77.cppm']]],
+  ['max_5fchain_2',['MAX_CHAIN',['../classalg_1_1Rabin.html#aa15e426abcd632a784e8c129b586bce9',1,'alg::Rabin']]],
+  ['max_5fhash_5fsize_3',['MAX_HASH_SIZE',['../lz77_8cppm.html#ac4a340be8c3b526cce9e4074d9389497',1,'lz77.cppm']]],
+  ['max_5fmatch_4',['MAX_MATCH',['../namespacealg.html#ad3d2660056a755adc8334b83459060a6',1,'alg']]],
+  ['max_5fsize_5',['max_size',['../classWindow.html#ac17eb23134bc4acf3b6c0f3e52ec3f1e',1,'Window']]],
+  ['max_5fsize_5flook_5fahead_6',['max_size_look_ahead',['../classWindow.html#a0d7ab6e968bbd1b1ccf38f7262b0355c',1,'Window']]],
+  ['max_5fsize_5fsearch_7',['max_size_search',['../classWindow.html#a26862559cda48d21cd2081510daa63ab',1,'Window']]],
+  ['max_5fwindow_5fsize_8',['MAX_WINDOW_SIZE',['../lz77_8cppm.html#a282c82f087f402efca939353e57fca44',1,'lz77.cppm']]],
+  ['message_5fid_5for_5fprogress_9',['message_ID_or_progress',['../structBackendMessage.html#abb24d7ceb9899c1b7fd0dc5f2328ab42',1,'BackendMessage']]],
+  ['min_5fmatch_10',['MIN_MATCH',['../namespacealg.html#aeca501bd83e1fd3e65ea2fce9f4e1190',1,'alg']]],
+  ['minimum_5fsize_5f_11',['minimum_size_',['../classConcFileBuffer.html#a3ec5d0c05461e4215fbf46e1d4969938',1,'ConcFileBuffer']]],
+  ['missing_5fargument_12',['MISSING_ARGUMENT',['../namespaceERR__STRING.html#af81b6954b18ad24febeb376c7db6fcca',1,'ERR_STRING']]],
+  ['mod_13',['MOD',['../namespacealg.html#a38d521bade379a8121e61b016ad5397f',1,'alg']]],
+  ['msg_14',['msg',['../structErrorException.html#a6ec2c3c851156fa3d99b7809cbc9bac5',1,'ErrorException']]],
+  ['mut_15',['mut',['../classConcFileBuffer.html#ad66675024341b94f8073586c9169d889',1,'ConcFileBuffer::mut'],['../classConcOrderedFileList.html#a9790d71211b6a70c3cd101d68cba5108',1,'ConcOrderedFileList::mut']]],
+  ['mut_5f_16',['mut_',['../classThreadPool.html#abea81872556be4746f4be7a396254f08',1,'ThreadPool']]],
+  ['mutex_5f_17',['mutex_',['../classLZ77ConcurrentCompressor.html#aadbf5c339f2bfaddde1b70a50d942845',1,'LZ77ConcurrentCompressor::mutex_'],['../classLZ77ConcurrentDecompressor.html#aaebfb6d5778fec7074d2137b32874d9b',1,'LZ77ConcurrentDecompressor::mutex_']]]
 ];

@@ -1,0 +1,219 @@
+\doxysection{Qml\+Backend\+Message Class Reference}
+\hypertarget{classQmlBackendMessage}{}\label{classQmlBackendMessage}\index{QmlBackendMessage@{QmlBackendMessage}}
+
+
+{\ttfamily \+\#include $<$interpreter.\+hpp$>$}
+
+
+
+Inheritance diagram for Qml\+Backend\+Message:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=199pt]{classQmlBackendMessage__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Qml\+Backend\+Message:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=199pt]{classQmlBackendMessage__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum class \doxymbox{\hyperlink{classQmlBackendMessage_af6bffc32112b3726507c566a4413c03c}{Severity}} \{ \doxymbox{\hyperlink{classQmlBackendMessage_af6bffc32112b3726507c566a4413c03ca4059b0251f66a18cb56f544728796875}{Info}}
+, \doxymbox{\hyperlink{classQmlBackendMessage_af6bffc32112b3726507c566a4413c03ca0eaadb4fcb48a0a0ed7bc9868be9fbaa}{Warning}}
+, \doxymbox{\hyperlink{classQmlBackendMessage_af6bffc32112b3726507c566a4413c03ca902b0d55fddef6f8d651fe1035b7d4bd}{Error}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classQmlBackendMessage_aad5a3e22aa24957893fc5bbf2fcddbde}{Qml\+Backend\+Message}} (QObject \texorpdfstring{$\ast$}{*}parent=nullptr)
+\item 
+auto \doxymbox{\hyperlink{classQmlBackendMessage_a74ada75b13d64990da9f922b1382ae55}{severity}} () const -\/$>$ \doxymbox{\hyperlink{classQmlBackendMessage_af6bffc32112b3726507c566a4413c03c}{Severity}}
+\item 
+auto \doxymbox{\hyperlink{classQmlBackendMessage_ae73eeaa25eb8ecfc6a49dc81d85e2bb9}{ID}} () const -\/$>$ qint32
+\item 
+auto \doxymbox{\hyperlink{classQmlBackendMessage_af82f24041ab4aaeea9b3f02f02c3b11b}{text}} () const -\/$>$ QString
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classQmlBackendMessage_af6bffc32112b3726507c566a4413c03c}{Severity}} \doxymbox{\hyperlink{classQmlBackendMessage_ab15e0921959125ae3e422a674240c14d}{severity}}
+\item 
+QString \doxymbox{\hyperlink{classQmlBackendMessage_aa9cde7b4d02622de0fe3764a39436300}{text}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\doxymbox{\hyperlink{classQmlBackendMessage_af6bffc32112b3726507c566a4413c03c}{Severity}} \doxymbox{\hyperlink{classQmlBackendMessage_a3d517ad05ca226dc6122cb7e8544d88e}{severity\+\_\+}} \{\}
+\item 
+qint32 \doxymbox{\hyperlink{classQmlBackendMessage_ad84c5eff04c2ef1849c1ca3650d7090b}{ID\+\_\+}} \{\}
+\item 
+QString \doxymbox{\hyperlink{classQmlBackendMessage_a09d37db1cfa04ea9d303e156aea2aafc}{text\+\_\+}} \{\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{interpreter_8hpp_source_l00054}{54}} of file \doxymbox{\hyperlink{interpreter_8hpp_source}{interpreter.\+hpp}}.
+
+
+
+\label{doc-enum-members}
+\Hypertarget{classQmlBackendMessage_doc-enum-members}
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classQmlBackendMessage_af6bffc32112b3726507c566a4413c03c}\index{QmlBackendMessage@{QmlBackendMessage}!Severity@{Severity}}
+\index{Severity@{Severity}!QmlBackendMessage@{QmlBackendMessage}}
+\doxysubsubsection{\texorpdfstring{Severity}{Severity}}
+{\footnotesize\ttfamily \label{classQmlBackendMessage_af6bffc32112b3726507c566a4413c03c} 
+enum class \doxymbox{\hyperlink{classQmlBackendMessage_af6bffc32112b3726507c566a4413c03c}{Qml\+Backend\+Message::\+\+Severity}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Info@{Info}!QmlBackendMessage@{QmlBackendMessage}}
+\index{QmlBackendMessage@{QmlBackendMessage}!Info@{Info}}
+}\Hypertarget{classQmlBackendMessage_af6bffc32112b3726507c566a4413c03ca4059b0251f66a18cb56f544728796875}\label{classQmlBackendMessage_af6bffc32112b3726507c566a4413c03ca4059b0251f66a18cb56f544728796875} 
+Info&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Warning@{Warning}!QmlBackendMessage@{QmlBackendMessage}}
+\index{QmlBackendMessage@{QmlBackendMessage}!Warning@{Warning}}
+}\Hypertarget{classQmlBackendMessage_af6bffc32112b3726507c566a4413c03ca0eaadb4fcb48a0a0ed7bc9868be9fbaa}\label{classQmlBackendMessage_af6bffc32112b3726507c566a4413c03ca0eaadb4fcb48a0a0ed7bc9868be9fbaa} 
+Warning&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Error@{Error}!QmlBackendMessage@{QmlBackendMessage}}
+\index{QmlBackendMessage@{QmlBackendMessage}!Error@{Error}}
+}\Hypertarget{classQmlBackendMessage_af6bffc32112b3726507c566a4413c03ca902b0d55fddef6f8d651fe1035b7d4bd}\label{classQmlBackendMessage_af6bffc32112b3726507c566a4413c03ca902b0d55fddef6f8d651fe1035b7d4bd} 
+Error&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{interpreter_8hpp_source_l00061}{61}} of file \doxymbox{\hyperlink{interpreter_8hpp_source}{interpreter.\+hpp}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{classQmlBackendMessage_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classQmlBackendMessage_aad5a3e22aa24957893fc5bbf2fcddbde}\index{QmlBackendMessage@{QmlBackendMessage}!QmlBackendMessage@{QmlBackendMessage}}
+\index{QmlBackendMessage@{QmlBackendMessage}!QmlBackendMessage@{QmlBackendMessage}}
+\doxysubsubsection{\texorpdfstring{QmlBackendMessage()}{QmlBackendMessage()}}
+{\footnotesize\ttfamily \label{classQmlBackendMessage_aad5a3e22aa24957893fc5bbf2fcddbde} 
+Qml\+Backend\+Message::\+\+Qml\+Backend\+Message (\begin{DoxyParamCaption}\item[{QObject \texorpdfstring{$\ast$}{*}}]{parent}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{interpreter_8hpp_source_l00064}{64}} of file \doxymbox{\hyperlink{interpreter_8hpp_source}{interpreter.\+hpp}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{classQmlBackendMessage_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classQmlBackendMessage_ae73eeaa25eb8ecfc6a49dc81d85e2bb9}\index{QmlBackendMessage@{QmlBackendMessage}!ID@{ID}}
+\index{ID@{ID}!QmlBackendMessage@{QmlBackendMessage}}
+\doxysubsubsection{\texorpdfstring{ID()}{ID()}}
+{\footnotesize\ttfamily \label{classQmlBackendMessage_ae73eeaa25eb8ecfc6a49dc81d85e2bb9} 
+auto Qml\+Backend\+Message::\+\+ID (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ qint32\hspace{0.3cm}{\ttfamily [nodiscard]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{interpreter_8cpp_source_l00128}{128}} of file \doxymbox{\hyperlink{interpreter_8cpp_source}{interpreter.\+cpp}}.
+
+\Hypertarget{classQmlBackendMessage_a74ada75b13d64990da9f922b1382ae55}\index{QmlBackendMessage@{QmlBackendMessage}!severity@{severity}}
+\index{severity@{severity}!QmlBackendMessage@{QmlBackendMessage}}
+\doxysubsubsection{\texorpdfstring{severity()}{severity()}}
+{\footnotesize\ttfamily \label{classQmlBackendMessage_a74ada75b13d64990da9f922b1382ae55} 
+auto Qml\+Backend\+Message::\+severity (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ \doxymbox{\hyperlink{classQmlBackendMessage_af6bffc32112b3726507c566a4413c03c}{Severity}}\hspace{0.3cm}{\ttfamily [nodiscard]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{interpreter_8cpp_source_l00118}{118}} of file \doxymbox{\hyperlink{interpreter_8cpp_source}{interpreter.\+cpp}}.
+
+\Hypertarget{classQmlBackendMessage_af82f24041ab4aaeea9b3f02f02c3b11b}\index{QmlBackendMessage@{QmlBackendMessage}!text@{text}}
+\index{text@{text}!QmlBackendMessage@{QmlBackendMessage}}
+\doxysubsubsection{\texorpdfstring{text()}{text()}}
+{\footnotesize\ttfamily \label{classQmlBackendMessage_af82f24041ab4aaeea9b3f02f02c3b11b} 
+auto Qml\+Backend\+Message::\+text (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ QString\hspace{0.3cm}{\ttfamily [nodiscard]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{interpreter_8cpp_source_l00123}{123}} of file \doxymbox{\hyperlink{interpreter_8cpp_source}{interpreter.\+cpp}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classQmlBackendMessage_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classQmlBackendMessage_ad84c5eff04c2ef1849c1ca3650d7090b}\index{QmlBackendMessage@{QmlBackendMessage}!ID\_@{ID\_}}
+\index{ID\_@{ID\_}!QmlBackendMessage@{QmlBackendMessage}}
+\doxysubsubsection{\texorpdfstring{ID\_}{ID\_}}
+{\footnotesize\ttfamily \label{classQmlBackendMessage_ad84c5eff04c2ef1849c1ca3650d7090b} 
+qint32 Qml\+Backend\+Message::\+\+ID\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{interpreter_8hpp_source_l00072}{72}} of file \doxymbox{\hyperlink{interpreter_8hpp_source}{interpreter.\+hpp}}.
+
+\Hypertarget{classQmlBackendMessage_a3d517ad05ca226dc6122cb7e8544d88e}\index{QmlBackendMessage@{QmlBackendMessage}!severity\_@{severity\_}}
+\index{severity\_@{severity\_}!QmlBackendMessage@{QmlBackendMessage}}
+\doxysubsubsection{\texorpdfstring{severity\_}{severity\_}}
+{\footnotesize\ttfamily \label{classQmlBackendMessage_a3d517ad05ca226dc6122cb7e8544d88e} 
+\doxymbox{\hyperlink{classQmlBackendMessage_af6bffc32112b3726507c566a4413c03c}{Severity}} Qml\+Backend\+Message::\+severity\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{interpreter_8hpp_source_l00071}{71}} of file \doxymbox{\hyperlink{interpreter_8hpp_source}{interpreter.\+hpp}}.
+
+\Hypertarget{classQmlBackendMessage_a09d37db1cfa04ea9d303e156aea2aafc}\index{QmlBackendMessage@{QmlBackendMessage}!text\_@{text\_}}
+\index{text\_@{text\_}!QmlBackendMessage@{QmlBackendMessage}}
+\doxysubsubsection{\texorpdfstring{text\_}{text\_}}
+{\footnotesize\ttfamily \label{classQmlBackendMessage_a09d37db1cfa04ea9d303e156aea2aafc} 
+QString Qml\+Backend\+Message::\+text\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{interpreter_8hpp_source_l00073}{73}} of file \doxymbox{\hyperlink{interpreter_8hpp_source}{interpreter.\+hpp}}.
+
+
+
+\label{doc-property-members}
+\Hypertarget{classQmlBackendMessage_doc-property-members}
+\doxysubsection{Property Documentation}
+\Hypertarget{classQmlBackendMessage_ab15e0921959125ae3e422a674240c14d}\index{QmlBackendMessage@{QmlBackendMessage}!severity@{severity}}
+\index{severity@{severity}!QmlBackendMessage@{QmlBackendMessage}}
+\doxysubsubsection{\texorpdfstring{severity}{severity}}
+{\footnotesize\ttfamily \label{classQmlBackendMessage_ab15e0921959125ae3e422a674240c14d} 
+\doxymbox{\hyperlink{classQmlBackendMessage_af6bffc32112b3726507c566a4413c03c}{Severity}} Qml\+Backend\+Message::\+severity\hspace{0.3cm}{\ttfamily [read]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{interpreter_8hpp_source_l00057}{57}} of file \doxymbox{\hyperlink{interpreter_8hpp_source}{interpreter.\+hpp}}.
+
+\Hypertarget{classQmlBackendMessage_aa9cde7b4d02622de0fe3764a39436300}\index{QmlBackendMessage@{QmlBackendMessage}!text@{text}}
+\index{text@{text}!QmlBackendMessage@{QmlBackendMessage}}
+\doxysubsubsection{\texorpdfstring{text}{text}}
+{\footnotesize\ttfamily \label{classQmlBackendMessage_aa9cde7b4d02622de0fe3764a39436300} 
+QString Qml\+Backend\+Message::\+text\hspace{0.3cm}{\ttfamily [read]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{interpreter_8hpp_source_l00058}{58}} of file \doxymbox{\hyperlink{interpreter_8hpp_source}{interpreter.\+hpp}}.
+
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+Compress-\/to-\/fit/\+src/\+gui/\+\doxymbox{\hyperlink{interpreter_8hpp}{interpreter.\+hpp}}\item 
+Compress-\/to-\/fit/\+src/\+gui/\+\doxymbox{\hyperlink{interpreter_8cpp}{interpreter.\+cpp}}\end{DoxyCompactItemize}

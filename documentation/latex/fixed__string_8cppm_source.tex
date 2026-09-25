@@ -1,0 +1,108 @@
+\doxysection{fixed\+\_\+string.\+cppm}
+\hypertarget{fixed__string_8cppm_source}{}\label{fixed__string_8cppm_source}\index{Compress-\/to-\/fit/src/util/fixed\_string.cppm@{Compress-\/to-\/fit/src/util/fixed\_string.cppm}}
+\doxymbox{\hyperlink{fixed__string_8cppm}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{*\ \ \ Copyright\ (C)\ 2026\ Roan\ Bukaci}}
+\DoxyCodeLine{00003\ \textcolor{comment}{*\ \ \ SPDX-\/License-\/Identifier:\ GPL-\/3.0}}
+\DoxyCodeLine{00004\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00005}00005\ \textcolor{keyword}{export}\ module\ util:fixed\_string;}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00006}00006\ import\ std;}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00008}00008\ }
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00009}00009\ \textcolor{comment}{/**}}
+\DoxyCodeLine{00010\ \textcolor{comment}{\ *\ @brief\ An\ owning\ string\ with\ stack\ duration.}}
+\DoxyCodeLine{00011\ \textcolor{comment}{\ *\ @tparam\ N\ Size\ of\ string}}
+\DoxyCodeLine{00012\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00013}00013\ \textcolor{keyword}{template}\ <std::size\_t\ N>}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00014}\doxymbox{\hyperlink{classFixedString}{00014}}\ \textcolor{keyword}{class}\ \doxymbox{\hyperlink{classFixedString}{FixedString}}}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00015}00015\ \{}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00016}00016\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00017}\doxymbox{\hyperlink{classFixedString_a095905aa96d4c1158e72b8ee3cca5606}{00017}}\ \ \ \ \ \doxymbox{\hyperlink{classFixedString_a095905aa96d4c1158e72b8ee3cca5606}{consteval}}\ \doxymbox{\hyperlink{classFixedString_a095905aa96d4c1158e72b8ee3cca5606}{FixedString}}(\textcolor{keywordtype}{char}\ \textcolor{keyword}{const}\ (\&str)[N])}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00018}00018\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00019}00019\ \ \ \ \ \ \ \ \ std::copy\_n(str,\ N,\ str\_.begin());}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00020}00020\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00021}\doxymbox{\hyperlink{classFixedString_a458f7cee179b9784ea50bac42b5119bd}{00021}}\ \ \ \ \ \textcolor{keyword}{constexpr}\ \doxymbox{\hyperlink{classFixedString_a458f7cee179b9784ea50bac42b5119bd}{FixedString}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00023}\doxymbox{\hyperlink{classFixedString_a0835c797586182daf7eb908ad1b66b14}{00023}}\ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classFixedString_a0835c797586182daf7eb908ad1b66b14}{size}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ -\/>\ \doxymbox{\hyperlink{classFixedString_a0835c797586182daf7eb908ad1b66b14}{std}}::\doxymbox{\hyperlink{classFixedString_a0835c797586182daf7eb908ad1b66b14}{size\_t}}}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00024}00024\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00025}00025\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ N\ -\/\ 1;}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00026}00026\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00027}00027\ }
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00028}\doxymbox{\hyperlink{classFixedString_ab3c9619a12f473eff3a38bdb53b5e210}{00028}}\ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classFixedString_ab3c9619a12f473eff3a38bdb53b5e210}{data}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00029}00029\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00030}00030\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ str\_.data();}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00031}00031\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00032}00032\ }
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00033}\doxymbox{\hyperlink{classFixedString_aed79f545b305ad474753c904ee84741a}{00033}}\ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classFixedString_aed79f545b305ad474753c904ee84741a}{c\_str}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00034}00034\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00035}00035\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ str\_.data();}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00036}00036\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00037}00037\ }
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00038}\doxymbox{\hyperlink{classFixedString_a4e3a50a391ca2b642946fcb4666cf35e}{00038}}\ \ \ \ \ [[\doxymbox{\hyperlink{classFixedString}{nodiscard}}]]\ \textcolor{keyword}{constexpr}\ \doxymbox{\hyperlink{classFixedString}{operator}}\ \doxymbox{\hyperlink{classFixedString}{std}}::\doxymbox{\hyperlink{classFixedString}{string\_view}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00039}00039\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00040}00040\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\doxymbox{\hyperlink{classFixedString}{str\_}}.\doxymbox{\hyperlink{classFixedString}{data}}(),\ \doxymbox{\hyperlink{classFixedString}{str\_}}.\doxymbox{\hyperlink{classFixedString}{size}}()\};}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00041}00041\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00042}00042\ }
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00043}\doxymbox{\hyperlink{classFixedString_a36c9414e569ec18f8ea139c06fc17e13}{00043}}\ \ \ \ \ [[\doxymbox{\hyperlink{classFixedString}{nodiscard}}]]\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classFixedString}{operator}}[](\doxymbox{\hyperlink{classFixedString}{std}}::\doxymbox{\hyperlink{classFixedString}{size\_t}}\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{classFixedString}{index}})\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00044}00044\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00045}00045\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classFixedString}{data}}()[\doxymbox{\hyperlink{classFixedString}{index}}];}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00046}00046\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00047}00047\ }
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00048}\doxymbox{\hyperlink{classFixedString_a63073ef467c88e8b5b9f9c0590dc6959}{00048}}\ \ \ \ \ [[\doxymbox{\hyperlink{classFixedString}{nodiscard}}]]\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\&\ \doxymbox{\hyperlink{classFixedString}{operator}}[](\doxymbox{\hyperlink{classFixedString}{std}}::\doxymbox{\hyperlink{classFixedString}{size\_t}}\ \textcolor{keyword}{const}\ \doxymbox{\hyperlink{classFixedString}{index}})\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00049}00049\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00050}00050\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classFixedString}{str\_}}[\doxymbox{\hyperlink{classFixedString}{index}}];}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00051}00051\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00052}00052\ }
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00053}\doxymbox{\hyperlink{classFixedString_a82f2929e12a5c0d57c1882c8688b5b6e}{00053}}\ \ \ \ \ [[\doxymbox{\hyperlink{classFixedString}{nodiscard}}]]\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classFixedString}{begin}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00054}00054\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00055}00055\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classFixedString}{data}}();}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00056}00056\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00057}00057\ }
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00058}\doxymbox{\hyperlink{classFixedString_ad9b8ec43fb5118e00fdffaeba23c46f5}{00058}}\ \ \ \ \ [[\doxymbox{\hyperlink{classFixedString}{nodiscard}}]]\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classFixedString}{end}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00059}00059\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00060}00060\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classFixedString}{data}}()\ +\ \doxymbox{\hyperlink{classFixedString}{size}}();}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00061}00061\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00064}00064\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00065}\doxymbox{\hyperlink{classFixedString_a0a3d36814158f3831d325607fdea991f}{00065}}\ \ \ \ \ \doxymbox{\hyperlink{classFixedString}{std}}::\doxymbox{\hyperlink{classFixedString}{array}}<\textcolor{keywordtype}{char},\doxymbox{\hyperlink{classFixedString}{N}}>\ \doxymbox{\hyperlink{classFixedString}{str\_}}\{\};}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00066}00066\ }
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00067}00067\ \ \ \ \ \textcolor{keyword}{template}\ <\doxymbox{\hyperlink{classFixedString}{std}}::\doxymbox{\hyperlink{classFixedString}{size\_t}},\ \doxymbox{\hyperlink{classFixedString}{std}}::\doxymbox{\hyperlink{classFixedString}{size\_t}}>}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00068}\doxymbox{\hyperlink{classFixedString_a10435edabd79804f4f82338244e282b6}{00068}}\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classFixedString}{operator}}+(\doxymbox{\hyperlink{classFixedString}{FixedString}},\ \doxymbox{\hyperlink{classFixedString}{FixedString}});}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00069}00069\ \};}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00070}00070\ }
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00071}00071\ }
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00072}00072\ \textcolor{comment}{/**}}
+\DoxyCodeLine{00073\ \textcolor{comment}{\ *\ @brief\ Concatenate\ two\ FixedString(s)}}
+\DoxyCodeLine{00074\ \textcolor{comment}{\ *\ @param\ lhs}}
+\DoxyCodeLine{00075\ \textcolor{comment}{\ *\ @param\ rhs}}
+\DoxyCodeLine{00076\ \textcolor{comment}{\ *\ @return\ The\ new\ string}}
+\DoxyCodeLine{00077\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00078}00078\ \textcolor{keyword}{export}\ \textcolor{keyword}{template}\ <std::size\_t\ N1,\ std::size\_t\ N2>}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00079}\doxymbox{\hyperlink{fixed__string_8cppm_a48c41e6f84ccf054e5559fb5fcf79acc}{00079}}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{fixed__string_8cppm_a48c41e6f84ccf054e5559fb5fcf79acc}{operator}}+(\doxymbox{\hyperlink{classFixedString}{FixedString}}<N1>\ lhs,\ \doxymbox{\hyperlink{classFixedString}{FixedString}}<N2>\ rhs)}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00080}00080\ \{}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00081}00081\ \ \ \ \ \doxymbox{\hyperlink{classFixedString}{FixedString}}<N1\ +\ N2\ -\/\ 1>\ result;}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00083}00083\ \ \ \ \ \textcolor{keywordflow}{for}\ (std::size\_t\ i\ =\ 0;\ i\ <\ N1\ -\/\ 1;\ ++i)}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00084}00084\ \ \ \ \ \ \ \ \ result[i]\ =\ lhs[i];}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00086}00086\ \ \ \ \ \textcolor{keywordflow}{for}\ (std::size\_t\ i\ =\ 0;\ i\ <\ N2;\ ++i)}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00087}00087\ \ \ \ \ \ \ \ \ result[i\ +\ N1\ -\/\ 1]\ =\ rhs[i];}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00089}00089\ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00090}00090\ \}}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00091}00091\ }
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00092}00092\ \textcolor{keyword}{export}\ \textcolor{keyword}{template}\ <std::size\_t\ N1,\ std::size\_t\ N2>}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00093}\doxymbox{\hyperlink{fixed__string_8cppm_a799b00779226c899234ee733a0760af4}{00093}}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{fixed__string_8cppm_a799b00779226c899234ee733a0760af4}{operator}}+(\textcolor{keywordtype}{char}\ \textcolor{keyword}{const}\ (\&lhs)[N1],\ \doxymbox{\hyperlink{classFixedString}{FixedString}}<N2>\ rhs)}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00094}00094\ \{}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00095}00095\ \ \ \ \ \textcolor{keywordflow}{return}\ FixedString\{lhs\}\ +\ rhs;}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00096}00096\ \}}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00097}00097\ }
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00098}00098\ \textcolor{keyword}{export}\ \textcolor{keyword}{template}\ <std::size\_t\ N1,\ std::size\_t\ N2>}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00099}\doxymbox{\hyperlink{fixed__string_8cppm_a747f7c2b60a367c54c8d808be8b666a4}{00099}}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{fixed__string_8cppm_a747f7c2b60a367c54c8d808be8b666a4}{operator}}+(\doxymbox{\hyperlink{classFixedString}{FixedString}}<N1>\ lhs,\ \textcolor{keywordtype}{char}\ \textcolor{keyword}{const}\ (\&rhs)[N2])}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00100}00100\ \{}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00101}00101\ \ \ \ \ \textcolor{keywordflow}{return}\ lhs\ +\ FixedString\{rhs\};}
+\DoxyCodeLine{\Hypertarget{fixed__string_8cppm_source_l00102}00102\ \}}
+
+\end{DoxyCode}

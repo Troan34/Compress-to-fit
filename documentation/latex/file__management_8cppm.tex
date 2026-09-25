@@ -44,7 +44,7 @@ void \doxymbox{\hyperlink{file__management_8cppm_a51ac0d18eaecc636ae1d46e002e310
 \item 
 constexpr std::\+string\+\_\+view \doxymbox{\hyperlink{file__management_8cppm_a5d9e3a0a38b084aa0d6d23da7a06be5e}{SIGNATURE}} = "{}CTF-\/1"{}
 \item 
-constexpr size\+\_\+t \doxymbox{\hyperlink{file__management_8cppm_ae86837d59db95e31826c13b25d7aa994}{FILE\+\_\+\+HEADER\+\_\+\+SIZE}} = SIGNATURE.\+size() + sizeof(uint8\+\_\+t) + sizeof(uint8\+\_\+t) + sizeof(size\+\_\+t)
+constexpr size\+\_\+t \doxymbox{\hyperlink{file__management_8cppm_ae86837d59db95e31826c13b25d7aa994}{FILE\+\_\+\+HEADER\+\_\+\+SIZE}} = SIGNATURE.\+size() + sizeof(size\+\_\+t) + sizeof(uint16\+\_\+t) + sizeof(uint8\+\_\+t) + sizeof(uint8\+\_\+t)
 \end{DoxyCompactItemize}
 
 
@@ -97,7 +97,7 @@ MAX&\\
 \end{DoxyEnumFields}
 
 
-Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00020}{20}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00027}{27}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
 
 
 
@@ -112,7 +112,7 @@ void try\+\_\+throw\+\_\+\+IO\+\_\+error (\begin{DoxyParamCaption}\item[{std::\+
 
 
 
-Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00062}{62}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00068}{68}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
 
 
 
@@ -123,11 +123,11 @@ Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00062}{62
 \index{FILE\_HEADER\_SIZE@{FILE\_HEADER\_SIZE}!file\_management.cppm@{file\_management.cppm}}
 \doxysubsubsection{\texorpdfstring{FILE\_HEADER\_SIZE}{FILE\_HEADER\_SIZE}}
 {\footnotesize\ttfamily \label{file__management_8cppm_ae86837d59db95e31826c13b25d7aa994} 
-size\+\_\+t FILE\+\_\+\+HEADER\+\_\+\+SIZE = SIGNATURE.\+size() + sizeof(uint8\+\_\+t) + sizeof(uint8\+\_\+t) + sizeof(size\+\_\+t)\hspace{0.3cm}{\ttfamily [constexpr]}, {\ttfamily [export]}}
+size\+\_\+t FILE\+\_\+\+HEADER\+\_\+\+SIZE = SIGNATURE.\+size() + sizeof(size\+\_\+t) + sizeof(uint16\+\_\+t) + sizeof(uint8\+\_\+t) + sizeof(uint8\+\_\+t)\hspace{0.3cm}{\ttfamily [constexpr]}, {\ttfamily [export]}}
 
 
 
-Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00019}{19}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00026}{26}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
 
 \Hypertarget{file__management_8cppm_a5d9e3a0a38b084aa0d6d23da7a06be5e}\index{file\_management.cppm@{file\_management.cppm}!SIGNATURE@{SIGNATURE}}
 \index{SIGNATURE@{SIGNATURE}!file\_management.cppm@{file\_management.cppm}}
@@ -137,5 +137,5 @@ std::\+string\+\_\+view SIGNATURE = "{}CTF-\/1"{}\hspace{0.3cm}{\ttfamily [const
 
 
 
-Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00017}{17}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{file__management_8cppm_source_l00024}{24}} of file \doxymbox{\hyperlink{file__management_8cppm_source}{file\+\_\+management.\+cppm}}.
 

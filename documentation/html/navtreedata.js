@@ -55,6 +55,8 @@ var NAVTREE =
         [ "Functions", "functions_func.html", null ],
         [ "Variables", "functions_vars.html", null ],
         [ "Typedefs", "functions_type.html", null ],
+        [ "Enumerations", "functions_enum.html", null ],
+        [ "Properties", "functions_prop.html", null ],
         [ "Related Symbols", "functions_rela.html", null ]
       ] ]
     ] ],
@@ -75,9 +77,10 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"Compress-to-fit_8cpp.html",
-"classWindow.html#a5f935861ed29efa6e3aebdf4e4c07874",
-"macros_8hpp.html#ab7cf55a2c019bccc72bd8cfe79271eec"
+"Compress-to-fit-gui_8cpp.html",
+"classLZ77ConcurrentCompressor.html#ad58bcddad411e4973bde4155c7549b65",
+"error__warn__print_8hpp.html#aed6e5d8e0c233046b51a0726eeae42dea18dccefdab88f68c78bb114e0e03f61d",
+"structFileOptions.html#a7cb51e65263f944a8a56b79346dedb71"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

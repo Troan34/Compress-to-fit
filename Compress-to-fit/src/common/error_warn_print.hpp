@@ -123,7 +123,7 @@ inline void throw_error(ErrorType const error, const std::string& error_option =
 	}
 }
 
-enum class WarningType
+enum class WarningType : int
 {
 	RECOMPRESSION,
 	PORTIONS_OUT_OF_RANGE,

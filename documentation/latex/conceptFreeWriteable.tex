@@ -1,0 +1,19 @@
+\doxysection{Free\+Writeable Concept Reference}
+\hypertarget{conceptFreeWriteable}{}\label{conceptFreeWriteable}\index{FreeWriteable@{FreeWriteable}}
+\doxysubsection{Concept definition}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\textcolor{keyword}{concept\ }\doxymbox{\hyperlink{conceptFreeWriteable}{FreeWriteable}}\ =\ \textcolor{keyword}{requires}(T\ \textcolor{keyword}{const}\&\ a,\ std::ofstream\&\ file)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ write\_to(a,\ file);}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{core__utils_8cppm_source_l00210}{210}} of file \doxymbox{\hyperlink{core__utils_8cppm_source}{core\+\_\+utils.\+cppm}}.
+

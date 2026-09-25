@@ -93,7 +93,7 @@ $(function(){initNavTree('classConcOrderedFileList.html','','classConcOrderedFil
 </div><!--header-->
 <div class="contents">
 
-<p>First sequence in first sequence out, i.e. the data is written in the order given to <a class="el" href="#a2c53a81b8da07b0b7e0502ad83d98e0d" title="Inserts an element to the list, which it will own. THE FIRST ELEMENT MUST HAVE SEQUENCE NUMBER == 0,...">insert()</a>.  
+<p>First sequence in first sequence out, i.e. the data is written in the order given to the '<a class="el" href="#a2c53a81b8da07b0b7e0502ad83d98e0d" title="Inserts an element to the list, which it will own. THE FIRST ELEMENT MUST HAVE SEQUENCE NUMBER == 0,...">insert()</a>' member function.  
  <a href="#details">More...</a></p>
 <div class="dynheader">
 Collaboration diagram for ConcOrderedFileList&lt; T &gt;:</div>
@@ -134,8 +134,9 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:a831ae809e0d82e6481d9cbefe009b6a0" id="r_a831ae809e0d82e6481d9cbefe009b6a0"><td class="memItemLeft">std::jthread&#160;</td><td class="memItemRight"><a class="el" href="#a831ae809e0d82e6481d9cbefe009b6a0">writer</a> {&amp;<a class="el" href="#a50b2e0386e9d994376546f249bb1f0ad">ConcOrderedFileList::write_file</a>, this}</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDisk</a> T&gt;<br />
-class ConcOrderedFileList&lt; T &gt;</div><p>First sequence in first sequence out, i.e. the data is written in the order given to <a class="el" href="#a2c53a81b8da07b0b7e0502ad83d98e0d" title="Inserts an element to the list, which it will own. THE FIRST ELEMENT MUST HAVE SEQUENCE NUMBER == 0,...">insert()</a>. </p>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
+requires <a class="el" href="conceptSerializableToDisk.html">SerializableToDisk</a>&lt;std::ranges::range_value_t&lt;T&gt;&gt; or <a class="el" href="conceptSerializableToDisk.html">SerializableToDisk</a>&lt;T&gt;<br />
+class ConcOrderedFileList&lt; T &gt;</div><p>First sequence in first sequence out, i.e. the data is written in the order given to the '<a class="el" href="#a2c53a81b8da07b0b7e0502ad83d98e0d" title="Inserts an element to the list, which it will own. THE FIRST ELEMENT MUST HAVE SEQUENCE NUMBER == 0,...">insert()</a>' member function. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>Must implement write_to(ofstream&amp;) or be trivially copyable</td></tr>
@@ -143,9 +144,9 @@ class ConcOrderedFileList&lt; T &gt;</div><p>First sequence in first sequence ou
   </dd>
 </dl>
 <p>Implemented as doubly linked list. A separate write thread is spawned.</p>
-<dl class="section note"><dt>Note</dt><dd>Because the list will own the elements, consider using a memory pool (e.g. pmr) as to not reallocate memory. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Because the list will own the elements, consider using a memory pool (e.g. pmr) as to not reallocate memory. Do NOT expect this stuff to be cache friendly in ANY way. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="file__list_8cppm_source.html#l00032">32</a> of file <a class="el" href="file__list_8cppm_source.html">file_list.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="file__list_8cppm_source.html#l00043">43</a> of file <a class="el" href="file__list_8cppm_source.html">file_list.cppm</a>.</p>
 </div><a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a1ff85ae4e67a999054509fd24ee70e15" name="a1ff85ae4e67a999054509fd24ee70e15"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1ff85ae4e67a999054509fd24ee70e15">&#9670;&#160;</a></span>ConcOrderedFileList() <span class="overload">[1/3]</span></h2>
@@ -153,7 +154,7 @@ class ConcOrderedFileList&lt; T &gt;</div><p>First sequence in first sequence ou
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDisk</a> T&gt; </div>
+template&lt;typename T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -172,7 +173,7 @@ template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDi
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="file__list_8cppm_source.html#l00035">35</a> of file <a class="el" href="file__list_8cppm_source.html">file_list.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="file__list_8cppm_source.html#l00046">46</a> of file <a class="el" href="file__list_8cppm_source.html">file_list.cppm</a>.</p>
 
 </div>
 </div>
@@ -182,7 +183,7 @@ template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDi
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDisk</a> T&gt; </div>
+template&lt;typename T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -201,7 +202,7 @@ template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDi
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="file__list_8cppm_source.html#l00040">40</a> of file <a class="el" href="file__list_8cppm_source.html">file_list.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="file__list_8cppm_source.html#l00051">51</a> of file <a class="el" href="file__list_8cppm_source.html">file_list.cppm</a>.</p>
 
 </div>
 </div>
@@ -211,7 +212,7 @@ template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDi
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDisk</a> T&gt; </div>
+template&lt;typename T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -238,7 +239,7 @@ template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDi
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDisk</a> T&gt; </div>
+template&lt;typename T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -266,7 +267,7 @@ template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDi
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDisk</a> T&gt; </div>
+template&lt;typename T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -288,9 +289,7 @@ template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDi
 <p>Returns the next sequence number expected or missing. Can be used as a sanity check. </p>
 <dl class="section return"><dt>Returns</dt><dd>The expected sequence number </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="file__list_8cppm_source.html#l00139">139</a> of file <a class="el" href="file__list_8cppm_source.html">file_list.cppm</a>.</p>
-
-<p class="reference">References <a class="el" href="file__list_8cppm_source.html#l00152">expected_sequence_num_</a>.</p>
+<p class="definition">Definition at line <a class="el" href="file__list_8cppm_source.html#l00149">149</a> of file <a class="el" href="file__list_8cppm_source.html">file_list.cppm</a>.</p>
 
 </div>
 </div>
@@ -300,7 +299,7 @@ template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDi
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDisk</a> T&gt; </div>
+template&lt;typename T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -319,7 +318,7 @@ template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDi
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="file__list_8cppm_source.html#l00145">145</a> of file <a class="el" href="file__list_8cppm_source.html">file_list.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="file__list_8cppm_source.html#l00155">155</a> of file <a class="el" href="file__list_8cppm_source.html">file_list.cppm</a>.</p>
 
 </div>
 </div>
@@ -329,7 +328,7 @@ template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDi
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDisk</a> T&gt; </div>
+template&lt;typename T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -362,9 +361,9 @@ template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDi
 </dl>
 <dl class="section pre"><dt>Precondition</dt><dd><code class="param">element</code> must not own a nullptr </dd></dl>
 <dl class="section post"><dt>Postcondition</dt><dd>Any reference to <code class="param">element</code> is invalidated.</dd></dl>
-<dl class="section warning"><dt>Warning</dt><dd>THE FIRST ELEMENT THAT IS GOING TO BE WRITTEN TO FILE MUST HAVE SEQUENCE NUMBER == 0. This requirement exists as the first element you add could easily be not the first data chunk (i.e. out of order). Failure to follow this requirement will cause DEADLOCK. </dd></dl>
+<dl class="section warning"><dt>Warning</dt><dd>THE FIRST ELEMENT THAT IS GOING TO BE WRITTEN TO FILE MUST HAVE SEQUENCE NUMBER == 0. This requirement exists as the first element you add could easily not be the first data chunk (i.e. out of order). Failure to follow this requirement will cause DEADLOCK. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="file__list_8cppm_source.html#l00069">69</a> of file <a class="el" href="file__list_8cppm_source.html">file_list.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="file__list_8cppm_source.html#l00080">80</a> of file <a class="el" href="file__list_8cppm_source.html">file_list.cppm</a>.</p>
 
 </div>
 </div>
@@ -374,7 +373,7 @@ template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDi
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDisk</a> T&gt; </div>
+template&lt;typename T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -401,7 +400,7 @@ template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDi
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDisk</a> T&gt; </div>
+template&lt;typename T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -428,7 +427,7 @@ template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDi
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDisk</a> T&gt; </div>
+template&lt;typename T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -448,9 +447,7 @@ template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDi
 </div><div class="memdoc">
 <dl class="section return"><dt>Returns</dt><dd>Size, the number of nodes waiting to get written to file </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="file__list_8cppm_source.html#l00129">129</a> of file <a class="el" href="file__list_8cppm_source.html">file_list.cppm</a>.</p>
-
-<p class="reference">References <a class="el" href="file__list_8cppm_source.html#l00151">size_</a>.</p>
+<p class="definition">Definition at line <a class="el" href="file__list_8cppm_source.html#l00139">139</a> of file <a class="el" href="file__list_8cppm_source.html">file_list.cppm</a>.</p>
 
 </div>
 </div>
@@ -460,7 +457,7 @@ template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDi
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDisk</a> T&gt; </div>
+template&lt;typename T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -482,7 +479,7 @@ template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDi
 <p>Writes to file. Should be called by a thread. </p>
 <dl class="section pre"><dt>Precondition</dt><dd>tail_ != nullptr </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="file__list_8cppm_source.html#l00165">165</a> of file <a class="el" href="file__list_8cppm_source.html">file_list.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="file__list_8cppm_source.html#l00175">175</a> of file <a class="el" href="file__list_8cppm_source.html">file_list.cppm</a>.</p>
 
 </div>
 </div>
@@ -493,7 +490,7 @@ template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDi
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDisk</a> T&gt; </div>
+template&lt;typename T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -509,7 +506,7 @@ template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDi
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="file__list_8cppm_source.html#l00155">155</a> of file <a class="el" href="file__list_8cppm_source.html">file_list.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="file__list_8cppm_source.html#l00165">165</a> of file <a class="el" href="file__list_8cppm_source.html">file_list.cppm</a>.</p>
 
 </div>
 </div>
@@ -519,7 +516,7 @@ template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDi
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDisk</a> T&gt; </div>
+template&lt;typename T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -535,9 +532,7 @@ template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDi
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="file__list_8cppm_source.html#l00152">152</a> of file <a class="el" href="file__list_8cppm_source.html">file_list.cppm</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="file__list_8cppm_source.html#l00139">expected_sequence_num()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="file__list_8cppm_source.html#l00162">162</a> of file <a class="el" href="file__list_8cppm_source.html">file_list.cppm</a>.</p>
 
 </div>
 </div>
@@ -547,7 +542,7 @@ template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDi
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDisk</a> T&gt; </div>
+template&lt;typename T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -563,7 +558,7 @@ template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDi
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="file__list_8cppm_source.html#l00150">150</a> of file <a class="el" href="file__list_8cppm_source.html">file_list.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="file__list_8cppm_source.html#l00160">160</a> of file <a class="el" href="file__list_8cppm_source.html">file_list.cppm</a>.</p>
 
 </div>
 </div>
@@ -573,7 +568,7 @@ template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDi
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDisk</a> T&gt; </div>
+template&lt;typename T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -589,7 +584,7 @@ template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDi
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="file__list_8cppm_source.html#l00153">153</a> of file <a class="el" href="file__list_8cppm_source.html">file_list.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="file__list_8cppm_source.html#l00163">163</a> of file <a class="el" href="file__list_8cppm_source.html">file_list.cppm</a>.</p>
 
 </div>
 </div>
@@ -599,7 +594,7 @@ template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDi
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDisk</a> T&gt; </div>
+template&lt;typename T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -615,7 +610,7 @@ template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDi
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="file__list_8cppm_source.html#l00156">156</a> of file <a class="el" href="file__list_8cppm_source.html">file_list.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="file__list_8cppm_source.html#l00166">166</a> of file <a class="el" href="file__list_8cppm_source.html">file_list.cppm</a>.</p>
 
 </div>
 </div>
@@ -625,7 +620,7 @@ template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDi
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDisk</a> T&gt; </div>
+template&lt;typename T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -641,9 +636,7 @@ template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDi
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="file__list_8cppm_source.html#l00151">151</a> of file <a class="el" href="file__list_8cppm_source.html">file_list.cppm</a>.</p>
-
-<p class="reference">Referenced by <a class="el" href="file__list_8cppm_source.html#l00129">size()</a>.</p>
+<p class="definition">Definition at line <a class="el" href="file__list_8cppm_source.html#l00161">161</a> of file <a class="el" href="file__list_8cppm_source.html">file_list.cppm</a>.</p>
 
 </div>
 </div>
@@ -653,7 +646,7 @@ template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDi
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDisk</a> T&gt; </div>
+template&lt;typename T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -669,7 +662,7 @@ template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDi
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="file__list_8cppm_source.html#l00154">154</a> of file <a class="el" href="file__list_8cppm_source.html">file_list.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="file__list_8cppm_source.html#l00164">164</a> of file <a class="el" href="file__list_8cppm_source.html">file_list.cppm</a>.</p>
 
 </div>
 </div>
@@ -679,7 +672,7 @@ template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDi
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDisk</a> T&gt; </div>
+template&lt;typename T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -695,7 +688,7 @@ template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDi
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="file__list_8cppm_source.html#l00158">158</a> of file <a class="el" href="file__list_8cppm_source.html">file_list.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="file__list_8cppm_source.html#l00168">168</a> of file <a class="el" href="file__list_8cppm_source.html">file_list.cppm</a>.</p>
 
 </div>
 </div>
@@ -705,7 +698,7 @@ template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDi
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDisk</a> T&gt; </div>
+template&lt;typename T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -721,7 +714,7 @@ template&lt;<a class="el" href="conceptSerializableToDisk.html">SerializableToDi
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="file__list_8cppm_source.html#l00157">157</a> of file <a class="el" href="file__list_8cppm_source.html">file_list.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="file__list_8cppm_source.html#l00167">167</a> of file <a class="el" href="file__list_8cppm_source.html">file_list.cppm</a>.</p>
 
 </div>
 </div>

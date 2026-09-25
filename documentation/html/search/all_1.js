@@ -1,7 +1,19 @@
 var searchData=
 [
-  ['base_0',['BASE',['../namespacealg.html#a783a2c45f8f4efe9e425d4e7f1030864',1,'alg']]],
-  ['begin_1',['begin',['../classWindow.html#ab03fe4247b35a09d6f9d6b6f7d612c91',1,'Window::begin()'],['../classLZ77Block.html#af8c1465ab854939fc0ab8faf52fe8578',1,'LZ77Block::begin() const noexcept']]],
-  ['block_2',['block',['../classLZ77Block.html#a8a60a5c590f1600ea16bafe8dbc0f8a1',1,'LZ77Block']]],
-  ['bucket_5findex_3',['bucket_index',['../classalg_1_1Rabin.html#ab51dcaf05dd74ff0aa46b5adfbb28369',1,'alg::Rabin']]]
+  ['backendmessage_0',['BackendMessage',['../structBackendMessage.html',1,'']]],
+  ['badmessage_1',['BadMessage',['../structBadMessage.html',1,'']]],
+  ['base_2',['BASE',['../namespacealg.html#a783a2c45f8f4efe9e425d4e7f1030864',1,'alg']]],
+  ['begin_3',['begin',['../classWindow.html#ab03fe4247b35a09d6f9d6b6f7d612c91',1,'Window::begin()'],['../classLZ77Block.html#a79e6cd1fd57e9ee4ec96ee1680a4a77d',1,'LZ77Block::begin()'],['../classFixedString.html#a82f2929e12a5c0d57c1882c8688b5b6e',1,'FixedString::begin()']]],
+  ['blue_4',['BLUE',['../namespaceANSI.html#a85c052cafafafe8e43dc42b530ababcb',1,'ANSI']]],
+  ['bold_5',['BOLD',['../namespaceANSI.html#a782f8fa0332d5f1a05b5b63e160252b6',1,'ANSI']]],
+  ['bold_5fblue_6',['BOLD_BLUE',['../namespaceANSI.html#aae6b5334500e7446153611e95d5377ba',1,'ANSI']]],
+  ['bold_5fcyan_7',['BOLD_CYAN',['../namespaceANSI.html#a8d568ab38ede356e754f6d262a5ececd',1,'ANSI']]],
+  ['bold_5fgreen_8',['BOLD_GREEN',['../namespaceANSI.html#a2e440a4bc9a6af48e23658c432ee2405',1,'ANSI']]],
+  ['bold_5fmagenta_9',['BOLD_MAGENTA',['../namespaceANSI.html#a08ce6eab8b73ff748dea5e9525b59731',1,'ANSI']]],
+  ['bold_5fred_10',['BOLD_RED',['../namespaceANSI.html#a7e1901742c27ecaa22c772b5425d8749',1,'ANSI']]],
+  ['bold_5fwhite_11',['BOLD_WHITE',['../namespaceANSI.html#a562537925b99730dc2d0b61954c14b19',1,'ANSI']]],
+  ['bold_5fyellow_12',['BOLD_YELLOW',['../namespaceANSI.html#a6ab00d53d0b6cde7b8d88a3f24a7809c',1,'ANSI']]],
+  ['bucket_5findex_13',['bucket_index',['../classalg_1_1Rabin.html#ab51dcaf05dd74ff0aa46b5adfbb28369',1,'alg::Rabin']]],
+  ['buffer_14',['buffer',['../classLZ77Block.html#a8ff1e939673dd9d4c8a338c68bedba6e',1,'LZ77Block']]],
+  ['buffer_5f_15',['buffer_',['../classLZ77Block.html#abd630fecb32c7a1e445ebeedf1ea8881',1,'LZ77Block']]]
 ];

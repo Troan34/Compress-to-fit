@@ -1,0 +1,19 @@
+\doxysection{Member\+Writeable Concept Reference}
+\hypertarget{conceptMemberWriteable}{}\label{conceptMemberWriteable}\index{MemberWriteable@{MemberWriteable}}
+\doxysubsection{Concept definition}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\textcolor{keyword}{concept\ }\doxymbox{\hyperlink{conceptMemberWriteable}{MemberWriteable}}\ =\ \textcolor{keyword}{requires}(T\ \textcolor{keyword}{const}\&\ a,\ std::ofstream\&\ file)}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ a.write\_to(file);}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{core__utils_8cppm_source_l00204}{204}} of file \doxymbox{\hyperlink{core__utils_8cppm_source}{core\+\_\+utils.\+cppm}}.
+

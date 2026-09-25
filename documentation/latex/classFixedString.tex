@@ -1,0 +1,216 @@
+\doxysection{Fixed\+String\texorpdfstring{$<$}{<} N \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classFixedString}{}\label{classFixedString}\index{FixedString$<$ N $>$@{FixedString$<$ N $>$}}
+
+
+An owning string with stack duration.  
+
+
+
+
+Collaboration diagram for Fixed\+String\texorpdfstring{$<$}{<} N \texorpdfstring{$>$}{>}:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=180pt]{classFixedString__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+consteval \doxymbox{\hyperlink{classFixedString_a095905aa96d4c1158e72b8ee3cca5606}{Fixed\+String}} (char const (\&str)\+[N]\+)
+\item 
+constexpr \doxymbox{\hyperlink{classFixedString_a458f7cee179b9784ea50bac42b5119bd}{Fixed\+String}} ()=default
+\item 
+constexpr auto \doxymbox{\hyperlink{classFixedString_a0835c797586182daf7eb908ad1b66b14}{size}} () const noexcept -\/$>$ std::\+size\+\_\+t
+\item 
+constexpr auto \doxymbox{\hyperlink{classFixedString_ab3c9619a12f473eff3a38bdb53b5e210}{data}} () const noexcept
+\item 
+constexpr auto \doxymbox{\hyperlink{classFixedString_aed79f545b305ad474753c904ee84741a}{c\+\_\+str}} () const noexcept
+\item 
+constexpr \doxymbox{\hyperlink{classFixedString_a4e3a50a391ca2b642946fcb4666cf35e}{operator std::\+string\+\_\+view}} () const noexcept
+\item 
+constexpr auto \doxymbox{\hyperlink{classFixedString_a36c9414e569ec18f8ea139c06fc17e13}{operator\+[$\,$]\+}} (std::\+size\+\_\+t const index) const noexcept
+\item 
+constexpr auto \& \doxymbox{\hyperlink{classFixedString_a63073ef467c88e8b5b9f9c0590dc6959}{operator\+[$\,$]\+}} (std::\+size\+\_\+t const index) noexcept
+\item 
+constexpr auto \doxymbox{\hyperlink{classFixedString_a82f2929e12a5c0d57c1882c8688b5b6e}{begin}} () const noexcept
+\item 
+constexpr auto \doxymbox{\hyperlink{classFixedString_ad9b8ec43fb5118e00fdffaeba23c46f5}{end}} () const noexcept
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std::\+array$<$ char, N $>$ \doxymbox{\hyperlink{classFixedString_a0a3d36814158f3831d325607fdea991f}{str\+\_\+}} \{\}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$std::\+size\+\_\+t, std::\+size\+\_\+t$>$ }\\constexpr auto \doxymbox{\hyperlink{classFixedString_a10435edabd79804f4f82338244e282b6}{operator+}} (\doxymbox{\hyperlink{classFixedString}{Fixed\+String}}, \doxymbox{\hyperlink{classFixedString}{Fixed\+String}})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$std::\+size\+\_\+t N$>$\newline
+class Fixed\+String$<$ N $>$}
+An owning string with stack duration. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em N} & Size of string \\
+\hline
+\end{DoxyTemplParams}
+
+
+Definition at line \doxymbox{\hyperlink{fixed__string_8cppm_source_l00014}{14}} of file \doxymbox{\hyperlink{fixed__string_8cppm_source}{fixed\+\_\+string.\+cppm}}.
+
+
+
+\label{doc-constructors}
+\Hypertarget{classFixedString_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classFixedString_a095905aa96d4c1158e72b8ee3cca5606}\index{FixedString$<$ N $>$@{FixedString$<$ N $>$}!FixedString@{FixedString}}
+\index{FixedString@{FixedString}!FixedString$<$ N $>$@{FixedString$<$ N $>$}}
+\doxysubsubsection{\texorpdfstring{FixedString()}{FixedString()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classFixedString_a095905aa96d4c1158e72b8ee3cca5606} 
+template$<$std::\+size\+\_\+t N$>$ \\
+\doxymbox{\hyperlink{classFixedString}{Fixed\+String}}$<$ N $>$::\+\+Fixed\+String (\begin{DoxyParamCaption}\item[{char const (\&)}]{str}{\+[\+N]\+}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [consteval]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{fixed__string_8cppm_source_l00017}{17}} of file \doxymbox{\hyperlink{fixed__string_8cppm_source}{fixed\+\_\+string.\+cppm}}.
+
+\Hypertarget{classFixedString_a458f7cee179b9784ea50bac42b5119bd}\index{FixedString$<$ N $>$@{FixedString$<$ N $>$}!FixedString@{FixedString}}
+\index{FixedString@{FixedString}!FixedString$<$ N $>$@{FixedString$<$ N $>$}}
+\doxysubsubsection{\texorpdfstring{FixedString()}{FixedString()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classFixedString_a458f7cee179b9784ea50bac42b5119bd} 
+template$<$std::\+size\+\_\+t N$>$ \\
+\doxymbox{\hyperlink{classFixedString}{Fixed\+String}}$<$ N $>$::\+\+Fixed\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [constexpr]}, {\ttfamily [default]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classFixedString_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classFixedString_a82f2929e12a5c0d57c1882c8688b5b6e}\index{FixedString$<$ N $>$@{FixedString$<$ N $>$}!begin@{begin}}
+\index{begin@{begin}!FixedString$<$ N $>$@{FixedString$<$ N $>$}}
+\doxysubsubsection{\texorpdfstring{begin()}{begin()}}
+{\footnotesize\ttfamily \label{classFixedString_a82f2929e12a5c0d57c1882c8688b5b6e} 
+template$<$std::\+size\+\_\+t N$>$ \\
+auto \doxymbox{\hyperlink{classFixedString}{Fixed\+String}}$<$ N $>$::\+begin (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{fixed__string_8cppm_source_l00053}{53}} of file \doxymbox{\hyperlink{fixed__string_8cppm_source}{fixed\+\_\+string.\+cppm}}.
+
+\Hypertarget{classFixedString_aed79f545b305ad474753c904ee84741a}\index{FixedString$<$ N $>$@{FixedString$<$ N $>$}!c\_str@{c\_str}}
+\index{c\_str@{c\_str}!FixedString$<$ N $>$@{FixedString$<$ N $>$}}
+\doxysubsubsection{\texorpdfstring{c\_str()}{c\_str()}}
+{\footnotesize\ttfamily \label{classFixedString_aed79f545b305ad474753c904ee84741a} 
+template$<$std::\+size\+\_\+t N$>$ \\
+auto \doxymbox{\hyperlink{classFixedString}{Fixed\+String}}$<$ N $>$::\+c\+\_\+str (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{fixed__string_8cppm_source_l00033}{33}} of file \doxymbox{\hyperlink{fixed__string_8cppm_source}{fixed\+\_\+string.\+cppm}}.
+
+\Hypertarget{classFixedString_ab3c9619a12f473eff3a38bdb53b5e210}\index{FixedString$<$ N $>$@{FixedString$<$ N $>$}!data@{data}}
+\index{data@{data}!FixedString$<$ N $>$@{FixedString$<$ N $>$}}
+\doxysubsubsection{\texorpdfstring{data()}{data()}}
+{\footnotesize\ttfamily \label{classFixedString_ab3c9619a12f473eff3a38bdb53b5e210} 
+template$<$std::\+size\+\_\+t N$>$ \\
+auto \doxymbox{\hyperlink{classFixedString}{Fixed\+String}}$<$ N $>$::\+data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{fixed__string_8cppm_source_l00028}{28}} of file \doxymbox{\hyperlink{fixed__string_8cppm_source}{fixed\+\_\+string.\+cppm}}.
+
+\Hypertarget{classFixedString_ad9b8ec43fb5118e00fdffaeba23c46f5}\index{FixedString$<$ N $>$@{FixedString$<$ N $>$}!end@{end}}
+\index{end@{end}!FixedString$<$ N $>$@{FixedString$<$ N $>$}}
+\doxysubsubsection{\texorpdfstring{end()}{end()}}
+{\footnotesize\ttfamily \label{classFixedString_ad9b8ec43fb5118e00fdffaeba23c46f5} 
+template$<$std::\+size\+\_\+t N$>$ \\
+auto \doxymbox{\hyperlink{classFixedString}{Fixed\+String}}$<$ N $>$::\+end (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{fixed__string_8cppm_source_l00058}{58}} of file \doxymbox{\hyperlink{fixed__string_8cppm_source}{fixed\+\_\+string.\+cppm}}.
+
+\Hypertarget{classFixedString_a4e3a50a391ca2b642946fcb4666cf35e}\index{FixedString$<$ N $>$@{FixedString$<$ N $>$}!operator std::string\_view@{operator std::string\_view}}
+\index{operator std::string\_view@{operator std::string\_view}!FixedString$<$ N $>$@{FixedString$<$ N $>$}}
+\doxysubsubsection{\texorpdfstring{operator std::string\_view()}{operator std::string\_view()}}
+{\footnotesize\ttfamily \label{classFixedString_a4e3a50a391ca2b642946fcb4666cf35e} 
+template$<$std::\+size\+\_\+t N$>$ \\
+\doxymbox{\hyperlink{classFixedString}{Fixed\+String}}$<$ N $>$::\+operator std::\+string\+\_\+view (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{fixed__string_8cppm_source_l00038}{38}} of file \doxymbox{\hyperlink{fixed__string_8cppm_source}{fixed\+\_\+string.\+cppm}}.
+
+\Hypertarget{classFixedString_a36c9414e569ec18f8ea139c06fc17e13}\index{FixedString$<$ N $>$@{FixedString$<$ N $>$}!operator\+[]\+@{operator[]}}
+\index{operator\+[]\+@{operator[]}!FixedString$<$ N $>$@{FixedString$<$ N $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classFixedString_a36c9414e569ec18f8ea139c06fc17e13} 
+template$<$std::\+size\+\_\+t N$>$ \\
+auto \doxymbox{\hyperlink{classFixedString}{Fixed\+String}}$<$ N $>$::\+operator\+[$\,$]\+ (\begin{DoxyParamCaption}\item[{std::\+size\+\_\+t const}]{index}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{fixed__string_8cppm_source_l00043}{43}} of file \doxymbox{\hyperlink{fixed__string_8cppm_source}{fixed\+\_\+string.\+cppm}}.
+
+\Hypertarget{classFixedString_a63073ef467c88e8b5b9f9c0590dc6959}\index{FixedString$<$ N $>$@{FixedString$<$ N $>$}!operator\+[]\+@{operator[]}}
+\index{operator\+[]\+@{operator[]}!FixedString$<$ N $>$@{FixedString$<$ N $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classFixedString_a63073ef467c88e8b5b9f9c0590dc6959} 
+template$<$std::\+size\+\_\+t N$>$ \\
+auto \& \doxymbox{\hyperlink{classFixedString}{Fixed\+String}}$<$ N $>$::\+operator\+[$\,$]\+ (\begin{DoxyParamCaption}\item[{std::\+size\+\_\+t const}]{index}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{fixed__string_8cppm_source_l00048}{48}} of file \doxymbox{\hyperlink{fixed__string_8cppm_source}{fixed\+\_\+string.\+cppm}}.
+
+\Hypertarget{classFixedString_a0835c797586182daf7eb908ad1b66b14}\index{FixedString$<$ N $>$@{FixedString$<$ N $>$}!size@{size}}
+\index{size@{size}!FixedString$<$ N $>$@{FixedString$<$ N $>$}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily \label{classFixedString_a0835c797586182daf7eb908ad1b66b14} 
+template$<$std::\+size\+\_\+t N$>$ \\
+auto \doxymbox{\hyperlink{classFixedString}{Fixed\+String}}$<$ N $>$::\+size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const -\/$>$ std::\+size\+\_\+t\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [constexpr]}, {\ttfamily [noexcept]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{fixed__string_8cppm_source_l00023}{23}} of file \doxymbox{\hyperlink{fixed__string_8cppm_source}{fixed\+\_\+string.\+cppm}}.
+
+
+
+\label{doc-related-members}
+\Hypertarget{classFixedString_doc-related-members}
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classFixedString_a10435edabd79804f4f82338244e282b6}\index{FixedString$<$ N $>$@{FixedString$<$ N $>$}!operator+@{operator+}}
+\index{operator+@{operator+}!FixedString$<$ N $>$@{FixedString$<$ N $>$}}
+\doxysubsubsection{\texorpdfstring{operator+}{operator+}}
+{\footnotesize\ttfamily \label{classFixedString_a10435edabd79804f4f82338244e282b6} 
+template$<$std::\+size\+\_\+t N$>$ \\
+template$<$std::\+size\+\_\+t, std::\+size\+\_\+t$>$ \\
+auto operator+ (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{classFixedString}{Fixed\+String}}$<$ N $>$}]{}{, }\item[{\doxymbox{\hyperlink{classFixedString}{Fixed\+String}}$<$ N $>$}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classFixedString_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classFixedString_a0a3d36814158f3831d325607fdea991f}\index{FixedString$<$ N $>$@{FixedString$<$ N $>$}!str\_@{str\_}}
+\index{str\_@{str\_}!FixedString$<$ N $>$@{FixedString$<$ N $>$}}
+\doxysubsubsection{\texorpdfstring{str\_}{str\_}}
+{\footnotesize\ttfamily \label{classFixedString_a0a3d36814158f3831d325607fdea991f} 
+template$<$std::\+size\+\_\+t N$>$ \\
+std::\+array$<$char,N$>$ \doxymbox{\hyperlink{classFixedString}{Fixed\+String}}$<$ N $>$::\+str\+\_\+ \{\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{fixed__string_8cppm_source_l00065}{65}} of file \doxymbox{\hyperlink{fixed__string_8cppm_source}{fixed\+\_\+string.\+cppm}}.
+
+
+
+The documentation for this class was generated from the following file:\+\begin{DoxyCompactItemize}
+\item 
+Compress-\/to-\/fit/\+src/\+util/\+\doxymbox{\hyperlink{fixed__string_8cppm}{fixed\+\_\+string.\+cppm}}\end{DoxyCompactItemize}

@@ -1,9 +1,17 @@
 var searchData=
 [
-  ['tail_5f_0',['tail_',['../classConcOrderedFileList.html#a765dda4afe675365fcc4fa7a6ce787e7',1,'ConcOrderedFileList']]],
-  ['tasks_5f_1',['tasks_',['../classThreadPool.html#aa91d4103c2770a7b47e7e45e1d1037a1',1,'ThreadPool']]],
-  ['thread_5fpool_2',['thread_pool',['../classLZ77ConcurrentCompressor.html#a3e8abeacb4374460608fcb4b352a02f8',1,'LZ77ConcurrentCompressor::thread_pool'],['../classLZ77ConcurrentDecompressor.html#af97c7bbfb681f4a6f07857c9b096d3e9',1,'LZ77ConcurrentDecompressor::thread_pool']]],
-  ['threads_5f_3',['threads_',['../classThreadPool.html#a0bfc20a0a9f4060e1b2c3a471f86592c',1,'ThreadPool']]],
-  ['token_5fstrings_4',['token_strings',['../namespaceparser.html#a35056580671d6aa5abd316f21007bef6',1,'parser']]],
-  ['type_5',['type',['../classparser_1_1Token.html#a94a222c963f58b1206743b29e10084df',1,'parser::Token']]]
+  ['search_5fratio_0',['SEARCH_RATIO',['../lz77_8cppm.html#a99dc63646f54b92729a552eed4b13e91',1,'lz77.cppm']]],
+  ['sequence_5fnum_5f_1',['sequence_num_',['../structNode.html#ae4a3d7ab0055ff54fee6c87a644ae79e',1,'Node']]],
+  ['severity_5f_2',['severity_',['../classQmlBackendMessage.html#a3d517ad05ca226dc6122cb7e8544d88e',1,'QmlBackendMessage']]],
+  ['signature_3',['SIGNATURE',['../file__management_8cppm.html#a5d9e3a0a38b084aa0d6d23da7a06be5e',1,'file_management.cppm']]],
+  ['size_5f_4',['size_',['../classConcOrderedFileList.html#adf5cfd5b2e46c73533d28b89a0612f28',1,'ConcOrderedFileList']]],
+  ['size_5fchunk_5',['SIZE_CHUNK',['../core__utils_8cppm.html#a558c3db94c9beb4d83912931cf4244e7',1,'core_utils.cppm']]],
+  ['size_5ffiles_6',['size_files',['../structparser_1_1Options.html#a31c850f2a96edb31857b56082fed7605',1,'parser::Options']]],
+  ['size_5ffiles_5fmin_7',['SIZE_FILES_MIN',['../comp__options_8hpp.html#aec7880c199d5393b78db8e52d180495b',1,'SIZE_FILES_MIN:&#160;comp_options.hpp'],['../core__utils_8cppm.html#aec7880c199d5393b78db8e52d180495b',1,'SIZE_FILES_MIN:&#160;comp_options.hpp']]],
+  ['size_5flook_5fahead_8',['size_look_ahead',['../classWindow.html#af4884d06fd6bee3d25f2738f82573ade',1,'Window']]],
+  ['size_5fsearch_9',['size_search',['../classWindow.html#a1021b4fccc4fbdf9e9d325bf805ef577',1,'Window']]],
+  ['stop_5fthreads_5f_10',['stop_threads_',['../classThreadPool.html#a49e2b199d10b5f6c8ddd4394d0220662',1,'ThreadPool']]],
+  ['str_5f_11',['str_',['../classFixedString.html#a0a3d36814158f3831d325607fdea991f',1,'FixedString']]],
+  ['symbol_12',['symbol',['../structToken.html#a6f893dab099147a0de1fe04e3f428d0e',1,'Token']]],
+  ['syntax_13',['SYNTAX',['../namespaceERR__STRING.html#a220301514d7ebf48975be72979b79ddf',1,'ERR_STRING']]]
 ];

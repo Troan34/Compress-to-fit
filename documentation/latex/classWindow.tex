@@ -7,7 +7,8 @@
 
 
 
-Collaboration diagram for Window:\+\nopagebreak
+Collaboration diagram for Window:\+
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -19,7 +20,7 @@ Collaboration diagram for Window:\+\nopagebreak
 \item 
 \doxymbox{\hyperlink{classWindow_a2e5c69b901a3b6a8c849c97eb06fc053}{Window}} (const std::\+span$<$ \doxymbox{\hyperlink{structSym}{Sym}} const $>$ \&data\+\_\+, size\+\_\+t const window\+\_\+size) noexcept
 \item 
-\doxymbox{\hyperlink{classWindow_ab4926cf812ec593e7bac1ded97edf43d}{Window}} (const std::\+span$<$ \doxymbox{\hyperlink{structSym}{Sym}} const $>$ \&data\+\_\+, \doxymbox{\hyperlink{core__utils_8cppm_a59fc5d9b777790e56395e645e4205db0}{Comp\+Preset}} const preset)
+\doxymbox{\hyperlink{classWindow_ab4926cf812ec593e7bac1ded97edf43d}{Window}} (const std::\+span$<$ \doxymbox{\hyperlink{structSym}{Sym}} const $>$ \&data\+\_\+, \doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0}{Comp\+Preset}} const preset)
 \item 
 auto \doxymbox{\hyperlink{classWindow_ab03fe4247b35a09d6f9d6b6f7d612c91}{begin}} () const noexcept
 \item 
@@ -42,6 +43,8 @@ auto \doxymbox{\hyperlink{classWindow_abf906e8c855f1166e57d070cb613b8a3}{get\+\_
 auto \doxymbox{\hyperlink{classWindow_ac2514e007aa303f6fb54b48fe0b35999}{get\+\_\+relative\+\_\+pos}} () const noexcept
 \item 
 auto \doxymbox{\hyperlink{classWindow_a545b4c991719d798b71a5caa33b6b332}{get\+\_\+absolute\+\_\+pos}} () const noexcept
+\item 
+auto \doxymbox{\hyperlink{classWindow_ae436ef7cac460780cf76716baa2e97ea}{get\+\_\+offset}} () const noexcept
 \item 
 auto \doxymbox{\hyperlink{classWindow_ab5ad9769703a0bacc1deb7c2068c1de8}{operator\+[$\,$]\+}} (size\+\_\+t const index) const noexcept
 \item 
@@ -71,7 +74,7 @@ size\+\_\+t \doxymbox{\hyperlink{classWindow_ac8356c30e82c99c02e6e4b6f897c5086}{
 
 This class gives a window to data given to the ctor 
 
-Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00062}{62}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00070}{70}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
 
 
 
@@ -86,15 +89,15 @@ Window::\+\+Window (\begin{DoxyParamCaption}\item[{const std::\+span$<$ \doxymbo
 
 
 
-Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00065}{65}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00073}{73}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
 
 
 
-References \doxymbox{\hyperlink{lz77_8cppm_source_l00178}{max\+\_\+size\+\_\+look\+\_\+ahead}}, \doxymbox{\hyperlink{lz77_8cppm_source_l00180}{max\+\_\+size\+\_\+search}}, \doxymbox{\hyperlink{lz77_8cppm_source_l00051}{SEARCH\+\_\+\+RATIO}}, \doxymbox{\hyperlink{lz77_8cppm_source_l00177}{size\+\_\+look\+\_\+ahead}}, \doxymbox{\hyperlink{lz77_8cppm_source_l00179}{size\+\_\+search}}, and \doxymbox{\hyperlink{lz77_8cppm_source_l00065}{Window()}}.
+References \doxymbox{\hyperlink{lz77_8cppm_source_l00187}{max\+\_\+size\+\_\+look\+\_\+ahead}}, \doxymbox{\hyperlink{lz77_8cppm_source_l00189}{max\+\_\+size\+\_\+search}}, \doxymbox{\hyperlink{lz77_8cppm_source_l00059}{SEARCH\+\_\+\+RATIO}}, \doxymbox{\hyperlink{lz77_8cppm_source_l00186}{size\+\_\+look\+\_\+ahead}}, \doxymbox{\hyperlink{lz77_8cppm_source_l00188}{size\+\_\+search}}, and \doxymbox{\hyperlink{lz77_8cppm_source_l00073}{Window()}}.
 
 
 
-Referenced by \doxymbox{\hyperlink{lz77_8cppm_source_l00065}{Window()}}.
+Referenced by \doxymbox{\hyperlink{lz77_8cppm_source_l00073}{Window()}}.
 
 Here is the call graph for this function:\+\nopagebreak
 \begin{figure}[H]
@@ -114,19 +117,19 @@ Here is the caller graph for this function:\+\nopagebreak
 \index{Window@{Window}!Window@{Window}}
 \doxysubsubsection{\texorpdfstring{Window()}{Window()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily \label{classWindow_ab4926cf812ec593e7bac1ded97edf43d} 
-Window::\+\+Window (\begin{DoxyParamCaption}\item[{const std::\+span$<$ \doxymbox{\hyperlink{structSym}{Sym}} const $>$ \&}]{data\+\_\+}{, }\item[{\doxymbox{\hyperlink{core__utils_8cppm_a59fc5d9b777790e56395e645e4205db0}{Comp\+Preset}} const}]{preset}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+Window::\+\+Window (\begin{DoxyParamCaption}\item[{const std::\+span$<$ \doxymbox{\hyperlink{structSym}{Sym}} const $>$ \&}]{data\+\_\+}{, }\item[{\doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0}{Comp\+Preset}} const}]{preset}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
-Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00074}{74}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00082}{82}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
 
 
 
-References \doxymbox{\hyperlink{lz77_8cppm_source_l00181}{max\+\_\+size}}, \doxymbox{\hyperlink{lz77_8cppm_source_l00178}{max\+\_\+size\+\_\+look\+\_\+ahead}}, \doxymbox{\hyperlink{lz77_8cppm_source_l00180}{max\+\_\+size\+\_\+search}}, \doxymbox{\hyperlink{lz77_8cppm_source_l00051}{SEARCH\+\_\+\+RATIO}}, \doxymbox{\hyperlink{lz77_8cppm_source_l00177}{size\+\_\+look\+\_\+ahead}}, \doxymbox{\hyperlink{lz77_8cppm_source_l00179}{size\+\_\+search}}, and \doxymbox{\hyperlink{lz77_8cppm_source_l00074}{Window()}}.
+References \doxymbox{\hyperlink{lz77_8cppm_source_l00190}{max\+\_\+size}}, \doxymbox{\hyperlink{lz77_8cppm_source_l00187}{max\+\_\+size\+\_\+look\+\_\+ahead}}, \doxymbox{\hyperlink{lz77_8cppm_source_l00189}{max\+\_\+size\+\_\+search}}, \doxymbox{\hyperlink{lz77_8cppm_source_l00059}{SEARCH\+\_\+\+RATIO}}, \doxymbox{\hyperlink{lz77_8cppm_source_l00186}{size\+\_\+look\+\_\+ahead}}, \doxymbox{\hyperlink{lz77_8cppm_source_l00188}{size\+\_\+search}}, and \doxymbox{\hyperlink{lz77_8cppm_source_l00082}{Window()}}.
 
 
 
-Referenced by \doxymbox{\hyperlink{lz77_8cppm_source_l00074}{Window()}}.
+Referenced by \doxymbox{\hyperlink{lz77_8cppm_source_l00082}{Window()}}.
 
 Here is the call graph for this function:\+\nopagebreak
 \begin{figure}[H]
@@ -155,7 +158,7 @@ auto Window::\+begin (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\
 
 
 
-Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00121}{121}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00129}{129}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
 
 \Hypertarget{classWindow_a9af0f12097f7bf387f7b33cabb4f6e44}\index{Window@{Window}!end@{end}}
 \index{end@{end}!Window@{Window}}
@@ -165,7 +168,7 @@ auto Window::\+end (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hs
 
 
 
-Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00126}{126}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00134}{134}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
 
 \Hypertarget{classWindow_a545b4c991719d798b71a5caa33b6b332}\index{Window@{Window}!get\_absolute\_pos@{get\_absolute\_pos}}
 \index{get\_absolute\_pos@{get\_absolute\_pos}!Window@{Window}}
@@ -175,11 +178,11 @@ auto Window::\+get\+\_\+absolute\+\_\+pos (\begin{DoxyParamCaption}{}{}\end{Doxy
 
 
 
-Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00166}{166}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00174}{174}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
 
 
 
-References \doxymbox{\hyperlink{lz77_8cppm_source_l00182}{offset}}, and \doxymbox{\hyperlink{lz77_8cppm_source_l00179}{size\+\_\+search}}.
+References \doxymbox{\hyperlink{lz77_8cppm_source_l00191}{offset}}, and \doxymbox{\hyperlink{lz77_8cppm_source_l00188}{size\+\_\+search}}.
 
 \Hypertarget{classWindow_a5f935861ed29efa6e3aebdf4e4c07874}\index{Window@{Window}!get\_data@{get\_data}}
 \index{get\_data@{get\_data}!Window@{Window}}
@@ -189,11 +192,11 @@ auto Window::\+get\+\_\+data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}
 
 
 
-Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00173}{173}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00182}{182}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
 
 
 
-Referenced by \doxymbox{\hyperlink{lz77_8cppm_source_l00208}{alg::\+\+Rabin::\+\+Rabin()}}.
+Referenced by \doxymbox{\hyperlink{lz77_8cppm_source_l00217}{alg::\+\+Rabin::\+\+Rabin()}}.
 
 Here is the caller graph for this function:\+\nopagebreak
 \begin{figure}[H]
@@ -210,11 +213,11 @@ auto Window::\+get\+\_\+max\+\_\+size (\begin{DoxyParamCaption}{}{}\end{DoxyPara
 
 
 
-Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00163}{163}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00171}{171}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
 
 
 
-References \doxymbox{\hyperlink{lz77_8cppm_source_l00181}{max\+\_\+size}}.
+References \doxymbox{\hyperlink{lz77_8cppm_source_l00190}{max\+\_\+size}}.
 
 \Hypertarget{classWindow_abf906e8c855f1166e57d070cb613b8a3}\index{Window@{Window}!get\_max\_size\_search@{get\_max\_size\_search}}
 \index{get\_max\_size\_search@{get\_max\_size\_search}!Window@{Window}}
@@ -224,11 +227,25 @@ auto Window::\+get\+\_\+max\+\_\+size\+\_\+search (\begin{DoxyParamCaption}{}{}\
 
 
 
-Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00164}{164}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00172}{172}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
 
 
 
-References \doxymbox{\hyperlink{lz77_8cppm_source_l00180}{max\+\_\+size\+\_\+search}}.
+References \doxymbox{\hyperlink{lz77_8cppm_source_l00189}{max\+\_\+size\+\_\+search}}.
+
+\Hypertarget{classWindow_ae436ef7cac460780cf76716baa2e97ea}\index{Window@{Window}!get\_offset@{get\_offset}}
+\index{get\_offset@{get\_offset}!Window@{Window}}
+\doxysubsubsection{\texorpdfstring{get\_offset()}{get\_offset()}}
+{\footnotesize\ttfamily \label{classWindow_ae436ef7cac460780cf76716baa2e97ea} 
+auto Window::\+get\+\_\+offset (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [nodiscard]}, {\ttfamily [noexcept]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00175}{175}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+
+
+
+References \doxymbox{\hyperlink{lz77_8cppm_source_l00191}{offset}}.
 
 \Hypertarget{classWindow_ac2514e007aa303f6fb54b48fe0b35999}\index{Window@{Window}!get\_relative\_pos@{get\_relative\_pos}}
 \index{get\_relative\_pos@{get\_relative\_pos}!Window@{Window}}
@@ -238,11 +255,11 @@ auto Window::\+get\+\_\+relative\+\_\+pos (\begin{DoxyParamCaption}{}{}\end{Doxy
 
 
 
-Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00165}{165}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00173}{173}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
 
 
 
-References \doxymbox{\hyperlink{lz77_8cppm_source_l00179}{size\+\_\+search}}.
+References \doxymbox{\hyperlink{lz77_8cppm_source_l00188}{size\+\_\+search}}.
 
 \Hypertarget{classWindow_a223036d292819493a4c96bc1c21ada81}\index{Window@{Window}!get\_size\_la\_buf@{get\_size\_la\_buf}}
 \index{get\_size\_la\_buf@{get\_size\_la\_buf}!Window@{Window}}
@@ -252,11 +269,11 @@ auto Window::\+get\+\_\+size\+\_\+la\+\_\+buf (\begin{DoxyParamCaption}{}{}\end{
 
 
 
-Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00162}{162}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00170}{170}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
 
 
 
-References \doxymbox{\hyperlink{lz77_8cppm_source_l00177}{size\+\_\+look\+\_\+ahead}}.
+References \doxymbox{\hyperlink{lz77_8cppm_source_l00186}{size\+\_\+look\+\_\+ahead}}.
 
 \Hypertarget{classWindow_a5be8f3f89ec60a2105c820bc9e9fdf1b}\index{Window@{Window}!get\_size\_search@{get\_size\_search}}
 \index{get\_size\_search@{get\_size\_search}!Window@{Window}}
@@ -266,11 +283,11 @@ auto Window::\+get\+\_\+size\+\_\+search (\begin{DoxyParamCaption}{}{}\end{DoxyP
 
 
 
-Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00161}{161}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00169}{169}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
 
 
 
-References \doxymbox{\hyperlink{lz77_8cppm_source_l00179}{size\+\_\+search}}.
+References \doxymbox{\hyperlink{lz77_8cppm_source_l00188}{size\+\_\+search}}.
 
 \Hypertarget{classWindow_ae6a38782b779237a36354d4ee0a65f14}\index{Window@{Window}!look\_ahead\_buffer@{look\_ahead\_buffer}}
 \index{look\_ahead\_buffer@{look\_ahead\_buffer}!Window@{Window}}
@@ -280,7 +297,7 @@ auto Window::\+look\+\_\+ahead\+\_\+buffer (\begin{DoxyParamCaption}{}{}\end{Dox
 
 
 
-Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00159}{159}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00167}{167}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
 
 \Hypertarget{classWindow_ab5ad9769703a0bacc1deb7c2068c1de8}\index{Window@{Window}!operator\+[]\+@{operator[]}}
 \index{operator\+[]\+@{operator[]}!Window@{Window}}
@@ -290,11 +307,7 @@ auto Window::\+operator\+[$\,$]\+ (\begin{DoxyParamCaption}\item[{size\+\_\+t co
 
 
 
-Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00167}{167}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
-
-
-
-References \doxymbox{\hyperlink{lz77_8cppm_source_l00181}{max\+\_\+size}}.
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00176}{176}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
 
 \Hypertarget{classWindow_aa7ab401a00d19891166c8e1c995feae0}\index{Window@{Window}!search\_buffer@{search\_buffer}}
 \index{search\_buffer@{search\_buffer}!Window@{Window}}
@@ -304,7 +317,7 @@ auto Window::\+search\+\_\+buffer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCap
 
 
 
-Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00160}{160}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00168}{168}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
 
 \Hypertarget{classWindow_a12e2df11533ee97db81673a0422e328b}\index{Window@{Window}!slide@{slide}}
 \index{slide@{slide}!Window@{Window}}
@@ -323,11 +336,11 @@ Slide the window.
 \end{DoxyParams}
 
 
-Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00135}{135}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00143}{143}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
 
 
 
-References \doxymbox{\hyperlink{lz77_8cppm_source_l00180}{max\+\_\+size\+\_\+search}}, \doxymbox{\hyperlink{lz77_8cppm_source_l00182}{offset}}, and \doxymbox{\hyperlink{lz77_8cppm_source_l00179}{size\+\_\+search}}.
+References \doxymbox{\hyperlink{lz77_8cppm_source_l00189}{max\+\_\+size\+\_\+search}}, \doxymbox{\hyperlink{lz77_8cppm_source_l00191}{offset}}, and \doxymbox{\hyperlink{lz77_8cppm_source_l00188}{size\+\_\+search}}.
 
 
 
@@ -342,7 +355,7 @@ const std::\+span$<$const \doxymbox{\hyperlink{structSym}{Sym}}$>$ Window::\+dat
 
 
 
-Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00176}{176}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00185}{185}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
 
 \Hypertarget{classWindow_ac17eb23134bc4acf3b6c0f3e52ec3f1e}\index{Window@{Window}!max\_size@{max\_size}}
 \index{max\_size@{max\_size}!Window@{Window}}
@@ -352,11 +365,11 @@ size\+\_\+t Window::\+max\+\_\+size\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00181}{181}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00190}{190}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
 
 
 
-Referenced by \doxymbox{\hyperlink{lz77_8cppm_source_l00163}{get\+\_\+max\+\_\+size()}}, \doxymbox{\hyperlink{lz77_8cppm_source_l00167}{operator\+[$\,$]\+()}}, and \doxymbox{\hyperlink{lz77_8cppm_source_l00074}{Window()}}.
+Referenced by \doxymbox{\hyperlink{lz77_8cppm_source_l00171}{get\+\_\+max\+\_\+size()}}, and \doxymbox{\hyperlink{lz77_8cppm_source_l00082}{Window()}}.
 
 \Hypertarget{classWindow_a0d7ab6e968bbd1b1ccf38f7262b0355c}\index{Window@{Window}!max\_size\_look\_ahead@{max\_size\_look\_ahead}}
 \index{max\_size\_look\_ahead@{max\_size\_look\_ahead}!Window@{Window}}
@@ -366,11 +379,11 @@ size\+\_\+t Window::\+max\+\_\+size\+\_\+look\+\_\+ahead\hspace{0.3cm}{\ttfamily
 
 
 
-Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00178}{178}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00187}{187}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
 
 
 
-Referenced by \doxymbox{\hyperlink{lz77_8cppm_source_l00074}{Window()}}, and \doxymbox{\hyperlink{lz77_8cppm_source_l00065}{Window()}}.
+Referenced by \doxymbox{\hyperlink{lz77_8cppm_source_l00082}{Window()}}, and \doxymbox{\hyperlink{lz77_8cppm_source_l00073}{Window()}}.
 
 \Hypertarget{classWindow_a26862559cda48d21cd2081510daa63ab}\index{Window@{Window}!max\_size\_search@{max\_size\_search}}
 \index{max\_size\_search@{max\_size\_search}!Window@{Window}}
@@ -380,11 +393,11 @@ size\+\_\+t Window::\+max\+\_\+size\+\_\+search\hspace{0.3cm}{\ttfamily [private
 
 
 
-Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00180}{180}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00189}{189}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
 
 
 
-Referenced by \doxymbox{\hyperlink{lz77_8cppm_source_l00164}{get\+\_\+max\+\_\+size\+\_\+search()}}, \doxymbox{\hyperlink{lz77_8cppm_source_l00135}{slide()}}, \doxymbox{\hyperlink{lz77_8cppm_source_l00074}{Window()}}, and \doxymbox{\hyperlink{lz77_8cppm_source_l00065}{Window()}}.
+Referenced by \doxymbox{\hyperlink{lz77_8cppm_source_l00172}{get\+\_\+max\+\_\+size\+\_\+search()}}, \doxymbox{\hyperlink{lz77_8cppm_source_l00143}{slide()}}, \doxymbox{\hyperlink{lz77_8cppm_source_l00082}{Window()}}, and \doxymbox{\hyperlink{lz77_8cppm_source_l00073}{Window()}}.
 
 \Hypertarget{classWindow_ac8356c30e82c99c02e6e4b6f897c5086}\index{Window@{Window}!offset@{offset}}
 \index{offset@{offset}!Window@{Window}}
@@ -394,11 +407,11 @@ size\+\_\+t Window::\+offset = 0\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00182}{182}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00191}{191}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
 
 
 
-Referenced by \doxymbox{\hyperlink{lz77_8cppm_source_l00166}{get\+\_\+absolute\+\_\+pos()}}, and \doxymbox{\hyperlink{lz77_8cppm_source_l00135}{slide()}}.
+Referenced by \doxymbox{\hyperlink{lz77_8cppm_source_l00174}{get\+\_\+absolute\+\_\+pos()}}, \doxymbox{\hyperlink{lz77_8cppm_source_l00175}{get\+\_\+offset()}}, and \doxymbox{\hyperlink{lz77_8cppm_source_l00143}{slide()}}.
 
 \Hypertarget{classWindow_af4884d06fd6bee3d25f2738f82573ade}\index{Window@{Window}!size\_look\_ahead@{size\_look\_ahead}}
 \index{size\_look\_ahead@{size\_look\_ahead}!Window@{Window}}
@@ -408,11 +421,11 @@ size\+\_\+t Window::\+size\+\_\+look\+\_\+ahead\hspace{0.3cm}{\ttfamily [private
 
 
 
-Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00177}{177}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00186}{186}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
 
 
 
-Referenced by \doxymbox{\hyperlink{lz77_8cppm_source_l00162}{get\+\_\+size\+\_\+la\+\_\+buf()}}, \doxymbox{\hyperlink{lz77_8cppm_source_l00074}{Window()}}, and \doxymbox{\hyperlink{lz77_8cppm_source_l00065}{Window()}}.
+Referenced by \doxymbox{\hyperlink{lz77_8cppm_source_l00170}{get\+\_\+size\+\_\+la\+\_\+buf()}}, \doxymbox{\hyperlink{lz77_8cppm_source_l00082}{Window()}}, and \doxymbox{\hyperlink{lz77_8cppm_source_l00073}{Window()}}.
 
 \Hypertarget{classWindow_a1021b4fccc4fbdf9e9d325bf805ef577}\index{Window@{Window}!size\_search@{size\_search}}
 \index{size\_search@{size\_search}!Window@{Window}}
@@ -422,11 +435,11 @@ size\+\_\+t Window::\+size\+\_\+search\hspace{0.3cm}{\ttfamily [private]}}
 
 
 
-Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00179}{179}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{lz77_8cppm_source_l00188}{188}} of file \doxymbox{\hyperlink{lz77_8cppm_source}{lz77.\+cppm}}.
 
 
 
-Referenced by \doxymbox{\hyperlink{lz77_8cppm_source_l00166}{get\+\_\+absolute\+\_\+pos()}}, \doxymbox{\hyperlink{lz77_8cppm_source_l00165}{get\+\_\+relative\+\_\+pos()}}, \doxymbox{\hyperlink{lz77_8cppm_source_l00161}{get\+\_\+size\+\_\+search()}}, \doxymbox{\hyperlink{lz77_8cppm_source_l00135}{slide()}}, \doxymbox{\hyperlink{lz77_8cppm_source_l00074}{Window()}}, and \doxymbox{\hyperlink{lz77_8cppm_source_l00065}{Window()}}.
+Referenced by \doxymbox{\hyperlink{lz77_8cppm_source_l00174}{get\+\_\+absolute\+\_\+pos()}}, \doxymbox{\hyperlink{lz77_8cppm_source_l00173}{get\+\_\+relative\+\_\+pos()}}, \doxymbox{\hyperlink{lz77_8cppm_source_l00169}{get\+\_\+size\+\_\+search()}}, \doxymbox{\hyperlink{lz77_8cppm_source_l00143}{slide()}}, \doxymbox{\hyperlink{lz77_8cppm_source_l00082}{Window()}}, and \doxymbox{\hyperlink{lz77_8cppm_source_l00073}{Window()}}.
 
 
 

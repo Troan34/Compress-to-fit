@@ -31,7 +31,7 @@ auto trim_whitespace(std::string const& str) -> std::string
     return str.substr(start, end + 1);
 }
 
-auto interpret(std::string const& str) -> std::expected<BackendMessage, BadMessage>
+auto interpret(std::string const& str) -> std::expected<Status, BadMessage>
 {
     auto const stripped_str = strip_ansi(str);
     //If not an error/warning
@@ -56,7 +56,7 @@ auto interpret(std::string const& str) -> std::expected<BackendMessage, BadMessa
         //initialize the variant
         std::variant<ErrorType, WarningType, ProgressType> const message_ID_or_progress_{ProgressType{ progress }};
         //init the backend_message without the optional
-        BackendMessage backend_message{.message_ID_or_progress = message_ID_or_progress_};
+        Status backend_message{.message_ID_or_progress = message_ID_or_progress_};
         return backend_message;
     }
 
@@ -101,13 +101,13 @@ auto interpret(std::string const& str) -> std::expected<BackendMessage, BadMessa
 
     if (stripped_str.contains("Warn"))
     {
-        return BackendMessage{ .message_ID_or_progress = WarningType{code},
+        return Status{ .message_ID_or_progress = WarningType{code},
                                   .failing_option = result.value(), };
     }
 
     if (stripped_str.contains("Error"))
     {
-        return BackendMessage{ .message_ID_or_progress = ErrorType{code},
+        return Status{ .message_ID_or_progress = ErrorType{code},
                                   .failing_option = result.value(), };
     }
 

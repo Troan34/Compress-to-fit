@@ -1,0 +1,131 @@
+\doxysection{File\+System Class Reference}
+\hypertarget{classFileSystem}{}\label{classFileSystem}\index{FileSystem@{FileSystem}}
+
+
+{\ttfamily \+\#include $<$fs\+\_\+helper.\+hpp$>$}
+
+
+
+Inheritance diagram for File\+System:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=152pt]{classFileSystem__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for File\+System:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=152pt]{classFileSystem__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+Q\+\_\+\+INVOKABLE auto \doxymbox{\hyperlink{classFileSystem_a00b2dab43d05b315272b016f698d195f}{is\+Directory}} (QUrl const \&path) -\/$>$ bool
+\item 
+Q\+\_\+\+INVOKABLE auto \doxymbox{\hyperlink{classFileSystem_a69b0810f7d1d99cb22e736201472e236}{is\+File}} (QUrl const \&path) -\/$>$ bool
+\item 
+Q\+\_\+\+INVOKABLE auto \doxymbox{\hyperlink{classFileSystem_aeeb6a797414969a49df11ef1887318f7}{extension}} (QUrl const \&path) -\/$>$ QString
+\item 
+Q\+\_\+\+INVOKABLE auto \doxymbox{\hyperlink{classFileSystem_a7404ae1c32874f4f5aa89a2cf8fb9ee8}{exists}} (QUrl const \&path) -\/$>$ bool
+\item 
+Q\+\_\+\+INVOKABLE auto \doxymbox{\hyperlink{classFileSystem_a0a522672cf6bf00ab49ee68dc6f04c9c}{file\+Name}} (QUrl const \&path) -\/$>$ QString
+\item 
+Q\+\_\+\+INVOKABLE auto \doxymbox{\hyperlink{classFileSystem_a013c15bd306204db33f0d12011028173}{file\+Size}} (QUrl const \&path) -\/$>$ qint64
+\item 
+Q\+\_\+\+INVOKABLE auto \doxymbox{\hyperlink{classFileSystem_acc33e0f7a4815d6d1f77f4a592e088fd}{to\+Unit}} (quint64 const size) -\/$>$ QString
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+
+
+Definition at line \doxymbox{\hyperlink{fs__helper_8hpp_source_l00014}{14}} of file \doxymbox{\hyperlink{fs__helper_8hpp_source}{fs\+\_\+helper.\+hpp}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{classFileSystem_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classFileSystem_a7404ae1c32874f4f5aa89a2cf8fb9ee8}\index{FileSystem@{FileSystem}!exists@{exists}}
+\index{exists@{exists}!FileSystem@{FileSystem}}
+\doxysubsubsection{\texorpdfstring{exists()}{exists()}}
+{\footnotesize\ttfamily \label{classFileSystem_a7404ae1c32874f4f5aa89a2cf8fb9ee8} 
+auto File\+System::\+exists (\begin{DoxyParamCaption}\item[{QUrl const \&}]{path}{}\end{DoxyParamCaption}) -\/$>$ bool}
+
+
+
+Definition at line \doxymbox{\hyperlink{fs__helper_8cpp_source_l00027}{27}} of file \doxymbox{\hyperlink{fs__helper_8cpp_source}{fs\+\_\+helper.\+cpp}}.
+
+\Hypertarget{classFileSystem_aeeb6a797414969a49df11ef1887318f7}\index{FileSystem@{FileSystem}!extension@{extension}}
+\index{extension@{extension}!FileSystem@{FileSystem}}
+\doxysubsubsection{\texorpdfstring{extension()}{extension()}}
+{\footnotesize\ttfamily \label{classFileSystem_aeeb6a797414969a49df11ef1887318f7} 
+auto File\+System::\+extension (\begin{DoxyParamCaption}\item[{QUrl const \&}]{path}{}\end{DoxyParamCaption}) -\/$>$ QString}
+
+
+
+Definition at line \doxymbox{\hyperlink{fs__helper_8cpp_source_l00022}{22}} of file \doxymbox{\hyperlink{fs__helper_8cpp_source}{fs\+\_\+helper.\+cpp}}.
+
+\Hypertarget{classFileSystem_a0a522672cf6bf00ab49ee68dc6f04c9c}\index{FileSystem@{FileSystem}!fileName@{fileName}}
+\index{fileName@{fileName}!FileSystem@{FileSystem}}
+\doxysubsubsection{\texorpdfstring{fileName()}{fileName()}}
+{\footnotesize\ttfamily \label{classFileSystem_a0a522672cf6bf00ab49ee68dc6f04c9c} 
+auto File\+System::\+file\+Name (\begin{DoxyParamCaption}\item[{QUrl const \&}]{path}{}\end{DoxyParamCaption}) -\/$>$ QString}
+
+
+
+Definition at line \doxymbox{\hyperlink{fs__helper_8cpp_source_l00032}{32}} of file \doxymbox{\hyperlink{fs__helper_8cpp_source}{fs\+\_\+helper.\+cpp}}.
+
+\Hypertarget{classFileSystem_a013c15bd306204db33f0d12011028173}\index{FileSystem@{FileSystem}!fileSize@{fileSize}}
+\index{fileSize@{fileSize}!FileSystem@{FileSystem}}
+\doxysubsubsection{\texorpdfstring{fileSize()}{fileSize()}}
+{\footnotesize\ttfamily \label{classFileSystem_a013c15bd306204db33f0d12011028173} 
+auto File\+System::\+file\+Size (\begin{DoxyParamCaption}\item[{QUrl const \&}]{path}{}\end{DoxyParamCaption}) -\/$>$ qint64}
+
+
+
+Definition at line \doxymbox{\hyperlink{fs__helper_8cpp_source_l00037}{37}} of file \doxymbox{\hyperlink{fs__helper_8cpp_source}{fs\+\_\+helper.\+cpp}}.
+
+\Hypertarget{classFileSystem_a00b2dab43d05b315272b016f698d195f}\index{FileSystem@{FileSystem}!isDirectory@{isDirectory}}
+\index{isDirectory@{isDirectory}!FileSystem@{FileSystem}}
+\doxysubsubsection{\texorpdfstring{isDirectory()}{isDirectory()}}
+{\footnotesize\ttfamily \label{classFileSystem_a00b2dab43d05b315272b016f698d195f} 
+auto File\+System::\+is\+Directory (\begin{DoxyParamCaption}\item[{QUrl const \&}]{path}{}\end{DoxyParamCaption}) -\/$>$ bool}
+
+
+
+Definition at line \doxymbox{\hyperlink{fs__helper_8cpp_source_l00012}{12}} of file \doxymbox{\hyperlink{fs__helper_8cpp_source}{fs\+\_\+helper.\+cpp}}.
+
+\Hypertarget{classFileSystem_a69b0810f7d1d99cb22e736201472e236}\index{FileSystem@{FileSystem}!isFile@{isFile}}
+\index{isFile@{isFile}!FileSystem@{FileSystem}}
+\doxysubsubsection{\texorpdfstring{isFile()}{isFile()}}
+{\footnotesize\ttfamily \label{classFileSystem_a69b0810f7d1d99cb22e736201472e236} 
+auto File\+System::\+is\+File (\begin{DoxyParamCaption}\item[{QUrl const \&}]{path}{}\end{DoxyParamCaption}) -\/$>$ bool}
+
+
+
+Definition at line \doxymbox{\hyperlink{fs__helper_8cpp_source_l00017}{17}} of file \doxymbox{\hyperlink{fs__helper_8cpp_source}{fs\+\_\+helper.\+cpp}}.
+
+\Hypertarget{classFileSystem_acc33e0f7a4815d6d1f77f4a592e088fd}\index{FileSystem@{FileSystem}!toUnit@{toUnit}}
+\index{toUnit@{toUnit}!FileSystem@{FileSystem}}
+\doxysubsubsection{\texorpdfstring{toUnit()}{toUnit()}}
+{\footnotesize\ttfamily \label{classFileSystem_acc33e0f7a4815d6d1f77f4a592e088fd} 
+auto File\+System::\+to\+Unit (\begin{DoxyParamCaption}\item[{quint64 const}]{size}{}\end{DoxyParamCaption}) -\/$>$ QString}
+
+
+
+Definition at line \doxymbox{\hyperlink{fs__helper_8cpp_source_l00042}{42}} of file \doxymbox{\hyperlink{fs__helper_8cpp_source}{fs\+\_\+helper.\+cpp}}.
+
+
+
+The documentation for this class was generated from the following files:\+\begin{DoxyCompactItemize}
+\item 
+Compress-\/to-\/fit/\+src/\+gui/\+\doxymbox{\hyperlink{fs__helper_8hpp}{fs\+\_\+helper.\+hpp}}\item 
+Compress-\/to-\/fit/\+src/\+gui/\+\doxymbox{\hyperlink{fs__helper_8cpp}{fs\+\_\+helper.\+cpp}}\end{DoxyCompactItemize}

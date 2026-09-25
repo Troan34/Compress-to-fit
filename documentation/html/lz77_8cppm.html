@@ -94,6 +94,7 @@ $(function(){initNavTree('lz77_8cppm.html','',''); });
 <div class="contents">
 <div class="textblock"><code>#include &lt;cassert&gt;</code><br />
 <code>#include &lt;cstddef&gt;</code><br />
+<code>#include &lt;mio/mmap.hpp&gt;</code><br />
 <code>import <a class="el" href="containers_8cppm_source.html">containers</a>;</code><br />
 <code>import <a class="el" href="cli__parser_8cppm_source.html">parser</a>;</code><br />
 <code>import std.compat;</code><br />
@@ -101,7 +102,7 @@ $(function(){initNavTree('lz77_8cppm.html','',''); });
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for lz77.cppm:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="lz77_8cppm__incl.svg" width="498" height="195"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="lz77_8cppm__incl.svg" width="628" height="195"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
 </div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
@@ -119,10 +120,10 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">[lz77.Window]  <a href="classWindow.html#details">More...</a><br /></td></tr>
 <tr class="memitem:alg_3A_3ARabin" id="r_alg_3A_3ARabin"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classalg_1_1Rabin.html">alg::Rabin</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">This class enables fast string matching. Makes use of two chained arrays. This class is intertwined with LZ77 and should not be used as separate entity. This class shall not modify the <a class="el" href="classWindow.html" title="[lz77.Window]">Window</a> given.  <a href="classalg_1_1Rabin.html#details">More...</a><br /></td></tr>
-<tr class="memitem:LZ77Block" id="r_LZ77Block"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classLZ77Block.html">LZ77Block</a></td></tr>
+<tr class="memitem:LZ77Block_3C_20Alloc_20_3E" id="r_LZ77Block_3C_20Alloc_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classLZ77Block.html">LZ77Block&lt; Alloc &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a block of data encoded by LZ77.  <a href="classLZ77Block.html#details">More...</a><br /></td></tr>
 <tr class="memitem:LZ77Compressor" id="r_LZ77Compressor"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classLZ77Compressor.html">LZ77Compressor</a></td></tr>
-<tr class="memitem:LZ77Decompressor" id="r_LZ77Decompressor"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classLZ77Decompressor.html">LZ77Decompressor</a></td></tr>
+<tr class="memitem:LZ77Decompressor_3C_20Alloc_20_3E" id="r_LZ77Decompressor_3C_20Alloc_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classLZ77Decompressor.html">LZ77Decompressor&lt; Alloc &gt;</a></td></tr>
 <tr class="memitem:LZ77ConcurrentCompressor" id="r_LZ77ConcurrentCompressor"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classLZ77ConcurrentCompressor.html">LZ77ConcurrentCompressor</a></td></tr>
 <tr class="memitem:LZ77ConcurrentDecompressor" id="r_LZ77ConcurrentDecompressor"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classLZ77ConcurrentDecompressor.html">LZ77ConcurrentDecompressor</a></td></tr>
 </table><table class="memberdecls">
@@ -169,7 +170,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00049">49</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00057">57</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
 
 </div>
 </div>
@@ -194,7 +195,7 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00316">316</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00325">325</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
 
 </div>
 </div>
@@ -220,9 +221,9 @@ Variables</h2></td></tr>
 
 <p>The size of <a class="el" href="classalg_1_1Rabin.html#a044b5f0c49e0c52d1ae1a715d00ec0ac" title="alg::Rabin::poss_table">alg::Rabin::poss_table</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00056">56</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00064">64</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="lz77_8cppm_source.html#l00260">alg::Rabin::bucket_index()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="lz77_8cppm_source.html#l00269">alg::Rabin::bucket_index()</a>.</p>
 
 </div>
 </div>
@@ -246,9 +247,9 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00052">52</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00060">60</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="lz77_8cppm_source.html#l00272">alg::Rabin::prev_bucket_index()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="lz77_8cppm_source.html#l00281">alg::Rabin::prev_bucket_index()</a>.</p>
 
 </div>
 </div>
@@ -272,9 +273,9 @@ Variables</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00051">51</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="lz77_8cppm_source.html#l00059">59</a> of file <a class="el" href="lz77_8cppm_source.html">lz77.cppm</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="lz77_8cppm_source.html#l00074">Window::Window()</a>, and <a class="el" href="lz77_8cppm_source.html#l00065">Window::Window()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="lz77_8cppm_source.html#l00082">Window::Window()</a>, and <a class="el" href="lz77_8cppm_source.html#l00073">Window::Window()</a>.</p>
 
 </div>
 </div>

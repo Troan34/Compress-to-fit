@@ -102,7 +102,7 @@ Include dependency graph for cli_parser.cppm:</div>
 </div><div class="textblock"><div class="dynheader">
 This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" loading="lazy" frameborder="0" src="cli__parser_8cppm__dep__incl.svg" width="392" height="136"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div>
+<div class="center"><div class="zoom"><iframe scrolling="no" loading="lazy" frameborder="0" src="cli__parser_8cppm__dep__incl.svg" width="100%" height="402"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe></div></div>
 </div>
 </div>
 <p><a href="cli__parser_8cppm_source.html">Go to the source code of this file.</a></p>
@@ -142,6 +142,7 @@ Enumerations</h2></td></tr>
 , <a class="el" href="namespaceparser.html#accd7eb1ffd4c925598ec25fab6905369a297a6bb3ef5700bc84563dc87938c1b2">parser::DO_DECOMP_AFTER_CONCAT</a>
 , <br />
 &#160;&#160;<a class="el" href="namespaceparser.html#accd7eb1ffd4c925598ec25fab6905369a8cb317a671dafb2df58c07a6fc9291ef">parser::DO_NOT_DECOMP_AFTER_CONCAT</a>
+, <a class="el" href="namespaceparser.html#accd7eb1ffd4c925598ec25fab6905369a8fe82dc3c5d457c702ccdf336a955e06">parser::CONCURRENCY</a>
 , <a class="el" href="namespaceparser.html#accd7eb1ffd4c925598ec25fab6905369a245d11a3709454cc69b2de7911073d57">parser::NO_TYPE</a> = 696969
 <br />
  }</td></tr>
@@ -149,7 +150,7 @@ Enumerations</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a883c446b2f982a5d7b6989f2442e8186" id="r_a883c446b2f982a5d7b6989f2442e8186"><td class="memItemLeft">std::expected&lt; <a class="el" href="structToken.html">Token</a>, <a class="el" href="core__utils_8cppm.html#ab0df38968e4f03a3f1f6d6df0f31f45a">ErrorType</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="namespaceparser.html#a883c446b2f982a5d7b6989f2442e8186">parser::lex</a> (const std::string &amp;option)</td></tr>
+<tr class="memitem:a883c446b2f982a5d7b6989f2442e8186" id="r_a883c446b2f982a5d7b6989f2442e8186"><td class="memItemLeft">std::expected&lt; <a class="el" href="structToken.html">Token</a>, <a class="el" href="error__warn__print_8hpp.html#aed6e5d8e0c233046b51a0726eeae42de">ErrorType</a> &gt;&#160;</td><td class="memItemRight"><a class="el" href="namespaceparser.html#a883c446b2f982a5d7b6989f2442e8186">parser::lex</a> (const std::string &amp;option)</td></tr>
 <tr class="memdesc:a883c446b2f982a5d7b6989f2442e8186"><td class="mdescLeft">&#160;</td><td class="mdescRight">Semantically check an argument (e.g. -preset 8).  <br /></td></tr>
 <tr class="memitem:a7f5ecbf764fc175fc336fcea0dd07be8" id="r_a7f5ecbf764fc175fc336fcea0dd07be8"><td class="memItemLeft"><a class="el" href="structparser_1_1Options.html">Options</a>&#160;</td><td class="memItemRight"><a class="el" href="namespaceparser.html#a7f5ecbf764fc175fc336fcea0dd07be8">parser::parse</a> (int argc, char *argv[])</td></tr>
 <tr class="memdesc:a7f5ecbf764fc175fc336fcea0dd07be8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Read the cli.  <br /></td></tr>
@@ -159,7 +160,7 @@ Functions</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:a35056580671d6aa5abd316f21007bef6" id="r_a35056580671d6aa5abd316f21007bef6"><td class="memItemLeft">constexpr std::string_view&#160;</td><td class="memItemRight"><a class="el" href="namespaceparser.html#a35056580671d6aa5abd316f21007bef6">parser::token_strings</a> []</td></tr>
-<tr class="memitem:a8fb0c61c07575a0d8f64cfc377b885ed" id="r_a8fb0c61c07575a0d8f64cfc377b885ed"><td class="memItemLeft">constexpr std::string_view&#160;</td><td class="memItemRight"><a class="el" href="namespaceparser.html#a8fb0c61c07575a0d8f64cfc377b885ed">parser::help_str</a></td></tr>
+<tr class="memitem:ad8ab5c1ee924ccb278d79ba52ae20c5a" id="r_ad8ab5c1ee924ccb278d79ba52ae20c5a"><td class="memItemLeft">const auto&#160;</td><td class="memItemRight"><a class="el" href="namespaceparser.html#ad8ab5c1ee924ccb278d79ba52ae20c5a">parser::help_str</a></td></tr>
 <tr class="memitem:a239b839c0edd6180eb4bd577ad8b3ab9" id="r_a239b839c0edd6180eb4bd577ad8b3ab9"><td class="memItemLeft">const fs::path&#160;</td><td class="memItemRight"><a class="el" href="namespaceparser.html#a239b839c0edd6180eb4bd577ad8b3ab9">parser::DEFAULT_OUT_PATH</a> { &quot;output.tzf&quot; }</td></tr>
 </table>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
@@ -204,7 +205,7 @@ Variables</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="cli__parser_8cppm_source.html#l00157">157</a> of file <a class="el" href="cli__parser_8cppm_source.html">cli_parser.cppm</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cli__parser_8cppm_source.html#l00167">167</a> of file <a class="el" href="cli__parser_8cppm_source.html">cli_parser.cppm</a>.</p>
 
 </div>
 </div>

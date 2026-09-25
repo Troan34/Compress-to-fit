@@ -1,0 +1,102 @@
+\doxysection{interface.\+cpp}
+\hypertarget{interface_8cpp_source}{}\label{interface_8cpp_source}\index{Compress-\/to-\/fit/src/gui/interface.cpp@{Compress-\/to-\/fit/src/gui/interface.cpp}}
+\doxymbox{\hyperlink{interface_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{*\ \ \ Copyright\ (C)\ 2026\ Roan\ Bukaci}}
+\DoxyCodeLine{00003\ \textcolor{comment}{*\ \ \ SPDX-\/License-\/Identifier:\ GPL-\/3.0}}
+\DoxyCodeLine{00004\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00005}00005\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{include}\ \doxymbox{\hyperlink{interface_8hpp}{"{}interface.hpp"{}}}}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00007}00007\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{include}\ \textcolor{preprocessor}{<}\textcolor{preprocessor}{algorithm}\textcolor{preprocessor}{>}}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00008}00008\ import\ std;}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00009}00009\ import\ parser;}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00010}00010\ import\ util;}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00011}00011\ }
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00012}\doxymbox{\hyperlink{classCompressConfig_a92d95c16509ccff1b1b94005804457d8}{00012}}\ \doxymbox{\hyperlink{classCompressConfig}{CompressConfig}}::CompressConfig(QObject\ *parent)}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00013}00013\ \ \ \ \ :\ path\_out\_(parser::DEFAULT\_OUT\_PATH.c\_str())}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00014}00014\ \{}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00015}00015\ \}}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00016}00016\ }
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00017}\doxymbox{\hyperlink{classCompressConfig_ae3f398c2b5e0a945f300996bafb553ed}{00017}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classCompressConfig}{CompressConfig}}::\doxymbox{\hyperlink{classCompressConfig_ae3f398c2b5e0a945f300996bafb553ed}{setPathsIn}}(QList<QUrl>\ \textcolor{keyword}{const}\&\ paths)}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00018}00018\ \{}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00019}00019\ \ \ \ \ std::ranges::for\_each(}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00020}00020\ \ \ \ \ \ \ \ \ paths,}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00021}00021\ \ \ \ \ \ \ \ \ [](QUrl\ \textcolor{keyword}{const}\&\ path)}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00022}00022\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00023}00023\ \ \ \ \ \ \ \ \ std::println(\textcolor{stringliteral}{"{}\{\}"{}},\ path.toString().toStdString());}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00024}00024\ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00025}00025\ }
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00026}00026\ \ \ \ \ emit\ pathsInChanged();}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00027}00027\ \}}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00028}\doxymbox{\hyperlink{classCompressConfig_ab6a78433abe59e015c9acd1b7146fae7}{00028}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classCompressConfig}{CompressConfig}}::\doxymbox{\hyperlink{classCompressConfig_ab6a78433abe59e015c9acd1b7146fae7}{setPathOut}}(QUrl\ \textcolor{keyword}{const}\&\ path)}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00029}00029\ \{}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00030}00030\ \ \ \ \ path\_out\_\ =\ path;}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00031}00031\ \ \ \ \ emit\ pathOutChanged();}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00032}00032\ \}}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00033}\doxymbox{\hyperlink{classCompressConfig_ae18aedf1084d258802e4a811e80a6875}{00033}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classCompressConfig}{CompressConfig}}::setCompressor(CompType\ \textcolor{keyword}{const}\ comp\_type)}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00034}00034\ \{}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00035}00035\ \ \ \ \ comp\_type\_\ =\ comp\_type;}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00036}00036\ \ \ \ \ emit\ compressorChanged();}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00037}00037\ \}}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00038}\doxymbox{\hyperlink{classCompressConfig_a55226a4613a7991ebaac88e29bdcc0b2}{00038}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classCompressConfig}{CompressConfig}}::\doxymbox{\hyperlink{classCompressConfig_a55226a4613a7991ebaac88e29bdcc0b2}{setCompressorPreset}}(\doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0}{CompPreset}}\ \textcolor{keyword}{const}\ comp\_preset)}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00039}00039\ \{}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00040}00040\ \ \ \ \ \doxymbox{\hyperlink{classCompressConfig_ae5e7b97fff9999bb4a55a63a91f28792}{comp\_preset\_}}\ =\ comp\_preset;}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00041}00041\ \ \ \ \ emit\ compressorPresetChanged();}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00042}00042\ \}}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00043}\doxymbox{\hyperlink{classCompressConfig_a08dfd8b4ffca07842944c8582cbceb56}{00043}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classCompressConfig}{CompressConfig}}::\doxymbox{\hyperlink{classCompressConfig_a08dfd8b4ffca07842944c8582cbceb56}{setForceCompression}}(\textcolor{keywordtype}{bool}\ \textcolor{keyword}{const}\ force\_compression)}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00044}00044\ \{}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00045}00045\ \ \ \ \ \doxymbox{\hyperlink{classCompressConfig_a56ce867af9dbb83d3801d6d332f9cc83}{force\_compression\_}}\ =\ force\_compression;}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00046}00046\ \ \ \ \ emit\ forceCompressionChanged();}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00047}00047\ \}}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00048}\doxymbox{\hyperlink{classCompressConfig_a26a7800de7b4ebed2981a4d35562536d}{00048}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classCompressConfig}{CompressConfig}}::\doxymbox{\hyperlink{classCompressConfig_a26a7800de7b4ebed2981a4d35562536d}{setDeleteInput}}(\textcolor{keywordtype}{bool}\ \textcolor{keyword}{const}\ delete\_input)}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00049}00049\ \{}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00050}00050\ \ \ \ \ \doxymbox{\hyperlink{classCompressConfig_a6a3eb5226b37a7a60100a0a90b9dcbd5}{delete\_input\_}}\ =\ delete\_input;}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00051}00051\ \ \ \ \ emit\ deleteInputChanged();}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00052}00052\ \}}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00053}\doxymbox{\hyperlink{classCompressConfig_a42ba33a1f1b8ebf83976e8e668e7c827}{00053}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classCompressConfig}{CompressConfig}}::\doxymbox{\hyperlink{classCompressConfig_a42ba33a1f1b8ebf83976e8e668e7c827}{setNumberOfFiles}}(size\_t\ \textcolor{keyword}{const}\ number\_of\_files)}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00054}00054\ \{}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00055}00055\ \ \ \ \ \doxymbox{\hyperlink{classCompressConfig_ad5b4c9470e76dfce08689bcd20bc1860}{numberOfFiles\_}}\ =\ number\_of\_files;}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00056}00056\ \ \ \ \ emit\ numberOfFilesChanged();}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00057}00057\ \}}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00058}\doxymbox{\hyperlink{classCompressConfig_acb332759e277f9c0ad0be87081e5fabf}{00058}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classCompressConfig}{CompressConfig}}::\doxymbox{\hyperlink{classCompressConfig_acb332759e277f9c0ad0be87081e5fabf}{setErrorType}}(\doxymbox{\hyperlink{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42de}{ErrorType}}\ \textcolor{keyword}{const}\ error\_type)}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00059}00059\ \{}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00060}00060\ \ \ \ \ \doxymbox{\hyperlink{classCompressConfig_ad9fe0d1319e7e31c3689278d9182fcb0}{error\_type\_}}\ =\ error\_type;}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00061}00061\ \ \ \ \ emit\ errorTypeChanged();}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00062}00062\ \}}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00064}00064\ }
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00065}\doxymbox{\hyperlink{classCompressConfig_a811e0571804e1ee90fab8d6ab9911ccd}{00065}}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classCompressConfig}{CompressConfig}}::pathsIn()\ \textcolor{keyword}{const}\ -\/>\ QList<QUrl>}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00066}00066\ \{}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00067}00067\ \ \ \ \ \textcolor{keywordflow}{return}\ paths\_in\_;}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00068}00068\ \}}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00069}\doxymbox{\hyperlink{classCompressConfig_a944c3b15562fe769f768c525140b4ac5}{00069}}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classCompressConfig}{CompressConfig}}::\doxymbox{\hyperlink{classCompressConfig_a944c3b15562fe769f768c525140b4ac5}{pathOut}}()\ \textcolor{keyword}{const}\ -\/>\ \doxymbox{\hyperlink{classCompressConfig_a944c3b15562fe769f768c525140b4ac5}{QUrl}}}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00070}00070\ \{}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00071}00071\ \ \ \ \ \textcolor{keywordflow}{return}\ path\_out\_;}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00072}00072\ \}}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00073}\doxymbox{\hyperlink{classCompressConfig_ac490cd204d049e6e37645b6755755eb5}{00073}}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classCompressConfig}{CompressConfig}}::compressor()\ \textcolor{keyword}{const}\ -\/>\ CompType}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00074}00074\ \{}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00075}00075\ \ \ \ \ \textcolor{keywordflow}{return}\ comp\_type\_;}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00076}00076\ \}}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00077}\doxymbox{\hyperlink{classCompressConfig_a5a20553136343f5e5ac12059b39b1fe5}{00077}}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classCompressConfig}{CompressConfig}}::\doxymbox{\hyperlink{classCompressConfig_a5a20553136343f5e5ac12059b39b1fe5}{compressorPreset}}()\ \textcolor{keyword}{const}\ -\/>\ \doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0}{CompPreset}}}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00078}00078\ \{}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00079}00079\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classCompressConfig_ae5e7b97fff9999bb4a55a63a91f28792}{comp\_preset\_}};}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00080}00080\ \}}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00081}\doxymbox{\hyperlink{classCompressConfig_af325c24e43c2be561ccfe572d79447d4}{00081}}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classCompressConfig}{CompressConfig}}::\doxymbox{\hyperlink{classCompressConfig_af325c24e43c2be561ccfe572d79447d4}{forceCompression}}()\ \textcolor{keyword}{const}\ -\/>\ \textcolor{keywordtype}{bool}}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00082}00082\ \{}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00083}00083\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classCompressConfig_a56ce867af9dbb83d3801d6d332f9cc83}{force\_compression\_}};}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00084}00084\ \}}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00085}\doxymbox{\hyperlink{classCompressConfig_abdf2fbbce13920e78f0921edd2de3f09}{00085}}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classCompressConfig}{CompressConfig}}::\doxymbox{\hyperlink{classCompressConfig_abdf2fbbce13920e78f0921edd2de3f09}{deleteInput}}()\ \textcolor{keyword}{const}\ -\/>\ \textcolor{keywordtype}{bool}}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00086}00086\ \{}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00087}00087\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classCompressConfig_a6a3eb5226b37a7a60100a0a90b9dcbd5}{delete\_input\_}};}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00088}00088\ \}}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00089}\doxymbox{\hyperlink{classCompressConfig_a759b2424d6d05da8654fca9437a9f528}{00089}}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classCompressConfig}{CompressConfig}}::\doxymbox{\hyperlink{classCompressConfig_a759b2424d6d05da8654fca9437a9f528}{numberOfFiles}}()\ \textcolor{keyword}{const}\ -\/>\ size\_t}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00090}00090\ \{}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00091}00091\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classCompressConfig_ad5b4c9470e76dfce08689bcd20bc1860}{numberOfFiles\_}};}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00092}00092\ \}}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00093}\doxymbox{\hyperlink{classCompressConfig_a94dd8d1fa9ccff88ca51f363743f4096}{00093}}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classCompressConfig}{CompressConfig}}::\doxymbox{\hyperlink{classCompressConfig_a94dd8d1fa9ccff88ca51f363743f4096}{errorType}}()\ \textcolor{keyword}{const}\ -\/>\ \doxymbox{\hyperlink{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42de}{ErrorType}}}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00094}00094\ \{}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00095}00095\ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classCompressConfig_ad9fe0d1319e7e31c3689278d9182fcb0}{error\_type\_}};}
+\DoxyCodeLine{\Hypertarget{interface_8cpp_source_l00096}00096\ \}}
+
+\end{DoxyCode}

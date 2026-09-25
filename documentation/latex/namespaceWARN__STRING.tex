@@ -7,7 +7,11 @@ const std::\+string \doxymbox{\hyperlink{namespaceWARN__STRING_a3484e445cf1e4cdf
 \item 
 const std::\+string \doxymbox{\hyperlink{namespaceWARN__STRING_a97695fd577cd87a855b4d08e7d29ed6a}{PORTIONS\+\_\+\+OUT\+\_\+\+OF\+\_\+\+RANGE}}
 \item 
-const std::\+string \doxymbox{\hyperlink{namespaceWARN__STRING_ae325c9559d30aa8bb285b17b84ae925f}{CONCAT\+\_\+\+AMBIGUITY}} = "{}\textbackslash{}033\+[43m\+Warn\textbackslash{}033\+[0m\+["{} + std::\+to\+\_\+string(static\+\_\+cast$<$int$>$(\doxymbox{\hyperlink{core__utils_8cppm_aa278aa207bdeddc8432b560d1e1312aeabd356f5fc145a69a6d0b3cbac5d70c00}{Warning\+Type::\+\+PORTIONS\+\_\+\+OUT\+\_\+\+OF\+\_\+\+RANGE}})) + "{}]\+:\+ there has been found an ambiguity while concatenating. These files do not come from the same compressed file(same session).\textbackslash{}n"{}
+const std::\+string \doxymbox{\hyperlink{namespaceWARN__STRING_ae325c9559d30aa8bb285b17b84ae925f}{CONCAT\+\_\+\+AMBIGUITY}}
+\item 
+const std::\+string \doxymbox{\hyperlink{namespaceWARN__STRING_a78e1b884c0f4442ef73c83d720cb8bc1}{CONCURRENCY\+\_\+\+OUT\+\_\+\+OF\+\_\+\+RANGE\+\_\+\+UPPER}}
+\item 
+const std::\+string \doxymbox{\hyperlink{namespaceWARN__STRING_a8be1a21d9eb2f06f3b7bf5bc00393c15}{CONCURRENCY\+\_\+\+OUT\+\_\+\+OF\+\_\+\+RANGE\+\_\+\+LOWER}}
 \end{DoxyCompactItemize}
 
 
@@ -18,11 +22,49 @@ const std::\+string \doxymbox{\hyperlink{namespaceWARN__STRING_ae325c9559d30aa8b
 \index{CONCAT\_AMBIGUITY@{CONCAT\_AMBIGUITY}!WARN\_STRING@{WARN\_STRING}}
 \doxysubsubsection{\texorpdfstring{CONCAT\_AMBIGUITY}{CONCAT\_AMBIGUITY}}
 {\footnotesize\ttfamily \label{namespaceWARN__STRING_ae325c9559d30aa8bb285b17b84ae925f} 
-const std::\+string WARN\+\_\+\+STRING::\+\+CONCAT\+\_\+\+AMBIGUITY = "{}\textbackslash{}033\+[43m\+Warn\textbackslash{}033\+[0m\+["{} + std::\+to\+\_\+string(static\+\_\+cast$<$int$>$(\doxymbox{\hyperlink{core__utils_8cppm_aa278aa207bdeddc8432b560d1e1312aeabd356f5fc145a69a6d0b3cbac5d70c00}{Warning\+Type::\+\+PORTIONS\+\_\+\+OUT\+\_\+\+OF\+\_\+\+RANGE}})) + "{}]\+:\+ there has been found an ambiguity while concatenating. These files do not come from the same compressed file(same session).\textbackslash{}n"{}}
+const std::\+string WARN\+\_\+\+STRING::\+\+CONCAT\+\_\+\+AMBIGUITY}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\(\backslash\)033[43mWarn\(\backslash\)033[0m["{}}\ +\ std::to\_string(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(\doxymbox{\hyperlink{error__warn__print_8hpp_aa278aa207bdeddc8432b560d1e1312aeabd356f5fc145a69a6d0b3cbac5d70c00}{WarningType::PORTIONS\_OUT\_OF\_RANGE}}))\ +}
+\DoxyCodeLine{\textcolor{stringliteral}{"{}]:\ there\ has\ been\ found\ an\ ambiguity\ while\ concatenating.\ These\ files\ do\ not\ come\ from\ the\ same\ compressed\ file(same\ session).\(\backslash\)n"{}}}
+
+\end{DoxyCode}
 
 
+Definition at line \doxymbox{\hyperlink{error__warn__print_8hpp_source_l00145}{145}} of file \doxymbox{\hyperlink{error__warn__print_8hpp_source}{error\+\_\+warn\+\_\+print.\+hpp}}.
 
-Definition at line \doxymbox{\hyperlink{core__utils_8cppm_source_l00190}{190}} of file \doxymbox{\hyperlink{core__utils_8cppm_source}{core\+\_\+utils.\+cppm}}.
+\Hypertarget{namespaceWARN__STRING_a8be1a21d9eb2f06f3b7bf5bc00393c15}\index{WARN\_STRING@{WARN\_STRING}!CONCURRENCY\_OUT\_OF\_RANGE\_LOWER@{CONCURRENCY\_OUT\_OF\_RANGE\_LOWER}}
+\index{CONCURRENCY\_OUT\_OF\_RANGE\_LOWER@{CONCURRENCY\_OUT\_OF\_RANGE\_LOWER}!WARN\_STRING@{WARN\_STRING}}
+\doxysubsubsection{\texorpdfstring{CONCURRENCY\_OUT\_OF\_RANGE\_LOWER}{CONCURRENCY\_OUT\_OF\_RANGE\_LOWER}}
+{\footnotesize\ttfamily \label{namespaceWARN__STRING_a8be1a21d9eb2f06f3b7bf5bc00393c15} 
+const std::\+string WARN\+\_\+\+STRING::\+\+CONCURRENCY\+\_\+\+OUT\+\_\+\+OF\+\_\+\+RANGE\+\_\+\+LOWER}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\textcolor{stringliteral}{"{}\(\backslash\)033[43mWarn\(\backslash\)033[0m["{}}\ +\ std::to\_string(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(\doxymbox{\hyperlink{error__warn__print_8hpp_aa278aa207bdeddc8432b560d1e1312aeac45bc9105bed6251f81376a78a1f5c25}{WarningType::CONCURRENCY\_OUT\_OF\_RANGE\_UPPER}}))\ +}
+\DoxyCodeLine{\textcolor{stringliteral}{"{}]:\ you\ have\ selected\ zero\ or\ a\ negative\ number\ of\ threads,\ will\ default\ to\ use\ only\ one\ thread."{}}}
+
+\end{DoxyCode}
+
+
+Definition at line \doxymbox{\hyperlink{error__warn__print_8hpp_source_l00151}{151}} of file \doxymbox{\hyperlink{error__warn__print_8hpp_source}{error\+\_\+warn\+\_\+print.\+hpp}}.
+
+\Hypertarget{namespaceWARN__STRING_a78e1b884c0f4442ef73c83d720cb8bc1}\index{WARN\_STRING@{WARN\_STRING}!CONCURRENCY\_OUT\_OF\_RANGE\_UPPER@{CONCURRENCY\_OUT\_OF\_RANGE\_UPPER}}
+\index{CONCURRENCY\_OUT\_OF\_RANGE\_UPPER@{CONCURRENCY\_OUT\_OF\_RANGE\_UPPER}!WARN\_STRING@{WARN\_STRING}}
+\doxysubsubsection{\texorpdfstring{CONCURRENCY\_OUT\_OF\_RANGE\_UPPER}{CONCURRENCY\_OUT\_OF\_RANGE\_UPPER}}
+{\footnotesize\ttfamily \label{namespaceWARN__STRING_a78e1b884c0f4442ef73c83d720cb8bc1} 
+const std::\+string WARN\+\_\+\+STRING::\+\+CONCURRENCY\+\_\+\+OUT\+\_\+\+OF\+\_\+\+RANGE\+\_\+\+UPPER}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\textcolor{stringliteral}{"{}\(\backslash\)033[43mWarn\(\backslash\)033[0m["{}}\ +\ std::to\_string(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(\doxymbox{\hyperlink{error__warn__print_8hpp_aa278aa207bdeddc8432b560d1e1312aeac45bc9105bed6251f81376a78a1f5c25}{WarningType::CONCURRENCY\_OUT\_OF\_RANGE\_UPPER}}))\ +}
+\DoxyCodeLine{\textcolor{stringliteral}{"{}]:\ you\ have\ selected\ more\ threads\ than\ available\ on\ your\ machine,\ will\ default\ to\ using\ all\ your\ threads."{}}}
+
+\end{DoxyCode}
+
+
+Definition at line \doxymbox{\hyperlink{error__warn__print_8hpp_source_l00148}{148}} of file \doxymbox{\hyperlink{error__warn__print_8hpp_source}{error\+\_\+warn\+\_\+print.\+hpp}}.
 
 \Hypertarget{namespaceWARN__STRING_a97695fd577cd87a855b4d08e7d29ed6a}\index{WARN\_STRING@{WARN\_STRING}!PORTIONS\_OUT\_OF\_RANGE@{PORTIONS\_OUT\_OF\_RANGE}}
 \index{PORTIONS\_OUT\_OF\_RANGE@{PORTIONS\_OUT\_OF\_RANGE}!WARN\_STRING@{WARN\_STRING}}
@@ -32,13 +74,14 @@ const std::\+string WARN\+\_\+\+STRING::\+\+PORTIONS\+\_\+\+OUT\+\_\+\+OF\+\_\+\
 
 {\bfseries Initial value:\+}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \ \ \textcolor{stringliteral}{"{}\(\backslash\)033[43mWarn\(\backslash\)033[0m["{}}\ +\ std::to\_string(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(\doxymbox{\hyperlink{core__utils_8cppm_aa278aa207bdeddc8432b560d1e1312aeabd356f5fc145a69a6d0b3cbac5d70c00}{WarningType::PORTIONS\_OUT\_OF\_RANGE}}))\ +\ \textcolor{stringliteral}{"{}]:\ the\ number\ of\ file\ portions\ is\ outside\ of\ the\ accepted\ range."{}}}
-\DoxyCodeLine{+\ \textcolor{stringliteral}{"{}\(\backslash\)033[34mTip\(\backslash\)033[0m:\ The\ (not\ split)\ output\ file\ may\ have\ been\ too\ small.\(\backslash\)nThe\ number\ of\ files\ created\ may\ be\ different\ from\ what\ you\ asked.\(\backslash\)n"{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \ \ \textcolor{stringliteral}{"{}\(\backslash\)033[43mWarn\(\backslash\)033[0m["{}}\ +\ std::to\_string(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(\doxymbox{\hyperlink{error__warn__print_8hpp_aa278aa207bdeddc8432b560d1e1312aeabd356f5fc145a69a6d0b3cbac5d70c00}{WarningType::PORTIONS\_OUT\_OF\_RANGE}}))\ +}
+\DoxyCodeLine{\textcolor{stringliteral}{"{}]:\ the\ number\ of\ file\ portions\ is\ outside\ of\ the\ accepted\ range."{}}}
+\DoxyCodeLine{+\ \textcolor{stringliteral}{"{}The\ number\ of\ files\ created\ may\ be\ different\ from\ what\ you\ asked.\(\backslash\)n\(\backslash\)033[34mTip\(\backslash\)033[0m:\ The\ (not\ split)\ output\ file\ may\ have\ been\ too\ small.\(\backslash\)n"{}}}
 
 \end{DoxyCode}
 
 
-Definition at line \doxymbox{\hyperlink{core__utils_8cppm_source_l00187}{187}} of file \doxymbox{\hyperlink{core__utils_8cppm_source}{core\+\_\+utils.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{error__warn__print_8hpp_source_l00141}{141}} of file \doxymbox{\hyperlink{error__warn__print_8hpp_source}{error\+\_\+warn\+\_\+print.\+hpp}}.
 
 \Hypertarget{namespaceWARN__STRING_a3484e445cf1e4cdf965160b363ce9351}\index{WARN\_STRING@{WARN\_STRING}!RECOMPRESSION@{RECOMPRESSION}}
 \index{RECOMPRESSION@{RECOMPRESSION}!WARN\_STRING@{WARN\_STRING}}
@@ -48,11 +91,12 @@ const std::\+string WARN\+\_\+\+STRING::\+\+RECOMPRESSION}
 
 {\bfseries Initial value:\+}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\(\backslash\)033[43mWarn["{}}\ +\ std::to\_string(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(\doxymbox{\hyperlink{core__utils_8cppm_aa278aa207bdeddc8432b560d1e1312aea429a96bd6dfce0e85b1d88b7ea7ff59f}{WarningType::RECOMPRESSION}}))\ +\ \textcolor{stringliteral}{"{}]\(\backslash\)033[0m:\ the\ file\ being\ compressed\ has\ already\ been\ compressed."{}}}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}\(\backslash\)033[43mWarn["{}}\ +\ std::to\_string(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(\doxymbox{\hyperlink{error__warn__print_8hpp_aa278aa207bdeddc8432b560d1e1312aea429a96bd6dfce0e85b1d88b7ea7ff59f}{WarningType::RECOMPRESSION}}))\ +}
+\DoxyCodeLine{\textcolor{stringliteral}{"{}]\(\backslash\)033[0m:\ the\ file\ being\ compressed\ has\ already\ been\ compressed."{}}}
 \DoxyCodeLine{+\ \textcolor{stringliteral}{"{}\(\backslash\)033[34mTip\(\backslash\)033[0m:\ A\ file\ recompression\ gives\ negligible,\ if\ not\ counter-\/productive,\ results.\(\backslash\)n"{}}}
 
 \end{DoxyCode}
 
 
-Definition at line \doxymbox{\hyperlink{core__utils_8cppm_source_l00184}{184}} of file \doxymbox{\hyperlink{core__utils_8cppm_source}{core\+\_\+utils.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{error__warn__print_8hpp_source_l00137}{137}} of file \doxymbox{\hyperlink{error__warn__print_8hpp_source}{error\+\_\+warn\+\_\+print.\+hpp}}.
 

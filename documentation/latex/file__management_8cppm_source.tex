@@ -2,554 +2,562 @@
 \hypertarget{file__management_8cppm_source}{}\label{file__management_8cppm_source}\index{Compress-\/to-\/fit/src/util/containers/file\_management.cppm@{Compress-\/to-\/fit/src/util/containers/file\_management.cppm}}
 \doxymbox{\hyperlink{file__management_8cppm}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00001}00001\ module;}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00002}00002\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{include}\ \textcolor{preprocessor}{<}\textcolor{preprocessor}{mio}\textcolor{preprocessor}{/}\textcolor{preprocessor}{mmap}\textcolor{preprocessor}{.}\textcolor{preprocessor}{hpp}\textcolor{preprocessor}{>}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00003}00003\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{include}\ \textcolor{preprocessor}{<}\textcolor{preprocessor}{cassert}\textcolor{preprocessor}{>}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00004}00004\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{if}\ \textcolor{preprocessor}{defined}\textcolor{preprocessor}{(}\textcolor{preprocessor}{\_\_INTELLISENSE\_\_}\textcolor{preprocessor}{)}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00005}00005\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{include}\ \textcolor{stringliteral}{"{}../../for\_intellisense/everything.hpp"{}}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00006}00006\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{endif}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{*\ \ \ Copyright\ (C)\ 2026\ Roan\ Bukaci}}
+\DoxyCodeLine{00003\ \textcolor{comment}{*\ \ \ SPDX-\/License-\/Identifier:\ GPL-\/3.0}}
+\DoxyCodeLine{00004\ \textcolor{comment}{*}}
+\DoxyCodeLine{00005\ \textcolor{comment}{*\ \ \ Implements\ 'File'\ which\ represents\ an\ ordinary\ or\ encoded\ file}}
+\DoxyCodeLine{00006\ \textcolor{comment}{*/}}
 \DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00007}00007\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00008}00008\ \textcolor{keyword}{export}\ module\ containers:file;}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00009}00009\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00010}00010\ import\ parser;}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00011}00011\ import\ std.compat;}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00012}00012\ import\ util;}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00013}00013\ \textcolor{keyword}{namespace}\ fs\ =\ std::filesystem;}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00008}00008\ module;}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00009}00009\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{include}\ \textcolor{preprocessor}{<}\textcolor{preprocessor}{mio}\textcolor{preprocessor}{/}\textcolor{preprocessor}{mmap}\textcolor{preprocessor}{.}\textcolor{preprocessor}{hpp}\textcolor{preprocessor}{>}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00010}00010\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{include}\ \textcolor{preprocessor}{<}\textcolor{preprocessor}{cassert}\textcolor{preprocessor}{>}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00011}00011\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{if}\ \textcolor{preprocessor}{defined}\textcolor{preprocessor}{(}\textcolor{preprocessor}{\_\_INTELLISENSE\_\_}\textcolor{preprocessor}{)}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00012}00012\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{include}\ \textcolor{stringliteral}{"{}../../for\_intellisense/everything.hpp"{}}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00013}00013\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{endif}}
 \DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00014}00014\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00015}00015\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00015}00015\ \textcolor{keyword}{export}\ module\ containers:file;}
 \DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00016}00016\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00017}\doxymbox{\hyperlink{file__management_8cppm_a5d9e3a0a38b084aa0d6d23da7a06be5e}{00017}}\ \textcolor{keyword}{constexpr}\ \doxymbox{\hyperlink{file__management_8cppm_a5d9e3a0a38b084aa0d6d23da7a06be5e}{std}}::\doxymbox{\hyperlink{file__management_8cppm_a5d9e3a0a38b084aa0d6d23da7a06be5e}{string\_view}}\ \doxymbox{\hyperlink{file__management_8cppm_a5d9e3a0a38b084aa0d6d23da7a06be5e}{SIGNATURE}}\ =\ \textcolor{stringliteral}{"{}CTF-\/1"{}};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00018}00018\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//SIGNATURE\ \ \ \ \ +\ \ \ IDENTIFIER\ \ \ \ \ \ }}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00019}\doxymbox{\hyperlink{file__management_8cppm_ae86837d59db95e31826c13b25d7aa994}{00019}}\ \textcolor{keyword}{export}\ \textcolor{keyword}{constexpr}\ size\_t\ \doxymbox{\hyperlink{file__management_8cppm_ae86837d59db95e31826c13b25d7aa994}{FILE\_HEADER\_SIZE}}\ =\ SIGNATURE.size()\ +\ \textcolor{keyword}{sizeof}(uint8\_t)\ +\ \textcolor{keyword}{sizeof}(uint8\_t)\ +\ \textcolor{keyword}{sizeof}(size\_t);}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00020}\doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527}{00020}}\ \textcolor{keyword}{enum}\ \textcolor{keyword}{class}\ \doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527}{HEADER\_OFFSET}}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00021}00021\ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00022}\doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527aef21bf22481e7930df1e2bda54025095}{00022}}\ \ \ \ \ \doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527aef21bf22481e7930df1e2bda54025095}{SIGNATURE}}\ =\ 0,}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00023}\doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527ab718adec73e04ce3ec720dd11a06a308}{00023}}\ \ \ \ \ \doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527ab718adec73e04ce3ec720dd11a06a308}{ID}}\ =\ ::SIGNATURE.size(),}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00024}\doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527a4905ac9d6a22bdfc1ae096094ce6248d}{00024}}\ \ \ \ \ \doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527a4905ac9d6a22bdfc1ae096094ce6248d}{COUNT}}\ =\ \doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527}{ID}}\ +\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527}{uint16\_t}}),}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00025}\doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527ad539c6567c1f2966df43ad3a2d82b626}{00025}}\ \ \ \ \ \doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527ad539c6567c1f2966df43ad3a2d82b626}{COMP\_TYPE}}\ =\ \doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527a4905ac9d6a22bdfc1ae096094ce6248d}{COUNT}}\ +\ \textcolor{keyword}{sizeof}(size\_t),}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00026}\doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527a8d1d3f777392a89d7531871f6c3f2208}{00026}}\ \ \ \ \ \doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527a8d1d3f777392a89d7531871f6c3f2208}{COMP\_PRESET}}\ =\ \doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527}{COMP\_TYPE}}\ +\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527}{uint8\_t}}),}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00027}\doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527a26a4b44a837bf97b972628509912b4a5}{00027}}\ \ \ \ \ \doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527a26a4b44a837bf97b972628509912b4a5}{MAX}}\ =\ \doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527}{COMP\_PRESET}}\ +\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527}{uint8\_t}}),}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00028}00028\ \};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00029}00029\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00030}00030\ \textcolor{comment}{///\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TZF\ \ \ \ \ FILE\ \ \ \ HEADER}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00031}00031\ \textcolor{comment}{///\ \ \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00032}00032\ \textcolor{comment}{///\ |\ \ \ \ \ \ \ \ \ \ \ \ |\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00033}00033\ \textcolor{comment}{///\ |\ \ SIGNATURE\ |\ Identifier\ (file\ splitting)\ |\ Count(file\ splt)\ |\ \ CompType(u8)\ |\ \ CompPreset(u8)\ \ |}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00034}00034\ \textcolor{comment}{///\ |\_\_\_\_\_\_\_\_\_\_\_\_|\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_|\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_|\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_|\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_|}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00035}00035\ \textcolor{comment}{///\ \ \ \ \ \ \ \ \ \ \ \ \ \ ↑\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ↑\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ↑\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ↑\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ↑}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00036}00036\ \textcolor{comment}{///\ HEADER\_OFFSET::ID\ \ \ \ \ \ \ HEADER\_OFFSET::COUNT\ \ \ /*...*/::COMP\_TYPE\ \ HEADER\_OFFSET::COMP\_PRESET\ \ HEADER\_OFFSET::MAX}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00037}00037\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00038}00038\ \textcolor{comment}{//avoid\ padding\ in\ files}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00039}00039\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{pragma}\ \textcolor{preprocessor}{pack}\textcolor{preprocessor}{(}\textcolor{preprocessor}{push}\textcolor{preprocessor}{,}\ 1\textcolor{preprocessor}{)}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00040}\doxymbox{\hyperlink{structHeader}{00040}}\ \textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structHeader}{Header}}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00041}00041\ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00042}\doxymbox{\hyperlink{structHeader_a66f6c58d0244bc34895827bab6e9f61a}{00042}}\ \ \ \ \ size\_t\ \doxymbox{\hyperlink{structHeader_a66f6c58d0244bc34895827bab6e9f61a}{identifier}};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00043}\doxymbox{\hyperlink{structHeader_a7e28f0be834e5db8b42db26058fe99fe}{00043}}\ \ \ \ \ \doxymbox{\hyperlink{structHeader}{std}}::\doxymbox{\hyperlink{structHeader}{uint16\_t}}\ \doxymbox{\hyperlink{structHeader}{count}};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00044}\doxymbox{\hyperlink{structHeader_a65653b8a9e7ec9e2d414242c8d1ec0f1}{00044}}\ \ \ \ \ \doxymbox{\hyperlink{structHeader_a65653b8a9e7ec9e2d414242c8d1ec0f1}{CompType}}\ \doxymbox{\hyperlink{structHeader_a65653b8a9e7ec9e2d414242c8d1ec0f1}{comp\_type}};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00045}\doxymbox{\hyperlink{structHeader_a38a22e627cdd546a20e434bfd9b754dc}{00045}}\ \ \ \ \ \doxymbox{\hyperlink{structHeader_a38a22e627cdd546a20e434bfd9b754dc}{CompPreset}}\ \doxymbox{\hyperlink{structHeader_a38a22e627cdd546a20e434bfd9b754dc}{preset}};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00046}00046\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00047}00047\ \};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00048}00048\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{pragma}\ \textcolor{preprocessor}{pack}\textcolor{preprocessor}{(}\textcolor{preprocessor}{pop}\textcolor{preprocessor}{)}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00049}00049\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00050}\doxymbox{\hyperlink{structFileOptions}{00050}}\ \textcolor{keyword}{export}\ \textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structFileOptions}{FileOptions}}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00051}00051\ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00052}\doxymbox{\hyperlink{structFileOptions_aefc1e13c9d342565948fccbbd0ec3e15}{00052}}\ \ \ \ \ \doxymbox{\hyperlink{structFileOptions_aefc1e13c9d342565948fccbbd0ec3e15}{fs}}::\doxymbox{\hyperlink{structFileOptions_aefc1e13c9d342565948fccbbd0ec3e15}{path}}\ \doxymbox{\hyperlink{structFileOptions_aefc1e13c9d342565948fccbbd0ec3e15}{path}};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00053}\doxymbox{\hyperlink{structFileOptions_ae86a7b9e2da8adbab5c3b20a76dd7454}{00053}}\ \ \ \ \ \doxymbox{\hyperlink{structFileOptions}{std}}::\doxymbox{\hyperlink{structFileOptions}{optional}}<\doxymbox{\hyperlink{structFileOptions}{Header}}>\ \doxymbox{\hyperlink{structFileOptions}{header}};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00054}\doxymbox{\hyperlink{structFileOptions_a7cb51e65263f944a8a56b79346dedb71}{00054}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{structFileOptions_a7cb51e65263f944a8a56b79346dedb71}{delete\_on\_dtor}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00017}00017\ import\ parser;}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00018}00018\ import\ std.compat;}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00019}00019\ import\ util;}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00020}00020\ \textcolor{keyword}{namespace}\ fs\ =\ std::filesystem;}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00022}00022\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00023}00023\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00024}\doxymbox{\hyperlink{file__management_8cppm_a5d9e3a0a38b084aa0d6d23da7a06be5e}{00024}}\ \textcolor{keyword}{constexpr}\ \doxymbox{\hyperlink{file__management_8cppm_a5d9e3a0a38b084aa0d6d23da7a06be5e}{std}}::\doxymbox{\hyperlink{file__management_8cppm_a5d9e3a0a38b084aa0d6d23da7a06be5e}{string\_view}}\ \doxymbox{\hyperlink{file__management_8cppm_a5d9e3a0a38b084aa0d6d23da7a06be5e}{SIGNATURE}}\ =\ \textcolor{stringliteral}{"{}CTF-\/1"{}};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00025}00025\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//SIGNATURE\ \ \ \ \ +\ \ \ IDENTIFIER\ \ \ \ \ \ }}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00026}\doxymbox{\hyperlink{file__management_8cppm_ae86837d59db95e31826c13b25d7aa994}{00026}}\ \textcolor{keyword}{export}\ \textcolor{keyword}{constexpr}\ size\_t\ \doxymbox{\hyperlink{file__management_8cppm_ae86837d59db95e31826c13b25d7aa994}{FILE\_HEADER\_SIZE}}\ =\ SIGNATURE.size()\ +\ \textcolor{keyword}{sizeof}(size\_t)\ +\ \textcolor{keyword}{sizeof}(uint16\_t)\ +\ \textcolor{keyword}{sizeof}(uint8\_t)\ +\ \textcolor{keyword}{sizeof}(uint8\_t);}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00027}\doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527}{00027}}\ \textcolor{keyword}{enum}\ \textcolor{keyword}{class}\ \doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527}{HEADER\_OFFSET}}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00028}00028\ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00029}\doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527aef21bf22481e7930df1e2bda54025095}{00029}}\ \ \ \ \ \doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527aef21bf22481e7930df1e2bda54025095}{SIGNATURE}}\ =\ 0,}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00030}\doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527ab718adec73e04ce3ec720dd11a06a308}{00030}}\ \ \ \ \ \doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527ab718adec73e04ce3ec720dd11a06a308}{ID}}\ =\ ::SIGNATURE.size(),}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00031}\doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527a4905ac9d6a22bdfc1ae096094ce6248d}{00031}}\ \ \ \ \ \doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527a4905ac9d6a22bdfc1ae096094ce6248d}{COUNT}}\ =\ \doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527}{ID}}\ +\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527}{uint16\_t}}),}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00032}\doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527ad539c6567c1f2966df43ad3a2d82b626}{00032}}\ \ \ \ \ \doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527ad539c6567c1f2966df43ad3a2d82b626}{COMP\_TYPE}}\ =\ \doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527a4905ac9d6a22bdfc1ae096094ce6248d}{COUNT}}\ +\ \textcolor{keyword}{sizeof}(size\_t),}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00033}\doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527a8d1d3f777392a89d7531871f6c3f2208}{00033}}\ \ \ \ \ \doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527a8d1d3f777392a89d7531871f6c3f2208}{COMP\_PRESET}}\ =\ \doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527}{COMP\_TYPE}}\ +\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527}{uint8\_t}}),}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00034}\doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527a26a4b44a837bf97b972628509912b4a5}{00034}}\ \ \ \ \ \doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527a26a4b44a837bf97b972628509912b4a5}{MAX}}\ =\ \doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527}{COMP\_PRESET}}\ +\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527}{uint8\_t}}),}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00035}00035\ \};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00036}00036\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00037}00037\ \textcolor{comment}{///\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ TZF\ \ \ \ \ FILE\ \ \ \ HEADER}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00038}00038\ \textcolor{comment}{///\ \ \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00039}00039\ \textcolor{comment}{///\ |\ \ \ \ \ \ \ \ \ \ \ \ |\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ |}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00040}00040\ \textcolor{comment}{///\ |\ \ SIGNATURE\ |\ Identifier\ (file\ splitting)\ (u64)\ |\ \ Count(file\ splitting)(u16)\ \ |\ \ CompType(u8)\ \ |\ \ CompPreset(u8)\ \ |}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00041}00041\ \textcolor{comment}{///\ |\_\_\_\_\_\_\_\_\_\_\_\_|\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_|\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_|\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_|\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_|}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00042}00042\ \textcolor{comment}{///\ \ \ \ \ \ \ \ \ \ \ \ \ \ ↑\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ↑\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ↑\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ↑\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ↑}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00043}00043\ \textcolor{comment}{///\ HEADER\_OFFSET::ID\ \ \ \ \ \ \ \ \ \ \ \ \ HEADER\_OFFSET::COUNT\ \ \ \ \ \ \ \ \ \ \ \ \ /*...*/::COMP\_TYPE\ \ \ HEADER\_OFFSET::COMP\_PRESET\ \ \ \ \ \ HEADER\_OFFSET::MAX}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00044}00044\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00045}00045\ \textcolor{comment}{//avoid\ padding\ in\ files}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00046}00046\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{pragma}\ \textcolor{preprocessor}{pack}\textcolor{preprocessor}{(}\textcolor{preprocessor}{push}\textcolor{preprocessor}{,}\ 1\textcolor{preprocessor}{)}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00047}\doxymbox{\hyperlink{structHeader}{00047}}\ \textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structHeader}{Header}}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00048}00048\ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00049}\doxymbox{\hyperlink{structHeader_a66f6c58d0244bc34895827bab6e9f61a}{00049}}\ \ \ \ \ size\_t\ \doxymbox{\hyperlink{structHeader_a66f6c58d0244bc34895827bab6e9f61a}{identifier}};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00050}\doxymbox{\hyperlink{structHeader_ad9a803405f6a09c325389309d269c0bd}{00050}}\ \ \ \ \ \doxymbox{\hyperlink{structHeader_ad9a803405f6a09c325389309d269c0bd}{uint16\_t}}\ \doxymbox{\hyperlink{structHeader_ad9a803405f6a09c325389309d269c0bd}{count}};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00051}\doxymbox{\hyperlink{structHeader_a65653b8a9e7ec9e2d414242c8d1ec0f1}{00051}}\ \ \ \ \ \doxymbox{\hyperlink{structHeader_a65653b8a9e7ec9e2d414242c8d1ec0f1}{CompType}}\ \doxymbox{\hyperlink{structHeader_a65653b8a9e7ec9e2d414242c8d1ec0f1}{comp\_type}};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00052}\doxymbox{\hyperlink{structHeader_a38a22e627cdd546a20e434bfd9b754dc}{00052}}\ \ \ \ \ \doxymbox{\hyperlink{structHeader_a38a22e627cdd546a20e434bfd9b754dc}{CompPreset}}\ \doxymbox{\hyperlink{structHeader_a38a22e627cdd546a20e434bfd9b754dc}{preset}};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00053}00053\ \};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00054}00054\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{pragma}\ \textcolor{preprocessor}{pack}\textcolor{preprocessor}{(}\textcolor{preprocessor}{pop}\textcolor{preprocessor}{)}}
 \DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00055}00055\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00056}\doxymbox{\hyperlink{structFileOptions_a942032d7491ea7231b48c3b1d1940b7b}{00056}}\ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{structFileOptions_a942032d7491ea7231b48c3b1d1940b7b}{already\_compressed}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00057}00057\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00058}00058\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ fs::exists(path)\ \textcolor{keyword}{and}\ header.has\_value();}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00059}00059\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00060}00060\ \};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00056}\doxymbox{\hyperlink{structFileOptions}{00056}}\ \textcolor{keyword}{export}\ \textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structFileOptions}{FileOptions}}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00057}00057\ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00058}\doxymbox{\hyperlink{structFileOptions_aefc1e13c9d342565948fccbbd0ec3e15}{00058}}\ \ \ \ \ \doxymbox{\hyperlink{structFileOptions_aefc1e13c9d342565948fccbbd0ec3e15}{fs}}::\doxymbox{\hyperlink{structFileOptions_aefc1e13c9d342565948fccbbd0ec3e15}{path}}\ \doxymbox{\hyperlink{structFileOptions_aefc1e13c9d342565948fccbbd0ec3e15}{path}};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00059}\doxymbox{\hyperlink{structFileOptions_ae86a7b9e2da8adbab5c3b20a76dd7454}{00059}}\ \ \ \ \ \doxymbox{\hyperlink{structFileOptions}{std}}::\doxymbox{\hyperlink{structFileOptions}{optional}}<\doxymbox{\hyperlink{structFileOptions}{Header}}>\ \doxymbox{\hyperlink{structFileOptions}{header}};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00060}\doxymbox{\hyperlink{structFileOptions_a7cb51e65263f944a8a56b79346dedb71}{00060}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{structFileOptions_a7cb51e65263f944a8a56b79346dedb71}{delete\_on\_dtor}}\ =\ \textcolor{keyword}{false};}
 \DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00061}00061\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00062}\doxymbox{\hyperlink{file__management_8cppm_a51ac0d18eaecc636ae1d46e002e310f6}{00062}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{file__management_8cppm_a51ac0d18eaecc636ae1d46e002e310f6}{try\_throw\_IO\_error}}(std::ios\_base::iostate\ \textcolor{keyword}{const}\ state,\ fs::path\ \textcolor{keyword}{const}\&\ path)\ \textcolor{keyword}{noexcept}(\textcolor{keyword}{false})}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00063}00063\ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00064}00064\ \ \ \ \ \textcolor{keywordflow}{if}\ (((state\ \&\ std::ios\_base::failbit)\ !=\ 0)\ \textcolor{keyword}{and}\ (state\ \&\ std::ios\_base::eofbit)\ ==\ 0)}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00065}00065\ \ \ \ \ \ \ \ \ throw\_error(ErrorType::FILE\_CORRUPTED,\ path.string());}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00066}00066\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00067}00067\ \ \ \ \ \textcolor{keywordflow}{if}\ ((state\ \&\ std::ios\_base::badbit)\ !=\ 0)\textcolor{comment}{//we\ fucked\ fucked}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00068}00068\ \ \ \ \ \ \ \ \ throw\_error(ErrorType::DRIVE\_ERROR,\ path.string());}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00069}00069\ \}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00070}00070\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00071}00071\ \textcolor{comment}{/**}}
-\DoxyCodeLine{00072\ \textcolor{comment}{\ *\ @brief\ Interpret\ a\ file\ as\ to\ retrieve\ custom\ information}}
-\DoxyCodeLine{00073\ \textcolor{comment}{\ *\ @details\ An\ interpreted\ file\ is\ one\ where\ we\ have\ the\ knowledge\ about\ it\ to\ fill\ \#FileOptions}}
-\DoxyCodeLine{00074\ \textcolor{comment}{\ */}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00075}\doxymbox{\hyperlink{classFile}{00075}}\ \textcolor{keyword}{export}\ \textcolor{keyword}{class}\ \doxymbox{\hyperlink{classFile}{File}}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00076}00076\ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00077}00077\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00078}00078\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00079}00079\ \ \ \ \ \textcolor{comment}{/**}}
-\DoxyCodeLine{00080\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Construct\ member\ types,\ such\ as\ \#FileOptions.\ This\ ctor\ should\ be\ used\ when\ a\ file\ is\ to\ be\ compressed}}
-\DoxyCodeLine{00081\ \textcolor{comment}{\ \ \ \ \ *\ @param\ path\ Path\ of\ file}}
-\DoxyCodeLine{00082\ \textcolor{comment}{\ \ \ \ \ *\ @param\ options\ Options\ to\ create\ and\ customize\ to\ the\ file}}
-\DoxyCodeLine{00083\ \textcolor{comment}{\ \ \ \ \ *\ }}
-\DoxyCodeLine{00084\ \textcolor{comment}{\ \ \ \ \ *\ @todo\ Add\ a\ parameter\ for\ \#FileOptions::delete\_on\_dtor\ when\ the\ parser\ is\ updated\ to\ do\ that}}
-\DoxyCodeLine{00085\ \textcolor{comment}{\ \ \ \ \ */}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00086}\doxymbox{\hyperlink{classFile_a58521685afcf0aa7659e34d003f46868}{00086}}\ \ \ \ \ \doxymbox{\hyperlink{classFile_a58521685afcf0aa7659e34d003f46868}{File}}(\doxymbox{\hyperlink{classFile_a58521685afcf0aa7659e34d003f46868}{parser}}::\doxymbox{\hyperlink{classFile_a58521685afcf0aa7659e34d003f46868}{Options}}\ \textcolor{keyword}{const}\&\ \doxymbox{\hyperlink{classFile_a58521685afcf0aa7659e34d003f46868}{options}})}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00087}00087\ \ \ \ \ \ \ \ \ :\doxymbox{\hyperlink{classFile_a58521685afcf0aa7659e34d003f46868}{cli\_options}}(\doxymbox{\hyperlink{classFile_a58521685afcf0aa7659e34d003f46868}{options}})}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00088}00088\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00089}00089\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (options.concatenate\_files)}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00090}00090\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00091}00091\ \ \ \ \ \ \ \ \ \ \ \ \ concatenate\_files(cli\_options.filename\_in);}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00092}00092\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00093}00093\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00094}00094\ \ \ \ \ \ \ \ \ in\_file\_options\ =\ FileOptions\{\ cli\_options.filename\_in,\ extract\_info(cli\_options.filename\_in)\ \};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00095}00095\ \ \ \ \ \ \ \ \ out\_file\ =\ create\_file(cli\_options.filename\_out);}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00096}00096\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00097}00097\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00098}00098\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00099}00099\ \ \ \ \ \textcolor{comment}{/**}}
-\DoxyCodeLine{00100\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Write\ to\ the\ output\ file.}}
-\DoxyCodeLine{00101\ \textcolor{comment}{\ \ \ \ \ */}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00102}00102\ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00103}\doxymbox{\hyperlink{classFile_a71a366962da0748bf6f89e800593e58a}{00103}}\ \ \ \ \ \doxymbox{\hyperlink{classFile}{File}}\&\ \doxymbox{\hyperlink{classFile_a71a366962da0748bf6f89e800593e58a}{write}}(\doxymbox{\hyperlink{classFile_a71a366962da0748bf6f89e800593e58a}{std}}::\doxymbox{\hyperlink{classFile_a71a366962da0748bf6f89e800593e58a}{span}}<\doxymbox{\hyperlink{classFile_a71a366962da0748bf6f89e800593e58a}{T}}>\ \doxymbox{\hyperlink{classFile_a71a366962da0748bf6f89e800593e58a}{buffer}})\ \textcolor{keyword}{noexcept}(\textcolor{keyword}{false})}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00104}00104\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00105}00105\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{out\_file}}.\doxymbox{\hyperlink{classFile}{write}}(\textcolor{keyword}{reinterpret\_cast}<\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*>(\doxymbox{\hyperlink{classFile}{buffer}}.\doxymbox{\hyperlink{classFile}{data}}()),\ \doxymbox{\hyperlink{classFile}{buffer}}.\doxymbox{\hyperlink{classFile}{size}}()\ *\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{classFile}{T}}));}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00106}00106\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{try\_throw\_IO\_error}}(\doxymbox{\hyperlink{classFile}{out\_file}}.\doxymbox{\hyperlink{classFile}{rdstate}}(),\ \doxymbox{\hyperlink{classFile}{cli\_options}}.\doxymbox{\hyperlink{classFile}{filename\_out}});}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00107}00107\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00108}00108\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00109}00109\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00110}00110\ \ \ \ \ \textcolor{comment}{/**}}
-\DoxyCodeLine{00111\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Write\ to\ file\ (forwarding\ the\ actual\ write\ function)\ with\ IO\ error\ protection}}
-\DoxyCodeLine{00112\ \textcolor{comment}{\ \ \ \ \ *\ @param\ bytes\ Bytes\ to\ write\ to\ file}}
-\DoxyCodeLine{00113\ \textcolor{comment}{\ \ \ \ \ *\ @param\ num\ Number\ of\ bytes}}
-\DoxyCodeLine{00114\ \textcolor{comment}{\ \ \ \ \ *}}
-\DoxyCodeLine{00115\ \textcolor{comment}{\ \ \ \ \ *\ @throws\ std::runtime\_exception\ An\ ErrorType}}
-\DoxyCodeLine{00116\ \textcolor{comment}{\ \ \ \ \ */}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00117}\doxymbox{\hyperlink{classFile_a3f0bd1fcb9423f20e7ad5313deba5945}{00117}}\ \ \ \ \ \doxymbox{\hyperlink{classFile}{File}}\&\ \doxymbox{\hyperlink{classFile_a3f0bd1fcb9423f20e7ad5313deba5945}{write}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ bytes,\ std::streamsize\ \textcolor{keyword}{const}\ num)}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00118}00118\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00119}00119\ \ \ \ \ \ \ \ \ out\_file.write(bytes,\ num);}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00120}00120\ \ \ \ \ \ \ \ \ try\_throw\_IO\_error(out\_file.rdstate(),\ cli\_options.filename\_out);}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00121}00121\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00122}00122\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00123}00123\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00124}00124\ \ \ \ \ \textcolor{comment}{/**}}
-\DoxyCodeLine{00125\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Split\ an\ encoded\ file\ into\ a\ certain\ number\ of\ encoded\ (with\ header)\ files\ }}
-\DoxyCodeLine{00126\ \textcolor{comment}{\ \ \ \ \ *\ @param\ path\ }}
-\DoxyCodeLine{00127\ \textcolor{comment}{\ \ \ \ \ *\ @param\ portions\ }}
-\DoxyCodeLine{00128\ \textcolor{comment}{\ \ \ \ \ */}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00129}\doxymbox{\hyperlink{classFile_a30d421f12056fe097e75f2a98a0f480c}{00129}}\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classFile_a30d421f12056fe097e75f2a98a0f480c}{split\_file}}(fs::path\ \textcolor{keyword}{const}\&\ path,\ size\_t\ portions)}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00130}00130\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00131}00131\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00132}00132\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (portions\ ==\ 1)\ \textcolor{keywordflow}{return};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00133}00133\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00134}00134\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((portions\ <\ 1\ \textcolor{keyword}{or}\ portions\ >\ N\_FILES\_LIMIT)\ \textcolor{keyword}{or}\ (fs::file\_size(path)\ /\ portions)\ <\ SIZE\_FILES\_MIN)}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00135}00135\ \ \ \ \ \ \ \ \ \ \ \ \ print\_warn(WarningType::PORTIONS\_OUT\_OF\_RANGE,\ std::to\_string(portions));}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00136}00136\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00137}00137\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00138}00138\ \ \ \ \ \ \ \ \ std::ifstream\ source\_file\{\ path,\ std::ios::binary\ \};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00139}00139\ \ \ \ \ \ \ \ \ assert(has\_signature(source\_file));}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00140}00140\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00141}00141\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!fs::exists(path))\ throw\_error(ErrorType::PATH\_NOT\_FOUND,\ path.string());}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00142}00142\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ Header\ =\ extract\_info(path);}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00143}00143\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00144}00144\ \ \ \ \ \ \ \ \ \textcolor{comment}{//move\ to\ the\ ID\ section}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00145}00145\ \ \ \ \ \ \ \ \ source\_file.seekg(\textcolor{keyword}{static\_cast}<size\_t>(\doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527}{HEADER\_OFFSET}}\doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527ab718adec73e04ce3ec720dd11a06a308}{::}}\doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527ab718adec73e04ce3ec720dd11a06a308}{ID}}));}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00146}00146\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ portions\_size\ =\ fs::file\_size(path)\ /\ portions;}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00062}\doxymbox{\hyperlink{structFileOptions_a942032d7491ea7231b48c3b1d1940b7b}{00062}}\ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{structFileOptions_a942032d7491ea7231b48c3b1d1940b7b}{already\_compressed}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00063}00063\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00064}00064\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ fs::exists(path)\ \textcolor{keyword}{and}\ header.has\_value();}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00065}00065\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00066}00066\ \};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00067}00067\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00068}\doxymbox{\hyperlink{file__management_8cppm_a51ac0d18eaecc636ae1d46e002e310f6}{00068}}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{file__management_8cppm_a51ac0d18eaecc636ae1d46e002e310f6}{try\_throw\_IO\_error}}(std::ios\_base::iostate\ \textcolor{keyword}{const}\ state,\ fs::path\ \textcolor{keyword}{const}\&\ path)\ \textcolor{keyword}{noexcept}(\textcolor{keyword}{false})}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00069}00069\ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00070}00070\ \ \ \ \ \textcolor{keywordflow}{if}\ (((state\ \&\ std::ios\_base::failbit)\ !=\ 0)\ \textcolor{keyword}{and}\ (state\ \&\ std::ios\_base::eofbit)\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00071}00071\ \ \ \ \ \ \ \ \ throw\_error(ErrorType::FILE\_CORRUPTED,\ path.string());}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00072}00072\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00073}00073\ \ \ \ \ \textcolor{keywordflow}{if}\ ((state\ \&\ std::ios\_base::badbit)\ !=\ 0)\textcolor{comment}{//we\ fucked\ fucked}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00074}00074\ \ \ \ \ \ \ \ \ throw\_error(ErrorType::DRIVE\_ERROR,\ path.string());}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00075}00075\ \}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00077}00077\ \textcolor{comment}{/**}}
+\DoxyCodeLine{00078\ \textcolor{comment}{\ *\ @brief\ Interpret\ a\ file\ as\ to\ retrieve\ custom\ information}}
+\DoxyCodeLine{00079\ \textcolor{comment}{\ *\ @details\ An\ interpreted\ file\ is\ one\ where\ we\ have\ the\ knowledge\ about\ it\ to\ fill\ \#FileOptions}}
+\DoxyCodeLine{00080\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00081}\doxymbox{\hyperlink{classFile}{00081}}\ \textcolor{keyword}{export}\ \textcolor{keyword}{class}\ \doxymbox{\hyperlink{classFile}{File}}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00082}00082\ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00083}00083\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00085}00085\ \ \ \ \ \textcolor{comment}{/**}}
+\DoxyCodeLine{00086\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Construct\ member\ types,\ such\ as\ \#FileOptions.\ This\ ctor\ should\ be\ used\ when\ a\ file\ is\ to\ be\ compressed}}
+\DoxyCodeLine{00087\ \textcolor{comment}{\ \ \ \ \ *\ @param\ path\ Path\ of\ file}}
+\DoxyCodeLine{00088\ \textcolor{comment}{\ \ \ \ \ *\ @param\ options\ Options\ to\ create\ and\ customize\ to\ the\ file}}
+\DoxyCodeLine{00089\ \textcolor{comment}{\ \ \ \ \ *\ }}
+\DoxyCodeLine{00090\ \textcolor{comment}{\ \ \ \ \ *\ @todo\ Add\ a\ parameter\ for\ \#FileOptions::delete\_on\_dtor\ when\ the\ parser\ is\ updated\ to\ do\ that}}
+\DoxyCodeLine{00091\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00092}\doxymbox{\hyperlink{classFile_a58521685afcf0aa7659e34d003f46868}{00092}}\ \ \ \ \ \doxymbox{\hyperlink{classFile_a58521685afcf0aa7659e34d003f46868}{File}}(\doxymbox{\hyperlink{classFile_a58521685afcf0aa7659e34d003f46868}{parser}}::\doxymbox{\hyperlink{classFile_a58521685afcf0aa7659e34d003f46868}{Options}}\ \textcolor{keyword}{const}\&\ \doxymbox{\hyperlink{classFile_a58521685afcf0aa7659e34d003f46868}{options}})}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00093}00093\ \ \ \ \ \ \ \ \ :\doxymbox{\hyperlink{classFile_a58521685afcf0aa7659e34d003f46868}{options\_}}(\doxymbox{\hyperlink{classFile_a58521685afcf0aa7659e34d003f46868}{options}})}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00094}00094\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00095}00095\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (options.concatenate\_files)}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00096}00096\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00097}00097\ \ \ \ \ \ \ \ \ \ \ \ \ concatenate\_files(options\_.filename\_in);}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00098}00098\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00099}00099\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00100}00100\ \ \ \ \ \ \ \ \ in\_file\_options\ =\ FileOptions\{\ .path\ =\ options\_.filename\_in,\ .header\ =\ extract\_info(options\_.filename\_in)\ \};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00102}00102\ \ \ \ \ \ \ \ \ \textcolor{comment}{//TODO:\ What\ if\ the\ uncompressed\ file\ is\ a\ compressed\ file?}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00103}00103\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!extract\_info(options\_.filename\_in)\ \textcolor{keyword}{or}\ options\_.force\_compression)}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00104}00104\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ out\_file\ =\ create\_file(options\_.filename\_out);\textcolor{comment}{//create\ the\ file\ with\ header}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00106}00106\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00107}00107\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00108}00108\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00109}00109\ \ \ \ \ \ \ \ \ \ \ \ \ options\_.filename\_out.replace\_extension(\textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00110}00110\ \ \ \ \ \ \ \ \ \ \ \ \ out\_file\ =\ \{\ options\_.filename\_out,\ std::ios::binary\ \};\textcolor{comment}{//create\ empty\ file}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00111}00111\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00112}00112\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00114}00114\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00115}00115\ \ \ \ \ \textcolor{comment}{/**}}
+\DoxyCodeLine{00116\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Write\ to\ the\ output\ file.}}
+\DoxyCodeLine{00117\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00118}00118\ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00119}\doxymbox{\hyperlink{classFile_a71a366962da0748bf6f89e800593e58a}{00119}}\ \ \ \ \ \doxymbox{\hyperlink{classFile}{File}}\&\ \doxymbox{\hyperlink{classFile_a71a366962da0748bf6f89e800593e58a}{write}}(\doxymbox{\hyperlink{classFile_a71a366962da0748bf6f89e800593e58a}{std}}::\doxymbox{\hyperlink{classFile_a71a366962da0748bf6f89e800593e58a}{span}}<\doxymbox{\hyperlink{classFile_a71a366962da0748bf6f89e800593e58a}{T}}>\ \doxymbox{\hyperlink{classFile_a71a366962da0748bf6f89e800593e58a}{buffer}})\ \textcolor{keyword}{noexcept}(\textcolor{keyword}{false})}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00120}00120\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00121}00121\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{out\_file}}.\doxymbox{\hyperlink{classFile}{write}}(\textcolor{keyword}{reinterpret\_cast}<\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*>(\doxymbox{\hyperlink{classFile}{buffer}}.\doxymbox{\hyperlink{classFile}{data}}()),\ \doxymbox{\hyperlink{classFile}{buffer}}.\doxymbox{\hyperlink{classFile}{size}}()\ *\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{classFile}{T}}));}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00122}00122\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{try\_throw\_IO\_error}}(\doxymbox{\hyperlink{classFile}{out\_file}}.\doxymbox{\hyperlink{classFile}{rdstate}}(),\ \doxymbox{\hyperlink{classFile}{options\_}}.\doxymbox{\hyperlink{classFile}{filename\_out}});}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00123}00123\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00124}00124\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00125}00125\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00126}00126\ \ \ \ \ \textcolor{comment}{/**}}
+\DoxyCodeLine{00127\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Write\ to\ file\ (forwarding\ the\ actual\ write\ function)\ with\ IO\ error\ protection}}
+\DoxyCodeLine{00128\ \textcolor{comment}{\ \ \ \ \ *\ @param\ bytes\ Bytes\ to\ write\ to\ file}}
+\DoxyCodeLine{00129\ \textcolor{comment}{\ \ \ \ \ *\ @param\ num\ Number\ of\ bytes}}
+\DoxyCodeLine{00130\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00131\ \textcolor{comment}{\ \ \ \ \ *\ @throws\ std::runtime\_exception\ An\ ErrorType}}
+\DoxyCodeLine{00132\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00133}\doxymbox{\hyperlink{classFile_a3f0bd1fcb9423f20e7ad5313deba5945}{00133}}\ \ \ \ \ \doxymbox{\hyperlink{classFile}{File}}\&\ \doxymbox{\hyperlink{classFile_a3f0bd1fcb9423f20e7ad5313deba5945}{write}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ bytes,\ std::streamsize\ \textcolor{keyword}{const}\ num)}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00134}00134\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00135}00135\ \ \ \ \ \ \ \ \ out\_file.write(bytes,\ num);}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00136}00136\ \ \ \ \ \ \ \ \ try\_throw\_IO\_error(out\_file.rdstate(),\ options\_.filename\_out);}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00137}00137\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00138}00138\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00139}00139\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00140}00140\ \ \ \ \ \textcolor{comment}{/**}}
+\DoxyCodeLine{00141\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Split\ an\ encoded\ file\ into\ a\ certain\ number\ of\ encoded\ (with\ header)\ files\ }}
+\DoxyCodeLine{00142\ \textcolor{comment}{\ \ \ \ \ *\ @param\ path\ to\ be\ split}}
+\DoxyCodeLine{00143\ \textcolor{comment}{\ \ \ \ \ *\ @param\ portions\ number\ of\ files\ that\ will\ be\ made}}
+\DoxyCodeLine{00144\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00145}\doxymbox{\hyperlink{classFile_a30d421f12056fe097e75f2a98a0f480c}{00145}}\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classFile_a30d421f12056fe097e75f2a98a0f480c}{split\_file}}(fs::path\ \textcolor{keyword}{const}\&\ path,\ size\_t\ portions)}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00146}00146\ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00147}00147\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00148}00148\ \ \ \ \ \ \ \ \ std::vector<\textcolor{keywordtype}{char}>\ buffer(portions\_size);}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00148}00148\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (portions\ ==\ 1)\ \textcolor{keywordflow}{return};}
 \DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00149}00149\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00150}00150\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ out\_path\ =\ path.parent\_path()\ /\ \textcolor{stringliteral}{"{}output"{}};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00151}00151\ \ \ \ \ \ \ \ \ fs::create\_directory(out\_path);}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00150}00150\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ ((portions\ <\ 1\ \textcolor{keyword}{or}\ portions\ >\ N\_FILES\_LIMIT)\ \textcolor{keyword}{or}\ (fs::file\_size(path)\ /\ portions)\ <\ SIZE\_FILES\_MIN)}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00151}00151\ \ \ \ \ \ \ \ \ \ \ \ \ print\_warn(WarningType::PORTIONS\_OUT\_OF\_RANGE,\ std::to\_string(portions));}
 \DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00152}00152\ }
 \DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00153}00153\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00154}00154\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Set\ up\ a\ random\ number\ such\ that\ num\ <\ size\_t::max}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00155}00155\ \ \ \ \ \ \ \ \ std::random\_device\ seed;}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00156}00156\ \ \ \ \ \ \ \ \ std::default\_random\_engine\ rng(seed());}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00157}00157\ \ \ \ \ \ \ \ \ std::uniform\_int\_distribution<size\_t>\ dist(1,\ std::numeric\_limits<uint16\_t>::max());}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00158}00158\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ id\ =\ dist(rng);}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00154}00154\ \ \ \ \ \ \ \ \ std::ifstream\ source\_file\{\ path,\ std::ios::binary\ \};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00155}00155\ \ \ \ \ \ \ \ \ assert(has\_signature(source\_file));}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00156}00156\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00157}00157\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!fs::exists(path))\ throw\_error(ErrorType::PATH\_NOT\_FOUND,\ path.string());}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00158}00158\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ Header\ =\ extract\_info(path);}
 \DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00159}00159\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00160}00160\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (uint16\_t\ file\_n\ =\ 0;\ file\_n\ <\ portions;\ file\_n++)}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00161}00161\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00162}00162\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//create\ a\ file\ with\ same\ comp\_type\ and\ preset,\ but\ with\ id\ as\ ID.\ This\ file\ ends\ with\ \_<file\_n>}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00163}00163\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ file\ =\ create\_file(Header.value().comp\_type,\ Header.value().preset,\ out\_path\ /\ (path.stem().string()\ +\ \textcolor{stringliteral}{'\_'}\ +\ std::to\_string(file\_n)\ +\ FILE\_EXTENSION),\ id,\ file\_n);}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00164}00164\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00165}00165\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//We\ are\ at\ the\ last\ file,\ may\ be\ smaller\ than\ portions\_size\ and/or\ SIZE\_FILES\_MIN}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00166}00166\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (portions\_size\ >\ (fs::file\_size(path)\ -\/\ source\_file.tellg()))}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00167}00167\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ buffer.resize(fs::file\_size(path)\ -\/\ source\_file.tellg());}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00160}00160\ \ \ \ \ \ \ \ \ \textcolor{comment}{//move\ to\ the\ ID\ section}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00161}00161\ \ \ \ \ \ \ \ \ source\_file.seekg(\textcolor{keyword}{static\_cast}<size\_t>(\doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527}{HEADER\_OFFSET}}\doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527ab718adec73e04ce3ec720dd11a06a308}{::}}\doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527ab718adec73e04ce3ec720dd11a06a308}{ID}}));}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00162}00162\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ portions\_size\ =\ fs::file\_size(path)\ /\ portions;}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00163}00163\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00164}00164\ \ \ \ \ \ \ \ \ std::vector<\textcolor{keywordtype}{char}>\ buffer(portions\_size);}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00165}00165\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00166}00166\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ out\_path\ =\ path.parent\_path()\ /\ \textcolor{stringliteral}{"{}output"{}};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00167}00167\ \ \ \ \ \ \ \ \ fs::create\_directory(out\_path);}
 \DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00168}00168\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00169}00169\ \ \ \ \ \ \ \ \ \ \ \ \ source\_file.read(buffer.data(),\ buffer.size());}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00170}00170\ \ \ \ \ \ \ \ \ \ \ \ \ file.write(buffer.data(),\ buffer.size());}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00171}00171\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00172}00172\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00173}00173\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00174}00174\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00175}00175\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (errno)}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00176}00176\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00177}00177\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ENOSPC:}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ EIO:}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ENFILE:}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00180}00180\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ EMFILE:}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ throw\_error(ErrorType::DRIVE\_ERROR,\ path.string());}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00182}00182\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00184}00184\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00185}00185\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00186}00186\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (std::runtime\_error\ \textcolor{keyword}{const}\&)}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00187}00187\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00188}00188\ \ \ \ \ \ \ \ \ \ \ \ \ fs::remove\_all(out\_path);}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00189}00189\ \ \ \ \ \ \ \ \ \ \ \ \ std::terminate();\textcolor{comment}{//terminate\ as\ to\ not\ call\ fs::remove(path),\ also,\ if\ these\ errors\ do\ happen\ it\ is\ a\ good\ idea\ to\ drop\ everything}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00190}00190\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00191}00191\ \ \ \ \ \ \ \ \ source\_file.close();}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00192}00192\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00193}00193\ \ \ \ \ \ \ \ \ fs::remove(path);}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00194}00194\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00195}00195\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00196}00196\ \ \ \ \ \textcolor{comment}{/**}}
-\DoxyCodeLine{00197\ \textcolor{comment}{\ \ \ \ *\ @brief\ Read\ a\ file\ into\ a\ vector.\ Will\ call\ throw\_error\ if\ file\ is\ not\ found\ or\ inaccessible.}}
-\DoxyCodeLine{00198\ \textcolor{comment}{\ \ \ \ *\ @param\ in\_path\ Location\ of\ file.}}
-\DoxyCodeLine{00199\ \textcolor{comment}{\ \ \ \ *\ @param\ received\_data\ The\ vector\ that\ will\ be\ filled.}}
-\DoxyCodeLine{00200\ \textcolor{comment}{\ \ \ \ */}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00201}\doxymbox{\hyperlink{classFile_a055e2d7dcee51ebb9212c9e5c0e853b3}{00201}}\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classFile_a055e2d7dcee51ebb9212c9e5c0e853b3}{read\_file}}(\textcolor{keyword}{const}\ fs::path\&\ in\_path,\ std::vector<Sym>\&\ received\_data)}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00202}00202\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00203}00203\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!fs::exists(in\_path))}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00204}00204\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00205}00205\ \ \ \ \ \ \ \ \ \ \ \ \ throw\_error(ErrorType::PATH\_NOT\_FOUND,\ in\_path.string());}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00169}00169\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00170}00170\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Set\ up\ a\ random\ number\ such\ that\ num\ <\ size\_t::max}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00171}00171\ \ \ \ \ \ \ \ \ std::random\_device\ seed;}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00172}00172\ \ \ \ \ \ \ \ \ std::default\_random\_engine\ rng(seed());}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00173}00173\ \ \ \ \ \ \ \ \ std::uniform\_int\_distribution<size\_t>\ dist(1,\ std::numeric\_limits<uint16\_t>::max());}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00174}00174\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ id\ =\ dist(rng);}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00175}00175\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00176}00176\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (uint16\_t\ file\_n\ =\ 0;\ file\_n\ <\ portions;\ file\_n++)}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00177}00177\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00178}00178\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//create\ a\ file\ with\ same\ comp\_type\ and\ preset,\ but\ with\ id\ as\ ID.\ This\ file\ ends\ with\ \_<file\_n>}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00179}00179\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ file\ =\ create\_file(Header.value().comp\_type,\ Header.value().preset,\ out\_path\ /\ (path.stem().string()\ +\ \textcolor{stringliteral}{'\_'}\ +\ std::to\_string(file\_n)\ +\ FILE\_EXTENSION),\ id,\ file\_n);}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00180}00180\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00181}00181\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//We\ are\ at\ the\ last\ file,\ may\ be\ smaller\ than\ portions\_size\ and/or\ SIZE\_FILES\_MIN}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00182}00182\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (portions\_size\ >\ (fs::file\_size(path)\ -\/\ source\_file.tellg()))}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00183}00183\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ buffer.resize(fs::file\_size(path)\ -\/\ source\_file.tellg());}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00184}00184\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00185}00185\ \ \ \ \ \ \ \ \ \ \ \ \ source\_file.read(buffer.data(),\ buffer.size());}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00186}00186\ \ \ \ \ \ \ \ \ \ \ \ \ file.write(buffer.data(),\ buffer.size());}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00187}00187\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00188}00188\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00189}00189\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00190}00190\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00191}00191\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (errno)}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00192}00192\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00193}00193\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ENOSPC:}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00194}00194\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ EIO:}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00195}00195\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ENFILE:}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00196}00196\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ EMFILE:}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00197}00197\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ throw\_error(ErrorType::DRIVE\_ERROR,\ path.string());}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00198}00198\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00199}00199\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00200}00200\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00201}00201\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00202}00202\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (std::runtime\_error\ \textcolor{keyword}{const}\&)}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00203}00203\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00204}00204\ \ \ \ \ \ \ \ \ \ \ \ \ fs::remove\_all(out\_path);}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00205}00205\ \ \ \ \ \ \ \ \ \ \ \ \ std::terminate();\textcolor{comment}{//terminate\ as\ to\ not\ call\ fs::remove(path),\ also,\ if\ these\ errors\ do\ happen\ it\ is\ a\ good\ idea\ to\ drop\ everything}}
 \DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00206}00206\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00207}00207\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00208}00208\ \ \ \ \ \ \ \ \ std::ifstream\ in\_file\{\ in\_path,\ std::ios::ate\ |\ std::ios::binary\ \};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00209}00209\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00210}00210\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!in\_file.is\_open())}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00211}00211\ \ \ \ \ \ \ \ \ \ \ \ \ throw\_error(ErrorType::PATH\_NOT\_ACCESSIBLE,\ in\_path.string());}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00212}00212\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00213}00213\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \textcolor{keyword}{const}\ size\_file\ =\ in\_file.tellg()\ /\ \textcolor{keyword}{sizeof}(Sym);}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00214}00214\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00215}00215\ \ \ \ \ \ \ \ \ received\_data.resize(size\_file);}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00216}00216\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00217}00217\ \ \ \ \ \ \ \ \ in\_file.seekg(0);}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00218}00218\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00219}00219\ \ \ \ \ \ \ \ \ in\_file.read(\textcolor{keyword}{reinterpret\_cast}<\textcolor{keywordtype}{char}*>(received\_data.data()),\ size\_file\ *\ \textcolor{keyword}{sizeof}(Sym));}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00220}00220\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00221}00221\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00222}00222\ \ \ \ \ \textcolor{comment}{/**}}
-\DoxyCodeLine{00223\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Check\ if\ file\ has\ the\ \#SIGNATURE\ in\ the\ header.\ Non-\/throwing\ version\ of\ \#check\_signature.}}
-\DoxyCodeLine{00224\ \textcolor{comment}{\ \ \ \ \ *\ @return\ True\ if\ file\ has\ signature,\ false\ if\ not.}}
-\DoxyCodeLine{00225\ \textcolor{comment}{\ \ \ \ \ *}}
-\DoxyCodeLine{00226\ \textcolor{comment}{\ \ \ \ \ *\ @param\ file\ File\ to\ be\ checked.}}
-\DoxyCodeLine{00227\ \textcolor{comment}{\ \ \ \ \ *\ @pre\ The\ file\ shall\ already\ exist\ and\ be\ accessible.}}
-\DoxyCodeLine{00228\ \textcolor{comment}{\ \ \ \ \ *\ @post\ file\ will\ be\ unchanged.}}
-\DoxyCodeLine{00229\ \textcolor{comment}{\ \ \ \ \ */}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00230}\doxymbox{\hyperlink{classFile_a74344ea69c407c73131db10ffc3292b4}{00230}}\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{classFile_a74344ea69c407c73131db10ffc3292b4}{has\_signature}}(std::fstream\&\ file)}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00231}00231\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00232}00232\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ save\_pos\ =\ file.tellg();}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00233}00233\ \ \ \ \ \ \ \ \ file.seekg(0);}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00234}00234\ \ \ \ \ \ \ \ \ std::string\ buffer(SIGNATURE.size(),\ \textcolor{stringliteral}{'\ '});}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00235}00235\ \ \ \ \ \ \ \ \ file.read(buffer.data(),\ buffer.size());}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00236}00236\ \ \ \ \ \ \ \ \ file.seekg(save\_pos);}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00237}00237\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00238}00238\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (buffer\ !=\ SIGNATURE.data())\textcolor{comment}{//not\ recognized}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00239}00239\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00240}00240\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00241}00241\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00242}00242\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00243}00243\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00244}00244\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00245}00245\ \ \ \ \ \textcolor{comment}{/**}}
-\DoxyCodeLine{00246\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Check\ if\ file\ has\ the\ \#SIGNATURE\ in\ the\ header.\ Non-\/throwing\ version\ of\ \#check\_signature.}}
-\DoxyCodeLine{00247\ \textcolor{comment}{\ \ \ \ \ *\ @return\ True\ if\ file\ has\ signature,\ false\ if\ not.}}
-\DoxyCodeLine{00248\ \textcolor{comment}{\ \ \ \ \ *}}
-\DoxyCodeLine{00249\ \textcolor{comment}{\ \ \ \ \ *\ @param\ file\ File\ to\ be\ checked.}}
-\DoxyCodeLine{00250\ \textcolor{comment}{\ \ \ \ \ *\ @pre\ The\ file\ shall\ already\ exist\ and\ be\ accessible.}}
-\DoxyCodeLine{00251\ \textcolor{comment}{\ \ \ \ \ *\ @post\ file\ will\ be\ unchanged.}}
-\DoxyCodeLine{00252\ \textcolor{comment}{\ \ \ \ \ */}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00253}\doxymbox{\hyperlink{classFile_a09024be52cad08277a0c2de7ddf22b8b}{00253}}\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{classFile_a74344ea69c407c73131db10ffc3292b4}{has\_signature}}(std::ifstream\&\ file)}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00254}00254\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00255}00255\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ save\_pos\ =\ file.tellg();}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00256}00256\ \ \ \ \ \ \ \ \ file.seekg(0);}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00257}00257\ \ \ \ \ \ \ \ \ std::string\ buffer(SIGNATURE.size(),\ \textcolor{stringliteral}{'\ '});}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00258}00258\ \ \ \ \ \ \ \ \ file.read(buffer.data(),\ buffer.size());}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00259}00259\ \ \ \ \ \ \ \ \ file.seekg(save\_pos);}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00260}00260\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00261}00261\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ buffer\ ==\ SIGNATURE.data();}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00262}00262\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00263}00263\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00264}00264\ \ \ \ \ \textcolor{comment}{/**}}
-\DoxyCodeLine{00265\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Extract\ information\ from\ the\ header\ of\ the\ tzf\ file.}}
-\DoxyCodeLine{00266\ \textcolor{comment}{\ \ \ \ \ *\ @param\ path}}
-\DoxyCodeLine{00267\ \textcolor{comment}{\ \ \ \ \ *\ @return\ A\ FileOptions\ type\ constructed\ with\ the\ obtained\ information}}
-\DoxyCodeLine{00268\ \textcolor{comment}{\ \ \ \ \ *}}
-\DoxyCodeLine{00269\ \textcolor{comment}{\ \ \ \ \ *\ @pre\ path\ shall\ exist\ and\ be\ accessible.}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00207}00207\ \ \ \ \ \ \ \ \ source\_file.close();}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00208}00208\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00209}00209\ \ \ \ \ \ \ \ \ fs::remove(path);}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00210}00210\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00211}00211\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00212}00212\ \ \ \ \ \textcolor{comment}{/**}}
+\DoxyCodeLine{00213\ \textcolor{comment}{\ \ \ \ *\ @brief\ Read\ a\ file\ into\ a\ vector.\ Will\ call\ throw\_error\ if\ file\ is\ not\ found\ or\ inaccessible.}}
+\DoxyCodeLine{00214\ \textcolor{comment}{\ \ \ \ *\ @param\ in\_path\ Location\ of\ file.}}
+\DoxyCodeLine{00215\ \textcolor{comment}{\ \ \ \ *\ @param\ received\_data\ The\ vector\ that\ will\ be\ filled.}}
+\DoxyCodeLine{00216\ \textcolor{comment}{\ \ \ \ *\ @param\ pos\ Read\ position.}}
+\DoxyCodeLine{00217\ \textcolor{comment}{\ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00218}\doxymbox{\hyperlink{classFile_a619fe73c935f1fd4e2bc68da329e75b1}{00218}}\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classFile_a619fe73c935f1fd4e2bc68da329e75b1}{read\_file}}(\textcolor{keyword}{const}\ fs::path\&\ in\_path,\ std::vector<Sym>\&\ received\_data,\ size\_t\ pos\ =\ 0)}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00219}00219\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00220}00220\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!fs::exists(in\_path))}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00221}00221\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00222}00222\ \ \ \ \ \ \ \ \ \ \ \ \ throw\_error(ErrorType::PATH\_NOT\_FOUND,\ in\_path.string());}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00223}00223\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00224}00224\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00225}00225\ \ \ \ \ \ \ \ \ std::ifstream\ in\_file\{\ in\_path,\ std::ios::ate\ |\ std::ios::binary\ \};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00226}00226\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00227}00227\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!in\_file.is\_open())}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00228}00228\ \ \ \ \ \ \ \ \ \ \ \ \ throw\_error(ErrorType::PATH\_NOT\_ACCESSIBLE,\ in\_path.string());}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00229}00229\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00230}00230\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \textcolor{keyword}{const}\ size\_file\ =\ in\_file.tellg()\ /\ \textcolor{keyword}{sizeof}(Sym);}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00231}00231\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00232}00232\ \ \ \ \ \ \ \ \ received\_data.resize(size\_file);}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00233}00233\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00234}00234\ \ \ \ \ \ \ \ \ in\_file.seekg(pos);}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00235}00235\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00236}00236\ \ \ \ \ \ \ \ \ in\_file.read(\textcolor{keyword}{reinterpret\_cast}<\textcolor{keywordtype}{char}*>(received\_data.data()),\ size\_file\ *\ \textcolor{keyword}{sizeof}(Sym));}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00237}00237\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00238}00238\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00239}00239\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00240}00240\ \ \ \ \ \textcolor{comment}{/**}}
+\DoxyCodeLine{00241\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Check\ if\ file\ has\ the\ \#SIGNATURE\ in\ the\ header.\ Non-\/throwing\ version\ of\ \#check\_signature.}}
+\DoxyCodeLine{00242\ \textcolor{comment}{\ \ \ \ \ *\ @return\ True\ if\ file\ has\ signature,\ false\ if\ not.}}
+\DoxyCodeLine{00243\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00244\ \textcolor{comment}{\ \ \ \ \ *\ @param\ file\ File\ to\ be\ checked.}}
+\DoxyCodeLine{00245\ \textcolor{comment}{\ \ \ \ \ *\ @pre\ The\ file\ shall\ already\ exist\ and\ be\ accessible.}}
+\DoxyCodeLine{00246\ \textcolor{comment}{\ \ \ \ \ *\ @post\ file\ will\ be\ unchanged.}}
+\DoxyCodeLine{00247\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00248}\doxymbox{\hyperlink{classFile_a74344ea69c407c73131db10ffc3292b4}{00248}}\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{classFile_a74344ea69c407c73131db10ffc3292b4}{has\_signature}}(std::fstream\&\ file)}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00249}00249\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00250}00250\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ save\_pos\ =\ file.tellg();}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00251}00251\ \ \ \ \ \ \ \ \ file.seekg(0);}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00252}00252\ \ \ \ \ \ \ \ \ std::string\ buffer(SIGNATURE.size(),\ \textcolor{stringliteral}{'\ '});}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00253}00253\ \ \ \ \ \ \ \ \ file.read(buffer.data(),\ buffer.size());}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00254}00254\ \ \ \ \ \ \ \ \ file.seekg(save\_pos);}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00255}00255\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00256}00256\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (buffer\ !=\ SIGNATURE.data())\textcolor{comment}{//not\ recognized}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00257}00257\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00258}00258\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00259}00259\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00260}00260\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00261}00261\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00262}00262\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00263}00263\ \ \ \ \ \textcolor{comment}{/**}}
+\DoxyCodeLine{00264\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Check\ if\ file\ has\ the\ \#SIGNATURE\ in\ the\ header.\ Non-\/throwing\ version\ of\ \#check\_signature.}}
+\DoxyCodeLine{00265\ \textcolor{comment}{\ \ \ \ \ *\ @return\ True\ if\ file\ has\ signature,\ false\ if\ not.}}
+\DoxyCodeLine{00266\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00267\ \textcolor{comment}{\ \ \ \ \ *\ @param\ file\ File\ to\ be\ checked.}}
+\DoxyCodeLine{00268\ \textcolor{comment}{\ \ \ \ \ *\ @pre\ The\ file\ shall\ already\ exist\ and\ be\ accessible.}}
+\DoxyCodeLine{00269\ \textcolor{comment}{\ \ \ \ \ *\ @post\ file\ will\ be\ unchanged.}}
 \DoxyCodeLine{00270\ \textcolor{comment}{\ \ \ \ \ */}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00271}\doxymbox{\hyperlink{classFile_aef5019792135c243254037a05cd0d7e3}{00271}}\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classFile_aef5019792135c243254037a05cd0d7e3}{extract\_info}}(\textcolor{keyword}{const}\ fs::path\&\ path)\ -\/>\ \doxymbox{\hyperlink{classFile_aef5019792135c243254037a05cd0d7e3}{std}}::\doxymbox{\hyperlink{classFile_aef5019792135c243254037a05cd0d7e3}{optional}}<\doxymbox{\hyperlink{classFile_aef5019792135c243254037a05cd0d7e3}{Header}}>}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00271}\doxymbox{\hyperlink{classFile_a09024be52cad08277a0c2de7ddf22b8b}{00271}}\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{classFile_a74344ea69c407c73131db10ffc3292b4}{has\_signature}}(std::ifstream\&\ file)}
 \DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00272}00272\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00273}00273\ \ \ \ \ \ \ \ \ std::ifstream\ file\{\ path,\ std::ios::binary\ \};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00274}00274\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00275}00275\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ extract\_info(file,\ path);}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00276}00276\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00277}00277\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00278}00278\ \ \ \ \ \textcolor{comment}{/**}}
-\DoxyCodeLine{00279\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Extract\ information\ from\ the\ header\ of\ the\ tzf\ file.}}
-\DoxyCodeLine{00280\ \textcolor{comment}{\ \ \ \ \ *\ @param\ path\ Will\ not\ be\ used\ to\ construct\ a\ stream}}
-\DoxyCodeLine{00281\ \textcolor{comment}{\ \ \ \ \ *\ @param\ file\ The\ file\ the\ information\ will\ be\ extracted\ from}}
-\DoxyCodeLine{00282\ \textcolor{comment}{\ \ \ \ \ *\ @return\ A\ FileOptions\ type\ constructed\ with\ the\ obtained\ information}}
-\DoxyCodeLine{00283\ \textcolor{comment}{\ \ \ \ \ *}}
-\DoxyCodeLine{00284\ \textcolor{comment}{\ \ \ \ \ *\ @pre\ path\ shall\ exist\ and\ be\ accessible.}}
-\DoxyCodeLine{00285\ \textcolor{comment}{\ \ \ \ \ */}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00286}\doxymbox{\hyperlink{classFile_a4a6cfc52ae0d0b8bca22a6d11bd033d8}{00286}}\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classFile_a4a6cfc52ae0d0b8bca22a6d11bd033d8}{extract\_info}}(std::ifstream\&\ file,\ fs::path\ \textcolor{keyword}{const}\&\ path)\ -\/>\ \doxymbox{\hyperlink{classFile_a4a6cfc52ae0d0b8bca22a6d11bd033d8}{std}}::\doxymbox{\hyperlink{classFile_a4a6cfc52ae0d0b8bca22a6d11bd033d8}{optional}}<\doxymbox{\hyperlink{classFile_a4a6cfc52ae0d0b8bca22a6d11bd033d8}{Header}}>}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00287}00287\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00288}00288\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00289}00289\ \ \ \ \ \ \ \ \ \textcolor{comment}{//we\ are\ dealing\ with\ an\ already\ compressed\ file}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00290}00290\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (has\_signature(file))}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00291}00291\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00292}00292\ \ \ \ \ \ \ \ \ \ \ \ \ file.seekg(\textcolor{keyword}{static\_cast}<size\_t>(\doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527}{HEADER\_OFFSET}}\doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527ab718adec73e04ce3ec720dd11a06a308}{::}}\doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527ab718adec73e04ce3ec720dd11a06a308}{ID}}));}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00293}00293\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00294}00294\ \ \ \ \ \ \ \ \ \ \ \ \ std::byte\ buffer[\textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{structHeader}{Header}})]\ =\ \{\ std::byte\{0\}\ \};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00295}00295\ \ \ \ \ \ \ \ \ \ \ \ \ file.read(\textcolor{keyword}{reinterpret\_cast}<\textcolor{keywordtype}{char}*>(buffer),\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{structHeader}{Header}}));}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00296}00296\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00297}00297\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ header\ =\ std::bit\_cast<Header>(buffer);}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00298}00298\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00299}00299\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (header.comp\_type\ >=\ CompType::MAX\ \textcolor{keyword}{or}\ header.preset\ >\ COMP\_MAX)}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00300}00300\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ throw\_error(ErrorType::FILE\_CORRUPTED,\ path.string());}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00301}00301\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00302}00302\ \ \ \ \ \ \ \ \ \ \ \ \ try\_throw\_IO\_error(file.rdstate(),\ path);}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00303}00303\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00304}00304\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::optional\{header\};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00305}00305\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00306}00306\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00307}00307\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00308}00308\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::optional<Header>\{\};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00309}00309\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00310}00310\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00311}\doxymbox{\hyperlink{classFile_a686e7934ae57d624bf8b591a7013d39a}{00311}}\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classFile_a686e7934ae57d624bf8b591a7013d39a}{create\_file}}(CompType\ \textcolor{keyword}{const}\ comp\_type,\ CompPreset\ \textcolor{keyword}{const}\ comp\_preset,\ fs::path\ \textcolor{keyword}{const}\&\ path,\ size\_t\ id,\ uint16\_t\ count)\ -\/>\ \doxymbox{\hyperlink{classFile_a686e7934ae57d624bf8b591a7013d39a}{std}}::\doxymbox{\hyperlink{classFile_a686e7934ae57d624bf8b591a7013d39a}{ofstream}}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00312}00312\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00313}00313\ \ \ \ \ \ \ \ \ std::ofstream\ file(path,\ std::ios::binary\ |\ std::ios::trunc);}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00273}00273\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ save\_pos\ =\ file.tellg();}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00274}00274\ \ \ \ \ \ \ \ \ file.seekg(0);}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00275}00275\ \ \ \ \ \ \ \ \ std::string\ buffer(SIGNATURE.size(),\ \textcolor{stringliteral}{'\ '});}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00276}00276\ \ \ \ \ \ \ \ \ file.read(buffer.data(),\ buffer.size());}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00277}00277\ \ \ \ \ \ \ \ \ file.seekg(save\_pos);}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00278}00278\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00279}00279\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ buffer\ ==\ SIGNATURE.data();}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00280}00280\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00281}00281\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00282}00282\ \ \ \ \ \textcolor{comment}{/**}}
+\DoxyCodeLine{00283\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Extract\ information\ from\ the\ header\ of\ the\ tzf\ file.}}
+\DoxyCodeLine{00284\ \textcolor{comment}{\ \ \ \ \ *\ @param\ path}}
+\DoxyCodeLine{00285\ \textcolor{comment}{\ \ \ \ \ *\ @return\ A\ FileOptions\ type\ constructed\ with\ the\ obtained\ information}}
+\DoxyCodeLine{00286\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00287\ \textcolor{comment}{\ \ \ \ \ *\ @pre\ path\ shall\ exist\ and\ be\ accessible.}}
+\DoxyCodeLine{00288\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00289}\doxymbox{\hyperlink{classFile_aef5019792135c243254037a05cd0d7e3}{00289}}\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classFile_aef5019792135c243254037a05cd0d7e3}{extract\_info}}(\textcolor{keyword}{const}\ fs::path\&\ path)\ -\/>\ \doxymbox{\hyperlink{classFile_aef5019792135c243254037a05cd0d7e3}{std}}::\doxymbox{\hyperlink{classFile_aef5019792135c243254037a05cd0d7e3}{optional}}<\doxymbox{\hyperlink{classFile_aef5019792135c243254037a05cd0d7e3}{Header}}>}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00290}00290\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00291}00291\ \ \ \ \ \ \ \ \ std::ifstream\ file\{\ path,\ std::ios::binary\ \};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00292}00292\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00293}00293\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ extract\_info(file,\ path);}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00294}00294\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00295}00295\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00296}00296\ \ \ \ \ \textcolor{comment}{/**}}
+\DoxyCodeLine{00297\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Extract\ information\ from\ the\ header\ of\ the\ tzf\ file.}}
+\DoxyCodeLine{00298\ \textcolor{comment}{\ \ \ \ \ *\ @param\ path\ Will\ not\ be\ used\ to\ construct\ a\ stream}}
+\DoxyCodeLine{00299\ \textcolor{comment}{\ \ \ \ \ *\ @param\ file\ The\ file\ the\ information\ will\ be\ extracted\ from}}
+\DoxyCodeLine{00300\ \textcolor{comment}{\ \ \ \ \ *\ @return\ A\ FileOptions\ type\ constructed\ with\ the\ obtained\ information}}
+\DoxyCodeLine{00301\ \textcolor{comment}{\ \ \ \ \ *}}
+\DoxyCodeLine{00302\ \textcolor{comment}{\ \ \ \ \ *\ @pre\ path\ shall\ exist\ and\ be\ accessible.}}
+\DoxyCodeLine{00303\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00304}\doxymbox{\hyperlink{classFile_a4a6cfc52ae0d0b8bca22a6d11bd033d8}{00304}}\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classFile_a4a6cfc52ae0d0b8bca22a6d11bd033d8}{extract\_info}}(std::ifstream\&\ file,\ fs::path\ \textcolor{keyword}{const}\&\ path)\ -\/>\ \doxymbox{\hyperlink{classFile_a4a6cfc52ae0d0b8bca22a6d11bd033d8}{std}}::\doxymbox{\hyperlink{classFile_a4a6cfc52ae0d0b8bca22a6d11bd033d8}{optional}}<\doxymbox{\hyperlink{classFile_a4a6cfc52ae0d0b8bca22a6d11bd033d8}{Header}}>}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00305}00305\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00306}00306\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00307}00307\ \ \ \ \ \ \ \ \ \textcolor{comment}{//we\ are\ dealing\ with\ an\ already\ compressed\ file}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00308}00308\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (has\_signature(file))}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00309}00309\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00310}00310\ \ \ \ \ \ \ \ \ \ \ \ \ file.seekg(\textcolor{keyword}{static\_cast}<size\_t>(\doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527}{HEADER\_OFFSET}}\doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527ab718adec73e04ce3ec720dd11a06a308}{::}}\doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527ab718adec73e04ce3ec720dd11a06a308}{ID}}));}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00311}00311\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00312}00312\ \ \ \ \ \ \ \ \ \ \ \ \ std::byte\ buffer[\textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{structHeader}{Header}})]\ =\ \{\ std::byte\{0\}\ \};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00313}00313\ \ \ \ \ \ \ \ \ \ \ \ \ file.read(\textcolor{keyword}{reinterpret\_cast}<\textcolor{keywordtype}{char}*>(buffer),\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{structHeader}{Header}}));}
 \DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00314}00314\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00315}00315\ \ \ \ \ \ \ \ \ file.seekp(0);}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00316}00316\ \ \ \ \ \ \ \ \ file.write(SIGNATURE.data(),\ SIGNATURE.size());}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00317}00317\ \ \ \ \ \ \ \ \ file.write(\textcolor{keyword}{reinterpret\_cast}<\textcolor{keywordtype}{char}\ \textcolor{keyword}{const}*>(\&id),\ \textcolor{keyword}{sizeof}(\textcolor{keyword}{decltype}(id)));}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00318}00318\ \ \ \ \ \ \ \ \ file.write(\textcolor{keyword}{reinterpret\_cast}<\textcolor{keywordtype}{char}\ \textcolor{keyword}{const}*>(\&count),\ \textcolor{keyword}{sizeof}(\textcolor{keyword}{decltype}(count)));}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00319}00319\ \ \ \ \ \ \ \ \ file.seekp(\textcolor{keyword}{static\_cast}<\textcolor{keywordtype}{int}>(\doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527}{HEADER\_OFFSET}}\doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527a8d1d3f777392a89d7531871f6c3f2208}{::}}\doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527a8d1d3f777392a89d7531871f6c3f2208}{COMP\_PRESET}}));}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00320}00320\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ temp\ =\ \textcolor{keyword}{static\_cast}<uint8\_t>(comp\_type);}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00321}00321\ \ \ \ \ \ \ \ \ file.write(\textcolor{keyword}{reinterpret\_cast}<\textcolor{keywordtype}{char}\ \textcolor{keyword}{const}*>(\&temp),\ \textcolor{keyword}{sizeof}(\textcolor{keyword}{decltype}(temp)));}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00322}00322\ \ \ \ \ \ \ \ \ temp\ =\ \textcolor{keyword}{static\_cast}<uint8\_t>(comp\_preset);}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00323}00323\ \ \ \ \ \ \ \ \ file.write(\textcolor{keyword}{reinterpret\_cast}<\textcolor{keywordtype}{char}\ \textcolor{keyword}{const}*>(\&temp),\ \textcolor{keyword}{sizeof}(\textcolor{keyword}{decltype}(temp)));}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00324}00324\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00325}00325\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ file;}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00326}00326\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00327}00327\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00328}\doxymbox{\hyperlink{classFile_a1bcdcbd5f6f03b20c427f3e1eebddf99}{00328}}\ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classFile_a1bcdcbd5f6f03b20c427f3e1eebddf99}{get\_in\_file\_options}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ -\/>\ \doxymbox{\hyperlink{structFileOptions}{FileOptions}}\ \textcolor{keyword}{const}\&\ \{\textcolor{keywordflow}{return}\ in\_file\_options;\}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00329}00329\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00330}\doxymbox{\hyperlink{classFile_ad37220653fbeda93559104647aa0c379}{00330}}\ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classFile_ad37220653fbeda93559104647aa0c379}{get\_ref\_out\_stream}}()\ -\/>\ \doxymbox{\hyperlink{classFile_ad37220653fbeda93559104647aa0c379}{std}}::\doxymbox{\hyperlink{classFile_ad37220653fbeda93559104647aa0c379}{ofstream}}\&\{\ \textcolor{keywordflow}{return}\ out\_file;\ \}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00331}00331\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00332}\doxymbox{\hyperlink{classFile_a9a900e39be5848aad9e046bf6e7b5005}{00332}}\ \ \ \ \ \doxymbox{\hyperlink{structFileOptions}{FileOptions}}\ \doxymbox{\hyperlink{classFile_a9a900e39be5848aad9e046bf6e7b5005}{in\_file\_options}};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00333}\doxymbox{\hyperlink{classFile_ab53a042dbb267af48b1a6e5523a2af1d}{00333}}\ \ \ \ \ \doxymbox{\hyperlink{classFile}{parser}}::\doxymbox{\hyperlink{classFile}{Options}}\ \textcolor{keyword}{const}\&\ \doxymbox{\hyperlink{classFile}{cli\_options}};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00334}\doxymbox{\hyperlink{classFile_a733e671529f4aff0b4f43e9cfd223779}{00334}}\ \ \ \ \ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{ofstream}}\ \doxymbox{\hyperlink{classFile}{out\_file}};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00335}00335\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00336}00336\ \ \ \ \ \textcolor{comment}{/**}}
-\DoxyCodeLine{00337\ \textcolor{comment}{\ \ \ \ *\ @brief\ Check\ if\ \#file\_options.path\ has\ the\ \#SIGNATURE\ in\ the\ header,\ throws\ if\ not.}}
-\DoxyCodeLine{00338\ \textcolor{comment}{\ \ \ \ */}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00339}\doxymbox{\hyperlink{classFile_a2eb241a6b3e045cb9665b0e3742ee424}{00339}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classFile_a2eb241a6b3e045cb9665b0e3742ee424}{check\_signature}}()}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00340}00340\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00341}00341\ \ \ \ \ \ \ \ \ std::ifstream\ file\{\ in\_file\_options.path,\ std::ios::binary\ \};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00315}00315\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ header\ =\ std::bit\_cast<Header>(buffer);}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00316}00316\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00317}00317\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (header.comp\_type\ >=\ CompType::MAX\ \textcolor{keyword}{or}\ header.preset\ >\ COMP\_MAX)}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00318}00318\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ throw\_error(ErrorType::FILE\_CORRUPTED,\ path.string());}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00319}00319\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00320}00320\ \ \ \ \ \ \ \ \ \ \ \ \ try\_throw\_IO\_error(file.rdstate(),\ path);}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00321}00321\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00322}00322\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::optional\{header\};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00323}00323\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00324}00324\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00325}00325\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00326}00326\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::optional<Header>\{\};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00327}00327\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00328}00328\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00329}\doxymbox{\hyperlink{classFile_a686e7934ae57d624bf8b591a7013d39a}{00329}}\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classFile_a686e7934ae57d624bf8b591a7013d39a}{create\_file}}(CompType\ \textcolor{keyword}{const}\ comp\_type,\ CompPreset\ \textcolor{keyword}{const}\ comp\_preset,\ fs::path\ \textcolor{keyword}{const}\&\ path,\ size\_t\ id,\ uint16\_t\ count)\ -\/>\ \doxymbox{\hyperlink{classFile_a686e7934ae57d624bf8b591a7013d39a}{std}}::\doxymbox{\hyperlink{classFile_a686e7934ae57d624bf8b591a7013d39a}{ofstream}}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00330}00330\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00331}00331\ \ \ \ \ \ \ \ \ std::ofstream\ file(path,\ std::ios::binary\ |\ std::ios::trunc);}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00332}00332\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00333}00333\ \ \ \ \ \ \ \ \ file.seekp(0);}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00334}00334\ \ \ \ \ \ \ \ \ file.write(SIGNATURE.data(),\ SIGNATURE.size());}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00335}00335\ \ \ \ \ \ \ \ \ file.write(\textcolor{keyword}{reinterpret\_cast}<\textcolor{keywordtype}{char}\ \textcolor{keyword}{const}*>(\&id),\ \textcolor{keyword}{sizeof}(\textcolor{keyword}{decltype}(id)));}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00336}00336\ \ \ \ \ \ \ \ \ file.write(\textcolor{keyword}{reinterpret\_cast}<\textcolor{keywordtype}{char}\ \textcolor{keyword}{const}*>(\&count),\ \textcolor{keyword}{sizeof}(\textcolor{keyword}{decltype}(count)));}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00337}00337\ \ \ \ \ \ \ \ \ file.seekp(\textcolor{keyword}{static\_cast}<\textcolor{keywordtype}{int}>(\doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527}{HEADER\_OFFSET}}\doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527a8d1d3f777392a89d7531871f6c3f2208}{::}}\doxymbox{\hyperlink{file__management_8cppm_ac3f10b5949a91b9cafbbdcf140d0a527a8d1d3f777392a89d7531871f6c3f2208}{COMP\_PRESET}}));}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00338}00338\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ temp\ =\ \textcolor{keyword}{static\_cast}<uint8\_t>(comp\_type);}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00339}00339\ \ \ \ \ \ \ \ \ file.write(\textcolor{keyword}{reinterpret\_cast}<\textcolor{keywordtype}{char}\ \textcolor{keyword}{const}*>(\&temp),\ \textcolor{keyword}{sizeof}(\textcolor{keyword}{decltype}(temp)));}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00340}00340\ \ \ \ \ \ \ \ \ temp\ =\ \textcolor{keyword}{static\_cast}<uint8\_t>(comp\_preset);}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00341}00341\ \ \ \ \ \ \ \ \ file.write(\textcolor{keyword}{reinterpret\_cast}<\textcolor{keywordtype}{char}\ \textcolor{keyword}{const}*>(\&temp),\ \textcolor{keyword}{sizeof}(\textcolor{keyword}{decltype}(temp)));}
 \DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00342}00342\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00343}00343\ \ \ \ \ \ \ \ \ file.seekg(0);}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00344}00344\ \ \ \ \ \ \ \ \ std::string\ buffer(SIGNATURE.size(),\ \textcolor{stringliteral}{'\ '});}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00345}00345\ \ \ \ \ \ \ \ \ file.read(buffer.data(),\ buffer.size());}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00346}00346\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (buffer\ !=\ SIGNATURE.data())\textcolor{comment}{//not\ recognized}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00347}00347\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00348}00348\ \ \ \ \ \ \ \ \ \ \ \ \ throw\_error(ErrorType::FILE\_INVALID,\ in\_file\_options.path.string());}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00349}00349\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00350}00350\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00351}00351\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00352}00352\ \ \ \ \ \textcolor{comment}{/**}}
-\DoxyCodeLine{00353\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Check\ if\ \#file\_options.path\ has\ the\ \#SIGNATURE\ in\ the\ header.\ Non-\/throwing\ version\ of\ \#check\_signature.}}
-\DoxyCodeLine{00354\ \textcolor{comment}{\ \ \ \ \ *\ @return\ True\ if\ \#file\_options.path\ has\ signature,\ false\ if\ not.}}
-\DoxyCodeLine{00355\ \textcolor{comment}{\ \ \ \ \ *\ }}
-\DoxyCodeLine{00356\ \textcolor{comment}{\ \ \ \ \ *\ @pre\ The\ file\ shall\ already\ exist\ and\ be\ accessible.}}
-\DoxyCodeLine{00357\ \textcolor{comment}{\ \ \ \ \ */}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00358}\doxymbox{\hyperlink{classFile_aa5c3142a4a5e9cba6bd7303c0373b8bb}{00358}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{classFile_aa5c3142a4a5e9cba6bd7303c0373b8bb}{has\_signature}}()\ \textcolor{keyword}{const}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00359}00359\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00360}00360\ \ \ \ \ \ \ \ \ std::ifstream\ file\{\ in\_file\_options.path,\ std::ios::binary\ \};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00361}00361\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00362}00362\ \ \ \ \ \ \ \ \ file.seekg(0);}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00363}00363\ \ \ \ \ \ \ \ \ std::string\ buffer(SIGNATURE.size(),\ \textcolor{stringliteral}{'\ '});}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00364}00364\ \ \ \ \ \ \ \ \ file.read(buffer.data(),\ buffer.size());}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00365}00365\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (buffer\ !=\ SIGNATURE.data())\textcolor{comment}{//not\ recognized}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00366}00366\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00367}00367\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00368}00368\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00369}00369\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00370}00370\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00371}00371\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00372}00372\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00373}00373\ \ \ \ \ \textcolor{comment}{/**}}
-\DoxyCodeLine{00374\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Creates\ a\ compressed\ file(header)\ with\ the\ details\ of\ \#cli\_options.\ If\ file\ exists,\ it\ is\ cleared.}}
-\DoxyCodeLine{00375\ \textcolor{comment}{\ \ \ \ \ *\ @param\ path\ Where\ the\ file\ is\ created}}
-\DoxyCodeLine{00376\ \textcolor{comment}{\ \ \ \ \ *\ @return\ A\ stream\ to\ the\ file.}}
-\DoxyCodeLine{00377\ \textcolor{comment}{\ \ \ \ \ */}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00378}\doxymbox{\hyperlink{classFile_afa196d7e9fcb034d8029293ce2f54d5f}{00378}}\ \ \ \ \ [[\doxymbox{\hyperlink{classFile}{maybe\_unused}}]]\ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{ofstream}}\ \doxymbox{\hyperlink{classFile}{create\_file}}(\doxymbox{\hyperlink{classFile}{fs}}::\doxymbox{\hyperlink{classFile}{path}}\ \textcolor{keyword}{const}\&\ \doxymbox{\hyperlink{classFile}{path}})\ \textcolor{keyword}{const}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00379}00379\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00380}00380\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00381}00381\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{fs}}::\doxymbox{\hyperlink{classFile}{remove}}(\doxymbox{\hyperlink{classFile}{path}});}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00382}00382\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{ofstream}}\ \doxymbox{\hyperlink{classFile}{file}}\{\ \doxymbox{\hyperlink{classFile}{path}},\ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{ios}}::\doxymbox{\hyperlink{classFile}{binary}}\ |\ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{ios}}::\doxymbox{\hyperlink{classFile}{trunc}}\ \};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00383}00383\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00384}00384\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{file}}.\doxymbox{\hyperlink{classFile}{seekp}}(\textcolor{keyword}{static\_cast}<\doxymbox{\hyperlink{classFile}{size\_t}}>(\doxymbox{\hyperlink{classFile}{HEADER\_OFFSET}}::\doxymbox{\hyperlink{classFile}{SIGNATURE}}));}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00385}00385\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{file}}.\doxymbox{\hyperlink{classFile}{write}}(\doxymbox{\hyperlink{classFile}{SIGNATURE}}.\doxymbox{\hyperlink{classFile}{data}}(),\ \doxymbox{\hyperlink{classFile}{SIGNATURE}}.\doxymbox{\hyperlink{classFile}{size}}());}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00386}00386\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00387}00387\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{file}}.\doxymbox{\hyperlink{classFile}{seekp}}(\textcolor{keyword}{static\_cast}<\doxymbox{\hyperlink{classFile}{size\_t}}>(\doxymbox{\hyperlink{classFile}{HEADER\_OFFSET}}::\doxymbox{\hyperlink{classFile}{ID}}));}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00388}00388\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{size\_t}}\ \doxymbox{\hyperlink{classFile}{id\_temp}}\ =\ 0;}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00389}00389\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{file}}.\doxymbox{\hyperlink{classFile}{write}}(\textcolor{keyword}{reinterpret\_cast}<\textcolor{keywordtype}{char}\ \textcolor{keyword}{const}*>(\&\doxymbox{\hyperlink{classFile}{id\_temp}}),\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{classFile}{size\_t}}));}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00390}00390\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{uint8\_t}}\ \doxymbox{\hyperlink{classFile}{temp}}\ =\ \textcolor{keyword}{static\_cast}<\doxymbox{\hyperlink{classFile}{uint8\_t}}>(\doxymbox{\hyperlink{classFile}{cli\_options}}.\doxymbox{\hyperlink{classFile}{compressor}});}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00391}00391\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{file}}.\doxymbox{\hyperlink{classFile}{write}}(\textcolor{keyword}{reinterpret\_cast}<\textcolor{keywordtype}{char}\ \textcolor{keyword}{const}*>(\&\doxymbox{\hyperlink{classFile}{temp}}),\ \textcolor{keyword}{sizeof}(\textcolor{keyword}{decltype}(\doxymbox{\hyperlink{classFile}{temp}})));}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00392}00392\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{temp}}\ =\ \textcolor{keyword}{static\_cast}<\doxymbox{\hyperlink{classFile}{uint8\_t}}>(\doxymbox{\hyperlink{classFile}{cli\_options}}.\doxymbox{\hyperlink{classFile}{preset}});}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00393}00393\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{file}}.\doxymbox{\hyperlink{classFile}{write}}(\textcolor{keyword}{reinterpret\_cast}<\textcolor{keywordtype}{char}\ \textcolor{keyword}{const}*>(\&\doxymbox{\hyperlink{classFile}{temp}}),\ \textcolor{keyword}{sizeof}(\textcolor{keyword}{decltype}(\doxymbox{\hyperlink{classFile}{temp}})));}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00394}00394\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00395}00395\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00396}00396\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classFile}{file}};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00397}00397\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00398}00398\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00399}00399\ \ \ \ \ \textcolor{comment}{/**}}
-\DoxyCodeLine{00400\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Creates\ a\ compressed\ file(header).\ If\ file\ exists,\ it\ is\ cleared.}}
-\DoxyCodeLine{00401\ \textcolor{comment}{\ \ \ \ \ *\ @param\ path\ Where\ the\ file\ is\ created}}
-\DoxyCodeLine{00402\ \textcolor{comment}{\ \ \ \ \ *\ @return\ A\ stream\ to\ the\ file.}}
-\DoxyCodeLine{00403\ \textcolor{comment}{\ \ \ \ \ */}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00404}\doxymbox{\hyperlink{classFile_acae28f8736d41a36faa606bd1c27dab7}{00404}}\ \ \ \ \ [[\doxymbox{\hyperlink{classFile}{maybe\_unused}}]]\ \textcolor{keyword}{static}\ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{ofstream}}\ \doxymbox{\hyperlink{classFile}{create\_file}}(\doxymbox{\hyperlink{classFile}{fs}}::\doxymbox{\hyperlink{classFile}{path}}\ \textcolor{keyword}{const}\&\ \doxymbox{\hyperlink{classFile}{path}},\ \doxymbox{\hyperlink{classFile}{Header}}\ \doxymbox{\hyperlink{classFile}{options}})}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00405}00405\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00406}00406\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{fs}}::\doxymbox{\hyperlink{classFile}{remove}}(\doxymbox{\hyperlink{classFile}{path}});}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00407}00407\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{ofstream}}\ \doxymbox{\hyperlink{classFile}{file}}\{\ \doxymbox{\hyperlink{classFile}{path}},\ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{ios}}::\doxymbox{\hyperlink{classFile}{binary}}\ |\ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{ios}}::\doxymbox{\hyperlink{classFile}{trunc}}\ \};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00408}00408\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00409}00409\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{file}}.\doxymbox{\hyperlink{classFile}{seekp}}(\textcolor{keyword}{static\_cast}<\doxymbox{\hyperlink{classFile}{size\_t}}>(\doxymbox{\hyperlink{classFile}{HEADER\_OFFSET}}::\doxymbox{\hyperlink{classFile}{SIGNATURE}}));}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00410}00410\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{file}}.\doxymbox{\hyperlink{classFile}{write}}(\doxymbox{\hyperlink{classFile}{SIGNATURE}}.\doxymbox{\hyperlink{classFile}{data}}(),\ \doxymbox{\hyperlink{classFile}{SIGNATURE}}.\doxymbox{\hyperlink{classFile}{size}}());}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00411}00411\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{file}}.\doxymbox{\hyperlink{classFile}{seekp}}(\textcolor{keyword}{static\_cast}<\doxymbox{\hyperlink{classFile}{size\_t}}>(\doxymbox{\hyperlink{classFile}{HEADER\_OFFSET}}::\doxymbox{\hyperlink{classFile}{ID}}));}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00412}00412\ \ \ \ \ \ \ \ \ \textcolor{keyword}{constexpr}\ \doxymbox{\hyperlink{classFile}{size\_t}}\ \doxymbox{\hyperlink{classFile}{id\_temp}}\ =\ 0;}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00413}00413\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{file}}.\doxymbox{\hyperlink{classFile}{write}}(\textcolor{keyword}{reinterpret\_cast}<\textcolor{keywordtype}{char}\ \textcolor{keyword}{const}*>(\&\doxymbox{\hyperlink{classFile}{id\_temp}}),\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{classFile}{size\_t}}));}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00414}00414\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classFile}{temp}}\ =\ \textcolor{keyword}{static\_cast}<\doxymbox{\hyperlink{classFile}{uint8\_t}}>(\doxymbox{\hyperlink{classFile}{options}}.\doxymbox{\hyperlink{classFile}{comp\_type}});}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00415}00415\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{file}}.\doxymbox{\hyperlink{classFile}{write}}(\textcolor{keyword}{reinterpret\_cast}<\textcolor{keywordtype}{char}\ \textcolor{keyword}{const}*>(\&\doxymbox{\hyperlink{classFile}{temp}}),\ \textcolor{keyword}{sizeof}(\textcolor{keyword}{decltype}(\doxymbox{\hyperlink{classFile}{temp}})));}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00416}00416\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{temp}}\ =\ \textcolor{keyword}{static\_cast}<\doxymbox{\hyperlink{classFile}{uint8\_t}}>(\doxymbox{\hyperlink{classFile}{options}}.\doxymbox{\hyperlink{classFile}{preset}});}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00417}00417\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{file}}.\doxymbox{\hyperlink{classFile}{write}}(\textcolor{keyword}{reinterpret\_cast}<\textcolor{keywordtype}{char}\ \textcolor{keyword}{const}*>(\&\doxymbox{\hyperlink{classFile}{temp}}),\ \textcolor{keyword}{sizeof}(\textcolor{keyword}{decltype}(\doxymbox{\hyperlink{classFile}{temp}})));}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00418}00418\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00419}00419\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classFile}{file}};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00420}00420\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00421}00421\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00422}00422\ \ \ \ \ \textcolor{comment}{/**}}
-\DoxyCodeLine{00423\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Concatenate\ files\ found\ in\ \#path\ into\ a\ new\ file,\ if\ }}
-\DoxyCodeLine{00424\ \textcolor{comment}{\ \ \ \ \ *\ @param\ path\ }}
-\DoxyCodeLine{00425\ \textcolor{comment}{\ \ \ \ \ *\ @return\ path\ to\ the\ new\ concatenated\ file}}
-\DoxyCodeLine{00426\ \textcolor{comment}{\ \ \ \ \ */}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00427}\doxymbox{\hyperlink{classFile_aaf7b0f743db8c7343de75d5c4d3f93fb}{00427}}\ \ \ \ \ \doxymbox{\hyperlink{classFile}{fs}}::\doxymbox{\hyperlink{classFile}{path}}\ \doxymbox{\hyperlink{classFile}{concatenate\_files}}(\doxymbox{\hyperlink{classFile}{fs}}::\doxymbox{\hyperlink{classFile}{path}}\ \textcolor{keyword}{const}\&\ \doxymbox{\hyperlink{classFile}{path}})}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00428}00428\ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00429}00429\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{vector}}<\doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{pair}}<\doxymbox{\hyperlink{classFile}{fs}}::\doxymbox{\hyperlink{classFile}{path}},\ \doxymbox{\hyperlink{classFile}{uint16\_t}}>>\ \doxymbox{\hyperlink{classFile}{files\_to\_concat}}\{\};\textcolor{comment}{//uint16\_t\ is\ here\ to\ keep\ a\ temporary\ copy\ of\ count\ (we\ sacrifice\ a\ bit\ of\ memory\ for\ fewer\ drive\ accesses)}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00430}00430\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{vector}}<\doxymbox{\hyperlink{classFile}{size\_t}}>\ \doxymbox{\hyperlink{classFile}{ignored\_ids}}\{\};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00431}00431\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00432}00432\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{size\_t}}\ \doxymbox{\hyperlink{classFile}{id}}\{\};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00433}00433\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{classFile}{id\_not\_set\_yet}}\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00434}00434\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00435}00435\ \ \ \ \ \ \ \ \ \textcolor{comment}{//add\ the\ files\ to\ concatenate\ to\ \#files\_to\_concat}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00436}00436\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ \textcolor{keyword}{const}\&\ \doxymbox{\hyperlink{classFile}{dir\_entry}}\ :\ \doxymbox{\hyperlink{classFile}{fs}}::\doxymbox{\hyperlink{classFile}{directory\_iterator}}\{\ \doxymbox{\hyperlink{classFile}{path}}\ \})}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00437}00437\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00438}00438\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\doxymbox{\hyperlink{classFile}{dir\_entry}}.\doxymbox{\hyperlink{classFile}{is\_regular\_file}}())}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00439}00439\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00440}00440\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00441}00441\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classFile}{info}}\ =\ \doxymbox{\hyperlink{classFile}{extract\_info}}(\doxymbox{\hyperlink{classFile}{dir\_entry}});}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00343}00343\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ file;}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00344}00344\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00345}00345\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00346}\doxymbox{\hyperlink{classFile_a1bcdcbd5f6f03b20c427f3e1eebddf99}{00346}}\ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classFile_a1bcdcbd5f6f03b20c427f3e1eebddf99}{get\_in\_file\_options}}()\ \textcolor{keyword}{const}\ \textcolor{keyword}{noexcept}\ -\/>\ \doxymbox{\hyperlink{structFileOptions}{FileOptions}}\ \textcolor{keyword}{const}\&\ \{\textcolor{keywordflow}{return}\ in\_file\_options;\}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00347}00347\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00348}\doxymbox{\hyperlink{classFile_ad37220653fbeda93559104647aa0c379}{00348}}\ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classFile_ad37220653fbeda93559104647aa0c379}{get\_ref\_out\_stream}}()\ -\/>\ \doxymbox{\hyperlink{classFile_ad37220653fbeda93559104647aa0c379}{std}}::\doxymbox{\hyperlink{classFile_ad37220653fbeda93559104647aa0c379}{ofstream}}\&\{\ \textcolor{keywordflow}{return}\ out\_file;\ \}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00349}00349\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00350}\doxymbox{\hyperlink{classFile_a9a900e39be5848aad9e046bf6e7b5005}{00350}}\ \ \ \ \ \doxymbox{\hyperlink{structFileOptions}{FileOptions}}\ \doxymbox{\hyperlink{classFile_a9a900e39be5848aad9e046bf6e7b5005}{in\_file\_options}};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00351}\doxymbox{\hyperlink{classFile_ae7b639eecda0e97d09b9e51d313b24a8}{00351}}\ \ \ \ \ \doxymbox{\hyperlink{classFile}{parser}}::\doxymbox{\hyperlink{classFile}{Options}}\ \doxymbox{\hyperlink{classFile}{options\_}};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00352}\doxymbox{\hyperlink{classFile_a733e671529f4aff0b4f43e9cfd223779}{00352}}\ \ \ \ \ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{ofstream}}\ \doxymbox{\hyperlink{classFile}{out\_file}};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00353}00353\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00354}00354\ \ \ \ \ \textcolor{comment}{/**}}
+\DoxyCodeLine{00355\ \textcolor{comment}{\ \ \ \ *\ @brief\ Check\ if\ \#file\_options.path\ has\ the\ \#SIGNATURE\ in\ the\ header,\ throws\ if\ not.}}
+\DoxyCodeLine{00356\ \textcolor{comment}{\ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00357}\doxymbox{\hyperlink{classFile_a2eb241a6b3e045cb9665b0e3742ee424}{00357}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classFile_a2eb241a6b3e045cb9665b0e3742ee424}{check\_signature}}()}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00358}00358\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00359}00359\ \ \ \ \ \ \ \ \ std::ifstream\ file\{\ in\_file\_options.path,\ std::ios::binary\ \};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00360}00360\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00361}00361\ \ \ \ \ \ \ \ \ file.seekg(0);}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00362}00362\ \ \ \ \ \ \ \ \ std::string\ buffer(SIGNATURE.size(),\ \textcolor{stringliteral}{'\ '});}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00363}00363\ \ \ \ \ \ \ \ \ file.read(buffer.data(),\ buffer.size());}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00364}00364\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (buffer\ !=\ SIGNATURE.data())\textcolor{comment}{//not\ recognized}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00365}00365\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00366}00366\ \ \ \ \ \ \ \ \ \ \ \ \ throw\_error(ErrorType::FILE\_INVALID,\ in\_file\_options.path.string());}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00367}00367\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00368}00368\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00369}00369\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00370}00370\ \ \ \ \ \textcolor{comment}{/**}}
+\DoxyCodeLine{00371\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Check\ if\ \#file\_options.path\ has\ the\ \#SIGNATURE\ in\ the\ header.\ Non-\/throwing\ version\ of\ \#check\_signature.}}
+\DoxyCodeLine{00372\ \textcolor{comment}{\ \ \ \ \ *\ @return\ True\ if\ \#file\_options.path\ has\ signature,\ false\ if\ not.}}
+\DoxyCodeLine{00373\ \textcolor{comment}{\ \ \ \ \ *\ }}
+\DoxyCodeLine{00374\ \textcolor{comment}{\ \ \ \ \ *\ @pre\ The\ file\ shall\ already\ exist\ and\ be\ accessible.}}
+\DoxyCodeLine{00375\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00376}\doxymbox{\hyperlink{classFile_aa5c3142a4a5e9cba6bd7303c0373b8bb}{00376}}\ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{classFile_aa5c3142a4a5e9cba6bd7303c0373b8bb}{has\_signature}}()\ \textcolor{keyword}{const}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00377}00377\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00378}00378\ \ \ \ \ \ \ \ \ std::ifstream\ file\{\ in\_file\_options.path,\ std::ios::binary\ \};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00379}00379\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00380}00380\ \ \ \ \ \ \ \ \ file.seekg(0);}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00381}00381\ \ \ \ \ \ \ \ \ std::string\ buffer(SIGNATURE.size(),\ \textcolor{stringliteral}{'\ '});}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00382}00382\ \ \ \ \ \ \ \ \ file.read(buffer.data(),\ buffer.size());}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00383}00383\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (buffer\ !=\ SIGNATURE.data())\textcolor{comment}{//not\ recognized}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00384}00384\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00385}00385\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00386}00386\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00387}00387\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00388}00388\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00389}00389\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00390}00390\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00391}00391\ \ \ \ \ \textcolor{comment}{/**}}
+\DoxyCodeLine{00392\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Creates\ a\ compressed\ file(header)\ with\ the\ details\ of\ \#cli\_options.\ If\ file\ exists,\ it\ is\ not\ cleared.}}
+\DoxyCodeLine{00393\ \textcolor{comment}{\ \ \ \ \ *\ @param\ path\ Where\ the\ file\ is\ created}}
+\DoxyCodeLine{00394\ \textcolor{comment}{\ \ \ \ \ *\ @return\ A\ stream\ to\ the\ file.}}
+\DoxyCodeLine{00395\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00396}\doxymbox{\hyperlink{classFile_afa196d7e9fcb034d8029293ce2f54d5f}{00396}}\ \ \ \ \ [[\doxymbox{\hyperlink{classFile}{maybe\_unused}}]]\ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{ofstream}}\ \doxymbox{\hyperlink{classFile}{create\_file}}(\doxymbox{\hyperlink{classFile}{fs}}::\doxymbox{\hyperlink{classFile}{path}}\ \textcolor{keyword}{const}\&\ \doxymbox{\hyperlink{classFile}{path}})\ \textcolor{keyword}{const}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00397}00397\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00398}00398\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classFile}{create\_file}}(\doxymbox{\hyperlink{classFile}{path}},\ \{0,\ 0,\ \textcolor{keyword}{static\_cast}<\doxymbox{\hyperlink{classFile}{CompType}}>(\doxymbox{\hyperlink{classFile}{options\_}}.\doxymbox{\hyperlink{classFile}{compressor}}),\textcolor{keyword}{static\_cast}<\doxymbox{\hyperlink{classFile}{CompPreset}}>(\doxymbox{\hyperlink{classFile}{options\_}}.\doxymbox{\hyperlink{classFile}{preset}})\});}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00399}00399\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00400}00400\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00401}00401\ \ \ \ \ \textcolor{comment}{/**}}
+\DoxyCodeLine{00402\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Creates\ a\ compressed\ file(header).\ If\ file\ exists,\ it\ is\ cleared.}}
+\DoxyCodeLine{00403\ \textcolor{comment}{\ \ \ \ \ *\ @param\ path\ Where\ the\ file\ is\ created}}
+\DoxyCodeLine{00404\ \textcolor{comment}{\ \ \ \ \ *\ @return\ A\ stream\ to\ the\ file.}}
+\DoxyCodeLine{00405\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00406}\doxymbox{\hyperlink{classFile_acae28f8736d41a36faa606bd1c27dab7}{00406}}\ \ \ \ \ [[\doxymbox{\hyperlink{classFile}{maybe\_unused}}]]\ \textcolor{keyword}{static}\ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{ofstream}}\ \doxymbox{\hyperlink{classFile}{create\_file}}(\doxymbox{\hyperlink{classFile}{fs}}::\doxymbox{\hyperlink{classFile}{path}}\ \textcolor{keyword}{const}\&\ \doxymbox{\hyperlink{classFile}{path}},\ \doxymbox{\hyperlink{classFile}{Header}}\ \doxymbox{\hyperlink{classFile}{options}})}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00407}00407\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00408}00408\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{fs}}::\doxymbox{\hyperlink{classFile}{remove}}(\doxymbox{\hyperlink{classFile}{path}});}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00409}00409\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{ofstream}}\ \doxymbox{\hyperlink{classFile}{file}}\{\ \doxymbox{\hyperlink{classFile}{path}},\ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{ios}}::\doxymbox{\hyperlink{classFile}{binary}}\ |\ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{ios}}::\doxymbox{\hyperlink{classFile}{trunc}}\ \};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00410}00410\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00411}00411\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{file}}.\doxymbox{\hyperlink{classFile}{seekp}}(\textcolor{keyword}{static\_cast}<\doxymbox{\hyperlink{classFile}{size\_t}}>(\doxymbox{\hyperlink{classFile}{HEADER\_OFFSET}}::\doxymbox{\hyperlink{classFile}{SIGNATURE}}));}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00412}00412\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{file}}.\doxymbox{\hyperlink{classFile}{write}}(\doxymbox{\hyperlink{classFile}{SIGNATURE}}.\doxymbox{\hyperlink{classFile}{data}}(),\ \doxymbox{\hyperlink{classFile}{SIGNATURE}}.\doxymbox{\hyperlink{classFile}{size}}());}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00413}00413\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{file}}.\doxymbox{\hyperlink{classFile}{seekp}}(\textcolor{keyword}{static\_cast}<\doxymbox{\hyperlink{classFile}{size\_t}}>(\doxymbox{\hyperlink{classFile}{HEADER\_OFFSET}}::\doxymbox{\hyperlink{classFile}{ID}}));}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00414}00414\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00415}00415\ \ \ \ \ \ \ \ \ \textcolor{keyword}{constexpr}\ \doxymbox{\hyperlink{classFile}{size\_t}}\ \doxymbox{\hyperlink{classFile}{id\_temp}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00416}00416\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{file}}.\doxymbox{\hyperlink{classFile}{write}}(\textcolor{keyword}{reinterpret\_cast}<\textcolor{keywordtype}{char}\ \textcolor{keyword}{const}*>(\&\doxymbox{\hyperlink{classFile}{id\_temp}}),\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{classFile}{size\_t}}));}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00417}00417\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00418}00418\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classFile}{temp\_u16}}\ =\ \doxymbox{\hyperlink{classFile}{options}}.\doxymbox{\hyperlink{classFile}{count}};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00419}00419\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{file}}.\doxymbox{\hyperlink{classFile}{write}}(\textcolor{keyword}{reinterpret\_cast}<\textcolor{keywordtype}{char}\ \textcolor{keyword}{const}*>(\&\doxymbox{\hyperlink{classFile}{temp\_u16}}),\ \textcolor{keyword}{sizeof}(\textcolor{keyword}{decltype}(\doxymbox{\hyperlink{classFile}{temp\_u16}})));}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00420}00420\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00421}00421\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classFile}{temp}}\ =\ \textcolor{keyword}{static\_cast}<\doxymbox{\hyperlink{classFile}{uint8\_t}}>(\doxymbox{\hyperlink{classFile}{options}}.\doxymbox{\hyperlink{classFile}{comp\_type}});}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00422}00422\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{file}}.\doxymbox{\hyperlink{classFile}{write}}(\textcolor{keyword}{reinterpret\_cast}<\textcolor{keywordtype}{char}\ \textcolor{keyword}{const}*>(\&\doxymbox{\hyperlink{classFile}{temp}}),\ \textcolor{keyword}{sizeof}(\textcolor{keyword}{decltype}(\doxymbox{\hyperlink{classFile}{temp}})));}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00423}00423\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00424}00424\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{temp}}\ =\ \textcolor{keyword}{static\_cast}<\doxymbox{\hyperlink{classFile}{uint8\_t}}>(\doxymbox{\hyperlink{classFile}{options}}.\doxymbox{\hyperlink{classFile}{preset}});}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00425}00425\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{file}}.\doxymbox{\hyperlink{classFile}{write}}(\textcolor{keyword}{reinterpret\_cast}<\textcolor{keywordtype}{char}\ \textcolor{keyword}{const}*>(\&\doxymbox{\hyperlink{classFile}{temp}}),\ \textcolor{keyword}{sizeof}(\textcolor{keyword}{decltype}(\doxymbox{\hyperlink{classFile}{temp}})));}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00426}00426\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00427}00427\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classFile}{file}};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00428}00428\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00429}00429\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00430}00430\ \ \ \ \ \textcolor{comment}{/**}}
+\DoxyCodeLine{00431\ \textcolor{comment}{\ \ \ \ \ *\ @brief\ Concatenate\ files\ found\ in\ \#path\ into\ a\ new\ file,\ if\ }}
+\DoxyCodeLine{00432\ \textcolor{comment}{\ \ \ \ \ *\ @param\ path\ }}
+\DoxyCodeLine{00433\ \textcolor{comment}{\ \ \ \ \ *\ @return\ path\ to\ the\ new\ concatenated\ file}}
+\DoxyCodeLine{00434\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00435}\doxymbox{\hyperlink{classFile_aaf7b0f743db8c7343de75d5c4d3f93fb}{00435}}\ \ \ \ \ \doxymbox{\hyperlink{classFile}{fs}}::\doxymbox{\hyperlink{classFile}{path}}\ \doxymbox{\hyperlink{classFile}{concatenate\_files}}(\doxymbox{\hyperlink{classFile}{fs}}::\doxymbox{\hyperlink{classFile}{path}}\ \textcolor{keyword}{const}\&\ \doxymbox{\hyperlink{classFile}{path}})}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00436}00436\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00437}00437\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{vector}}<\doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{pair}}<\doxymbox{\hyperlink{classFile}{fs}}::\doxymbox{\hyperlink{classFile}{path}},\ \doxymbox{\hyperlink{classFile}{uint16\_t}}>>\ \doxymbox{\hyperlink{classFile}{files\_to\_concat}}\{\};\textcolor{comment}{//uint16\_t\ is\ here\ to\ keep\ a\ temporary\ copy\ of\ count\ (we\ sacrifice\ a\ bit\ of\ memory\ for\ fewer\ drive\ accesses)}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00438}00438\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{vector}}<\doxymbox{\hyperlink{classFile}{size\_t}}>\ \doxymbox{\hyperlink{classFile}{ignored\_ids}}\{\};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00439}00439\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00440}00440\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{size\_t}}\ \doxymbox{\hyperlink{classFile}{id}}\{\};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00441}00441\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \doxymbox{\hyperlink{classFile}{id\_not\_set\_yet}}\ =\ \textcolor{keyword}{true};}
 \DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00442}00442\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00443}00443\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\doxymbox{\hyperlink{classFile}{info}}.\doxymbox{\hyperlink{classFile}{has\_value}}())\textcolor{comment}{//basically\ if\ it's\ not\ a\ tzf\ file}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00444}00444\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00445}00445\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00446}00446\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//do\ this\ at\ first,\ if\ it\ is\ not\ the\ first\ time\ it's\ because\ the\ user\ refused\ both\ possible\ ids.\ Check\ the\ following\ code.}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00447}00447\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{classFile}{id\_not\_set\_yet}}\ \textcolor{keyword}{and}\ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{ranges}}::\doxymbox{\hyperlink{classFile}{find}}(\doxymbox{\hyperlink{classFile}{ignored\_ids}},\ \doxymbox{\hyperlink{classFile}{info}}.\doxymbox{\hyperlink{classFile}{value}}().\doxymbox{\hyperlink{classFile}{identifier}})\ ==\ \doxymbox{\hyperlink{classFile}{ignored\_ids}}.\doxymbox{\hyperlink{classFile}{end}}())}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00448}00448\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00449}00449\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{id}}\ =\ \doxymbox{\hyperlink{classFile}{info}}.\doxymbox{\hyperlink{classFile}{value}}().\doxymbox{\hyperlink{classFile}{identifier}};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00450}00450\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{id\_not\_set\_yet}}\ =\ \textcolor{keyword}{false};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00451}00451\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{files\_to\_concat}}.\doxymbox{\hyperlink{classFile}{push\_back}}(\{\ \doxymbox{\hyperlink{classFile}{dir\_entry}},\ \doxymbox{\hyperlink{classFile}{info}}.\doxymbox{\hyperlink{classFile}{value}}().\doxymbox{\hyperlink{classFile}{count}}\ \});}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00452}00452\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};\textcolor{comment}{//skip\ the\ rest!!!}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00453}00453\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00454}00454\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00455}00455\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//if\ id\ is\ different\ from\ identifier\ and\ identifier\ was\ not\ ignored}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00456}00456\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{classFile}{id}}\ !=\ \doxymbox{\hyperlink{classFile}{info}}.\doxymbox{\hyperlink{classFile}{value}}().\doxymbox{\hyperlink{classFile}{identifier}}\ \textcolor{keyword}{and}\ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{find}}(\doxymbox{\hyperlink{classFile}{ignored\_ids}}.\doxymbox{\hyperlink{classFile}{begin}}(),\ \doxymbox{\hyperlink{classFile}{ignored\_ids}}.\doxymbox{\hyperlink{classFile}{end}}(),\ \doxymbox{\hyperlink{classFile}{info}}.\doxymbox{\hyperlink{classFile}{value}}().\doxymbox{\hyperlink{classFile}{identifier}})\ ==\ \doxymbox{\hyperlink{classFile}{ignored\_ids}}.\doxymbox{\hyperlink{classFile}{end}}())}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00457}00457\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00458}00458\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{print\_warn}}(\doxymbox{\hyperlink{classFile}{WarningType}}::\doxymbox{\hyperlink{classFile}{CONCAT\_AMBIGUITY}},\ \doxymbox{\hyperlink{classFile}{files\_to\_concat}}.\doxymbox{\hyperlink{classFile}{back}}().\doxymbox{\hyperlink{classFile}{first}}.\doxymbox{\hyperlink{classFile}{filename}}().\doxymbox{\hyperlink{classFile}{string}}()\ +\ \textcolor{stringliteral}{"{}\ "{}}\ +\ \doxymbox{\hyperlink{classFile}{dir\_entry}}.\doxymbox{\hyperlink{classFile}{path}}().\doxymbox{\hyperlink{classFile}{filename}}().\doxymbox{\hyperlink{classFile}{string}}());}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00459}00459\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{println}}(\textcolor{stringliteral}{"{}Choose\ which\ of\ these\ files\ are\ part\ of\ the\ concatenation.\ Insert\ '1'\ or\ '2'\ for\ the\ respective\ file.\ If\ neither\ of\ these\ is,\ insert\ '0',\ we\ will\ find\ the\ next\ possible\ file."{}});}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00460}00460\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classFile}{choice}}\ =\ 0;}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00461}00461\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//get\ user\ to\ resolve\ the\ ambiguity}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00462}00462\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\textcolor{keyword}{true})}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00463}00463\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00464}00464\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{cin}}\ >>\ \doxymbox{\hyperlink{classFile}{choice}};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00465}00465\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00466}00466\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//1\ is\ minimum\_entry\ and\ 2\ is\ dir\_entry\ and\ 3\ is\ neither}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00467}00467\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{classFile}{choice}}\ ==\ 1)}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00468}00468\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00469}00469\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{ignored\_ids}}.\doxymbox{\hyperlink{classFile}{push\_back}}(\doxymbox{\hyperlink{classFile}{id}});}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00470}00470\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{id\_not\_set\_yet}}\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00471}00471\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{println}}(\textcolor{stringliteral}{"{}You\ selected\ \{\}"{}},\ \doxymbox{\hyperlink{classFile}{files\_to\_concat}}.\doxymbox{\hyperlink{classFile}{back}}().\doxymbox{\hyperlink{classFile}{first}}.\doxymbox{\hyperlink{classFile}{filename}}().\doxymbox{\hyperlink{classFile}{string}}());}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00472}00472\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{files\_to\_concat}}.\doxymbox{\hyperlink{classFile}{clear}}();}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00473}00473\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00474}00474\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{classFile}{choice}}\ ==\ 2)}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00475}00475\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00476}00476\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{ignored\_ids}}.\doxymbox{\hyperlink{classFile}{push\_back}}(\doxymbox{\hyperlink{classFile}{info}}.\doxymbox{\hyperlink{classFile}{value}}().\doxymbox{\hyperlink{classFile}{identifier}});}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00477}00477\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{id\_not\_set\_yet}}\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00478}00478\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{println}}(\textcolor{stringliteral}{"{}You\ selected\ \{\}"{}},\ \doxymbox{\hyperlink{classFile}{dir\_entry}}.\doxymbox{\hyperlink{classFile}{path}}().\doxymbox{\hyperlink{classFile}{filename}}().\doxymbox{\hyperlink{classFile}{string}}());}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00479}00479\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{files\_to\_concat}}.\doxymbox{\hyperlink{classFile}{clear}}();}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00480}00480\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00481}00481\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{classFile}{choice}}\ ==\ 0)}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00482}00482\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00483}00483\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{ignored\_ids}}.\doxymbox{\hyperlink{classFile}{push\_back}}(\doxymbox{\hyperlink{classFile}{id}});}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00443}00443\ \ \ \ \ \ \ \ \ \textcolor{comment}{//add\ the\ files\ to\ concatenate\ to\ \#files\_to\_concat}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00444}00444\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ \textcolor{keyword}{const}\&\ \doxymbox{\hyperlink{classFile}{dir\_entry}}\ :\ \doxymbox{\hyperlink{classFile}{fs}}::\doxymbox{\hyperlink{classFile}{directory\_iterator}}\{\ \doxymbox{\hyperlink{classFile}{path}}\ \})}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00445}00445\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00446}00446\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\doxymbox{\hyperlink{classFile}{dir\_entry}}.\doxymbox{\hyperlink{classFile}{is\_regular\_file}}())}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00447}00447\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00448}00448\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00449}00449\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classFile}{info}}\ =\ \doxymbox{\hyperlink{classFile}{extract\_info}}(\doxymbox{\hyperlink{classFile}{dir\_entry}});}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00450}00450\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00451}00451\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\doxymbox{\hyperlink{classFile}{info}}.\doxymbox{\hyperlink{classFile}{has\_value}}())\textcolor{comment}{//basically\ if\ it's\ not\ a\ tzf\ file}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00452}00452\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00453}00453\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00454}00454\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//do\ this\ at\ first,\ if\ it\ is\ not\ the\ first\ time\ it's\ because\ the\ user\ refused\ both\ possible\ ids.\ Check\ the\ following\ code.}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00455}00455\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{classFile}{id\_not\_set\_yet}}\ \textcolor{keyword}{and}\ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{ranges}}::\doxymbox{\hyperlink{classFile}{find}}(\doxymbox{\hyperlink{classFile}{ignored\_ids}},\ \doxymbox{\hyperlink{classFile}{info}}.\doxymbox{\hyperlink{classFile}{value}}().\doxymbox{\hyperlink{classFile}{identifier}})\ ==\ \doxymbox{\hyperlink{classFile}{ignored\_ids}}.\doxymbox{\hyperlink{classFile}{end}}())}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00456}00456\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00457}00457\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{id}}\ =\ \doxymbox{\hyperlink{classFile}{info}}.\doxymbox{\hyperlink{classFile}{value}}().\doxymbox{\hyperlink{classFile}{identifier}};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00458}00458\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{id\_not\_set\_yet}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00459}00459\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{files\_to\_concat}}.\doxymbox{\hyperlink{classFile}{push\_back}}(\{\ \doxymbox{\hyperlink{classFile}{dir\_entry}},\ \doxymbox{\hyperlink{classFile}{info}}.\doxymbox{\hyperlink{classFile}{value}}().\doxymbox{\hyperlink{classFile}{count}}\ \});}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00460}00460\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};\textcolor{comment}{//skip\ the\ rest!!!}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00461}00461\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00462}00462\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00463}00463\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//if\ id\ is\ different\ from\ identifier\ and\ identifier\ was\ not\ ignored}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00464}00464\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{classFile}{id}}\ !=\ \doxymbox{\hyperlink{classFile}{info}}.\doxymbox{\hyperlink{classFile}{value}}().\doxymbox{\hyperlink{classFile}{identifier}}\ \textcolor{keyword}{and}\ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{ranges}}::\doxymbox{\hyperlink{classFile}{find}}(\doxymbox{\hyperlink{classFile}{ignored\_ids}},\ \doxymbox{\hyperlink{classFile}{info}}.\doxymbox{\hyperlink{classFile}{value}}().\doxymbox{\hyperlink{classFile}{identifier}})\ ==\ \doxymbox{\hyperlink{classFile}{ignored\_ids}}.\doxymbox{\hyperlink{classFile}{end}}())}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00465}00465\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00466}00466\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{print\_warn}}(\doxymbox{\hyperlink{classFile}{WarningType}}::\doxymbox{\hyperlink{classFile}{CONCAT\_AMBIGUITY}},\ \doxymbox{\hyperlink{classFile}{files\_to\_concat}}.\doxymbox{\hyperlink{classFile}{back}}().\doxymbox{\hyperlink{classFile}{first}}.\doxymbox{\hyperlink{classFile}{filename}}().\doxymbox{\hyperlink{classFile}{string}}()\ +\ \textcolor{stringliteral}{"{}\ "{}}\ +\ \doxymbox{\hyperlink{classFile}{dir\_entry}}.\doxymbox{\hyperlink{classFile}{path}}().\doxymbox{\hyperlink{classFile}{filename}}().\doxymbox{\hyperlink{classFile}{string}}());}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00467}00467\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{println}}(\textcolor{stringliteral}{"{}Choose\ which\ of\ these\ files\ are\ part\ of\ the\ concatenation.\ Insert\ '1'\ or\ '2'\ for\ the\ respective\ file.\ If\ neither\ of\ these\ is,\ insert\ '0',\ we\ will\ find\ the\ next\ possible\ file."{}});}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00468}00468\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classFile}{choice}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00469}00469\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//get\ user\ to\ resolve\ the\ ambiguity}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00470}00470\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\textcolor{keyword}{true})}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00471}00471\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00472}00472\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{cin}}\ >>\ \doxymbox{\hyperlink{classFile}{choice}};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00473}00473\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00474}00474\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//1\ is\ minimum\_entry\ and\ 2\ is\ dir\_entry\ and\ 3\ is\ neither}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00475}00475\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{classFile}{choice}}\ ==\ 1)}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00476}00476\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00477}00477\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{ignored\_ids}}.\doxymbox{\hyperlink{classFile}{push\_back}}(\doxymbox{\hyperlink{classFile}{id}});}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00478}00478\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{id\_not\_set\_yet}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00479}00479\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{println}}(\textcolor{stringliteral}{"{}You\ selected\ \{\}"{}},\ \doxymbox{\hyperlink{classFile}{files\_to\_concat}}.\doxymbox{\hyperlink{classFile}{back}}().\doxymbox{\hyperlink{classFile}{first}}.\doxymbox{\hyperlink{classFile}{filename}}().\doxymbox{\hyperlink{classFile}{string}}());}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00480}00480\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{files\_to\_concat}}.\doxymbox{\hyperlink{classFile}{clear}}();}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00481}00481\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00482}00482\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{classFile}{choice}}\ ==\ 2)}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00483}00483\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
 \DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00484}00484\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{ignored\_ids}}.\doxymbox{\hyperlink{classFile}{push\_back}}(\doxymbox{\hyperlink{classFile}{info}}.\doxymbox{\hyperlink{classFile}{value}}().\doxymbox{\hyperlink{classFile}{identifier}});}
 \DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00485}00485\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{id\_not\_set\_yet}}\ =\ \textcolor{keyword}{true};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00486}00486\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{files\_to\_concat}}.\doxymbox{\hyperlink{classFile}{clear}}();}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00487}00487\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00488}00488\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00489}00489\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{println}}(\textcolor{stringliteral}{"{}Get\ it\ right\ you\ stoopid.\ Insert\ '1',\ '2',\ or\ '0'\ if\ neither\ file\ is\ correct."{}});}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00490}00490\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00491}00491\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00492}00492\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\textcolor{comment}{//everything\ goes\ as\ expected}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00493}00493\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00494}00494\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{files\_to\_concat}}.\doxymbox{\hyperlink{classFile}{push\_back}}(\{\ \doxymbox{\hyperlink{classFile}{dir\_entry}},\ \doxymbox{\hyperlink{classFile}{info}}.\doxymbox{\hyperlink{classFile}{value}}().\doxymbox{\hyperlink{classFile}{count}}\ \});}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00495}00495\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00496}00496\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00497}00497\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00498}00498\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00499}00499\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classFile}{example}}\ =\ \doxymbox{\hyperlink{classFile}{extract\_info}}(\doxymbox{\hyperlink{classFile}{files\_to\_concat}}[0].\doxymbox{\hyperlink{classFile}{first}});}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00500}00500\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{example}}.\doxymbox{\hyperlink{classFile}{value}}().\doxymbox{\hyperlink{classFile}{count}}\ =\ 0;}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00501}00501\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{ofstream}}\ \doxymbox{\hyperlink{classFile}{file}}\{\ \doxymbox{\hyperlink{classFile}{create\_file}}(\doxymbox{\hyperlink{classFile}{cli\_options}}.\doxymbox{\hyperlink{classFile}{filename\_out}},\ \doxymbox{\hyperlink{classFile}{example}}.\doxymbox{\hyperlink{classFile}{value}}())\ \};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00502}00502\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00503}00503\ \ \ \ \ \ \ \ \ \textcolor{comment}{//sort\ the\ files\ base\ on\ their\ count}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00504}00504\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{sort}}(\doxymbox{\hyperlink{classFile}{files\_to\_concat}}.\doxymbox{\hyperlink{classFile}{begin}}(),\ \doxymbox{\hyperlink{classFile}{files\_to\_concat}}.\doxymbox{\hyperlink{classFile}{end}}(),}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00505}00505\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [](\doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{pair}}<\doxymbox{\hyperlink{classFile}{fs}}::\doxymbox{\hyperlink{classFile}{path}},\ \doxymbox{\hyperlink{classFile}{uint16\_t}}>\ \textcolor{keyword}{const}\&\ \doxymbox{\hyperlink{classFile}{file1}},\ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{pair}}<\doxymbox{\hyperlink{classFile}{fs}}::\doxymbox{\hyperlink{classFile}{path}},\ \doxymbox{\hyperlink{classFile}{uint16\_t}}>\ \textcolor{keyword}{const}\&\ \doxymbox{\hyperlink{classFile}{file2}})}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00506}00506\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00507}00507\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classFile}{file1}}.\doxymbox{\hyperlink{classFile}{second}}\ <\ \doxymbox{\hyperlink{classFile}{file2}}.\doxymbox{\hyperlink{classFile}{second}};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00508}00508\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \});}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00509}00509\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00510}00510\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Copy\ all\ the\ files\ into\ the\ new\ file}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00511}00511\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ \textcolor{keyword}{const}\&\ [\doxymbox{\hyperlink{classFile}{path\_}},\ \doxymbox{\hyperlink{classFile}{\_}}]\ :\ \doxymbox{\hyperlink{classFile}{files\_to\_concat}})\textcolor{comment}{//I\ couldn't\ get\ ranges\ to\ work,\ also,\ the\ underscore\ is\ a\ placeholder\ in\ c++26.\ However,\ msvc\ is\ slooooow\ at\ getting\ new\ stuff.\ I'm\ looking\ at\ you\ microsoft,\ not\ at\ the\ developers.}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00512}00512\ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00513}00513\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{ifstream}}\ \doxymbox{\hyperlink{classFile}{input}}\{\ \doxymbox{\hyperlink{classFile}{path\_}}\ \};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00514}00514\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{input}}.\doxymbox{\hyperlink{classFile}{seekg}}(0,\ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{ios}}::\doxymbox{\hyperlink{classFile}{end}});}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00515}00515\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{input}}.\doxymbox{\hyperlink{classFile}{seekg}}(\textcolor{keyword}{static\_cast}<\textcolor{keywordtype}{int}>(\doxymbox{\hyperlink{classFile}{HEADER\_OFFSET}}::\doxymbox{\hyperlink{classFile}{MAX}}));}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00516}00516\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00517}00517\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (!\doxymbox{\hyperlink{classFile}{input}}.\doxymbox{\hyperlink{classFile}{eof}}())\textcolor{comment}{//fill\ input\ with\ file\ at\ path\_}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00518}00518\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00519}00519\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//TODO:\ this\ exception\ stuff\ should\ be\ abstracted,\ also,\ how\ about\ making\ custom\ exceptions?}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00520}00520\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00521}00521\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classFile}{buffer}}\ =\ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{make\_unique}}<\doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{byte}}[]>(\doxymbox{\hyperlink{classFile}{MiB\_to\_B}}(1));}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00522}00522\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{input}}.\doxymbox{\hyperlink{classFile}{read}}(\textcolor{keyword}{reinterpret\_cast}<\textcolor{keywordtype}{char}*>(\doxymbox{\hyperlink{classFile}{buffer}}.\doxymbox{\hyperlink{classFile}{get}}()),\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{classFile}{buffer}}));}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00523}00523\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00524}00524\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00525}00525\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{try\_throw\_IO\_error}}(\doxymbox{\hyperlink{classFile}{input}}.\doxymbox{\hyperlink{classFile}{rdstate}}(),\ \doxymbox{\hyperlink{classFile}{path\_}});}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00526}00526\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00527}00527\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (...)}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00528}00528\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00529}00529\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{fs}}::\doxymbox{\hyperlink{classFile}{remove}}(\doxymbox{\hyperlink{classFile}{cli\_options}}.\doxymbox{\hyperlink{classFile}{filename\_out}});\textcolor{comment}{//cleanup}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00530}00530\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00531}00531\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00532}00532\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00533}00533\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{file}}.\doxymbox{\hyperlink{classFile}{write}}(\textcolor{keyword}{reinterpret\_cast}<\textcolor{keywordtype}{char}\ \textcolor{keyword}{const}*>(\doxymbox{\hyperlink{classFile}{buffer}}.\doxymbox{\hyperlink{classFile}{get}}()),\ \doxymbox{\hyperlink{classFile}{input}}.\doxymbox{\hyperlink{classFile}{gcount}}());}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00534}00534\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00535}00535\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00536}00536\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{try\_throw\_IO\_error}}(\doxymbox{\hyperlink{classFile}{file}}.\doxymbox{\hyperlink{classFile}{rdstate}}(),\ \doxymbox{\hyperlink{classFile}{cli\_options}}.\doxymbox{\hyperlink{classFile}{filename\_out}}.\doxymbox{\hyperlink{classFile}{string}}());}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00537}00537\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00538}00538\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (...)}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00539}00539\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00540}00540\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{fs}}::\doxymbox{\hyperlink{classFile}{remove}}(\doxymbox{\hyperlink{classFile}{cli\_options}}.\doxymbox{\hyperlink{classFile}{filename\_out}});\textcolor{comment}{//cleanup}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00541}00541\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00542}00542\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00543}00543\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00544}00544\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00545}00545\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00546}00546\ }
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00547}00547\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classFile}{cli\_options}}.\doxymbox{\hyperlink{classFile}{filename\_out}};}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00548}00548\ \ \ \ \ \}}
-\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00549}00549\ \};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00486}00486\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{println}}(\textcolor{stringliteral}{"{}You\ selected\ \{\}"{}},\ \doxymbox{\hyperlink{classFile}{dir\_entry}}.\doxymbox{\hyperlink{classFile}{path}}().\doxymbox{\hyperlink{classFile}{filename}}().\doxymbox{\hyperlink{classFile}{string}}());}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00487}00487\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{files\_to\_concat}}.\doxymbox{\hyperlink{classFile}{clear}}();}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00488}00488\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00489}00489\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\doxymbox{\hyperlink{classFile}{choice}}\ ==\ 0)}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00490}00490\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00491}00491\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{ignored\_ids}}.\doxymbox{\hyperlink{classFile}{push\_back}}(\doxymbox{\hyperlink{classFile}{id}});}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00492}00492\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{ignored\_ids}}.\doxymbox{\hyperlink{classFile}{push\_back}}(\doxymbox{\hyperlink{classFile}{info}}.\doxymbox{\hyperlink{classFile}{value}}().\doxymbox{\hyperlink{classFile}{identifier}});}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00493}00493\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{id\_not\_set\_yet}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00494}00494\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{files\_to\_concat}}.\doxymbox{\hyperlink{classFile}{clear}}();}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00495}00495\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00496}00496\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00497}00497\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{println}}(\textcolor{stringliteral}{"{}Get\ it\ right\ you\ stoopid.\ Insert\ '1',\ '2',\ or\ '0'\ if\ neither\ file\ is\ correct."{}});}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00498}00498\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00499}00499\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00500}00500\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\textcolor{comment}{//everything\ goes\ as\ expected}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00501}00501\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00502}00502\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{files\_to\_concat}}.\doxymbox{\hyperlink{classFile}{push\_back}}(\{\ \doxymbox{\hyperlink{classFile}{dir\_entry}},\ \doxymbox{\hyperlink{classFile}{info}}.\doxymbox{\hyperlink{classFile}{value}}().\doxymbox{\hyperlink{classFile}{count}}\ \});}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00503}00503\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00504}00504\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00505}00505\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00506}00506\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00507}00507\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classFile}{example}}\ =\ \doxymbox{\hyperlink{classFile}{extract\_info}}(\doxymbox{\hyperlink{classFile}{files\_to\_concat}}[0].\doxymbox{\hyperlink{classFile}{first}});}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00508}00508\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{example}}.\doxymbox{\hyperlink{classFile}{value}}().\doxymbox{\hyperlink{classFile}{count}}\ =\ 0;}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00509}00509\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{ofstream}}\ \doxymbox{\hyperlink{classFile}{file}}\{\ \doxymbox{\hyperlink{classFile}{create\_file}}(\doxymbox{\hyperlink{classFile}{options\_}}.\doxymbox{\hyperlink{classFile}{filename\_out}},\ \doxymbox{\hyperlink{classFile}{example}}.\doxymbox{\hyperlink{classFile}{value}}())\ \};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00510}00510\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00511}00511\ \ \ \ \ \ \ \ \ \textcolor{comment}{//sort\ the\ files\ base\ on\ their\ count}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00512}00512\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{ranges}}::\doxymbox{\hyperlink{classFile}{sort}}(\doxymbox{\hyperlink{classFile}{files\_to\_concat}},}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00513}00513\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [](\doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{pair}}<\doxymbox{\hyperlink{classFile}{fs}}::\doxymbox{\hyperlink{classFile}{path}},\ \doxymbox{\hyperlink{classFile}{uint16\_t}}>\ \textcolor{keyword}{const}\&\ \doxymbox{\hyperlink{classFile}{file1}},\ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{pair}}<\doxymbox{\hyperlink{classFile}{fs}}::\doxymbox{\hyperlink{classFile}{path}},\ \doxymbox{\hyperlink{classFile}{uint16\_t}}>\ \textcolor{keyword}{const}\&\ \doxymbox{\hyperlink{classFile}{file2}})}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00514}00514\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00515}00515\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classFile}{file1}}.\doxymbox{\hyperlink{classFile}{second}}\ <\ \doxymbox{\hyperlink{classFile}{file2}}.\doxymbox{\hyperlink{classFile}{second}};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00516}00516\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00517}00517\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00518}00518\ \ \ \ \ \ \ \ \ \textcolor{comment}{//Copy\ all\ the\ files\ into\ the\ new\ file}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00519}00519\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\ \textcolor{keyword}{const}\&\ [\doxymbox{\hyperlink{classFile}{path\_}},\ \doxymbox{\hyperlink{classFile}{\_}}]\ :\ \doxymbox{\hyperlink{classFile}{files\_to\_concat}})\textcolor{comment}{//I\ couldn't\ get\ ranges\ to\ work\ (actually\ (auto\ const\ \&path\_:\ files\_to\_concat\ |\ std::views::keys)\ works\ on\ clang).\ However,\ msvc\ is\ slooooow\ at\ getting\ new\ stuff.}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00520}00520\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00521}00521\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{ifstream}}\ \doxymbox{\hyperlink{classFile}{input}}\{\ \doxymbox{\hyperlink{classFile}{path\_}}\ \};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00522}00522\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{input}}.\doxymbox{\hyperlink{classFile}{seekg}}(0,\ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{ios}}::\doxymbox{\hyperlink{classFile}{end}});}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00523}00523\ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{input}}.\doxymbox{\hyperlink{classFile}{seekg}}(\textcolor{keyword}{static\_cast}<\textcolor{keywordtype}{int}>(\doxymbox{\hyperlink{classFile}{HEADER\_OFFSET}}::\doxymbox{\hyperlink{classFile}{MAX}}));}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00524}00524\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00525}00525\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (!\doxymbox{\hyperlink{classFile}{input}}.\doxymbox{\hyperlink{classFile}{eof}}())\textcolor{comment}{//fill\ input\ with\ file\ at\ path\_}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00526}00526\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00527}00527\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//TODO:\ this\ exception\ stuff\ should\ be\ abstracted,\ also,\ how\ about\ making\ custom\ exceptions?}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00528}00528\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00529}00529\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classFile}{buffer}}\ =\ \doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{make\_unique}}<\doxymbox{\hyperlink{classFile}{std}}::\doxymbox{\hyperlink{classFile}{byte}}[]>(\doxymbox{\hyperlink{classFile}{MiB\_to\_B}}(1));}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00530}00530\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{input}}.\doxymbox{\hyperlink{classFile}{read}}(\textcolor{keyword}{reinterpret\_cast}<\textcolor{keywordtype}{char}*>(\doxymbox{\hyperlink{classFile}{buffer}}.\doxymbox{\hyperlink{classFile}{get}}()),\ \textcolor{keyword}{sizeof}(\doxymbox{\hyperlink{classFile}{buffer}}));}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00531}00531\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00532}00532\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00533}00533\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{try\_throw\_IO\_error}}(\doxymbox{\hyperlink{classFile}{input}}.\doxymbox{\hyperlink{classFile}{rdstate}}(),\ \doxymbox{\hyperlink{classFile}{path\_}});}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00534}00534\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00535}00535\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (...)}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00536}00536\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00537}00537\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{fs}}::\doxymbox{\hyperlink{classFile}{remove}}(\doxymbox{\hyperlink{classFile}{options\_}}.\doxymbox{\hyperlink{classFile}{filename\_out}});\textcolor{comment}{//cleanup}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00538}00538\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00539}00539\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00540}00540\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00541}00541\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{file}}.\doxymbox{\hyperlink{classFile}{write}}(\textcolor{keyword}{reinterpret\_cast}<\textcolor{keywordtype}{char}\ \textcolor{keyword}{const}*>(\doxymbox{\hyperlink{classFile}{buffer}}.\doxymbox{\hyperlink{classFile}{get}}()),\ \doxymbox{\hyperlink{classFile}{input}}.\doxymbox{\hyperlink{classFile}{gcount}}());}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00542}00542\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00543}00543\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00544}00544\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{try\_throw\_IO\_error}}(\doxymbox{\hyperlink{classFile}{file}}.\doxymbox{\hyperlink{classFile}{rdstate}}(),\ \doxymbox{\hyperlink{classFile}{options\_}}.\doxymbox{\hyperlink{classFile}{filename\_out}}.\doxymbox{\hyperlink{classFile}{string}}());}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00545}00545\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00546}00546\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (...)}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00547}00547\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00548}00548\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{classFile}{fs}}::\doxymbox{\hyperlink{classFile}{remove}}(\doxymbox{\hyperlink{classFile}{options\_}}.\doxymbox{\hyperlink{classFile}{filename\_out}});\textcolor{comment}{//cleanup}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00549}00549\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00550}00550\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00551}00551\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00552}00552\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00553}00553\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00554}00554\ }
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00555}00555\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{classFile}{options\_}}.\doxymbox{\hyperlink{classFile}{filename\_out}};}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00556}00556\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{file__management_8cppm_source_l00557}00557\ \};}
 
 \end{DoxyCode}

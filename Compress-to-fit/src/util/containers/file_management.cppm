@@ -493,7 +493,7 @@ private:
 						id_not_set_yet = true;
 						files_to_concat.clear();
 					}
-					else 
+					else
 						std::println("Get it right you stoopid. Insert '1', '2', or '0' if neither file is correct.");
 				}
 			}

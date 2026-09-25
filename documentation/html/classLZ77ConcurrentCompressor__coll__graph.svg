@@ -47,7 +47,7 @@
   </g>
 </defs>
 <script type="application/ecmascript">
-var viewWidth = 746;
+var viewWidth = 1104;
 var viewHeight = 1378;
 var sectionId = 'dynsection-0';
 </script>
@@ -59,45 +59,75 @@ var sectionId = 'dynsection-0';
 <g id="Node000001" class="node">
 <title>Node1</title>
 <g id="a_Node000001"><a xlink:title=" ">
-<polygon fill="#999999" stroke="none" points="369.75,-134.5 216,-134.5 216,0 369.75,0 369.75,-134.5"/>
-<text xml:space="preserve" text-anchor="start" x="231" y="-123" font-family="Helvetica,sans-Serif" font-size="10.00">LZ77ConcurrentCompressor</text>
-<text xml:space="preserve" text-anchor="start" x="221.5" y="-108.5" font-family="Helvetica,sans-Serif" font-size="10.00">&#45;</text>
-<text xml:space="preserve" text-anchor="start" x="230" y="-108.5" font-family="Helvetica,sans-Serif" font-size="10.00">preset_</text>
-<text xml:space="preserve" text-anchor="start" x="221.5" y="-94" font-family="Helvetica,sans-Serif" font-size="10.00">&#45;</text>
-<text xml:space="preserve" text-anchor="start" x="230" y="-94" font-family="Helvetica,sans-Serif" font-size="10.00">concurrency_</text>
-<text xml:space="preserve" text-anchor="start" x="221.5" y="-79.5" font-family="Helvetica,sans-Serif" font-size="10.00">&#45;</text>
-<text xml:space="preserve" text-anchor="start" x="230" y="-79.5" font-family="Helvetica,sans-Serif" font-size="10.00">n_blocks_</text>
-<text xml:space="preserve" text-anchor="start" x="221.5" y="-65" font-family="Helvetica,sans-Serif" font-size="10.00">&#45;</text>
-<text xml:space="preserve" text-anchor="start" x="230" y="-65" font-family="Helvetica,sans-Serif" font-size="10.00">n_completed_blocks</text>
-<text xml:space="preserve" text-anchor="start" x="220" y="-50.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="230" y="-50.5" font-family="Helvetica,sans-Serif" font-size="10.00">LZ77ConcurrentCompressor()</text>
-<text xml:space="preserve" text-anchor="start" x="220" y="-36" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="230" y="-36" font-family="Helvetica,sans-Serif" font-size="10.00">~LZ77ConcurrentCompressor()</text>
-<text xml:space="preserve" text-anchor="start" x="220" y="-21.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="230" y="-21.5" font-family="Helvetica,sans-Serif" font-size="10.00">compress()</text>
-<text xml:space="preserve" text-anchor="start" x="221.5" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">&#45;</text>
-<text xml:space="preserve" text-anchor="start" x="230" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">check_results()</text>
-<polygon fill="#666666" stroke="#666666" points="216,-118 216,-118 369.75,-118 369.75,-118 216,-118"/>
-<polygon fill="#666666" stroke="#666666" points="216,-60 216,-60 228,-60 228,-60 216,-60"/>
-<polygon fill="#666666" stroke="#666666" points="228,-60 228,-60 369.75,-60 369.75,-60 228,-60"/>
-<polygon fill="none" stroke="#666666" points="216,0 216,-134.5 369.75,-134.5 369.75,0 216,0"/>
+<polygon fill="#999999" stroke="none" points="633.88,-134.5 480.12,-134.5 480.12,0 633.88,0 633.88,-134.5"/>
+<text xml:space="preserve" text-anchor="start" x="495.12" y="-123" font-family="Helvetica,sans-Serif" font-size="10.00">LZ77ConcurrentCompressor</text>
+<text xml:space="preserve" text-anchor="start" x="485.62" y="-108.5" font-family="Helvetica,sans-Serif" font-size="10.00">&#45;</text>
+<text xml:space="preserve" text-anchor="start" x="494.12" y="-108.5" font-family="Helvetica,sans-Serif" font-size="10.00">preset_</text>
+<text xml:space="preserve" text-anchor="start" x="485.62" y="-94" font-family="Helvetica,sans-Serif" font-size="10.00">&#45;</text>
+<text xml:space="preserve" text-anchor="start" x="494.12" y="-94" font-family="Helvetica,sans-Serif" font-size="10.00">concurrency_</text>
+<text xml:space="preserve" text-anchor="start" x="485.62" y="-79.5" font-family="Helvetica,sans-Serif" font-size="10.00">&#45;</text>
+<text xml:space="preserve" text-anchor="start" x="494.12" y="-79.5" font-family="Helvetica,sans-Serif" font-size="10.00">file_size_</text>
+<text xml:space="preserve" text-anchor="start" x="485.62" y="-65" font-family="Helvetica,sans-Serif" font-size="10.00">&#45;</text>
+<text xml:space="preserve" text-anchor="start" x="494.12" y="-65" font-family="Helvetica,sans-Serif" font-size="10.00">n_completed_blocks</text>
+<text xml:space="preserve" text-anchor="start" x="484.12" y="-50.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="494.12" y="-50.5" font-family="Helvetica,sans-Serif" font-size="10.00">LZ77ConcurrentCompressor()</text>
+<text xml:space="preserve" text-anchor="start" x="484.12" y="-36" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="494.12" y="-36" font-family="Helvetica,sans-Serif" font-size="10.00">~LZ77ConcurrentCompressor()</text>
+<text xml:space="preserve" text-anchor="start" x="484.12" y="-21.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="494.12" y="-21.5" font-family="Helvetica,sans-Serif" font-size="10.00">compress()</text>
+<text xml:space="preserve" text-anchor="start" x="485.62" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">&#45;</text>
+<text xml:space="preserve" text-anchor="start" x="494.12" y="-7" font-family="Helvetica,sans-Serif" font-size="10.00">check_results()</text>
+<polygon fill="#666666" stroke="#666666" points="480.12,-118 480.12,-118 633.88,-118 633.88,-118 480.12,-118"/>
+<polygon fill="#666666" stroke="#666666" points="480.12,-60 480.12,-60 492.12,-60 492.12,-60 480.12,-60"/>
+<polygon fill="#666666" stroke="#666666" points="492.12,-60 492.12,-60 633.88,-60 633.88,-60 492.12,-60"/>
+<polygon fill="none" stroke="#666666" points="480.12,0 480.12,-134.5 633.88,-134.5 633.88,0 480.12,0"/>
 </a>
 </g>
 </g>
 <!-- Node2 -->
 <g id="Node000002" class="node">
 <title>Node2</title>
-<g id="a_Node000002"><a xlink:title=" ">
-<polygon fill="white" stroke="none" points="171.75,-332 76,-332 76,-274 171.75,-274 171.75,-332"/>
-<text xml:space="preserve" text-anchor="start" x="80" y="-320.5" font-family="Helvetica,sans-Serif" font-size="10.00">std::span&lt; std::byte</text>
-<text xml:space="preserve" text-anchor="start" x="105.88" y="-310" font-family="Helvetica,sans-Serif" font-size="10.00"> const &gt;</text>
-<text xml:space="preserve" text-anchor="start" x="89.5" y="-295.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="109" y="-295.5" font-family="Helvetica,sans-Serif" font-size="10.00">elements</text>
-<text xml:space="preserve" text-anchor="start" x="122.38" y="-281" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
-<polygon fill="#666666" stroke="#666666" points="76,-305 76,-305 171.75,-305 171.75,-305 76,-305"/>
-<polygon fill="#666666" stroke="#666666" points="76,-290.5 76,-290.5 107,-290.5 107,-290.5 76,-290.5"/>
-<polygon fill="#666666" stroke="#666666" points="107,-290.5 107,-290.5 171.75,-290.5 171.75,-290.5 107,-290.5"/>
-<polygon fill="none" stroke="#666666" points="76,-274 76,-332 171.75,-332 171.75,-274 76,-274"/>
+<g id="a_Node000002"><a xlink:href="classFile.html" target="_top" xlink:title="Interpret a file as to retrieve custom information.">
+<polygon fill="white" stroke="none" points="254,-736.5 146,-736.5 146,-457 254,-457 254,-736.5"/>
+<text xml:space="preserve" text-anchor="start" x="192.12" y="-725" font-family="Helvetica,sans-Serif" font-size="10.00">File</text>
+<text xml:space="preserve" text-anchor="start" x="198.5" y="-710.5" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
+<text xml:space="preserve" text-anchor="start" x="150" y="-696" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="160" y="-696" font-family="Helvetica,sans-Serif" font-size="10.00">File()</text>
+<text xml:space="preserve" text-anchor="start" x="150" y="-681.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="160" y="-681.5" font-family="Helvetica,sans-Serif" font-size="10.00">write()</text>
+<text xml:space="preserve" text-anchor="start" x="150" y="-667" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="160" y="-667" font-family="Helvetica,sans-Serif" font-size="10.00">write()</text>
+<text xml:space="preserve" text-anchor="start" x="150" y="-652.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="160" y="-652.5" font-family="Helvetica,sans-Serif" font-size="10.00">get_in_file_options()</text>
+<text xml:space="preserve" text-anchor="start" x="150" y="-638" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="160" y="-638" font-family="Helvetica,sans-Serif" font-size="10.00">get_ref_out_stream()</text>
+<text xml:space="preserve" text-anchor="start" x="150" y="-623.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="160" y="-623.5" font-family="Helvetica,sans-Serif" font-size="10.00">split_file()</text>
+<text xml:space="preserve" text-anchor="start" x="150" y="-609" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="160" y="-609" font-family="Helvetica,sans-Serif" font-size="10.00">read_file()</text>
+<text xml:space="preserve" text-anchor="start" x="150" y="-594.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="160" y="-594.5" font-family="Helvetica,sans-Serif" font-size="10.00">has_signature()</text>
+<text xml:space="preserve" text-anchor="start" x="150" y="-580" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="160" y="-580" font-family="Helvetica,sans-Serif" font-size="10.00">has_signature()</text>
+<text xml:space="preserve" text-anchor="start" x="150" y="-565.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="160" y="-565.5" font-family="Helvetica,sans-Serif" font-size="10.00">extract_info()</text>
+<text xml:space="preserve" text-anchor="start" x="150" y="-551" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="160" y="-551" font-family="Helvetica,sans-Serif" font-size="10.00">extract_info()</text>
+<text xml:space="preserve" text-anchor="start" x="150" y="-536.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="160" y="-536.5" font-family="Helvetica,sans-Serif" font-size="10.00">create_file()</text>
+<text xml:space="preserve" text-anchor="start" x="151.5" y="-522" font-family="Helvetica,sans-Serif" font-size="10.00">&#45;</text>
+<text xml:space="preserve" text-anchor="start" x="160" y="-522" font-family="Helvetica,sans-Serif" font-size="10.00">check_signature()</text>
+<text xml:space="preserve" text-anchor="start" x="151.5" y="-507.5" font-family="Helvetica,sans-Serif" font-size="10.00">&#45;</text>
+<text xml:space="preserve" text-anchor="start" x="160" y="-507.5" font-family="Helvetica,sans-Serif" font-size="10.00">has_signature()</text>
+<text xml:space="preserve" text-anchor="start" x="151.5" y="-493" font-family="Helvetica,sans-Serif" font-size="10.00">&#45;</text>
+<text xml:space="preserve" text-anchor="start" x="160" y="-493" font-family="Helvetica,sans-Serif" font-size="10.00">create_file()</text>
+<text xml:space="preserve" text-anchor="start" x="151.5" y="-478.5" font-family="Helvetica,sans-Serif" font-size="10.00">&#45;</text>
+<text xml:space="preserve" text-anchor="start" x="160" y="-478.5" font-family="Helvetica,sans-Serif" font-size="10.00">concatenate_files()</text>
+<text xml:space="preserve" text-anchor="start" x="151.5" y="-464" font-family="Helvetica,sans-Serif" font-size="10.00">&#45;</text>
+<text xml:space="preserve" text-anchor="start" x="160" y="-464" font-family="Helvetica,sans-Serif" font-size="10.00">create_file()</text>
+<polygon fill="#666666" stroke="#666666" points="146,-720 146,-720 254,-720 254,-720 146,-720"/>
+<polygon fill="#666666" stroke="#666666" points="146,-705.5 146,-705.5 254,-705.5 254,-705.5 146,-705.5"/>
+<polygon fill="none" stroke="#666666" points="146,-457 146,-736.5 254,-736.5 254,-457 146,-457"/>
 </a>
 </g>
 </g>
@@ -105,166 +135,175 @@ var sectionId = 'dynsection-0';
 <g id="edge1_Node000001_Node000002" class="edge">
 <title>Node2&#45;&gt;Node1</title>
 <g id="a_edge1_Node000001_Node000002"><a xlink:title=" ">
-<path fill="none" stroke="#63b8ff" d="M134.56,-274.21C144.49,-250.07 160.62,-214.73 179.88,-187 190.16,-172.18 202.28,-157.43 214.69,-143.61"/>
-<polygon fill="none" stroke="#63b8ff" points="214.6,-143.71 215.7,-136.58 222.71,-134.86 221.6,-141.99 214.6,-143.71"/>
+<path fill="none" stroke="#63b8ff" d="M165.76,-457.06C152.98,-371.33 153.02,-263.46 209,-187 268.15,-106.21 385.47,-79.84 467.46,-71.53"/>
+<polygon fill="none" stroke="#63b8ff" points="467.46,-71.53 473.07,-67 479.41,-70.43 473.8,-74.97 467.46,-71.53"/>
 </a>
 </g>
-<text xml:space="preserve" text-anchor="start" x="207.63" y="-158.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">&#45;data_</text>
+<text xml:space="preserve" text-anchor="start" x="212" y="-286.25" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">&#45;file_</text>
+</g>
+<!-- Node14 -->
+<g id="Node000014" class="node">
+<title>Node14</title>
+<g id="a_Node000014"><a xlink:href="classConcOrderedFileList.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="none" points="624.5,-390 489.5,-390 489.5,-187 624.5,-187 624.5,-390"/>
+<text xml:space="preserve" text-anchor="start" x="512.38" y="-378.5" font-family="Helvetica,sans-Serif" font-size="10.00">ConcOrderedFileList</text>
+<text xml:space="preserve" text-anchor="start" x="518.38" y="-368" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; LZ77Block&lt;&gt; &gt;</text>
+<text xml:space="preserve" text-anchor="start" x="495" y="-353.5" font-family="Helvetica,sans-Serif" font-size="10.00">&#45;</text>
+<text xml:space="preserve" text-anchor="start" x="503.5" y="-353.5" font-family="Helvetica,sans-Serif" font-size="10.00">size_</text>
+<text xml:space="preserve" text-anchor="start" x="495" y="-339" font-family="Helvetica,sans-Serif" font-size="10.00">&#45;</text>
+<text xml:space="preserve" text-anchor="start" x="503.5" y="-339" font-family="Helvetica,sans-Serif" font-size="10.00">expected_sequence_num_</text>
+<text xml:space="preserve" text-anchor="start" x="495" y="-324.5" font-family="Helvetica,sans-Serif" font-size="10.00">&#45;</text>
+<text xml:space="preserve" text-anchor="start" x="503.5" y="-324.5" font-family="Helvetica,sans-Serif" font-size="10.00">called_writer</text>
+<text xml:space="preserve" text-anchor="start" x="495" y="-310" font-family="Helvetica,sans-Serif" font-size="10.00">&#45;</text>
+<text xml:space="preserve" text-anchor="start" x="503.5" y="-310" font-family="Helvetica,sans-Serif" font-size="10.00">writer_notifier</text>
+<text xml:space="preserve" text-anchor="start" x="493.5" y="-295.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="503.5" y="-295.5" font-family="Helvetica,sans-Serif" font-size="10.00">ConcOrderedFileList()</text>
+<text xml:space="preserve" text-anchor="start" x="493.5" y="-281" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="503.5" y="-281" font-family="Helvetica,sans-Serif" font-size="10.00">~ConcOrderedFileList()</text>
+<text xml:space="preserve" text-anchor="start" x="493.5" y="-266.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="503.5" y="-266.5" font-family="Helvetica,sans-Serif" font-size="10.00">operator=()</text>
+<text xml:space="preserve" text-anchor="start" x="493.5" y="-252" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="503.5" y="-252" font-family="Helvetica,sans-Serif" font-size="10.00">insert()</text>
+<text xml:space="preserve" text-anchor="start" x="493.5" y="-237.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="503.5" y="-237.5" font-family="Helvetica,sans-Serif" font-size="10.00">size()</text>
+<text xml:space="preserve" text-anchor="start" x="493.5" y="-223" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="503.5" y="-223" font-family="Helvetica,sans-Serif" font-size="10.00">expected_sequence_num()</text>
+<text xml:space="preserve" text-anchor="start" x="493.5" y="-208.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="503.5" y="-208.5" font-family="Helvetica,sans-Serif" font-size="10.00">file()</text>
+<text xml:space="preserve" text-anchor="start" x="495" y="-194" font-family="Helvetica,sans-Serif" font-size="10.00">&#45;</text>
+<text xml:space="preserve" text-anchor="start" x="503.5" y="-194" font-family="Helvetica,sans-Serif" font-size="10.00">write_file()</text>
+<polygon fill="#666666" stroke="#666666" points="489.5,-363 489.5,-363 624.5,-363 624.5,-363 489.5,-363"/>
+<polygon fill="#666666" stroke="#666666" points="489.5,-305 489.5,-305 501.5,-305 501.5,-305 489.5,-305"/>
+<polygon fill="#666666" stroke="#666666" points="501.5,-305 501.5,-305 624.5,-305 624.5,-305 501.5,-305"/>
+<polygon fill="none" stroke="#666666" points="489.5,-187 489.5,-390 624.5,-390 624.5,-187 489.5,-187"/>
+</a>
+</g>
+</g>
+<!-- Node2&#45;&gt;Node14 -->
+<g id="edge14_Node000014_Node000002" class="edge">
+<title>Node2&#45;&gt;Node14</title>
+<g id="a_edge14_Node000014_Node000002"><a xlink:title=" ">
+<path fill="none" stroke="#63b8ff" d="M253.77,-562.82C312.86,-525.2 408.81,-459.78 480,-390 480.31,-389.7 480.62,-389.39 480.93,-389.09"/>
+<polygon fill="none" stroke="#63b8ff" points="480.83,-389.19 482.13,-382.09 489.18,-380.56 487.88,-387.66 480.83,-389.19"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="start" x="462.56" y="-421.25" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">&#45;file_</text>
 </g>
 <!-- Node3 -->
 <g id="Node000003" class="node">
 <title>Node3</title>
-<g id="a_Node000003"><a xlink:title=" ">
-<polygon fill="white" stroke="none" points="296.38,-332 189.38,-332 189.38,-274 296.38,-274 296.38,-332"/>
-<text xml:space="preserve" text-anchor="start" x="193.38" y="-320.5" font-family="Helvetica,sans-Serif" font-size="10.00">std::vector&lt; std::future</text>
-<text xml:space="preserve" text-anchor="start" x="220.75" y="-310" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; void &gt; &gt;</text>
-<text xml:space="preserve" text-anchor="start" x="205.69" y="-295.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="228" y="-295.5" font-family="Helvetica,sans-Serif" font-size="10.00">elements</text>
-<text xml:space="preserve" text-anchor="start" x="241.38" y="-281" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
-<polygon fill="#666666" stroke="#666666" points="189.38,-305 189.38,-305 296.38,-305 296.38,-305 189.38,-305"/>
-<polygon fill="#666666" stroke="#666666" points="189.38,-290.5 189.38,-290.5 226,-290.5 226,-290.5 189.38,-290.5"/>
-<polygon fill="#666666" stroke="#666666" points="226,-290.5 226,-290.5 296.38,-290.5 296.38,-290.5 226,-290.5"/>
-<polygon fill="none" stroke="#666666" points="189.38,-274 189.38,-332 296.38,-332 296.38,-274 189.38,-274"/>
+<g id="a_Node000003"><a xlink:href="structFileOptions.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="none" points="114,-945.25 0,-945.25 0,-868.75 114,-868.75 114,-945.25"/>
+<text xml:space="preserve" text-anchor="start" x="32.25" y="-933.75" font-family="Helvetica,sans-Serif" font-size="10.00">FileOptions</text>
+<text xml:space="preserve" text-anchor="start" x="4" y="-919.25" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="14" y="-919.25" font-family="Helvetica,sans-Serif" font-size="10.00">path</text>
+<text xml:space="preserve" text-anchor="start" x="4" y="-904.75" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="14" y="-904.75" font-family="Helvetica,sans-Serif" font-size="10.00">header</text>
+<text xml:space="preserve" text-anchor="start" x="4" y="-890.25" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="14" y="-890.25" font-family="Helvetica,sans-Serif" font-size="10.00">delete_on_dtor</text>
+<text xml:space="preserve" text-anchor="start" x="4" y="-875.75" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="14" y="-875.75" font-family="Helvetica,sans-Serif" font-size="10.00">already_compressed()</text>
+<polygon fill="#666666" stroke="#666666" points="0,-928.75 0,-928.75 114,-928.75 114,-928.75 0,-928.75"/>
+<polygon fill="#666666" stroke="#666666" points="0,-885.25 0,-885.25 12,-885.25 12,-885.25 0,-885.25"/>
+<polygon fill="#666666" stroke="#666666" points="12,-885.25 12,-885.25 114,-885.25 114,-885.25 12,-885.25"/>
+<polygon fill="none" stroke="#666666" points="0,-868.75 0,-945.25 114,-945.25 114,-868.75 0,-868.75"/>
 </a>
 </g>
 </g>
-<!-- Node3&#45;&gt;Node1 -->
-<g id="edge2_Node000001_Node000003" class="edge">
-<title>Node3&#45;&gt;Node1</title>
-<g id="a_edge2_Node000001_Node000003"><a xlink:title=" ">
-<path fill="none" stroke="#63b8ff" d="M248.81,-274.27C255.47,-243.12 266.58,-191.17 275.98,-147.23"/>
-<polygon fill="none" stroke="#63b8ff" points="276.01,-147.1 273.35,-140.4 278.52,-135.37 281.18,-142.07 276.01,-147.1"/>
+<!-- Node3&#45;&gt;Node2 -->
+<g id="edge2_Node000002_Node000003" class="edge">
+<title>Node3&#45;&gt;Node2</title>
+<g id="a_edge2_Node000002_Node000003"><a xlink:title=" ">
+<path fill="none" stroke="#63b8ff" d="M70.7,-868.82C82.38,-837.87 100.06,-792.84 117.75,-754.5 124.74,-739.34 132.47,-723.56 140.31,-708.1"/>
+<polygon fill="none" stroke="#63b8ff" points="140.15,-708.4 139.32,-701.24 145.62,-697.72 146.45,-704.88 140.15,-708.4"/>
 </a>
 </g>
-<text xml:space="preserve" text-anchor="start" x="276.82" y="-158.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">&#45;results</text>
+<text xml:space="preserve" text-anchor="start" x="120.75" y="-767.75" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">&#45;in_file_options</text>
 </g>
 <!-- Node4 -->
 <g id="Node000004" class="node">
 <title>Node4</title>
-<g id="a_Node000004"><a xlink:href="classConcOrderedFileList.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="none" points="449.38,-419 314.38,-419 314.38,-187 449.38,-187 449.38,-419"/>
-<text xml:space="preserve" text-anchor="start" x="337.25" y="-407.5" font-family="Helvetica,sans-Serif" font-size="10.00">ConcOrderedFileList</text>
-<text xml:space="preserve" text-anchor="start" x="349.25" y="-397" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; LZ77Block &gt;</text>
-<text xml:space="preserve" text-anchor="start" x="319.88" y="-382.5" font-family="Helvetica,sans-Serif" font-size="10.00">&#45;</text>
-<text xml:space="preserve" text-anchor="start" x="328.38" y="-382.5" font-family="Helvetica,sans-Serif" font-size="10.00">size_</text>
-<text xml:space="preserve" text-anchor="start" x="319.88" y="-368" font-family="Helvetica,sans-Serif" font-size="10.00">&#45;</text>
-<text xml:space="preserve" text-anchor="start" x="328.38" y="-368" font-family="Helvetica,sans-Serif" font-size="10.00">expected_sequence_num_</text>
-<text xml:space="preserve" text-anchor="start" x="319.88" y="-353.5" font-family="Helvetica,sans-Serif" font-size="10.00">&#45;</text>
-<text xml:space="preserve" text-anchor="start" x="328.38" y="-353.5" font-family="Helvetica,sans-Serif" font-size="10.00">head_</text>
-<text xml:space="preserve" text-anchor="start" x="319.88" y="-339" font-family="Helvetica,sans-Serif" font-size="10.00">&#45;</text>
-<text xml:space="preserve" text-anchor="start" x="328.38" y="-339" font-family="Helvetica,sans-Serif" font-size="10.00">tail_</text>
-<text xml:space="preserve" text-anchor="start" x="319.88" y="-324.5" font-family="Helvetica,sans-Serif" font-size="10.00">&#45;</text>
-<text xml:space="preserve" text-anchor="start" x="328.38" y="-324.5" font-family="Helvetica,sans-Serif" font-size="10.00">called_writer</text>
-<text xml:space="preserve" text-anchor="start" x="319.88" y="-310" font-family="Helvetica,sans-Serif" font-size="10.00">&#45;</text>
-<text xml:space="preserve" text-anchor="start" x="328.38" y="-310" font-family="Helvetica,sans-Serif" font-size="10.00">writer_notifier</text>
-<text xml:space="preserve" text-anchor="start" x="318.38" y="-295.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="328.38" y="-295.5" font-family="Helvetica,sans-Serif" font-size="10.00">ConcOrderedFileList()</text>
-<text xml:space="preserve" text-anchor="start" x="318.38" y="-281" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="328.38" y="-281" font-family="Helvetica,sans-Serif" font-size="10.00">~ConcOrderedFileList()</text>
-<text xml:space="preserve" text-anchor="start" x="318.38" y="-266.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="328.38" y="-266.5" font-family="Helvetica,sans-Serif" font-size="10.00">operator=()</text>
-<text xml:space="preserve" text-anchor="start" x="318.38" y="-252" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="328.38" y="-252" font-family="Helvetica,sans-Serif" font-size="10.00">insert()</text>
-<text xml:space="preserve" text-anchor="start" x="318.38" y="-237.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="328.38" y="-237.5" font-family="Helvetica,sans-Serif" font-size="10.00">size()</text>
-<text xml:space="preserve" text-anchor="start" x="318.38" y="-223" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="328.38" y="-223" font-family="Helvetica,sans-Serif" font-size="10.00">expected_sequence_num()</text>
-<text xml:space="preserve" text-anchor="start" x="318.38" y="-208.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="328.38" y="-208.5" font-family="Helvetica,sans-Serif" font-size="10.00">file()</text>
-<text xml:space="preserve" text-anchor="start" x="319.88" y="-194" font-family="Helvetica,sans-Serif" font-size="10.00">&#45;</text>
-<text xml:space="preserve" text-anchor="start" x="328.38" y="-194" font-family="Helvetica,sans-Serif" font-size="10.00">write_file()</text>
-<polygon fill="#666666" stroke="#666666" points="314.38,-392 314.38,-392 449.38,-392 449.38,-392 314.38,-392"/>
-<polygon fill="#666666" stroke="#666666" points="314.38,-305 314.38,-305 326.38,-305 326.38,-305 314.38,-305"/>
-<polygon fill="#666666" stroke="#666666" points="326.38,-305 326.38,-305 449.38,-305 449.38,-305 326.38,-305"/>
-<polygon fill="none" stroke="#666666" points="314.38,-187 314.38,-419 449.38,-419 449.38,-187 314.38,-187"/>
+<g id="a_Node000004"><a xlink:href="structparser_1_1Options.html" target="_top" xlink:title="All the options available.">
+<polygon fill="white" stroke="none" points="243.88,-1010.5 132.12,-1010.5 132.12,-803.5 243.88,-803.5 243.88,-1010.5"/>
+<text xml:space="preserve" text-anchor="start" x="154.25" y="-999" font-family="Helvetica,sans-Serif" font-size="10.00">parser::Options</text>
+<text xml:space="preserve" text-anchor="start" x="136.12" y="-984.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="146.12" y="-984.5" font-family="Helvetica,sans-Serif" font-size="10.00">filename_in</text>
+<text xml:space="preserve" text-anchor="start" x="136.12" y="-970" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="146.12" y="-970" font-family="Helvetica,sans-Serif" font-size="10.00">filename_out</text>
+<text xml:space="preserve" text-anchor="start" x="136.12" y="-955.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="146.12" y="-955.5" font-family="Helvetica,sans-Serif" font-size="10.00">compressor</text>
+<text xml:space="preserve" text-anchor="start" x="136.12" y="-941" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="146.12" y="-941" font-family="Helvetica,sans-Serif" font-size="10.00">preset</text>
+<text xml:space="preserve" text-anchor="start" x="136.12" y="-926.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="146.12" y="-926.5" font-family="Helvetica,sans-Serif" font-size="10.00">n_files</text>
+<text xml:space="preserve" text-anchor="start" x="136.12" y="-912" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="146.12" y="-912" font-family="Helvetica,sans-Serif" font-size="10.00">size_files</text>
+<text xml:space="preserve" text-anchor="start" x="136.12" y="-897.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="146.12" y="-897.5" font-family="Helvetica,sans-Serif" font-size="10.00">force_compression</text>
+<text xml:space="preserve" text-anchor="start" x="136.12" y="-883" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="146.12" y="-883" font-family="Helvetica,sans-Serif" font-size="10.00">delete_input</text>
+<text xml:space="preserve" text-anchor="start" x="136.12" y="-868.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="146.12" y="-868.5" font-family="Helvetica,sans-Serif" font-size="10.00">concatenate_files</text>
+<text xml:space="preserve" text-anchor="start" x="136.12" y="-854" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="146.12" y="-854" font-family="Helvetica,sans-Serif" font-size="10.00">need_help</text>
+<text xml:space="preserve" text-anchor="start" x="136.12" y="-839.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="146.12" y="-839.5" font-family="Helvetica,sans-Serif" font-size="10.00">decomp_after_concat</text>
+<text xml:space="preserve" text-anchor="start" x="136.12" y="-825" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="146.12" y="-825" font-family="Helvetica,sans-Serif" font-size="10.00">concurrency</text>
+<text xml:space="preserve" text-anchor="start" x="186.5" y="-810.5" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
+<polygon fill="#666666" stroke="#666666" points="132.12,-994 132.12,-994 243.88,-994 243.88,-994 132.12,-994"/>
+<polygon fill="#666666" stroke="#666666" points="132.12,-820 132.12,-820 144.12,-820 144.12,-820 132.12,-820"/>
+<polygon fill="#666666" stroke="#666666" points="144.12,-820 144.12,-820 243.88,-820 243.88,-820 144.12,-820"/>
+<polygon fill="none" stroke="#666666" points="132.12,-803.5 132.12,-1010.5 243.88,-1010.5 243.88,-803.5 132.12,-803.5"/>
 </a>
 </g>
 </g>
-<!-- Node4&#45;&gt;Node1 -->
-<g id="edge3_Node000001_Node000004" class="edge">
-<title>Node4&#45;&gt;Node1</title>
-<g id="a_edge3_Node000001_Node000004"><a xlink:title=" ">
-<path fill="none" stroke="#63b8ff" d="M338.16,-187.18C332.87,-173.3 327.57,-159.38 322.56,-146.21"/>
-<polygon fill="none" stroke="#63b8ff" points="322.63,-146.4 316.76,-142.22 318.36,-135.19 324.23,-139.37 322.63,-146.4"/>
+<!-- Node4&#45;&gt;Node2 -->
+<g id="edge3_Node000002_Node000004" class="edge">
+<title>Node4&#45;&gt;Node2</title>
+<g id="a_edge3_Node000002_Node000004"><a xlink:title=" ">
+<path fill="none" stroke="#63b8ff" d="M191.98,-803.79C192.66,-786.36 193.38,-767.92 194.09,-749.53"/>
+<polygon fill="none" stroke="#63b8ff" points="194.1,-749.39 190.33,-743.24 194.56,-737.4 198.33,-743.55 194.1,-749.39"/>
 </a>
 </g>
-<text xml:space="preserve" text-anchor="start" x="332.4" y="-158.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">&#45;file_list_</text>
+<text xml:space="preserve" text-anchor="start" x="196.64" y="-767.75" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">&#45;options_</text>
 </g>
 <!-- Node5 -->
 <g id="Node000005" class="node">
 <title>Node5</title>
-<g id="a_Node000005"><a xlink:href="classFile.html" target="_top" xlink:title="Interpret a file as to retrieve custom information.">
-<polygon fill="white" stroke="none" points="267.88,-751 159.88,-751 159.88,-471.5 267.88,-471.5 267.88,-751"/>
-<text xml:space="preserve" text-anchor="start" x="206" y="-739.5" font-family="Helvetica,sans-Serif" font-size="10.00">File</text>
-<text xml:space="preserve" text-anchor="start" x="212.38" y="-725" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
-<text xml:space="preserve" text-anchor="start" x="163.88" y="-710.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="173.88" y="-710.5" font-family="Helvetica,sans-Serif" font-size="10.00">File()</text>
-<text xml:space="preserve" text-anchor="start" x="163.88" y="-696" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="173.88" y="-696" font-family="Helvetica,sans-Serif" font-size="10.00">write()</text>
-<text xml:space="preserve" text-anchor="start" x="163.88" y="-681.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="173.88" y="-681.5" font-family="Helvetica,sans-Serif" font-size="10.00">write()</text>
-<text xml:space="preserve" text-anchor="start" x="163.88" y="-667" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="173.88" y="-667" font-family="Helvetica,sans-Serif" font-size="10.00">get_in_file_options()</text>
-<text xml:space="preserve" text-anchor="start" x="163.88" y="-652.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="173.88" y="-652.5" font-family="Helvetica,sans-Serif" font-size="10.00">get_ref_out_stream()</text>
-<text xml:space="preserve" text-anchor="start" x="163.88" y="-638" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="173.88" y="-638" font-family="Helvetica,sans-Serif" font-size="10.00">split_file()</text>
-<text xml:space="preserve" text-anchor="start" x="163.88" y="-623.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="173.88" y="-623.5" font-family="Helvetica,sans-Serif" font-size="10.00">read_file()</text>
-<text xml:space="preserve" text-anchor="start" x="163.88" y="-609" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="173.88" y="-609" font-family="Helvetica,sans-Serif" font-size="10.00">has_signature()</text>
-<text xml:space="preserve" text-anchor="start" x="163.88" y="-594.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="173.88" y="-594.5" font-family="Helvetica,sans-Serif" font-size="10.00">has_signature()</text>
-<text xml:space="preserve" text-anchor="start" x="163.88" y="-580" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="173.88" y="-580" font-family="Helvetica,sans-Serif" font-size="10.00">extract_info()</text>
-<text xml:space="preserve" text-anchor="start" x="163.88" y="-565.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="173.88" y="-565.5" font-family="Helvetica,sans-Serif" font-size="10.00">extract_info()</text>
-<text xml:space="preserve" text-anchor="start" x="163.88" y="-551" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="173.88" y="-551" font-family="Helvetica,sans-Serif" font-size="10.00">create_file()</text>
-<text xml:space="preserve" text-anchor="start" x="165.38" y="-536.5" font-family="Helvetica,sans-Serif" font-size="10.00">&#45;</text>
-<text xml:space="preserve" text-anchor="start" x="173.88" y="-536.5" font-family="Helvetica,sans-Serif" font-size="10.00">check_signature()</text>
-<text xml:space="preserve" text-anchor="start" x="165.38" y="-522" font-family="Helvetica,sans-Serif" font-size="10.00">&#45;</text>
-<text xml:space="preserve" text-anchor="start" x="173.88" y="-522" font-family="Helvetica,sans-Serif" font-size="10.00">has_signature()</text>
-<text xml:space="preserve" text-anchor="start" x="165.38" y="-507.5" font-family="Helvetica,sans-Serif" font-size="10.00">&#45;</text>
-<text xml:space="preserve" text-anchor="start" x="173.88" y="-507.5" font-family="Helvetica,sans-Serif" font-size="10.00">create_file()</text>
-<text xml:space="preserve" text-anchor="start" x="165.38" y="-493" font-family="Helvetica,sans-Serif" font-size="10.00">&#45;</text>
-<text xml:space="preserve" text-anchor="start" x="173.88" y="-493" font-family="Helvetica,sans-Serif" font-size="10.00">concatenate_files()</text>
-<text xml:space="preserve" text-anchor="start" x="165.38" y="-478.5" font-family="Helvetica,sans-Serif" font-size="10.00">&#45;</text>
-<text xml:space="preserve" text-anchor="start" x="173.88" y="-478.5" font-family="Helvetica,sans-Serif" font-size="10.00">create_file()</text>
-<polygon fill="#666666" stroke="#666666" points="159.88,-734.5 159.88,-734.5 267.88,-734.5 267.88,-734.5 159.88,-734.5"/>
-<polygon fill="#666666" stroke="#666666" points="159.88,-720 159.88,-720 267.88,-720 267.88,-720 159.88,-720"/>
-<polygon fill="none" stroke="#666666" points="159.88,-471.5 159.88,-751 267.88,-751 267.88,-471.5 159.88,-471.5"/>
+<g id="a_Node000005"><a xlink:title=" ">
+<polygon fill="white" stroke="none" points="327.88,-930.75 262.12,-930.75 262.12,-883.25 327.88,-883.25 327.88,-930.75"/>
+<text xml:space="preserve" text-anchor="start" x="266.12" y="-919.25" font-family="Helvetica,sans-Serif" font-size="10.00">std::ofstream</text>
+<text xml:space="preserve" text-anchor="start" x="293.5" y="-904.75" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
+<text xml:space="preserve" text-anchor="start" x="293.5" y="-890.25" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
+<polygon fill="#666666" stroke="#666666" points="262.12,-914.25 262.12,-914.25 327.88,-914.25 327.88,-914.25 262.12,-914.25"/>
+<polygon fill="#666666" stroke="#666666" points="262.12,-899.75 262.12,-899.75 327.88,-899.75 327.88,-899.75 262.12,-899.75"/>
+<polygon fill="none" stroke="#666666" points="262.12,-883.25 262.12,-930.75 327.88,-930.75 327.88,-883.25 262.12,-883.25"/>
 </a>
 </g>
 </g>
-<!-- Node5&#45;&gt;Node4 -->
-<g id="edge4_Node000004_Node000005" class="edge">
-<title>Node5&#45;&gt;Node4</title>
-<g id="a_edge4_Node000004_Node000005"><a xlink:title=" ">
-<path fill="none" stroke="#63b8ff" d="M267.72,-512.09C282.02,-486.02 297.66,-457.51 312.66,-430.18"/>
-<polygon fill="none" stroke="#63b8ff" points="312.61,-430.27 311.99,-423.09 318.38,-419.75 319,-426.93 312.61,-430.27"/>
+<!-- Node5&#45;&gt;Node2 -->
+<g id="edge4_Node000002_Node000005" class="edge">
+<title>Node5&#45;&gt;Node2</title>
+<g id="a_edge4_Node000002_Node000005"><a xlink:title=" ">
+<path fill="none" stroke="#63b8ff" d="M288.01,-883.33C279.05,-854.25 262.72,-801.25 246.53,-748.74"/>
+<polygon fill="none" stroke="#63b8ff" points="246.56,-748.82 240.97,-744.26 243.02,-737.35 248.61,-741.91 246.56,-748.82"/>
 </a>
 </g>
-<text xml:space="preserve" text-anchor="start" x="310.93" y="-443" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">&#45;file_</text>
+<text xml:space="preserve" text-anchor="start" x="259.01" y="-767.75" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">&#45;out_file</text>
 </g>
 <!-- Node6 -->
 <g id="Node000006" class="node">
 <title>Node6</title>
-<g id="a_Node000006"><a xlink:href="structFileOptions.html" target="_top" xlink:title=" ">
-<polygon fill="white" stroke="none" points="218.88,-945.25 104.88,-945.25 104.88,-868.75 218.88,-868.75 218.88,-945.25"/>
-<text xml:space="preserve" text-anchor="start" x="137.12" y="-933.75" font-family="Helvetica,sans-Serif" font-size="10.00">FileOptions</text>
-<text xml:space="preserve" text-anchor="start" x="108.88" y="-919.25" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="118.88" y="-919.25" font-family="Helvetica,sans-Serif" font-size="10.00">path</text>
-<text xml:space="preserve" text-anchor="start" x="108.88" y="-904.75" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="118.88" y="-904.75" font-family="Helvetica,sans-Serif" font-size="10.00">header</text>
-<text xml:space="preserve" text-anchor="start" x="108.88" y="-890.25" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="118.88" y="-890.25" font-family="Helvetica,sans-Serif" font-size="10.00">delete_on_dtor</text>
-<text xml:space="preserve" text-anchor="start" x="108.88" y="-875.75" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="118.88" y="-875.75" font-family="Helvetica,sans-Serif" font-size="10.00">already_compressed()</text>
-<polygon fill="#666666" stroke="#666666" points="104.88,-928.75 104.88,-928.75 218.88,-928.75 218.88,-928.75 104.88,-928.75"/>
-<polygon fill="#666666" stroke="#666666" points="104.88,-885.25 104.88,-885.25 116.88,-885.25 116.88,-885.25 104.88,-885.25"/>
-<polygon fill="#666666" stroke="#666666" points="116.88,-885.25 116.88,-885.25 218.88,-885.25 218.88,-885.25 116.88,-885.25"/>
-<polygon fill="none" stroke="#666666" points="104.88,-868.75 104.88,-945.25 218.88,-945.25 218.88,-868.75 104.88,-868.75"/>
+<g id="a_Node000006"><a xlink:title=" ">
+<polygon fill="white" stroke="none" points="342.12,-1105.5 247.88,-1105.5 247.88,-1047.5 342.12,-1047.5 342.12,-1105.5"/>
+<text xml:space="preserve" text-anchor="start" x="251.88" y="-1094" font-family="Helvetica,sans-Serif" font-size="10.00">std::basic_ofstream</text>
+<text xml:space="preserve" text-anchor="start" x="275.5" y="-1083.5" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; Char &gt;</text>
+<text xml:space="preserve" text-anchor="start" x="293.5" y="-1069" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
+<text xml:space="preserve" text-anchor="start" x="293.5" y="-1054.5" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
+<polygon fill="#666666" stroke="#666666" points="247.88,-1078.5 247.88,-1078.5 342.12,-1078.5 342.12,-1078.5 247.88,-1078.5"/>
+<polygon fill="#666666" stroke="#666666" points="247.88,-1064 247.88,-1064 342.12,-1064 342.12,-1064 247.88,-1064"/>
+<polygon fill="none" stroke="#666666" points="247.88,-1047.5 247.88,-1105.5 342.12,-1105.5 342.12,-1047.5 247.88,-1047.5"/>
 </a>
 </g>
 </g>
@@ -272,96 +311,69 @@ var sectionId = 'dynsection-0';
 <g id="edge5_Node000005_Node000006" class="edge">
 <title>Node6&#45;&gt;Node5</title>
 <g id="a_edge5_Node000005_Node000006"><a xlink:title=" ">
-<path fill="none" stroke="#63b8ff" d="M168.46,-868.8C173.27,-841.63 180.14,-802.84 187.08,-763.62"/>
-<polygon fill="none" stroke="#63b8ff" points="187.09,-763.59 184.19,-756.98 189.18,-751.77 192.07,-758.38 187.09,-763.59"/>
+<path fill="none" stroke="#63b8ff" d="M295,-1036.37C295,-1003.5 295,-957.67 295,-930.59"/>
+<polygon fill="none" stroke="#63b8ff" points="291.5,-1036.33 295,-1046.33 298.5,-1036.33 291.5,-1036.33"/>
 </a>
 </g>
-<text xml:space="preserve" text-anchor="start" x="187.76" y="-775" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">&#45;in_file_options</text>
 </g>
 <!-- Node7 -->
 <g id="Node000007" class="node">
 <title>Node7</title>
-<g id="a_Node000007"><a xlink:href="structparser_1_1Options.html" target="_top" xlink:title="All the options available.">
-<polygon fill="white" stroke="none" points="348.75,-1010.5 237,-1010.5 237,-803.5 348.75,-803.5 348.75,-1010.5"/>
-<text xml:space="preserve" text-anchor="start" x="259.12" y="-999" font-family="Helvetica,sans-Serif" font-size="10.00">parser::Options</text>
-<text xml:space="preserve" text-anchor="start" x="241" y="-984.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="251" y="-984.5" font-family="Helvetica,sans-Serif" font-size="10.00">filename_in</text>
-<text xml:space="preserve" text-anchor="start" x="241" y="-970" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="251" y="-970" font-family="Helvetica,sans-Serif" font-size="10.00">filename_out</text>
-<text xml:space="preserve" text-anchor="start" x="241" y="-955.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="251" y="-955.5" font-family="Helvetica,sans-Serif" font-size="10.00">compressor</text>
-<text xml:space="preserve" text-anchor="start" x="241" y="-941" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="251" y="-941" font-family="Helvetica,sans-Serif" font-size="10.00">preset</text>
-<text xml:space="preserve" text-anchor="start" x="241" y="-926.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="251" y="-926.5" font-family="Helvetica,sans-Serif" font-size="10.00">n_files</text>
-<text xml:space="preserve" text-anchor="start" x="241" y="-912" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="251" y="-912" font-family="Helvetica,sans-Serif" font-size="10.00">size_files</text>
-<text xml:space="preserve" text-anchor="start" x="241" y="-897.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="251" y="-897.5" font-family="Helvetica,sans-Serif" font-size="10.00">force_compression</text>
-<text xml:space="preserve" text-anchor="start" x="241" y="-883" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="251" y="-883" font-family="Helvetica,sans-Serif" font-size="10.00">delete_input</text>
-<text xml:space="preserve" text-anchor="start" x="241" y="-868.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="251" y="-868.5" font-family="Helvetica,sans-Serif" font-size="10.00">concatenate_files</text>
-<text xml:space="preserve" text-anchor="start" x="241" y="-854" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="251" y="-854" font-family="Helvetica,sans-Serif" font-size="10.00">need_help</text>
-<text xml:space="preserve" text-anchor="start" x="241" y="-839.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="251" y="-839.5" font-family="Helvetica,sans-Serif" font-size="10.00">decomp_after_concat</text>
-<text xml:space="preserve" text-anchor="start" x="241" y="-825" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="251" y="-825" font-family="Helvetica,sans-Serif" font-size="10.00">concurrency</text>
-<text xml:space="preserve" text-anchor="start" x="291.38" y="-810.5" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
-<polygon fill="#666666" stroke="#666666" points="237,-994 237,-994 348.75,-994 348.75,-994 237,-994"/>
-<polygon fill="#666666" stroke="#666666" points="237,-820 237,-820 249,-820 249,-820 237,-820"/>
-<polygon fill="#666666" stroke="#666666" points="249,-820 249,-820 348.75,-820 348.75,-820 249,-820"/>
-<polygon fill="none" stroke="#666666" points="237,-803.5 237,-1010.5 348.75,-1010.5 348.75,-803.5 237,-803.5"/>
+<g id="a_Node000007"><a xlink:title=" ">
+<polygon fill="white" stroke="none" points="340.62,-1200.5 249.38,-1200.5 249.38,-1142.5 340.62,-1142.5 340.62,-1200.5"/>
+<text xml:space="preserve" text-anchor="start" x="253.38" y="-1189" font-family="Helvetica,sans-Serif" font-size="10.00">std::basic_ostream</text>
+<text xml:space="preserve" text-anchor="start" x="275.5" y="-1178.5" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; Char &gt;</text>
+<text xml:space="preserve" text-anchor="start" x="293.5" y="-1164" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
+<text xml:space="preserve" text-anchor="start" x="293.5" y="-1149.5" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
+<polygon fill="#666666" stroke="#666666" points="249.38,-1173.5 249.38,-1173.5 340.62,-1173.5 340.62,-1173.5 249.38,-1173.5"/>
+<polygon fill="#666666" stroke="#666666" points="249.38,-1159 249.38,-1159 340.62,-1159 340.62,-1159 249.38,-1159"/>
+<polygon fill="none" stroke="#666666" points="249.38,-1142.5 249.38,-1200.5 340.62,-1200.5 340.62,-1142.5 249.38,-1142.5"/>
 </a>
 </g>
 </g>
-<!-- Node7&#45;&gt;Node5 -->
-<g id="edge6_Node000005_Node000007" class="edge">
-<title>Node7&#45;&gt;Node5</title>
-<g id="a_edge6_Node000005_Node000007"><a xlink:title=" ">
-<path fill="none" stroke="#63b8ff" d="M268.83,-803.74C265.89,-792.01 262.87,-780.23 259.88,-769 259.35,-767.02 258.81,-765.03 258.27,-763.03"/>
-<polygon fill="none" stroke="#63b8ff" points="258.28,-763.06 252.84,-758.33 255.12,-751.49 260.56,-756.22 258.28,-763.06"/>
+<!-- Node7&#45;&gt;Node6 -->
+<g id="edge6_Node000006_Node000007" class="edge">
+<title>Node7&#45;&gt;Node6</title>
+<g id="a_edge6_Node000006_Node000007"><a xlink:title=" ">
+<path fill="none" stroke="#63b8ff" d="M295,-1131.12C295,-1122.47 295,-1113.47 295,-1105.38"/>
+<polygon fill="none" stroke="#63b8ff" points="291.5,-1131.08 295,-1141.08 298.5,-1131.08 291.5,-1131.08"/>
 </a>
 </g>
-<text xml:space="preserve" text-anchor="start" x="266.76" y="-775" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">&#45;cli_options</text>
 </g>
 <!-- Node8 -->
 <g id="Node000008" class="node">
 <title>Node8</title>
 <g id="a_Node000008"><a xlink:title=" ">
-<polygon fill="white" stroke="none" points="86.75,-930.75 21,-930.75 21,-883.25 86.75,-883.25 86.75,-930.75"/>
-<text xml:space="preserve" text-anchor="start" x="25" y="-919.25" font-family="Helvetica,sans-Serif" font-size="10.00">std::ofstream</text>
-<text xml:space="preserve" text-anchor="start" x="52.38" y="-904.75" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
-<text xml:space="preserve" text-anchor="start" x="52.38" y="-890.25" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
-<polygon fill="#666666" stroke="#666666" points="21,-914.25 21,-914.25 86.75,-914.25 86.75,-914.25 21,-914.25"/>
-<polygon fill="#666666" stroke="#666666" points="21,-899.75 21,-899.75 86.75,-899.75 86.75,-899.75 21,-899.75"/>
-<polygon fill="none" stroke="#666666" points="21,-883.25 21,-930.75 86.75,-930.75 86.75,-883.25 21,-883.25"/>
+<polygon fill="white" stroke="none" points="348.88,-1285 241.12,-1285 241.12,-1237.5 348.88,-1237.5 348.88,-1285"/>
+<text xml:space="preserve" text-anchor="start" x="245.12" y="-1273.5" font-family="Helvetica,sans-Serif" font-size="10.00">std::basic_ios&lt; Char &gt;</text>
+<text xml:space="preserve" text-anchor="start" x="293.5" y="-1259" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
+<text xml:space="preserve" text-anchor="start" x="293.5" y="-1244.5" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
+<polygon fill="#666666" stroke="#666666" points="241.12,-1268.5 241.12,-1268.5 348.88,-1268.5 348.88,-1268.5 241.12,-1268.5"/>
+<polygon fill="#666666" stroke="#666666" points="241.12,-1254 241.12,-1254 348.88,-1254 348.88,-1254 241.12,-1254"/>
+<polygon fill="none" stroke="#666666" points="241.12,-1237.5 241.12,-1285 348.88,-1285 348.88,-1237.5 241.12,-1237.5"/>
 </a>
 </g>
 </g>
-<!-- Node8&#45;&gt;Node5 -->
-<g id="edge7_Node000005_Node000008" class="edge">
-<title>Node8&#45;&gt;Node5</title>
-<g id="a_edge7_Node000005_Node000008"><a xlink:title=" ">
-<path fill="none" stroke="#63b8ff" d="M61.86,-883.54C69.65,-862.45 82.27,-830.24 95.88,-803.5 112.89,-770.07 133.78,-734.76 153.22,-703.72"/>
-<polygon fill="none" stroke="#63b8ff" points="153.15,-703.83 152.96,-696.62 159.55,-693.68 159.73,-700.89 153.15,-703.83"/>
+<!-- Node8&#45;&gt;Node7 -->
+<g id="edge7_Node000007_Node000008" class="edge">
+<title>Node8&#45;&gt;Node7</title>
+<g id="a_edge7_Node000007_Node000008"><a xlink:title=" ">
+<path fill="none" stroke="#63b8ff" d="M295,-1226.38C295,-1217.78 295,-1208.63 295,-1200.36"/>
+<polygon fill="none" stroke="#63b8ff" points="291.5,-1226.14 295,-1236.14 298.5,-1226.14 291.5,-1226.14"/>
 </a>
 </g>
-<text xml:space="preserve" text-anchor="start" x="116.2" y="-775" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">&#45;out_file</text>
 </g>
 <!-- Node9 -->
 <g id="Node000009" class="node">
 <title>Node9</title>
 <g id="a_Node000009"><a xlink:title=" ">
-<polygon fill="white" stroke="none" points="101,-1105.5 6.75,-1105.5 6.75,-1047.5 101,-1047.5 101,-1105.5"/>
-<text xml:space="preserve" text-anchor="start" x="10.75" y="-1094" font-family="Helvetica,sans-Serif" font-size="10.00">std::basic_ofstream</text>
-<text xml:space="preserve" text-anchor="start" x="34.38" y="-1083.5" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; Char &gt;</text>
-<text xml:space="preserve" text-anchor="start" x="52.38" y="-1069" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
-<text xml:space="preserve" text-anchor="start" x="52.38" y="-1054.5" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
-<polygon fill="#666666" stroke="#666666" points="6.75,-1078.5 6.75,-1078.5 101,-1078.5 101,-1078.5 6.75,-1078.5"/>
-<polygon fill="#666666" stroke="#666666" points="6.75,-1064 6.75,-1064 101,-1064 101,-1064 6.75,-1064"/>
-<polygon fill="none" stroke="#666666" points="6.75,-1047.5 6.75,-1105.5 101,-1105.5 101,-1047.5 6.75,-1047.5"/>
+<polygon fill="white" stroke="none" points="328.25,-1369.5 261.75,-1369.5 261.75,-1322 328.25,-1322 328.25,-1369.5"/>
+<text xml:space="preserve" text-anchor="start" x="265.75" y="-1358" font-family="Helvetica,sans-Serif" font-size="10.00">std::ios_base</text>
+<text xml:space="preserve" text-anchor="start" x="293.5" y="-1343.5" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
+<text xml:space="preserve" text-anchor="start" x="293.5" y="-1329" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
+<polygon fill="#666666" stroke="#666666" points="261.75,-1353 261.75,-1353 328.25,-1353 328.25,-1353 261.75,-1353"/>
+<polygon fill="#666666" stroke="#666666" points="261.75,-1338.5 261.75,-1338.5 328.25,-1338.5 328.25,-1338.5 261.75,-1338.5"/>
+<polygon fill="none" stroke="#666666" points="261.75,-1322 261.75,-1369.5 328.25,-1369.5 328.25,-1322 261.75,-1322"/>
 </a>
 </g>
 </g>
@@ -369,8 +381,8 @@ var sectionId = 'dynsection-0';
 <g id="edge8_Node000008_Node000009" class="edge">
 <title>Node9&#45;&gt;Node8</title>
 <g id="a_edge8_Node000008_Node000009"><a xlink:title=" ">
-<path fill="none" stroke="#63b8ff" d="M53.88,-1036.37C53.88,-1003.5 53.88,-957.67 53.88,-930.59"/>
-<polygon fill="none" stroke="#63b8ff" points="50.38,-1036.33 53.88,-1046.33 57.38,-1036.33 50.38,-1036.33"/>
+<path fill="none" stroke="#63b8ff" d="M295,-1310.71C295,-1301.96 295,-1292.77 295,-1284.77"/>
+<polygon fill="none" stroke="#63b8ff" points="291.5,-1310.69 295,-1320.69 298.5,-1310.69 291.5,-1310.69"/>
 </a>
 </g>
 </g>
@@ -378,211 +390,242 @@ var sectionId = 'dynsection-0';
 <g id="Node000010" class="node">
 <title>Node10</title>
 <g id="a_Node000010"><a xlink:title=" ">
-<polygon fill="white" stroke="none" points="99.5,-1200.5 8.25,-1200.5 8.25,-1142.5 99.5,-1142.5 99.5,-1200.5"/>
-<text xml:space="preserve" text-anchor="start" x="12.25" y="-1189" font-family="Helvetica,sans-Serif" font-size="10.00">std::basic_ostream</text>
-<text xml:space="preserve" text-anchor="start" x="34.38" y="-1178.5" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; Char &gt;</text>
-<text xml:space="preserve" text-anchor="start" x="52.38" y="-1164" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
-<text xml:space="preserve" text-anchor="start" x="52.38" y="-1149.5" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
-<polygon fill="#666666" stroke="#666666" points="8.25,-1173.5 8.25,-1173.5 99.5,-1173.5 99.5,-1173.5 8.25,-1173.5"/>
-<polygon fill="#666666" stroke="#666666" points="8.25,-1159 8.25,-1159 99.5,-1159 99.5,-1159 8.25,-1159"/>
-<polygon fill="none" stroke="#666666" points="8.25,-1142.5 8.25,-1200.5 99.5,-1200.5 99.5,-1142.5 8.25,-1142.5"/>
+<polygon fill="white" stroke="none" points="352.5,-317.5 245.5,-317.5 245.5,-259.5 352.5,-259.5 352.5,-317.5"/>
+<text xml:space="preserve" text-anchor="start" x="249.5" y="-306" font-family="Helvetica,sans-Serif" font-size="10.00">std::vector&lt; std::future</text>
+<text xml:space="preserve" text-anchor="start" x="276.88" y="-295.5" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; void &gt; &gt;</text>
+<text xml:space="preserve" text-anchor="start" x="261.81" y="-281" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="284.12" y="-281" font-family="Helvetica,sans-Serif" font-size="10.00">elements</text>
+<text xml:space="preserve" text-anchor="start" x="297.5" y="-266.5" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
+<polygon fill="#666666" stroke="#666666" points="245.5,-290.5 245.5,-290.5 352.5,-290.5 352.5,-290.5 245.5,-290.5"/>
+<polygon fill="#666666" stroke="#666666" points="245.5,-276 245.5,-276 282.12,-276 282.12,-276 245.5,-276"/>
+<polygon fill="#666666" stroke="#666666" points="282.12,-276 282.12,-276 352.5,-276 352.5,-276 282.12,-276"/>
+<polygon fill="none" stroke="#666666" points="245.5,-259.5 245.5,-317.5 352.5,-317.5 352.5,-259.5 245.5,-259.5"/>
 </a>
 </g>
 </g>
-<!-- Node10&#45;&gt;Node9 -->
-<g id="edge9_Node000009_Node000010" class="edge">
-<title>Node10&#45;&gt;Node9</title>
-<g id="a_edge9_Node000009_Node000010"><a xlink:title=" ">
-<path fill="none" stroke="#63b8ff" d="M53.88,-1131.12C53.88,-1122.47 53.88,-1113.47 53.88,-1105.38"/>
-<polygon fill="none" stroke="#63b8ff" points="50.38,-1131.08 53.88,-1141.08 57.38,-1131.08 50.38,-1131.08"/>
+<!-- Node10&#45;&gt;Node1 -->
+<g id="edge9_Node000001_Node000010" class="edge">
+<title>Node10&#45;&gt;Node1</title>
+<g id="a_edge9_Node000001_Node000010"><a xlink:title=" ">
+<path fill="none" stroke="#63b8ff" d="M311.82,-259.92C322.88,-238.25 340.46,-208.27 362,-187 393.06,-156.34 433.48,-130.08 469.45,-110.12"/>
+<polygon fill="none" stroke="#63b8ff" points="469.13,-110.3 472.49,-103.91 479.67,-104.56 476.31,-110.94 469.13,-110.3"/>
 </a>
 </g>
+<text xml:space="preserve" text-anchor="start" x="402.84" y="-158.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">&#45;results</text>
 </g>
 <!-- Node11 -->
 <g id="Node000011" class="node">
 <title>Node11</title>
 <g id="a_Node000011"><a xlink:title=" ">
-<polygon fill="white" stroke="none" points="107.75,-1285 0,-1285 0,-1237.5 107.75,-1237.5 107.75,-1285"/>
-<text xml:space="preserve" text-anchor="start" x="4" y="-1273.5" font-family="Helvetica,sans-Serif" font-size="10.00">std::basic_ios&lt; Char &gt;</text>
-<text xml:space="preserve" text-anchor="start" x="52.38" y="-1259" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
-<text xml:space="preserve" text-anchor="start" x="52.38" y="-1244.5" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
-<polygon fill="#666666" stroke="#666666" points="0,-1268.5 0,-1268.5 107.75,-1268.5 107.75,-1268.5 0,-1268.5"/>
-<polygon fill="#666666" stroke="#666666" points="0,-1254 0,-1254 107.75,-1254 107.75,-1254 0,-1254"/>
-<polygon fill="none" stroke="#666666" points="0,-1237.5 0,-1285 107.75,-1285 107.75,-1237.5 0,-1237.5"/>
+<polygon fill="white" stroke="none" points="471.12,-312.25 370.88,-312.25 370.88,-264.75 471.12,-264.75 471.12,-312.25"/>
+<text xml:space="preserve" text-anchor="start" x="374.88" y="-300.75" font-family="Helvetica,sans-Serif" font-size="10.00">std::atomic&lt; size_t &gt;</text>
+<text xml:space="preserve" text-anchor="start" x="392.62" y="-286.25" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="420.38" y="-286.25" font-family="Helvetica,sans-Serif" font-size="10.00">ptr</text>
+<text xml:space="preserve" text-anchor="start" x="419.5" y="-271.75" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
+<polygon fill="#666666" stroke="#666666" points="370.88,-295.75 370.88,-295.75 471.12,-295.75 471.12,-295.75 370.88,-295.75"/>
+<polygon fill="#666666" stroke="#666666" points="370.88,-281.25 370.88,-281.25 418.38,-281.25 418.38,-281.25 370.88,-281.25"/>
+<polygon fill="#666666" stroke="#666666" points="418.38,-281.25 418.38,-281.25 471.12,-281.25 471.12,-281.25 418.38,-281.25"/>
+<polygon fill="none" stroke="#666666" points="370.88,-264.75 370.88,-312.25 471.12,-312.25 471.12,-264.75 370.88,-264.75"/>
 </a>
 </g>
 </g>
-<!-- Node11&#45;&gt;Node10 -->
-<g id="edge10_Node000010_Node000011" class="edge">
-<title>Node11&#45;&gt;Node10</title>
-<g id="a_edge10_Node000010_Node000011"><a xlink:title=" ">
-<path fill="none" stroke="#63b8ff" d="M53.88,-1226.38C53.88,-1217.78 53.88,-1208.63 53.88,-1200.36"/>
-<polygon fill="none" stroke="#63b8ff" points="50.38,-1226.14 53.88,-1236.14 57.38,-1226.14 50.38,-1226.14"/>
+<!-- Node11&#45;&gt;Node1 -->
+<g id="edge10_Node000001_Node000011" class="edge">
+<title>Node11&#45;&gt;Node1</title>
+<g id="a_edge10_Node000001_Node000011"><a xlink:title=" ">
+<path fill="none" stroke="#63b8ff" d="M433.63,-264.76C448.81,-237.7 475.3,-191.29 499.75,-152.5 501.28,-150.07 502.85,-147.61 504.44,-145.13"/>
+<polygon fill="none" stroke="#63b8ff" points="504.53,-145 504.45,-137.79 511.07,-134.95 511.15,-142.16 504.53,-145"/>
 </a>
 </g>
+<text xml:space="preserve" text-anchor="start" x="502.75" y="-158.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">&#45;n_blocks_</text>
 </g>
 <!-- Node12 -->
 <g id="Node000012" class="node">
 <title>Node12</title>
 <g id="a_Node000012"><a xlink:title=" ">
-<polygon fill="white" stroke="none" points="87.12,-1369.5 20.62,-1369.5 20.62,-1322 87.12,-1322 87.12,-1369.5"/>
-<text xml:space="preserve" text-anchor="start" x="24.62" y="-1358" font-family="Helvetica,sans-Serif" font-size="10.00">std::ios_base</text>
-<text xml:space="preserve" text-anchor="start" x="52.38" y="-1343.5" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
-<text xml:space="preserve" text-anchor="start" x="52.38" y="-1329" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
-<polygon fill="#666666" stroke="#666666" points="20.62,-1353 20.62,-1353 87.12,-1353 87.12,-1353 20.62,-1353"/>
-<polygon fill="#666666" stroke="#666666" points="20.62,-1338.5 20.62,-1338.5 87.12,-1338.5 87.12,-1338.5 20.62,-1338.5"/>
-<polygon fill="none" stroke="#666666" points="20.62,-1322 20.62,-1369.5 87.12,-1369.5 87.12,-1322 20.62,-1322"/>
+<polygon fill="white" stroke="none" points="822.25,-620.5 767.75,-620.5 767.75,-573 822.25,-573 822.25,-620.5"/>
+<text xml:space="preserve" text-anchor="start" x="771.75" y="-609" font-family="Helvetica,sans-Serif" font-size="10.00">std::mutex</text>
+<text xml:space="preserve" text-anchor="start" x="793.5" y="-594.5" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
+<text xml:space="preserve" text-anchor="start" x="793.5" y="-580" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
+<polygon fill="#666666" stroke="#666666" points="767.75,-604 767.75,-604 822.25,-604 822.25,-604 767.75,-604"/>
+<polygon fill="#666666" stroke="#666666" points="767.75,-589.5 767.75,-589.5 822.25,-589.5 822.25,-589.5 767.75,-589.5"/>
+<polygon fill="none" stroke="#666666" points="767.75,-573 767.75,-620.5 822.25,-620.5 822.25,-573 767.75,-573"/>
 </a>
 </g>
 </g>
-<!-- Node12&#45;&gt;Node11 -->
-<g id="edge11_Node000011_Node000012" class="edge">
-<title>Node12&#45;&gt;Node11</title>
-<g id="a_edge11_Node000011_Node000012"><a xlink:title=" ">
-<path fill="none" stroke="#63b8ff" d="M53.88,-1310.71C53.88,-1301.96 53.88,-1292.77 53.88,-1284.77"/>
-<polygon fill="none" stroke="#63b8ff" points="50.38,-1310.69 53.88,-1320.69 57.38,-1310.69 50.38,-1310.69"/>
+<!-- Node12&#45;&gt;Node1 -->
+<g id="edge11_Node000001_Node000012" class="edge">
+<title>Node12&#45;&gt;Node1</title>
+<g id="a_edge11_Node000001_Node000012"><a xlink:title=" ">
+<path fill="none" stroke="#63b8ff" d="M796.69,-573.09C798.75,-537.4 800.34,-466.14 786,-408 755.99,-286.38 745.43,-250.18 667,-152.5 660.05,-143.85 652.03,-135.58 643.56,-127.83"/>
+<polygon fill="none" stroke="#63b8ff" points="643.54,-127.81 636.39,-126.87 634.51,-119.91 641.66,-120.85 643.54,-127.81"/>
 </a>
 </g>
+<text xml:space="preserve" text-anchor="start" x="784.16" y="-286.25" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">&#45;mutex_</text>
+</g>
+<!-- Node12&#45;&gt;Node14 -->
+<g id="edge19_Node000014_Node000012" class="edge">
+<title>Node12&#45;&gt;Node14</title>
+<g id="a_edge19_Node000014_Node000012"><a xlink:title=" ">
+<path fill="none" stroke="#63b8ff" d="M793.44,-573.28C789.81,-535.63 777.96,-458.92 740,-408 713.14,-371.97 671.84,-343.88 635.27,-324.1"/>
+<polygon fill="none" stroke="#63b8ff" points="635.51,-324.23 628.34,-324.98 624.89,-318.65 632.06,-317.9 635.51,-324.23"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="start" x="759.67" y="-421.25" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">&#45;mut</text>
+</g>
+<!-- Node18 -->
+<g id="Node000018" class="node">
+<title>Node18</title>
+<g id="a_Node000018"><a xlink:href="classThreadPool.html" target="_top" xlink:title="A tool to asynchronously execute tasks without respawning threads.">
+<polygon fill="white" stroke="none" points="941.75,-370.25 862.25,-370.25 862.25,-206.75 941.75,-206.75 941.75,-370.25"/>
+<text xml:space="preserve" text-anchor="start" x="877.25" y="-358.75" font-family="Helvetica,sans-Serif" font-size="10.00">ThreadPool</text>
+<text xml:space="preserve" text-anchor="start" x="867.75" y="-344.25" font-family="Helvetica,sans-Serif" font-size="10.00">&#45;</text>
+<text xml:space="preserve" text-anchor="start" x="876.25" y="-344.25" font-family="Helvetica,sans-Serif" font-size="10.00">stop_threads_</text>
+<text xml:space="preserve" text-anchor="start" x="867.75" y="-329.75" font-family="Helvetica,sans-Serif" font-size="10.00">&#45;</text>
+<text xml:space="preserve" text-anchor="start" x="876.25" y="-329.75" font-family="Helvetica,sans-Serif" font-size="10.00">cv_</text>
+<text xml:space="preserve" text-anchor="start" x="866.25" y="-315.25" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="876.25" y="-315.25" font-family="Helvetica,sans-Serif" font-size="10.00">ThreadPool()</text>
+<text xml:space="preserve" text-anchor="start" x="866.25" y="-300.75" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="876.25" y="-300.75" font-family="Helvetica,sans-Serif" font-size="10.00">~ThreadPool()</text>
+<text xml:space="preserve" text-anchor="start" x="866.25" y="-286.25" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="876.25" y="-286.25" font-family="Helvetica,sans-Serif" font-size="10.00">ThreadPool()</text>
+<text xml:space="preserve" text-anchor="start" x="866.25" y="-271.75" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="876.25" y="-271.75" font-family="Helvetica,sans-Serif" font-size="10.00">ThreadPool()</text>
+<text xml:space="preserve" text-anchor="start" x="866.25" y="-257.25" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="876.25" y="-257.25" font-family="Helvetica,sans-Serif" font-size="10.00">operator=()</text>
+<text xml:space="preserve" text-anchor="start" x="866.25" y="-242.75" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="876.25" y="-242.75" font-family="Helvetica,sans-Serif" font-size="10.00">operator=()</text>
+<text xml:space="preserve" text-anchor="start" x="866.25" y="-228.25" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="876.25" y="-228.25" font-family="Helvetica,sans-Serif" font-size="10.00">add_task()</text>
+<text xml:space="preserve" text-anchor="start" x="867.75" y="-213.75" font-family="Helvetica,sans-Serif" font-size="10.00">&#45;</text>
+<text xml:space="preserve" text-anchor="start" x="876.25" y="-213.75" font-family="Helvetica,sans-Serif" font-size="10.00">worker()</text>
+<polygon fill="#666666" stroke="#666666" points="862.25,-353.75 862.25,-353.75 941.75,-353.75 941.75,-353.75 862.25,-353.75"/>
+<polygon fill="#666666" stroke="#666666" points="862.25,-324.75 862.25,-324.75 874.25,-324.75 874.25,-324.75 862.25,-324.75"/>
+<polygon fill="#666666" stroke="#666666" points="874.25,-324.75 874.25,-324.75 941.75,-324.75 941.75,-324.75 874.25,-324.75"/>
+<polygon fill="none" stroke="#666666" points="862.25,-206.75 862.25,-370.25 941.75,-370.25 941.75,-206.75 862.25,-206.75"/>
+</a>
+</g>
+</g>
+<!-- Node12&#45;&gt;Node18 -->
+<g id="edge22_Node000018_Node000012" class="edge">
+<title>Node12&#45;&gt;Node18</title>
+<g id="a_edge22_Node000018_Node000012"><a xlink:title=" ">
+<path fill="none" stroke="#63b8ff" d="M799.98,-573.37C806.37,-545.71 818.26,-497.36 832,-457 840.43,-432.26 850.74,-405.97 860.83,-381.73"/>
+<polygon fill="none" stroke="#63b8ff" points="860.76,-381.91 859.4,-374.82 865.41,-370.84 866.77,-377.93 860.76,-381.91"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="start" x="852.27" y="-421.25" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">&#45;mut_</text>
 </g>
 <!-- Node13 -->
 <g id="Node000013" class="node">
 <title>Node13</title>
 <g id="a_Node000013"><a xlink:title=" ">
-<polygon fill="white" stroke="none" points="464.12,-635 409.62,-635 409.62,-587.5 464.12,-587.5 464.12,-635"/>
-<text xml:space="preserve" text-anchor="start" x="413.62" y="-623.5" font-family="Helvetica,sans-Serif" font-size="10.00">std::mutex</text>
-<text xml:space="preserve" text-anchor="start" x="435.38" y="-609" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
-<text xml:space="preserve" text-anchor="start" x="435.38" y="-594.5" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
-<polygon fill="#666666" stroke="#666666" points="409.62,-618.5 409.62,-618.5 464.12,-618.5 464.12,-618.5 409.62,-618.5"/>
-<polygon fill="#666666" stroke="#666666" points="409.62,-604 409.62,-604 464.12,-604 464.12,-604 409.62,-604"/>
-<polygon fill="none" stroke="#666666" points="409.62,-587.5 409.62,-635 464.12,-635 464.12,-587.5 409.62,-587.5"/>
+<polygon fill="white" stroke="none" points="727.38,-930.75 670.62,-930.75 670.62,-883.25 727.38,-883.25 727.38,-930.75"/>
+<text xml:space="preserve" text-anchor="start" x="674.62" y="-919.25" font-family="Helvetica,sans-Serif" font-size="10.00">std::jthread</text>
+<text xml:space="preserve" text-anchor="start" x="697.5" y="-904.75" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
+<text xml:space="preserve" text-anchor="start" x="697.5" y="-890.25" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
+<polygon fill="#666666" stroke="#666666" points="670.62,-914.25 670.62,-914.25 727.38,-914.25 727.38,-914.25 670.62,-914.25"/>
+<polygon fill="#666666" stroke="#666666" points="670.62,-899.75 670.62,-899.75 727.38,-899.75 727.38,-899.75 670.62,-899.75"/>
+<polygon fill="none" stroke="#666666" points="670.62,-883.25 670.62,-930.75 727.38,-930.75 727.38,-883.25 670.62,-883.25"/>
 </a>
 </g>
 </g>
-<!-- Node13&#45;&gt;Node4 -->
-<g id="edge12_Node000004_Node000013" class="edge">
-<title>Node13&#45;&gt;Node4</title>
-<g id="a_edge12_Node000004_Node000013"><a xlink:title=" ">
-<path fill="none" stroke="#63b8ff" d="M432.83,-587.73C426.89,-554.65 415.36,-490.45 404.77,-431.47"/>
-<polygon fill="none" stroke="#63b8ff" points="404.81,-431.68 399.81,-426.48 402.68,-419.87 407.68,-425.07 404.81,-431.68"/>
+<!-- Node13&#45;&gt;Node1 -->
+<g id="edge12_Node000001_Node000013" class="edge">
+<title>Node13&#45;&gt;Node1</title>
+<g id="a_edge12_Node000001_Node000013"><a xlink:title=" ">
+<path fill="none" stroke="#63b8ff" d="M696.38,-883.67C688.55,-816.5 665,-610.38 650.5,-439 641.03,-327.16 669.34,-293.53 634,-187 629.29,-172.79 622.45,-158.61 614.78,-145.26"/>
+<polygon fill="none" stroke="#63b8ff" points="614.81,-145.32 608.29,-142.24 608.62,-135.03 615.14,-138.11 614.81,-145.32"/>
 </a>
 </g>
-<text xml:space="preserve" text-anchor="start" x="410.73" y="-443" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">&#45;mut</text>
+<text xml:space="preserve" text-anchor="start" x="653.5" y="-421.25" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">&#45;progress_checker</text>
+</g>
+<!-- Node13&#45;&gt;Node14 -->
+<g id="edge20_Node000014_Node000013" class="edge">
+<title>Node13&#45;&gt;Node14</title>
+<g id="a_edge20_Node000014_Node000013"><a xlink:title=" ">
+<path fill="none" stroke="#63b8ff" d="M694.32,-883.58C688.95,-861.65 678.53,-828.06 661,-803.5 653.66,-793.22 647.51,-794.84 639,-785.5 621.32,-766.09 614.88,-761.21 606,-736.5 556.4,-598.45 591.53,-553.64 574,-408 573.79,-406.25 573.58,-404.49 573.36,-402.72"/>
+<polygon fill="none" stroke="#63b8ff" points="573.36,-402.79 568.64,-397.34 571.85,-390.88 576.58,-396.33 573.36,-402.79"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="start" x="609" y="-594.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">&#45;writer</text>
+</g>
+<!-- Node20 -->
+<g id="Node000020" class="node">
+<title>Node20</title>
+<g id="a_Node000020"><a xlink:title=" ">
+<polygon fill="white" stroke="none" points="1096.25,-620.5 975.75,-620.5 975.75,-573 1096.25,-573 1096.25,-620.5"/>
+<text xml:space="preserve" text-anchor="start" x="979.75" y="-609" font-family="Helvetica,sans-Serif" font-size="10.00">std::vector&lt; std::jthread &gt;</text>
+<text xml:space="preserve" text-anchor="start" x="1034.5" y="-594.5" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
+<text xml:space="preserve" text-anchor="start" x="1034.5" y="-580" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
+<polygon fill="#666666" stroke="#666666" points="975.75,-604 975.75,-604 1096.25,-604 1096.25,-604 975.75,-604"/>
+<polygon fill="#666666" stroke="#666666" points="975.75,-589.5 975.75,-589.5 1096.25,-589.5 1096.25,-589.5 975.75,-589.5"/>
+<polygon fill="none" stroke="#666666" points="975.75,-573 975.75,-620.5 1096.25,-620.5 1096.25,-573 975.75,-573"/>
+</a>
+</g>
+</g>
+<!-- Node13&#45;&gt;Node20 -->
+<g id="edge25_Node000020_Node000013" class="edge">
+<title>Node13&#45;&gt;Node20</title>
+<g id="a_edge25_Node000020_Node000013"><a xlink:title=" ">
+<path fill="none" stroke="#63b8ff" d="M727.03,-894.34C779.82,-871.2 895.03,-814.82 966,-736.5 993.66,-705.97 1013.23,-662.5 1024.52,-632.39"/>
+<polygon fill="none" stroke="#63b8ff" points="1024.47,-632.51 1022.74,-625.51 1028.54,-621.22 1030.27,-628.22 1024.47,-632.51"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="start" x="951.22" y="-767.75" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">+elements</text>
+</g>
+<!-- Node14&#45;&gt;Node1 -->
+<g id="edge13_Node000001_Node000014" class="edge">
+<title>Node14&#45;&gt;Node1</title>
+<g id="a_edge13_Node000001_Node000014"><a xlink:title=" ">
+<path fill="none" stroke="#63b8ff" d="M557,-187.18C557,-173.73 557,-160.1 557,-147.09"/>
+<polygon fill="none" stroke="#63b8ff" points="557,-147.23 553,-141.23 557,-135.23 561,-141.23 557,-147.23"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="start" x="560" y="-158.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">&#45;file_list_</text>
 </g>
 <!-- Node15 -->
 <g id="Node000015" class="node">
 <title>Node15</title>
-<g id="a_Node000015"><a xlink:href="classThreadPool.html" target="_top" xlink:title="A tool to asynchronously execute tasks without respawning threads.">
-<polygon fill="white" stroke="none" points="574.62,-384.75 495.12,-384.75 495.12,-221.25 574.62,-221.25 574.62,-384.75"/>
-<text xml:space="preserve" text-anchor="start" x="510.12" y="-373.25" font-family="Helvetica,sans-Serif" font-size="10.00">ThreadPool</text>
-<text xml:space="preserve" text-anchor="start" x="500.62" y="-358.75" font-family="Helvetica,sans-Serif" font-size="10.00">&#45;</text>
-<text xml:space="preserve" text-anchor="start" x="509.12" y="-358.75" font-family="Helvetica,sans-Serif" font-size="10.00">stop_threads_</text>
-<text xml:space="preserve" text-anchor="start" x="500.62" y="-344.25" font-family="Helvetica,sans-Serif" font-size="10.00">&#45;</text>
-<text xml:space="preserve" text-anchor="start" x="509.12" y="-344.25" font-family="Helvetica,sans-Serif" font-size="10.00">cv_</text>
-<text xml:space="preserve" text-anchor="start" x="499.12" y="-329.75" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="509.12" y="-329.75" font-family="Helvetica,sans-Serif" font-size="10.00">ThreadPool()</text>
-<text xml:space="preserve" text-anchor="start" x="499.12" y="-315.25" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="509.12" y="-315.25" font-family="Helvetica,sans-Serif" font-size="10.00">~ThreadPool()</text>
-<text xml:space="preserve" text-anchor="start" x="499.12" y="-300.75" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="509.12" y="-300.75" font-family="Helvetica,sans-Serif" font-size="10.00">ThreadPool()</text>
-<text xml:space="preserve" text-anchor="start" x="499.12" y="-286.25" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="509.12" y="-286.25" font-family="Helvetica,sans-Serif" font-size="10.00">ThreadPool()</text>
-<text xml:space="preserve" text-anchor="start" x="499.12" y="-271.75" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="509.12" y="-271.75" font-family="Helvetica,sans-Serif" font-size="10.00">operator=()</text>
-<text xml:space="preserve" text-anchor="start" x="499.12" y="-257.25" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="509.12" y="-257.25" font-family="Helvetica,sans-Serif" font-size="10.00">operator=()</text>
-<text xml:space="preserve" text-anchor="start" x="499.12" y="-242.75" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="509.12" y="-242.75" font-family="Helvetica,sans-Serif" font-size="10.00">add_task()</text>
-<text xml:space="preserve" text-anchor="start" x="500.62" y="-228.25" font-family="Helvetica,sans-Serif" font-size="10.00">&#45;</text>
-<text xml:space="preserve" text-anchor="start" x="509.12" y="-228.25" font-family="Helvetica,sans-Serif" font-size="10.00">worker()</text>
-<polygon fill="#666666" stroke="#666666" points="495.12,-368.25 495.12,-368.25 574.62,-368.25 574.62,-368.25 495.12,-368.25"/>
-<polygon fill="#666666" stroke="#666666" points="495.12,-339.25 495.12,-339.25 507.12,-339.25 507.12,-339.25 495.12,-339.25"/>
-<polygon fill="#666666" stroke="#666666" points="507.12,-339.25 507.12,-339.25 574.62,-339.25 574.62,-339.25 507.12,-339.25"/>
-<polygon fill="none" stroke="#666666" points="495.12,-221.25 495.12,-384.75 574.62,-384.75 574.62,-221.25 495.12,-221.25"/>
+<g id="a_Node000015"><a xlink:href="structNode.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="none" points="556.25,-620.5 447.75,-620.5 447.75,-573 556.25,-573 556.25,-620.5"/>
+<text xml:space="preserve" text-anchor="start" x="451.75" y="-609" font-family="Helvetica,sans-Serif" font-size="10.00">Node&lt; LZ77Block&lt;&gt; &gt;</text>
+<text xml:space="preserve" text-anchor="start" x="456.56" y="-594.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="471.38" y="-594.5" font-family="Helvetica,sans-Serif" font-size="10.00">sequence_num_</text>
+<text xml:space="preserve" text-anchor="start" x="456.56" y="-580" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="471.38" y="-580" font-family="Helvetica,sans-Serif" font-size="10.00">Node()</text>
+<polygon fill="#666666" stroke="#666666" points="447.75,-604 447.75,-604 556.25,-604 556.25,-604 447.75,-604"/>
+<polygon fill="#666666" stroke="#666666" points="447.75,-589.5 447.75,-589.5 469.38,-589.5 469.38,-589.5 447.75,-589.5"/>
+<polygon fill="#666666" stroke="#666666" points="469.38,-589.5 469.38,-589.5 556.25,-589.5 556.25,-589.5 469.38,-589.5"/>
+<polygon fill="none" stroke="#666666" points="447.75,-573 447.75,-620.5 556.25,-620.5 556.25,-573 447.75,-573"/>
 </a>
 </g>
 </g>
-<!-- Node13&#45;&gt;Node15 -->
-<g id="edge15_Node000015_Node000013" class="edge">
-<title>Node13&#45;&gt;Node15</title>
-<g id="a_edge15_Node000015_Node000013"><a xlink:title=" ">
-<path fill="none" stroke="#63b8ff" d="M442.17,-587.97C448.87,-560.41 461.08,-512.16 473.88,-471.5 481.59,-447 490.71,-420.79 499.51,-396.54"/>
-<polygon fill="none" stroke="#63b8ff" points="499.51,-396.56 497.81,-389.55 503.63,-385.29 505.33,-392.3 499.51,-396.56"/>
+<!-- Node15&#45;&gt;Node14 -->
+<g id="edge15_Node000014_Node000015" class="edge">
+<title>Node15&#45;&gt;Node14</title>
+<g id="a_edge15_Node000014_Node000015"><a xlink:title=" ">
+<path fill="none" stroke="#63b8ff" d="M506.04,-573.23C512.47,-537.43 525.45,-465.19 536.7,-402.56"/>
+<polygon fill="none" stroke="#63b8ff" points="536.71,-402.46 533.84,-395.85 538.83,-390.65 541.71,-397.27 536.71,-402.46"/>
 </a>
 </g>
-<text xml:space="preserve" text-anchor="start" x="487.52" y="-443" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">&#45;mut_</text>
-</g>
-<!-- Node14 -->
-<g id="Node000014" class="node">
-<title>Node14</title>
-<g id="a_Node000014"><a xlink:title=" ">
-<polygon fill="white" stroke="none" points="432.25,-930.75 375.5,-930.75 375.5,-883.25 432.25,-883.25 432.25,-930.75"/>
-<text xml:space="preserve" text-anchor="start" x="379.5" y="-919.25" font-family="Helvetica,sans-Serif" font-size="10.00">std::jthread</text>
-<text xml:space="preserve" text-anchor="start" x="402.38" y="-904.75" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
-<text xml:space="preserve" text-anchor="start" x="402.38" y="-890.25" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
-<polygon fill="#666666" stroke="#666666" points="375.5,-914.25 375.5,-914.25 432.25,-914.25 432.25,-914.25 375.5,-914.25"/>
-<polygon fill="#666666" stroke="#666666" points="375.5,-899.75 375.5,-899.75 432.25,-899.75 432.25,-899.75 375.5,-899.75"/>
-<polygon fill="none" stroke="#666666" points="375.5,-883.25 375.5,-930.75 432.25,-930.75 432.25,-883.25 375.5,-883.25"/>
-</a>
-</g>
-</g>
-<!-- Node14&#45;&gt;Node4 -->
-<g id="edge13_Node000004_Node000014" class="edge">
-<title>Node14&#45;&gt;Node4</title>
-<g id="a_edge13_Node000004_Node000014"><a xlink:title=" ">
-<path fill="none" stroke="#63b8ff" d="M396.92,-883.44C388.1,-853.51 373.36,-798.89 367.88,-751 355.59,-643.84 360.76,-521.36 368.06,-431.73"/>
-<polygon fill="none" stroke="#63b8ff" points="368.07,-431.61 364.59,-425.29 369.08,-419.65 372.56,-425.96 368.07,-431.61"/>
-</a>
-</g>
-<text xml:space="preserve" text-anchor="start" x="370.88" y="-609" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">&#45;writer</text>
-</g>
-<!-- Node17 -->
-<g id="Node000017" class="node">
-<title>Node17</title>
-<g id="a_Node000017"><a xlink:title=" ">
-<polygon fill="white" stroke="none" points="738.12,-635 617.62,-635 617.62,-587.5 738.12,-587.5 738.12,-635"/>
-<text xml:space="preserve" text-anchor="start" x="621.62" y="-623.5" font-family="Helvetica,sans-Serif" font-size="10.00">std::vector&lt; std::jthread &gt;</text>
-<text xml:space="preserve" text-anchor="start" x="676.38" y="-609" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
-<text xml:space="preserve" text-anchor="start" x="676.38" y="-594.5" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
-<polygon fill="#666666" stroke="#666666" points="617.62,-618.5 617.62,-618.5 738.12,-618.5 738.12,-618.5 617.62,-618.5"/>
-<polygon fill="#666666" stroke="#666666" points="617.62,-604 617.62,-604 738.12,-604 738.12,-604 617.62,-604"/>
-<polygon fill="none" stroke="#666666" points="617.62,-587.5 617.62,-635 738.12,-635 738.12,-587.5 617.62,-587.5"/>
-</a>
-</g>
-</g>
-<!-- Node14&#45;&gt;Node17 -->
-<g id="edge18_Node000017_Node000014" class="edge">
-<title>Node14&#45;&gt;Node17</title>
-<g id="a_edge18_Node000017_Node000014"><a xlink:title=" ">
-<path fill="none" stroke="#63b8ff" d="M432.18,-890.23C474.83,-865.31 556.09,-813.22 607.88,-751 634.08,-719.52 653.82,-676.58 665.55,-646.85"/>
-<polygon fill="none" stroke="#63b8ff" points="665.48,-647.03 663.88,-640 669.76,-635.82 671.36,-642.86 665.48,-647.03"/>
-</a>
-</g>
-<text xml:space="preserve" text-anchor="start" x="592.37" y="-775" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">+elements</text>
-</g>
-<!-- Node15&#45;&gt;Node1 -->
-<g id="edge14_Node000001_Node000015" class="edge">
-<title>Node15&#45;&gt;Node1</title>
-<g id="a_edge14_Node000001_Node000015"><a xlink:title=" ">
-<path fill="none" stroke="#63b8ff" d="M495.14,-232.92C484.41,-216.98 472.08,-200.7 458.88,-187 435.65,-162.9 406.96,-140.42 380.01,-121.64"/>
-<polygon fill="none" stroke="#63b8ff" points="380.02,-121.65 372.81,-121.56 370.12,-114.87 377.33,-114.96 380.02,-121.65"/>
-</a>
-</g>
-<text xml:space="preserve" text-anchor="start" x="441.93" y="-158.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">&#45;thread_pool</text>
+<text xml:space="preserve" text-anchor="start" x="537.43" y="-428.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">&#45;head_</text>
+<text xml:space="preserve" text-anchor="start" x="537.43" y="-414" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">&#45;tail_</text>
 </g>
 <!-- Node16 -->
 <g id="Node000016" class="node">
 <title>Node16</title>
 <g id="a_Node000016"><a xlink:title=" ">
-<polygon fill="white" stroke="none" points="599.25,-640.25 482.5,-640.25 482.5,-582.25 599.25,-582.25 599.25,-640.25"/>
-<text xml:space="preserve" text-anchor="start" x="486.5" y="-628.75" font-family="Helvetica,sans-Serif" font-size="10.00">std::queue&lt; std::function</text>
-<text xml:space="preserve" text-anchor="start" x="517.25" y="-618.25" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; void()&gt; &gt;</text>
-<text xml:space="preserve" text-anchor="start" x="501.25" y="-603.75" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
-<text xml:space="preserve" text-anchor="start" x="526" y="-603.75" font-family="Helvetica,sans-Serif" font-size="10.00">elements</text>
-<text xml:space="preserve" text-anchor="start" x="539.38" y="-589.25" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
-<polygon fill="#666666" stroke="#666666" points="482.5,-613.25 482.5,-613.25 599.25,-613.25 599.25,-613.25 482.5,-613.25"/>
-<polygon fill="#666666" stroke="#666666" points="482.5,-598.75 482.5,-598.75 524,-598.75 524,-598.75 482.5,-598.75"/>
-<polygon fill="#666666" stroke="#666666" points="524,-598.75 524,-598.75 599.25,-598.75 599.25,-598.75 524,-598.75"/>
-<polygon fill="none" stroke="#666666" points="482.5,-582.25 482.5,-640.25 599.25,-640.25 599.25,-582.25 482.5,-582.25"/>
+<polygon fill="white" stroke="none" points="495.88,-930.75 346.12,-930.75 346.12,-883.25 495.88,-883.25 495.88,-930.75"/>
+<text xml:space="preserve" text-anchor="start" x="350.12" y="-919.25" font-family="Helvetica,sans-Serif" font-size="10.00">std::unique_ptr&lt; LZ77Block&lt;&gt; &gt;</text>
+<text xml:space="preserve" text-anchor="start" x="370.5" y="-904.75" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="400.88" y="-904.75" font-family="Helvetica,sans-Serif" font-size="10.00">ptr</text>
+<text xml:space="preserve" text-anchor="start" x="370.5" y="-890.25" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="400.88" y="-890.25" font-family="Helvetica,sans-Serif" font-size="10.00">operator&#45;&gt;()</text>
+<polygon fill="#666666" stroke="#666666" points="346.12,-914.25 346.12,-914.25 495.88,-914.25 495.88,-914.25 346.12,-914.25"/>
+<polygon fill="#666666" stroke="#666666" points="346.12,-899.75 346.12,-899.75 398.88,-899.75 398.88,-899.75 346.12,-899.75"/>
+<polygon fill="#666666" stroke="#666666" points="398.88,-899.75 398.88,-899.75 495.88,-899.75 495.88,-899.75 398.88,-899.75"/>
+<polygon fill="none" stroke="#666666" points="346.12,-883.25 346.12,-930.75 495.88,-930.75 495.88,-883.25 346.12,-883.25"/>
 </a>
 </g>
 </g>
@@ -590,21 +633,99 @@ var sectionId = 'dynsection-0';
 <g id="edge16_Node000015_Node000016" class="edge">
 <title>Node16&#45;&gt;Node15</title>
 <g id="a_edge16_Node000015_Node000016"><a xlink:title=" ">
-<path fill="none" stroke="#63b8ff" d="M540.33,-582.26C539.51,-540.75 537.95,-460.93 536.7,-397.39"/>
-<polygon fill="none" stroke="#63b8ff" points="536.71,-397.4 532.59,-391.48 536.47,-385.41 540.59,-391.33 536.71,-397.4"/>
+<path fill="none" stroke="#63b8ff" d="M426.96,-883.33C440.94,-830.11 475.96,-696.85 492.74,-632.97"/>
+<polygon fill="none" stroke="#63b8ff" points="492.76,-632.93 490.41,-626.11 495.81,-621.32 498.15,-628.14 492.76,-632.93"/>
 </a>
 </g>
-<text xml:space="preserve" text-anchor="start" x="540.7" y="-443" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">&#45;tasks_</text>
+<text xml:space="preserve" text-anchor="start" x="462.07" y="-767.75" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">+element_</text>
+</g>
+<!-- Node17 -->
+<g id="Node000017" class="node">
+<title>Node17</title>
+<g id="a_Node000017"><a xlink:href="structNode.html" target="_top" xlink:title=" ">
+<polygon fill="white" stroke="none" points="603.62,-938 514.38,-938 514.38,-876 603.62,-876 603.62,-938"/>
+<text xml:space="preserve" text-anchor="start" x="535.38" y="-926.5" font-family="Helvetica,sans-Serif" font-size="10.00">Node&lt; T &gt;</text>
+<text xml:space="preserve" text-anchor="start" x="518.38" y="-912" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="528.38" y="-912" font-family="Helvetica,sans-Serif" font-size="10.00">element_</text>
+<text xml:space="preserve" text-anchor="start" x="518.38" y="-897.5" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="528.38" y="-897.5" font-family="Helvetica,sans-Serif" font-size="10.00">sequence_num_</text>
+<text xml:space="preserve" text-anchor="start" x="518.38" y="-883" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="528.38" y="-883" font-family="Helvetica,sans-Serif" font-size="10.00">Node()</text>
+<polygon fill="#666666" stroke="#666666" points="514.38,-921.5 514.38,-921.5 603.62,-921.5 603.62,-921.5 514.38,-921.5"/>
+<polygon fill="#666666" stroke="#666666" points="514.38,-892.5 514.38,-892.5 526.38,-892.5 526.38,-892.5 514.38,-892.5"/>
+<polygon fill="#666666" stroke="#666666" points="526.38,-892.5 526.38,-892.5 603.62,-892.5 603.62,-892.5 526.38,-892.5"/>
+<polygon fill="none" stroke="#666666" points="514.38,-876 514.38,-938 603.62,-938 603.62,-876 514.38,-876"/>
+</a>
+</g>
 </g>
 <!-- Node17&#45;&gt;Node15 -->
 <g id="edge17_Node000015_Node000017" class="edge">
 <title>Node17&#45;&gt;Node15</title>
 <g id="a_edge17_Node000015_Node000017"><a xlink:title=" ">
-<path fill="none" stroke="#63b8ff" d="M667.36,-587.73C648.77,-547.92 609.13,-463.03 578.03,-396.42"/>
-<polygon fill="none" stroke="#63b8ff" points="577.99,-396.33 571.82,-392.58 572.91,-385.45 579.07,-389.2 577.99,-396.33"/>
+<path fill="none" stroke="#63b8ff" d="M553.48,-876.16C542.91,-818.99 519.85,-694.26 508.53,-633.06"/>
+<polygon fill="none" stroke="#63b8ff" points="508.52,-633 503.49,-627.83 506.34,-621.2 511.36,-626.38 508.52,-633"/>
 </a>
 </g>
-<text xml:space="preserve" text-anchor="start" x="605.09" y="-443" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">&#45;threads_</text>
+<text xml:space="preserve" text-anchor="start" x="538.61" y="-775" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">+next</text>
+<text xml:space="preserve" text-anchor="start" x="538.61" y="-760.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">+prev</text>
+</g>
+<!-- Node17&#45;&gt;Node17 -->
+<g id="edge18_Node000017_Node000017" class="edge">
+<title>Node17&#45;&gt;Node17</title>
+<g id="a_edge18_Node000017_Node000017"><a xlink:title=" ">
+<path fill="none" stroke="#63b8ff" d="M603.47,-929.42C613.92,-927.58 621.62,-920.11 621.62,-907 621.62,-899.63 619.19,-894.04 615.19,-890.23"/>
+<polygon fill="none" stroke="#63b8ff" points="615.09,-890.18 607.95,-891.18 604.28,-884.97 611.42,-883.97 615.09,-890.18"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="start" x="624.62" y="-912" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">+next</text>
+<text xml:space="preserve" text-anchor="start" x="624.62" y="-897.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">+prev</text>
+</g>
+<!-- Node18&#45;&gt;Node1 -->
+<g id="edge21_Node000001_Node000018" class="edge">
+<title>Node18&#45;&gt;Node1</title>
+<g id="a_edge21_Node000001_Node000018"><a xlink:title=" ">
+<path fill="none" stroke="#63b8ff" d="M866.85,-206.89C854.06,-186.11 837.56,-165.85 817,-152.5 765.15,-118.82 698.72,-97.6 645.99,-84.88"/>
+<polygon fill="none" stroke="#63b8ff" points="646.15,-84.92 639.4,-87.45 634.46,-82.19 641.22,-79.66 646.15,-84.92"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="start" x="839.95" y="-158.5" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">&#45;thread_pool</text>
+</g>
+<!-- Node19 -->
+<g id="Node000019" class="node">
+<title>Node19</title>
+<g id="a_Node000019"><a xlink:title=" ">
+<polygon fill="white" stroke="none" points="957.38,-625.75 840.62,-625.75 840.62,-567.75 957.38,-567.75 957.38,-625.75"/>
+<text xml:space="preserve" text-anchor="start" x="844.62" y="-614.25" font-family="Helvetica,sans-Serif" font-size="10.00">std::queue&lt; std::function</text>
+<text xml:space="preserve" text-anchor="start" x="875.38" y="-603.75" font-family="Helvetica,sans-Serif" font-size="10.00">&lt; void()&gt; &gt;</text>
+<text xml:space="preserve" text-anchor="start" x="859.38" y="-589.25" font-family="Helvetica,sans-Serif" font-size="10.00">+</text>
+<text xml:space="preserve" text-anchor="start" x="884.12" y="-589.25" font-family="Helvetica,sans-Serif" font-size="10.00">elements</text>
+<text xml:space="preserve" text-anchor="start" x="897.5" y="-574.75" font-family="Helvetica,sans-Serif" font-size="10.00"> </text>
+<polygon fill="#666666" stroke="#666666" points="840.62,-598.75 840.62,-598.75 957.38,-598.75 957.38,-598.75 840.62,-598.75"/>
+<polygon fill="#666666" stroke="#666666" points="840.62,-584.25 840.62,-584.25 882.12,-584.25 882.12,-584.25 840.62,-584.25"/>
+<polygon fill="#666666" stroke="#666666" points="882.12,-584.25 882.12,-584.25 957.38,-584.25 957.38,-584.25 882.12,-584.25"/>
+<polygon fill="none" stroke="#666666" points="840.62,-567.75 840.62,-625.75 957.38,-625.75 957.38,-567.75 840.62,-567.75"/>
+</a>
+</g>
+</g>
+<!-- Node19&#45;&gt;Node18 -->
+<g id="edge23_Node000018_Node000019" class="edge">
+<title>Node19&#45;&gt;Node18</title>
+<g id="a_edge23_Node000018_Node000019"><a xlink:title=" ">
+<path fill="none" stroke="#63b8ff" d="M899.27,-567.76C899.68,-526.25 900.46,-446.43 901.09,-382.89"/>
+<polygon fill="none" stroke="#63b8ff" points="901.08,-382.9 897.14,-376.87 901.2,-370.91 905.14,-376.94 901.08,-382.9"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="start" x="903.77" y="-421.25" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">&#45;tasks_</text>
+</g>
+<!-- Node20&#45;&gt;Node18 -->
+<g id="edge24_Node000018_Node000020" class="edge">
+<title>Node20&#45;&gt;Node18</title>
+<g id="a_edge24_Node000018_Node000020"><a xlink:title=" ">
+<path fill="none" stroke="#63b8ff" d="M1026.15,-573.23C1008.73,-533.42 971.58,-448.53 942.44,-381.92"/>
+<polygon fill="none" stroke="#63b8ff" points="942.45,-381.96 936.39,-378.06 937.64,-370.96 943.71,-374.86 942.45,-381.96"/>
+</a>
+</g>
+<text xml:space="preserve" text-anchor="start" x="967.98" y="-421.25" font-family="Helvetica,sans-Serif" font-size="10.00" fill="grey">&#45;threads_</text>
 </g>
 </g>
 </svg>

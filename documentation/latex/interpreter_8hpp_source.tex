@@ -1,0 +1,95 @@
+\doxysection{interpreter.\+hpp}
+\hypertarget{interpreter_8hpp_source}{}\label{interpreter_8hpp_source}\index{Compress-\/to-\/fit/src/gui/interpreter.hpp@{Compress-\/to-\/fit/src/gui/interpreter.hpp}}
+\doxymbox{\hyperlink{interpreter_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{*\ \ \ Copyright\ (C)\ 2026\ Roan\ Bukaci}}
+\DoxyCodeLine{00003\ \textcolor{comment}{*\ \ \ SPDX-\/License-\/Identifier:\ GPL-\/3.0}}
+\DoxyCodeLine{00004\ \textcolor{comment}{*\ \ \ Interprets\ strings\ from\ the\ compressor.}}
+\DoxyCodeLine{00005\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00006}00006\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{pragma}\ \textcolor{preprocessor}{once}}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00007}00007\ }
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00008}00008\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{include}\ \textcolor{preprocessor}{<}\textcolor{preprocessor}{expected}\textcolor{preprocessor}{>}}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00009}00009\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{include}\ \textcolor{preprocessor}{<}\textcolor{preprocessor}{QObject}\textcolor{preprocessor}{>}}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00010}00010\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{include}\ \textcolor{preprocessor}{<}\textcolor{preprocessor}{regex}\textcolor{preprocessor}{>}}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00011}00011\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{include}\ \textcolor{preprocessor}{<}\textcolor{preprocessor}{variant}\textcolor{preprocessor}{>}}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00012}00012\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{include}\ \textcolor{preprocessor}{"{}src/common/error\_warn\_print.hpp"{}}}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00013}00013\ }
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00014}00014\ }
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00015}00015\ \textcolor{comment}{/**}}
+\DoxyCodeLine{00016\ \textcolor{comment}{\ *\ @brief\ Remove\ ANSI\ \(\backslash\)x1b\ sequences\ (color,\ underline...)}}
+\DoxyCodeLine{00017\ \textcolor{comment}{\ *\ @param\ str\ Input\ string}}
+\DoxyCodeLine{00018\ \textcolor{comment}{\ *\ @return\ The\ string\ without\ ANSI\ sequences}}
+\DoxyCodeLine{00019\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00020}00020\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{interpreter_8cpp_a4e782c34ec65ee82a6848090e25f2ec3}{strip\_ansi}}(std::string\ \textcolor{keyword}{const}\&\ str)\ -\/>\ \doxymbox{\hyperlink{interpreter_8cpp_a4e782c34ec65ee82a6848090e25f2ec3}{std}}::\doxymbox{\hyperlink{interpreter_8cpp_a4e782c34ec65ee82a6848090e25f2ec3}{string}};}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00021}00021\ }
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00022}00022\ \textcolor{comment}{/**}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ *\ @brief\ Remove\ leading\ and\ trailing\ whitespace}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ *\ @param\ str\ Input\ string}}
+\DoxyCodeLine{00025\ \textcolor{comment}{\ *\ @return\ The\ trimmed\ string}}
+\DoxyCodeLine{00026\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00027}00027\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{interpreter_8cpp_aece5c8effea071621f0e1f2a87aade5f}{trim\_whitespace}}(std::string\ \textcolor{keyword}{const}\&\ str)\ -\/>\ \doxymbox{\hyperlink{interpreter_8cpp_aece5c8effea071621f0e1f2a87aade5f}{std}}::\doxymbox{\hyperlink{interpreter_8cpp_aece5c8effea071621f0e1f2a87aade5f}{string}};}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00028}00028\ }
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00029}\doxymbox{\hyperlink{structProgressType}{00029}}\ \textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structProgressType}{ProgressType}}}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00030}00030\ \{}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00031}\doxymbox{\hyperlink{structProgressType_aafdd45b4a64940e7340d2ac0bee26a05}{00031}}\ \ \ \ \ \textcolor{keywordtype}{float}\ \doxymbox{\hyperlink{structProgressType_aafdd45b4a64940e7340d2ac0bee26a05}{progress}};}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00032}00032\ \};}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00034}00034\ \textcolor{comment}{/**}}
+\DoxyCodeLine{00035\ \textcolor{comment}{\ *\ @brief\ Package\ a\ message\ from\ the\ compressor}}
+\DoxyCodeLine{00036\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00037}\doxymbox{\hyperlink{structBackendMessage}{00037}}\ \textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structBackendMessage}{BackendMessage}}}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00038}00038\ \{}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00039}\doxymbox{\hyperlink{structBackendMessage_abb24d7ceb9899c1b7fd0dc5f2328ab42}{00039}}\ \ \ \ \ \doxymbox{\hyperlink{structBackendMessage_abb24d7ceb9899c1b7fd0dc5f2328ab42}{std}}::\doxymbox{\hyperlink{structBackendMessage_abb24d7ceb9899c1b7fd0dc5f2328ab42}{variant}}<\doxymbox{\hyperlink{structBackendMessage_abb24d7ceb9899c1b7fd0dc5f2328ab42}{ErrorType}},\ \doxymbox{\hyperlink{structBackendMessage_abb24d7ceb9899c1b7fd0dc5f2328ab42}{WarningType}},\ \doxymbox{\hyperlink{structBackendMessage_abb24d7ceb9899c1b7fd0dc5f2328ab42}{ProgressType}}>\ \doxymbox{\hyperlink{structBackendMessage_abb24d7ceb9899c1b7fd0dc5f2328ab42}{message\_ID\_or\_progress}};\textcolor{comment}{//ID\ of\ the\ error/warning\ or\ amount\ of\ progress\ from\ 0\ to\ 1}}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00040}\doxymbox{\hyperlink{structBackendMessage_a95f522c8f31c5d8593ed54e5999b315d}{00040}}\ \ \ \ \ \doxymbox{\hyperlink{structBackendMessage_a95f522c8f31c5d8593ed54e5999b315d}{std}}::\doxymbox{\hyperlink{structBackendMessage_a95f522c8f31c5d8593ed54e5999b315d}{optional}}<\doxymbox{\hyperlink{structBackendMessage_a95f522c8f31c5d8593ed54e5999b315d}{std}}::\doxymbox{\hyperlink{structBackendMessage_a95f522c8f31c5d8593ed54e5999b315d}{string}}>\ \doxymbox{\hyperlink{structBackendMessage_a95f522c8f31c5d8593ed54e5999b315d}{failing\_option}};\textcolor{comment}{//option\ causing\ error/warn,\ i.e.\ './ctf\ -\/wrongSyntax'\ prints\ -\/wrongSyntax\ <-\/\ Error[3]:\ the\ syntax...}}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00041}00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//So\ this\ contains\ '-\/wrongSyntax'}}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00042}00042\ \};}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00043}00043\ }
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00044}00044\ \textcolor{comment}{//A\ dummy\ type\ to\ check\ against\ for\ a\ bad\ backend\ message}}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00045}\doxymbox{\hyperlink{structBadMessage}{00045}}\ \textcolor{keyword}{struct}\ \doxymbox{\hyperlink{structBadMessage}{BadMessage}}\ \{\};}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00047}00047\ \textcolor{comment}{/**}}
+\DoxyCodeLine{00048\ \textcolor{comment}{\ *\ @brief\ Receive\ and\ interpret\ the\ compressor's\ output}}
+\DoxyCodeLine{00049\ \textcolor{comment}{\ *\ @param\ str\ To\ be\ interpreted}}
+\DoxyCodeLine{00050\ \textcolor{comment}{\ *\ @return\ The\ BackendMessage,\ or\ a\ BadMessage\ if\ the\ parsing\ failed}}
+\DoxyCodeLine{00051\ \textcolor{comment}{\ */}}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00052}00052\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{interpreter_8cpp_a2f6fd731a78be1f73c85feb304d532b4}{interpret}}(std::string\ \textcolor{keyword}{const}\&\ str)\ -\/>\ \doxymbox{\hyperlink{interpreter_8cpp_a2f6fd731a78be1f73c85feb304d532b4}{std}}::\doxymbox{\hyperlink{interpreter_8cpp_a2f6fd731a78be1f73c85feb304d532b4}{expected}}<BackendMessage,\ BadMessage>;}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00053}00053\ }
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00054}\doxymbox{\hyperlink{classQmlBackendMessage}{00054}}\ \textcolor{keyword}{class}\ \doxymbox{\hyperlink{classQmlBackendMessage}{QmlBackendMessage}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{classQmlBackendMessage}{QObject}}}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00055}00055\ \{}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00056}00056\ \ \ \ \ Q\_GADGET}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00057}\doxymbox{\hyperlink{classQmlBackendMessage_ab15e0921959125ae3e422a674240c14d}{00057}}\ \ \ \ \ Q\_PROPERTY(Severity\ severity\ READ\ severity\ CONSTANT)}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00058}\doxymbox{\hyperlink{classQmlBackendMessage_aa9cde7b4d02622de0fe3764a39436300}{00058}}\ \ \ \ \ \doxymbox{\hyperlink{classQmlBackendMessage}{Q\_PROPERTY}}(\doxymbox{\hyperlink{classQmlBackendMessage}{QString}}\ \doxymbox{\hyperlink{classQmlBackendMessage}{text}}\ \doxymbox{\hyperlink{classQmlBackendMessage}{READ}}\ \doxymbox{\hyperlink{classQmlBackendMessage}{text}}\ \doxymbox{\hyperlink{classQmlBackendMessage}{CONSTANT}})}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00059}00059\ }
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00060}00060\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00061}\doxymbox{\hyperlink{classQmlBackendMessage_af6bffc32112b3726507c566a4413c03ca902b0d55fddef6f8d651fe1035b7d4bd}{00061}}\ \ \ \ \ \textcolor{keyword}{enum}\ \textcolor{keyword}{class}\ \doxymbox{\hyperlink{classQmlBackendMessage}{Severity}}\ \{\ \doxymbox{\hyperlink{classQmlBackendMessage}{Info}},\ \doxymbox{\hyperlink{classQmlBackendMessage}{Warning}},\ \doxymbox{\hyperlink{classQmlBackendMessage}{Error}}\ \};}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00062}00062\ \ \ \ \ Q\_ENUM(Severity)}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00063}00063\ }
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00064}\doxymbox{\hyperlink{classQmlBackendMessage_aad5a3e22aa24957893fc5bbf2fcddbde}{00064}}\ \ \ \ \ \textcolor{keyword}{explicit}\ \doxymbox{\hyperlink{classQmlBackendMessage}{QmlBackendMessage}}(\doxymbox{\hyperlink{classQmlBackendMessage}{QObject}}\ *\doxymbox{\hyperlink{classQmlBackendMessage}{parent}}\ =\ \textcolor{keywordtype}{nullptr})\ \{\}}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00065}00065\ }
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00066}00066\ \ \ \ \ [[\doxymbox{\hyperlink{classQmlBackendMessage}{nodiscard}}]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classQmlBackendMessage}{severity}}()\ \textcolor{keyword}{const}\ -\/>\ \doxymbox{\hyperlink{classQmlBackendMessage}{Severity}};}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00067}00067\ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classQmlBackendMessage_ae73eeaa25eb8ecfc6a49dc81d85e2bb9}{ID}}()\ \textcolor{keyword}{const}\ -\/>\ \doxymbox{\hyperlink{classQmlBackendMessage_ae73eeaa25eb8ecfc6a49dc81d85e2bb9}{qint32}};}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00068}00068\ \ \ \ \ [[nodiscard]]\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classQmlBackendMessage_af82f24041ab4aaeea9b3f02f02c3b11b}{text}}()\ \textcolor{keyword}{const}\ -\/>\ \doxymbox{\hyperlink{classQmlBackendMessage_af82f24041ab4aaeea9b3f02f02c3b11b}{QString}};}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00069}00069\ }
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00070}00070\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00071}\doxymbox{\hyperlink{classQmlBackendMessage_a3d517ad05ca226dc6122cb7e8544d88e}{00071}}\ \ \ \ \ \doxymbox{\hyperlink{classQmlBackendMessage_a3d517ad05ca226dc6122cb7e8544d88e}{Severity}}\ \doxymbox{\hyperlink{classQmlBackendMessage_a3d517ad05ca226dc6122cb7e8544d88e}{severity\_}}\{\};}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00072}\doxymbox{\hyperlink{classQmlBackendMessage_ad84c5eff04c2ef1849c1ca3650d7090b}{00072}}\ \ \ \ \ \doxymbox{\hyperlink{classQmlBackendMessage_ad84c5eff04c2ef1849c1ca3650d7090b}{qint32}}\ \doxymbox{\hyperlink{classQmlBackendMessage_ad84c5eff04c2ef1849c1ca3650d7090b}{ID\_}}\{\};}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00073}\doxymbox{\hyperlink{classQmlBackendMessage_a09d37db1cfa04ea9d303e156aea2aafc}{00073}}\ \ \ \ \ \doxymbox{\hyperlink{classQmlBackendMessage_a09d37db1cfa04ea9d303e156aea2aafc}{QString}}\ \doxymbox{\hyperlink{classQmlBackendMessage_a09d37db1cfa04ea9d303e156aea2aafc}{text\_}}\{\};}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00074}00074\ \};}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00075}00075\ }
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00076}00076\ Q\_DECLARE\_METATYPE(QmlBackendMessage)}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00077}00077\ }
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00078}\doxymbox{\hyperlink{classStatusBridge}{00078}}\ \textcolor{keyword}{class}\ \doxymbox{\hyperlink{classStatusBridge}{StatusBridge}}\ :\ \textcolor{keyword}{public}\ \doxymbox{\hyperlink{classStatusBridge}{QObject}}\textcolor{comment}{//TODO:\ set\ up\ bridge\ on\ creation,\ ask\ some\ kind\ of\ pointer\ to\ the\ stdout\ of\ the\ compressor}}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00079}00079\ \{}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00080}00080\ \ \ \ \ \doxymbox{\hyperlink{classStatusBridge}{Q\_OBJECT}}}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00081}00081\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00082}\doxymbox{\hyperlink{classStatusBridge_acad61f8d0d64d28add25462237d0f884}{00082}}\ \ \ \ \ \textcolor{keyword}{explicit}\ \doxymbox{\hyperlink{classStatusBridge}{StatusBridge}}(\doxymbox{\hyperlink{classStatusBridge}{QObject}}*\ \doxymbox{\hyperlink{classStatusBridge}{parent}}\ =\ \textcolor{keywordtype}{nullptr})\ :\ \doxymbox{\hyperlink{classStatusBridge}{QObject}}(\doxymbox{\hyperlink{classStatusBridge}{parent}})\ \{\}}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00083}00083\ }
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00084}00084\ }
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00085}00085\ }
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00086}00086\ \doxymbox{\hyperlink{classStatusBridge}{signals}}:}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00087}\doxymbox{\hyperlink{classStatusBridge_a170d9d87cc24c1dc87abdaab339baec9}{00087}}\ \ \ \ \ \textcolor{keywordtype}{void}\ \doxymbox{\hyperlink{classStatusBridge}{messageReceived}}(\doxymbox{\hyperlink{classStatusBridge}{QmlBackendMessage}}\ \textcolor{keyword}{const}\&\ \doxymbox{\hyperlink{classStatusBridge}{message}});}
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00088}00088\ }
+\DoxyCodeLine{\Hypertarget{interpreter_8hpp_source_l00089}00089\ \};}
+
+\end{DoxyCode}

@@ -98,7 +98,7 @@ Classes</h2></td></tr>
 <tr class="memitem:ConcFileBuffer_3C_20T_20_3E" id="r_ConcFileBuffer_3C_20T_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classConcFileBuffer.html">ConcFileBuffer&lt; T &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ring queue-like where if size &gt; capacity, the oldest elements are written to stream. At least the most recent <a class="el" href="classConcFileBuffer.html#a3ec5d0c05461e4215fbf46e1d4969938">minimum_size_</a> number of elements shall be available for reading.  <a href="classConcFileBuffer.html#details">More...</a><br /></td></tr>
 <tr class="memitem:ConcOrderedFileList_3C_20T_20_3E" id="r_ConcOrderedFileList_3C_20T_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classConcOrderedFileList.html">ConcOrderedFileList&lt; T &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">First sequence in first sequence out, i.e. the data is written in the order given to <a class="el" href="classConcOrderedFileList.html#a2c53a81b8da07b0b7e0502ad83d98e0d" title="Inserts an element to the list, which it will own. THE FIRST ELEMENT MUST HAVE SEQUENCE NUMBER == 0,...">insert()</a>.  <a href="classConcOrderedFileList.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">First sequence in first sequence out, i.e. the data is written in the order given to the '<a class="el" href="classConcOrderedFileList.html#a2c53a81b8da07b0b7e0502ad83d98e0d" title="Inserts an element to the list, which it will own. THE FIRST ELEMENT MUST HAVE SEQUENCE NUMBER == 0,...">insert()</a>' member function.  <a href="classConcOrderedFileList.html#details">More...</a><br /></td></tr>
 <tr class="memitem:FileOptions" id="r_FileOptions"><td class="memItemLeft">struct &#160;</td><td class="memItemRight"><a class="el" href="structFileOptions.html">FileOptions</a></td></tr>
 <tr class="memitem:File" id="r_File"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="classFile.html">File</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Interpret a file as to retrieve custom information.  <a href="classFile.html#details">More...</a><br /></td></tr>
@@ -107,7 +107,7 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:ae86837d59db95e31826c13b25d7aa994" id="r_ae86837d59db95e31826c13b25d7aa994"><td class="memItemLeft">constexpr size_t&#160;</td><td class="memItemRight"><a class="el" href="file__management_8cppm.html#ae86837d59db95e31826c13b25d7aa994">FILE_HEADER_SIZE</a> = SIGNATURE.size() + sizeof(uint8_t) + sizeof(uint8_t) + sizeof(size_t)</td></tr>
+<tr class="memitem:ae86837d59db95e31826c13b25d7aa994" id="r_ae86837d59db95e31826c13b25d7aa994"><td class="memItemLeft">constexpr size_t&#160;</td><td class="memItemRight"><a class="el" href="file__management_8cppm.html#ae86837d59db95e31826c13b25d7aa994">FILE_HEADER_SIZE</a> = SIGNATURE.size() + sizeof(size_t) + sizeof(uint16_t) + sizeof(uint8_t) + sizeof(uint8_t)</td></tr>
 </table>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-files" class="groupheader"><a id="files" name="files"></a>

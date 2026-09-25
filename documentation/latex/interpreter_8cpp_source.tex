@@ -1,0 +1,137 @@
+\doxysection{interpreter.\+cpp}
+\hypertarget{interpreter_8cpp_source}{}\label{interpreter_8cpp_source}\index{Compress-\/to-\/fit/src/gui/interpreter.cpp@{Compress-\/to-\/fit/src/gui/interpreter.cpp}}
+\doxymbox{\hyperlink{interpreter_8cpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00001}00001\ \textcolor{comment}{/*}}
+\DoxyCodeLine{00002\ \textcolor{comment}{*\ \ \ Copyright\ (C)\ 2026\ Roan\ Bukaci}}
+\DoxyCodeLine{00003\ \textcolor{comment}{*\ \ \ SPDX-\/License-\/Identifier:\ GPL-\/3.0}}
+\DoxyCodeLine{00004\ \textcolor{comment}{*\ \ \ Interprets\ strings\ from\ the\ compressor.}}
+\DoxyCodeLine{00005\ \textcolor{comment}{*/}}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00006}00006\ }
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00007}00007\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{include}\ \doxymbox{\hyperlink{interpreter_8hpp}{"{}interpreter.hpp"{}}}}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00008}00008\ \textcolor{preprocessor}{\#}\textcolor{preprocessor}{include}\ \textcolor{preprocessor}{<}\textcolor{preprocessor}{utility}\textcolor{preprocessor}{>}}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00009}00009\ }
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00010}\doxymbox{\hyperlink{interpreter_8cpp_a4e782c34ec65ee82a6848090e25f2ec3}{00010}}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{interpreter_8cpp_a4e782c34ec65ee82a6848090e25f2ec3}{strip\_ansi}}(std::string\ \textcolor{keyword}{const}\&\ str)\ -\/>\ \doxymbox{\hyperlink{interpreter_8cpp_a4e782c34ec65ee82a6848090e25f2ec3}{std}}::\doxymbox{\hyperlink{interpreter_8cpp_a4e782c34ec65ee82a6848090e25f2ec3}{string}}}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00011}00011\ \{}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00012}00012\ \ \ \ \ \textcolor{comment}{//This\ is\ LLM-\/made\ because\ I'm\ NOT\ writing\ a\ regex}}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00013}00013\ \ \ \ \ \textcolor{comment}{//I\ learnt\ basic\ regex\ just\ to\ explain\ the\ following:}}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00014}00014\ \ \ \ \ \textcolor{comment}{//\(\backslash\)x1b\ is\ a\ literal,\ \(\backslash\)[\ is\ a\ literal,\ [0-\/9;]*\ is\ basically\ <anynum\ or\ ;>repeated,\ [A-\/Za-\/z]\ means\ the\ whole\ alphabet}}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00015}00015\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ std::regex\ ansi(}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00016}00016\ \ \ \ \ \ \ \ \ R"{}(\(\backslash\)x1b\(\backslash\)[[0-\/9;]*[A-\/Za-\/z])"{});\ \ \ \textcolor{comment}{//\ CSI\ sequences}}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00017}00017\ \ \ \ \ \textcolor{keywordflow}{return}\ std::regex\_replace(str,\ ansi,\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00018}00018\ \}}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00019}00019\ }
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00020}\doxymbox{\hyperlink{interpreter_8cpp_aece5c8effea071621f0e1f2a87aade5f}{00020}}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{interpreter_8cpp_aece5c8effea071621f0e1f2a87aade5f}{trim\_whitespace}}(std::string\ \textcolor{keyword}{const}\&\ str)\ -\/>\ \doxymbox{\hyperlink{interpreter_8cpp_aece5c8effea071621f0e1f2a87aade5f}{std}}::\doxymbox{\hyperlink{interpreter_8cpp_aece5c8effea071621f0e1f2a87aade5f}{string}}}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00021}00021\ \{}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00022}00022\ \ \ \ \ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{auto}\ WHITESPACE\{\textcolor{stringliteral}{"{}\ \(\backslash\)n\(\backslash\)r\(\backslash\)t\(\backslash\)f\(\backslash\)v"{}}\};}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00023}00023\ \ \ \ \ \textcolor{keyword}{auto}\ \textcolor{keyword}{const}\ start\ =\ str.find\_first\_not\_of(WHITESPACE);}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00024}00024\ \ \ \ \ \textcolor{keywordflow}{if}\ (start\ ==\ std::string::npos)}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00025}00025\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00026}00026\ }
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00027}00027\ \ \ \ \ \textcolor{keyword}{auto}\ \textcolor{keyword}{const}\ end\ =\ str.find\_last\_not\_of(WHITESPACE);}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00028}00028\ \ \ \ \ \textcolor{keywordflow}{if}\ (end\ ==\ std::string::npos)}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00029}00029\ \ \ \ \ \ \ \ \ std::unreachable();}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00030}00030\ }
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00031}00031\ \ \ \ \ \textcolor{keywordflow}{return}\ str.substr(start,\ end\ +\ 1);}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00032}00032\ \}}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00033}00033\ }
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00034}\doxymbox{\hyperlink{interpreter_8cpp_a2f6fd731a78be1f73c85feb304d532b4}{00034}}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{interpreter_8cpp_a2f6fd731a78be1f73c85feb304d532b4}{interpret}}(std::string\ \textcolor{keyword}{const}\&\ str)\ -\/>\ \doxymbox{\hyperlink{interpreter_8cpp_a2f6fd731a78be1f73c85feb304d532b4}{std}}::\doxymbox{\hyperlink{interpreter_8cpp_a2f6fd731a78be1f73c85feb304d532b4}{expected}}<\doxymbox{\hyperlink{interpreter_8cpp_a2f6fd731a78be1f73c85feb304d532b4}{BackendMessage}},\ \doxymbox{\hyperlink{interpreter_8cpp_a2f6fd731a78be1f73c85feb304d532b4}{BadMessage}}>}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00035}00035\ \{}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00036}00036\ \ \ \ \ \textcolor{keyword}{auto}\ \textcolor{keyword}{const}\ stripped\_str\ =\ strip\_ansi(str);}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00037}00037\ \ \ \ \ \textcolor{comment}{//If\ not\ an\ error/warning}}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00038}00038\ \ \ \ \ \textcolor{keywordflow}{if}\ (stripped\_str.empty()\ \textcolor{keyword}{or}}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00039}00039\ \ \ \ \ \ \ \ \ !(stripped\_str.contains(\textcolor{stringliteral}{"{}Error"{}})\ \textcolor{keyword}{or}\ stripped\_str.contains(\textcolor{stringliteral}{"{}Warn"{}})))}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00040}00040\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00041}00041\ \ \ \ \ \ \ \ \ \textcolor{comment}{//if\ not\ an\ info\ on\ the\ progress}}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00042}00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!stripped\_str.contains(\textcolor{stringliteral}{"{}Progress"{}}))}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00043}00043\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00044}00044\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::unexpected(BadMessage\{\});}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00045}00045\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00046}00046\ }
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00047}00047\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ percentage\ =\ stripped\_str.substr(stripped\_str.rfind(\textcolor{stringliteral}{'\ '},\ stripped\_str.rfind(\textcolor{stringliteral}{'\%'})),\ stripped\_str.rfind(\textcolor{stringliteral}{'\%'})\ -\/\ 1);}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00048}00048\ \ \ \ \ \ \ \ \ \textcolor{comment}{//get\ the\ percentage}}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00049}00049\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ progress\{0.F\};}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00050}00050\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \textcolor{keyword}{const}\ [\_,\ ec]\ =\ std::from\_chars(percentage.data(),\ percentage.data()\ +\ percentage.size(),\ progress);}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00051}00051\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ec\ !=\ std::errc())}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00052}00052\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00053}00053\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::unexpected(BadMessage\{\});}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00054}00054\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00055}00055\ }
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00056}00056\ \ \ \ \ \ \ \ \ \textcolor{comment}{//initialize\ the\ variant}}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00057}00057\ \ \ \ \ \ \ \ \ std::variant<ErrorType,\ WarningType,\ ProgressType>\ \textcolor{keyword}{const}\ message\_ID\_or\_progress\_\{ProgressType\{\ progress\ \}\};}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00058}00058\ \ \ \ \ \ \ \ \ \textcolor{comment}{//init\ the\ backend\_message\ without\ the\ optional}}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00059}00059\ \ \ \ \ \ \ \ \ \doxymbox{\hyperlink{structBackendMessage}{BackendMessage}}\ backend\_message\{.message\_ID\_or\_progress\ =\ message\_ID\_or\_progress\_\};}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00060}00060\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ backend\_message;}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00061}00061\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00062}00062\ }
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00063}00063\ \ \ \ \ \textcolor{comment}{//Get\ the\ code\ between\ the\ [<code>]}}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00064}00064\ \ \ \ \ \textcolor{keyword}{auto}\ get\_code\ =\ [stripped\_str]}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00065}00065\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00066}00066\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \textcolor{keyword}{const}\ first\_bracket\ =\ stripped\_str.find(\textcolor{stringliteral}{'['});}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00067}00067\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \textcolor{keyword}{const}\ last\_bracket\ =\ stripped\_str.find(\textcolor{stringliteral}{']'},\ first\_bracket);}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00068}00068\ }
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00069}00069\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (first\_bracket\ ==\ std::string::npos\ \textcolor{keyword}{or}\ last\_bracket\ ==\ std::string::npos)}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00070}00070\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00071}00071\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00072}00072\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00073}00073\ }
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00074}00074\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ code\{\};}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00075}00075\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \textcolor{keyword}{const}\ [ptr,\ ec]\ =\ std::from\_chars(stripped\_str.data()\ +\ first\_bracket\ +\ 1,\ stripped\_str.data()\ +\ last\_bracket,\ code);}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00076}00076\ }
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00077}00077\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ec\ !=\ std::errc())}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00078}00078\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ -\/1;}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00079}00079\ }
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00080}00080\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ code;}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00081}00081\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00082}00082\ }
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00083}00083\ \ \ \ \ \textcolor{comment}{//Get\ the\ failing\ option\ that\ is\ behind\ the\ '<-\/'}}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00084}00084\ \ \ \ \ \textcolor{keyword}{auto}\ get\_failing\_opt\ =\ [stripped\_str]\ -\/>\ std::expected<std::string,\ BadMessage>}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00085}00085\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00086}00086\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \textcolor{keyword}{const}\ arrow\_index\ =\ stripped\_str.rfind(\textcolor{stringliteral}{"{}<-\/"{}});\textcolor{comment}{//The\ user\ might\ insert\ (GUI\ wise)\ something\ like\ "{}-\/i\ <-\/"{}\ (I\ have\ no\ idea\ if\ that\ is\ possible)}}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00087}00087\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//It's\ important\ that\ we\ don't\ have\ a\ warn/err\ string\ with\ <-\/}}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00088}00088\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (arrow\_index\ ==\ std::string::npos)}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00089}00089\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::unexpected(BadMessage\{\});}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00090}00090\ }
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00091}00091\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ trim\_whitespace(stripped\_str.substr(0,\ arrow\_index));}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00092}00092\ \ \ \ \ \};}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00093}00093\ }
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00094}00094\ \ \ \ \ \textcolor{keyword}{auto}\ \textcolor{keyword}{const}\ code\ =\ get\_code();}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00095}00095\ \ \ \ \ \textcolor{keywordflow}{if}\ (code\ ==\ -\/1)}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00096}00096\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::unexpected(BadMessage\{\});}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00097}00097\ }
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00098}00098\ \ \ \ \ \textcolor{keyword}{auto}\ \textcolor{keyword}{const}\ result\ =\ get\_failing\_opt();}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00099}00099\ \ \ \ \ \textcolor{keywordflow}{if}\ (!result.has\_value())}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00100}00100\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::unexpected(result.error());}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00101}00101\ }
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00102}00102\ \ \ \ \ \textcolor{keywordflow}{if}\ (stripped\_str.contains(\textcolor{stringliteral}{"{}Warn"{}}))}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00103}00103\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00104}00104\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{structBackendMessage}{BackendMessage}}\{\ .message\_ID\_or\_progress\ =\ WarningType\{code\},}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00105}00105\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .failing\_option\ =\ result.value(),\ \};}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00106}00106\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00107}00107\ }
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00108}00108\ \ \ \ \ \textcolor{keywordflow}{if}\ (stripped\_str.contains(\textcolor{stringliteral}{"{}Error"{}}))}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00109}00109\ \ \ \ \ \{}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00110}00110\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \doxymbox{\hyperlink{structBackendMessage}{BackendMessage}}\{\ .message\_ID\_or\_progress\ =\ ErrorType\{code\},}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00111}00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ .failing\_option\ =\ result.value(),\ \};}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00112}00112\ \ \ \ \ \}}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00113}00113\ }
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00114}00114\ \ \ \ \ \textcolor{keywordflow}{return}\ std::unexpected(BadMessage\{\});}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00115}00115\ \}}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00116}00116\ }
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00117}00117\ }
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00118}\doxymbox{\hyperlink{classQmlBackendMessage_a74ada75b13d64990da9f922b1382ae55}{00118}}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classQmlBackendMessage}{QmlBackendMessage}}::severity()\ \textcolor{keyword}{const}\ -\/>\ Severity}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00119}00119\ \{}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00120}00120\ \ \ \ \ \textcolor{keywordflow}{return}\ severity\_;}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00121}00121\ \}}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00122}00122\ }
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00123}\doxymbox{\hyperlink{classQmlBackendMessage_af82f24041ab4aaeea9b3f02f02c3b11b}{00123}}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classQmlBackendMessage}{QmlBackendMessage}}::\doxymbox{\hyperlink{classQmlBackendMessage_af82f24041ab4aaeea9b3f02f02c3b11b}{text}}()\ \textcolor{keyword}{const}\ -\/>\ \doxymbox{\hyperlink{classQmlBackendMessage_af82f24041ab4aaeea9b3f02f02c3b11b}{QString}}}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00124}00124\ \{}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00125}00125\ \ \ \ \ \textcolor{keywordflow}{return}\ text\_;}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00126}00126\ \}}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00127}00127\ }
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00128}\doxymbox{\hyperlink{classQmlBackendMessage_ae73eeaa25eb8ecfc6a49dc81d85e2bb9}{00128}}\ \textcolor{keyword}{auto}\ \doxymbox{\hyperlink{classQmlBackendMessage}{QmlBackendMessage}}::\doxymbox{\hyperlink{classQmlBackendMessage_ae73eeaa25eb8ecfc6a49dc81d85e2bb9}{ID}}()\ \textcolor{keyword}{const}\ -\/>\ \doxymbox{\hyperlink{classQmlBackendMessage_ae73eeaa25eb8ecfc6a49dc81d85e2bb9}{qint32}}}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00129}00129\ \{}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00130}00130\ \ \ \ \ \textcolor{keywordflow}{return}\ ID\_;}
+\DoxyCodeLine{\Hypertarget{interpreter_8cpp_source_l00131}00131\ \}}
+
+\end{DoxyCode}

@@ -1,0 +1,202 @@
+\doxysection{Compress-\/to-\/fit/\+src/\+common/\+comp\+\_\+options.hpp File Reference}
+\hypertarget{comp__options_8hpp}{}\label{comp__options_8hpp}\index{Compress-\/to-\/fit/src/common/comp\_options.hpp@{Compress-\/to-\/fit/src/common/comp\_options.hpp}}
+{\ttfamily \+\#include $<$cstdint$>$}\newline
+{\ttfamily \+\#include $<$string\+\_\+view$>$}\newline
+Include dependency graph for comp\+\_\+options.\+hpp:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=219pt]{comp__options_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{comp__options_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0}{Comp\+Preset}} :\+ uint8\+\_\+t \{ \newline
+\doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0a7589a60238783984f16f26794ced40e0}{NO\+\_\+\+COMP}}
+, \doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0a2894f87570ca4378c250f2c5e96d6ba0}{COMP\+\_\+1}}
+, \doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0a7669e287d92a06f35336399b2ec255dd}{COMP\+\_\+2}}
+, \doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0aaaac41c5762f6ce8e8477482b93a1b52}{COMP\+\_\+3}}
+, \newline
+\doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0a1011fe2cf6eba162403018ba22443819}{COMP\+\_\+4}}
+, \doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0ac4ef8ee83418a3d1bb09cd68c9518653}{COMP\+\_\+5}}
+, \doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0a9195bcab05e9ae5cf5b829e8e9d9a38a}{COMP\+\_\+6}}
+, \doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0ab8888debd18c782f0498759f5adb66e3}{COMP\+\_\+7}}
+, \newline
+\doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0a6c7cd5bf0cb0515ed3a8bbe53b8059f7}{COMP\+\_\+8}}
+, \doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0a623be7eb54f4a715b71e63dbd0d7d314}{COMP\+\_\+\+MAX}}
+ \}
+\item 
+enum class \doxymbox{\hyperlink{comp__options_8hpp_a77b7b3d2b23480b5378dbd65c7af9178}{Comp\+Type}} :\+ uint8\+\_\+t \{ \doxymbox{\hyperlink{comp__options_8hpp_a77b7b3d2b23480b5378dbd65c7af9178af6b1e796b8ffae4172e2752c26dd404c}{LZ77}}
+, \doxymbox{\hyperlink{comp__options_8hpp_a77b7b3d2b23480b5378dbd65c7af9178a26a4b44a837bf97b972628509912b4a5}{MAX}}
+ \}
+\begin{DoxyCompactList}\small\item\em Identify compressor used. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+constexpr std::\+string\+\_\+view \doxymbox{\hyperlink{comp__options_8hpp_a00efb0a9acab4c356b0b4550de60af1e}{COMPRESSOR\+\_\+\+STR\+\_\+\+OPTIONS}} \+[$\,$]\+
+\item 
+constexpr size\+\_\+t \doxymbox{\hyperlink{comp__options_8hpp_a4f6782c41a389cd9988f6c570fc6dc0c}{N\+\_\+\+FILES\+\_\+\+LIMIT}} = 1\textquotesingle{}000
+\item 
+constexpr size\+\_\+t \doxymbox{\hyperlink{comp__options_8hpp_aec7880c199d5393b78db8e52d180495b}{SIZE\+\_\+\+FILES\+\_\+\+MIN}} = 512
+\end{DoxyCompactItemize}
+
+
+\label{doc-enum-members}
+\Hypertarget{comp__options_8hpp_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0}\index{comp\_options.hpp@{comp\_options.hpp}!CompPreset@{CompPreset}}
+\index{CompPreset@{CompPreset}!comp\_options.hpp@{comp\_options.hpp}}
+\doxysubsubsection{\texorpdfstring{CompPreset}{CompPreset}}
+{\footnotesize\ttfamily \label{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0} 
+enum \doxymbox{\hyperlink{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0}{Comp\+Preset}} :\+ uint8\+\_\+t}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NO\_COMP@{NO\_COMP}!comp\_options.hpp@{comp\_options.hpp}}
+\index{comp\_options.hpp@{comp\_options.hpp}!NO\_COMP@{NO\_COMP}}
+}\Hypertarget{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0a7589a60238783984f16f26794ced40e0}\label{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0a7589a60238783984f16f26794ced40e0} 
+NO\+\_\+\+COMP&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{COMP\_1@{COMP\_1}!comp\_options.hpp@{comp\_options.hpp}}
+\index{comp\_options.hpp@{comp\_options.hpp}!COMP\_1@{COMP\_1}}
+}\Hypertarget{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0a2894f87570ca4378c250f2c5e96d6ba0}\label{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0a2894f87570ca4378c250f2c5e96d6ba0} 
+COMP\+\_\+1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{COMP\_2@{COMP\_2}!comp\_options.hpp@{comp\_options.hpp}}
+\index{comp\_options.hpp@{comp\_options.hpp}!COMP\_2@{COMP\_2}}
+}\Hypertarget{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0a7669e287d92a06f35336399b2ec255dd}\label{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0a7669e287d92a06f35336399b2ec255dd} 
+COMP\+\_\+2&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{COMP\_3@{COMP\_3}!comp\_options.hpp@{comp\_options.hpp}}
+\index{comp\_options.hpp@{comp\_options.hpp}!COMP\_3@{COMP\_3}}
+}\Hypertarget{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0aaaac41c5762f6ce8e8477482b93a1b52}\label{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0aaaac41c5762f6ce8e8477482b93a1b52} 
+COMP\+\_\+3&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{COMP\_4@{COMP\_4}!comp\_options.hpp@{comp\_options.hpp}}
+\index{comp\_options.hpp@{comp\_options.hpp}!COMP\_4@{COMP\_4}}
+}\Hypertarget{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0a1011fe2cf6eba162403018ba22443819}\label{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0a1011fe2cf6eba162403018ba22443819} 
+COMP\+\_\+4&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{COMP\_5@{COMP\_5}!comp\_options.hpp@{comp\_options.hpp}}
+\index{comp\_options.hpp@{comp\_options.hpp}!COMP\_5@{COMP\_5}}
+}\Hypertarget{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0ac4ef8ee83418a3d1bb09cd68c9518653}\label{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0ac4ef8ee83418a3d1bb09cd68c9518653} 
+COMP\+\_\+5&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{COMP\_6@{COMP\_6}!comp\_options.hpp@{comp\_options.hpp}}
+\index{comp\_options.hpp@{comp\_options.hpp}!COMP\_6@{COMP\_6}}
+}\Hypertarget{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0a9195bcab05e9ae5cf5b829e8e9d9a38a}\label{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0a9195bcab05e9ae5cf5b829e8e9d9a38a} 
+COMP\+\_\+6&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{COMP\_7@{COMP\_7}!comp\_options.hpp@{comp\_options.hpp}}
+\index{comp\_options.hpp@{comp\_options.hpp}!COMP\_7@{COMP\_7}}
+}\Hypertarget{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0ab8888debd18c782f0498759f5adb66e3}\label{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0ab8888debd18c782f0498759f5adb66e3} 
+COMP\+\_\+7&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{COMP\_8@{COMP\_8}!comp\_options.hpp@{comp\_options.hpp}}
+\index{comp\_options.hpp@{comp\_options.hpp}!COMP\_8@{COMP\_8}}
+}\Hypertarget{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0a6c7cd5bf0cb0515ed3a8bbe53b8059f7}\label{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0a6c7cd5bf0cb0515ed3a8bbe53b8059f7} 
+COMP\+\_\+8&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{COMP\_MAX@{COMP\_MAX}!comp\_options.hpp@{comp\_options.hpp}}
+\index{comp\_options.hpp@{comp\_options.hpp}!COMP\_MAX@{COMP\_MAX}}
+}\Hypertarget{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0a623be7eb54f4a715b71e63dbd0d7d314}\label{comp__options_8hpp_a59fc5d9b777790e56395e645e4205db0a623be7eb54f4a715b71e63dbd0d7d314} 
+COMP\+\_\+\+MAX&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{comp__options_8hpp_source_l00015}{15}} of file \doxymbox{\hyperlink{comp__options_8hpp_source}{comp\+\_\+options.\+hpp}}.
+
+\Hypertarget{comp__options_8hpp_a77b7b3d2b23480b5378dbd65c7af9178}\index{comp\_options.hpp@{comp\_options.hpp}!CompType@{CompType}}
+\index{CompType@{CompType}!comp\_options.hpp@{comp\_options.hpp}}
+\doxysubsubsection{\texorpdfstring{CompType}{CompType}}
+{\footnotesize\ttfamily \label{comp__options_8hpp_a77b7b3d2b23480b5378dbd65c7af9178} 
+enum class \doxymbox{\hyperlink{comp__options_8hpp_a77b7b3d2b23480b5378dbd65c7af9178}{Comp\+Type}} :\+ uint8\+\_\+t\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+Identify compressor used. 
+
+\begin{DoxyNote}{Note}
+You must not reorder the enums or (especially) remove MAX. For every new enum, MAX shall always stay the max enum possible. DO NOT CUSTOMIZE THE VALUES. YOU WILL MAKE PREEXISTING .tzf FILES INVALID. 
+\end{DoxyNote}
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LZ77@{LZ77}!comp\_options.hpp@{comp\_options.hpp}}
+\index{comp\_options.hpp@{comp\_options.hpp}!LZ77@{LZ77}}
+}\Hypertarget{comp__options_8hpp_a77b7b3d2b23480b5378dbd65c7af9178af6b1e796b8ffae4172e2752c26dd404c}\label{comp__options_8hpp_a77b7b3d2b23480b5378dbd65c7af9178af6b1e796b8ffae4172e2752c26dd404c} 
+LZ77&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MAX@{MAX}!comp\_options.hpp@{comp\_options.hpp}}
+\index{comp\_options.hpp@{comp\_options.hpp}!MAX@{MAX}}
+}\Hypertarget{comp__options_8hpp_a77b7b3d2b23480b5378dbd65c7af9178a26a4b44a837bf97b972628509912b4a5}\label{comp__options_8hpp_a77b7b3d2b23480b5378dbd65c7af9178a26a4b44a837bf97b972628509912b4a5} 
+MAX&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{comp__options_8hpp_source_l00036}{36}} of file \doxymbox{\hyperlink{comp__options_8hpp_source}{comp\+\_\+options.\+hpp}}.
+
+
+
+\label{doc-var-members}
+\Hypertarget{comp__options_8hpp_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{comp__options_8hpp_a00efb0a9acab4c356b0b4550de60af1e}\index{comp\_options.hpp@{comp\_options.hpp}!COMPRESSOR\_STR\_OPTIONS@{COMPRESSOR\_STR\_OPTIONS}}
+\index{COMPRESSOR\_STR\_OPTIONS@{COMPRESSOR\_STR\_OPTIONS}!comp\_options.hpp@{comp\_options.hpp}}
+\doxysubsubsection{\texorpdfstring{COMPRESSOR\_STR\_OPTIONS}{COMPRESSOR\_STR\_OPTIONS}}
+{\footnotesize\ttfamily \label{comp__options_8hpp_a00efb0a9acab4c356b0b4550de60af1e} 
+std::\+string\+\_\+view COMPRESSOR\+\_\+\+STR\+\_\+\+OPTIONS\+[$\,$]\+\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+{\bfseries Initial value:\+}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =}
+\DoxyCodeLine{\{}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}LZ77"{}},}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+
+
+Definition at line \doxymbox{\hyperlink{comp__options_8hpp_source_l00042}{42}} of file \doxymbox{\hyperlink{comp__options_8hpp_source}{comp\+\_\+options.\+hpp}}.
+
+\Hypertarget{comp__options_8hpp_a4f6782c41a389cd9988f6c570fc6dc0c}\index{comp\_options.hpp@{comp\_options.hpp}!N\_FILES\_LIMIT@{N\_FILES\_LIMIT}}
+\index{N\_FILES\_LIMIT@{N\_FILES\_LIMIT}!comp\_options.hpp@{comp\_options.hpp}}
+\doxysubsubsection{\texorpdfstring{N\_FILES\_LIMIT}{N\_FILES\_LIMIT}}
+{\footnotesize\ttfamily \label{comp__options_8hpp_a4f6782c41a389cd9988f6c570fc6dc0c} 
+size\+\_\+t N\+\_\+\+FILES\+\_\+\+LIMIT = 1\textquotesingle{}000\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{comp__options_8hpp_source_l00047}{47}} of file \doxymbox{\hyperlink{comp__options_8hpp_source}{comp\+\_\+options.\+hpp}}.
+
+\Hypertarget{comp__options_8hpp_aec7880c199d5393b78db8e52d180495b}\index{comp\_options.hpp@{comp\_options.hpp}!SIZE\_FILES\_MIN@{SIZE\_FILES\_MIN}}
+\index{SIZE\_FILES\_MIN@{SIZE\_FILES\_MIN}!comp\_options.hpp@{comp\_options.hpp}}
+\doxysubsubsection{\texorpdfstring{SIZE\_FILES\_MIN}{SIZE\_FILES\_MIN}}
+{\footnotesize\ttfamily \label{comp__options_8hpp_aec7880c199d5393b78db8e52d180495b} 
+size\+\_\+t SIZE\+\_\+\+FILES\+\_\+\+MIN = 512\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [constexpr]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{comp__options_8hpp_source_l00048}{48}} of file \doxymbox{\hyperlink{comp__options_8hpp_source}{comp\+\_\+options.\+hpp}}.
+

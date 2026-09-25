@@ -1,0 +1,295 @@
+\doxysection{Compress-\/to-\/fit/\+src/\+common/\+error\+\_\+warn\+\_\+print.hpp File Reference}
+\hypertarget{error__warn__print_8hpp}{}\label{error__warn__print_8hpp}\index{Compress-\/to-\/fit/src/common/error\_warn\_print.hpp@{Compress-\/to-\/fit/src/common/error\_warn\_print.hpp}}
+{\ttfamily \+\#include $<$cassert$>$}\newline
+{\ttfamily \+\#include $<$stdexcept$>$}\newline
+{\ttfamily \+\#include $<$string$>$}\newline
+{\ttfamily \+\#include $<$print$>$}\newline
+Include dependency graph for error\+\_\+warn\+\_\+print.\+hpp:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=316pt]{error__warn__print_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file:\+
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{error__warn__print_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \doxymbox{\hyperlink{structErrorException}{Error\+Exception}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \doxymbox{\hyperlink{namespaceERR__STRING}{ERR\+\_\+\+STRING}}
+\item 
+namespace \doxymbox{\hyperlink{namespaceWARN__STRING}{WARN\+\_\+\+STRING}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum class \doxymbox{\hyperlink{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42de}{Error\+Type}} :\+ int \{ \newline
+\doxymbox{\hyperlink{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42dead306b6fdee05fe87455110ddf6501e6c}{NO\+\_\+\+ERROR}}
+, \doxymbox{\hyperlink{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42deab6e89aef4ee41f778bd0dd285f0d5c20}{VALUE\+\_\+\+ERROR}}
+, \doxymbox{\hyperlink{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42dea25935ec8650130f4dd9f87d403493ac3}{MISSING\+\_\+\+ARGUMENT}}
+, \doxymbox{\hyperlink{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42dea756ec3dd26d1a73363eb3e68b6e820df}{SYNTAX\+\_\+\+ERROR}}
+, \newline
+\doxymbox{\hyperlink{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42dea18dccefdab88f68c78bb114e0e03f61d}{OPTION\+\_\+\+UNAVAILABLE}}
+, \doxymbox{\hyperlink{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42dea10ea5c18cb2990c51bb9db888917165d}{PATH\+\_\+\+NOT\+\_\+\+FOUND}}
+, \doxymbox{\hyperlink{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42deac5d1d2985b0085be54ef3223fae157c7}{PATH\+\_\+\+NOT\+\_\+\+ACCESSIBLE}}
+, \doxymbox{\hyperlink{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42dea18d76a5de8f052b40860c3cc1623e5d6}{PATH\+\_\+\+INVALID}}
+, \newline
+\doxymbox{\hyperlink{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42deafc88cb342c01e41f5f45657a51cf65cb}{FILE\+\_\+\+INVALID}}
+, \doxymbox{\hyperlink{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42dea2cdc1eecb70cc6dabd09b6f9be6c72c8}{FILE\+\_\+\+CORRUPTED}}
+, \doxymbox{\hyperlink{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42dead5459024a3d9e8c304e106f0c0fc8ffe}{DRIVE\+\_\+\+ERROR}}
+, \doxymbox{\hyperlink{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42dea6aec2e033766444573e60b2ecdbfcde8}{INVALID\+\_\+\+DECOMPRESSION}}
+, \newline
+\doxymbox{\hyperlink{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42deae8266dd47c23ed1f1c76b1e0669a3e47}{DIR\+\_\+\+COMPRESSION}}
+ \}
+\begin{DoxyCompactList}\small\item\em Parser error types. \end{DoxyCompactList}\item 
+enum class \doxymbox{\hyperlink{error__warn__print_8hpp_aa278aa207bdeddc8432b560d1e1312ae}{Warning\+Type}} \{ \newline
+\doxymbox{\hyperlink{error__warn__print_8hpp_aa278aa207bdeddc8432b560d1e1312aea429a96bd6dfce0e85b1d88b7ea7ff59f}{RECOMPRESSION}}
+, \doxymbox{\hyperlink{error__warn__print_8hpp_aa278aa207bdeddc8432b560d1e1312aeabd356f5fc145a69a6d0b3cbac5d70c00}{PORTIONS\+\_\+\+OUT\+\_\+\+OF\+\_\+\+RANGE}}
+, \doxymbox{\hyperlink{error__warn__print_8hpp_aa278aa207bdeddc8432b560d1e1312aea3679d74393649174baa5db30d7e70081}{CONCAT\+\_\+\+AMBIGUITY}}
+, \doxymbox{\hyperlink{error__warn__print_8hpp_aa278aa207bdeddc8432b560d1e1312aeac45bc9105bed6251f81376a78a1f5c25}{CONCURRENCY\+\_\+\+OUT\+\_\+\+OF\+\_\+\+RANGE\+\_\+\+UPPER}}
+, \newline
+\doxymbox{\hyperlink{error__warn__print_8hpp_aa278aa207bdeddc8432b560d1e1312aea20185411fe4cc4b2188d1fd0838cfec3}{CONCURRENCY\+\_\+\+OUT\+\_\+\+OF\+\_\+\+RANGE\+\_\+\+LOWER}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \doxymbox{\hyperlink{error__warn__print_8hpp_a2242bb8ed849903356437dd8961008b9}{throw\+\_\+error}} (\doxymbox{\hyperlink{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42de}{Error\+Type}} const error, const std::\+string \&error\+\_\+option="{}"{})
+\begin{DoxyCompactList}\small\item\em throw\+\_\+error is a custom error logger to the terminal. This will WILL throw. \end{DoxyCompactList}\item 
+void \doxymbox{\hyperlink{error__warn__print_8hpp_a28a87d9ff3c635c4d6bfdd3b8c1c21dc}{print\+\_\+warn}} (\doxymbox{\hyperlink{error__warn__print_8hpp_aa278aa207bdeddc8432b560d1e1312ae}{Warning\+Type}} const warn, const std::\+string \&warn\+\_\+option="{}"{})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const std::\+string \doxymbox{\hyperlink{namespaceERR__STRING_a220301514d7ebf48975be72979b79ddf}{ERR\+\_\+\+STRING::\+\+SYNTAX}} = "{}\textbackslash{}033\+[41m\+Error\textbackslash{}033\+[0m\textbackslash{}033\+[31m\+["{} + std::\+to\+\_\+string(static\+\_\+cast$<$int$>$(\doxymbox{\hyperlink{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42dea756ec3dd26d1a73363eb3e68b6e820df}{Error\+Type::\+\+SYNTAX\+\_\+\+ERROR}})) + "{}]\+:\+ the syntax for this option is incorrect. \textbackslash{}033\+[34m\+Tip\textbackslash{}033\+[0m:\+ \textquotesingle{}-\/h\textquotesingle{} or \textquotesingle{}-\/help\textquotesingle{} for help\textbackslash{}n"{}
+\item 
+const std::\+string \doxymbox{\hyperlink{namespaceERR__STRING_ab87f3f9775ac9b28bca2f1c02520077c}{ERR\+\_\+\+STRING::\+\+VALUE}} = "{}\textbackslash{}033\+[41m\+Error\textbackslash{}033\+[0m\textbackslash{}033\+[31m\+["{} + std::\+to\+\_\+string(static\+\_\+cast$<$int$>$(\doxymbox{\hyperlink{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42deab6e89aef4ee41f778bd0dd285f0d5c20}{Error\+Type::\+\+VALUE\+\_\+\+ERROR}})) + "{}]\+:\+ this is an incorrect value for this option.\textbackslash{}033\+[0m\textbackslash{}n"{}
+\item 
+const std::\+string \doxymbox{\hyperlink{namespaceERR__STRING_af81b6954b18ad24febeb376c7db6fcca}{ERR\+\_\+\+STRING::\+\+MISSING\+\_\+\+ARGUMENT}} = "{}\textbackslash{}033\+[41m\+Error\textbackslash{}033\+[0m\textbackslash{}033\+[31m\+["{} + std::\+to\+\_\+string(static\+\_\+cast$<$int$>$(\doxymbox{\hyperlink{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42dea25935ec8650130f4dd9f87d403493ac3}{Error\+Type::\+\+MISSING\+\_\+\+ARGUMENT}})) + "{}]\+:\+ this argument is missing.\textbackslash{}033\+[0m\textbackslash{}n"{}
+\item 
+const std::\+string \doxymbox{\hyperlink{namespaceERR__STRING_afc81976c232892e2b4e16e100a14423e}{ERR\+\_\+\+STRING::\+\+OPTION\+\_\+\+UNAVAILABLE}} = "{}\textbackslash{}033\+[41m\+Error\textbackslash{}033\+[0m\textbackslash{}033\+[31m\+["{} + std::\+to\+\_\+string(static\+\_\+cast$<$int$>$(\doxymbox{\hyperlink{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42dea18dccefdab88f68c78bb114e0e03f61d}{Error\+Type::\+\+OPTION\+\_\+\+UNAVAILABLE}})) + "{}]\+:\+ this option is unavailable in this context.\textbackslash{}033\+[0m\textbackslash{}n"{}
+\item 
+const std::\+string \doxymbox{\hyperlink{namespaceERR__STRING_a4e0f1c39222e841bb9bc92fa5c93f12d}{ERR\+\_\+\+STRING::\+\+PATH\+\_\+\+NOT\+\_\+\+FOUND}} = "{}\textbackslash{}033\+[41m\+Error\textbackslash{}033\+[0m\textbackslash{}033\+[31m\+["{} + std::\+to\+\_\+string(static\+\_\+cast$<$int$>$(\doxymbox{\hyperlink{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42dea10ea5c18cb2990c51bb9db888917165d}{Error\+Type::\+\+PATH\+\_\+\+NOT\+\_\+\+FOUND}})) + "{}]\+:\+ this path could not be found, make sure to double quote (\textbackslash{}"{}) around your path if there are spaces in it\textbackslash{}033\+[0m\textbackslash{}n"{}
+\item 
+const std::\+string \doxymbox{\hyperlink{namespaceERR__STRING_adcca934fbf807fcdae04da825c63d620}{ERR\+\_\+\+STRING::\+\+PATH\+\_\+\+NOT\+\_\+\+ACCESSIBLE}} = "{}\textbackslash{}033\+[41m\+Error\textbackslash{}033\+[0m\textbackslash{}033\+[31m\+["{} + std::\+to\+\_\+string(static\+\_\+cast$<$int$>$(\doxymbox{\hyperlink{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42deac5d1d2985b0085be54ef3223fae157c7}{Error\+Type::\+\+PATH\+\_\+\+NOT\+\_\+\+ACCESSIBLE}})) + "{}]\+:\+ this path could not be accessed, the program may not have some required privileges.\textbackslash{}033\+[34m\+Tip\textbackslash{}033\+[0m:\+\+Such an error has multiple causes. Check path, folder and other things as such.\textbackslash{}033\+[0m\textbackslash{}n"{}
+\item 
+const std::\+string \doxymbox{\hyperlink{namespaceERR__STRING_a4a1bb1b9a2811049bac67c85d03d4a09}{ERR\+\_\+\+STRING::\+\+PATH\+\_\+\+INVALID}} = "{}\textbackslash{}033\+[41m\+Error\textbackslash{}033\+[0m\textbackslash{}033\+[31m\+["{} + std::\+to\+\_\+string(static\+\_\+cast$<$int$>$(\doxymbox{\hyperlink{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42dea18d76a5de8f052b40860c3cc1623e5d6}{Error\+Type::\+\+PATH\+\_\+\+INVALID}})) + "{}]\+:\+ this path is invalid for the selected operation (i.\+e. compressing a folder or concatenating a single file). Make sure to double quote (\textbackslash{}"{} \textbackslash{}"{}) around your path if there are spaces in it.\textbackslash{}033\+[0m\textbackslash{}n"{}
+\item 
+const std::\+string \doxymbox{\hyperlink{namespaceERR__STRING_a6e076d05d154540639df579a40ab57d2}{ERR\+\_\+\+STRING::\+\+FILE\+\_\+\+INVALID}} = "{}\textbackslash{}033\+[41m\+Error\textbackslash{}033\+[0m\textbackslash{}033\+[31m\+["{} + std::\+to\+\_\+string(static\+\_\+cast$<$int$>$(\doxymbox{\hyperlink{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42deafc88cb342c01e41f5f45657a51cf65cb}{Error\+Type::\+\+FILE\+\_\+\+INVALID}})) + "{}]\+:\+ this file is invalid. i.\+e. it is the wrong type or it is unrecognizable.\textbackslash{}033\+[0m\textbackslash{}n"{}
+\item 
+const std::\+string \doxymbox{\hyperlink{namespaceERR__STRING_a6cfbf91e4f1d44fdc579d4aaac395051}{ERR\+\_\+\+STRING::\+\+FILE\+\_\+\+CORRUPTED}} = "{}\textbackslash{}033\+[41m\+Error\textbackslash{}033\+[0m\textbackslash{}033\+[31m\+["{} + std::\+to\+\_\+string(static\+\_\+cast$<$int$>$(\doxymbox{\hyperlink{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42dea2cdc1eecb70cc6dabd09b6f9be6c72c8}{Error\+Type::\+\+FILE\+\_\+\+CORRUPTED}})) + "{}]\+:\+ this file is corrupted. Unable to continue decompression properly.\textbackslash{}033\+[0m\textbackslash{}n"{}
+\item 
+const std::\+string \doxymbox{\hyperlink{namespaceERR__STRING_aba29f8774197da0a4890bc532fbbab15}{ERR\+\_\+\+STRING::\+\+DRIVE\+\_\+\+ERROR}} = "{}\textbackslash{}033\+[41m\+Error\textbackslash{}033\+[0m\textbackslash{}033\+[31m\+["{} + std::\+to\+\_\+string(static\+\_\+cast$<$int$>$(\doxymbox{\hyperlink{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42dead5459024a3d9e8c304e106f0c0fc8ffe}{Error\+Type::\+\+DRIVE\+\_\+\+ERROR}})) + "{}]\+:\+ there has been a critical error when accessing this file. Please check your drive.\textbackslash{}033\+[0m\textbackslash{}n"{}
+\item 
+const std::\+string \doxymbox{\hyperlink{namespaceERR__STRING_a8797da65711c547cbf975bcf9d287505}{ERR\+\_\+\+STRING::\+\+INVALID\+\_\+\+DECOMPRESSION}} ="{}\textbackslash{}033\+[41m\+Error\textbackslash{}033\+[0m\textbackslash{}033\+[31m\+["{} + std::\+to\+\_\+string(static\+\_\+cast$<$int$>$(\doxymbox{\hyperlink{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42dea6aec2e033766444573e60b2ecdbfcde8}{Error\+Type::\+\+INVALID\+\_\+\+DECOMPRESSION}})) + "{}]\+:\+ decompression is invalid on this file, you may have tried to decompress a normal file.\textbackslash{}033\+[0m\textbackslash{}n"{}
+\item 
+const std::\+string \doxymbox{\hyperlink{namespaceERR__STRING_a10aa42d66046b2a4263633a39f005124}{ERR\+\_\+\+STRING::\+\+DIR\+\_\+\+COMPRESSION}} = "{}\textbackslash{}033\+[41m\+Error\textbackslash{}033\+[0m\textbackslash{}033\+[31m\+["{} + std::\+to\+\_\+string(static\+\_\+cast$<$int$>$(\doxymbox{\hyperlink{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42deae8266dd47c23ed1f1c76b1e0669a3e47}{Error\+Type::\+\+DIR\+\_\+\+COMPRESSION}})) + "{}]\+:\+ folder compression is unavailable. \textbackslash{}033\+[34m\+Tip\textbackslash{}033\+[0m:\+ If you are trying to decompress a folder of files, check the related command in the help page with \textquotesingle{}-\/h\textquotesingle{} or \textquotesingle{}-\/help\textquotesingle{}\textbackslash{}n"{}
+\item 
+const std::\+string \doxymbox{\hyperlink{namespaceWARN__STRING_a3484e445cf1e4cdf965160b363ce9351}{WARN\+\_\+\+STRING::\+\+RECOMPRESSION}}
+\item 
+const std::\+string \doxymbox{\hyperlink{namespaceWARN__STRING_a97695fd577cd87a855b4d08e7d29ed6a}{WARN\+\_\+\+STRING::\+\+PORTIONS\+\_\+\+OUT\+\_\+\+OF\+\_\+\+RANGE}}
+\item 
+const std::\+string \doxymbox{\hyperlink{namespaceWARN__STRING_ae325c9559d30aa8bb285b17b84ae925f}{WARN\+\_\+\+STRING::\+\+CONCAT\+\_\+\+AMBIGUITY}}
+\item 
+const std::\+string \doxymbox{\hyperlink{namespaceWARN__STRING_a78e1b884c0f4442ef73c83d720cb8bc1}{WARN\+\_\+\+STRING::\+\+CONCURRENCY\+\_\+\+OUT\+\_\+\+OF\+\_\+\+RANGE\+\_\+\+UPPER}}
+\item 
+const std::\+string \doxymbox{\hyperlink{namespaceWARN__STRING_a8be1a21d9eb2f06f3b7bf5bc00393c15}{WARN\+\_\+\+STRING::\+\+CONCURRENCY\+\_\+\+OUT\+\_\+\+OF\+\_\+\+RANGE\+\_\+\+LOWER}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-enum-members}
+\Hypertarget{error__warn__print_8hpp_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42de}\index{error\_warn\_print.hpp@{error\_warn\_print.hpp}!ErrorType@{ErrorType}}
+\index{ErrorType@{ErrorType}!error\_warn\_print.hpp@{error\_warn\_print.hpp}}
+\doxysubsubsection{\texorpdfstring{ErrorType}{ErrorType}}
+{\footnotesize\ttfamily \label{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42de} 
+enum class \doxymbox{\hyperlink{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42de}{Error\+Type}} :\+ int\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+Parser error types. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NO\_ERROR@{NO\_ERROR}!error\_warn\_print.hpp@{error\_warn\_print.hpp}}
+\index{error\_warn\_print.hpp@{error\_warn\_print.hpp}!NO\_ERROR@{NO\_ERROR}}
+}\Hypertarget{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42dead306b6fdee05fe87455110ddf6501e6c}\label{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42dead306b6fdee05fe87455110ddf6501e6c} 
+NO\+\_\+\+ERROR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{VALUE\_ERROR@{VALUE\_ERROR}!error\_warn\_print.hpp@{error\_warn\_print.hpp}}
+\index{error\_warn\_print.hpp@{error\_warn\_print.hpp}!VALUE\_ERROR@{VALUE\_ERROR}}
+}\Hypertarget{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42deab6e89aef4ee41f778bd0dd285f0d5c20}\label{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42deab6e89aef4ee41f778bd0dd285f0d5c20} 
+VALUE\+\_\+\+ERROR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MISSING\_ARGUMENT@{MISSING\_ARGUMENT}!error\_warn\_print.hpp@{error\_warn\_print.hpp}}
+\index{error\_warn\_print.hpp@{error\_warn\_print.hpp}!MISSING\_ARGUMENT@{MISSING\_ARGUMENT}}
+}\Hypertarget{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42dea25935ec8650130f4dd9f87d403493ac3}\label{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42dea25935ec8650130f4dd9f87d403493ac3} 
+MISSING\+\_\+\+ARGUMENT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SYNTAX\_ERROR@{SYNTAX\_ERROR}!error\_warn\_print.hpp@{error\_warn\_print.hpp}}
+\index{error\_warn\_print.hpp@{error\_warn\_print.hpp}!SYNTAX\_ERROR@{SYNTAX\_ERROR}}
+}\Hypertarget{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42dea756ec3dd26d1a73363eb3e68b6e820df}\label{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42dea756ec3dd26d1a73363eb3e68b6e820df} 
+SYNTAX\+\_\+\+ERROR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OPTION\_UNAVAILABLE@{OPTION\_UNAVAILABLE}!error\_warn\_print.hpp@{error\_warn\_print.hpp}}
+\index{error\_warn\_print.hpp@{error\_warn\_print.hpp}!OPTION\_UNAVAILABLE@{OPTION\_UNAVAILABLE}}
+}\Hypertarget{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42dea18dccefdab88f68c78bb114e0e03f61d}\label{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42dea18dccefdab88f68c78bb114e0e03f61d} 
+OPTION\+\_\+\+UNAVAILABLE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PATH\_NOT\_FOUND@{PATH\_NOT\_FOUND}!error\_warn\_print.hpp@{error\_warn\_print.hpp}}
+\index{error\_warn\_print.hpp@{error\_warn\_print.hpp}!PATH\_NOT\_FOUND@{PATH\_NOT\_FOUND}}
+}\Hypertarget{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42dea10ea5c18cb2990c51bb9db888917165d}\label{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42dea10ea5c18cb2990c51bb9db888917165d} 
+PATH\+\_\+\+NOT\+\_\+\+FOUND&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PATH\_NOT\_ACCESSIBLE@{PATH\_NOT\_ACCESSIBLE}!error\_warn\_print.hpp@{error\_warn\_print.hpp}}
+\index{error\_warn\_print.hpp@{error\_warn\_print.hpp}!PATH\_NOT\_ACCESSIBLE@{PATH\_NOT\_ACCESSIBLE}}
+}\Hypertarget{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42deac5d1d2985b0085be54ef3223fae157c7}\label{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42deac5d1d2985b0085be54ef3223fae157c7} 
+PATH\+\_\+\+NOT\+\_\+\+ACCESSIBLE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PATH\_INVALID@{PATH\_INVALID}!error\_warn\_print.hpp@{error\_warn\_print.hpp}}
+\index{error\_warn\_print.hpp@{error\_warn\_print.hpp}!PATH\_INVALID@{PATH\_INVALID}}
+}\Hypertarget{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42dea18d76a5de8f052b40860c3cc1623e5d6}\label{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42dea18d76a5de8f052b40860c3cc1623e5d6} 
+PATH\+\_\+\+INVALID&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FILE\_INVALID@{FILE\_INVALID}!error\_warn\_print.hpp@{error\_warn\_print.hpp}}
+\index{error\_warn\_print.hpp@{error\_warn\_print.hpp}!FILE\_INVALID@{FILE\_INVALID}}
+}\Hypertarget{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42deafc88cb342c01e41f5f45657a51cf65cb}\label{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42deafc88cb342c01e41f5f45657a51cf65cb} 
+FILE\+\_\+\+INVALID&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FILE\_CORRUPTED@{FILE\_CORRUPTED}!error\_warn\_print.hpp@{error\_warn\_print.hpp}}
+\index{error\_warn\_print.hpp@{error\_warn\_print.hpp}!FILE\_CORRUPTED@{FILE\_CORRUPTED}}
+}\Hypertarget{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42dea2cdc1eecb70cc6dabd09b6f9be6c72c8}\label{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42dea2cdc1eecb70cc6dabd09b6f9be6c72c8} 
+FILE\+\_\+\+CORRUPTED&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DRIVE\_ERROR@{DRIVE\_ERROR}!error\_warn\_print.hpp@{error\_warn\_print.hpp}}
+\index{error\_warn\_print.hpp@{error\_warn\_print.hpp}!DRIVE\_ERROR@{DRIVE\_ERROR}}
+}\Hypertarget{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42dead5459024a3d9e8c304e106f0c0fc8ffe}\label{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42dead5459024a3d9e8c304e106f0c0fc8ffe} 
+DRIVE\+\_\+\+ERROR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{INVALID\_DECOMPRESSION@{INVALID\_DECOMPRESSION}!error\_warn\_print.hpp@{error\_warn\_print.hpp}}
+\index{error\_warn\_print.hpp@{error\_warn\_print.hpp}!INVALID\_DECOMPRESSION@{INVALID\_DECOMPRESSION}}
+}\Hypertarget{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42dea6aec2e033766444573e60b2ecdbfcde8}\label{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42dea6aec2e033766444573e60b2ecdbfcde8} 
+INVALID\+\_\+\+DECOMPRESSION&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DIR\_COMPRESSION@{DIR\_COMPRESSION}!error\_warn\_print.hpp@{error\_warn\_print.hpp}}
+\index{error\_warn\_print.hpp@{error\_warn\_print.hpp}!DIR\_COMPRESSION@{DIR\_COMPRESSION}}
+}\Hypertarget{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42deae8266dd47c23ed1f1c76b1e0669a3e47}\label{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42deae8266dd47c23ed1f1c76b1e0669a3e47} 
+DIR\+\_\+\+COMPRESSION&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{error__warn__print_8hpp_source_l00017}{17}} of file \doxymbox{\hyperlink{error__warn__print_8hpp_source}{error\+\_\+warn\+\_\+print.\+hpp}}.
+
+\Hypertarget{error__warn__print_8hpp_aa278aa207bdeddc8432b560d1e1312ae}\index{error\_warn\_print.hpp@{error\_warn\_print.hpp}!WarningType@{WarningType}}
+\index{WarningType@{WarningType}!error\_warn\_print.hpp@{error\_warn\_print.hpp}}
+\doxysubsubsection{\texorpdfstring{WarningType}{WarningType}}
+{\footnotesize\ttfamily \label{error__warn__print_8hpp_aa278aa207bdeddc8432b560d1e1312ae} 
+enum class \doxymbox{\hyperlink{error__warn__print_8hpp_aa278aa207bdeddc8432b560d1e1312ae}{Warning\+Type}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RECOMPRESSION@{RECOMPRESSION}!error\_warn\_print.hpp@{error\_warn\_print.hpp}}
+\index{error\_warn\_print.hpp@{error\_warn\_print.hpp}!RECOMPRESSION@{RECOMPRESSION}}
+}\Hypertarget{error__warn__print_8hpp_aa278aa207bdeddc8432b560d1e1312aea429a96bd6dfce0e85b1d88b7ea7ff59f}\label{error__warn__print_8hpp_aa278aa207bdeddc8432b560d1e1312aea429a96bd6dfce0e85b1d88b7ea7ff59f} 
+RECOMPRESSION&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PORTIONS\_OUT\_OF\_RANGE@{PORTIONS\_OUT\_OF\_RANGE}!error\_warn\_print.hpp@{error\_warn\_print.hpp}}
+\index{error\_warn\_print.hpp@{error\_warn\_print.hpp}!PORTIONS\_OUT\_OF\_RANGE@{PORTIONS\_OUT\_OF\_RANGE}}
+}\Hypertarget{error__warn__print_8hpp_aa278aa207bdeddc8432b560d1e1312aeabd356f5fc145a69a6d0b3cbac5d70c00}\label{error__warn__print_8hpp_aa278aa207bdeddc8432b560d1e1312aeabd356f5fc145a69a6d0b3cbac5d70c00} 
+PORTIONS\+\_\+\+OUT\+\_\+\+OF\+\_\+\+RANGE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CONCAT\_AMBIGUITY@{CONCAT\_AMBIGUITY}!error\_warn\_print.hpp@{error\_warn\_print.hpp}}
+\index{error\_warn\_print.hpp@{error\_warn\_print.hpp}!CONCAT\_AMBIGUITY@{CONCAT\_AMBIGUITY}}
+}\Hypertarget{error__warn__print_8hpp_aa278aa207bdeddc8432b560d1e1312aea3679d74393649174baa5db30d7e70081}\label{error__warn__print_8hpp_aa278aa207bdeddc8432b560d1e1312aea3679d74393649174baa5db30d7e70081} 
+CONCAT\+\_\+\+AMBIGUITY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CONCURRENCY\_OUT\_OF\_RANGE\_UPPER@{CONCURRENCY\_OUT\_OF\_RANGE\_UPPER}!error\_warn\_print.hpp@{error\_warn\_print.hpp}}
+\index{error\_warn\_print.hpp@{error\_warn\_print.hpp}!CONCURRENCY\_OUT\_OF\_RANGE\_UPPER@{CONCURRENCY\_OUT\_OF\_RANGE\_UPPER}}
+}\Hypertarget{error__warn__print_8hpp_aa278aa207bdeddc8432b560d1e1312aeac45bc9105bed6251f81376a78a1f5c25}\label{error__warn__print_8hpp_aa278aa207bdeddc8432b560d1e1312aeac45bc9105bed6251f81376a78a1f5c25} 
+CONCURRENCY\+\_\+\+OUT\+\_\+\+OF\+\_\+\+RANGE\+\_\+\+UPPER&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CONCURRENCY\_OUT\_OF\_RANGE\_LOWER@{CONCURRENCY\_OUT\_OF\_RANGE\_LOWER}!error\_warn\_print.hpp@{error\_warn\_print.hpp}}
+\index{error\_warn\_print.hpp@{error\_warn\_print.hpp}!CONCURRENCY\_OUT\_OF\_RANGE\_LOWER@{CONCURRENCY\_OUT\_OF\_RANGE\_LOWER}}
+}\Hypertarget{error__warn__print_8hpp_aa278aa207bdeddc8432b560d1e1312aea20185411fe4cc4b2188d1fd0838cfec3}\label{error__warn__print_8hpp_aa278aa207bdeddc8432b560d1e1312aea20185411fe4cc4b2188d1fd0838cfec3} 
+CONCURRENCY\+\_\+\+OUT\+\_\+\+OF\+\_\+\+RANGE\+\_\+\+LOWER&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+Definition at line \doxymbox{\hyperlink{error__warn__print_8hpp_source_l00126}{126}} of file \doxymbox{\hyperlink{error__warn__print_8hpp_source}{error\+\_\+warn\+\_\+print.\+hpp}}.
+
+
+
+\label{doc-func-members}
+\Hypertarget{error__warn__print_8hpp_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{error__warn__print_8hpp_a28a87d9ff3c635c4d6bfdd3b8c1c21dc}\index{error\_warn\_print.hpp@{error\_warn\_print.hpp}!print\_warn@{print\_warn}}
+\index{print\_warn@{print\_warn}!error\_warn\_print.hpp@{error\_warn\_print.hpp}}
+\doxysubsubsection{\texorpdfstring{print\_warn()}{print\_warn()}}
+{\footnotesize\ttfamily \label{error__warn__print_8hpp_a28a87d9ff3c635c4d6bfdd3b8c1c21dc} 
+void print\+\_\+warn (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{error__warn__print_8hpp_aa278aa207bdeddc8432b560d1e1312ae}{Warning\+Type}} const}]{warn}{, }\item[{const std::\+string \&}]{warn\+\_\+option}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Definition at line \doxymbox{\hyperlink{error__warn__print_8hpp_source_l00157}{157}} of file \doxymbox{\hyperlink{error__warn__print_8hpp_source}{error\+\_\+warn\+\_\+print.\+hpp}}.
+
+\Hypertarget{error__warn__print_8hpp_a2242bb8ed849903356437dd8961008b9}\index{error\_warn\_print.hpp@{error\_warn\_print.hpp}!throw\_error@{throw\_error}}
+\index{throw\_error@{throw\_error}!error\_warn\_print.hpp@{error\_warn\_print.hpp}}
+\doxysubsubsection{\texorpdfstring{throw\_error()}{throw\_error()}}
+{\footnotesize\ttfamily \label{error__warn__print_8hpp_a2242bb8ed849903356437dd8961008b9} 
+void throw\+\_\+error (\begin{DoxyParamCaption}\item[{\doxymbox{\hyperlink{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42de}{Error\+Type}} const}]{error}{, }\item[{const std::\+string \&}]{error\+\_\+option}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+throw\+\_\+error is a custom error logger to the terminal. This will WILL throw. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em error} & Your type of error. \\
+\hline
+{\em error\+\_\+option} & An optional string to be added at the start, could be a path, text... \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \doxylink{structErrorException}{Error\+Exception}} & \\
+\hline
+\end{DoxyExceptions}
+
+
+Definition at line \doxymbox{\hyperlink{error__warn__print_8hpp_source_l00078}{78}} of file \doxymbox{\hyperlink{error__warn__print_8hpp_source}{error\+\_\+warn\+\_\+print.\+hpp}}.
+
+
+
+References \doxymbox{\hyperlink{error__warn__print_8hpp_source_l00031}{DIR\+\_\+\+COMPRESSION}}, \doxymbox{\hyperlink{error__warn__print_8hpp_source_l00029}{DRIVE\+\_\+\+ERROR}}, \doxymbox{\hyperlink{error__warn__print_8hpp_source_l00028}{FILE\+\_\+\+CORRUPTED}}, \doxymbox{\hyperlink{error__warn__print_8hpp_source_l00027}{FILE\+\_\+\+INVALID}}, \doxymbox{\hyperlink{error__warn__print_8hpp_source_l00030}{INVALID\+\_\+\+DECOMPRESSION}}, \doxymbox{\hyperlink{error__warn__print_8hpp_source_l00021}{MISSING\+\_\+\+ARGUMENT}}, \doxymbox{\hyperlink{error__warn__print_8hpp_source_l00019}{NO\+\_\+\+ERROR}}, \doxymbox{\hyperlink{error__warn__print_8hpp_source_l00023}{OPTION\+\_\+\+UNAVAILABLE}}, \doxymbox{\hyperlink{error__warn__print_8hpp_source_l00026}{PATH\+\_\+\+INVALID}}, \doxymbox{\hyperlink{error__warn__print_8hpp_source_l00025}{PATH\+\_\+\+NOT\+\_\+\+ACCESSIBLE}}, \doxymbox{\hyperlink{error__warn__print_8hpp_source_l00024}{PATH\+\_\+\+NOT\+\_\+\+FOUND}}, \doxymbox{\hyperlink{error__warn__print_8hpp_source_l00022}{SYNTAX\+\_\+\+ERROR}}, and \doxymbox{\hyperlink{error__warn__print_8hpp_source_l00020}{VALUE\+\_\+\+ERROR}}.
+

@@ -9,7 +9,8 @@ Include dependency graph for cli\+\_\+parser.\+cppm:\+\nopagebreak
 \includegraphics[width=210pt]{cli__parser_8cppm__incl}
 \end{center}
 \end{figure}
-This graph shows which files directly or indirectly include this file:\+\nopagebreak
+This graph shows which files directly or indirectly include this file:\+
+\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -55,13 +56,14 @@ enum class \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab690536
 , \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a297a6bb3ef5700bc84563dc87938c1b2}{parser::\+\+DO\+\_\+\+DECOMP\+\_\+\+AFTER\+\_\+\+CONCAT}}
 , \newline
 \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a8cb317a671dafb2df58c07a6fc9291ef}{parser::\+\+DO\+\_\+\+NOT\+\_\+\+DECOMP\+\_\+\+AFTER\+\_\+\+CONCAT}}
+, \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a8fe82dc3c5d457c702ccdf336a955e06}{parser::\+\+CONCURRENCY}}
 , \doxymbox{\hyperlink{namespaceparser_accd7eb1ffd4c925598ec25fab6905369a245d11a3709454cc69b2de7911073d57}{parser::\+\+NO\+\_\+\+TYPE}} = 696969
  \}
 \begin{DoxyCompactList}\small\item\em Parser token types. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Functions}
 \begin{DoxyCompactItemize}
 \item 
-std::\+expected$<$ \doxymbox{\hyperlink{structToken}{Token}}, \doxymbox{\hyperlink{core__utils_8cppm_ab0df38968e4f03a3f1f6d6df0f31f45a}{Error\+Type}} $>$ \doxymbox{\hyperlink{namespaceparser_a883c446b2f982a5d7b6989f2442e8186}{parser::\+lex}} (const std::\+string \&option)
+std::\+expected$<$ \doxymbox{\hyperlink{structToken}{Token}}, \doxymbox{\hyperlink{error__warn__print_8hpp_aed6e5d8e0c233046b51a0726eeae42de}{Error\+Type}} $>$ \doxymbox{\hyperlink{namespaceparser_a883c446b2f982a5d7b6989f2442e8186}{parser::\+lex}} (const std::\+string \&option)
 \begin{DoxyCompactList}\small\item\em Semantically check an argument (e.\+g. -\/preset 8). \end{DoxyCompactList}\item 
 \doxymbox{\hyperlink{structparser_1_1Options}{Options}} \doxymbox{\hyperlink{namespaceparser_a7f5ecbf764fc175fc336fcea0dd07be8}{parser::\+parse}} (int argc, char \texorpdfstring{$\ast$}{*}argv\+[$\,$]\+)
 \begin{DoxyCompactList}\small\item\em Read the cli. \end{DoxyCompactList}\item 
@@ -72,7 +74,7 @@ void \doxymbox{\hyperlink{cli__parser_8cppm_ae97b52a0806996c1857b54bf4e06253e}{s
 \item 
 constexpr std::\+string\+\_\+view \doxymbox{\hyperlink{namespaceparser_a35056580671d6aa5abd316f21007bef6}{parser::\+token\+\_\+strings}} \+[$\,$]\+
 \item 
-constexpr std::\+string\+\_\+view \doxymbox{\hyperlink{namespaceparser_a8fb0c61c07575a0d8f64cfc377b885ed}{parser::\+help\+\_\+str}}
+const auto \doxymbox{\hyperlink{namespaceparser_ad8ab5c1ee924ccb278d79ba52ae20c5a}{parser::\+help\+\_\+str}}
 \item 
 const fs::\+path \doxymbox{\hyperlink{namespaceparser_a239b839c0edd6180eb4bd577ad8b3ab9}{parser::\+\+DEFAULT\+\_\+\+OUT\+\_\+\+PATH}} \{ "{}output.\+tzf"{} \}
 \end{DoxyCompactItemize}
@@ -100,5 +102,5 @@ Show a progress bar in terminal.
 \end{DoxyParams}
 
 
-Definition at line \doxymbox{\hyperlink{cli__parser_8cppm_source_l00157}{157}} of file \doxymbox{\hyperlink{cli__parser_8cppm_source}{cli\+\_\+parser.\+cppm}}.
+Definition at line \doxymbox{\hyperlink{cli__parser_8cppm_source_l00167}{167}} of file \doxymbox{\hyperlink{cli__parser_8cppm_source}{cli\+\_\+parser.\+cppm}}.
 
