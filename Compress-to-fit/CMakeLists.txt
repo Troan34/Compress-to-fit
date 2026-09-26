@@ -52,7 +52,9 @@ target_compile_definitions(project_logic PUBLIC NOMINMAX WIN32_LEAN_AND_MEAN)
 
 
 #add the main executable
-add_executable(Compress-to-fit)
+add_executable(Compress-to-fit
+        src/cli/sink.cpp
+        src/cli/sink.hpp)
 set_target_properties(Compress-to-fit PROPERTIES 
     OUTPUT_NAME "ctf"
     CXX_SCAN_FOR_MODULES ON

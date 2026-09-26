@@ -6,10 +6,11 @@
 */
 
 #pragma once
-#include <cassert>
+#include <format>
 #include <stdexcept>
 #include <string>
 #include <print>
+#include <source_location>
 
 /**
  * @brief Parser error types.
@@ -75,7 +76,7 @@ struct ErrorException : std::exception
  * @param error_option An optional string to be added at the start, could be a path, text...
  * @throw ErrorException
  */
-inline void throw_error(ErrorType const error, const std::string& error_option = "")
+inline void throw_error(ErrorType const error, const std::string& error_option = "") noexcept(false)
 {
 	switch (error)
 	{
@@ -118,7 +119,8 @@ inline void throw_error(ErrorType const error, const std::string& error_option =
 		throw ErrorException(ErrorType::DIR_COMPRESSION, error_option + " <- " + ERR_STRING::DIR_COMPRESSION);
 		break;
 	default:
-		assert(false);
+		auto const src = std::source_location::current();
+		throw std::logic_error(std::format("Thrown logic exception in function {} at line {}", src.function_name(), src.line()));
 		break;
 	}
 }

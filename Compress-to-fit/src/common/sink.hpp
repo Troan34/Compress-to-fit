@@ -12,24 +12,22 @@ struct ProgressType
     float progress;
 };
 
-struct InputRequired{};
 
 /**
- * @brief Package a message from the compressor
+ * @brief Package a message from the core
  */
 struct Status
 {
-    std::variant<ErrorType, WarningType, ProgressType, InputRequired> message_ID_or_progress;//ID of the error/warning or amount of progress from 0 to 1
+    std::variant<ErrorType, WarningType, ProgressType> message_ID_or_progress;//ID of the error/warning or amount of progress from 0 to 1
     std::optional<std::string> failing_option;//option causing error/warn, i.e. './ctf -wrongSyntax' prints -wrongSyntax <- Error[3]: the syntax...
                                               //So this contains '-wrongSyntax'
-
 };
 
 class StatusSink
 {
 public:
     virtual ~StatusSink() = default;
-    virtual void report() = 0;
+    virtual void report(Status const& status) = 0;
 };
 
 
