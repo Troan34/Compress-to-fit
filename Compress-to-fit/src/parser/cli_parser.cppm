@@ -163,8 +163,9 @@ namespace parser
  * @brief Show a progress bar in terminal.
  * @param options Receive miscellaneus data.
  * @param progress From 0 to 1
+ * @todo I have no idea what \p options is doing here
  */
-export void show_progress(const parser::Options& options = {}, float progress = 0.f, bool compressing = false)
+export void show_progress(const parser::Options& options = {}, float progress = 0.F, bool const compressing = false)
 {
 	progress = std::min(1.F, progress);
 	constexpr int max_bar_width = 50;

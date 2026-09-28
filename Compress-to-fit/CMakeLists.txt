@@ -1,5 +1,4 @@
-add_library(project_logic SHARED
-        src/common/sink.hpp)
+add_library(project_logic SHARED)
 
 set(CLANG_TIDY_OPT
         clang-tidy
@@ -39,6 +38,7 @@ target_sources(
         "src/parser/cli_parser.cpp"
         "src/common/comp_options.hpp"
         "src/common/error_warn_print.hpp"
+        "src/common/sink.hpp"
 )
 
 #set_target_properties(project_logic PROPERTIES CXX_CLANG_TIDY ${CLANG_TIDY_OPT})
@@ -52,9 +52,7 @@ target_compile_definitions(project_logic PUBLIC NOMINMAX WIN32_LEAN_AND_MEAN)
 
 
 #add the main executable
-add_executable(Compress-to-fit
-        src/cli/sink.cpp
-        src/cli/sink.hpp)
+add_executable(Compress-to-fit)
 set_target_properties(Compress-to-fit PROPERTIES 
     OUTPUT_NAME "ctf"
     CXX_SCAN_FOR_MODULES ON
@@ -64,6 +62,12 @@ set_target_properties(Compress-to-fit PROPERTIES
 target_link_libraries(Compress-to-fit PRIVATE project_logic)
 
 target_sources(Compress-to-fit PRIVATE "Compress-to-fit.cpp")
+
+target_sources(
+    Compress-to-fit
+    PRIVATE FILE_SET CXX_MODULES FILES
+        "src/cli/sink.cppm"
+)
 
 target_compile_features(Compress-to-fit PRIVATE cxx_std_23)
 set_target_properties(Compress-to-fit PROPERTIES CXX_CLANG_TIDY ${CLANG_TIDY_OPT})
