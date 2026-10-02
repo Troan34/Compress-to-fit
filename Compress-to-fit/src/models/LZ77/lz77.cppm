@@ -9,6 +9,7 @@ module;
 #include <cassert>
 #include <cstddef>
 #include <mio/mmap.hpp>
+#include "../../common/sink.hpp"
 export module models:lz77;
 
 #ifdef __INTELLISENSE__
@@ -19,6 +20,7 @@ export import util;
 import std.compat;
 import parser;
 import containers;
+
 
 namespace fs = std::filesystem;
 using namespace std::chrono_literals;
@@ -362,7 +364,9 @@ public:
 		uncompressed_length_ = uncompressed_length__;
 
 		if (len1 + len2 + compressed_length_ > data.size())
-			throw_error(ErrorType::FILE_CORRUPTED, "An lz77 header is corrupted in file \"" + file.string() + "\"");
+		{
+			report({.message_ID_or_progress = ErrorType::FILE_CORRUPTED, .failing_option = "An lz77 header is corrupted in file \"" + file.string() + "\""});
+		}
 
 		buffer_.reserve(data.size());
 		buffer_ = std::vector<LZ77_Token>{

@@ -68,7 +68,7 @@ std::expected<Token, ErrorType> lex(const std::string& option)
 	else if (token_string == token_strings[static_cast<size_t>(TokenType::DO_NOT_DECOMP_AFTER_CONCAT)]) token_type = TokenType::DO_NOT_DECOMP_AFTER_CONCAT;
 	else if (token_string == token_strings[static_cast<size_t>(TokenType::CONCURRENCY)]) token_type = TokenType::CONCURRENCY;
 	else
-		throw_error(ErrorType::SYNTAX_ERROR, token_string);
+		throw_error(ErrorType::SYNTAX_ERROR, token_string);//TODO replace all of these with `report()`
 
 	//handle flags
 	switch (token_type)
