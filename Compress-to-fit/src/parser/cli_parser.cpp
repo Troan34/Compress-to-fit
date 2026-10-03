@@ -5,7 +5,10 @@
 *	Parses the cli
 */
 module;
+#include <algorithm>
+
 #include "../common/error_warn_print.hpp"
+#include "../common/sink.hpp"
 module parser;
 
 import util;
@@ -68,7 +71,7 @@ std::expected<Token, ErrorType> lex(const std::string& option)
 	else if (token_string == token_strings[static_cast<size_t>(TokenType::DO_NOT_DECOMP_AFTER_CONCAT)]) token_type = TokenType::DO_NOT_DECOMP_AFTER_CONCAT;
 	else if (token_string == token_strings[static_cast<size_t>(TokenType::CONCURRENCY)]) token_type = TokenType::CONCURRENCY;
 	else
-		throw_error(ErrorType::SYNTAX_ERROR, token_string);//TODO replace all of these with `report()`
+		report({.message_ID_or_progress = ErrorType::SYNTAX_ERROR, .failing_option = token_string, .compressing = {}});
 
 	//handle flags
 	switch (token_type)
@@ -93,10 +96,10 @@ std::expected<Token, ErrorType> lex(const std::string& option)
 		{
 			//Test if we can find and access the input file
 			if (!fs::exists(token_value))
-				throw_error(ErrorType::PATH_NOT_FOUND, token_value);
+				report({.message_ID_or_progress = ErrorType::PATH_NOT_FOUND, .failing_option = token_value, .compressing = {}});
 
 			if (std::ifstream file(token_value); !file.is_open())
-				throw_error(ErrorType::PATH_NOT_ACCESSIBLE, token_value);
+				report({.message_ID_or_progress = ErrorType::PATH_NOT_ACCESSIBLE, .failing_option = token_value, .compressing = {}});
 
 			value.emplace<fs::path>(token_value);
 		}
@@ -111,7 +114,7 @@ std::expected<Token, ErrorType> lex(const std::string& option)
 			if (!test_file.is_open())
 			{
 				fs::remove(test_path);
-				throw_error(ErrorType::PATH_NOT_ACCESSIBLE, path.string());
+				report({ErrorType::PATH_NOT_ACCESSIBLE, path.string(), {}});
 			}
 			test_file.close();
 			fs::remove(test_path);
@@ -123,7 +126,7 @@ std::expected<Token, ErrorType> lex(const std::string& option)
 		break;
 		case TokenType::COMPRESSOR_TYPE:
 		{
-			std::transform(token_value.begin(), token_value.end(), token_value.begin(), [](char c) { return std::toupper(c); });
+			std::ranges::transform(token_value, token_value.begin(), [](char c) { return std::toupper(c); });
 
 			for (int i = 0; i < static_cast<int>(CompType::MAX); i++)
 			{
@@ -135,17 +138,17 @@ std::expected<Token, ErrorType> lex(const std::string& option)
 			}
 
 			if (std::holds_alternative<std::monostate>(value))
-				throw_error(ErrorType::SYNTAX_ERROR, token_string + token_value);
+				report({.message_ID_or_progress = ErrorType::SYNTAX_ERROR, .failing_option = token_string + token_value, .compressing = {}});
 		}
 		break;
 		case TokenType::COMPRESSION_PRESET:
 		{
 			//Convert and check the compression preset
 			size_t value_cmpr;
-			auto res = std::from_chars(token_value.data(), token_value.data() + token_value.size(), value_cmpr);
+			auto [_, ec] = std::from_chars(token_value.data(), token_value.data() + token_value.size(), value_cmpr);
 
-			if (res.ec != std::errc() or (value_cmpr > CompPreset::COMP_MAX or value_cmpr < CompPreset::NO_COMP))//if not a number or outside of our range
-				throw_error(ErrorType::VALUE_ERROR, token_string + token_value);
+			if (ec != std::errc() or (value_cmpr > CompPreset::COMP_MAX or value_cmpr < CompPreset::NO_COMP))//if not a number or outside of our range
+				report({.message_ID_or_progress = ErrorType::VALUE_ERROR, .failing_option = token_string + token_value, .compressing = {}});
 
 			value.emplace<size_t>(value_cmpr);
 		}
@@ -153,10 +156,10 @@ std::expected<Token, ErrorType> lex(const std::string& option)
 		case TokenType::N_FILES:
 		{
 			int value_temp;
-			auto res = std::from_chars(token_value.data(), token_value.data() + token_value.size(), value_temp);
+			auto [_, ec] = std::from_chars(token_value.data(), token_value.data() + token_value.size(), value_temp);
 
-			if (res.ec != std::errc() or (value_temp > N_FILES_LIMIT or value_temp < 1))//if less than 1 or over N_FILES_LIMIT
-				throw_error(ErrorType::VALUE_ERROR, token_string + token_value);
+			if (ec != std::errc() or (value_temp > N_FILES_LIMIT or value_temp < 1))//if less than 1 or over N_FILES_LIMIT
+				report({.message_ID_or_progress = ErrorType::VALUE_ERROR, .failing_option = token_string + token_value, .compressing = {}});
 
 			value.emplace<size_t>(value_temp);
 		}
@@ -164,10 +167,10 @@ std::expected<Token, ErrorType> lex(const std::string& option)
 		case TokenType::SIZE_FILES:
 		{
 			int value_temp;
-			auto res = std::from_chars(token_value.data(), token_value.data() + token_value.size(), value_temp);
+			auto [_, ec] = std::from_chars(token_value.data(), token_value.data() + token_value.size(), value_temp);
 
-			if (res.ec != std::errc() or (value_temp < SIZE_FILES_MIN))//if negative or under SIZE_FILES_MIN
-				throw_error(ErrorType::VALUE_ERROR, token_string + token_value);
+			if (ec != std::errc() or (value_temp < SIZE_FILES_MIN))//if negative or under SIZE_FILES_MIN
+				report({.message_ID_or_progress = ErrorType::VALUE_ERROR, .failing_option = token_string + token_value, .compressing = {}});
 
 			value.emplace<size_t>(value_temp);
 		}
@@ -175,16 +178,16 @@ std::expected<Token, ErrorType> lex(const std::string& option)
 		case TokenType::CONCURRENCY:
 		{
 			size_t value_temp;
-			auto const res = std::from_chars(token_value.data(), token_value.data() + token_value.size(), value_temp);
+			auto [_, ec] = std::from_chars(token_value.data(), token_value.data() + token_value.size(), value_temp);
 
-			if (res.ec != std::errc())
-				throw_error(ErrorType::VALUE_ERROR, token_string + token_value);
+			if (ec != std::errc())
+				report({.message_ID_or_progress = ErrorType::VALUE_ERROR, .failing_option = token_string + token_value, .compressing = {}});
 
 			if (value_temp < 0)
-				print_warn(WarningType::CONCURRENCY_OUT_OF_RANGE_LOWER, token_string + token_value);
+				report({.message_ID_or_progress=WarningType::CONCURRENCY_OUT_OF_RANGE_LOWER, .failing_option = token_string + token_value, .compressing = {}});
 
 			if (value_temp > std::thread::hardware_concurrency())
-				print_warn(WarningType::CONCURRENCY_OUT_OF_RANGE_UPPER, token_string + token_value);
+				report({.message_ID_or_progress=WarningType::CONCURRENCY_OUT_OF_RANGE_UPPER, .failing_option = token_string + token_value, .compressing = {}});
 
 			//I had no fucking idea size_t had suffix 'uz'
 			value_temp = std::clamp(value_temp, 0uz, static_cast<size_t>(std::thread::hardware_concurrency()));
@@ -217,10 +220,10 @@ std::expected<Token, ErrorType> lex(const std::string& option)
  * @throws HelpException if help command was used
  * @todo simplify whatever spaghetti is inside of this
  */
-Options parse(int argc, char* argv[])
+auto parse(int argc, char* argv[]) -> Options
 {
 	if (argc == 1)
-		throw_error(ErrorType::SYNTAX_ERROR, "No arguments given.");
+		report({.message_ID_or_progress = ErrorType::SYNTAX_ERROR, .failing_option = "No arguments given.", .compressing = {}});
 
 	Options options;
 	//Parse the cli
@@ -242,7 +245,7 @@ Options parse(int argc, char* argv[])
 			{
 				std::string option_temp{ argv[index + 1] };
 				option += option_temp;
-				if (std::count(option_temp.begin(), option_temp.end(), '\"') == 1)
+				if (std::ranges::count(option_temp, '\"') == 1)
 				{
 					valid = true;
 					break;
@@ -250,7 +253,7 @@ Options parse(int argc, char* argv[])
 			}
 
 			if (!valid)
-				throw_error(ErrorType::PATH_INVALID, option);
+				report({.message_ID_or_progress = ErrorType::PATH_INVALID, .failing_option = option, .compressing = {}});
 		}
 
 		auto token = lex(option);
@@ -266,7 +269,7 @@ Options parse(int argc, char* argv[])
 				options.filename_out = std::get<fs::path>(token.value().get_value());
 				break;
 			case TokenType::COMPRESSOR_TYPE:
-				options.preset = std::get<size_t>(token.value().get_value());
+				options.compressor = std::get<size_t>(token.value().get_value());
 				break;
 			case TokenType::COMPRESSION_PRESET:
 				options.preset = std::get<size_t>(token.value().get_value());
@@ -319,21 +322,15 @@ Options parse(int argc, char* argv[])
 		}
 		else
 		{
-			throw_error(token.error(), option);
+			report({.message_ID_or_progress = token.error(), .failing_option = option, .compressing = {}});
 		}
-	}
-
-	if (options.need_help)
-	{
-		std::println("{}", help_str);
-		return options;
 	}
 
 
 	if (fs::is_directory(options.filename_in) and !options.concatenate_files)//tried de/compressing a dir
-		throw_error(ErrorType::DIR_COMPRESSION, options.filename_in.string());
+		report({.message_ID_or_progress = ErrorType::DIR_COMPRESSION, .failing_option = options.filename_in.string(), .compressing = {}});
 	else if (options.filename_in.has_filename() and options.concatenate_files)//tried concatenating a file
-		throw_error(ErrorType::PATH_INVALID, options.filename_in.string());
+		report({.message_ID_or_progress = ErrorType::PATH_INVALID, .failing_option = options.filename_in.string(), .compressing = {}});
 
 	//swap ifs
 	if (options.filename_in.empty() or options.filename_in.string().find_first_not_of(' ') == std::string::npos)//if filename_in is empty
@@ -341,9 +338,9 @@ Options parse(int argc, char* argv[])
 		if (options.concatenate_files)
 			options.filename_in = fs::current_path();
 		else if (!options.need_help)
-			throw_error(ErrorType::MISSING_ARGUMENT, token_strings[static_cast<int>(TokenType::FILENAME_IN)].data());
+			report({.message_ID_or_progress = ErrorType::MISSING_ARGUMENT, .failing_option = token_strings[static_cast<int>(TokenType::FILENAME_IN)].data(), .compressing = {}});
 		else
-			throw HelpException();
+			throw HelpException{};
 	}
 
 	if (options.filename_out == DEFAULT_OUT_PATH)

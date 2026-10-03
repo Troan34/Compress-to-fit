@@ -35,25 +35,22 @@ int main(int argc, char* argv[])
 	}
 	catch (ErrorException const& e)
 	{
-		std::println(stderr, e.what());
+		std::println(stderr, "{}", e.what());
 		return static_cast<int>(e.error_type);
 	}
 	catch (parser::HelpException const& e)
 	{
-		std::println(e.what());
+		std::println("{}", e.what());
+		return 0;
 	}
 	catch (std::exception const& e)
 	{
-		return -1;
-	}
-	catch (std::logic_error const& e)
-	{
-		std::println(e.what());
+		std::println(stderr, "{}", e.what());
 		return -1;
 	}
 	catch (...)
 	{
-		std::println(stderr, "Unknown exception.");
+		std::println(stderr,  "Unknown exception.");
 		return -1;
 	}
 

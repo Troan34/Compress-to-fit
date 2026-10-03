@@ -8,6 +8,7 @@
 module;
 #include <mio/mmap.hpp>
 #include <cassert>
+#include "../../common/sink.hpp"
 #if defined(__INTELLISENSE__)
 #include "../../for_intellisense/everything.hpp"
 #endif
@@ -68,10 +69,10 @@ export struct FileOptions
 void try_throw_IO_error(std::ios_base::iostate const state, fs::path const& path) noexcept(false)
 {
 	if (((state & std::ios_base::failbit) != 0) and (state & std::ios_base::eofbit) == 0)
-		throw_error(ErrorType::FILE_CORRUPTED, path.string());
+		report({ErrorType::FILE_CORRUPTED, path.string(), {}});
 
 	if ((state & std::ios_base::badbit) != 0)//we fucked fucked
-		throw_error(ErrorType::DRIVE_ERROR, path.string());
+		report({ErrorType::DRIVE_ERROR, path.string(), {}});
 }
 
 /**
@@ -148,13 +149,13 @@ public:
 		if (portions == 1) return;
 
 		if ((portions < 1 or portions > N_FILES_LIMIT) or (fs::file_size(path) / portions) < SIZE_FILES_MIN)
-			print_warn(WarningType::PORTIONS_OUT_OF_RANGE, std::to_string(portions));
+			report({.message_ID_or_progress=WarningType::PORTIONS_OUT_OF_RANGE, .failing_option=std::to_string(portions), .compressing={}});
 
 
 		std::ifstream source_file{ path, std::ios::binary };
 		assert(has_signature(source_file));
 
-		if (!fs::exists(path)) throw_error(ErrorType::PATH_NOT_FOUND, path.string());
+		if (!fs::exists(path)) report({ErrorType::PATH_NOT_FOUND, path.string(), {}});
 		auto Header = extract_info(path);
 
 		//move to the ID section
@@ -194,7 +195,7 @@ public:
 			case EIO:
 			case ENFILE:
 			case EMFILE:
-				throw_error(ErrorType::DRIVE_ERROR, path.string());
+				report({ErrorType::DRIVE_ERROR, path.string(), {}});
 			default:
 				break;
 			}
@@ -219,13 +220,13 @@ public:
 	{
 		if (!fs::exists(in_path))
 		{
-			throw_error(ErrorType::PATH_NOT_FOUND, in_path.string());
+			report({ErrorType::PATH_NOT_FOUND, in_path.string(), {}});
 		}
 
 		std::ifstream in_file{ in_path, std::ios::ate | std::ios::binary };
 
 		if (!in_file.is_open())
-			throw_error(ErrorType::PATH_NOT_ACCESSIBLE, in_path.string());
+			report({ErrorType::PATH_NOT_ACCESSIBLE, in_path.string(), {}});
 
 		auto const size_file = in_file.tellg() / sizeof(Sym);
 
@@ -315,7 +316,7 @@ public:
 			auto header = std::bit_cast<Header>(buffer);
 
 			if (header.comp_type >= CompType::MAX or header.preset > COMP_MAX)
-				throw_error(ErrorType::FILE_CORRUPTED, path.string());
+				report({ErrorType::FILE_CORRUPTED, path.string(), {}});
 
 			try_throw_IO_error(file.rdstate(), path);
 
@@ -363,7 +364,7 @@ private:
 		file.read(buffer.data(), buffer.size());
 		if (buffer != SIGNATURE.data())//not recognized
 		{
-			throw_error(ErrorType::FILE_INVALID, in_file_options.path.string());
+			report({ErrorType::FILE_INVALID, in_file_options.path, {}});
 		}
 	}
 	
@@ -463,7 +464,9 @@ private:
 			//if id is different from identifier and identifier was not ignored
 			if (id != info.value().identifier and std::ranges::find(ignored_ids, info.value().identifier) == ignored_ids.end())
 			{
-				print_warn(WarningType::CONCAT_AMBIGUITY, files_to_concat.back().first.filename().string() + " " + dir_entry.path().filename().string());
+				auto const warn = files_to_concat.back().first.filename().string() + " " + dir_entry.path().filename().string();
+				report({.message_ID_or_progress = WarningType::CONCAT_AMBIGUITY, .failing_option = warn, .compressing = {}});
+				assert(false && "fix this shitty code");
 				std::println("Choose which of these files are part of the concatenation. Insert '1' or '2' for the respective file. If neither of these is, insert '0', we will find the next possible file.");
 				auto choice = 0;
 				//get user to resolve the ambiguity
@@ -516,7 +519,7 @@ private:
 		                  });
 
 		//Copy all the files into the new file
-		for (auto const& [path_, _] : files_to_concat)//I couldn't get ranges to work (actually (auto const &path_: files_to_concat | std::views::keys) works on clang). However, msvc is slooooow at getting new stuff.
+		for (auto const &path_: files_to_concat | std::views::keys)//I couldn't get ranges to work (actually (auto const &path_: files_to_concat | std::views::keys) works on clang). However, msvc is slooooow at getting new stuff.
 		{
 			std::ifstream input{ path_ };
 			input.seekg(0, std::ios::end);
