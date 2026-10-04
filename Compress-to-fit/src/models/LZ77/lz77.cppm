@@ -627,10 +627,10 @@ private:
 						return false;
 				}
 			);
-			show_progress({}, static_cast<float>(n_completed_blocks) / static_cast<float>(n_blocks_), true);
+			report({ProgressType{static_cast<float>(n_completed_blocks) / static_cast<float>(n_blocks_)}, {}, true});
 		}
 
-		show_progress({}, 1.F, true);
+		report({ProgressType{1.F}, {}, true});
 	}
 };
 
@@ -723,13 +723,15 @@ private:
 						return true;
 					}
 					else
+					{
 						return false;
+					}
 				}
 			);
-			show_progress({}, static_cast<float>(n_completed_blocks) / static_cast<float>(n_blocks_), false);
+			report({ProgressType{static_cast<float>(n_completed_blocks) / static_cast<float>(n_blocks_)}, {}, true});
 		}
 
-		show_progress({}, 1.F, false);
+		report({ProgressType{1.F}, {}, true});
 	}
 
 };
