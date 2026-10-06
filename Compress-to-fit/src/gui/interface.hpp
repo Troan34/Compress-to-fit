@@ -40,7 +40,6 @@ public:
 
     Q_ENUM(CompType)
     Q_ENUM(CompPreset)
-    Q_ENUM(ErrorType)
 
     [[nodiscard]] auto pathsIn() const -> QList<QUrl>;
     [[nodiscard]] auto pathOut() const -> QUrl;

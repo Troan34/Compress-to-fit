@@ -25,7 +25,7 @@ int main(int argc, char* argv[])
 {
     QGuiApplication app(argc, argv);
 
-
+    //TODO: qRegisterMetaType<common::ErrorType>()
     QQmlApplicationEngine engine;
 
     FileSystem file_system;

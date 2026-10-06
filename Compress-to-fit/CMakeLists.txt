@@ -119,10 +119,10 @@ target_sources(
         "src/gui/interface.cpp"
         "src/gui/fs_helper.hpp"
         "src/gui/fs_helper.cpp"
-        "src/gui/interpreter.hpp"
-        "src/gui/interpreter.cpp"
         "src/gui/compressor_manager.cpp"
         "src/gui/compressor_manager.hpp"
+        "src/gui/sink.hpp"
+        "src/gui/common.hpp"
 )
 
 #add the tests executable
