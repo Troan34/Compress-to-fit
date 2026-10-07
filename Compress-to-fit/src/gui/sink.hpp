@@ -8,23 +8,18 @@
 #include "common.hpp"
 #include "../common/sink.hpp"
 
-class GuiStatus
-{
-    Q_GADGET
-public:
 
-
-signals:
-    void errorReceived(ErrorType error, QString failingOption);
-    void warningReceived(WarningType warning, QString failingOption);
-    void progressReceived(ProgressType progress, QString failingOption);
-};
 
 class GuiSink : public QObject, public StatusSink
 {
     Q_OBJECT
 
 public:
+    explicit GuiSink(QObject *parent = nullptr);
+    void report(Status const& status) noexcept(false) override;
 
-
+signals:
+    void errorReceived(ErrorType error, QString failingOption);
+    void warningReceived(WarningType warning, QString failingOption);
+    void progressReceived(float progress, bool compressing);
 };

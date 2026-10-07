@@ -123,6 +123,7 @@ target_sources(
         "src/gui/compressor_manager.hpp"
         "src/gui/sink.hpp"
         "src/gui/common.hpp"
+        "src/gui/sink.cpp"
 )
 
 #add the tests executable

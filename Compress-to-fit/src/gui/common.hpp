@@ -12,9 +12,7 @@ namespace common
 {
     using ::ErrorType;
     using ::WarningType;
-    using ::ProgressType;
     Q_NAMESPACE
     Q_ENUM_NS(ErrorType)
     Q_ENUM_NS(WarningType)
-    Q_ENUM_NS(ProgressType)
 }

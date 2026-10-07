@@ -10,6 +10,7 @@
 #include <QDebug>
 #include "src/gui/interface.hpp"
 #include "src/gui/fs_helper.hpp"
+#include "src/gui/common.hpp"
 
 import util;
 
@@ -25,7 +26,8 @@ int main(int argc, char* argv[])
 {
     QGuiApplication app(argc, argv);
 
-    //TODO: qRegisterMetaType<common::ErrorType>()
+    qRegisterMetaType<ErrorType>("ErrorType");
+    qRegisterMetaType<WarningType>("WarningType");
     QQmlApplicationEngine engine;
 
     FileSystem file_system;
