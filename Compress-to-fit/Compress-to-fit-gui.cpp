@@ -11,6 +11,7 @@
 #include "src/gui/interface.hpp"
 #include "src/gui/fs_helper.hpp"
 #include "src/gui/common.hpp"
+#include "src/gui/sink.hpp"
 
 import util;
 
@@ -28,8 +29,12 @@ int main(int argc, char* argv[])
 
     qRegisterMetaType<ErrorType>("ErrorType");
     qRegisterMetaType<WarningType>("WarningType");
+
+    GuiSink sink;
+    SinkInstancer sink_instance{sink};
     QQmlApplicationEngine engine;
 
+    engine.setExternalSingletonInstance("CompressToFit", "GuiSink", &sink);
     FileSystem file_system;
     CompressConfig compressor_conf;
     engine.rootContext()->setContextProperty("compressor_conf", &compressor_conf);

@@ -95,7 +95,7 @@
         "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
         "CMAKE_CXX_CLANG_TIDY": "",
         "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
-        "CMAKE_PREFIX_PATH": "~/Qt/6.11.1/gcc_64/"
+        "CMAKE_PREFIX_PATH": "~/Qt/6.12.0/gcc_64/"
       },
       "condition": {
         "type": "equals",
