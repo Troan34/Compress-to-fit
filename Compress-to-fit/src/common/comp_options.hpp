@@ -36,6 +36,7 @@ enum CompPreset : uint8_t
 enum class CompType : uint8_t
 {
     LZ77,
+    LZ78,
     MAX,
 };
 

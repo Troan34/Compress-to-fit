@@ -27,8 +27,6 @@ int main(int argc, char* argv[])
 {
     QGuiApplication app(argc, argv);
 
-    qRegisterMetaType<ErrorType>("ErrorType");
-    qRegisterMetaType<WarningType>("WarningType");
 
     GuiSink sink;
     SinkInstancer sink_instance{sink};

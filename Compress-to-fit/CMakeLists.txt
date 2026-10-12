@@ -112,6 +112,13 @@ qt_add_qml_module(Compress-to-fit-gui
             qml/icons/files_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg
 )
 
+set(QML_INCLUDES
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/gui
+)
+target_include_directories(Compress-to-fit-gui PRIVATE
+    ${QML_INCLUDES}#What is this bullshit Qt????
+)
+
 target_sources(
     Compress-to-fit-gui
     PRIVATE
@@ -121,8 +128,8 @@ target_sources(
         "src/gui/fs_helper.cpp"
         "src/gui/compressor_manager.cpp"
         "src/gui/compressor_manager.hpp"
-        "src/gui/sink.hpp"
         "src/gui/common.hpp"
+        "src/gui/sink.hpp"
         "src/gui/sink.cpp"
 )
 

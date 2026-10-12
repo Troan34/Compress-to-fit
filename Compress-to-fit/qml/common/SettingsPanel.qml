@@ -38,7 +38,7 @@ Item {
                     text: "LZ77"
                     id: lz77Button
 
-                    onCheckedChanged: checked ? compressor_conf.compressor = "LZ77" : compressor_conf.compressor = ""
+                    onCheckedChanged: checked ? compressor_conf.compressor = CompType.LZ77 : compressor_conf.compressor = CompType.MAX
 
                     Popup {
                         x: lz77Button.width / 2 - width / 2
@@ -72,7 +72,7 @@ Item {
                     text: "LZ78"
                     id: lz78Button
 
-                    onCheckedChanged: checked ? compressor_conf.compressor = "LZ78" : compressor_conf.compressor = "LZ78"
+                    onCheckedChanged: checked ? compressor_conf.compressor = CompType.LZ78 : compressor_conf.compressor = CompType.MAX
 
                     Popup {
                         width: 200
