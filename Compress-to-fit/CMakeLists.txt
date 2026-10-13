@@ -99,6 +99,9 @@ qt_add_qml_module(Compress-to-fit-gui
         URI CompressToFit
         VERSION 1.0
 
+        SOURCES
+            src/gui/common.hpp
+
         QML_FILES
             qml/Main.qml
             qml/common/FileEntry.qml

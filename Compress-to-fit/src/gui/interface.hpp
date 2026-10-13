@@ -7,10 +7,10 @@
 #include <QObject>
 #include <qqmlintegration.h>
 #include <QUrl>
+
+#include "common.hpp"
 #include "src/common/comp_options.hpp"
 #include "src/common/error_warn_print.hpp"
-
-//TODO: Make error handling: read the return value to check for non EXIT_SUCCESS, if so, parse. Also, what do we do with concat ambiguity???
 
 /**
  * @brief parser::Options but for the frontend
@@ -20,35 +20,33 @@ class CompressConfig : public QObject
     Q_OBJECT
     Q_PROPERTY(QList<QUrl> pathsIn READ pathsIn WRITE setPathsIn NOTIFY pathsInChanged)
     Q_PROPERTY(QUrl pathOut READ pathOut WRITE setPathOut NOTIFY pathOutChanged)
-    Q_PROPERTY(CompType compressor READ compressor WRITE setCompressor)
-    Q_PROPERTY(CompPreset compressorPreset READ compressorPreset WRITE setCompressorPreset)
+    Q_PROPERTY(QmlEnums::CompType compressor READ compressor WRITE setCompressor)
+    Q_PROPERTY(QmlEnums::CompPreset compressorPreset READ compressorPreset WRITE setCompressorPreset)
     Q_PROPERTY(bool forceCompression READ forceCompression WRITE setForceCompression)
     Q_PROPERTY(bool deleteInput READ deleteInput WRITE setDeleteInput)
     Q_PROPERTY(size_t numberOfFiles READ numberOfFiles WRITE setNumberOfFiles NOTIFY numberOfFilesChanged)
-    Q_PROPERTY(ErrorType errorType READ errorType NOTIFY errorTypeChanged)
+
 public:
     explicit CompressConfig(QObject *parent = nullptr);
 
     void setPathsIn(QList<QUrl> const& paths);
     void setPathOut(QUrl const& path);
-    void setCompressor(CompType comp_type);
-    void setCompressorPreset(CompPreset comp_preset);
+    void setCompressor(QmlEnums::CompType comp_type);
+    void setCompressorPreset(QmlEnums::CompPreset comp_preset);
     void setForceCompression(bool force_compression);
     void setDeleteInput(bool delete_input);
     void setNumberOfFiles(size_t number_of_files);
-    void setErrorType(ErrorType error_type);
 
-    Q_ENUM(CompType)
-    Q_ENUM(CompPreset)
 
     [[nodiscard]] auto pathsIn() const -> QList<QUrl>;
     [[nodiscard]] auto pathOut() const -> QUrl;
-    [[nodiscard]] auto compressor() const -> CompType;
-    [[nodiscard]] auto compressorPreset() const -> CompPreset;
+    [[nodiscard]] auto compressor() const -> QmlEnums::CompType;
+    [[nodiscard]] auto compressorPreset() const -> QmlEnums::CompPreset;
     [[nodiscard]] auto forceCompression() const -> bool;
     [[nodiscard]] auto deleteInput() const -> bool;
     [[nodiscard]] auto numberOfFiles() const -> size_t;
-    [[nodiscard]] auto errorType() const -> ErrorType;
+
+    Q_INVOKABLE auto run() -> void;
 
 signals:
     void pathsInChanged();
@@ -58,15 +56,15 @@ signals:
     void forceCompressionChanged();
     void deleteInputChanged();
     void numberOfFilesChanged();
-    void errorTypeChanged();
 
 private:
     QList<QUrl> paths_in_;
     QUrl path_out_{};
-    CompType comp_type_;
-    CompPreset comp_preset_;
+    QmlEnums::CompType comp_type_;
+    QmlEnums::CompPreset comp_preset_;
     bool force_compression_ = false;
     bool delete_input_ = false;
     size_t numberOfFiles_{};
-    ErrorType error_type_{ErrorType::NO_ERROR};
+
+
 };

@@ -5,7 +5,10 @@
 *   This header groups together some symbols that the qml backend requires (Qt's moc doesn't understand modules)
 */
 
-/*REMEMBER: YOU MUST ADD EXPORTS FOR EACH SYMBOL TO ITS CORRESPONDING MODULE IN THE LIBRARY*/
+/**
+ * REMEMBER: YOU MUST ADD EXPORTS FOR EACH SYMBOL TO ITS CORRESPONDING MODULE IN THE LIBRARY
+ * ALSO, ANY CHANGES MADE HERE HAVE TO BE MIRRORED TO qml_enums
+ */
 
 #pragma once
 #include <cstdint>

@@ -9,6 +9,7 @@ import QtQuick.Controls.Material
 import QtQuick.Dialogs
 import QtCore
 import QtQuick.Layouts
+import CompressToFit
 
 Item {
     id: rootPanel
@@ -38,7 +39,7 @@ Item {
                     text: "LZ77"
                     id: lz77Button
 
-                    onCheckedChanged: checked ? compressor_conf.compressor = CompType.LZ77 : compressor_conf.compressor = CompType.MAX
+                    onCheckedChanged: checked ? compressor_conf.compressor = QmlEnums.LZ77 : compressor_conf.compressor = QmlEnums.MAX
 
                     Popup {
                         x: lz77Button.width / 2 - width / 2
@@ -72,7 +73,7 @@ Item {
                     text: "LZ78"
                     id: lz78Button
 
-                    onCheckedChanged: checked ? compressor_conf.compressor = CompType.LZ78 : compressor_conf.compressor = CompType.MAX
+                    onCheckedChanged: checked ? compressor_conf.compressor = QmlEnums.LZ78 : compressor_conf.compressor = QmlEnums.MAX
 
                     Popup {
                         width: 200
@@ -162,7 +163,7 @@ Item {
             }
         }
 
-
+        //misc options
         RowLayout {
             id: misc
             Text {
@@ -211,6 +212,12 @@ Item {
                 onTextChanged: { compressor_conf.numberOfFiles = Number(text) }
                 validator: IntValidator { bottom: 1; top: 1000; }
             }
+        }
+
+        //Run button
+        Button {
+            text: qsTr("Run operation")
+            onClicked:
         }
 
         Item {
