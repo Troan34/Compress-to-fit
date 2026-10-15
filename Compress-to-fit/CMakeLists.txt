@@ -95,6 +95,9 @@ target_sources(Compress-to-fit-gui PRIVATE "Compress-to-fit-gui.cpp")
 
 target_compile_features(Compress-to-fit-gui PRIVATE cxx_std_23)
 set_target_properties(Compress-to-fit-gui PROPERTIES CXX_CLANG_TIDY ${CLANG_TIDY_OPT})
+
+set_source_files_properties(qml/common/Style.qml
+    PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
 qt_add_qml_module(Compress-to-fit-gui
         URI CompressToFit
         VERSION 1.0
@@ -107,12 +110,14 @@ qt_add_qml_module(Compress-to-fit-gui
             qml/common/FileEntry.qml
             qml/common/InteractiveDropArea.qml
             qml/common/SettingsPanel.qml
+            qml/common/Style.qml
 
         RESOURCES
             qml/icons/docs_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg
             qml/icons/folder_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg
             qml/icons/photo_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg
             qml/icons/files_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg
+            qml/icons/folder_open_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg
 )
 
 set(QML_INCLUDES
@@ -120,6 +125,10 @@ set(QML_INCLUDES
 )
 target_include_directories(Compress-to-fit-gui PRIVATE
     ${QML_INCLUDES}#What is this bullshit Qt????
+)
+
+target_compile_definitions(Compress-to-fit-gui PRIVATE
+    $<$<CONFIG:Debug>:QT_QML_DEBUG>
 )
 
 target_sources(

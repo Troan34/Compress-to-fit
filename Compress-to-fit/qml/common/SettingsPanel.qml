@@ -29,7 +29,7 @@ Item {
 
                 color: palette.text
                 fontSizeMode: Text.Fit
-                font.pointSize: 12
+                font.pointSize: Style.preferredPointSize
                 minimumPointSize: 8
             }
             RowLayout {
@@ -62,7 +62,7 @@ Item {
                             color: palette.text
 
                             fontSizeMode: Text.Fit
-                            font.pointSize: 12
+                            font.pointSize: Style.preferredPointSize
                             minimumPointSize: 8
                         }
                     }
@@ -96,7 +96,7 @@ Item {
                             color: palette.text
 
                             fontSizeMode: Text.Fit
-                            font.pointSize: 12
+                            font.pointSize: Style.preferredPointSize
                             minimumPointSize: 8
                         }
                     }
@@ -113,7 +113,7 @@ Item {
                 color: palette.text
 
                 fontSizeMode: Text.Fit
-                font.pointSize: 12
+                font.pointSize: Style.preferredPointSize
                 minimumPointSize: 8
             }
 
@@ -171,7 +171,7 @@ Item {
                 color: palette.text
 
                 fontSizeMode: Text.Fit
-                font.pointSize: 12
+                font.pointSize: Style.preferredPointSize
                 minimumPointSize: 8
             }
 
@@ -197,7 +197,7 @@ Item {
                 color: palette.text
 
                 fontSizeMode: Text.Fit
-                font.pointSize: 12
+                font.pointSize: Style.preferredPointSize
                 minimumPointSize: 8
             }
 
@@ -217,7 +217,7 @@ Item {
         //Run button
         Button {
             text: qsTr("Run operation")
-            onClicked:
+
         }
 
         Item {

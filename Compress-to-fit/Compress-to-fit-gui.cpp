@@ -27,7 +27,6 @@ int main(int argc, char* argv[])
 {
     QGuiApplication app(argc, argv);
 
-
     GuiSink sink;
     SinkInstancer sink_instance{sink};
     QQmlApplicationEngine engine;

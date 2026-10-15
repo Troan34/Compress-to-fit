@@ -34,9 +34,12 @@ ApplicationWindow {
 
             Layout.fillWidth: true
             Layout.fillHeight: true
-            Layout.preferredHeight: window.height / 2
-            Layout.maximumHeight: window.height / 2
+            Layout.preferredHeight: window.height / 1.7
+            Layout.maximumHeight: window.height / 1.4
+            Layout.preferredWidth: window.width * 0.35
+            Layout.maximumWidth: window.width * 0.4
             Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+            Layout.margins: 20
         }
 
         //initially non-visible settings for the compressor
@@ -47,8 +50,10 @@ ApplicationWindow {
 
             Layout.fillWidth: true
             Layout.fillHeight: true
-
+            Layout.preferredWidth: window.width * 0.5
+            Layout.maximumWidth: window.width * 0.6
             Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+            Layout.margins: 20
         }
 
     }

@@ -27,21 +27,17 @@ Item {
             Layout.preferredWidth: Layout.preferredHeight
             Layout.minimumHeight: 100
             Layout.minimumWidth: Layout.minimumHeight
-            Layout.maximumHeight: 300
+            Layout.maximumHeight: parent.height / 1.2
             Layout.maximumWidth: Layout.maximumHeight
         }
 
         Button {
             Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
 
-            /*
-            background: Rectangle {
-                color: parent.hovered ? "lightblue" : palette.button
-            }
-            */
+            Layout.preferredHeight: 60
 
             text: qsTr("Choose files to process...")
-            icon.name: "folder"
+            icon.source: "qrc:/qt/qml/CompressToFit/qml/icons/folder_open_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg"
             onClicked: fileDialog.open()
         }
     }
