@@ -11,8 +11,6 @@ Item {
 
     ColumnLayout {
         anchors.fill: parent
-        spacing: 8
-        Layout.margins: 10
 
         InteractiveDropArea {
             id: dropArea
@@ -27,7 +25,7 @@ Item {
             Layout.preferredWidth: Layout.preferredHeight
             Layout.minimumHeight: 100
             Layout.minimumWidth: Layout.minimumHeight
-            Layout.maximumHeight: parent.height / 1.2
+            Layout.maximumHeight: parent.height - 60
             Layout.maximumWidth: Layout.maximumHeight
         }
 

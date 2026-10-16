@@ -16,11 +16,9 @@ Item {
     Material.theme: Material.System
     //overarching layout, i.e. a first compressor row, a second preset row et cetera
     ColumnLayout {
-        anchors.fill: parent
-        spacing: 10
-        Item { //I just found out about this method of padding and I love its ingenuity
-            Layout.fillHeight: true
-        }
+        anchors.centerIn: parent
+        width: parent.width
+
 
         //models
         RowLayout {
@@ -220,8 +218,5 @@ Item {
 
         }
 
-        Item {
-            Layout.fillHeight: true
-        }
     }
 }

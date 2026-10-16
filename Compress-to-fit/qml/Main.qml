@@ -23,8 +23,21 @@ ApplicationWindow {
     title: "Compress To Fit"
 
 
-    RowLayout {
+    GridLayout {
         anchors.fill: parent
+
+        states: [
+            State {
+                when: width < minimumWidth * 2.2
+                PropertyChanges { target: compressorSettings; Layout.row: 1 }
+                PropertyChanges { target: compressorSettings; Layout.column: 0 }
+            },
+            State {
+                when: width >= minimumWidth * 2.2
+                PropertyChanges { target: compressorSettings; Layout.row: 0 }
+                PropertyChanges { target: compressorSettings; Layout.column: 1 }
+            }
+        ]
 
         //The file receiver
         FileEntry {
@@ -34,12 +47,13 @@ ApplicationWindow {
 
             Layout.fillWidth: true
             Layout.fillHeight: true
-            Layout.preferredHeight: window.height / 1.7
-            Layout.maximumHeight: window.height / 1.4
-            Layout.preferredWidth: window.width * 0.35
-            Layout.maximumWidth: window.width * 0.4
+            Layout.preferredHeight: window.height * 0.4
+            Layout.preferredWidth: window.width * 0.4
+            Layout.maximumHeight: window.height * 0.7
+            Layout.maximumWidth: window.width * 0.7
             Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-            Layout.margins: 20
+            Layout.rightMargin: 10
+            Layout.leftMargin: 10
         }
 
         //initially non-visible settings for the compressor
@@ -51,9 +65,11 @@ ApplicationWindow {
             Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.preferredWidth: window.width * 0.5
+            Layout.preferredHeight: window.height * 0.5
             Layout.maximumWidth: window.width * 0.6
-            Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-            Layout.margins: 20
+            Layout.maximumHeight: window.width * 0.8
+            Layout.rightMargin: 10
+            Layout.leftMargin: 10
         }
 
     }
