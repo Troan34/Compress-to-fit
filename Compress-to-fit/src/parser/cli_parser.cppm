@@ -111,16 +111,8 @@ namespace parser
 		Token(TokenType type_, ValueType const &value_);
 		Token(const std::string& option);
 
-		[[nodiscard]] auto get_value() const noexcept
-		{
-			return value;
-		}
-
-		[[nodiscard]] auto get_type() const noexcept
-		{
-			return type;
-		}
-
+		[[nodiscard]] auto get_value() const noexcept { return value; }
+		[[nodiscard]] auto get_type() const noexcept { return type; }
 	private:
 		ValueType value;
 		TokenType type = TokenType::NO_TYPE;
@@ -148,14 +140,30 @@ namespace parser
 		std::optional<bool> decomp_after_concat;
 		size_t concurrency = std::thread::hardware_concurrency();
 	};
-	
+
 	/**
 	 * @brief Parse the cli, fully manages error checking.
-	 * @return The options received from the cli.
-	 * 
+	 * @param argc Number of cli arguments, where an argument is a 'word' separated by spaces, e.g. -i or -preset
+	 * @param argv Pointer to the arguments
+	 * @return The options obtained from the cli
+	 *
+	 * @throws ErrorException for any kind of syntactic or semantic error
+	 * @throws HelpException if help command was used
 	 * @post Paths will be validated ONLY FOR THEIR EXISTANCE AND ACCESSIBILITY.
+	 *
+	 * @todo simplify whatever spaghetti is inside of this
 	 */
 	export Options parse(int argc, char* argv[]);
+
+	/**
+	 * @brief Resolve all problems the options config has
+	 * @param[in, out] options The finalized options
+	 *
+	 * @throws ErrorException for any kind of syntactic or semantic error
+	 * @throws HelpException if help command was used
+	 */
+	export auto finalize_options(Options& options) -> void;
+
 
 }//namespace parser
 

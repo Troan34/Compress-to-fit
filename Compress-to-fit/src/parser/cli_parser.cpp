@@ -84,7 +84,9 @@ std::expected<Token, ErrorType> lex(const std::string& option)
 		return Token{ token_type, true };
 		break;
 	default:
-		break;
+		report({ .message_ID_or_progress=static_cast<ErrorType>(-1),
+				.failing_option=format_sourceloc() + std::format("Unknown token type id `{}`", static_cast<int>(token_type)),
+				.compressing={}});
 	}
 		
 
@@ -189,37 +191,22 @@ std::expected<Token, ErrorType> lex(const std::string& option)
 			if (value_temp > std::thread::hardware_concurrency())
 				report({.message_ID_or_progress=WarningType::CONCURRENCY_OUT_OF_RANGE_UPPER, .failing_option = token_string + token_value, .compressing = {}});
 
-			//I had no fucking idea size_t had suffix 'uz'
-			value_temp = std::clamp(value_temp, 0uz, static_cast<size_t>(std::thread::hardware_concurrency()));
+			//I had no fucking idea size_t had suffix 'UZ'
+			value_temp = std::clamp(value_temp, 0UZ, static_cast<size_t>(std::thread::hardware_concurrency()));
 
 			value.emplace<size_t>(value_temp);
 		}
 		break;
-		//the next are all flags handled by the switch just above
-		case TokenType::LONG_HELP:
-		case TokenType::HELP:
-		case TokenType::FORCE_COMPRESSION:
-		case TokenType::DELETE_INPUT:
-		case TokenType::CONCATENATE:
-		case TokenType::DO_DECOMP_AFTER_CONCAT:
-		case TokenType::DO_NOT_DECOMP_AFTER_CONCAT:
-		case TokenType::NO_TYPE:
-			break;
+		default:
+			report({ .message_ID_or_progress=static_cast<ErrorType>(-1),
+					.failing_option=format_sourceloc() + ": unreachable branch",
+					.compressing={}});
 	}
 
 	return Token{ token_type, value };
 }
 
-/**
- * @brief Read the cli.
- * @param argc Number of cli arguments, where an argument is a 'word' separated by spaces, e.g. -i or -preset
- * @param argv Pointer to the arguments
- * @return The options obtained from the cli
- * 
- * @throws ErrorException for any kind of syntactic or semantic error
- * @throws HelpException if help command was used
- * @todo simplify whatever spaghetti is inside of this
- */
+
 auto parse(int argc, char* argv[]) -> Options
 {
 	if (argc == 1)
@@ -327,6 +314,13 @@ auto parse(int argc, char* argv[]) -> Options
 	}
 
 
+	finalize_options(options);
+
+	return options;
+}
+
+auto finalize_options(Options& options) -> void
+{
 	if (fs::is_directory(options.filename_in) and !options.concatenate_files)//tried de/compressing a dir
 		report({.message_ID_or_progress = ErrorType::DIR_COMPRESSION, .failing_option = options.filename_in.string(), .compressing = {}});
 	else if (options.filename_in.has_filename() and options.concatenate_files)//tried concatenating a file
@@ -354,8 +348,6 @@ auto parse(int argc, char* argv[]) -> Options
 	{
 		options.filename_out.replace_filename(options.filename_out.stem().string() + "_out" + FILE_EXTENSION);
 	}
-
-	return options;
 }
 
 }//namespace parser

@@ -119,8 +119,7 @@ inline void throw_error(ErrorType const error, const std::string& error_option =
 		throw ErrorException(ErrorType::DIR_COMPRESSION, error_option + " <- " + ERR_STRING::DIR_COMPRESSION);
 		break;
 	default:
-		auto const src = std::source_location::current();
-		throw std::logic_error(std::format("Thrown logic exception in function {} at line {}", src.function_name(), src.line()));
+		throw std::logic_error(std::format("Thrown logic/unknown exception {}", error_option));
 		break;
 	}
 }

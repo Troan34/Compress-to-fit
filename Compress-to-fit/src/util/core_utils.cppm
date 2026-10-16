@@ -111,8 +111,6 @@ struct ForwardIterator
 };
 
 
-
-
 //definition of the symbol type for compression
 export struct Sym
 {
@@ -143,6 +141,7 @@ export struct Sym
 	}
 
 };
+
 
 /**
 * @brief Calculate the power at compile time, to make sure of its correct usage it will be consteval
@@ -199,6 +198,17 @@ export template <typename Type>
 	return i;
 }
 
+/**
+ * @brief Format a `source_location` as a human readable string
+ * @param loc The source_location, better left as default
+ * @return Human readable string
+ * @details The resulting string is structured in the following way: \n
+ *			@code file: {file_name}({line}:{col}) `{fun_name}` @endcode
+ */
+export [[nodiscard]] constexpr auto format_sourceloc(std::source_location const loc = std::source_location::current())
+{
+	return std::string{std::format("file: {}({}:{}) `{}`", loc.file_name(), loc.line(), loc.column(), loc.function_name())};
+}
 
 template <typename T>
 concept MemberWriteable = requires(T const& a, std::ofstream& file)

@@ -86,7 +86,17 @@ auto CompressConfig::numberOfFiles() const -> size_t
     return numberOfFiles_;
 }
 
+auto CompressConfig::isRunning() const -> bool
+{
+    return isRunning_;
+}
+
 auto CompressConfig::run() -> void
 {
+    if (isRunning_) return;
+    isRunning_ = true;
 
+    //TODO: pretty obvious
+
+    emit isRunningChanged();
 }

@@ -25,6 +25,7 @@ class CompressConfig : public QObject
     Q_PROPERTY(bool forceCompression READ forceCompression WRITE setForceCompression)
     Q_PROPERTY(bool deleteInput READ deleteInput WRITE setDeleteInput)
     Q_PROPERTY(size_t numberOfFiles READ numberOfFiles WRITE setNumberOfFiles NOTIFY numberOfFilesChanged)
+    Q_PROPERTY(bool isRunning READ isRunning NOTIFY isRunningChanged)
 
 public:
     explicit CompressConfig(QObject *parent = nullptr);
@@ -45,6 +46,7 @@ public:
     [[nodiscard]] auto forceCompression() const -> bool;
     [[nodiscard]] auto deleteInput() const -> bool;
     [[nodiscard]] auto numberOfFiles() const -> size_t;
+    [[nodiscard]] auto isRunning() const -> bool;
 
     Q_INVOKABLE auto run() -> void;
 
@@ -56,6 +58,7 @@ signals:
     void forceCompressionChanged();
     void deleteInputChanged();
     void numberOfFilesChanged();
+    void isRunningChanged();
 
 private:
     QList<QUrl> paths_in_;
@@ -65,6 +68,7 @@ private:
     bool force_compression_ = false;
     bool delete_input_ = false;
     size_t numberOfFiles_{};
+    bool isRunning_ = false;
 
 
 };
