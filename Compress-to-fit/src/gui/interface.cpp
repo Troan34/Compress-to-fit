@@ -96,7 +96,15 @@ auto CompressConfig::run() -> void
     if (isRunning_) return;
     isRunning_ = true;
 
-    //TODO: pretty obvious
+    /*
+     * Managing threads here should be avoided, get a callback that requires a parser::Options arg.
+     */
+    //std::jthread main_thread{&CompressConfig::run_operation, this};
 
     emit isRunningChanged();
+}
+
+void CompressConfig::run_operation()
+{
+
 }

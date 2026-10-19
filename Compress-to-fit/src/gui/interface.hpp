@@ -9,8 +9,6 @@
 #include <QUrl>
 
 #include "common.hpp"
-#include "src/common/comp_options.hpp"
-#include "src/common/error_warn_print.hpp"
 
 /**
  * @brief parser::Options but for the frontend
@@ -70,5 +68,6 @@ private:
     size_t numberOfFiles_{};
     bool isRunning_ = false;
 
+    void run_operation();
 
 };
