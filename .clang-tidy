@@ -1,5 +1,5 @@
 ---
-Checks:          'clang-diagnostic-*, bugprone-*, cert-*, cppcoreguidelines-*, modernize-*, performance-*, readability-*, -*compat*, -readability-braces-around-statements'
+Checks:          'clang-diagnostic-*, bugprone-*, -bugprone-unchecked-optional-access, cert-*, cppcoreguidelines-*, modernize-*, performance-*, readability-*, -*compat*'
 WarningsAsErrors: ''
 HeaderFileExtensions:
   - ''

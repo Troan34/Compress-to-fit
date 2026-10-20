@@ -4,11 +4,13 @@
 *   Defines the front end to compressor interface
 */
 #pragma once
+#include <latch>
 #include <QObject>
 #include <qqmlintegration.h>
 #include <QUrl>
 
 #include "common.hpp"
+#include "../common/parser_options_type.hpp"
 
 /**
  * @brief parser::Options but for the frontend
@@ -26,7 +28,7 @@ class CompressConfig : public QObject
     Q_PROPERTY(bool isRunning READ isRunning NOTIFY isRunningChanged)
 
 public:
-    explicit CompressConfig(QObject *parent = nullptr);
+    explicit CompressConfig(std::function<void(parser::Options)> compressor_callback, QObject *parent = nullptr);
 
     void setPathsIn(QList<QUrl> const& paths);
     void setPathOut(QUrl const& path);
@@ -65,9 +67,12 @@ private:
     QmlEnums::CompPreset comp_preset_;
     bool force_compression_ = false;
     bool delete_input_ = false;
-    size_t numberOfFiles_{};
+    size_t number_of_files_{};
     bool isRunning_ = false;
+    std::function<void(parser::Options)> compressor_callback_;
+    std::jthread executor_;
+    std::latch start_thread_{1};
 
-    void run_operation();
-
+    auto execute(parser::Options options) const -> void;
+    [[nodiscard]] auto to_Options() const -> parser::Options;
 };

@@ -5,12 +5,13 @@
 #include "interface.hpp"
 
 #include <algorithm>
+#include <utility>
 import std;
 import parser;
 import util;
 
-CompressConfig::CompressConfig(QObject *parent)
-    : path_out_(parser::DEFAULT_OUT_PATH.c_str())
+CompressConfig::CompressConfig(std::function<void(parser::Options)> compressor_callback, QObject *parent)
+    : QObject(parent), path_out_(parser::DEFAULT_OUT_PATH.c_str()), compressor_callback_(std::move(compressor_callback))
 {
 }
 
@@ -52,7 +53,7 @@ void CompressConfig::setDeleteInput(bool const delete_input)
 }
 void CompressConfig::setNumberOfFiles(size_t const number_of_files)
 {
-    numberOfFiles_ = number_of_files;
+    number_of_files_ = number_of_files;
     emit numberOfFilesChanged();
 }
 
@@ -83,9 +84,8 @@ auto CompressConfig::deleteInput() const -> bool
 }
 auto CompressConfig::numberOfFiles() const -> size_t
 {
-    return numberOfFiles_;
+    return number_of_files_;
 }
-
 auto CompressConfig::isRunning() const -> bool
 {
     return isRunning_;
@@ -96,15 +96,29 @@ auto CompressConfig::run() -> void
     if (isRunning_) return;
     isRunning_ = true;
 
-    /*
-     * Managing threads here should be avoided, get a callback that requires a parser::Options arg.
-     */
-    //std::jthread main_thread{&CompressConfig::run_operation, this};
+    auto options = to_Options();
+    executor_ = std::jthread{execute, std::move(options)};
 
     emit isRunningChanged();
+    start_thread_.count_down();
 }
 
-void CompressConfig::run_operation()
+auto CompressConfig::execute(parser::Options options) const -> void
 {
-
+    start_thread_.wait();
+    compressor_callback_(std::move(options));
 }
+
+auto CompressConfig::to_Options() const -> parser::Options
+{
+    return parser::Options{
+        .filename_in = paths_in_[0].path().toStdString(),//[0] only because we don't support multiple paths
+        .filename_out = path_out_.path().toStdString(),
+        .compressor = static_cast<size_t>(comp_type_),
+        .preset = static_cast<size_t>(comp_preset_),
+        .n_files = number_of_files_,
+        .force_compression = force_compression_,
+        .delete_input = delete_input_,
+    };
+}
+

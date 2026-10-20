@@ -4,7 +4,8 @@
 *
 *	Utilities for the parser
 */
-
+module;
+#include "../common/parser_options_type.hpp"
 export module parser;
 
 #ifdef __INTELLISENSE__
@@ -13,6 +14,9 @@ export module parser;
 
 import util;
 import std.compat;
+
+
+
 namespace fs = std::filesystem;
 
 
@@ -96,11 +100,9 @@ namespace parser
 		}
 	};
 
-	export const fs::path DEFAULT_OUT_PATH{ "output.tzf" };
+	export using ::parser::Options;
+	export using ::parser::DEFAULT_OUT_PATH;
 
-
-
-	
 	/// <summary>
 	/// Represents a cli option
 	/// </summary>
@@ -122,24 +124,7 @@ namespace parser
 	std::expected<Token, ErrorType> lex(const std::string& option);
 
 
-	/// <summary>
-	/// All the options available
-	/// </summary>
-	export struct Options
-	{
-		fs::path filename_in{};
-		fs::path filename_out{ DEFAULT_OUT_PATH };
-		size_t compressor = static_cast<size_t>(CompType::LZ77);
-		size_t preset = COMP_5;
-		size_t n_files = 1;
-		size_t size_files = 0;
-		bool force_compression = false;
-		bool delete_input = false;
-		bool concatenate_files = false;
-		bool need_help = false;
-		std::optional<bool> decomp_after_concat;
-		size_t concurrency = std::thread::hardware_concurrency();
-	};
+
 
 	/**
 	 * @brief Parse the cli, fully manages error checking.

@@ -13,6 +13,7 @@ set_target_properties(project_logic PROPERTIES
 )
 
 
+
 target_sources(
     project_logic
     PUBLIC FILE_SET CXX_MODULES FILES
@@ -39,6 +40,7 @@ target_sources(
         "src/common/comp_options.hpp"
         "src/common/error_warn_print.hpp"
         "src/common/sink.hpp"
+        "src/common/parser_options_type.hpp"
 )
 
 #set_target_properties(project_logic PROPERTIES CXX_CLANG_TIDY ${CLANG_TIDY_OPT})

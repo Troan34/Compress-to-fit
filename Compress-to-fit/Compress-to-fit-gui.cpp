@@ -33,7 +33,8 @@ int main(int argc, char* argv[])
 
     engine.setExternalSingletonInstance("CompressToFit", "GuiSink", &sink);
     FileSystem file_system;
-    CompressConfig compressor_conf;
+
+    CompressConfig compressor_conf{process_file};
     engine.rootContext()->setContextProperty("compressor_conf", &compressor_conf);
     engine.rootContext()->setContextProperty("fileSystem", &file_system);
 

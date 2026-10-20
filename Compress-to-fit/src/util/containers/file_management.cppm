@@ -8,6 +8,7 @@
 module;
 #include <mio/mmap.hpp>
 #include <cassert>
+#include <utility>
 #include "../../common/sink.hpp"
 #if defined(__INTELLISENSE__)
 #include "../../for_intellisense/everything.hpp"
@@ -85,23 +86,24 @@ public:
 
 	/**
 	 * @brief Construct member types, such as #FileOptions. This ctor should be used when a file is to be compressed
-	 * @param path Path of file
 	 * @param options Options to create and customize to the file
 	 * 
 	 * @todo Add a parameter for #FileOptions::delete_on_dtor when the parser is updated to do that
 	 */
-	File(parser::Options const& options)
-		:options_(options)
+	explicit File(parser::Options options)
+		:options_(std::move(options))
 	{
-		if (options.concatenate_files)
+		if (options_.concatenate_files)
 		{
 			concatenate_files(options_.filename_in);
 		}
 
-		in_file_options = FileOptions{ .path = options_.filename_in, .header = extract_info(options_.filename_in) };
+		auto const extracted_header = extract_info(options_.filename_in);
+
+		in_file_options = FileOptions{ .path = options_.filename_in, .header = extracted_header};
 
 		//TODO: What if the uncompressed file is a compressed file?
-		if (!extract_info(options_.filename_in) or options_.force_compression)
+		if (!extracted_header or options_.force_compression)
 		{
 			out_file = create_file(options_.filename_out);//create the file with header
 		}
@@ -111,7 +113,6 @@ public:
 			out_file = { options_.filename_out, std::ios::binary };//create empty file
 		}
 	}
-
 
 	/**
 	 * @brief Write to the output file.
@@ -287,7 +288,7 @@ public:
 	 *
 	 * @pre path shall exist and be accessible.
 	 */
-	static auto extract_info(const fs::path& path) -> std::optional<Header>
+	static auto extract_info(fs::path const& path) -> std::optional<Header>
 	{
 		std::ifstream file{ path, std::ios::binary };
 
@@ -321,7 +322,6 @@ public:
 			try_throw_IO_error(file.rdstate(), path);
 
 			return std::optional{header};
-
 		}
 
 		return std::optional<Header>{};
