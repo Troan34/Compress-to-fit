@@ -186,3 +186,34 @@ export void show_progress(const parser::Options& options = {}, float progress = 
 	std::print("\033[0m] {:.1f}%", progress * 100.F);
 	std::cout << std::flush;
 }
+
+template <>
+struct std::formatter<parser::Options>
+{
+	constexpr auto parse(std::format_parse_context& ctx)
+	{
+		return ctx.begin();
+	}
+
+	auto format(const parser::Options& opt, std::format_context& ctx) const
+	{
+		return std::format_to(ctx.out(),
+				"parser::Options object\n"
+					"filename_in = {} "
+					"filename_out = {}\n"
+					"comp_id = {} preset = {} "
+					"n_files = {} size_files = {}\n"
+					"force_comp = {} delete_input = {}\n"
+					"concat_files = {} need_help = {}\n"
+					"decomp_after_concat = {} "
+					"concurrency = {}",
+					opt.filename_in.string(),
+					opt.filename_out.string(),
+					opt.compressor, opt.preset,
+					opt.n_files, opt.size_files,
+					opt.force_compression, opt.delete_input,
+					opt.concatenate_files, opt.need_help,
+					opt.decomp_after_concat ? opt.decomp_after_concat.value() : false,
+					opt.concurrency);
+	}
+};

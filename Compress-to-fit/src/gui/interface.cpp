@@ -23,7 +23,7 @@ void CompressConfig::setPathsIn(QList<QUrl> const& paths)
     {
         std::println("{}", path.toString().toStdString());
     });
-
+    paths_in_ = paths;
     emit pathsInChanged();
 }
 void CompressConfig::setPathOut(QUrl const& path)
@@ -34,6 +34,7 @@ void CompressConfig::setPathOut(QUrl const& path)
 void CompressConfig::setCompressor(QmlEnums::CompType const comp_type)
 {
     comp_type_ = comp_type;
+    std::println("{}", static_cast<uint8_t>(comp_type));
     emit compressorChanged();
 }
 void CompressConfig::setCompressorPreset(QmlEnums::CompPreset const comp_preset)
@@ -97,25 +98,28 @@ auto CompressConfig::run() -> void
     isRunning_ = true;
 
     auto options = to_Options();
-    executor_ = std::jthread{execute, std::move(options)};
+    std::println("{}", options);
+    executor_ = std::jthread{
+        [opt = std::move(options), this] mutable -> void
+        {
+            parser::finalize_options(opt);
+            start_thread_.wait();
+            compressor_callback_(opt);
+        }
+    };
 
     emit isRunningChanged();
     start_thread_.count_down();
 }
 
-auto CompressConfig::execute(parser::Options options) const -> void
-{
-    start_thread_.wait();
-    compressor_callback_(std::move(options));
-}
 
 auto CompressConfig::to_Options() const -> parser::Options
 {
     return parser::Options{
-        .filename_in = paths_in_[0].path().toStdString(),//[0] only because we don't support multiple paths
+        .filename_in = paths_in_.first().path().toStdString(),//TODO: first only because we don't support multiple paths
         .filename_out = path_out_.path().toStdString(),
-        .compressor = static_cast<size_t>(comp_type_),
-        .preset = static_cast<size_t>(comp_preset_),
+        .compressor = static_cast<uint8_t>(comp_type_),
+        .preset = static_cast<uint8_t>(comp_preset_),
         .n_files = number_of_files_,
         .force_compression = force_compression_,
         .delete_input = delete_input_,

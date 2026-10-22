@@ -73,6 +73,5 @@ private:
     std::jthread executor_;
     std::latch start_thread_{1};
 
-    auto execute(parser::Options options) const -> void;
     [[nodiscard]] auto to_Options() const -> parser::Options;
 };

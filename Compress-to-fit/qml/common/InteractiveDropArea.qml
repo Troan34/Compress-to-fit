@@ -28,6 +28,7 @@ Item {
         else
         {
             filePathInfo.text = fileSystem.fileName(urls[0])
+            compressor_conf.pathsIn = urls
         }
 
         dropAreaCont.updateBackgroundSVGFromUrls(urls)

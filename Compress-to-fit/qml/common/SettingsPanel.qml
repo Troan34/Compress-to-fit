@@ -39,6 +39,10 @@ Item {
 
                     onCheckedChanged: checked ? compressor_conf.compressor = QmlEnums.LZ77 : compressor_conf.compressor = QmlEnums.MAX
 
+                    Component.onCompleted: {
+                        compressor_conf.compressor = QmlEnums.LZ77
+                    }
+
                     Popup {
                         x: lz77Button.width / 2 - width / 2
                         y: -height - 5
@@ -138,6 +142,9 @@ Item {
                 stepSize: 1
 
                 onValueChanged: { compressorOptions.setPreset(value) }
+                Component.onCompleted: {
+                    compressorOptions.setPreset(value)
+                }
             }
 
             TextField {
@@ -154,6 +161,10 @@ Item {
                 text: "4"
                 onTextChanged: { compressorOptions.setPreset(Number(text)) }
                 validator: IntValidator { bottom: slider.from; top: slider.to; }
+
+                Component.onCompleted: {
+                    compressorOptions.setPreset(Number(text))
+                }
             }
             Item {
                 Layout.fillWidth: true
@@ -178,11 +189,17 @@ Item {
                 CheckBox {
                     text: qsTr("force compression")
                     onCheckedChanged: checked ? compressor_conf.forceCompression = true : compressor_conf.forceCompression = false
+                    Component.onCompleted: {
+                        compressor_conf.forceCompression = false
+                    }
                 }
 
                 CheckBox {
                     text: qsTr("delete input on completion")
                     onCheckedChanged: checked ? compressor_conf.deleteInput = true : compressor_conf.deleteInput = false
+                    Component.onCompleted: {
+                        compressor_conf.deleteInput = false
+                    }
                 }
             }
 
@@ -209,13 +226,17 @@ Item {
 
                 onTextChanged: { compressor_conf.numberOfFiles = Number(text) }
                 validator: IntValidator { bottom: 1; top: 1000; }
+
+                Component.onCompleted: {
+                    compress_conf.numberOfFiles = Number(text)
+                }
             }
         }
 
         //Run button
         Button {
             text: qsTr("Run operation")
-
+            onClicked: compressor_conf.run();
         }
 
     }
