@@ -20,6 +20,7 @@ export import util;
 import std.compat;
 import parser;
 import containers;
+import :core;
 
 
 namespace fs = std::filesystem;
@@ -335,6 +336,11 @@ class LZ77Block
 public:
 	using value_type = LZ77_Token;
 
+	/**
+	 * @brief Grab the LZ77 header
+	 * @param data the raw data
+	 * @return A pair of the values @code { compressed_length, uncompressed_length } @endcode
+	 */
 	static auto extract_header(std::span<std::byte const> const data)
 	{
 		constexpr size_t len1 = sizeof(decltype(compressed_length_));
@@ -352,8 +358,19 @@ public:
 		return std::make_pair(compressed_length, uncompressed_length);
 	}
 
+	/**
+	 * @brief Grab the LZ77 header
+	 * @param data the Sym data
+	 * @return A pair of the values @code { compressed_length, uncompressed_length } @endcode
+	 */
+	static auto extract_header(std::span<Sym const> const data)
+	{
+		return extract_header({reinterpret_cast<std::span<std::byte const>::pointer>(data.data()),
+								reinterpret_cast<std::span<std::byte const>::pointer>(data.data() + data.size())});
+	}
 
-	explicit LZ77Block(std::span<std::byte const> const data, fs::path const& file, Alloc const& alloc = Alloc())
+
+	explicit LZ77Block(std::span<std::byte const> const data, Alloc const& alloc = Alloc())
 		: buffer_(alloc)
 	{
 		constexpr size_t len1 = sizeof(decltype(compressed_length_));
@@ -365,7 +382,7 @@ public:
 
 		if (len1 + len2 + compressed_length_ > data.size())
 		{
-			report({.message_ID_or_progress = ErrorType::FILE_CORRUPTED, .failing_option = "An lz77 header is corrupted in file \"" + file.string() + "\""});
+			report({.message_ID_or_progress = ErrorType::FILE_CORRUPTED, .failing_option = "An lz77 header is corrupted."});
 		}
 
 		buffer_.reserve(data.size());
@@ -449,10 +466,11 @@ private:
 	std::vector<LZ77_Token, Alloc> buffer_;
 };
 
-
+template <typename Alloc = std::allocator<LZ77_Token>>
 class LZ77Compressor
 {
 public:
+	using block_type = LZ77Block&;
 	LZ77Compressor(std::span<Sym const> const data, CompPreset const preset)
 		:data_(data), window(data, preset), pattern_matcher(window, 0, preset)
 	{}
@@ -463,7 +481,6 @@ public:
 	 *
 	 * @note Will clear out_data block
 	 */
-	template <typename Alloc>
 	void compress(LZ77Block<Alloc>& out_data)
 	{
 		out_data.clear();
@@ -489,15 +506,14 @@ private:
 	std::span<Sym const> const data_{};
 	Window window;
 	alg::Rabin pattern_matcher;
-
-
 };
 
-template<typename Alloc = std::allocator<LZ77Block<>::value_type>>
+template<typename Alloc = std::allocator<LZ77Block<>::value_type>, typename DataAlloc = std::allocator<Sym>>
 class LZ77Decompressor
 {
 public:
-	explicit LZ77Decompressor(LZ77Block<Alloc> const& data)
+	using data_type = std::vector<Sym, DataAlloc>&;
+	explicit LZ77Decompressor(std::span<Sym const> const data)
 		: data_(data) {}
 
 	/**
@@ -506,8 +522,7 @@ public:
 	 *
 	 * @note Will clear out_data buffer
 	 */
-	template <typename Allocator = std::allocator<Sym>>
-	void decompress(std::vector<Sym, Allocator>& out_data) const
+	void decompress(std::vector<Sym, DataAlloc>& out_data) const
 	{
 		out_data.reserve(data_.size() / sizeof(Sym));
 		for (auto const token : data_)
@@ -527,6 +542,73 @@ private:
 	LZ77Block<Alloc> const& data_;
 };
 
+template<typename Alloc = std::allocator<LZ77Block<>::value_type>, typename DataAlloc = std::allocator<Sym>>
+class LZ77Model
+{
+	LZ77Model(std::span<Sym const> const data, CompPreset const preset)
+		: raw_data_(data), processed_data_(), window(Window{data, preset}), pattern_matcher(alg::Rabin{window.value(), 0, preset})
+	{
+	}
+
+	explicit LZ77Model(std::span<Sym const> const data)
+	: processed_data_(data) {}
+
+	/**
+	 * @brief Compress the data received in the constructor
+	 * @param out_data Where the output will go
+	 *
+	 * @note Will clear out_data block
+	 */
+	void compress(LZ77Block<Alloc>& out_data)
+	{
+
+		out_data.clear();
+		out_data.reserve(raw_data_.value().size() / sizeof(LZ77_Token));
+
+		size_t consumed_tokens{};
+		//loop over the stream
+		for (auto i = raw_data_.value().begin(); i != raw_data_.value().end();)
+		{
+			auto const token = this->pattern_matcher.value().find_pattern();
+
+			auto const num_of_rolls = token.length + 1;
+			this->pattern_matcher.value().roll_hash(num_of_rolls);//roll, updates the hash and position
+			this->window.value().slide(num_of_rolls);
+			i += num_of_rolls;
+			consumed_tokens += num_of_rolls;
+
+			out_data.push_back(token);
+		}
+	}
+
+	/**
+	 * @brief Decompress the data received in the constructor
+	 * @param out_data Where the output will go
+	 *
+	 * @note Will clear out_data buffer
+	 */
+	void decompress(std::vector<Sym, DataAlloc>& out_data) const
+	{
+		out_data.reserve(processed_data_.value().size() / sizeof(Sym));
+		for (auto const token : processed_data_.value())
+		{
+			if (token.offset != 0)
+			{
+				auto size = out_data.size();
+				for (auto _ : std::views::iota(0u, token.length))
+					out_data.push_back(out_data[size - token.offset]);
+			}
+			out_data.emplace_back(token.symbol);
+		}
+		assert(out_data.capacity() == out_data.size());
+	}
+
+private:
+	std::optional<std::span<Sym const> const> raw_data_;
+	std::optional<LZ77Block<Alloc> const&> processed_data_;
+	std::optional<Window> window;
+	std::optional<alg::Rabin> pattern_matcher;
+};
 
 
 export class LZ77ConcurrentCompressor
@@ -658,37 +740,36 @@ public:
 	 * @brief Decompress the data.
 	 *
 	 * @details The decompression is achieved by considering the first index of the data as the start of the first block.
-	 *			We then check the compressed_size for this block and advance that much, by doing this we know the start of the new block.
+	 *			We then check the compressed_size (i.e. .first) for this block and advance that much, by doing this we know the start of the new block.
 	 */
 	void decompress() noexcept(false)
 	{
-		std::span const data{data_};
+		std::span const data{reinterpret_cast<Sym const*>(data_.begin()), reinterpret_cast<Sym const*>(data_.end()) };
 
 
 		for (size_t i{}, seq_n{}; i < data_.size(); seq_n++)
 		{
-			auto data_for_task = LZ77Block{data.subspan(i), file_.get_in_file_options().path};
-			i += sizeof(std::invoke_result_t<decltype(&LZ77Block<>::uncompressed_length), LZ77Block<>>) +
-				sizeof(std::invoke_result_t<decltype(&LZ77Block<>::compressed_length), LZ77Block<>>) +
-				data_for_task.compressed_length();
+			auto block_info = LZ77Block<>::extract_header(data);
 
 			auto future = thread_pool.add_task(
-				[this, data = std::move(data_for_task), seq_n]
+				[this, data, block_info, i, seq_n]
 				{
-					LZ77Decompressor decompressor{data};
-
+					LZ77Decompressor decompressor{data.subspan(i)};
 					auto buffer = std::make_unique<std::vector<Sym>>();
-					buffer->reserve(data.uncompressed_length());
+					buffer->reserve(block_info.second);
 
 					decompressor.decompress(*buffer);
 
 					file_list_.insert(std::move(buffer), seq_n);
 				});
 
+			i += sizeof(std::invoke_result_t<decltype(&LZ77Block<>::uncompressed_length), LZ77Block<>>) +
+				sizeof(std::invoke_result_t<decltype(&LZ77Block<>::compressed_length), LZ77Block<>>) +
+				block_info.first;
+
 			std::unique_lock lock{mutex_};
 			results.emplace_back(std::move(future));
 		}
-
 	}
 
 

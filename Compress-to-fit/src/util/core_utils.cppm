@@ -31,7 +31,7 @@ export inline constexpr char const* FILE_EXTENSION = ".tzf";
 export constexpr size_t SIZE_CHUNK = 4ULL * 1024 * 1024;//4MiB
 
 
-//All of this is COMPLETELY optional, but why not train our metaprogramming
+//All of this is COMPLETELY optional, but why not train our metaprogramming. P.S. also C++26 will add parameters_of, but this is what we have to do for now
 template <typename not_a_fun>
 struct function_traits;//throws if not a fun
 
