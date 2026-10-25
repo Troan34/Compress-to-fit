@@ -29,8 +29,10 @@ target_sources(
         "src/models/LZ77/lz77.cppm"
         "src/util/text_style.cppm"
         "src/util/fixed_string.cppm"
+        "src/models/core.cppm"
     PRIVATE
         "src/models/LZ77/lz77_impl.cpp"
+        "src/models/processor.cpp"
 )
 
 target_sources(

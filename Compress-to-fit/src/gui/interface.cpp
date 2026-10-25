@@ -10,8 +10,8 @@ import std;
 import parser;
 import util;
 
-CompressConfig::CompressConfig(std::function<void(parser::Options)> compressor_callback, QObject *parent)
-    : QObject(parent), path_out_(parser::DEFAULT_OUT_PATH.c_str()), compressor_callback_(std::move(compressor_callback))
+CompressConfig::CompressConfig(GuiSink& sink, std::function<void(parser::Options)> compressor_callback, QObject *parent)
+    : QObject(parent), path_out_(parser::DEFAULT_OUT_PATH.c_str()), sink_(sink), compressor_callback_(std::move(compressor_callback))
 {
 }
 
@@ -102,6 +102,7 @@ auto CompressConfig::run() -> void
     executor_ = std::jthread{
         [opt = std::move(options), this] mutable -> void
         {
+            SinkInstancer sink_instance{sink_};
             parser::finalize_options(opt);
             start_thread_.wait();
             compressor_callback_(opt);
