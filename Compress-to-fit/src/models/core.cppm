@@ -5,8 +5,10 @@
 module;
 #include "mio/mmap.hpp"
 export module models:core;
+import std;
 import parser;
 import containers;
+import util;
 
 export template <typename T>
 concept Model = requires(T const &t, std::span<std::byte const> const data, typename T::block_type out_blocks, typename T::data_type out_raw)
