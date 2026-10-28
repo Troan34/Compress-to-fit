@@ -16,23 +16,24 @@ import std.compat;
 
 
 /**
- * @brief Ring queue-like where if size > capacity, the oldest elements are written to stream.
+ * @brief Ring buffer where if size > capacity, the oldest elements are written to stream.
  *		  At least the most recent #minimum_size_ number of elements shall be available for reading.
  * @tparam T type stored, must be trivially copyable
  */
-export template <typename T>
-	requires SerializableToDisk<std::ranges::range_value_t<T>> or SerializableToDisk<T>
-class ConcFileBuffer
+export template <typename T, ByteSink S>
+	requires SerializableTo<T, S> ||
+		(std::ranges::range<T> && SerializableTo<std::ranges::range_value_t<T>, S>)
+class ConcurrentRingBuffer
 {
 public:
-
-	ConcFileBuffer(File& out_stream, size_t const minimum_size)
+	//TODO: maybe take a sink instead of a `File`
+	ConcurrentRingBuffer(File& out_stream, size_t const minimum_size)
 		:out_stream_(out_stream), minimum_size_(minimum_size)
 	{
 		reserve(1.5f * minimum_size_);
 	}
 
-	~ConcFileBuffer()
+	~ConcurrentRingBuffer()
 	{
 		auto const elements_to_write_n = index_ - written_index_;
 		out_stream_.write(reinterpret_cast<char const*>(&data_[written_index_]), elements_to_write_n * sizeof(T));
@@ -40,7 +41,7 @@ public:
 	}
 
 	/**
-	 * @brief 
+	 * @brief Push a new value
 	 * @param value
 	 * @pre #index_ > #minimum_size_
 	 */
@@ -55,7 +56,7 @@ public:
 	}
 
 	/**
-	 * @brief
+	 * @brief Push a new value
 	 * @param value
 	 * @pre #index_ > #minimum_size_
 	 */
@@ -192,7 +193,7 @@ private:
 				std::ranges::for_each(std::views::counted(data_, elements_to_write_n),
 					[this](T const& value)
 					{
-						value.write_to(out_stream_.get_ref_out_stream());
+						serialize_to(value, S{ out_stream_.get_ref_out_stream() });
 					}
 				);
 			}
@@ -204,3 +205,7 @@ private:
 
 	[[nodiscard]] constexpr size_t true_index() const noexcept { return index_ % capacity_; }
 };
+
+export template <typename T>
+	requires SerializableTo<T, byte_sinks::StreamSink>
+using ConcurrentRingFileBuffer = ConcurrentRingBuffer<T, byte_sinks::StreamSink>;

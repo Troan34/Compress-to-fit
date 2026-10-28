@@ -1,4 +1,5 @@
-add_library(project_logic SHARED)
+add_library(project_logic SHARED
+        src/util/serializable.cppm)
 
 set(CLANG_TIDY_OPT
         clang-tidy

@@ -25,21 +25,22 @@ export template <Model M>
 class ConcurrentModel
 {
 public:
-    ConcurrentModel()
+    ConcurrentModel(File& file, parser::Options options)
+    {
+
+    }
 
 private:
-    CompPreset const preset_;
-    size_t const concurrency_;
+    parser::Options options_;
     File const& file_;
-    size_t const file_size_;
     std::vector<std::future<void>> results{};
     std::atomic<size_t> n_blocks_{};
     size_t n_completed_blocks{};
     std::mutex mutex_;//to be used to access results
     std::jthread progress_checker{&ConcurrentModel::check_results, this};
     //These have to stay down here (I just found out how objects are destroyed)
-    ConcOrderedFileList<LZ77Block<>> file_list_;
-    ThreadPool thread_pool{};
+    ConcOrderedFileList<M> file_list_;
+    ThreadPool thread_pool;
 
 
     void check_results(std::stop_token stop);

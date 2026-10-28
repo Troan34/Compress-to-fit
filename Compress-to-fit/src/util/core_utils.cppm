@@ -146,7 +146,7 @@ export struct Sym
 /**
 * @brief Calculate the power at compile time, to make sure of its correct usage it will be consteval
 */
-export [[nodiscard]] consteval size_t const_pow(size_t const base, size_t const exponent) noexcept
+export [[nodiscard]] consteval auto const_pow(size_t const base, size_t const exponent) noexcept -> size_t
 {
 	size_t result = 1;
 	for (size_t i = 0; i < exponent; i++)
@@ -156,22 +156,32 @@ export [[nodiscard]] consteval size_t const_pow(size_t const base, size_t const 
 	return result;
 }
 
-export [[nodiscard]] constexpr size_t KiB_to_B(size_t const value)
+export [[nodiscard]] constexpr auto KiB_to_B(size_t const value) -> size_t
 {
-	return value * 1024;
-}
-
-export [[nodiscard]] constexpr size_t MiB_to_B(size_t const value)
-{
-	return value * 1024 * 1024;
-}
-
-export constexpr unsigned long long operator""_MiB(unsigned long long const value)
-{
-	if (value * 1024ULL * 1024ULL >= std::numeric_limits<unsigned long long>::max()) {
+	if (value * 1024UZ >= std::numeric_limits<size_t>::max())
+	{
 		throw std::out_of_range("Your value will cause an overflow.");
 	}
+	return value * 1024UZ;
+}
+
+export [[nodiscard]] constexpr auto MiB_to_B(size_t const value) -> size_t
+{
+	if (value * 1024UZ * 1024UZ >= std::numeric_limits<size_t>::max())
+	{
+		throw std::out_of_range("Your value will cause an overflow.");
+	}
+	return value * 1024UZ * 1024UZ;
+}
+
+export constexpr auto operator""_MiB(unsigned long long const value) -> unsigned long long
+{
 	return MiB_to_B(value);
+}
+
+export constexpr auto operator""_KiB(unsigned long long const value) -> unsigned long long
+{
+	return KiB_to_B(value);
 }
 
 
@@ -210,54 +220,5 @@ export [[nodiscard]] constexpr auto format_sourceloc(std::source_location const 
 	return std::string{std::format("file: {}({}:{}) `{}`", loc.file_name(), loc.line(), loc.column(), loc.function_name())};
 }
 
-template <typename T>
-concept MemberWriteable = requires(T const& a, std::ofstream& file)
-{
-	a.write_to(file);
-};
-
-template <typename T>
-concept FreeWriteable = requires(T const& a, std::ofstream& file)
-{
-	write_to(a, file);
-};
-
-export template<typename T>
-concept SerializableToDisk = std::is_trivially_copyable_v<T> or MemberWriteable<T> or FreeWriteable<T>;
-
-template<SerializableToDisk T>
-void do_write_to(T const& t, std::ofstream& file)
-{
-	if constexpr (std::is_trivially_copyable_v<T> and !MemberWriteable<T> and !FreeWriteable<T>)
-	{
-		file.write(reinterpret_cast<char const *>(&t), sizeof(T));
-	}
-	else if constexpr (MemberWriteable<T>)
-	{
-		t.write_to(file);
-	}
-	else
-	{
-		write_to(t, file);
-	}
-}
-
-
-export template<std::ranges::input_range R>
-	requires SerializableToDisk<std::ranges::range_value_t<R>> or SerializableToDisk<R>
-void write_to_disk(R const& range, std::ofstream& file)
-{
-	if constexpr (SerializableToDisk<R>)
-	{
-		do_write_to(range, file);
-	}
-	else
-	{
-		for (auto const& elem : range)
-		{
-			do_write_to(elem, file);
-		}
-	}
-}
 
 
