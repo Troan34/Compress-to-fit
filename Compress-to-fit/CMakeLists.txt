@@ -1,5 +1,4 @@
-add_library(project_logic SHARED
-        src/util/serializable.cppm)
+add_library(project_logic SHARED)
 
 set(CLANG_TIDY_OPT
         clang-tidy
@@ -31,6 +30,7 @@ target_sources(
         "src/util/text_style.cppm"
         "src/util/fixed_string.cppm"
         "src/models/core.cppm"
+        "src/util/serializable.cppm"
     PRIVATE
         "src/models/LZ77/lz77_impl.cpp"
         "src/models/processor.cpp"

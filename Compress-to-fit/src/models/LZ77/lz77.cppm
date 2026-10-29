@@ -396,19 +396,13 @@ public:
 
 	/**
 	 * @brief Convert the block into a byte buffer
-	 * @param output output buffer
 	 */
-	void serialize(std::vector<std::byte>& output)
+	template <ByteSink Sink = byte_sinks::VectorSink>
+	void serialize(Sink& sink)
 	{
-		constexpr size_t len1 = sizeof(decltype(compressed_length_));
-		constexpr size_t len2 = sizeof(decltype(uncompressed_length_));
-
-		output.resize(len1 + len2 + buffer_.size() * sizeof(LZ77_Token));
-
-		std::memcpy(output.data(), &compressed_length_, len1);
-		std::memcpy(output.data() + len1, &uncompressed_length_, len2);
-
-		std::memcpy(output.data() + len1 + len2, buffer_.data(), buffer_.size() * sizeof(LZ77_Token));
+		sink.append(to_bytes_le(compressed_length_));
+		sink.append(to_bytes_le(uncompressed_length_));
+		sink.append({reinterpret_cast<std::byte>(buffer_.data()), buffer_.size() * sizeof(decltype(buffer_)::value_type)});
 	}
 
 	void write_to(std::ofstream& output) const

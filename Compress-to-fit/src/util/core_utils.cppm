@@ -184,7 +184,9 @@ export constexpr auto operator""_KiB(unsigned long long const value) -> unsigned
 	return KiB_to_B(value);
 }
 
-
+export constexpr auto operator""_B(unsigned long long const value) -> std::byte {
+	return static_cast<std::byte>(value);
+}
 
 
 /**
@@ -221,4 +223,63 @@ export [[nodiscard]] constexpr auto format_sourceloc(std::source_location const 
 }
 
 
+
+/**
+ * @brief Turn a primitive into a little endian byte representation
+ */
+export template <std::integral T>
+	requires (not std::same_as<T, bool>)
+constexpr auto to_bytes_le(T val) -> std::array<std::byte, sizeof(T)> {
+	using U = std::make_unsigned_t<T>;
+	U unsigned_val = static_cast<U>(val);
+	std::array<std::byte, sizeof(U)> out;
+	if constexpr (std::endian::native == std::endian::little) {
+		std::memcpy(out.data(), &unsigned_val, sizeof(U));
+	} else {
+		for (std::size_t i = 0; i < sizeof(U); ++i)
+		{
+			out[i] = static_cast<std::byte>(unsigned_val >> (8 * (sizeof(U) - 1 - i)));
+		}
+	}
+	return out;
+}
+
+/**
+ * @brief Turn a primitive into its byte representation
+ */
+export template <std::integral T>
+	requires (not std::same_as<T, bool>)
+constexpr auto to_bytes(T val) -> std::array<std::byte, sizeof(T)> {
+	using U = std::make_unsigned_t<T>;
+	U unsigned_val = static_cast<U>(val);
+	std::array<std::byte, sizeof(U)> out;
+	std::memcpy(out.data(), &unsigned_val, sizeof(U));
+	return out;
+}
+
+/**
+ * @brief Turn a primitive into its byte representation
+ */
+export template <std::floating_point T>
+constexpr auto to_bytes_le(T val) -> std::array<std::byte, sizeof(T)> {
+	static_assert(std::numeric_limits<T>::is_iec559, "IEEE-754 required");
+	if constexpr (sizeof(T) == 4)
+		return to_bytes_le(std::bit_cast<std::uint32_t>(val));
+	else if constexpr (sizeof(T) == 8)
+		return to_bytes_le(std::bit_cast<std::uint64_t>(val));
+	static_assert("Floating point size greater than 8 bytes");
+}
+
+/**
+ * @brief Turn a primitive into a little endian byte representation
+ */
+export template <std::floating_point T>
+constexpr auto to_bytes(T val) -> std::array<std::byte, sizeof(T)> {
+	static_assert(std::numeric_limits<T>::is_iec559, "IEEE-754 required");
+	if constexpr (sizeof(T) == 4)
+		return to_bytes(std::bit_cast<std::uint32_t>(val));
+	else if constexpr (sizeof(T) == 8)
+		return to_bytes(std::bit_cast<std::uint64_t>(val));
+	static_assert("Floating point size greater than 8 bytes");
+}
 

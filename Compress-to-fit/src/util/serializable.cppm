@@ -87,6 +87,19 @@ export namespace byte_sinks
             used = 0;
         }
     };
+
+    /**
+     * @brief Sink to a std::vector
+     */
+    template <typename Alloc = std::allocator<std::byte>>
+    struct VectorSink
+    {
+        std::vector<std::byte, Alloc>& output;
+        void append(std::span<std::byte const> data)
+        {
+            output.append_range(data);
+        }
+    };
 }
 
 /**
