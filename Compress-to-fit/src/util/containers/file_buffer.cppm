@@ -27,8 +27,8 @@ class ConcurrentRingBuffer
 {
 public:
 	//TODO: maybe take a sink instead of a `File`
-	ConcurrentRingBuffer(File& out_stream, size_t const minimum_size)
-		:out_stream_(out_stream), minimum_size_(minimum_size)
+	ConcurrentRingBuffer(S& sink, size_t const minimum_size)
+		:sink_(sink), minimum_size_(minimum_size)
 	{
 		reserve(1.5f * minimum_size_);
 	}
@@ -36,7 +36,7 @@ public:
 	~ConcurrentRingBuffer()
 	{
 		auto const elements_to_write_n = index_ - written_index_;
-		out_stream_.write(reinterpret_cast<char const*>(&data_[written_index_]), elements_to_write_n * sizeof(T));
+		sink_.append({reinterpret_cast<char const*>(&data_[modulo_index(written_index_)]), elements_to_write_n * sizeof(T)});
 		allocator.deallocate(data_, capacity_);
 	}
 
@@ -49,7 +49,7 @@ public:
 	{
 		std::unique_lock lock{mut};
 
-		data_[true_index()] = value;
+		data_[modulo_index(index_)] = value;
 		index_++;
 
 		write_buffer();
@@ -64,7 +64,7 @@ public:
 	{
 		std::unique_lock lock{mut};
 
-		data_[true_index()] = value;
+		data_[modulo_index(index_)] = value;
 		index_++;
 
 		write_buffer();
@@ -162,7 +162,7 @@ public:
 	}
 
 private:
-	File& out_stream_;
+	S& sink_;
 	T* data_;
 	std::allocator<T> allocator;
 	mutable std::shared_mutex mut;
@@ -186,14 +186,14 @@ private:
 			//Maybe we can lock the stream, or stuff like that
 			if constexpr (std::is_trivially_copyable_v<T>)
 			{
-				out_stream_.write(std::span{&data_[written_index_], elements_to_write_n * sizeof(T)});
+				out_stream_.write(std::span{&data_[modulo_index(written_index_)], elements_to_write_n * sizeof(T)});
 			}
 			else//we expect write_to to have been defined as per SerializableToDisk
 			{
 				std::ranges::for_each(std::views::counted(data_, elements_to_write_n),
 					[this](T const& value)
 					{
-						serialize_to(value, S{ out_stream_.get_ref_out_stream() });
+						serialize_to(value, sink_);
 					}
 				);
 			}
@@ -203,7 +203,7 @@ private:
 	}
 
 
-	[[nodiscard]] constexpr size_t true_index() const noexcept { return index_ % capacity_; }
+	[[nodiscard]] constexpr size_t modulo_index(size_t const val) const noexcept { return val % capacity_; }
 };
 
 export template <typename T>

@@ -13,8 +13,9 @@ import util;
 import std.compat;
 
 
-template <typename T>
-    requires SerializableToDisk<std::ranges::range_value_t<T>> or SerializableToDisk<T>
+template <typename T, ByteSink S>
+    requires SerializableTo<T, S> ||
+            (std::ranges::range<T> && SerializableTo<std::ranges::range_value_t<T>, S>)
 struct Node
 {
     Node(std::unique_ptr<T> element, size_t const sequence_num)
@@ -38,8 +39,9 @@ constexpr int LEAST_NODES_FOR_WRITING = 10;
  * @note Because the list will own the elements, consider using a memory pool (e.g. pmr) as to not reallocate memory.
  *       Do NOT expect this stuff to be cache friendly in ANY way.
  */
-export template<typename T>
-    requires SerializableToDisk<std::ranges::range_value_t<T>> or SerializableToDisk<T>
+export template <typename T, ByteSink S>
+    requires SerializableTo<T, S> ||
+            (std::ranges::range<T> && SerializableTo<std::ranges::range_value_t<T>, S>)
 class ConcOrderedFileList
 {
 public:

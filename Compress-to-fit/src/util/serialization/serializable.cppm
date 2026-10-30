@@ -4,9 +4,9 @@
 *
 *   Implementation of the serializable concept and supporting tools
 */
-export module util:serializable;
-import :core_utils;
+export module util.serializable;
 import std;
+import util.core_utils;
 
 export template <typename S>
 concept ByteSink = requires(S s, std::span<std::byte const> data) {

@@ -4,10 +4,9 @@
 */
 
 module;
-#include <cassert>
 #include "../../src/common/comp_options.hpp"
 #include "../../src/common/error_warn_print.hpp"
-export module util:core_utils;
+export module util.core_utils;
 
 #ifdef __INTELLISENSE__
 #include "../../for_intellisense/everything.hpp"
