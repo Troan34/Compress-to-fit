@@ -25,7 +25,7 @@ namespace fs = std::filesystem;
 
 int main(int argc, char* argv[])
 {
-    QGuiApplication app(argc, argv);
+    QApplication app(argc, argv);
 
     GuiSink sink;
     SinkInstancer sink_instance{sink};
@@ -52,5 +52,5 @@ int main(int argc, char* argv[])
 
     engine.loadFromModule("CompressToFit", "Main");
 
-    return QGuiApplication::exec();
+    return QApplication::exec();
 }

@@ -45,25 +45,28 @@ export template <typename T, ByteSink S>
 class ConcOrderedFileList
 {
 public:
-    ConcOrderedFileList(File& file)
-        : file_(file)
+    explicit ConcOrderedFileList(S& sink)
+        : sink_(sink)
     {
     }
 
     ~ConcOrderedFileList()
     {
-        std::unique_lock lock{mut};
-        called_writer = true;
-        writer_notifier.notify_one();//write everything left
-        //the thread will be destroyed automatically thanks to jthread which updates the stop token
+        {
+            std::lock_guard lock{mut};
+            called_writer = true;
+        }
+        writer.request_stop();
+        writer_notifier.notify_one();//write the rest
     }
 
     //we really don't want to copy a concurrent container with access to a file
     ConcOrderedFileList(ConcOrderedFileList const&) = delete;
     auto operator=(ConcOrderedFileList const&) -> ConcOrderedFileList& = delete;
 
-    ConcOrderedFileList(ConcOrderedFileList&&) noexcept = default;
-    auto operator=(ConcOrderedFileList&&) noexcept -> ConcOrderedFileList& = default;
+    //TODO: I could get around to actually implementing these
+    ConcOrderedFileList(ConcOrderedFileList&&) noexcept = delete;
+    auto operator=(ConcOrderedFileList&&) noexcept -> ConcOrderedFileList& = delete;
 
     /**
      * @brief Inserts an element to the list, which it will own. THE FIRST ELEMENT MUST HAVE SEQUENCE NUMBER == 0, check warning for additional info.
@@ -81,7 +84,7 @@ public:
      */
     void insert(std::unique_ptr<T> element, size_t sequence_num)
     {
-        auto* new_node = new Node<T>{std::move(element), sequence_num};
+        auto* new_node = new Node<T, S>{std::move(element), sequence_num};
 
         {
             std::unique_lock lock{mut};//we could opt for a shared mutex here, profile
@@ -95,7 +98,7 @@ public:
             }
             else
             {
-                Node<T>* next_node{head_};
+                Node<T, S>* next_node{head_};
 
                 //Make sure the nullptr check stays first (unless you like bugs, I don't judge)
                 //If sequence_num > next_node->sequence_num_ it means that we found a spot that keeps the ascending order
@@ -131,8 +134,8 @@ public:
                 }
             }
             called_writer = true;
-            writer_notifier.notify_one();
         }
+        writer_notifier.notify_one();
     }
 
     /**
@@ -154,16 +157,12 @@ public:
         return expected_sequence_num_;
     }
 
-    auto const& file() const& noexcept
-    {
-        return file_;
-    }
 private:
-    File& file_;
     size_t size_{};
     size_t expected_sequence_num_{};
-    Node<T>* head_{nullptr};
-    Node<T>* tail_{nullptr};
+    Node<T, S>* head_{nullptr};
+    Node<T, S>* tail_{nullptr};
+    S& sink_;
     bool called_writer{false};
     mutable std::mutex mut;
     std::condition_variable writer_notifier;
@@ -178,18 +177,16 @@ private:
     {
         //NOT thread safe by itself, will not interact with the mutex.
         //returns true if something has been written otherwise false
-        auto write_func = [this]
+        auto take_writable_node = [this] -> std::unique_ptr<Node<T, S>>
         {
-            if (!tail_)
+            // empty  or  we are missing a node
+            if (!tail_ or tail_->sequence_num_ != expected_sequence_num_)
                 return false;
 
-            if (tail_->sequence_num_ != expected_sequence_num_)//we are missing a node
-                return false;
+            std::unique_ptr<Node<T, S>> node{tail_};
 
-            write_to_disk(*tail_->element_.get(), file_.get_ref_out_stream());
 
-            auto old_tail = tail_;
-            if (size_ == 1)
+            if (size_ == 1)//after deleting tail, we will have no Node(s) left
             {
                 tail_ = nullptr;
                 head_ = nullptr;
@@ -199,32 +196,46 @@ private:
                 tail_ = tail_->prev;//new tail ptr
                 tail_->next = nullptr;
             }
-            delete old_tail;//delete old tail ptr
+            node->prev = nullptr;
+            node->next = nullptr;
 
             size_--;
             expected_sequence_num_++;
-            return true;
+            return node;
         };
 
-        while (!stop.stop_requested())
+        while (true)
         {
-            std::unique_lock lock{mut};
-            writer_notifier.wait(lock, [this]{return called_writer;});
-
-            if (stop.stop_requested())
-                break;
-            called_writer = false;
-
-            if (size_ > LEAST_NODES_FOR_WRITING)
+            std::unique_ptr<Node<T,S>> node;
             {
-                for (auto _ : std::views::iota(0u, size_))
-                    write_func();
+                std::unique_lock lock{mut};
+
+                //wait until there's something to do
+                writer_notifier.wait(lock, [this]
+                {
+                    return called_writer;
+                });
+                called_writer = false;
+
+                if (stop.stop_requested())//writes everything left
+                {
+                    node = take_writable_node();
+                    if (!node)
+                        return;//nothing left, exit
+                }
+                else if (size_ > LEAST_NODES_FOR_WRITING)
+                {
+                    node = take_writable_node();
+                    if (!node)
+                        continue;//invalid sequence, wait again
+                }
+                else
+                {
+                    continue;//not enough work yet
+                }
             }
+            serialize_to(*node->element_, sink_);
         }
-
-        std::unique_lock lock{mut};
-        while (write_func());//write the whole thing
-
         assert(size_ == 0 && "The file list wasn't able to clean up correctly.");
     }
 

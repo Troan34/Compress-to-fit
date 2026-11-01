@@ -184,19 +184,13 @@ private:
 			//TODO: this blocks a thread, but if there are 12 threads AND they aren't writing frequently, it shouldn't be THAT bad. Benchmark this.
 			//We could try coroutines here
 			//Maybe we can lock the stream, or stuff like that
-			if constexpr (std::is_trivially_copyable_v<T>)
-			{
-				out_stream_.write(std::span{&data_[modulo_index(written_index_)], elements_to_write_n * sizeof(T)});
-			}
-			else//we expect write_to to have been defined as per SerializableToDisk
-			{
-				std::ranges::for_each(std::views::counted(data_, elements_to_write_n),
-					[this](T const& value)
-					{
-						serialize_to(value, sink_);
-					}
-				);
-			}
+			std::ranges::for_each(std::views::counted(data_, elements_to_write_n),
+				[this](T const& value)
+				{
+					serialize_to(value, sink_);
+				}
+			);
+
 
 			written_index_ = index_ - minimum_size_;
 		}

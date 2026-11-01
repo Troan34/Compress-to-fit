@@ -28,6 +28,14 @@ concept FreeSerializable = ByteSink<S> && requires(T const& a, S& s)
 export template <typename T, typename S>
 concept SerializableTo = MemberSerializable<T, S> || FreeSerializable<T, S>;
 
+struct AnySink
+{
+    void append(std::span<std::byte const>){}
+};
+
+export template <typename T>
+concept Serializable = SerializableTo<std::remove_cvref_t<T>, AnySink>;
+
 /**
  * @brief
  * @tparam T Shall fulfill the SerializableTo concept
