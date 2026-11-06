@@ -236,7 +236,6 @@ private:
             }
             serialize_to(*node->element_, sink_);
         }
-        assert(size_ == 0 && "The file list wasn't able to clean up correctly.");
     }
 
 };

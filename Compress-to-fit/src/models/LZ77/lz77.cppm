@@ -400,9 +400,9 @@ public:
 	template <ByteSink Sink = byte_sinks::VectorSink>
 	void serialize(Sink& sink)
 	{
-		sink.append(to_bytes_le(compressed_length_));
-		sink.append(to_bytes_le(uncompressed_length_));
-		sink.append({reinterpret_cast<std::byte>(buffer_.data()), buffer_.size() * sizeof(decltype(buffer_)::value_type)});
+		sink.append(as_bytes_le(compressed_length_));
+		sink.append(as_bytes_le(uncompressed_length_));
+		sink.append({ reinterpret_cast<std::byte>(buffer_.data()), buffer_.size() * sizeof(decltype(buffer_)::value_type) });
 	}
 
 	void write_to(std::ofstream& output) const
@@ -464,6 +464,7 @@ private:
 template<typename Alloc = std::allocator<LZ77Block<>::value_type>, typename DataAlloc = std::allocator<Sym>>
 class LZ77Model
 {
+public:
 	LZ77Model(std::span<Sym const> const data, CompPreset const preset)
 		: raw_data_(data), processed_data_(), window(Window{data, preset}), pattern_matcher(alg::Rabin{window.value(), 0, preset})
 	{
@@ -480,7 +481,6 @@ class LZ77Model
 	 */
 	void compress(LZ77Block<Alloc>& out_data)
 	{
-
 		out_data.clear();
 		out_data.reserve(raw_data_.value().size() / sizeof(LZ77_Token));
 
@@ -604,7 +604,6 @@ private:
 	size_t n_completed_blocks{};
 	std::mutex mutex_;//to be used to access results
 	std::jthread progress_checker{&LZ77ConcurrentCompressor::check_results, this};
-	//These have to stay down here (I just found out how objects are destroyed)
 	ConcOrderedFileList<LZ77Block<>> file_list_;
 	ThreadPool thread_pool{};
 
@@ -659,7 +658,7 @@ public:
 	 * @brief Decompress the data.
 	 *
 	 * @details The decompression is achieved by considering the first index of the data as the start of the first block.
-	 *			We then check the compressed_size (i.e. .first) for this block and advance that much, by doing this we know the start of the new block.
+	 *			We then check the compressed_size (i.e. `.first`) for this block and advance that much, by doing this we know the start of the new block.
 	 */
 	void decompress() noexcept(false)
 	{

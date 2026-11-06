@@ -117,7 +117,7 @@ public:
 	/**
 	 * @brief Write to the output file.
 	 */
-	template<typename T>
+	template <typename T>
 	File& write(std::span<T> buffer) noexcept(false)
 	{
 		out_file.write(reinterpret_cast<const char*>(buffer.data()), buffer.size() * sizeof(T));
@@ -216,8 +216,9 @@ public:
 	* @param in_path Location of file.
 	* @param received_data The vector that will be filled.
 	* @param pos Read position.
+	* @param num Number of Sym(s) to read
 	*/
-	static void read_file(const fs::path& in_path, std::vector<Sym>& received_data, size_t pos = 0)
+	static void read_file(const fs::path& in_path, std::vector<Sym>& received_data, size_t const pos = 0, std::streamsize const num = std::numeric_limits<std::streamsize>::max())
 	{
 		if (!fs::exists(in_path))
 		{
@@ -227,7 +228,9 @@ public:
 		std::ifstream in_file{ in_path, std::ios::ate | std::ios::binary };
 
 		if (!in_file.is_open())
+		{
 			report({ErrorType::PATH_NOT_ACCESSIBLE, in_path.string(), {}});
+		}
 
 		auto const size_file = in_file.tellg() / sizeof(Sym);
 
@@ -235,9 +238,21 @@ public:
 
 		in_file.seekg(pos);
 
-		in_file.read(reinterpret_cast<char*>(received_data.data()), size_file * sizeof(Sym));
+		in_file.read(reinterpret_cast<char*>(received_data.data()), (num == std::numeric_limits<std::streamsize>::max() ? size_file : num) * sizeof(Sym));
+
+		try_throw_IO_error(in_file.rdstate(), in_path);
 	}
 
+	/**
+	* @brief Read a file into a vector. Will call throw_error if file is not found or inaccessible.
+	* @param received_data The vector that will be filled.
+	* @param pos Read position.
+	* @param num Number of Sym(s) to read
+	*/
+	auto read(std::vector<Sym>& received_data, size_t const pos = 0, std::streamsize const num = std::numeric_limits<std::streamsize>::max()) const -> void
+	{
+		read_file(in_file_options.path, received_data, pos, num);
+	}
 
 	/**
 	 * @brief Check if file has the #SIGNATURE in the header. Non-throwing version of #check_signature.
@@ -255,11 +270,7 @@ public:
 		file.read(buffer.data(), buffer.size());
 		file.seekg(save_pos);
 
-		if (buffer != SIGNATURE.data())//not recognized
-		{
-			return false;
-		}
-		return true;
+		return buffer == SIGNATURE.data();
 	}
 	
 	/**
@@ -432,6 +443,7 @@ private:
 	 * @brief Concatenate files found in #path into a new file, if 
 	 * @param path 
 	 * @return path to the new concatenated file
+	 * @todo What even is this bs?
 	 */
 	fs::path concatenate_files(fs::path const& path)
 	{

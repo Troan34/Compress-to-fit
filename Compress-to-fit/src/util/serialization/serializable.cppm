@@ -36,6 +36,20 @@ struct AnySink
 export template <typename T>
 concept Serializable = SerializableTo<std::remove_cvref_t<T>, AnySink>;
 
+template <typename T, ByteSink S>
+    requires std::is_trivially_copyable_v<T>
+auto serialize(std::span<T const> const obj, S& sink)
+{
+    sink.append(std::as_bytes(obj));
+}
+
+template <typename T, ByteSink S>
+    requires std::is_trivially_copyable_v<T>
+auto serialize(T const& obj, S& sink)
+{
+    sink.append(to_bytes_le(obj));
+}
+
 /**
  * @brief
  * @tparam T Shall fulfill the SerializableTo concept

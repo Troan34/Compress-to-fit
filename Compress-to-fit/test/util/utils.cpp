@@ -28,12 +28,13 @@ TEST_CASE("Verify to_bytes[_le] utils", "[util]")
 	static_assert(sizeof(int) == 4, "int size unexpected");
 
 	REQUIRE(0xFF_B == static_cast<std::byte>(0xFF));
-	REQUIRE(to_bytes(f32_lowest) == std::array<std::byte, 4>{0b1111'1111_B, 0b0111'1111_B, 0b1111'1111_B, 0b1111'1111_B});
-	REQUIRE(to_bytes(f32_highest) == std::array<std::byte, 4>{0x7F_B, 0x7F_B, 0xFF_B, 0xFF_B});
-	REQUIRE(to_bytes(f64_lowest) == std::array<std::byte, 8>{0xFF_B, 0xEF_B, 0xFF_B, 0xFF_B, 0xFF_B, 0xFF_B, 0xFF_B, 0xFF_B});
-	REQUIRE(to_bytes(f64_highest) == std::array<std::byte, 8>{0x7F_B, 0xEF_B, 0xFF_B, 0xFF_B, 0xFF_B, 0xFF_B, 0xFF_B, 0xFF_B});
-	REQUIRE(to_bytes(i32_lowest) == std::array<std::byte, 4>{0x80_B, 0x00_B, 0x00_B, 0x00_B});
-	REQUIRE(to_bytes(i32_highest) == std::array<std::byte, 4>{0x7F_B, 0xFF_B, 0xFF_B, 0xFF_B});
-	REQUIRE(to_bytes(u8_highest) == std::array<std::byte, 1>{0x00_B});
-	REQUIRE(to_bytes(u8_highest) == std::array<std::byte, 1>{0xFF_B});
+	auto arr1 = std::array{0b1111'1111_B, 0b0111'1111_B, 0b1111'1111_B, 0b1111'1111_B};
+	REQUIRE(as_bytes(f32_lowest) == std::span{arr1});//WHY the FUCK is this an error????? FUCK YOU C++
+	REQUIRE(as_bytes(f32_highest) == {std::array<std::byte, 4>{0x7F_B, 0x7F_B, 0xFF_B, 0xFF_B}});
+	REQUIRE(as_bytes(f64_lowest) == {std::array<std::byte, 8>{0xFF_B, 0xEF_B, 0xFF_B, 0xFF_B, 0xFF_B, 0xFF_B, 0xFF_B, 0xFF_B}});
+	REQUIRE(as_bytes(f64_highest) == {std::array<std::byte, 8>{0x7F_B, 0xEF_B, 0xFF_B, 0xFF_B, 0xFF_B, 0xFF_B, 0xFF_B, 0xFF_B}});
+	REQUIRE(as_bytes(i32_lowest) == {std::array<std::byte, 4>{0x80_B, 0x00_B, 0x00_B, 0x00_B}});
+	REQUIRE(as_bytes(i32_highest) == {std::array<std::byte, 4>{0x7F_B, 0xFF_B, 0xFF_B, 0xFF_B}});
+	REQUIRE(as_bytes(u8_lowest) == {std::array<std::byte, 1>{0x00_B}});
+	REQUIRE(as_bytes(u8_highest) == {std::array<std::byte, 1>{0xFF_B}});
 }
