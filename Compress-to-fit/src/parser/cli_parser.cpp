@@ -73,27 +73,20 @@ std::expected<Token, ErrorType> lex(const std::string& option)
 	else
 		report({.message_ID_or_progress = ErrorType::SYNTAX_ERROR, .failing_option = token_string, .compressing = {}});
 
-	//handle flags
-	switch (token_type)
-	{
-	case TokenType::DELETE_INPUT:
-	case TokenType::FORCE_COMPRESSION:
-	case TokenType::CONCATENATE:
-	case TokenType::HELP:
-	case TokenType::LONG_HELP:
-		return Token{ token_type, true };
-		break;
-	default:
-		report({ .message_ID_or_progress=static_cast<ErrorType>(-1),
-				.failing_option=format_sourceloc() + std::format("Unknown token type id `{}`", static_cast<int>(token_type)),
-				.compressing={}});
-	}
 		
 
 	ValueType value;
 	//Find token_value and do error checking
 	switch (token_type)
 	{
+		//handle flags
+		case TokenType::DELETE_INPUT:
+		case TokenType::FORCE_COMPRESSION:
+		case TokenType::CONCATENATE:
+		case TokenType::HELP:
+		case TokenType::LONG_HELP:
+			return Token{ token_type, true };
+		//handle input
 		case TokenType::FILENAME_IN:
 		{
 			//Test if we can find and access the input file

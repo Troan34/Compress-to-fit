@@ -163,7 +163,7 @@ private:
     Node<T, S>* head_{nullptr};
     Node<T, S>* tail_{nullptr};
     S& sink_;
-    bool called_writer{false};
+    std::atomic<bool> called_writer{false};
     mutable std::mutex mut;
     std::condition_variable writer_notifier;
     std::jthread writer{&ConcOrderedFileList::write_file, this};
@@ -175,34 +175,6 @@ private:
      */
     void write_file(std::stop_token stop)
     {
-        //NOT thread safe by itself, will not interact with the mutex.
-        //returns true if something has been written otherwise false
-        auto take_writable_node = [this] -> std::unique_ptr<Node<T, S>>
-        {
-            // empty  or  we are missing a node
-            if (!tail_ or tail_->sequence_num_ != expected_sequence_num_)
-                return false;
-
-            std::unique_ptr<Node<T, S>> node{tail_};
-
-
-            if (size_ == 1)//after deleting tail, we will have no Node(s) left
-            {
-                tail_ = nullptr;
-                head_ = nullptr;
-            }
-            else
-            {
-                tail_ = tail_->prev;//new tail ptr
-                tail_->next = nullptr;
-            }
-            node->prev = nullptr;
-            node->next = nullptr;
-
-            size_--;
-            expected_sequence_num_++;
-            return node;
-        };
 
         while (true)
         {
@@ -211,9 +183,9 @@ private:
                 std::unique_lock lock{mut};
 
                 //wait until there's something to do
-                writer_notifier.wait(lock, [this]
+                writer_notifier.wait(lock, [this, stop]
                 {
-                    return called_writer;
+                    return called_writer.load() or stop.stop_requested();
                 });
                 called_writer = false;
 
@@ -238,4 +210,38 @@ private:
         }
     }
 
+    /**
+     * @brief Unlink and pass ownership of Nodes that can be written
+     * @return A vector of nodes to be written
+     * @pre mut must be locked by the caller
+     * @todo: actually implement this thing
+     */
+    auto take_writable_nodes_locked() -> std::vector<std::unique_ptr<Node<T, S>>>
+    {
+
+
+        // empty  or  we are missing a node
+        if (!tail_ or tail_->sequence_num_ != expected_sequence_num_)
+            return nullptr;
+
+        std::unique_ptr<Node<T, S>> node{tail_};
+
+
+        if (size_ == 1)//after deleting tail, we will have no Node(s) left
+        {
+            tail_ = nullptr;
+            head_ = nullptr;
+        }
+        else
+        {
+            tail_ = tail_->prev;//new tail ptr
+            tail_->next = nullptr;
+        }
+        node->prev = nullptr;
+        node->next = nullptr;
+
+        size_--;
+        expected_sequence_num_++;
+        return node;
+    };
 };

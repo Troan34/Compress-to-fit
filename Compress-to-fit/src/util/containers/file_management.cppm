@@ -355,9 +355,11 @@ public:
 		return file;
 	}
 
-	[[nodiscard]] auto get_in_file_options() const noexcept -> FileOptions const& {return in_file_options;}
+	[[nodiscard]] auto get_in_file_options() const noexcept -> FileOptions const& { return in_file_options; }
+	[[nodiscard]] auto get_ref_out_stream() noexcept -> std::ofstream& { return out_file; }
+	[[nodiscard]] auto size_in_file() const noexcept { return fs::file_size(in_file_options.path); }
+	[[nodiscard]] auto size_out_file() const noexcept { return fs::file_size(options_.filename_out); }
 
-	auto get_ref_out_stream() -> std::ofstream&{ return out_file; }
 private:
 	FileOptions in_file_options;
 	parser::Options options_;
