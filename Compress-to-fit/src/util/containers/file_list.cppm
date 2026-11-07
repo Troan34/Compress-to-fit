@@ -50,10 +50,12 @@ public:
 
     ~ConcOrderedFileList()
     {
-        std::unique_lock lock{mut};
-        called_writer = true;
-        writer_notifier.notify_one();//write everything left
-        //the thread will be destroyed automatically thanks to jthread which updates the stop token
+        {
+            std::lock_guard lock{mut};
+            called_writer = true;
+        }
+        writer.request_stop();
+        writer_notifier.notify_one();//write the rest
     }
 
     //we really don't want to copy a concurrent container with access to a file
@@ -152,10 +154,6 @@ public:
         return expected_sequence_num_;
     }
 
-    auto const& file() const& noexcept
-    {
-        return file_;
-    }
 private:
     File& file_;
     size_t size_{};
@@ -174,43 +172,18 @@ private:
      */
     void write_file(std::stop_token stop)
     {
-        //NOT thread safe by itself, will not interact with the mutex.
-        //returns true if something has been written otherwise false
-        auto write_func = [this]
-        {
-            if (!tail_)
-                return false;
-
-            if (tail_->sequence_num_ != expected_sequence_num_)//we are missing a node
-                return false;
-
-            write_to_disk(*tail_->element_.get(), file_.get_ref_out_stream());
-
-            auto old_tail = tail_;
-            if (size_ == 1)
-            {
-                tail_ = nullptr;
-                head_ = nullptr;
-            }
-            else
-            {
-                tail_ = tail_->prev;//new tail ptr
-                tail_->next = nullptr;
-            }
-            delete old_tail;//delete old tail ptr
-
-            size_--;
-            expected_sequence_num_++;
-            return true;
-        };
 
         while (!stop.stop_requested())
         {
-            std::unique_lock lock{mut};
-            writer_notifier.wait(lock, [this]{return called_writer;});
+            std::unique_ptr<Node<T>> node;
+            {
+                std::unique_lock lock{mut};
 
-            if (stop.stop_requested())
-                break;
+            //wait until there's something to do
+            writer_notifier.wait(lock, [this, stop]
+            {
+                return called_writer or stop.stop_requested();
+            });
             called_writer = false;
 
             if (size_ > LEAST_NODES_FOR_WRITING)
@@ -226,4 +199,38 @@ private:
         assert(size_ == 0 && "The file list wasn't able to clean up correctly.");
     }
 
+    /**
+     * @brief Unlink and pass ownership of Nodes that can be written
+     * @return A vector of nodes to be written
+     * @pre mut must be locked by the caller
+     * @todo: actually implement this thing
+     */
+    auto take_writable_nodes_locked() -> std::vector<std::unique_ptr<Node<T>>>
+    {
+
+
+        // empty  or  we are missing a node
+        if (!tail_ or tail_->sequence_num_ != expected_sequence_num_)
+            return nullptr;
+
+        std::unique_ptr<Node<T>> node{tail_};
+
+
+        if (size_ == 1)//after deleting tail, we will have no Node(s) left
+        {
+            tail_ = nullptr;
+            head_ = nullptr;
+        }
+        else
+        {
+            tail_ = tail_->prev;//new tail ptr
+            tail_->next = nullptr;
+        }
+        node->prev = nullptr;
+        node->next = nullptr;
+
+        size_--;
+        expected_sequence_num_++;
+        return node;
+    };
 };
