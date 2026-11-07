@@ -36,25 +36,18 @@ struct AnySink
 export template <typename T>
 concept Serializable = SerializableTo<std::remove_cvref_t<T>, AnySink>;
 
-export template <typename T, ByteSink S>
+template <typename T, ByteSink S>
     requires std::is_trivially_copyable_v<T>
-auto serialize(std::span<T> const& obj, S& sink)
+auto serialize(std::span<T const> const obj, S& sink)
 {
     sink.append(std::as_bytes(obj));
 }
 
-export template <typename T, ByteSink S>
-    requires std::is_trivially_copyable_v<T>
-auto serialize(std::vector<T> const& obj, S& sink)
-{
-    sink.append(std::as_bytes(std::span{obj.data(), obj.size()}));
-}
-
-export template <typename T, ByteSink S>
+template <typename T, ByteSink S>
     requires std::is_trivially_copyable_v<T>
 auto serialize(T const& obj, S& sink)
 {
-    sink.append(as_bytes_le(obj));
+    sink.append(to_bytes_le(obj));
 }
 
 /**
@@ -65,7 +58,7 @@ auto serialize(T const& obj, S& sink)
  * @param sink Processes the serialization, library provided or user made
  */
 export template <typename T, ByteSink S>
-auto serialize_to(T& obj, S& sink) -> void {
+auto serialize_to(T const& obj, S& sink) -> void {
     if constexpr (MemberSerializable<T, S>) {
         obj.serialize(sink);
     } else if constexpr (FreeSerializable<T, S>) {
@@ -74,8 +67,6 @@ auto serialize_to(T& obj, S& sink) -> void {
         static_assert(SerializableTo<T, S>, "T is not serializable to this sink");
     }
 }
-
-
 
 export namespace byte_sinks
 {
