@@ -9,6 +9,7 @@ module;
 #include <cassert>
 
 module models;
+import util.serializable;
 
 void process_file(parser::Options const& options)
 {
@@ -21,7 +22,8 @@ void process_file(parser::Options const& options)
         {
             case static_cast<size_t>(CompType::LZ77):
             {
-                LZ77ConcurrentCompressor comp{options.concurrency, file, static_cast<CompPreset>(options.preset)};
+                byte_sinks::StreamSink sink{ .out = file.get_ref_out_stream() };
+                ConcurrentModel<LZ77Model<>, decltype(sink)> comp{options, sink, file};
                 comp.compress();
                 break;
             }
@@ -38,8 +40,8 @@ void process_file(parser::Options const& options)
         {
             case CompType::LZ77:
             {
-                mio::basic_mmap_source<std::byte> data_map{file.get_in_file_options().path.string(), FILE_HEADER_SIZE};
-                LZ77ConcurrentDecompressor decomp{std::move(data_map), file, options.concurrency};
+                byte_sinks::StreamSink sink{ .out = file.get_ref_out_stream() };
+                ConcurrentModel<LZ77Model<>, decltype(sink)> decomp{options, sink, file};
                 decomp.decompress();
                 break;
             }

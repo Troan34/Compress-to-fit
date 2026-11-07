@@ -212,7 +212,7 @@ export template <typename Type>
 /**
  * @brief Format a `source_location` as a human readable string
  * @param loc The source_location, better left as default
- * @return Human readable string
+ * @return Human-readable string
  * @details The resulting string is structured in the following way: \n
  *			@code file: {file_name}({line}:{col}) `{fun_name}` @endcode
  */
@@ -227,9 +227,9 @@ export [[nodiscard]] constexpr auto format_sourceloc(std::source_location const 
  */
 export template <typename T>
 	requires std::is_trivially_copyable_v<T>
-constexpr auto as_bytes(T const& val) -> std::span<std::byte, sizeof(T)>
+constexpr auto as_bytes(T const& val) noexcept -> std::span<std::byte const, sizeof(T)>
 {
-	return std::as_bytes(std::span{&val, 1});
+	return std::as_bytes(std::span<T const, 1>{&val, 1});
 }
 
 /**
@@ -237,9 +237,9 @@ constexpr auto as_bytes(T const& val) -> std::span<std::byte, sizeof(T)>
  */
 export template <typename T>
 	requires std::is_trivially_copyable_v<T>
-constexpr auto as_bytes_le(T const& val) -> std::span<std::byte, sizeof(T)>
+constexpr auto as_bytes_le(T const& val) noexcept -> std::span<std::byte const, sizeof(T)>
 {
-	auto span = to_bytes(val);
+	auto span = as_bytes(val);
 	if constexpr (std::endian::native == std::endian::little)
 	{
 		return span;
