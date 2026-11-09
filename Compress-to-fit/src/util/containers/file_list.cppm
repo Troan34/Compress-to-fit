@@ -175,16 +175,59 @@ private:
      */
     void write_file(std::stop_token stop)
     {
-        //NOT thread safe by itself, will not interact with the mutex.
-        //returns true if something has been written otherwise false
-        auto take_writable_node = [this] -> std::unique_ptr<Node<T, S>>
+
+        while (true)
+        {
+            std::vector<std::unique_ptr<Node<T,S>>> nodes;
+            {
+                std::unique_lock lock{mut};
+
+                //wait until there's something to do
+                writer_notifier.wait(lock, [this]
+                {
+                    return called_writer;
+                });
+                called_writer = false;
+
+                if (stop.stop_requested())//writes everything left
+                {
+                    nodes = take_writable_nodes_locked();
+                    if (nodes.empty())
+                        return;//nothing left, exit
+                }
+                else if (size_ > LEAST_NODES_FOR_WRITING)
+                {
+                    nodes = take_writable_nodes_locked();
+                    if (nodes.empty())
+                        continue;//invalid sequence, wait again
+                }
+                else
+                {
+                    continue;//not enough work yet
+                }
+            }
+            for (auto&& node : nodes)
+            {
+                serialize_to(*std::move(node)->element_, sink_);
+            }
+        }
+    }
+
+    /**
+     * @brief Unlink and pass ownership of Nodes that can be written
+     * @return A vector of nodes to be written
+     * @pre mut must be locked by the caller
+     */
+    auto take_writable_nodes_locked() -> std::vector<std::unique_ptr<Node<T, S>>>
+    {
+        auto nodes = std::vector<std::unique_ptr<Node<T, S>>>{};
+        for (;;)
         {
             // empty  or  we are missing a node
             if (!tail_ or tail_->sequence_num_ != expected_sequence_num_)
-                return false;
+                break;
 
             std::unique_ptr<Node<T, S>> node{tail_};
-
 
             if (size_ == 1)//after deleting tail, we will have no Node(s) left
             {
@@ -201,41 +244,9 @@ private:
 
             size_--;
             expected_sequence_num_++;
-            return node;
-        };
-
-        while (true)
-        {
-            std::unique_ptr<Node<T,S>> node;
-            {
-                std::unique_lock lock{mut};
-
-                //wait until there's something to do
-                writer_notifier.wait(lock, [this]
-                {
-                    return called_writer;
-                });
-                called_writer = false;
-
-                if (stop.stop_requested())//writes everything left
-                {
-                    node = take_writable_node();
-                    if (!node)
-                        return;//nothing left, exit
-                }
-                else if (size_ > LEAST_NODES_FOR_WRITING)
-                {
-                    node = take_writable_node();
-                    if (!node)
-                        continue;//invalid sequence, wait again
-                }
-                else
-                {
-                    continue;//not enough work yet
-                }
-            }
-            serialize_to(*node->element_, sink_);
+            nodes.push_back(std::move(node));
         }
-    }
+        return nodes;
+    };
 
 };
