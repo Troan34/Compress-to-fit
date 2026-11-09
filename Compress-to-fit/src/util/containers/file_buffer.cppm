@@ -16,31 +16,32 @@ import std.compat;
 
 
 /**
- * @brief Ring queue-like where if size > capacity, the oldest elements are written to stream.
+ * @brief Ring buffer where if size > capacity, the oldest elements are written to stream.
  *		  At least the most recent #minimum_size_ number of elements shall be available for reading.
  * @tparam T type stored, must be trivially copyable
  */
-export template <typename T>
-	requires SerializableToDisk<std::ranges::range_value_t<T>> or SerializableToDisk<T>
-class ConcFileBuffer
+export template <typename T, ByteSink S>
+	requires SerializableTo<T, S> ||
+		(std::ranges::range<T> && SerializableTo<std::ranges::range_value_t<T>, S>)
+class ConcurrentRingBuffer
 {
 public:
-
-	ConcFileBuffer(File& out_stream, size_t const minimum_size)
-		:out_stream_(out_stream), minimum_size_(minimum_size)
+	//TODO: maybe take a sink instead of a `File`
+	ConcurrentRingBuffer(S& sink, size_t const minimum_size)
+		:sink_(sink), minimum_size_(minimum_size)
 	{
 		reserve(1.5f * minimum_size_);
 	}
 
-	~ConcFileBuffer()
+	~ConcurrentRingBuffer()
 	{
 		auto const elements_to_write_n = index_ - written_index_;
-		out_stream_.write(reinterpret_cast<char const*>(&data_[written_index_]), elements_to_write_n * sizeof(T));
+		sink_.append({reinterpret_cast<char const*>(&data_[modulo_index(written_index_)]), elements_to_write_n * sizeof(T)});
 		allocator.deallocate(data_, capacity_);
 	}
 
 	/**
-	 * @brief 
+	 * @brief Push a new value
 	 * @param value
 	 * @pre #index_ > #minimum_size_
 	 */
@@ -48,14 +49,14 @@ public:
 	{
 		std::unique_lock lock{mut};
 
-		data_[true_index()] = value;
+		data_[modulo_index(index_)] = value;
 		index_++;
 
 		write_buffer();
 	}
 
 	/**
-	 * @brief
+	 * @brief Push a new value
 	 * @param value
 	 * @pre #index_ > #minimum_size_
 	 */
@@ -63,7 +64,7 @@ public:
 	{
 		std::unique_lock lock{mut};
 
-		data_[true_index()] = value;
+		data_[modulo_index(index_)] = value;
 		index_++;
 
 		write_buffer();
@@ -161,7 +162,7 @@ public:
 	}
 
 private:
-	File& out_stream_;
+	S& sink_;
 	T* data_;
 	std::allocator<T> allocator;
 	mutable std::shared_mutex mut;
@@ -183,24 +184,22 @@ private:
 			//TODO: this blocks a thread, but if there are 12 threads AND they aren't writing frequently, it shouldn't be THAT bad. Benchmark this.
 			//We could try coroutines here
 			//Maybe we can lock the stream, or stuff like that
-			if constexpr (std::is_trivially_copyable_v<T>)
-			{
-				out_stream_.write(std::span{&data_[written_index_], elements_to_write_n * sizeof(T)});
-			}
-			else//we expect write_to to have been defined as per SerializableToDisk
-			{
-				std::ranges::for_each(std::views::counted(data_, elements_to_write_n),
-					[this](T const& value)
-					{
-						value.write_to(out_stream_.get_ref_out_stream());
-					}
-				);
-			}
+			std::ranges::for_each(std::views::counted(data_, elements_to_write_n),
+				[this](T const& value)
+				{
+					serialize_to(value, sink_);
+				}
+			);
+
 
 			written_index_ = index_ - minimum_size_;
 		}
 	}
 
 
-	[[nodiscard]] constexpr size_t true_index() const noexcept { return index_ % capacity_; }
+	[[nodiscard]] constexpr size_t modulo_index(size_t const val) const noexcept { return val % capacity_; }
 };
+
+export template <typename T>
+	requires SerializableTo<T, byte_sinks::StreamSink>
+using ConcurrentRingFileBuffer = ConcurrentRingBuffer<T, byte_sinks::StreamSink>;

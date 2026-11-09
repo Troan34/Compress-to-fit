@@ -4,52 +4,8 @@
 *
 *   Module interface for the models
 */
-
-module;
-#include "mio/mmap.hpp"
-#include <cassert>
-
 export module models;
 export import :lz77;
+import parser;
 
-export void process_file(parser::Options const& options)
-{
-    File file{options};
-
-
-    if (!file.get_in_file_options().header or options.force_compression)//it's a normal file or -fc option
-    {
-        switch (options.compressor)
-        {
-            case static_cast<size_t>(CompType::LZ77):
-            {
-                LZ77ConcurrentCompressor comp{options.concurrency, file, static_cast<CompPreset>(options.preset)};
-                comp.compress();
-                break;
-            }
-            default:
-                auto const location = std::source_location::current();
-                auto error_string = std::string{"Unreachable branch, file: "} + location.file_name() + std::string{"\nline: "} + std::to_string(location.line());
-                assert(false && error_string.c_str());
-                break;
-        }
-    }
-    else//it's a compressed file
-    {
-        switch (file.get_in_file_options().header.value().comp_type)
-        {
-            case CompType::LZ77:
-            {
-                mio::basic_mmap_source<std::byte> data_map{file.get_in_file_options().path.string(), FILE_HEADER_SIZE};
-                LZ77ConcurrentDecompressor decomp{std::move(data_map), file, options.concurrency};
-                decomp.decompress();
-                break;
-            }
-            default:
-                auto const location = std::source_location::current();
-                auto error_string = std::string{"Unreachable branch, file: "} + location.file_name() + std::string{"\nline: "} + std::to_string(location.line());
-                assert(false && error_string.c_str());
-                break;
-        }
-    }
-}
+export void process_file(parser::Options const& options);
