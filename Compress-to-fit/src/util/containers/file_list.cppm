@@ -183,9 +183,9 @@ private:
                 std::unique_lock lock{mut};
 
                 //wait until there's something to do
-                writer_notifier.wait(lock, [this]
+                writer_notifier.wait(lock, [this, &stop]
                 {
-                    return called_writer;
+                    return called_writer or stop.stop_requested();
                 });
                 called_writer = false;
 
@@ -199,7 +199,7 @@ private:
                 {
                     nodes = take_writable_nodes_locked();
                     if (nodes.empty())
-                	continue;//invalid sequence, wait again
+                        continue;//invalid sequence, wait again
                 }
                 else
                 {
@@ -247,40 +247,5 @@ private:
             nodes.push_back(std::move(node));
         }
         return nodes;
-    };
-
-    /**
-     * @brief Unlink and pass ownership of Nodes that can be written
-     * @return A vector of nodes to be written
-     * @pre mut must be locked by the caller
-     * @todo: actually implement this thing
-     */
-    auto take_writable_nodes_locked() -> std::vector<std::unique_ptr<Node<T>>>
-    {
-
-
-        // empty  or  we are missing a node
-        if (!tail_ or tail_->sequence_num_ != expected_sequence_num_)
-            return nullptr;
-
-        std::unique_ptr<Node<T>> node{tail_};
-
-
-        if (size_ == 1)//after deleting tail, we will have no Node(s) left
-        {
-            tail_ = nullptr;
-            head_ = nullptr;
-        }
-        else
-        {
-            tail_ = tail_->prev;//new tail ptr
-            tail_->next = nullptr;
-        }
-        node->prev = nullptr;
-        node->next = nullptr;
-
-        size_--;
-        expected_sequence_num_++;
-        return node;
-    };
+    }
 };
