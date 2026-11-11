@@ -30,7 +30,7 @@ int main(int argc, char* argv[])
 	try
 	{
 		auto const options = parser::parse(argc, argv);
-		process_file(options);
+		process_file(options, sink);
 	}
 	catch (ErrorException const& e)
 	{

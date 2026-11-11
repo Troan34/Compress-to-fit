@@ -33,7 +33,6 @@ target_sources(
         "src/util/serialization/serializable.cppm"
     PRIVATE
         "src/models/LZ77/lz77_impl.cpp"
-        "src/models/processor.cpp"
 )
 
 target_sources(

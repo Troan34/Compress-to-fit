@@ -36,8 +36,10 @@ export template <Model M, ByteSink S>
 class ConcurrentModel
 {
 public:
-    ConcurrentModel(parser::Options const& options, S& sink, File& file)
-        : options_{options}, file_{file}, out_data_{sink}, out_raw_{sink}, thread_pool{options_.concurrency}
+    ConcurrentModel(parser::Options const& options, S& sink, StatusSink& status_sink, File& file)
+        : options_{options}, file_{file},
+          out_data_{sink}, out_raw_{sink}, thread_pool{options_.concurrency},
+          progress_checker{&ConcurrentModel::check_results, this, std::ref(status_sink)}
     {
         n_blocks_ = file_.size_in_file() / std::min(file_.size_in_file() / options_.concurrency, MAX_BLOCK_SIZE);
         if (file_.size_in_file() % MAX_BLOCK_SIZE > 0)
@@ -145,14 +147,15 @@ private:
     File& file_;
     size_t n_completed_blocks{};
     std::mutex mutex_;//to be used to access results
-    std::jthread progress_checker{&ConcurrentModel::check_results, this};
+    std::jthread progress_checker;
     ConcOrderedFileList<typename M::block_type, S> out_data_;
     ConcOrderedFileList<typename M::data_type, S> out_raw_;
     ThreadPool thread_pool;
 
 
-    void check_results(std::stop_token stop)
+    void check_results(std::stop_token stop, StatusSink& status_sink)
     {
+        SinkInstancer sink_instance{status_sink};
         while (!stop.stop_requested())
         {
             std::this_thread::sleep_for(2ms);
