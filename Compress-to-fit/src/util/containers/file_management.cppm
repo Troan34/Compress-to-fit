@@ -232,13 +232,19 @@ public:
 			report({ErrorType::PATH_NOT_ACCESSIBLE, in_path.string(), {}});
 		}
 
-		auto const size_file = in_file.tellg() / sizeof(Sym);
+		auto const size_to_read = [num, in_path]
+		{
+			if (num == std::numeric_limits<std::streamsize>::max())
+			{
+				return fs::file_size(in_path) * sizeof(Sym);
+			}
+			return num * sizeof(Sym);
+		}();
 
-		received_data.resize(size_file);
+		received_data.resize(size_to_read);
 
 		in_file.seekg(pos);
-
-		in_file.read(reinterpret_cast<char*>(received_data.data()), (num == std::numeric_limits<std::streamsize>::max() ? size_file : num) * sizeof(Sym));
+		in_file.read(reinterpret_cast<char*>(received_data.data()), size_to_read);
 
 		try_throw_IO_error(in_file.rdstate(), in_path);
 	}
