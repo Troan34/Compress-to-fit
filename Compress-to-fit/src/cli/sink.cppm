@@ -22,6 +22,6 @@ public:
         else if (std::holds_alternative<WarningType>(status.message_ID_or_progress))
             print_warn(std::get<WarningType>(status.message_ID_or_progress), status.failing_option.value_or(""));
         else if (std::holds_alternative<ProgressType>(status.message_ID_or_progress))
-            show_progress({}, std::get<ProgressType>(status.message_ID_or_progress), status.compressing.value());
+            show_progress( std::get<ProgressType>(status.message_ID_or_progress), status.compressing.value());
     }
 };
