@@ -16,7 +16,6 @@ export void process_file(parser::Options const& options,  StatusSink& status_sin
 {
     File file{options};
 
-
     if (!file.get_in_file_options().header or options.force_compression)//it's a normal file or -fc option
     {
         switch (options.compressor)
@@ -29,9 +28,8 @@ export void process_file(parser::Options const& options,  StatusSink& status_sin
                 break;
             }
             default:
-                auto const location = std::source_location::current();
-                auto error_string = std::string{"Unreachable branch, file: "} + location.file_name() + std::string{"\nline: "} + std::to_string(location.line());
-                assert(false && error_string.c_str());
+                auto error_string = std::string{"Unreachable branch, "} + format_sourceloc();
+                report({ErrorType::LOGIC_ERROR, error_string, {}});
                 break;
         }
     }
@@ -48,8 +46,8 @@ export void process_file(parser::Options const& options,  StatusSink& status_sin
             }
             default:
                 auto const location = std::source_location::current();
-                auto error_string = std::string{"Unreachable branch, file: "} + location.file_name() + std::string{"\nline: "} + std::to_string(location.line());
-                assert(false && error_string.c_str());
+                auto error_string = std::string{"Unreachable branch, "} + format_sourceloc();
+                report({ErrorType::LOGIC_ERROR, error_string, {}});
                 break;
         }
     }

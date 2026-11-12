@@ -17,6 +17,7 @@
  */
 enum class ErrorType : int
 {
+	LOGIC_ERROR = -1,
 	NO_ERROR,
 	VALUE_ERROR,
 	MISSING_ARGUMENT,
@@ -57,6 +58,8 @@ namespace ERR_STRING
 	const std::string INVALID_DECOMPRESSION="\033[41mError\033[0m\033[31m[" + std::to_string(static_cast<int>(ErrorType::INVALID_DECOMPRESSION)) + "]: decompression is invalid on this file, you may have tried to decompress a normal file.\033[0m\n";
 
 	const std::string DIR_COMPRESSION =		"\033[41mError\033[0m\033[31m[" + std::to_string(static_cast<int>(ErrorType::DIR_COMPRESSION)) + "]: folder compression is unavailable. \033[34mTip\033[0m: If you are trying to decompress a folder of files, check the related command in the help page with '-h' or '-help'\n";
+
+	const std::string LOGIC_ERROR =			"\033[41mError\033[0m\033[31m[" + std::to_string(static_cast<int>(ErrorType::LOGIC_ERROR)) + "]: thrown logic error here.";
 	//DO NOT USE A <- IN THE STRINGS
 }
 
@@ -84,43 +87,32 @@ inline void throw_error(ErrorType const error, const std::string& error_option =
 		break;
 	case ErrorType::VALUE_ERROR:
 		throw ErrorException(ErrorType::VALUE_ERROR, error_option + " <- " + ERR_STRING::VALUE);
-		break;
 	case ErrorType::SYNTAX_ERROR:
 		throw ErrorException(ErrorType::SYNTAX_ERROR, error_option + " <- " + ERR_STRING::SYNTAX);
-		break;
 	case ErrorType::OPTION_UNAVAILABLE:
 		throw ErrorException(ErrorType::OPTION_UNAVAILABLE, error_option + " <- " + ERR_STRING::OPTION_UNAVAILABLE);
-		break;
 	case ErrorType::PATH_NOT_FOUND:
 		throw ErrorException(ErrorType::PATH_NOT_FOUND, error_option + " <- " + ERR_STRING::PATH_NOT_FOUND);
-		break;
 	case ErrorType::PATH_NOT_ACCESSIBLE:
 		throw ErrorException(ErrorType::PATH_NOT_ACCESSIBLE, error_option + " <- " + ERR_STRING::PATH_NOT_ACCESSIBLE);
-		break;
 	case ErrorType::PATH_INVALID:
 		throw ErrorException(ErrorType::PATH_INVALID, error_option + " <- " + ERR_STRING::PATH_INVALID);
-		break;
 	case ErrorType::FILE_INVALID:
 		throw ErrorException(ErrorType::FILE_INVALID, error_option + " <- " + ERR_STRING::FILE_INVALID);
-		break;
 	case ErrorType::FILE_CORRUPTED:
 		throw ErrorException(ErrorType::FILE_CORRUPTED, error_option + " <- " + ERR_STRING::FILE_CORRUPTED);
-		break;
 	case ErrorType::DRIVE_ERROR:
 		throw ErrorException(ErrorType::DRIVE_ERROR, error_option + " <- " + ERR_STRING::DRIVE_ERROR);
-		break;
 	case ErrorType::INVALID_DECOMPRESSION:
 		throw ErrorException(ErrorType::INVALID_DECOMPRESSION, error_option + " <- " + ERR_STRING::INVALID_DECOMPRESSION);
-		break;
 	case ErrorType::MISSING_ARGUMENT:
 		throw ErrorException(ErrorType::MISSING_ARGUMENT, error_option + " <- " + ERR_STRING::MISSING_ARGUMENT);
-		break;
 	case ErrorType::DIR_COMPRESSION:
 		throw ErrorException(ErrorType::DIR_COMPRESSION, error_option + " <- " + ERR_STRING::DIR_COMPRESSION);
-		break;
+	case ErrorType::LOGIC_ERROR:
+		throw ErrorException(ErrorType::LOGIC_ERROR, error_option + " <- " + ERR_STRING::LOGIC_ERROR);
 	default:
-		throw std::logic_error(std::format("Thrown logic/unknown exception {}", error_option));
-		break;
+		throw std::logic_error(std::format("Thrown unknown exception {}", error_option));
 	}
 }
 
