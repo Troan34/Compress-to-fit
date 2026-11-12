@@ -87,8 +87,6 @@ public:
 	/**
 	 * @brief Construct member types, such as #FileOptions. This ctor should be used when a file is to be compressed
 	 * @param options Options to create and customize to the file
-	 * 
-	 * @todo Add a parameter for #FileOptions::delete_on_dtor when the parser is updated to do that
 	 */
 	explicit File(parser::Options options)
 		:options_(std::move(options))
@@ -393,7 +391,7 @@ private:
 	 * 
 	 * @pre The file shall already exist and be accessible.
 	 */
-	bool has_signature() const
+	auto has_signature() const -> bool
 	{
 		std::ifstream file{ in_file_options.path, std::ios::binary };
 
@@ -413,7 +411,7 @@ private:
 	 * @param path Where the file is created
 	 * @return A stream to the file.
 	 */
-	[[maybe_unused]] std::ofstream create_file(fs::path const& path) const
+	[[maybe_unused]] auto create_file(fs::path const& path) const -> std::ofstream
 	{
 		return create_file(path, {0, 0, static_cast<CompType>(options_.compressor),static_cast<CompPreset>(options_.preset)});
 	}
@@ -423,7 +421,7 @@ private:
 	 * @param path Where the file is created
 	 * @return A stream to the file.
 	 */
-	[[maybe_unused]] static std::ofstream create_file(fs::path const& path, Header options)
+	[[maybe_unused]] static auto create_file(fs::path const& path, Header options) -> std::ofstream
 	{
 		fs::remove(path);
 		std::ofstream file{ path, std::ios::binary | std::ios::trunc };
@@ -453,7 +451,7 @@ private:
 	 * @return path to the new concatenated file
 	 * @todo What even is this bs?
 	 */
-	fs::path concatenate_files(fs::path const& path)
+	auto concatenate_files(fs::path const& path) -> fs::path
 	{
 		std::vector<std::pair<fs::path, uint16_t>> files_to_concat{};//uint16_t is here to keep a temporary copy of count (we sacrifice a bit of memory for fewer drive accesses)
 		std::vector<size_t> ignored_ids{};
@@ -486,7 +484,7 @@ private:
 			{
 				auto const warn = files_to_concat.back().first.filename().string() + " " + dir_entry.path().filename().string();
 				report({.message_ID_or_progress = WarningType::CONCAT_AMBIGUITY, .failing_option = warn, .compressing = {}});
-				assert(false && "fix this shitty code");
+				assert(false && "Adapt this code for a possible gui build");
 				std::println("Choose which of these files are part of the concatenation. Insert '1' or '2' for the respective file. If neither of these is, insert '0', we will find the next possible file.");
 				auto choice = 0;
 				//get user to resolve the ambiguity
@@ -547,15 +545,13 @@ private:
 			
 			while (!input.eof())//fill input with file at path_
 			{
-				//TODO: this exception stuff should be abstracted, also, how about making custom exceptions?
-
 				auto buffer = std::make_unique<std::byte[]>(MiB_to_B(1));
 				input.read(reinterpret_cast<char*>(buffer.get()), sizeof(buffer));
 				try
 				{
 					try_throw_IO_error(input.rdstate(), path_);
 				}
-				catch (...)
+				catch (ErrorException const& e)
 				{
 					fs::remove(options_.filename_out);//cleanup
 					throw;
@@ -566,7 +562,7 @@ private:
 				{
 					try_throw_IO_error(file.rdstate(), options_.filename_out.string());
 				}
-				catch (...)
+				catch (ErrorException const& e)
 				{
 					fs::remove(options_.filename_out);//cleanup
 					throw;

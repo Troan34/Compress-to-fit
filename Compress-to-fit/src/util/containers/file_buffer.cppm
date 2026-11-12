@@ -26,7 +26,6 @@ export template <typename T, ByteSink S>
 class ConcurrentRingBuffer
 {
 public:
-	//TODO: maybe take a sink instead of a `File`
 	ConcurrentRingBuffer(S& sink, size_t const minimum_size)
 		:sink_(sink), minimum_size_(minimum_size)
 	{
