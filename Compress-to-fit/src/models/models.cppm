@@ -12,7 +12,7 @@ export module models;
 export import :lz77;
 import util.serializable;
 
-export void process_file(parser::Options const& options,  StatusSink& status_sink)
+export void process_file(parser::Options const& options, StatusSink& status_sink)
 {
     File file{options};
 

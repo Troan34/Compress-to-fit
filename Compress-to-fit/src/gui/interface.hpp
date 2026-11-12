@@ -29,7 +29,7 @@ class CompressConfig : public QObject
     Q_PROPERTY(bool isRunning READ isRunning NOTIFY isRunningChanged)
 
 public:
-    explicit CompressConfig(GuiSink& sink, std::function<void(parser::Options)> compressor_callback, QObject *parent = nullptr);
+    explicit CompressConfig(StatusSink& sink, std::function<void(parser::Options, StatusSink&)> compressor_callback, QObject *parent = nullptr);
 
     void setPathsIn(QList<QUrl> const& paths);
     void setPathOut(QUrl const& path);
@@ -70,8 +70,8 @@ private:
     bool delete_input_ = false;
     size_t number_of_files_{};
     bool isRunning_ = false;
-    GuiSink& sink_;
-    std::function<void(parser::Options)> compressor_callback_;
+    StatusSink& sink_;
+    std::function<void(parser::Options, StatusSink&)> compressor_callback_;
     std::jthread executor_;
     std::latch start_thread_{1};
 

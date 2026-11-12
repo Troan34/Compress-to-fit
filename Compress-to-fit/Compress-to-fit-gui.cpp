@@ -27,14 +27,13 @@ int main(int argc, char* argv[])
 {
     QApplication app(argc, argv);
 
-    GuiSink sink;
     QQmlApplicationEngine engine;
 
+    GuiSink sink;
     engine.setExternalSingletonInstance("CompressToFit", "GuiSink", &sink);
-    FileSystem file_system;
-
     CompressConfig compressor_conf{sink, process_file};
     engine.rootContext()->setContextProperty("compressor_conf", &compressor_conf);
+    FileSystem file_system;
     engine.rootContext()->setContextProperty("fileSystem", &file_system);
 
 
