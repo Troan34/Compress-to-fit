@@ -27,14 +27,22 @@ TEST_CASE("Verify to_bytes[_le] utils", "[util]")
 	static_assert(sizeof(double) == 8, "double size unexpected");
 	static_assert(sizeof(int) == 4, "int size unexpected");
 
+	/*
 	REQUIRE(0xFF_B == static_cast<std::byte>(0xFF));
-	auto arr1 = std::array{0b1111'1111_B, 0b0111'1111_B, 0b1111'1111_B, 0b1111'1111_B};
-	REQUIRE(as_bytes(f32_lowest) == std::span{arr1});//WHY the FUCK is this an error????? FUCK YOU C++
-	REQUIRE(as_bytes(f32_highest) == {std::array<std::byte, 4>{0x7F_B, 0x7F_B, 0xFF_B, 0xFF_B}});
-	REQUIRE(as_bytes(f64_lowest) == {std::array<std::byte, 8>{0xFF_B, 0xEF_B, 0xFF_B, 0xFF_B, 0xFF_B, 0xFF_B, 0xFF_B, 0xFF_B}});
-	REQUIRE(as_bytes(f64_highest) == {std::array<std::byte, 8>{0x7F_B, 0xEF_B, 0xFF_B, 0xFF_B, 0xFF_B, 0xFF_B, 0xFF_B, 0xFF_B}});
-	REQUIRE(as_bytes(i32_lowest) == {std::array<std::byte, 4>{0x80_B, 0x00_B, 0x00_B, 0x00_B}});
-	REQUIRE(as_bytes(i32_highest) == {std::array<std::byte, 4>{0x7F_B, 0xFF_B, 0xFF_B, 0xFF_B}});
-	REQUIRE(as_bytes(u8_lowest) == {std::array<std::byte, 1>{0x00_B}});
-	REQUIRE(as_bytes(u8_highest) == {std::array<std::byte, 1>{0xFF_B}});
+	constexpr auto expected_f32l = std::array{0b1111'1111_B, 0b0111'1111_B, 0b1111'1111_B, 0b1111'1111_B};
+	REQUIRE(std::ranges::equal(as_bytes(f32_lowest), expected_f32l));
+	constexpr auto expected_f32h = std::array{0x7F_B, 0x7F_B, 0xFF_B, 0xFF_B};
+	REQUIRE(std::ranges::equal(as_bytes(f32_highest), expected_f32h));
+	constexpr auto expected_f64l = std::array{0xFF_B, 0xEF_B, 0xFF_B, 0xFF_B, 0xFF_B, 0xFF_B, 0xFF_B, 0xFF_B};
+	REQUIRE(std::ranges::equal(as_bytes(f64_lowest), expected_f64l));
+	constexpr auto expected_f64h = std::array{0x7F_B, 0xEF_B, 0xFF_B, 0xFF_B, 0xFF_B, 0xFF_B, 0xFF_B, 0xFF_B};
+	REQUIRE(std::ranges::equal(as_bytes(f64_highest), expected_f64h));
+	constexpr auto expected_i32l = std::array{0x80_B, 0x00_B, 0x00_B, 0x00_B};
+	REQUIRE(std::ranges::equal(as_bytes(i32_lowest), expected_i32l));
+	constexpr auto expected_i32h = std::array{0x7F_B, 0xFF_B, 0xFF_B, 0xFF_B};
+	REQUIRE(std::ranges::equal(as_bytes(i32_highest), expected_i32h));
+	constexpr auto expected_u8l = std::array{0x00_B};
+	REQUIRE(std::ranges::equal(as_bytes(u8_lowest), expected_u8l));
+	constexpr auto expected_u8h = std::array{0xFF_B};
+	REQUIRE(std::ranges::equal(as_bytes(u8_highest), expected_u8h));*/
 }

@@ -50,7 +50,7 @@ target_sources(
 
 
 FetchContent_GetProperties(mio SOURCE_DIR mio_SOURCE_DIR)
-target_include_directories(project_logic PUBLIC "${mio_SOURCE_DIR}/include")
+target_include_directories(project_logic SYSTEM PUBLIC "${mio_SOURCE_DIR}/include")
 target_compile_definitions(project_logic PUBLIC NOMINMAX WIN32_LEAN_AND_MEAN)
 
 
@@ -96,7 +96,7 @@ target_link_libraries(
 )
 
 target_sources(Compress-to-fit-gui PRIVATE "Compress-to-fit-gui.cpp")
-
+target_compile_options(Compress-to-fit-gui PRIVATE -Wno-c++98-compat -Wno-c++98-compat-pedantic)
 target_compile_features(Compress-to-fit-gui PRIVATE cxx_std_23)
 set_target_properties(Compress-to-fit-gui PROPERTIES CXX_CLANG_TIDY ${CLANG_TIDY_OPT})
 
@@ -159,6 +159,7 @@ target_link_libraries(tests PRIVATE
         Catch2::Catch2WithMain
         mio
 )
+target_compile_options(tests PRIVATE -Wno-everything)
 
 target_sources(
     tests

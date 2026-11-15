@@ -108,7 +108,7 @@ public:
 		else
 		{
 			options_.filename_out.replace_extension("");
-			out_file = { options_.filename_out, std::ios::binary };//create empty file
+			out_file.open(options_.filename_out, std::ios::binary);//create empty file
 		}
 	}
 

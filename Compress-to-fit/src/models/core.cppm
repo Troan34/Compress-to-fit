@@ -37,9 +37,11 @@ class ConcurrentModel
 {
 public:
     ConcurrentModel(parser::Options const& options, S& sink, StatusSink& status_sink, File& file)
-        : options_{options}, file_{file},
-          out_data_{sink}, out_raw_{sink}, thread_pool{options_.concurrency},
-          progress_checker{&ConcurrentModel::check_results, this, std::ref(status_sink)}
+        :   options_{options}, file_{file},
+            out_data_{sink}, out_raw_{sink}, thread_pool{options_.concurrency},
+            progress_checker{[this, &status_sink](std::stop_token st) {
+                check_results(st, std::ref(status_sink));
+            }}
     {
         n_blocks_ = file_.size_in_file() / std::min(file_.size_in_file() / options_.concurrency, MAX_BLOCK_SIZE);
         if (file_.size_in_file() % MAX_BLOCK_SIZE > 0)

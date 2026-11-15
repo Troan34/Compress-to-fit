@@ -40,6 +40,8 @@ FetchContent_Declare(
     SYSTEM
 )
 FetchContent_MakeAvailable(Catch2)
+set_target_properties(Catch2 PROPERTIES SYSTEM TRUE)
+set_target_properties(Catch2WithMain PROPERTIES SYSTEM TRUE)
 list(APPEND CMAKE_MODULE_PATH "${catch2_SOURCE_DIR}/extras") 
 
 FetchContent_Declare(
@@ -49,7 +51,6 @@ FetchContent_Declare(
     SYSTEM
 )
 FetchContent_MakeAvailable(mio)
-
 
 # Include sub-projects.
 add_subdirectory ("Compress-to-fit")

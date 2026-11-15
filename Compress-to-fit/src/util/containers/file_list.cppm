@@ -166,7 +166,7 @@ private:
     bool called_writer{false};
     mutable std::mutex mut;
     std::condition_variable writer_notifier;
-    std::jthread writer{&ConcOrderedFileList::write_file, this};
+    std::jthread writer{std::bind_front(&ConcOrderedFileList::write_file, this)};
 
 
     /**
