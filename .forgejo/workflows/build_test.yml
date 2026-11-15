@@ -1,0 +1,20 @@
+name: Build and Test
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: docker
+    container:
+      image: troan34/qt:6.12.0
+    steps:
+      - name: Checkout
+        uses: https://data.forgejo.org/actions/checkout@v7
+
+      - name: Configure
+        run: cmake --preset linux-ci
+
+      - name: Build
+        run: cmake --build --preset linux-ci
+
+      - name: Test
+        run: ctest --preset linux-ci
