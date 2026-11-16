@@ -14,7 +14,8 @@ RUN pacman -Syu --noconfirm \
 RUN clang-scan-deps --version && node --version
 
 #Install Qt with aqt into /opt/Qt
-RUN pip install --break-system-packages aqtinstall && \
-    aqt install-qt linux desktop 6.12.0 linux_gcc_64 --outputdir /opt/Qt
+RUN pip install --no-cache-dir --break-system-packages aqtinstall && \
+    aqt install-qt linux desktop 6.12.0 linux_gcc_64 --outputdir /opt/Qt && \
+    pip uninstall -y --break-system-packages aqtinstall
 
 ENV CMAKE_PREFIX_PATH=/opt/Qt/6.12.0/gcc_64
