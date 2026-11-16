@@ -9,3 +9,4 @@ test_set
 .cmake
 documentation/doxygen-awesome-css-2.4.2
 Testing
+CMakeUserPresets.json

@@ -8,7 +8,9 @@ if (POLICY CMP0141)
   cmake_policy(SET CMP0141 NEW)
   set(CMAKE_MSVC_DEBUG_INFORMATION_FORMAT "$<IF:$<AND:$<C_COMPILER_ID:MSVC>,$<CXX_COMPILER_ID:MSVC>>,$<$<CONFIG:Debug,RelWithDebInfo>:EditAndContinue>,$<$<CONFIG:Debug,RelWithDebInfo>:ProgramDatabase>>")
 endif()
-
+if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+    string(APPEND CMAKE_CXX_FLAGS " -Wno-unused-command-line-argument")
+endif()
 set(CMAKE_EXPERIMENTAL_CXX_IMPORT_STD "451f2fe2-a8a2-47c3-bc32-94786d8fc91b")
 
 project ("Compress-to-fit" LANGUAGES CXX)
@@ -25,7 +27,6 @@ set(CMAKE_CXX_SCAN_FOR_MODULES ON)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/$<CONFIG>)
 
-set(CMAKE_MAP_IMPORTED_CONFIG_RELWITHDEBINFO RelWithDebInfo)
 
 find_package(Qt6 REQUIRED COMPONENTS Core Quick Widgets Qml)
 qt_standard_project_setup(REQUIRES 6.12)
@@ -40,8 +41,13 @@ FetchContent_Declare(
     SYSTEM
 )
 FetchContent_MakeAvailable(Catch2)
-set_target_properties(Catch2 PROPERTIES SYSTEM TRUE)
-set_target_properties(Catch2WithMain PROPERTIES SYSTEM TRUE)
+foreach(dep Catch2 Catch2WithMain)
+    if(TARGET ${dep})
+        target_compile_options(${dep} PRIVATE
+                $<$<CXX_COMPILER_ID:Clang,GNU>:-w>
+                $<$<CXX_COMPILER_ID:MSVC>:/w>)
+    endif()
+endforeach()
 list(APPEND CMAKE_MODULE_PATH "${catch2_SOURCE_DIR}/extras") 
 
 FetchContent_Declare(
