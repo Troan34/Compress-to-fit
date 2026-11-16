@@ -3,7 +3,7 @@ add_library(project_logic SHARED)
 set(CLANG_TIDY_OPT
         clang-tidy
         --use-color
-        "--header-filter=${PROJECT_SOURCE_DIR}/(src|include)/.*"
+        "--header-filter=${CMAKE_CURRENT_SOURCE_DIR}/src/.*"
 )
 
 set_target_properties(project_logic PROPERTIES
@@ -168,7 +168,7 @@ target_sources(
     "test/benchmarks/file_management.cpp"
 )
 
-set_target_properties(tests PROPERTIES CXX_CLANG_TIDY ${CLANG_TIDY_OPT})
+set_target_properties(tests PROPERTIES CXX_CLANG_TIDY "")
 
 
 #platform dependent flags

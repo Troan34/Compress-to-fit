@@ -1,16 +1,17 @@
 FROM archlinux:latest
 
-#Install dependencies
+#Install dependencies including Node.js for CI runner actions
 RUN pacman -Syu --noconfirm \
-    clang lld libc++ clang-tools-extra\
+    clang lld libc++ clang-tools-extra \
     cmake ninja git \
     python python-pip \
+    nodejs npm \
     libgl mesa \
     freetype2 fontconfig libxkbcommon \
     && pacman -Scc --noconfirm
 
-#Verify clang-scan-deps exists (fail fast, avoid silent CI failures)
-RUN clang-scan-deps --version
+#Verify clang-scan-deps and node exist (fail fast, avoid silent CI failures)
+RUN clang-scan-deps --version && node --version
 
 #Install Qt with aqt into /opt/Qt
 RUN pip install --break-system-packages aqtinstall && \
