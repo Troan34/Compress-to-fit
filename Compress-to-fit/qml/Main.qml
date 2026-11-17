@@ -22,6 +22,14 @@ ApplicationWindow {
     visible: true
     title: "Compress To Fit"
 
+    InformationPopup {
+        id: iPopup
+        width: 300
+        height: 200
+        distance: iPopup.width + 20
+        restX: window.width
+        y: window.height - iPopup.height - 20
+    }
 
     GridLayout {
         anchors.fill: parent

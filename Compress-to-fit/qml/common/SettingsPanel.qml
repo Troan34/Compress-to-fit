@@ -228,7 +228,7 @@ Item {
                 validator: IntValidator { bottom: 1; top: 1000; }
 
                 Component.onCompleted: {
-                    compress_conf.numberOfFiles = Number(text)
+                    compressor_conf.numberOfFiles = Number(text)
                 }
             }
         }

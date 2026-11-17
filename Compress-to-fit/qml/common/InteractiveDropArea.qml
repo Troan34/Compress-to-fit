@@ -45,7 +45,8 @@ Item {
         compressor_conf.pathsIn = urls
     }
 
-    Rectangle { //Background square
+    //Background square
+    Rectangle {
         id: dropAreaCont
         anchors.fill: parent
         radius: 15
@@ -96,7 +97,6 @@ Item {
                 Layout.alignment: Qt.AlignVCenter| Qt.AlignHCenter
                 Layout.preferredHeight: dropAreaCont.width * 0.2
 
-                //color: "red"
                 Text {
                     id: sizeInfo
                     anchors.fill: parent
@@ -123,8 +123,6 @@ Item {
                 Layout.maximumHeight: Layout.maximumWidth
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
 
-                //color: "green"
-
                 Image {
                     id: backgroundImage
                     anchors.fill: parent
@@ -142,14 +140,14 @@ Item {
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 Layout.preferredHeight: dropAreaCont.width * 0.2
-
                 Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
 
-                //color: "blue"
 
                 Text {
                     id: filePathInfo
                     anchors.fill: parent
+                    anchors.leftMargin: 10
+                    anchors.rightMargin: 10
                     wrapMode: Text.Wrap
                     verticalAlignment: Text.AlignVCenter
                     horizontalAlignment: Text.AlignHCenter
@@ -159,11 +157,8 @@ Item {
                     fontSizeMode: Text.Fit
                     font.pointSize: 12
                     minimumPointSize: 8
-
                 }
             }
-
-
         }
 
 
@@ -177,7 +172,6 @@ Item {
             onDropped: (drop) => {
                 rootDropArea.receiveDrop(drop)
             }
-
             onExited: {
                 dropAreaCont.color = Qt.rgba(palette.dark.r, palette.dark.g, palette.dark.b, palette.dark.a / 2)
             }
