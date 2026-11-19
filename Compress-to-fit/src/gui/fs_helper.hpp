@@ -17,12 +17,12 @@ class FileSystem : public QObject
 
 public:
 
-    Q_INVOKABLE auto isDirectory(QUrl const& path) -> bool;
-    Q_INVOKABLE auto isFile(QUrl const& path) -> bool;
-    Q_INVOKABLE auto extension(QUrl const& path) -> QString;
-    Q_INVOKABLE auto exists(QUrl const& path) -> bool;
-    Q_INVOKABLE auto fileName(QUrl const& path) -> QString;
-    Q_INVOKABLE auto fileSize(QUrl const& path) -> qint64;
-    Q_INVOKABLE auto toUnit(quint64 const size) -> QString;
+    Q_INVOKABLE static auto isDirectory (QUrl const& path) -> bool;
+    Q_INVOKABLE static auto isFile      (QUrl const& path) -> bool;
+    Q_INVOKABLE static auto extension   (QUrl const& path) -> QString;
+    Q_INVOKABLE static auto exists      (QUrl const& path) -> bool;
+    Q_INVOKABLE static auto fileName    (QUrl const& path) -> QString;
+    Q_INVOKABLE static auto fileSize    (QUrl const& path) -> qint64;
+    Q_INVOKABLE static auto toUnit      (quint64 const size) -> QString;
 };
 

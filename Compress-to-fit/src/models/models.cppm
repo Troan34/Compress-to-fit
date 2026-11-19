@@ -20,7 +20,7 @@ export void process_file(parser::Options const& options, StatusSink& status_sink
     {
         switch (options.compressor)
         {
-            case static_cast<size_t>(CompType::LZ77):
+            case std::to_underlying(CompType::LZ77):
             {
                 byte_sinks::StreamSink sink{ .out = file.get_ref_out_stream() };
                 ConcurrentModel<LZ77Model<>, decltype(sink)> comp{options, sink, status_sink, file};
@@ -29,7 +29,7 @@ export void process_file(parser::Options const& options, StatusSink& status_sink
             }
             default:
                 auto error_string = std::string{"Unreachable branch, "} + format_sourceloc();
-                report({ErrorType::LOGIC_ERROR, error_string, {}});
+                report({.message_ID_or_progress=ErrorType::LOGIC_ERROR, .failing_option=error_string, .compressing={}});
                 break;
         }
     }
@@ -45,9 +45,8 @@ export void process_file(parser::Options const& options, StatusSink& status_sink
                 break;
             }
             default:
-                auto const location = std::source_location::current();
                 auto error_string = std::string{"Unreachable branch, "} + format_sourceloc();
-                report({ErrorType::LOGIC_ERROR, error_string, {}});
+                report({.message_ID_or_progress=ErrorType::LOGIC_ERROR, .failing_option=error_string, .compressing={}});
                 break;
         }
     }

@@ -3,8 +3,6 @@
 *   SPDX-License-Identifier: GPL-3.0
 *   Entry for the CLI program
 */
-#include <cstdlib>
-
 #include "src/common/error_warn_print.hpp"
 #include "src/util/macros.hpp"
 #include "src/common/sink.hpp"
@@ -35,7 +33,7 @@ int main(int argc, char* argv[])
 	catch (ErrorException const& e)
 	{
 		std::println(stderr, "{}", e.what());
-		return static_cast<int>(e.error_type);
+		return std::to_underlying(e.error_type);
 	}
 	catch (parser::HelpException const& e)
 	{

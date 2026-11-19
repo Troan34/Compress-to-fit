@@ -64,8 +64,8 @@ signals:
 private:
     QList<QUrl> paths_in_;
     QUrl path_out_{};
-    QmlEnums::CompType comp_type_;
-    QmlEnums::CompPreset comp_preset_;
+    QmlEnums::CompType comp_type_{};
+    QmlEnums::CompPreset comp_preset_{};
     bool force_compression_ = false;
     bool delete_input_ = false;
     size_t number_of_files_{};

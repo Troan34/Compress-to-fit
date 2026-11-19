@@ -6,11 +6,11 @@
 module;
 #include "../../src/common/comp_options.hpp"
 #include "../../src/common/error_warn_print.hpp"
-export module util.core_utils;
-
+#include <assert.h>
 #ifdef __INTELLISENSE__
 #include "../../for_intellisense/everything.hpp"
 #endif
+export module util.core_utils;
 
 import std.compat;
 
@@ -157,30 +157,63 @@ export [[nodiscard]] consteval auto const_pow(size_t const base, size_t const ex
 
 export [[nodiscard]] constexpr auto KiB_to_B(size_t const value) -> size_t
 {
-	if (value * 1024UZ >= std::numeric_limits<size_t>::max())
-	{
-		throw std::out_of_range("Your value will cause an overflow.");
-	}
-	return value * 1024UZ;
+	assert(value <= std::numeric_limits<size_t>::max() / 1UZ << 10);
+	return value << 10;
 }
 
 export [[nodiscard]] constexpr auto MiB_to_B(size_t const value) -> size_t
 {
-	if (value * 1024UZ * 1024UZ >= std::numeric_limits<size_t>::max())
-	{
-		throw std::out_of_range("Your value will cause an overflow.");
-	}
-	return value * 1024UZ * 1024UZ;
+	assert(value <= std::numeric_limits<size_t>::max() / 1UZ << 30);
+	return value << 20;
 }
 
-export constexpr auto operator""_MiB(unsigned long long const value) -> unsigned long long
+export [[nodiscard]] constexpr auto GiB_to_B(size_t const value) -> size_t
 {
-	return MiB_to_B(value);
+	assert(value <= std::numeric_limits<size_t>::max() / 1UZ << 30);
+	return value << 30;
+}
+
+export [[nodiscard]] constexpr auto TiB_to_B(size_t const value) -> size_t
+{
+	assert(value <= std::numeric_limits<size_t>::max() / 1UZ << 40);
+	return value << 40;
+}
+
+export [[nodiscard]] constexpr auto PiB_to_B(size_t const value) -> size_t
+{
+	assert(value <= std::numeric_limits<size_t>::max() / 1UZ << 50);
+	return value << 50;
+}
+
+export [[nodiscard]] constexpr auto EiB_to_B(size_t const value) -> size_t
+{
+	assert(value <= std::numeric_limits<size_t>::max() / 1UZ << 60);
+	return value << 60;
 }
 
 export constexpr auto operator""_KiB(unsigned long long const value) -> unsigned long long
 {
 	return KiB_to_B(value);
+}
+export constexpr auto operator""_MiB(unsigned long long const value) -> unsigned long long
+{
+	return MiB_to_B(value);
+}
+export constexpr auto operator""_GiB(unsigned long long const value) -> unsigned long long
+{
+	return GiB_to_B(value);
+}
+export constexpr auto operator""_TiB(unsigned long long const value) -> unsigned long long
+{
+	return TiB_to_B(value);
+}
+export constexpr auto operator""_PiB(unsigned long long const value) -> unsigned long long
+{
+	return PiB_to_B(value);
+}
+export constexpr auto operator""_EiB(unsigned long long const value) -> unsigned long long
+{
+	return EiB_to_B(value);
 }
 
 export constexpr auto operator""_B(unsigned long long const value) -> std::byte {

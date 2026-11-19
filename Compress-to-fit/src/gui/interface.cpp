@@ -4,8 +4,6 @@
 */
 #include "interface.hpp"
 
-#include <algorithm>
-#include <utility>
 import std;
 import parser;
 import util;
@@ -34,7 +32,7 @@ void CompressConfig::setPathOut(QUrl const& path)
 void CompressConfig::setCompressor(QmlEnums::CompType const comp_type)
 {
     comp_type_ = comp_type;
-    std::println("{}", static_cast<uint8_t>(comp_type));
+    std::println("{}", std::to_underlying(comp_type));
     emit compressorChanged();
 }
 void CompressConfig::setCompressorPreset(QmlEnums::CompPreset const comp_preset)
@@ -118,8 +116,8 @@ auto CompressConfig::to_Options() const -> parser::Options
     return parser::Options{
         .filename_in = paths_in_.first().path().toStdString(),//TODO: first only because we don't support multiple paths
         .filename_out = path_out_.path().toStdString(),
-        .compressor = static_cast<uint8_t>(comp_type_),
-        .preset = static_cast<uint8_t>(comp_preset_),
+        .compressor = std::to_underlying(comp_type_),
+        .preset = std::to_underlying(comp_preset_),
         .n_files = number_of_files_,
         .force_compression = force_compression_,
         .delete_input = delete_input_,

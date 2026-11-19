@@ -4,10 +4,8 @@
 */
 
 #include "fs_helper.hpp"
-#include <filesystem>
-#include <string>
-#include <algorithm>
-#include <cmath>
+import std;
+import util.core_utils;
 
 auto FileSystem::isDirectory(QUrl const& path) -> bool
 {
@@ -41,24 +39,28 @@ auto FileSystem::fileSize(QUrl const &path) -> qsizetype
 
 auto FileSystem::toUnit(quint64 const size) -> QString
 {
-    if (size < 10ULL * 1024)//B
+    if (size < 10_KiB)//B
     {
-        return QString::fromStdString(std::to_string(size) + "B");
+        return QString::fromStdString(std::format("{}B", size));
     }
-    else if (size < 2ULL * 1024 * 1024)//KiB when less than 2MiB
+    if (size < 2_MiB)
     {
-        return QString::fromStdString(std::to_string(size / 1024ULL) + "KiB");
+        return QString::fromStdString(std::format("{:g} KiB", static_cast<double>(size) / 1_KiB));
     }
-    else if (size < 2ULL * 1024 * 1024 * 1024)//MiB when less than 2GiB
+    if (size < 2_GiB)
     {
-        return QString::fromStdString(std::to_string(size / (1024ULL * 1024)) + "MiB");
+        return QString::fromStdString(std::format("{:g} MiB", static_cast<double>(size) / 1_MiB));
     }
-    else if (size < 2ULL * 1024 * 1024 * 1024 * 1024)//GiB when less than 2TiB
+    if (size < 2_TiB)
     {
-        return QString::fromStdString(std::to_string(size / (1024ULL * 1024 * 1024)) + "GiB");
+        return QString::fromStdString(std::format("{:g} GiB", static_cast<double>(size) / 1_GiB));
     }
-    else if (size < 2ULL * 1024 * 1024 * 1024 * 1024 * 1024)//TiB when less than 2PiB
+    if (size < 2_PiB)
     {
-        return QString::fromStdString(std::to_string(size / (1024ULL * 1024 * 1024 * 1024)) + "TiB");
+        return QString::fromStdString(std::format("{:g} TiB", static_cast<double>(size) / 1_TiB));
+    }
+    if (size < 2_EiB)
+    {
+        return QString::fromStdString(std::format("{:g} PiB", static_cast<double>(size) / 1_PiB));
     }
 }
