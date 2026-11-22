@@ -7,7 +7,6 @@
 module;
 #include "mio/mmap.hpp"
 #include "../common/sink.hpp"
-#include <cassert>
 export module models;
 export import :lz77;
 import util.serializable;
@@ -15,6 +14,7 @@ import util.serializable;
 export void process_file(parser::Options const& options, StatusSink& status_sink)
 {
     File file{options};
+    byte_sinks::StreamSink sink{ .out = file.get_ref_out_stream() };
 
     if (!file.get_in_file_options().header or options.force_compression)//it's a normal file or -fc option
     {
@@ -22,7 +22,6 @@ export void process_file(parser::Options const& options, StatusSink& status_sink
         {
             case std::to_underlying(CompType::LZ77):
             {
-                byte_sinks::StreamSink sink{ .out = file.get_ref_out_stream() };
                 ConcurrentModel<LZ77Model<>, decltype(sink)> comp{options, sink, status_sink, file};
                 comp.compress();
                 break;
@@ -39,7 +38,6 @@ export void process_file(parser::Options const& options, StatusSink& status_sink
         {
             case CompType::LZ77:
             {
-                byte_sinks::StreamSink sink{ .out = file.get_ref_out_stream() };
                 ConcurrentModel<LZ77Model<>, decltype(sink)> decomp{options, sink, status_sink, file};
                 decomp.decompress();
                 break;

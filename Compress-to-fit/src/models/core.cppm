@@ -110,32 +110,33 @@ public:
      */
     auto decompress() noexcept(false) -> void
     {
-        std::error_code error;
-        mio::basic_mmap_source<std::byte> mmap = mio::make_mmap_source(file_.get_in_file_options().path.string(), FILE_HEADER_SIZE, mio::map_entire_file, error);
-
-        if (error)
+        mio::basic_mmap_source<std::byte> mmap;
+        try
+        {
+            mmap = { file_.get_in_file_options().path.string(), FILE_HEADER_SIZE, mio::map_entire_file };
+        }
+        catch (const std::exception& e)
         {
             report({.message_ID_or_progress = ErrorType::DRIVE_ERROR,
-                .failing_option = "Error mapping to \'" + file_.get_in_file_options().path.string() + "\', message: " + error.message(),
+                .failing_option = "Error mapping to \'" + file_.get_in_file_options().path.string(),
                 .compressing = {}});
         }
 
+        auto const shared_map = std::make_shared<mio::basic_mmap_source<std::byte>>(std::move(mmap));
 
-        std::span const data{reinterpret_cast<Sym const*>(mmap.begin()), reinterpret_cast<Sym const*>(mmap.end()) };
-
-
-        for (size_t i{}, seq_n{}; i < data.size(); seq_n++)
+        for (size_t i{}, seq_n{}; i < shared_map->size(); seq_n++)
         {
             auto future = thread_pool.add_task(
-                [this, data, i, seq_n]
+                [this, i, seq_n, shared_map]
                 {
+                    std::span const data{reinterpret_cast<Sym const*>(shared_map->begin()), reinterpret_cast<Sym const*>(shared_map->end()) };
                     M decompressor{data.subspan(i)};
                     typename M::data_type buffer{};
                     decompressor.decompress(buffer);
                     out_raw_.insert(std::make_unique<typename M::data_type>(std::move(buffer)), seq_n);
                 });
 
-            i += M::block_type::compressed_size({reinterpret_cast<std::byte const*>(data.subspan(i).data()), data.subspan(i).size_bytes()});
+            i += M::block_type::compressed_size({shared_map->data() + i, shared_map->size() - i});
 
             std::unique_lock lock{mutex_};
             results.emplace_back(std::move(future));
@@ -175,9 +176,13 @@ private:
                         return false;
                 }
             );
-            report({ProgressType{static_cast<float>(n_completed_blocks) / static_cast<float>(n_blocks_)}, {}, true});
+            report({.message_ID_or_progress = ProgressType{static_cast<float>(n_completed_blocks) / static_cast<float>(n_blocks_)},
+                .failing_option = {},
+                .compressing = !file_.get_in_file_options().header or options_.force_compression});
         }
 
-        report({ProgressType{1.F}, {}, true});
+        report({.message_ID_or_progress=ProgressType{1.F},
+            .failing_option={},
+            .compressing=!file_.get_in_file_options().header or options_.force_compression});
     }
 };
