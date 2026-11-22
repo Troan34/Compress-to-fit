@@ -160,7 +160,7 @@ target_link_libraries(tests PRIVATE
         Catch2::Catch2WithMain
         mio
 )
-target_compile_options(tests PRIVATE -Wno-everything)
+target_compile_options(tests PRIVATE $<$<CXX_COMPILER_ID:Clang,GNU>:-Wno-everything>)
 
 target_sources(
     tests
@@ -168,6 +168,8 @@ target_sources(
     "test/util/utils.cpp"
     "test/benchmarks/file_management.cpp"
 )
+
+add_test(NAME validate_output COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/test/scripts/validate_output.py $<TARGET_FILE:Compress-to-fit>)
 
 set_target_properties(tests PROPERTIES CXX_CLANG_TIDY "")
 

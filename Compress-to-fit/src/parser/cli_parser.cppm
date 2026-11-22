@@ -6,6 +6,16 @@
 */
 module;
 #include "../common/parser_options_type.hpp"
+
+#include <iostream>
+#ifdef _WIN32
+#include <io.h>
+#define IS_TTY _isatty(_fileno(stdout))
+#else
+#include <unistd.h>
+#define IS_TTY isatty(STDOUT_FILENO)
+#endif
+
 export module parser;
 
 #ifdef __INTELLISENSE__
@@ -160,6 +170,15 @@ namespace parser
 export void show_progress(float progress = 0.F, bool const compressing = false)
 {
 	progress = std::min(1.F, progress);
+	if (!IS_TTY)
+	{
+		if (compressing)
+			std::println("compression {:.1f}%", progress * 100.F);
+		else
+			std::println("extraction {:.1f}%", progress * 100.F);
+
+		return;
+	}
 	constexpr int max_bar_width = 50;
 
 	std::print("\r\033[K");

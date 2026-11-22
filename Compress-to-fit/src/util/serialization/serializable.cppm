@@ -97,7 +97,7 @@ export namespace byte_sinks
             else
             {
                 auto written_bytes{0UZ};
-                while (written_bytes != buffer.size())
+                while (written_bytes != data.size_bytes())
                 {
                     auto const bytes_to_write = std::clamp(buffer.size() - used, 0UZ, data.size() - written_bytes);
 
@@ -106,6 +106,7 @@ export namespace byte_sinks
                                       buffer.begin() + used);
 
                     written_bytes += bytes_to_write;
+                    used += bytes_to_write;
                     flush();
                 }
             }

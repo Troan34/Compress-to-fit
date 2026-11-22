@@ -389,12 +389,7 @@ public:
 	explicit LZ77Block(std::span<std::byte const> const data, Alloc const& alloc = Alloc())
 		: buffer_(alloc)
 	{
-		constexpr size_t len1 = sizeof(decltype(compressed_length_));
-		constexpr size_t len2 = sizeof(decltype(uncompressed_length_));
-
-		auto const [compressed_length__, uncompressed_length__] = extract_header(data);
-		compressed_length_ = compressed_length__;
-		uncompressed_length_ = uncompressed_length__;
+		std::tie(compressed_length_, uncompressed_length_) = extract_header(data);
 
 		if (HEADER_SIZE + compressed_length_ > data.size())
 		{
@@ -403,8 +398,8 @@ public:
 
 		buffer_.reserve(data.size());
 		buffer_ = std::vector<LZ77_Token>{
-			reinterpret_cast<LZ77_Token const*>(data.data() + HEADER_SIZE),
-			reinterpret_cast<LZ77_Token const*>(data.data() + HEADER_SIZE +  compressed_length_)
+			 reinterpret_cast<LZ77_Token const*>(data.data() + HEADER_SIZE),
+			 reinterpret_cast<LZ77_Token const*>(data.data() + HEADER_SIZE +  compressed_length_)
 		};
 	}
 
@@ -527,7 +522,7 @@ public:
 	void decompress(std::vector<Sym, DataAlloc>& out_data) const
 	{
 		block_type in_data{raw_data_};
-		out_data.reserve(in_data.size() / sizeof(Sym));
+		out_data.reserve(in_data.uncompressed_length());
 		for (auto const token : in_data)
 		{
 			if (token.offset != 0)
