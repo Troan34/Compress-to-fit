@@ -1,4 +1,4 @@
-import subprocess, tempfile, filecmp, os, sys, random
+import subprocess, tempfile, filecmp, os, sys, random, shutil
 
 compressor = sys.argv[1]
 
@@ -23,6 +23,13 @@ with tempfile.TemporaryDirectory() as temp_dir:
 
     if not filecmp.cmp(original, restored, shallow=False):
         print("Validation failed: files differ")
+
+        offending_dir = os.path.join(os.path.expanduser("~"), "offenders")
+        os.makedirs(offending_dir, exist_ok=True)
+        shutil.copy(original, offending_dir)
+        shutil.copy(compressed, offending_dir)
+        shutil.copy(restored, offending_dir)
+        print(f"Saved offending files in {offending_dir}")
         sys.exit(1)
 
 
