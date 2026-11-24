@@ -527,9 +527,10 @@ public:
 		{
 			if (token.offset != 0)
 			{
-				auto size = out_data.size();
 				for (auto _ : std::views::iota(0U, token.length))
-					out_data.push_back(out_data[size - token.offset]);
+				{
+					out_data.push_back(out_data[out_data.size() - token.offset]);
+				}
 			}
 			out_data.emplace_back(token.symbol);
 		}

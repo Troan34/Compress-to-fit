@@ -1,5 +1,6 @@
 import std.mem;
 import std.core;
+import std.io;
 
 enum HEADER_OFFSET : u32
 {
@@ -68,32 +69,45 @@ struct CTFfile
     }
 };
 
+struct Pair<T>
+{
+    T first;
+    T second;
+};
+/*
 #pragma loop_limit 0x1000000
 fn index(ref CTFfile file, u64 addr)
 {
-    u64 current = 0;
     bool flag = false;
     for (u64 block_count = 0, block_count < std::core::member_count(file.blocks), block_count += 1)
     {
-        if (current + file.blocks[block_count].uncompressed_len < addr)
+        if (file.blocks[block_count].uncompressed_len < addr)
         {
-            current += file.blocks[block_count].uncompressed_len;
+            addr -= file.blocks[block_count].uncompressed_len;
             continue;
         }
         for (u64 token_count = 0, token_count < std::core::member_count(file.blocks[block_count].buffer), token_count += 1)
         {
-            current += file.blocks[block_count].buffer[token_count].len + 1;
+            true_addr += file.blocks[block_count].buffer[token_count].len + 1;
 
-            if (current >= addr) { flag = true; break; }
+            if (addr - file.blocks[block_count].buffer[token_count].len - 1 < 0)
+            {
+                Pair<u32> p;
+                p.first = block_count;
+                p.second = token_count;
+                return p;
+            }
         }
         if (flag) { break; }
     }
-    return current;
+    return true_addr;
 };
 
-CTFfile file @ 0x0;
+
 
 u64 original_address in;
 u64 respective_address out;
 
 respective_address = index(file, original_address);
+*/
+CTFfile file @ 0x0;
