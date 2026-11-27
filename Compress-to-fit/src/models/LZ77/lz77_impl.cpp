@@ -48,7 +48,7 @@ Token alg::Rabin::find_pattern()
 	if (position + best_length < data.get_data().size())
 		return Token{ .offset = best_offset, .length = best_length, .symbol = data[position + best_length] };
 	else
-		return Token{ .offset = best_offset, .length = --best_length, .symbol = data[position] };
+		return Token{ .offset = best_offset, .length = --best_length, .symbol = data[position + best_length] };
 }
 
 
