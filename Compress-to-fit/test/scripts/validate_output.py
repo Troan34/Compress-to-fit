@@ -2,7 +2,7 @@ import subprocess, tempfile, filecmp, os, sys, random, shutil
 
 compressor = sys.argv[1]
 
-ITERATIONS = 50
+ITERATIONS = 100
 
 for i in range(ITERATIONS):
     print(f"--- Iteration {i + 1}/{ITERATIONS} ---")
