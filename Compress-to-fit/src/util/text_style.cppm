@@ -29,6 +29,10 @@ export namespace ANSI
     constexpr std::string_view BOLD_WHITE = "\033[1;37m";
 }
 
+/**
+ * @brief Format styles into a string, pass in #ANSI values
+ * @return formatted string
+ */
 export [[nodiscard]] constexpr auto style(std::string_view const prefix, std::string_view const string, std::string_view const suffix = ANSI::RESET)
 {
     return std::string{prefix} + std::string{string} + std::string{suffix};

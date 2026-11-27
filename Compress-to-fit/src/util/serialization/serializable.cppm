@@ -2,12 +2,17 @@
 *   Copyright (C) 2026 Roan Bukaci
 *   SPDX-License-Identifier: GPL-3.0
 *
-*   Implementation of the serializable concept and supporting tools
+*   Implementation of the serializable concept and supporting tools.
+*
+*   Types implement `T::serializable(ByteSink)` or a free `serializable(T, ByteSink)`
 */
 export module util.serializable;
 import std;
 import util.core_utils;
 
+/**
+ * @brief Concept for ByteSink, that is any type that accepts some data
+ */
 export template <typename S>
 concept ByteSink = requires(S s, std::span<std::byte const> data) {
     { s.append(data) } -> std::same_as<void>;
@@ -76,7 +81,9 @@ auto serialize_to(T& obj, S& sink) -> void {
 }
 
 
-
+/**
+ * @brief Common ByteSink implementations
+ */
 export namespace byte_sinks
 {
     /**

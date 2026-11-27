@@ -13,6 +13,9 @@ import util;
 namespace fs = std::filesystem;
 using namespace std::chrono_literals;
 
+/**
+ * @brief Requirements for a model's block
+ */
 export template <typename T>
 concept Block = requires(std::span<std::byte const> const data)
                 {
@@ -21,6 +24,9 @@ concept Block = requires(std::span<std::byte const> const data)
                     { T::uncompressed_size(data) } -> std::same_as<size_t>;
                 };
 
+/**
+ * @brief Standardize the Model
+ */
 export template <typename T>
 concept Model = requires(T& t, std::span<std::byte const> const data, typename T::block_type& out_blocks, typename T::data_type& out_raw)
                 {
@@ -32,6 +38,11 @@ concept Model = requires(T& t, std::span<std::byte const> const data, typename T
 
 constexpr size_t MAX_BLOCK_SIZE = 4_MiB;
 
+/**
+ * @brief Execute actions concurrently
+ * @tparam M Passed in model
+ * @tparam S Passed in ByteSink
+ */
 export template <Model M, ByteSink S>
 class ConcurrentModel
 {
@@ -66,6 +77,9 @@ public:
         }
     }
 
+    /**
+     * @brief Compress the data
+     */
     auto compress() noexcept(false) -> void
     {
         auto const file_size_ = fs::file_size(file_.get_in_file_options().path);

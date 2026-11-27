@@ -25,10 +25,18 @@ struct Status
     std::optional<bool> compressing;
 };
 
+/**
+ * @brief Sink for every type of message, customize the behavior by implementing `report`
+ */
 class StatusSink
 {
 public:
     virtual ~StatusSink() = default;
+
+    /**
+     * @brief sink the @p status
+     * @param status Your status/message
+     */
     virtual void report(Status const& status) = 0;
 };
 
@@ -56,6 +64,9 @@ private:
     StatusSink* prev_;
 };
 
+/**
+ * @brief Generically report @p status into the thread_local sink
+ */
 inline auto report(Status const& status) -> void
 {
     if (auto* sink = SinkInstancer::current()) sink->report(status);

@@ -11,6 +11,11 @@ export module models;
 export import :lz77;
 import util.serializable;
 
+/**
+ * @brief The actual "main" of the program
+ * @param options passed in options
+ * @param status_sink sink for logging, which too is passed
+ */
 export void process_file(parser::Options const& options, StatusSink& status_sink)
 {
     File file{options};

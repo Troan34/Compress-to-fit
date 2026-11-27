@@ -12,6 +12,9 @@ import parser;
 
 export using ::Status;
 
+/**
+ * @brief Implementation of #StatusSink for console logging
+ */
 export class StdoutSink : public StatusSink
 {
 public:
