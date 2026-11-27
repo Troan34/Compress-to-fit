@@ -166,7 +166,6 @@ target_sources(
     tests
     PRIVATE
     "test/util/utils.cpp"
-    "test/benchmarks/file_management.cpp"
 )
 
 add_test(NAME validate_output COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/test/scripts/validate_output.py $<TARGET_FILE:Compress-to-fit>)
