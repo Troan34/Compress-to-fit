@@ -2,6 +2,7 @@
 Yet another compression program in C++ and Qt with my own implementation of compression algorithms. <br>
 Two builds are available, one is a CLI executable, the other (*unfinished*) is a GUI
 implemented with the QtQuick/QML libraries.
+[Documentation](https://troan.codeberg.page/Compress-to-fit/)
 
 ## Features
  - Multithreading
