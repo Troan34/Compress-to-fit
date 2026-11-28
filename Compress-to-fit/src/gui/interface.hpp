@@ -4,7 +4,7 @@
 *   Defines the front end to compressor interface
 */
 #pragma once
-#include <latch>
+#include <barrier>
 #include <QObject>
 #include <qqmlintegration.h>
 #include <QUrl>
@@ -69,11 +69,11 @@ private:
     bool force_compression_ = false;
     bool delete_input_ = false;
     size_t number_of_files_{};
-    bool isRunning_ = false;
+    std::atomic<bool> isRunning_ = false;
     StatusSink& sink_;
     std::function<void(parser::Options, StatusSink&)> compressor_callback_;
     std::jthread executor_;
-    std::latch start_thread_{1};
+    std::barrier<> start_thread_{1};
 
 
     [[nodiscard]] auto to_Options() const -> parser::Options;

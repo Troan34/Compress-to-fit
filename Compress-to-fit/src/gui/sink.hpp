@@ -24,7 +24,7 @@ public:
     void report(Status const& status) noexcept(false) override;
 
 signals:
-    void errorReceived(ErrorType error, QString const& failingOption);
-    void warningReceived(WarningType warning, QString const& failingOption);
+    void errorReceived(int error, QString const& failingOption);
+    void warningReceived(int warning, QString const& failingOption);
     void progressReceived(float progress, bool compressing);
 };

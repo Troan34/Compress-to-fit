@@ -95,19 +95,23 @@ auto CompressConfig::run() -> void
     if (isRunning_) return;
     isRunning_ = true;
 
+    auto token_promise = std::promise<std::barrier<>::arrival_token>{};
+    auto token_future = token_promise.get_future();
+
     auto options = to_Options();
     std::println("{}", options);
     executor_ = std::jthread{
-        [opt = std::move(options), this] mutable -> void
+        [opt = std::move(options), this, fut = std::move(token_future)] mutable -> void
         {
             parser::finalize_options(opt);
-            start_thread_.wait();
+            start_thread_.wait(fut.get());
             compressor_callback_(opt, sink_);
+            this->isRunning_.store(false);
         }
     };
 
     emit isRunningChanged();
-    start_thread_.count_down();
+    token_promise.set_value(start_thread_.arrive());//run callback
 }
 
 

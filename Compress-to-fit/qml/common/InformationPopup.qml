@@ -17,6 +17,7 @@ Popup {
     focus: true
     margins: -1
 
+    property string text
     property int distance
     property real restX//position when closed, set by the parent
     onRestXChanged: if (!visible) x = restX
@@ -41,9 +42,21 @@ Popup {
         }
     }
 
-    background: Rectangle {
-        color: Qt.rgba(palette.dark.r, palette.dark.g, palette.dark.b, palette.dark.a * 0.9)
-        radius: 25
+    background: Item {
+        Rectangle {
+            anchors.fill: parent
+            color: Qt.rgba(palette.dark.r, palette.dark.g, palette.dark.b, palette.dark.a * 0.9)
+            radius: 25
+        }
+        Text {
+            anchors.centerIn: parent
+
+            text: popup.text
+            color: palette.text
+            fontSizeMode: Text.Fit
+            font.pointSize: Style.preferredPointSize
+            minimumPointSize: 8
+        }
     }
 }
 

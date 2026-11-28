@@ -25,7 +25,7 @@ ApplicationWindow {
     InformationPopup {
         id: iPopup
         width: 300
-        height: 200
+        height: 150
         distance: iPopup.width + 20
         restX: window.width
         y: window.height - iPopup.height - 20
@@ -78,6 +78,20 @@ ApplicationWindow {
             Layout.maximumHeight: window.width * 0.8
             Layout.rightMargin: 10
             Layout.leftMargin: 10
+        }
+
+
+        Connections {
+            target: GuiSink
+            function onProgressReceived(progress, compressing) {
+                const percent = Math.round(progress * 100)
+                iPopup.text = compressing
+                    ? qsTr("Compressing %1%").arg(percent)
+                    : qsTr("Extracting %1%").arg(percent)
+
+                if (!iPopup.opened)
+                    iPopup.open()
+            }
         }
 
     }

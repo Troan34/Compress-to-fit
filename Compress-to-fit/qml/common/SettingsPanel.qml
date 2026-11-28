@@ -238,18 +238,6 @@ Item {
             text: qsTr("Run operation")
             onClicked: compressor_conf.run();
         }
-
-        Button {
-            id: aButtn
-            text: "Hey"
-            visible: false
-            Connections {
-                target: GuiSink
-                function onProgressReceived()
-                {
-                    aButtn.visible = true
-                }
-            }
-        }
+        
     }
 }
