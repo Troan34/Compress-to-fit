@@ -49,10 +49,10 @@ class ConcurrentModel
 public:
     ConcurrentModel(parser::Options const& options, S& sink, StatusSink& status_sink, File& file)
         :   options_{options}, file_{file},
-            out_data_{sink}, out_raw_{sink}, thread_pool{options_.concurrency},
-            progress_checker{[this, &status_sink](std::stop_token st) {
+            progress_checker{ [this, &status_sink](std::stop_token st) -> auto {
                 check_results(st, std::ref(status_sink));
-            }}
+            }}, out_data_{sink}, out_raw_{sink},
+            thread_pool{options_.concurrency}
     {
         n_blocks_ = file_.size_in_file() / std::min(file_.size_in_file() / options_.concurrency, MAX_BLOCK_SIZE);
         if (file_.size_in_file() % MAX_BLOCK_SIZE > 0)
@@ -67,15 +67,6 @@ public:
     ConcurrentModel(ConcurrentModel&&) = delete;
     auto operator=(ConcurrentModel&&) -> ConcurrentModel& = delete;
 
-    ~ConcurrentModel()
-    {
-        std::unique_lock lock{mutex_};
-        for (auto& result : results)
-        {
-            result.wait();
-            result.get();
-        }
-    }
 
     /**
      * @brief Compress the data
@@ -175,19 +166,18 @@ private:
         SinkInstancer sink_instance{status_sink};
         while (!stop.stop_requested())
         {
-            std::this_thread::sleep_for(2ms);
+            std::this_thread::sleep_for(1ms);
             std::unique_lock lock{mutex_};
             std::erase_if(results,
-            [this](std::future<void>& result)
+            [this](std::future<void>& result) -> auto
                 {
-                    if (result.valid())
+                    if (result.wait_for(0s) == std::future_status::ready)
                     {
                         result.get();
                         n_completed_blocks++;
                         return true;
                     }
-                    else
-                        return false;
+                    return false;
                 }
             );
             report({.message_ID_or_progress = ProgressType{static_cast<float>(n_completed_blocks) / static_cast<float>(n_blocks_)},
